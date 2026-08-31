@@ -31,6 +31,7 @@
     <div class="field">
       <label for="signupUsername">Pseudo</label>
       <input type="text" id="signupUsername" maxlength="24" required autocomplete="username">
+      <div style="font-size:11.5px;color:var(--text-dim);margin-top:6px;">3 à 24 caractères, lettres/chiffres/underscore uniquement (pas d'espace), avec au moins 1 majuscule.</div>
     </div>
     <div class="field">
       <label for="signupEmail">Email</label>
@@ -59,9 +60,16 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
   const okEl = document.getElementById('signupSuccess');
   errEl.classList.remove('show');
   okEl.classList.remove('show');
+  if (!ferraValidateUsername(username)) {
+    errEl.textContent = 'Pseudo invalide — ' + FERRA_USERNAME_RULES;
+    errEl.classList.add('show');
+    return;
+  }
   const { error } = await ferraSignUp(email, password, username);
   if (error) {
-    errEl.textContent = error.message.includes('already') ? 'Cet email est déjà utilisé.' : 'Impossible de créer le compte — réessaie.';
+    errEl.textContent = error.message.includes('already') ? 'Cet email est déjà utilisé.'
+      : error.message.includes('duplicate') || error.message.includes('unique') ? 'Ce pseudo est déjà pris.'
+      : 'Impossible de créer le compte — réessaie.';
     errEl.classList.add('show');
     return;
   }
