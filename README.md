@@ -101,6 +101,38 @@ Tout se fait depuis le dashboard Supabase, **Table Editor** (menu de gauche) :
 
 ---
 
+## Étape 3 — Brancher le formulaire de contact (EmailJS, gratuit)
+
+La page [`contact.html`](contact.html) permet à un joueur de choisir une
+catégorie (bug/suggestion/question/autre) et d'écrire un message qui
+arrive directement sur ton adresse email — sans backend, via EmailJS.
+
+1. Va sur [emailjs.com](https://www.emailjs.com) → crée un compte gratuit
+   (200 emails/mois offerts, largement assez pour commencer).
+2. Menu de gauche : **Email Services** → **Add New Service**.
+   - Choisis **Gmail** (ou ta messagerie).
+   - Connecte le compte qui doit RECEVOIR les messages (ex. `ferra.izacki@gmail.com`).
+   - Une fois créé, copie le **Service ID** affiché.
+3. Menu de gauche : **Email Templates** → **Create New Template**.
+   - Dans le champ **To Email** du template, mets l'adresse qui doit recevoir
+     les messages (ex. `ferra.izacki@gmail.com`).
+   - Dans **Subject**, mets par exemple : `[FERRA - {{category}}] Message de {{from_name}}`
+   - Dans le corps du message, mets par exemple :
+     ```
+     Catégorie : {{category}}
+     De : {{from_name}} ({{reply_to}})
+
+     {{message}}
+     ```
+   - Sauvegarde, puis copie le **Template ID** affiché.
+4. Menu de gauche : **Account** → **General** → copie ta **Public Key**.
+5. Ouvre [`assets/js/config.js`](assets/js/config.js) et remplace les 3
+   valeurs `EMAILJS_...` par celles que tu viens de copier.
+6. `git add .`, `git commit -m "Branche le formulaire de contact"`, `git push`
+   — la page `contact.html` envoie maintenant vraiment les messages.
+
+---
+
 ## Mettre à jour le jeu téléchargeable
 
 Le fichier téléchargé par les joueurs est [`game/FERRA.html`](game/FERRA.html).
