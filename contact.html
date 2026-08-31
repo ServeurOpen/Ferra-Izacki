@@ -26,39 +26,44 @@
 <div class="page-header">
   <div class="container-narrow">
     <h1>✉️ Contact</h1>
-    <p>Un bug ? Une idée ? Une question ? Écris-nous directement, ton message arrive sur notre boîte mail.</p>
+    <p>Un bug ? Une idée ? Une question ? Ton message part directement de ton compte FERRA, pour qu'on sache toujours qui nous écrit.</p>
   </div>
 </div>
 
 <section style="padding-top:10px;">
   <div class="container-narrow" style="max-width:560px;">
-    <div class="form-error" id="contactError"></div>
-    <div class="form-success" id="contactSuccess">Message envoyé ! Merci, on te répondra si besoin à l'adresse indiquée.</div>
 
-    <form id="contactForm">
-      <div class="field">
-        <label for="contactCategory">Catégorie</label>
-        <select id="contactCategory" required>
-          <option value="Report de bug">🐞 Report de bug</option>
-          <option value="Suggestion">💡 Suggestion</option>
-          <option value="Question">❓ Question</option>
-          <option value="Autre">📨 Autre</option>
-        </select>
+    <div id="needLogin" class="card" style="display:none;text-align:center;">
+      <p style="margin-bottom:14px;">Connecte-toi avec ton compte FERRA (le même que sur le forum) pour nous écrire — ça évite les faux messages et permet de te répondre directement.</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <a href="forum/login.html" class="btn btn-primary btn-sm">Se connecter</a>
+        <a href="forum/signup.html" class="btn btn-ghost btn-sm">Créer un compte</a>
       </div>
-      <div class="field">
-        <label for="contactName">Ton pseudo</label>
-        <input type="text" id="contactName" maxlength="40" required>
-      </div>
-      <div class="field">
-        <label for="contactEmail">Ton email (pour qu'on puisse te répondre)</label>
-        <input type="email" id="contactEmail" required>
-      </div>
-      <div class="field">
-        <label for="contactMessage">Message</label>
-        <textarea id="contactMessage" placeholder="Décris ton problème, ton idée, ta question..." required></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary btn-block" id="contactSubmitBtn">Envoyer</button>
-    </form>
+    </div>
+
+    <div id="contactWrap" style="display:none;">
+      <p class="sub" id="contactAsWho" style="color:var(--text-dim);font-size:13px;margin:0 0 18px;"></p>
+      <div class="form-error" id="contactError"></div>
+      <div class="form-success" id="contactSuccess">Message envoyé ! On te répondra si besoin directement par email.</div>
+
+      <form id="contactForm">
+        <div class="field">
+          <label for="contactCategory">Catégorie</label>
+          <select id="contactCategory" required>
+            <option value="Report de bug">🐞 Report de bug</option>
+            <option value="Suggestion">💡 Suggestion</option>
+            <option value="Question">❓ Question</option>
+            <option value="Autre">📨 Autre</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="contactMessage">Message</label>
+          <textarea id="contactMessage" placeholder="Décris ton problème, ton idée, ta question..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="contactSubmitBtn">Envoyer</button>
+      </form>
+    </div>
+
   </div>
 </section>
 
@@ -75,13 +80,26 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="assets/js/config.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/auth.js"></script>
 <script>
-(function () {
+(async function () {
   const cfg = window.FERRA_CONFIG || {};
-  const configured = cfg.EMAILJS_PUBLIC_KEY && !cfg.EMAILJS_PUBLIC_KEY.includes('VOTRE_');
-  if (configured) emailjs.init({ publicKey: cfg.EMAILJS_PUBLIC_KEY });
+  const emailConfigured = cfg.EMAILJS_PUBLIC_KEY && !cfg.EMAILJS_PUBLIC_KEY.includes('VOTRE_');
+  if (emailConfigured) emailjs.init({ publicKey: cfg.EMAILJS_PUBLIC_KEY });
+
+  const session = await ferraGetSession();
+  if (!session) {
+    document.getElementById('needLogin').style.display = 'block';
+    return;
+  }
+  document.getElementById('contactWrap').style.display = 'block';
+  const username = session.profile?.username || 'Joueur';
+  const email = session.user.email;
+  document.getElementById('contactAsWho').textContent = `Connecté en tant que ${username} (${email})`;
 
   document.getElementById('contactForm').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -91,23 +109,25 @@
     errEl.classList.remove('show');
     okEl.classList.remove('show');
 
-    if (!configured) {
+    if (!emailConfigured) {
       errEl.textContent = "Le formulaire de contact n'est pas encore configuré (voir README.md, section EmailJS).";
+      errEl.classList.add('show');
+      return;
+    }
+
+    const message = document.getElementById('contactMessage').value.trim();
+    if (!message) {
+      errEl.textContent = 'Écris un message avant d\'envoyer.';
       errEl.classList.add('show');
       return;
     }
 
     const params = {
       category: document.getElementById('contactCategory').value,
-      from_name: document.getElementById('contactName').value.trim(),
-      reply_to: document.getElementById('contactEmail').value.trim(),
-      message: document.getElementById('contactMessage').value.trim(),
+      from_name: username,
+      reply_to: email,
+      message,
     };
-    if (!params.from_name || !params.reply_to || !params.message) {
-      errEl.textContent = 'Tous les champs sont obligatoires.';
-      errEl.classList.add('show');
-      return;
-    }
 
     btn.disabled = true;
     btn.textContent = 'Envoi en cours...';

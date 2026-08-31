@@ -27,7 +27,21 @@ async function ferraGetSession() {
   }
 }
 
+// Règle des pseudos (compte site = compte forum, un seul et même pseudo
+// partout) : lettres/chiffres/underscore uniquement — donc jamais
+// d'espace ni de caractère bizarre — et au moins une majuscule. La même
+// règle est appliquée côté base de données (voir
+// supabase/migration_2_comptes.sql) en filet de sécurité.
+const FERRA_USERNAME_REGEX = /^(?=.*[A-Z])[A-Za-z0-9_]{3,24}$/;
+const FERRA_USERNAME_RULES = "3 à 24 caractères, lettres/chiffres/underscore uniquement (pas d'espace ni d'accent), avec au moins 1 majuscule.";
+function ferraValidateUsername(username) {
+  return FERRA_USERNAME_REGEX.test(username || '');
+}
+
 async function ferraSignUp(email, password, username) {
+  if (!ferraValidateUsername(username)) {
+    return { error: { message: 'invalid_username' } };
+  }
   return window.supabaseClient.auth.signUp({
     email,
     password,
@@ -37,6 +51,25 @@ async function ferraSignUp(email, password, username) {
 
 async function ferraSignIn(email, password) {
   return window.supabaseClient.auth.signInWithPassword({ email, password });
+}
+
+// Connexion par EMAIL OU PSEUDO — un seul champ "identifiant" côté
+// formulaire (voir forum/login.html). Un pseudo ne contenant jamais de
+// "@" (voir FERRA_USERNAME_REGEX), la présence de "@" suffit à distinguer
+// les deux cas sans ambiguïté.
+async function ferraSignInWithIdentifier(identifier, password) {
+  identifier = (identifier || '').trim();
+  let email = identifier;
+  if (!identifier.includes('@')) {
+    const { data, error } = await window.supabaseClient.rpc('get_email_by_username', { p_username: identifier });
+    if (error || !data) {
+      // Message volontairement identique à un mot de passe incorrect —
+      // ne pas révéler si c'est le pseudo ou le mot de passe qui est faux.
+      return { error: { message: 'Invalid login credentials' } };
+    }
+    email = data;
+  }
+  return ferraSignIn(email, password);
 }
 
 async function ferraSignOut() {

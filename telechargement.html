@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Télécharger — FERRA</title>
-<meta name="description" content="Télécharge FERRA gratuitement — un seul fichier, aucune installation, joue directement dans ton navigateur.">
+<meta name="description" content="Télécharge FERRA gratuitement avec ton compte joueur — un seul fichier, aucune installation compliquée.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛏️</text></svg>">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -26,42 +26,53 @@
 <div class="page-header">
   <div class="container-narrow">
     <h1>⬇ Télécharger FERRA</h1>
-    <p>Gratuit, sans compte, sans installation. Un seul fichier à ouvrir dans ton navigateur.</p>
+    <p>Gratuit, un seul fichier, aucune installation compliquée. Un compte FERRA est demandé pour télécharger — le même que sur le forum.</p>
   </div>
 </div>
 
 <section style="padding-top:10px;">
   <div class="container-narrow">
-    <div class="card" style="text-align:center;padding:40px 30px;">
+
+    <div id="needLogin" class="card" style="display:none;text-align:center;padding:40px 30px;">
+      <div class="card-icon" style="margin:0 auto 18px;width:64px;height:64px;font-size:32px;">🔒</div>
+      <h3 style="font-size:20px;margin-bottom:10px;">Connecte-toi pour télécharger</h3>
+      <p style="margin-bottom:24px;">Un compte FERRA (gratuit, 30 secondes) est nécessaire — il te sert aussi pour le forum et le contact.</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <a href="forum/login.html" class="btn btn-primary btn-sm">Se connecter</a>
+        <a href="forum/signup.html" class="btn btn-ghost btn-sm">Créer un compte</a>
+      </div>
+    </div>
+
+    <div id="downloadCard" class="card" style="display:none;text-align:center;padding:40px 30px;">
       <div class="card-icon" style="margin:0 auto 18px;width:64px;height:64px;font-size:32px;">⛏️</div>
       <h3 style="font-size:22px;">FERRA — Automatisation de Fer</h3>
-      <p style="margin-bottom:24px;">Version Bêta &nbsp;·&nbsp; ~2,6 Mo &nbsp;·&nbsp; fonctionne hors-ligne une fois téléchargé</p>
-      <a href="game/FERRA.html" download class="btn btn-primary btn-block" style="justify-content:center;max-width:340px;margin:0 auto;">⬇ Télécharger FERRA.html</a>
+      <p style="margin-bottom:24px;">Version de développement &nbsp;·&nbsp; ~4,3 Mo &nbsp;·&nbsp; Windows (.exe)</p>
+      <a href="game/FERRA.exe" download class="btn btn-primary btn-block" style="justify-content:center;max-width:340px;margin:0 auto;">⬇ Télécharger FERRA.exe</a>
     </div>
 
     <div style="margin-top:40px;">
       <h2 class="section-title" style="font-size:22px;text-align:left;">Comment jouer</h2>
       <div class="changelog-item">
-        <div class="changelog-title">1. Télécharge le fichier</div>
-        <div class="changelog-desc">Clique sur le bouton ci-dessus. Ton navigateur télécharge un seul fichier : <code>FERRA.html</code>.</div>
+        <div class="changelog-title">1. Connecte-toi et télécharge</div>
+        <div class="changelog-desc">Crée un compte ou connecte-toi (ci-dessus), puis clique sur le bouton de téléchargement. Ton navigateur récupère un seul fichier : <code>FERRA.exe</code>.</div>
       </div>
       <div class="changelog-item">
-        <div class="changelog-title">2. Ouvre-le</div>
-        <div class="changelog-desc">Double-clique sur le fichier téléchargé (dans ton dossier Téléchargements). Il s'ouvre directement dans ton navigateur — Chrome, Firefox et Edge fonctionnent très bien.</div>
+        <div class="changelog-title">2. Lance-le</div>
+        <div class="changelog-desc">Double-clique sur le fichier téléchargé (dans ton dossier Téléchargements). C'est une version de développement, non signée numériquement : Windows SmartScreen peut afficher un avertissement — clique <b>"Informations complémentaires"</b> puis <b>"Exécuter quand même"</b>.</div>
       </div>
       <div class="changelog-item">
         <div class="changelog-title">3. Joue</div>
-        <div class="changelog-desc">Aucune installation, aucun compte. Ta partie se sauvegarde automatiquement dans ton navigateur — garde le même fichier et le même navigateur pour la retrouver.</div>
+        <div class="changelog-desc">Ta partie se sauvegarde automatiquement sur ton ordinateur — garde le même fichier pour la retrouver.</div>
       </div>
       <div class="changelog-item" style="border-left-color:transparent;">
         <div class="changelog-title">💡 Astuce</div>
-        <div class="changelog-desc">Épingle la page ou crée un raccourci vers le fichier pour y revenir facilement. Pense à garder une copie du fichier si tu changes d'ordinateur : ta sauvegarde reste liée au navigateur qui l'a créée.</div>
+        <div class="changelog-desc">Épingle le fichier ou crée un raccourci pour y revenir facilement. Le jeu est encore en développement actif : de nouvelles versions arriveront régulièrement, annoncées sur le forum.</div>
       </div>
     </div>
 
     <div class="card" style="margin-top:30px;">
       <h3 style="margin-bottom:10px;">Un problème au lancement ?</h3>
-      <p>Passe sur le <a href="forum/index.html" style="color:var(--copper-glow);font-weight:600;">forum</a> — section Support — et décris ton souci (navigateur utilisé, message d'erreur éventuel). La communauté et le développeur y répondent.</p>
+      <p>Passe sur le <a href="forum/index.html" style="color:var(--copper-glow);font-weight:600;">forum</a> — section Support — ou écris-nous directement en <a href="contact.html" style="color:var(--copper-glow);font-weight:600;">contact</a>, avec ton navigateur/système et le message d'erreur éventuel.</p>
     </div>
   </div>
 </section>
@@ -79,5 +90,15 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/auth.js"></script>
+<script>
+(async function () {
+  const session = await ferraGetSession();
+  document.getElementById(session ? 'downloadCard' : 'needLogin').style.display = 'block';
+})();
+</script>
 </body>
 </html>

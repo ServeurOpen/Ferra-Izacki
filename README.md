@@ -133,9 +133,29 @@ arrive directement sur ton adresse email — sans backend, via EmailJS.
 
 ---
 
+## Comptes joueurs (site + forum + téléchargement, un seul compte)
+
+Le site utilise un seul système de compte partout (créer un sujet sur le
+forum, écrire en contact, télécharger le jeu) — pas de compte séparé par
+fonctionnalité. Une pièce en plus par rapport au schéma de base :
+
+1. Après avoir exécuté `supabase/schema.sql` (étape 2 ci-dessus), exécute
+   **aussi** [`supabase/migration_2_comptes.sql`](supabase/migration_2_comptes.sql)
+   de la même façon (SQL Editor → New query → colle → Run). Ça ajoute :
+   - la règle de pseudo (3-24 caractères, lettres/chiffres/underscore
+     uniquement, au moins 1 majuscule) — appliquée aussi côté site avant
+     même d'atteindre la base ;
+   - la possibilité de se connecter avec son **pseudo** en plus de son
+     email (la page de connexion accepte les deux dans le même champ).
+2. Rien d'autre à configurer : la page `telechargement.html` et
+   `contact.html` demandent automatiquement de se connecter si ce n'est
+   pas déjà fait.
+
+---
+
 ## Mettre à jour le jeu téléchargeable
 
-Le fichier téléchargé par les joueurs est [`game/FERRA.html`](game/FERRA.html).
+Le fichier téléchargé par les joueurs est [`game/FERRA.exe`](game/FERRA.exe).
 Pour publier une nouvelle version : remplace ce fichier par la version à
 jour du jeu (garde exactement ce nom), puis `git add .`, `git commit`,
 `git push` comme d'habitude.
@@ -149,7 +169,7 @@ website/
   index.html              page d'accueil
   telechargement.html     page de téléchargement du jeu
   infos.html              fonctionnalités + changelog
-  game/FERRA.html         le jeu lui-même (fichier téléchargeable)
+  game/FERRA.exe          le jeu lui-même (fichier téléchargeable)
   forum/                  toutes les pages du forum
   assets/css/style.css    tous les styles du site
   assets/js/config.js     ⚠️ à remplir (voir Étape 2)
