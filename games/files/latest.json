@@ -1,10 +1,10 @@
 {
-  "version": "0.2.3",
-  "notes": "FERRA verrouille (developpement en cours), Boutique/Mes jeux avec des roles distincts (installer vs jouer), fenetre borderless corrigee (boutons fonctionnels), bouton Verifier les mises a jour corrige, nouvelles affiches Tower Defense + Anime Clicker.",
-  "pub_date": "2026-09-01T01:00:00Z",
+  "version": "0.2.4",
+  "notes": "Corrige les boutons reduire/agrandir/fermer (permissions manquantes cote Tauri).",
+  "pub_date": "2026-09-01T01:30:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTRUVLcDI5clhZMVlLaFRFS2VtOUdyUVMxZzJSZW8zUm1RSzBiR1BvY25ObTE2a2ozejJFMXR3Mk13VDY2ZWJiZ1B3bjE4dTU2YnZtYjk5ZWN4SDNETE9aa0RYMVZpT0E4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MjAzOTg2CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4zX3g2NC1zZXR1cC5leGUKUXBncy9lL3dXbVYvQlJRRXpBRGF1YXY0aU1mT3YyV1VXRGk5MjNVVGlieW0xRUF1UWl0c1J3bnRxZlVvaTlpeWxyNEl5WG1XQVBIY00zQzlYWU1aQnc9PQo=",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTRUVLcDI5clhZMVdObXd2K01UOERiSDVUUWpnUHhxdVo2UnBYK0NWNGhxaFk3VG5kTTVXWTVOYUVEaytMTnpJajlCRkZjN0U4SE4yVUhIbDlZY05peTA5QU1OZFV1NXdvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MjA1MzczCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi40X3g2NC1zZXR1cC5leGUKaEswaytJWWpGM01zMGFrSGpDZ3AxUEtkZkwveEEzZWk4VG9RTTFqLzFNbVhNbms5VnA5TnhscngxcXpkOElWT0c2ajI5eXpGRWpSWFhjSk8zRVhYQUE9PQo=",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
