@@ -289,11 +289,11 @@ section{padding:64px 0;}
 /* ============================================================ launcher/plateforme (31/08/2026) ====
    Le site passe de "vitrine d'un seul jeu" à "portail qui donne envie
    d'installer le Launcher Izacki" — nouvelles briques réutilisées par
-   launcher.html + games/*.html : bannière plein cadre par jeu (façon page
-   Steam), grille de jeux, liste de fonctionnalités à puces, galerie de
-   captures. Rien ci-dessus n'est modifié, uniquement des ajouts. */
+   launcher.html + games/*.html : bannière plein cadre par jeu, grille de
+   jeux, liste de fonctionnalités à puces, galerie de captures. Rien
+   ci-dessus n'est modifié, uniquement des ajouts. */
 
-/* ---- Bandeau plein cadre en haut d'une page jeu (façon Steam) ---- */
+/* ---- Bandeau plein cadre en haut d'une page jeu ---- */
 .game-banner{
   position:relative;border-radius:var(--radius);overflow:hidden;margin-bottom:34px;
   border:1px solid var(--panel-edge);box-shadow:var(--shadow-soft);
