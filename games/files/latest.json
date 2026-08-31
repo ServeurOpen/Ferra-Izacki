@@ -1,10 +1,10 @@
 {
-  "version": "0.2.4",
-  "notes": "Corrige les boutons reduire/agrandir/fermer (permissions manquantes cote Tauri).",
-  "pub_date": "2026-09-01T01:30:00Z",
+  "version": "0.2.5",
+  "notes": "Corrige le bouton Agrandir/Restaurer (mauvaise permission Tauri : allow-internal-toggle-maximize au lieu de allow-toggle-maximize).",
+  "pub_date": "2026-09-01T02:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTRUVLcDI5clhZMVdObXd2K01UOERiSDVUUWpnUHhxdVo2UnBYK0NWNGhxaFk3VG5kTTVXWTVOYUVEaytMTnpJajlCRkZjN0U4SE4yVUhIbDlZY05peTA5QU1OZFV1NXdvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MjA1MzczCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi40X3g2NC1zZXR1cC5leGUKaEswaytJWWpGM01zMGFrSGpDZ3AxUEtkZkwveEEzZWk4VG9RTTFqLzFNbVhNbms5VnA5TnhscngxcXpkOElWT0c2ajI5eXpGRWpSWFhjSk8zRVhYQUE9PQo=",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTRUVLcDI5clhZMVVXdnF5N1Fyb3pSS1g1Nm5aMmZORzBwOEdOdUN5SUhPaWxGRmN2YUZIL3BsWE5RQUVkTkF3dHBQdmliVEVCRWhGRXl0UXpYdTgxMnpLczBMQ2ErVFFjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MjA2MDExCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi41X3g2NC1zZXR1cC5leGUKSm5kbmxiOGdqdGtFRHZCanJHd3dEV0tPZ2pweTYxekZIbTdCQko4dkdCa24rSmFvYlVQci9acU1jMjFpcit5MXlQUkZzVmVkLzNDOFBLVXlpT1AvQ3c9PQo=",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
