@@ -1,10 +1,10 @@
 {
-  "version": "0.2.0",
-  "notes": "Compte Izacki (connexion/inscription), onglets Boutique/Mes jeux/Telechargement/Parametres, nouveau logo, detection des mises a jour des jeux.",
-  "pub_date": "2026-08-31T18:35:28Z",
+  "version": "0.2.1",
+  "notes": "Fenetre sans decorations Windows natives : une seule barre de titre custom (Discord/Spotify-like) avec ses propres boutons reduire/agrandir/fermer.",
+  "pub_date": "2026-09-01T00:15:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTRUVLcDI5clhZMVppQVg1TUlraERqTm5ZY0gvanFyOWpsVEFZZzgwYWpiZjN6VEh3TGs4MjRCVGVzd3NyZjBrbmJLRTNiQ05mRG8vYXBnL2dsR3hUc1JPNEZobXdyYkE0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MjAxMzA5CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4wX3g2NC1zZXR1cC5leGUKcndEaVdOWUhkM20yanEyeVY1d0JLaE9XOURMdm82WU9paHdHd1Y0M2E5Q0hDSDlhdnc4UWFjS1FaUkFEWXNaL2Rra1laVVBaRXB1U0lVOTF3RjJVREE9PQo=",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTRUVLcDI5clhZMVJzNlZEVTZnakx1YjhyeEhFRDVnZ251UzJFMHNydVlBVWRLQVYxamdBZktNdERLQUs3bG9GRUp4NXVaNklyeUFrMm9oMGpMcFdlcUc3RTNuL2hNR3c0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MjAyNTk2CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4xX3g2NC1zZXR1cC5leGUKUkZ5ZEVmcUlmU2ZUTDFrRGJoZ3ZiNXpQcE0wWE1HY2l0MGdWa3pWQ3NFem5mekluejhNamVmcFRhSkRMejRWTmtGcWpveG4yMWJwL0t2ZWYyanlwQUE9PQo=",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
