@@ -19,6 +19,7 @@
       <a href="forum/index.html" class="nav-link">Forum</a>
       <a href="contact.html" class="nav-link">Contact</a>
       <a href="launcher.html" class="nav-cta">🚀 Launcher</a>
+      <span id="navAuth" class="nav-auth"></span>
     </div>
   </nav>
 </header>
@@ -145,5 +146,10 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/auth.js"></script>
+<script>ferraRenderNavAuth('navAuth', '');</script>
 </body>
 </html>

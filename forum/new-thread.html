@@ -18,6 +18,7 @@
       <a href="index.html" class="nav-link active">Forum</a>
       <a href="../contact.html" class="nav-link">Contact</a>
       <a href="../launcher.html" class="nav-cta">🚀 Launcher</a>
+      <span id="navAuth" class="nav-auth"></span>
     </div>
   </nav>
 </header>
@@ -66,6 +67,7 @@
 <script src="../assets/js/forum.js"></script>
 <script>
 (async function () {
+  ferraRenderNavAuth('navAuth', '../');
   const slug = new URLSearchParams(location.search).get('slug');
   if (!slug) { document.body.innerHTML = '<div class="empty-state">Catégorie manquante.</div>'; return; }
 
