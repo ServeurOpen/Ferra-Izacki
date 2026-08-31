@@ -39,11 +39,24 @@ create index if not exists idx_friendships_requester on public.friendships(reque
 create index if not exists idx_friendships_addressee on public.friendships(addressee_id, status);
 
 -- ---- Groupes (base pour de futurs lobbies de jeu en ligne) ----
+-- Les deux tables sont créées AVANT toute policy — une policy RLS
+-- référence le schéma existant au moment où elle est créée, donc
+-- group_members doit déjà exister avant la policy de "groups" qui le
+-- consulte (c'est ce qui a fait échouer une première tentative).
 create table if not exists public.groups (
   id uuid primary key default gen_random_uuid(),
   name text not null,
   owner_id uuid not null references public.profiles(id) on delete cascade,
   created_at timestamptz not null default now()
+);
+
+-- ---- Membres de groupe ----
+create table if not exists public.group_members (
+  group_id uuid not null references public.groups(id) on delete cascade,
+  user_id uuid not null references public.profiles(id) on delete cascade,
+  role text not null default 'member' check (role in ('owner','member')),
+  joined_at timestamptz not null default now(),
+  primary key (group_id, user_id)
 );
 
 alter table public.groups enable row level security;
@@ -66,15 +79,6 @@ create policy "Le proprietaire peut renommer/supprimer son groupe"
 create policy "Le proprietaire peut supprimer son groupe"
   on public.groups for delete
   using (auth.uid() = owner_id);
-
--- ---- Membres de groupe ----
-create table if not exists public.group_members (
-  group_id uuid not null references public.groups(id) on delete cascade,
-  user_id uuid not null references public.profiles(id) on delete cascade,
-  role text not null default 'member' check (role in ('owner','member')),
-  joined_at timestamptz not null default now(),
-  primary key (group_id, user_id)
-);
 
 alter table public.group_members enable row level security;
 
