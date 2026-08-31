@@ -6,15 +6,25 @@
 
 // Récupère l'utilisateur connecté (ou null) + son profil (pseudo) associé.
 // Utilisé par chaque page du forum pour savoir qui écrit/répond.
+// Volontairement protégée par un try/catch : tant que Supabase n'est pas
+// configuré (ou en cas de coupure réseau), l'appel réseau échoue — sans
+// ça, chaque page appelante plantait en entier (voir ferraRenderUserWidget,
+// appelée sans garde en tête de chaque page du forum) au lieu d'afficher
+// son propre message "pas encore configuré/erreur de chargement".
 async function ferraGetSession() {
-  const { data: { user } } = await window.supabaseClient.auth.getUser();
-  if (!user) return null;
-  const { data: profile } = await window.supabaseClient
-    .from('profiles')
-    .select('id, username')
-    .eq('id', user.id)
-    .single();
-  return { user, profile };
+  try {
+    const { data: { user } } = await window.supabaseClient.auth.getUser();
+    if (!user) return null;
+    const { data: profile } = await window.supabaseClient
+      .from('profiles')
+      .select('id, username')
+      .eq('id', user.id)
+      .single();
+    return { user, profile };
+  } catch (err) {
+    console.error('[FERRA] ferraGetSession a échoué (Supabase non configuré ou hors ligne) :', err);
+    return null;
+  }
 }
 
 async function ferraSignUp(email, password, username) {
