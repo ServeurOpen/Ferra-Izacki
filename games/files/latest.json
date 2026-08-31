@@ -1,10 +1,10 @@
 {
-  "version": "0.2.1",
-  "notes": "Fenetre sans decorations Windows natives : une seule barre de titre custom (Discord/Spotify-like) avec ses propres boutons reduire/agrandir/fermer.",
-  "pub_date": "2026-09-01T00:15:00Z",
+  "version": "0.2.2",
+  "notes": "Nouvelle affiche stylisee pour FERRA dans la Boutique/Mes jeux.",
+  "pub_date": "2026-09-01T00:30:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTRUVLcDI5clhZMVJzNlZEVTZnakx1YjhyeEhFRDVnZ251UzJFMHNydVlBVWRLQVYxamdBZktNdERLQUs3bG9GRUp4NXVaNklyeUFrMm9oMGpMcFdlcUc3RTNuL2hNR3c0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MjAyNTk2CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4xX3g2NC1zZXR1cC5leGUKUkZ5ZEVmcUlmU2ZUTDFrRGJoZ3ZiNXpQcE0wWE1HY2l0MGdWa3pWQ3NFem5mekluejhNamVmcFRhSkRMejRWTmtGcWpveG4yMWJwL0t2ZWYyanlwQUE9PQo=",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTRUVLcDI5clhZMWRIUCtoMjFKdHVnZVhBUC9jdjFPeUhWdUhUcEo2dE5FNnZPQndnUzFmdTk3YklUN094TkRXenp5NVVka2NHTEJUYllDOXRwZXNrYldyZ3V2akJwVlFVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MjAzMTY0CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4yX3g2NC1zZXR1cC5leGUKc2FuWVVEWkxIdFRtdXRpWEFmTUpLYXd1VFRWUDFJT0NqdlZJNnpac3FNVGYrS0JZdG5JTW50YlcwYThKRmpxQWJNblhEcXQ2ZWFldVpETkpuNER6Q1E9PQo=",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
