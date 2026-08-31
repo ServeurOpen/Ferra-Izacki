@@ -1,10 +1,10 @@
 {
-  "version": "0.2.5",
-  "notes": "Corrige le bouton Agrandir/Restaurer (mauvaise permission Tauri : allow-internal-toggle-maximize au lieu de allow-toggle-maximize).",
-  "pub_date": "2026-09-01T02:00:00Z",
+  "version": "0.2.6",
+  "notes": "Nouveau : systeme d'amis (demandes, acceptation) et de groupes, base pour de futurs jeux en ligne.",
+  "pub_date": "2026-09-01T02:30:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTRUVLcDI5clhZMVVXdnF5N1Fyb3pSS1g1Nm5aMmZORzBwOEdOdUN5SUhPaWxGRmN2YUZIL3BsWE5RQUVkTkF3dHBQdmliVEVCRWhGRXl0UXpYdTgxMnpLczBMQ2ErVFFjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MjA2MDExCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi41X3g2NC1zZXR1cC5leGUKSm5kbmxiOGdqdGtFRHZCanJHd3dEV0tPZ2pweTYxekZIbTdCQko4dkdCa24rSmFvYlVQci9acU1jMjFpcit5MXlQUkZzVmVkLzNDOFBLVXlpT1AvQ3c9PQo=",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTRUVLcDI5clhZMWJQZ241UjZxWGo2cmx0T0JvcEVXRTJVcncvVGJRZmZwd3pZMW92enFNNjRvUVdMcFU3N21MZURVa2cxd0tlRDEzdnNhamNsQjQwZE9ZNHQ4U2V0dHdNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MjA2ODAyCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi42X3g2NC1zZXR1cC5leGUKOGQzQURMYi8wUDdKQjVMQWtaaG04QkZ3NkF5YWhOcmZwUUlHVzBwS3UxVG9YM3cyZjk3OVhoMWttMkROazAwb2x6c2U0Q2Q4dFFadlFXQ3dNR1E0QWc9PQo=",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
