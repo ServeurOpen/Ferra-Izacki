@@ -59,14 +59,31 @@ create table if not exists public.group_members (
   primary key (group_id, user_id)
 );
 
+-- Fonction SECURITY DEFINER (contourne RLS) — indispensable pour la
+-- policy de group_members plus bas : une policy qui interroge SA PROPRE
+-- table directement crée une récursion infinie chez Postgres ("infinite
+-- recursion detected in policy for relation group_members"), passer par
+-- une fonction évite le problème.
+create or replace function public.is_group_member(p_group_id uuid, p_user_id uuid)
+returns boolean
+language sql
+security definer
+stable
+set search_path = public
+as $$
+  select exists (
+    select 1 from public.group_members
+    where group_id = p_group_id and user_id = p_user_id
+  );
+$$;
+
+grant execute on function public.is_group_member(uuid, uuid) to authenticated;
+
 alter table public.groups enable row level security;
 
 create policy "Voir les groupes dont on est membre"
   on public.groups for select
-  using (exists (
-    select 1 from public.group_members gm
-    where gm.group_id = groups.id and gm.user_id = auth.uid()
-  ));
+  using (public.is_group_member(groups.id, auth.uid()));
 
 create policy "Creer un groupe (on en devient le proprietaire)"
   on public.groups for insert
@@ -84,10 +101,7 @@ alter table public.group_members enable row level security;
 
 create policy "Voir les membres d'un groupe dont on fait partie"
   on public.group_members for select
-  using (exists (
-    select 1 from public.group_members gm2
-    where gm2.group_id = group_members.group_id and gm2.user_id = auth.uid()
-  ));
+  using (public.is_group_member(group_id, auth.uid()));
 
 -- Deux cas d'insertion valides : (1) se rajouter soi-meme comme owner
 -- juste apres avoir cree le groupe, (2) un membre existant qui invite
@@ -98,10 +112,7 @@ create policy "S'ajouter comme proprietaire ou inviter un ami dans son groupe"
     (user_id = auth.uid() and exists (
       select 1 from public.groups g where g.id = group_id and g.owner_id = auth.uid()
     ))
-    or exists (
-      select 1 from public.group_members gm3
-      where gm3.group_id = group_members.group_id and gm3.user_id = auth.uid()
-    )
+    or public.is_group_member(group_id, auth.uid())
   );
 
 create policy "Quitter un groupe ou en retirer un membre (proprietaire)"
