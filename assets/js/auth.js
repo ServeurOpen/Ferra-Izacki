@@ -38,9 +38,30 @@ function ferraValidateUsername(username) {
   return FERRA_USERNAME_REGEX.test(username || '');
 }
 
+// Vérifie si un pseudo est déjà pris (insensible à la casse — "Test" et
+// "test" comptent comme le même pseudo, cf. la contrainte SQL + la
+// comparaison lower() de get_email_by_username). Utilisée AVANT
+// l'inscription pour donner un message clair tout de suite : le message
+// d'erreur renvoyé par Supabase quand le pseudo est en doublon est un
+// générique "Database error saving new user" (le trigger handle_new_user
+// échoue sur la contrainte unique de profiles.username) qui ne dit pas du
+// tout à l'utilisateur ce qui a coincé.
+async function ferraUsernameTaken(username) {
+  const { data } = await window.supabaseClient
+    .from('profiles')
+    .select('id')
+    .ilike('username', username)
+    .limit(1)
+    .maybeSingle();
+  return !!data;
+}
+
 async function ferraSignUp(email, password, username) {
   if (!ferraValidateUsername(username)) {
     return { error: { message: 'invalid_username' } };
+  }
+  if (await ferraUsernameTaken(username)) {
+    return { error: { message: 'username_taken' } };
   }
   return window.supabaseClient.auth.signUp({
     email,

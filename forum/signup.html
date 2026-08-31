@@ -75,7 +75,8 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
     // confirmation par email (recommandé pour un petit forum).
     const msg = (error.message || '').toLowerCase();
     errEl.textContent = msg.includes('already') ? 'Cet email est déjà utilisé.'
-      : msg.includes('duplicate') || msg.includes('unique') ? 'Ce pseudo est déjà pris.'
+      : msg === 'username_taken' || msg.includes('duplicate') || msg.includes('unique') || msg.includes('database error saving new user')
+      ? 'Ce pseudo est déjà utilisé.'
       : msg.includes('rate limit') || msg.includes('429') || msg.includes('email rate limit exceeded')
       ? "Trop de créations de compte récentes (limite d'envoi d'emails) — réessaie dans quelques minutes."
       : msg.includes('disabled')
