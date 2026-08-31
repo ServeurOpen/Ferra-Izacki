@@ -27,7 +27,7 @@
   <h1>🆕 Créer un compte</h1>
   <p class="sub">Rejoins la communauté FERRA.</p>
   <div class="form-error" id="signupError"></div>
-  <div class="form-success" id="signupSuccess">Compte créé ! Vérifie tes emails pour confirmer ton adresse, puis connecte-toi.</div>
+  <div class="form-success" id="signupSuccess">Compte créé !</div>
   <form id="signupForm">
     <div class="field">
       <label for="signupUsername">Pseudo</label>
@@ -66,7 +66,7 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
     errEl.classList.add('show');
     return;
   }
-  const { error } = await ferraSignUp(email, password, username);
+  const { data, error } = await ferraSignUp(email, password, username);
   if (error) {
     // Message dédié pour le vrai souci rencontré (31/08/2026) : la limite
     // d'envoi d'emails de confirmation de Supabase (quelques emails/heure
@@ -78,12 +78,26 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
       : msg.includes('duplicate') || msg.includes('unique') ? 'Ce pseudo est déjà pris.'
       : msg.includes('rate limit') || msg.includes('429') || msg.includes('email rate limit exceeded')
       ? "Trop de créations de compte récentes (limite d'envoi d'emails) — réessaie dans quelques minutes."
+      : msg.includes('disabled')
+      ? "Les inscriptions sont temporairement désactivées côté serveur — préviens-nous en contact."
       : 'Impossible de créer le compte — réessaie.';
     errEl.classList.add('show');
     return;
   }
-  okEl.classList.add('show');
+  // Avec "Confirm email" désactivé côté Supabase, signUp() renvoie une
+  // session tout de suite (data.session non nul) : le compte est déjà actif,
+  // pas besoin de confirmer quoi que ce soit. Si "Confirm email" est encore
+  // actif (ou pour un ancien réglage), data.session reste vide et il faut
+  // vraiment confirmer par email avant de pouvoir se connecter.
   document.getElementById('signupForm').style.display = 'none';
+  if (data && data.session) {
+    okEl.textContent = 'Compte créé et connecté ! Direction le forum...';
+    okEl.classList.add('show');
+    setTimeout(() => { window.location.href = 'index.html'; }, 1200);
+  } else {
+    okEl.textContent = 'Compte créé ! Vérifie tes emails pour confirmer ton adresse (et les spams), puis connecte-toi.';
+    okEl.classList.add('show');
+  }
 });
 </script>
 </body>
