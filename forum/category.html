@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forum — FERRA</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛏️</text></svg>">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="site-nav">
+    <a href="../index.html" class="brand">FER<span>RA</span></a>
+    <div class="nav-links">
+      <a href="../index.html" class="nav-link">Accueil</a>
+      <a href="../infos.html" class="nav-link">Infos &amp; Changelog</a>
+      <a href="index.html" class="nav-link active">Forum</a>
+      <a href="../telechargement.html" class="nav-cta">⬇ Télécharger</a>
+    </div>
+  </nav>
+</header>
+
+<section style="padding-top:34px;">
+  <div class="container-narrow">
+    <div class="breadcrumb"><a href="index.html">Forum</a><span class="sep">/</span><span id="breadcrumbCat">…</span></div>
+
+    <div class="forum-toolbar">
+      <div>
+        <h1 id="catTitle" style="font-size:26px;margin:0 0 4px;">…</h1>
+        <p id="catDesc" style="color:var(--text-dim);font-size:13.5px;margin:0;"></p>
+      </div>
+      <a id="newThreadBtn" href="#" class="btn btn-primary btn-sm">✏️ Nouveau sujet</a>
+    </div>
+    <div id="forumUserWidget" class="forum-user" style="margin-bottom:18px;"></div>
+
+    <div id="threadsList">
+      <div class="empty-state"><div class="big-icon">⏳</div>Chargement des sujets…</div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-row">
+    <div class="footer-note">FERRA — projet indépendant, développé avec passion. © 2026.</div>
+    <div class="footer-links">
+      <a href="../index.html">Accueil</a>
+      <a href="../telechargement.html">Télécharger</a>
+      <a href="../infos.html">Infos</a>
+      <a href="index.html">Forum</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/supabase-client.js"></script>
+<script src="../assets/js/auth.js"></script>
+<script src="../assets/js/forum.js"></script>
+<script>
+(async function () {
+  await ferraRenderUserWidget('forumUserWidget');
+
+  const slug = new URLSearchParams(location.search).get('slug');
+  const listEl = document.getElementById('threadsList');
+  if (!slug) { listEl.innerHTML = `<div class="empty-state">Catégorie introuvable.</div>`; return; }
+
+  try {
+    const cat = await ferraFetchCategoryBySlug(slug);
+    document.getElementById('catTitle').textContent = `${cat.icon} ${cat.name}`;
+    document.getElementById('catDesc').textContent = cat.description || '';
+    document.getElementById('breadcrumbCat').textContent = cat.name;
+    document.title = `${cat.name} — Forum FERRA`;
+    document.getElementById('newThreadBtn').href = `new-thread.html?slug=${encodeURIComponent(cat.slug)}`;
+
+    const threads = await ferraFetchThreads(cat.id);
+    if (!threads.length) {
+      listEl.innerHTML = `<div class="empty-state"><div class="big-icon">📭</div>Aucun sujet ici pour l'instant — sois le premier à en ouvrir un !</div>`;
+      return;
+    }
+    listEl.innerHTML = threads.map(t => `
+      <a class="thread-row ${t.pinned ? 'pinned' : ''}" href="thread.html?id=${t.id}">
+        <div style="flex:1;min-width:0;">
+          <div class="thread-title">${t.pinned ? '📌 ' : ''}${ferraEscape(t.title)}</div>
+          <div class="thread-meta">par <b>${ferraEscape(t.profiles?.username || 'Joueur')}</b> · ${ferraFormatDate(t.created_at)}</div>
+        </div>
+        <div class="thread-stats"><b>${t.replyCount}</b>réponse${t.replyCount === 1 ? '' : 's'}</div>
+      </a>
+    `).join('');
+  } catch (err) {
+    listEl.innerHTML = `<div class="empty-state"><div class="big-icon">⚠️</div>Impossible de charger cette catégorie.</div>`;
+    console.error(err);
+  }
+})();
+</script>
+</body>
+</html>
