@@ -243,6 +243,11 @@ section{padding:64px 0;}
 }
 .field input:focus, .field textarea:focus, .field select:focus{outline:none;border-color:var(--copper-glow);}
 .field textarea{resize:vertical;min-height:140px;}
+/* Le menu déroulant d'un <select> s'affiche avec un fond clair imposé par
+   le navigateur (impossible à styliser complètement en CSS) — sans ça le
+   texte clair du thème devient illisible/éblouissant dessus une fois la
+   liste ouverte. On force donc un texte sombre uniquement sur les options. */
+.field select option{color:#1a1a1a;background:#fff;}
 .auth-shell{max-width:400px;margin:60px auto;padding:32px;border-radius:var(--radius);background:rgba(255,255,255,0.025);border:1px solid var(--panel-edge);}
 .auth-shell h1{font-size:22px;text-align:center;margin:0 0 6px;}
 .auth-shell p.sub{text-align:center;color:var(--text-dim);font-size:13px;margin:0 0 26px;}
