@@ -72,6 +72,23 @@ async function ferraSignInWithIdentifier(identifier, password) {
   return ferraSignIn(email, password);
 }
 
+// Mot de passe oublié — étape 1 : envoie un email contenant un lien de
+// réinitialisation. Le lien pointe vers reset-password.html, qui contient
+// un jeton temporaire dans l'URL ; supabase-js le détecte automatiquement
+// à l'ouverture de la page (detectSessionInUrl, activé par défaut) et
+// ouvre une session "recovery" le temps de choisir un nouveau mot de passe.
+async function ferraSendPasswordReset(email) {
+  const redirectTo = window.location.origin + window.location.pathname.replace(/forgot-password\.html$/, 'reset-password.html');
+  return window.supabaseClient.auth.resetPasswordForEmail(email, { redirectTo });
+}
+
+// Mot de passe oublié — étape 2 : appelée depuis reset-password.html une
+// fois que le joueur a choisi son nouveau mot de passe. Nécessite la
+// session "recovery" ouverte par le lien reçu par email (voir ci-dessus).
+async function ferraUpdatePassword(newPassword) {
+  return window.supabaseClient.auth.updateUser({ password: newPassword });
+}
+
 async function ferraSignOut() {
   await window.supabaseClient.auth.signOut();
   window.location.href = 'index.html';
