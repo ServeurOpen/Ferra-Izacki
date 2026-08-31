@@ -1,10 +1,10 @@
 {
-  "version": "0.2.6",
-  "notes": "Nouveau : systeme d'amis (demandes, acceptation) et de groupes, base pour de futurs jeux en ligne.",
-  "pub_date": "2026-09-01T02:30:00Z",
+  "version": "0.2.7",
+  "notes": "Tag de pseudo (Pseudo#Numero) pour ajouter un ami sans ambiguite. Amis/groupes testes et fonctionnels de bout en bout.",
+  "pub_date": "2026-09-01T03:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTRUVLcDI5clhZMWJQZ241UjZxWGo2cmx0T0JvcEVXRTJVcncvVGJRZmZwd3pZMW92enFNNjRvUVdMcFU3N21MZURVa2cxd0tlRDEzdnNhamNsQjQwZE9ZNHQ4U2V0dHdNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MjA2ODAyCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi42X3g2NC1zZXR1cC5leGUKOGQzQURMYi8wUDdKQjVMQWtaaG04QkZ3NkF5YWhOcmZwUUlHVzBwS3UxVG9YM3cyZjk3OVhoMWttMkROazAwb2x6c2U0Q2Q4dFFadlFXQ3dNR1E0QWc9PQo=",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTRUVLcDI5clhZMWZMVTJCZGRNMFB3TVdZQ1h1Qlg1YmNvb0xkbmxVbE5vazMramUwcExHdGQwbmxvd3ZZSElGZEdzNHhwWUJmZjBaaFI4c1VDYlMvb0V3YSt3b2l6V1FZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MjA3OTg5CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi43X3g2NC1zZXR1cC5leGUKVCtIT3lhNnBSYm0xMFp4cjRFUzRrUUhNb1g4TFRobEhvSWw1ZTgxNTFSY2FCTEVYRC90TzU3QlcrM0V3dVFiVjVYL0c4aTZ1WEx2aERsQWg5dkVQQlE9PQo=",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
