@@ -15,6 +15,6 @@
 // ============================================================
 
 window.FERRA_CONFIG = {
-  SUPABASE_URL: 'https://VOTRE-PROJET.supabase.co',
-  SUPABASE_ANON_KEY: 'VOTRE_CLE_ANON_PUBLIQUE',
+  SUPABASE_URL: 'https://wesfskxcvfidltnmnrsg.supabase.co',
+  SUPABASE_ANON_KEY: 'sb_publishable_aNQ7hYz-5LzuzDgnmF8E1g_Z186Vms4',
 };
