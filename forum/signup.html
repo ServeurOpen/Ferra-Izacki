@@ -18,7 +18,7 @@
       <a href="../launcher.html" class="nav-link">Launcher</a>
       <a href="index.html" class="nav-link active">Forum</a>
       <a href="../contact.html" class="nav-link">Contact</a>
-      <a href="../telechargement.html" class="nav-cta">⬇ Télécharger</a>
+      <a href="../launcher.html" class="nav-cta">🚀 Launcher</a>
     </div>
   </nav>
 </header>
@@ -68,8 +68,16 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
   }
   const { error } = await ferraSignUp(email, password, username);
   if (error) {
-    errEl.textContent = error.message.includes('already') ? 'Cet email est déjà utilisé.'
-      : error.message.includes('duplicate') || error.message.includes('unique') ? 'Ce pseudo est déjà pris.'
+    // Message dédié pour le vrai souci rencontré (31/08/2026) : la limite
+    // d'envoi d'emails de confirmation de Supabase (quelques emails/heure
+    // par défaut) fait échouer l'inscription avec un 429 générique —
+    // voir README.md, section "Comptes joueurs", pour désactiver la
+    // confirmation par email (recommandé pour un petit forum).
+    const msg = (error.message || '').toLowerCase();
+    errEl.textContent = msg.includes('already') ? 'Cet email est déjà utilisé.'
+      : msg.includes('duplicate') || msg.includes('unique') ? 'Ce pseudo est déjà pris.'
+      : msg.includes('rate limit') || msg.includes('429') || msg.includes('email rate limit exceeded')
+      ? "Trop de créations de compte récentes (limite d'envoi d'emails) — réessaie dans quelques minutes."
       : 'Impossible de créer le compte — réessaie.';
     errEl.classList.add('show');
     return;

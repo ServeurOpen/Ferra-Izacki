@@ -18,7 +18,7 @@
       <a href="../launcher.html" class="nav-link">Launcher</a>
       <a href="index.html" class="nav-link active">Forum</a>
       <a href="../contact.html" class="nav-link">Contact</a>
-      <a href="../telechargement.html" class="nav-cta">⬇ Télécharger</a>
+      <a href="../launcher.html" class="nav-cta">🚀 Launcher</a>
     </div>
   </nav>
 </header>
@@ -54,7 +54,18 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   errEl.classList.remove('show');
   const { error } = await ferraSignInWithIdentifier(identifier, password);
   if (error) {
-    errEl.textContent = 'Email/pseudo ou mot de passe incorrect.';
+    // Messages distincts pour les cas fréquents (31/08/2026, retour joueur
+    // "même quand ça marche la connexion ne fonctionne pas") — un compte
+    // créé avant la désactivation de la confirmation par email reste
+    // bloqué avec le message générique "identifiants incorrects", ce qui
+    // ressemblait à un mot de passe faux alors que le vrai souci est
+    // ailleurs. Voir README.md, section "Comptes joueurs".
+    const msg = (error.message || '').toLowerCase();
+    errEl.textContent = msg.includes('email not confirmed')
+      ? "Ce compte n'a pas encore confirmé son email — vérifie ta boîte mail (et les spams), ou écris-nous en contact si l'email n'est jamais arrivé."
+      : msg.includes('rate limit') || msg.includes('429')
+      ? 'Trop de tentatives récentes — réessaie dans quelques minutes.'
+      : 'Email/pseudo ou mot de passe incorrect.';
     errEl.classList.add('show');
     return;
   }
