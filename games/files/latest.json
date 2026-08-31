@@ -1,0 +1,11 @@
+{
+  "version": "0.2.0",
+  "notes": "Compte Izacki (connexion/inscription), onglets Boutique/Mes jeux/Telechargement/Parametres, nouveau logo, detection des mises a jour des jeux.",
+  "pub_date": "2026-08-31T18:35:28Z",
+  "platforms": {
+    "windows-x86_64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTRUVLcDI5clhZMVppQVg1TUlraERqTm5ZY0gvanFyOWpsVEFZZzgwYWpiZjN6VEh3TGs4MjRCVGVzd3NyZjBrbmJLRTNiQ05mRG8vYXBnL2dsR3hUc1JPNEZobXdyYkE0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MjAxMzA5CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4wX3g2NC1zZXR1cC5leGUKcndEaVdOWUhkM20yanEyeVY1d0JLaE9XOURMdm82WU9paHdHd1Y0M2E5Q0hDSDlhdnc4UWFjS1FaUkFEWXNaL2Rra1laVVBaRXB1U0lVOTF3RjJVREE9PQo=",
+      "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
+    }
+  }
+}
