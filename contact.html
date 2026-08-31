@@ -19,6 +19,7 @@
       <a href="forum/index.html" class="nav-link">Forum</a>
       <a href="contact.html" class="nav-link active">Contact</a>
       <a href="launcher.html" class="nav-cta">🚀 Launcher</a>
+      <span id="navAuth" class="nav-auth"></span>
     </div>
   </nav>
 </header>
@@ -86,6 +87,7 @@
 <script src="assets/js/auth.js"></script>
 <script>
 (async function () {
+  ferraRenderNavAuth('navAuth', '');
   const cfg = window.FERRA_CONFIG || {};
   const emailConfigured = cfg.EMAILJS_PUBLIC_KEY && !cfg.EMAILJS_PUBLIC_KEY.includes('VOTRE_');
   if (emailConfigured) emailjs.init({ publicKey: cfg.EMAILJS_PUBLIC_KEY });

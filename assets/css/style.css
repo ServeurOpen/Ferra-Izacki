@@ -75,6 +75,26 @@ button{font-family:inherit;cursor:pointer;}
 }
 .nav-toggle{display:none;}
 
+/* Widget connexion/inscription en coin haut-droit, sur TOUTES les pages du
+   site (plus seulement le forum) — même compte partout (site/forum/launcher),
+   donc pas besoin d'aller sur le forum juste pour se connecter. Rempli en JS
+   par ferraRenderNavAuth() (assets/js/auth.js). Séparé du reste du menu par
+   une fine bordure pour bien le distinguer de la navigation classique. */
+.nav-auth{display:flex;align-items:center;gap:8px;margin-left:6px;padding-left:14px;border-left:1px solid var(--panel-edge);}
+.nav-auth-signup{
+  font-weight:700;font-size:12.5px;letter-spacing:0.4px;color:var(--text);
+  padding:7px 14px;border-radius:999px;border:1px solid var(--panel-edge);
+  transition:border-color .15s,color .15s;
+}
+.nav-auth-signup:hover{border-color:var(--copper-glow);color:var(--copper-glow);}
+.nav-auth-user{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--text-dim);white-space:nowrap;}
+.nav-auth-user b{color:var(--text);}
+.nav-auth-logout{
+  font-size:12px;color:var(--text-dim);text-decoration:underline;text-underline-offset:2px;
+  cursor:pointer;background:none;border:none;padding:0;font-family:inherit;
+}
+.nav-auth-logout:hover{color:var(--text);}
+
 /* --------------------------------------------------------------- hero */
 .hero{padding:140px 0 120px;text-align:center;position:relative;overflow:hidden;}
 /* Image de fond plein cadre, floutée et assombrie — plutôt qu'une petite

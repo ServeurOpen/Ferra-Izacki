@@ -111,8 +111,40 @@ async function ferraUpdatePassword(newPassword) {
 }
 
 async function ferraSignOut() {
+  await ferraSignOutTo('index.html');
+}
+
+// Déconnexion générique avec redirection paramétrable — utilisée par le
+// widget de connexion du menu (ferraRenderNavAuth), présent sur TOUTES les
+// pages du site (pas que le forum), donc 'index.html' seul ne suffit pas :
+// depuis games/ferra.html par exemple, il faut '../index.html'.
+async function ferraSignOutTo(redirectPath) {
   await window.supabaseClient.auth.signOut();
-  window.location.href = 'index.html';
+  window.location.href = redirectPath;
+}
+
+// Widget compact "Connexion / Inscription" affiché en haut à droite du menu
+// sur TOUTES les pages du site (voir .nav-auth dans style.css) — même
+// compte que le forum et, à terme, le Launcher : plus besoin d'aller sur le
+// forum juste pour se connecter. `prefix` vaut '' depuis une page à la
+// racine du site, '../' depuis une page dans un sous-dossier (games/, forum/).
+async function ferraRenderNavAuth(elId, prefix) {
+  const el = document.getElementById(elId);
+  if (!el) return;
+  prefix = prefix || '';
+  const session = await ferraGetSession();
+  if (session) {
+    el.innerHTML = `
+      <span class="nav-auth-user">👤 <b>${ferraEscape(session.profile?.username || 'Joueur')}</b></span>
+      <button class="nav-auth-logout" id="ferraNavLogoutBtn">Déconnexion</button>
+    `;
+    document.getElementById('ferraNavLogoutBtn').addEventListener('click', () => ferraSignOutTo(prefix + 'index.html'));
+  } else {
+    el.innerHTML = `
+      <a href="${prefix}forum/login.html" class="nav-link">Connexion</a>
+      <a href="${prefix}forum/signup.html" class="nav-auth-signup">Inscription</a>
+    `;
+  }
 }
 
 // Petit widget "connecté en tant que X / Se connecter" affiché en haut de

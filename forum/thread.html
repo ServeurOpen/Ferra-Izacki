@@ -18,6 +18,7 @@
       <a href="index.html" class="nav-link active">Forum</a>
       <a href="../contact.html" class="nav-link">Contact</a>
       <a href="../launcher.html" class="nav-cta">🚀 Launcher</a>
+      <span id="navAuth" class="nav-auth"></span>
     </div>
   </nav>
 </header>
@@ -70,6 +71,7 @@
 <script src="../assets/js/forum.js"></script>
 <script>
 (async function () {
+  ferraRenderNavAuth('navAuth', '../');
   const threadId = new URLSearchParams(location.search).get('id');
   const postsEl = document.getElementById('postsList');
   if (!threadId) { postsEl.innerHTML = `<div class="empty-state">Sujet introuvable.</div>`; return; }
