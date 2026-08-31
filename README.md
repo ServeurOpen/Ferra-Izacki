@@ -168,7 +168,7 @@ jour du jeu (garde exactement ce nom), puis `git add .`, `git commit`,
 website/
   index.html              page d'accueil
   telechargement.html     page de téléchargement du jeu
-  infos.html              fonctionnalités + changelog
+  games/ferra-infos.html  fonctionnalités + changelog de FERRA
   game/FERRA.exe          le jeu lui-même (fichier téléchargeable)
   forum/                  toutes les pages du forum
   assets/css/style.css    tous les styles du site
