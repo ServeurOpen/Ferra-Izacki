@@ -1,10 +1,10 @@
 {
-  "version": "0.2.11",
-  "notes": "Notification native personnalisee quand un jeu vient de finir de s'installer (ou d'etre mis a jour), en plus du support existant.",
+  "version": "0.2.12",
+  "notes": "Profils stylises : banniere/avatar/nom d'affichage/vie privee (Parametres > Mon Profil), popup profil cliquable depuis Amis avec succes par jeu (badges canvas) et temps de jeu synchronise. Necessite migration_5_profils_stylises.sql cote Supabase.",
   "pub_date": "2026-09-01T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MU9ENlBRcnhXRFRQV0RxSVRPWENxT2VWSmovRGUzQ3N0RlBWZTFlWGhJbmNubThVNFhpZEo3cjl2VFMwWlZVajZQVTdCWEVkU0Vza1loWklJdzU3S0FnPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4Mjc2NTI1CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4xMV94NjQtc2V0dXAuZXhlCkVFL2NqSFZ0QngraGVtdUZ6bXdBdlJ1YWM3OVoyZDlwaE1ZelNaMFVKejVmOUcvTFRDQnBpaXNJbXA4RVY0MTNER0tsZEY4WGJXQ0JCWXhjNUU4d0FRPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MUlqazVPMmU2bVhucjl5dU5TdWJXSEtZajBkT0JZTzVyT3cycnA2TkI2VUhLTElzRHg5MjBOOG9jRzZ2QnhrVC9nWGU1bnd3Y1VTazdCdXZFalg4WmdNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4Mjc4NDAyCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4xMl94NjQtc2V0dXAuZXhlCmN5eW9BcVRrR3VhSW45Zmd0YUdGKzdmcEdxQVNBVm50bjZFVUdndXBsV2tKTENnTzlyTW4yeFF4WUhRdkN4TkVWbUJkck5LeTZCd05DenhJRUJTVUR3PT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
