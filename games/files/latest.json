@@ -1,10 +1,10 @@
 {
-  "version": "0.2.8",
-  "notes": "Blocage du lancement d'un jeu si une mise a jour est disponible (redirection vers Telechargement). Nouveau levier 'Mises a jour automatiques' pour les jeux, dans l'onglet Telechargement.",
+  "version": "0.2.9",
+  "notes": "Nouveaux parametres : lancement au demarrage Windows, reduction dans la barre systeme, notifications natives, couleur d'accent, dossier d'installation deplacable, gestion du stockage/desinstallation, statistiques de temps de jeu.",
   "pub_date": "2026-09-01T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MU5jTEI0TjBjKzNBbG8rdXJNZkNKUlNEZi96ODlHT1RxTDRXUEpObWNsSE9KM0FUNkZmQUFqb0pNMXIweW1UR3FhWmRLVWhWdlZIUUh6emdYUXQ4alFJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4Mjc0MjAwCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi44X3g2NC1zZXR1cC5leGUKYTNOOG9kSENYWTduWmEya2YvYXYzNU0wTlBNMDBzR3Y5bmY1Wk0rOHF4WHN1NXl6Tzl5b0VtTHZ2NDJXYklyd1NVSDFudUQvbTFOdXNJVnV2aWxIQmc9PQo=",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MUcyZ1FKTTF5bk02WVhSTVRhYzFEKzE4ODFsL3o0blZqQktST2pjV1h4Rmg5SmNQM0FOZW1GaGVScnE5TmhZWDl0UkZ6OHQ3RytCSC8zZGpNWnNpa2dvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4Mjc1MzAwCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi45X3g2NC1zZXR1cC5leGUKamtNcjBqNDV1M05NNVFjV2FkWktVMmg0RWhSNlRON3hlU3VyNmZoZVRLWUQ2RXppYUVDZVhOUmp6UE1wMytaRW9lZlplMzd0blB0aHJtdDNWaTAxQ2c9PQo=",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
