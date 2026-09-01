@@ -1,10 +1,10 @@
 {
-  "version": "0.2.12",
-  "notes": "Profils stylises : banniere/avatar/nom d'affichage/vie privee (Parametres > Mon Profil), popup profil cliquable depuis Amis avec succes par jeu (badges canvas) et temps de jeu synchronise. Necessite migration_5_profils_stylises.sql cote Supabase.",
+  "version": "0.2.13",
+  "notes": "Nouvelle fiche jeu (clic sur une carte) facon page Steam : description, captures d'ecran, et surtout tes succes debloques pour ce jeu avec badges medaillon colores par palier.",
   "pub_date": "2026-09-01T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MUlqazVPMmU2bVhucjl5dU5TdWJXSEtZajBkT0JZTzVyT3cycnA2TkI2VUhLTElzRHg5MjBOOG9jRzZ2QnhrVC9nWGU1bnd3Y1VTazdCdXZFalg4WmdNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4Mjc4NDAyCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4xMl94NjQtc2V0dXAuZXhlCmN5eW9BcVRrR3VhSW45Zmd0YUdGKzdmcEdxQVNBVm50bjZFVUdndXBsV2tKTENnTzlyTW4yeFF4WUhRdkN4TkVWbUJkck5LeTZCd05DenhJRUJTVUR3PT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MU1GLzFRZytXUzNtdS8zbmIwMi8rU085TFpZbkNQd3VmVmE2TkNpeFhXcjBFV3pUblA3d3Q0NVFERW80TUwwNzVEaFRNRGd2SExjdURkVGhheFA0UHdRPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MjgzMDYxCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4xM194NjQtc2V0dXAuZXhlCk9RcXNscG9HN2hwVVRZMFhwQ1ZwcVVHNkd3NHF6M3ZIOS9WczNDTUhmSXlRL0FxS1AwMG9HQlI3Z2RZL3dpbXVKbGlCRm5ldlFuWDVpMDRwRk04WEN3PT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
