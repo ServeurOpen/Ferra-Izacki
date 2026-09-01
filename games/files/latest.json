@@ -1,10 +1,10 @@
 {
-  "version": "0.2.13",
-  "notes": "Nouvelle fiche jeu (clic sur une carte) facon page Steam : description, captures d'ecran, et surtout tes succes debloques pour ce jeu avec badges medaillon colores par palier.",
+  "version": "0.2.14",
+  "notes": "Correctif : impossible de rouvrir une fiche jeu apres en avoir ferme une. La fiche jeu devient une vraie page plein ecran (le joueur atterrit dessus avant de pouvoir installer/jouer). Les succes affichent maintenant la vraie liste complete du jeu (verrouilles grises + debloques colores), pas seulement ceux deja obtenus.",
   "pub_date": "2026-09-01T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MU1GLzFRZytXUzNtdS8zbmIwMi8rU085TFpZbkNQd3VmVmE2TkNpeFhXcjBFV3pUblA3d3Q0NVFERW80TUwwNzVEaFRNRGd2SExjdURkVGhheFA0UHdRPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MjgzMDYxCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4xM194NjQtc2V0dXAuZXhlCk9RcXNscG9HN2hwVVRZMFhwQ1ZwcVVHNkd3NHF6M3ZIOS9WczNDTUhmSXlRL0FxS1AwMG9HQlI3Z2RZL3dpbXVKbGlCRm5ldlFuWDVpMDRwRk04WEN3PT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MUFXWG5jQXJOT0Zmdi84cFdGZGRVU1hDTGsrdUcrQ1RIUkMyQUJnYU9FVmxWMkZXVWc4cTZMVmdGNjBWVjVGOU9KUWdyKzlmc1YrZDZkTE1tWHllRndnPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4Mjg3MzM2CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4xNF94NjQtc2V0dXAuZXhlClNMR2NDanVNN0ZkMm04NEhOVkNGQ0NJU2N6a2dCK1VPMDM3NUJueExjWG1VQW5qZStKSjQvR3Q2VHBEOXBBQXFuUmhBV0tEMmtmWGsvVUVRVDk0ZkNRPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
