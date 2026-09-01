@@ -1,10 +1,10 @@
 {
-  "version": "0.2.10",
-  "notes": "Correctif : bouton Changer le dossier d'installation compacte/mal affiche dans Parametres > Stockage.",
+  "version": "0.2.11",
+  "notes": "Notification native personnalisee quand un jeu vient de finir de s'installer (ou d'etre mis a jour), en plus du support existant.",
   "pub_date": "2026-09-01T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MUVMRHZiT1pBa0RnQWVzV1cyUnhJRm12WjJxa0VrdmJ0M3lHT3JOT3JEOVB6aWlKdE9QS3NDeU50N1kydjgzR2k0WmFEWkdCbUF6U0xQQlBaVzdDTXdZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4Mjc1Njc0CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4xMF94NjQtc2V0dXAuZXhlCnJuM2c0VDI4aWM4Q256eXN4OVpQVFhNd21Obmg0R1hQYUlRYU1KRllha1VEMjhiOVpqSXI4WDR1SkRVOEFZNGRVQTV3NnVCcnUxTHJnVlh2UVRVOUNnPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MU9ENlBRcnhXRFRQV0RxSVRPWENxT2VWSmovRGUzQ3N0RlBWZTFlWGhJbmNubThVNFhpZEo3cjl2VFMwWlZVajZQVTdCWEVkU0Vza1loWklJdzU3S0FnPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4Mjc2NTI1CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4xMV94NjQtc2V0dXAuZXhlCkVFL2NqSFZ0QngraGVtdUZ6bXdBdlJ1YWM3OVoyZDlwaE1ZelNaMFVKejVmOUcvTFRDQnBpaXNJbXA4RVY0MTNER0tsZEY4WGJXQ0JCWXhjNUU4d0FRPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
