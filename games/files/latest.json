@@ -1,10 +1,10 @@
 {
-  "version": "0.2.9",
-  "notes": "Nouveaux parametres : lancement au demarrage Windows, reduction dans la barre systeme, notifications natives, couleur d'accent, dossier d'installation deplacable, gestion du stockage/desinstallation, statistiques de temps de jeu.",
+  "version": "0.2.10",
+  "notes": "Correctif : bouton Changer le dossier d'installation compacte/mal affiche dans Parametres > Stockage.",
   "pub_date": "2026-09-01T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MUcyZ1FKTTF5bk02WVhSTVRhYzFEKzE4ODFsL3o0blZqQktST2pjV1h4Rmg5SmNQM0FOZW1GaGVScnE5TmhZWDl0UkZ6OHQ3RytCSC8zZGpNWnNpa2dvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4Mjc1MzAwCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi45X3g2NC1zZXR1cC5leGUKamtNcjBqNDV1M05NNVFjV2FkWktVMmg0RWhSNlRON3hlU3VyNmZoZVRLWUQ2RXppYUVDZVhOUmp6UE1wMytaRW9lZlplMzd0blB0aHJtdDNWaTAxQ2c9PQo=",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MUVMRHZiT1pBa0RnQWVzV1cyUnhJRm12WjJxa0VrdmJ0M3lHT3JOT3JEOVB6aWlKdE9QS3NDeU50N1kydjgzR2k0WmFEWkdCbUF6U0xQQlBaVzdDTXdZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4Mjc1Njc0CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4xMF94NjQtc2V0dXAuZXhlCnJuM2c0VDI4aWM4Q256eXN4OVpQVFhNd21Obmg0R1hQYUlRYU1KRllha1VEMjhiOVpqSXI4WDR1SkRVOEFZNGRVQTV3NnVCcnUxTHJnVlh2UVRVOUNnPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
