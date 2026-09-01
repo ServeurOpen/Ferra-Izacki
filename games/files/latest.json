@@ -1,10 +1,10 @@
 {
-  "version": "0.2.7",
-  "notes": "Tag de pseudo (Pseudo#Numero) pour ajouter un ami sans ambiguite. Amis/groupes testes et fonctionnels de bout en bout.",
-  "pub_date": "2026-09-01T03:00:00Z",
+  "version": "0.2.8",
+  "notes": "Blocage du lancement d'un jeu si une mise a jour est disponible (redirection vers Telechargement). Nouveau levier 'Mises a jour automatiques' pour les jeux, dans l'onglet Telechargement.",
+  "pub_date": "2026-09-01T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTRUVLcDI5clhZMWZMVTJCZGRNMFB3TVdZQ1h1Qlg1YmNvb0xkbmxVbE5vazMramUwcExHdGQwbmxvd3ZZSElGZEdzNHhwWUJmZjBaaFI4c1VDYlMvb0V3YSt3b2l6V1FZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MjA3OTg5CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi43X3g2NC1zZXR1cC5leGUKVCtIT3lhNnBSYm0xMFp4cjRFUzRrUUhNb1g4TFRobEhvSWw1ZTgxNTFSY2FCTEVYRC90TzU3QlcrM0V3dVFiVjVYL0c4aTZ1WEx2aERsQWg5dkVQQlE9PQo=",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MU5jTEI0TjBjKzNBbG8rdXJNZkNKUlNEZi96ODlHT1RxTDRXUEpObWNsSE9KM0FUNkZmQUFqb0pNMXIweW1UR3FhWmRLVWhWdlZIUUh6emdYUXQ4alFJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4Mjc0MjAwCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi44X3g2NC1zZXR1cC5leGUKYTNOOG9kSENYWTduWmEya2YvYXYzNU0wTlBNMDBzR3Y5bmY1Wk0rOHF4WHN1NXl6Tzl5b0VtTHZ2NDJXYklyd1NVSDFudUQvbTFOdXNJVnV2aWxIQmc9PQo=",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
