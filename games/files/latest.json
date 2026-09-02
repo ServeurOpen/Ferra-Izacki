@@ -1,10 +1,10 @@
 {
-  "version": "0.2.16",
-  "notes": "Navigation Boutique/Mes jeux revue : Boutique renvoie vers Mes jeux pour un jeu deja installe, Mes jeux a un vrai bouton Jouer instantane. Profil : messages d'erreur clairs si l'upload de banniere/avatar echoue, rappel du nom d'affichage actuel, galerie de visuels fournis par le launcher (bannieres/avatars presets, dont un signe par le createur).",
+  "version": "0.2.17",
+  "notes": "Correctifs profil : icone camera qui restait affichee sur l'avatar une fois choisi, banniere trop recadree par rapport au cadre (mise en pleine largeur), visuels du createur retires des presets partages (gardes uniques a lui). Vrai correctif du bug Echap sur Tower Defense/Anime Clicker/FERRA : un champ texte cache gardait le focus et bloquait le raccourci a l'arrivee en jeu.",
   "pub_date": "2026-09-02T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MU1hK28xb1UrelBjNG1kcVhrSGYyaGZwTUl6MmhQakNiZHVmd1RwTDNpRTl3N0xrV1JqdllWdXlGb2NPdzkrRVhrTHBPaFJnV2tRYVBtTjZycGROcHdVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MzE2NDUxCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4xNl94NjQtc2V0dXAuZXhlCkFjV3N5WjNzaEwrR0NBbEk2QmQyWGRYTTY1Wk9vQ2dPbDFrQmNOdGE3Z3lSVnI0a1dJZ01uVXNWdVU3Si84bGR6UXVNT1F2WEJ6bC8rMENualNYSkJnPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MUhGSlJMSS9QSGNpeWNCdDJEMWtKUHgyWHpscEVBWS8vMjBjeTdhdmU0NGY5SXdZeFArWTRjVkNaTDJBUDZMbVZER0dpcGhBUUp4NTdmTlRHSzBDd2dNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MzUxNTI3CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4xN194NjQtc2V0dXAuZXhlCmkrRkJTZy9CUTh3Mll5c3dMUzhGK2xRcXo0U1YvbUY2dTM1dXdpejd2VjNjbDlDWngydXR2dTltZEZaNVBSeStSc2JvbTZ1bEFUbUtkdmVucUhBakNRPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
