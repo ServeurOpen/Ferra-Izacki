@@ -1,10 +1,10 @@
 {
-  "version": "0.2.23",
-  "notes": "Succes debloques deja lies au compte connecte, amis en direct (plus besoin de relancer le launcher pour voir un ami/groupe apparaitre), tchat de groupe, invitations a jouer entre amis, et une info-bulle des succes entierement restylee.",
+  "version": "0.2.24",
+  "notes": "Notification native si tu recois une demande d'ami pendant ton absence, et le menu d'invitation a jouer entierement restyle (un bouton Inviter + un menu stylise pour choisir le jeu, fini le menu deroulant blanc hors theme).",
   "pub_date": "2026-09-02T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MU1JVFYzTXNBS2szOVZyUDhvVmIwUkExNmZIOUtwT0VFWld3VHlocEZSWWkyUHNKYklTRWlJMzBXWURhL0ZKUWlEWitBZmlVRFhVWlMveTJXQXVkT2d3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MzcxNjI2CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4yM194NjQtc2V0dXAuZXhlCkd4ZnNNa3JaWERrVG5mZ1V6UVBGR1VhWjEvM1lSVDFPS0o5bkN6T3BobWFVdmxmVkdtdGFNRGwrbm82cTMvVWFtakFaREx0dkZ5aFlnVWtTNkIrOER3PT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MUV1cnZUcjM5eE5ROUV5SnAvS0h1T3A1VzMrS2hCOW9laVJwVnZ0Z3RBUnpJN2tiUEVKU2dVRFhGQzU1OUZvb3JMTXhxVkJvWlJVYysvRTVZOGZxSGdjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4Mzc2OTU2CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4yNF94NjQtc2V0dXAuZXhlCmVLWmpjWWFFUGJHY0V6WTJhbmJpd2lWbCt3TjdQWFVOSlZ2dktPUUtXa1BYWGsva3lOMkdCQmVDY1diVml2WXpCTnloSHVWTEFDbUNxY0EvOEE4akRBPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
