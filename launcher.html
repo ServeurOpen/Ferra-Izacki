@@ -33,7 +33,40 @@
       <a href="games/files/IzackiLauncher-Setup.exe" class="btn btn-primary">⬇ Télécharger le Launcher</a>
       <a href="#jeux" class="btn btn-ghost">🎮 Voir les jeux</a>
     </div>
-    <p style="margin-top:16px;color:var(--text-dim);font-size:13px;">Windows • v0.2.1 • ~2,3 Mo — Windows peut afficher un avertissement SmartScreen (éditeur non signé) : clique sur « Informations complémentaires » puis « Exécuter quand même ».</p>
+    <p style="margin-top:16px;color:var(--text-dim);font-size:13px;">Windows • ~2,3 Mo — Windows peut afficher un avertissement SmartScreen à l'installation (éditeur non signé). <a href="#smartscreen" style="color:var(--copper-glow);font-weight:600;">C'est normal, voir comment continuer →</a></p>
+  </div>
+</section>
+
+<section id="smartscreen">
+  <div class="container-narrow">
+    <div class="section-tag">⚠️ Un message Windows apparaît ?</div>
+    <h2 class="section-title">« L'application a été bloquée par mesure de protection »</h2>
+    <p class="section-lead">C'est normal et sans danger — voici pourquoi, et comment continuer en 2 clics.</p>
+
+    <div class="card" style="margin-bottom:24px;padding:22px 26px;">
+      <p style="color:var(--text-dim);line-height:1.75;font-size:14.5px;margin:0;">
+        Ce message apparaît sur <b>tout logiciel indépendant non signé numériquement</b> par un éditeur reconnu de Microsoft — un certificat de signature coûte plusieurs centaines d'euros par an, hors de portée d'un petit projet perso comme celui-ci pour l'instant. Ça ne veut <b>pas</b> dire que le Launcher est dangereux : c'est juste que Windows ne connaît pas encore l'éditeur.
+      </p>
+    </div>
+
+    <div class="grid grid-2" style="gap:24px;margin-bottom:24px;">
+      <div class="card">
+        <div class="card-icon">1️⃣</div>
+        <h3>Clique sur « Informations complémentaires »</h3>
+        <p>Un petit lien grisé, sous le message d'avertissement bleu.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">2️⃣</div>
+        <h3>Clique sur « Exécuter quand même »</h3>
+        <p>Le bouton apparaît juste en dessous — l'installation démarre normalement.</p>
+      </div>
+    </div>
+
+    <div class="card" style="border-color:rgba(107,214,127,0.35);background:rgba(107,214,127,0.06);padding:20px 26px;">
+      <p style="color:var(--text-dim);line-height:1.75;font-size:14px;margin:0;">
+        ✅ <b style="color:var(--valid);">Important à savoir</b> : cliquer sur « Exécuter quand même » ne désactive <b>aucune</b> protection de ton PC (ni l'antivirus, ni le pare-feu, ni SmartScreen lui-même) — c'est juste une autorisation ponctuelle pour ce fichier précis. Pas besoin de désactiver quoi que ce soit dans les réglages Windows.
+      </p>
+    </div>
   </div>
 </section>
 
