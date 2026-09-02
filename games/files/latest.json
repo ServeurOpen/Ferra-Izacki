@@ -1,10 +1,10 @@
 {
-  "version": "0.2.20",
-  "notes": "Corrige le bloc Admin qui ne s'affichait jamais (verifie l'email trop tot, avant la connexion). Corrige la banniere qui se recadrait davantage sur une fenetre agrandie (ratio fixe via aspect-ratio au lieu d'une hauteur figee).",
+  "version": "0.2.21",
+  "notes": "Ajoute des metadonnees editeur (nom, description, copyright) a l'executable -- ameliore les proprietes du fichier et l'affichage Windows, meme sans certificat de signature. Voir aussi le nouveau guide SmartScreen sur la page Launcher du site.",
   "pub_date": "2026-09-02T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MUxYZVpyT3JHajBmanpyeFRRZVZDY2RIZTQxanIzTGpiYVZDOVo0ZzJQYjA5MWg1ZnRmYk43NHZraHlKbmxiYmFxekVGMFdlSXBFMTVhdVh4T2Z0aXcwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MzU3NjUyCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4yMF94NjQtc2V0dXAuZXhlClg3alJNYXhnemRjUnd0c2hNdXZGWkMxZzUzOHcvMThrUk9OUFNzamloZE1JZWpxblBwaWc0KzJTUmxraTBlaXdnVDNUdW5EOW51TEh4NFNNRDgzVERnPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MUN3Z1VhM0k3K2dYeTVUNDQ5RUdodnd5MG5Qc1h4b1dIQnQ1NkZyUWd0cEV1THpyb2kwMnZMWk1zUmFZVFBxUzFSbDBSWEdrQW84d2pkMEZnNkMyR1E4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MzU5NDg5CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4yMV94NjQtc2V0dXAuZXhlCkpGenI2OE40dWRaMFBGRzJKSXU3NXBhUHlqNFVPdEp5TWhnQUx5RTlYYlZnaThVMUgrMHNUdlJNU3d6NElJeHpEYWhXR0VwM3Y0L1VvWk5Jd2RDWEN3PT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
