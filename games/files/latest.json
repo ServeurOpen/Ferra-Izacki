@@ -1,10 +1,10 @@
 {
-  "version": "0.2.17",
-  "notes": "Correctifs profil : icone camera qui restait affichee sur l'avatar une fois choisi, banniere trop recadree par rapport au cadre (mise en pleine largeur), visuels du createur retires des presets partages (gardes uniques a lui). Vrai correctif du bug Echap sur Tower Defense/Anime Clicker/FERRA : un champ texte cache gardait le focus et bloquait le raccourci a l'arrivee en jeu.",
+  "version": "0.2.18",
+  "notes": "Correctif : le texte de plusieurs bannieres presets debordait du cadre. Nouveau bloc Admin (compte createur uniquement) dans Mon Profil avec les visuels exclusifs.",
   "pub_date": "2026-09-02T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MUhGSlJMSS9QSGNpeWNCdDJEMWtKUHgyWHpscEVBWS8vMjBjeTdhdmU0NGY5SXdZeFArWTRjVkNaTDJBUDZMbVZER0dpcGhBUUp4NTdmTlRHSzBDd2dNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MzUxNTI3CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4xN194NjQtc2V0dXAuZXhlCmkrRkJTZy9CUTh3Mll5c3dMUzhGK2xRcXo0U1YvbUY2dTM1dXdpejd2VjNjbDlDWngydXR2dTltZEZaNVBSeStSc2JvbTZ1bEFUbUtkdmVucUhBakNRPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MUUwODNXemc4TnlzUEl5ek11NFRjWUJDbyt5OTRoR1pEd1ZsYTlNZlJaMWN2QmV5dEloY2ZPWmcrK09lL2plbXlKbzJ2a2o1RlNLSWNXV05oSHA0VndvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MzU2MTE0CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4xOF94NjQtc2V0dXAuZXhlCjhjMjJJZTZUa21DVThOTE10MVdJSVRmSkdkN2NHOWZJbEpXblhLbUNwamxTNkwxeTl4Nk1xb1Fid21heDJTdkY1dDBSR0ZUN3ZIVDFUQzZ2Sm9IN0NRPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
