@@ -1,10 +1,10 @@
 {
-  "version": "0.2.15",
-  "notes": "Correctif : sur la fiche jeu plein ecran, la vraie barre de titre (Agrandir/Reduire/Fermer) etait recouverte et injoignable, et 'Retour a la bibliotheque' pouvait devenir inerte une fois la fenetre agrandie. La fiche jeu respecte maintenant la barre de titre comme le reste de l'appli.",
+  "version": "0.2.16",
+  "notes": "Navigation Boutique/Mes jeux revue : Boutique renvoie vers Mes jeux pour un jeu deja installe, Mes jeux a un vrai bouton Jouer instantane. Profil : messages d'erreur clairs si l'upload de banniere/avatar echoue, rappel du nom d'affichage actuel, galerie de visuels fournis par le launcher (bannieres/avatars presets, dont un signe par le createur).",
   "pub_date": "2026-09-02T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MUJOTTBGYU83cVdKNmJFRWxKYmF1Wjk5ajBoWEtjSktTaU9neFVmTjNSWXpCSkxUV2VCZjNzNE42eFk5UXBZMit3K2JiSjVkYlZVYWhmL0dHNlhRdHdrPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MzEzODM5CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4xNV94NjQtc2V0dXAuZXhlCmplZUVBYUNSeGIwYUZIQjBkWWJqK0JaV3Q1dWF5UDBqQjhUWVFhdkVoMkZHazB2YzMrbnJqZnFCc0xNMDZ4UlE3UWc4eVJjL2UxaGtGRHlMSGovV0JBPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MU1hK28xb1UrelBjNG1kcVhrSGYyaGZwTUl6MmhQakNiZHVmd1RwTDNpRTl3N0xrV1JqdllWdXlGb2NPdzkrRVhrTHBPaFJnV2tRYVBtTjZycGROcHdVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MzE2NDUxCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4xNl94NjQtc2V0dXAuZXhlCkFjV3N5WjNzaEwrR0NBbEk2QmQyWGRYTTY1Wk9vQ2dPbDFrQmNOdGE3Z3lSVnI0a1dJZ01uVXNWdVU3Si84bGR6UXVNT1F2WEJ6bC8rMENualNYSkJnPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
