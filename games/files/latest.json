@@ -1,10 +1,10 @@
 {
-  "version": "0.2.21",
-  "notes": "Ajoute des metadonnees editeur (nom, description, copyright) a l'executable -- ameliore les proprietes du fichier et l'affichage Windows, meme sans certificat de signature. Voir aussi le nouveau guide SmartScreen sur la page Launcher du site.",
+  "version": "0.2.22",
+  "notes": "Fiabilise la mise a jour du launcher : bouton Redemarrer maintenant si le redemarrage automatique ne se declenche pas, et detection d'une installation qui n'a pas reellement pris (propose alors un lien de telechargement manuel au lieu de reboucler indefiniment).",
   "pub_date": "2026-09-02T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MUN3Z1VhM0k3K2dYeTVUNDQ5RUdodnd5MG5Qc1h4b1dIQnQ1NkZyUWd0cEV1THpyb2kwMnZMWk1zUmFZVFBxUzFSbDBSWEdrQW84d2pkMEZnNkMyR1E4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MzU5NDg5CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4yMV94NjQtc2V0dXAuZXhlCkpGenI2OE40dWRaMFBGRzJKSXU3NXBhUHlqNFVPdEp5TWhnQUx5RTlYYlZnaThVMUgrMHNUdlJNU3d6NElJeHpEYWhXR0VwM3Y0L1VvWk5Jd2RDWEN3PT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MUxQbVNROXczYktJSHJETlVFQVc1ME5mWk5zMGhpeUNOMVhTRUV3VTVKRXFDV0QrUTdlVlBFTEQvbVg2WlRBVDIvd0RMR2RCaytmVSs3K3F6aDZhM1FVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4MzY5NTQ1CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4yMl94NjQtc2V0dXAuZXhlCm1iM2VKdDRjUTJzQ2ZoU0xIZkR2VisrV0xoTzl1NlkySXhWYWJhMjVIcG1JaUMxeXJVY2lpVzR4MURtbmd6ZUxXZnNReWRVWmNUYWg2aUlZZGxQekJRPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
