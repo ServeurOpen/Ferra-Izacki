@@ -56,7 +56,7 @@ async function ferraUsernameTaken(username) {
   return !!data;
 }
 
-async function ferraSignUp(email, password, username) {
+async function ferraSignUp(email, password, username, displayName) {
   if (!ferraValidateUsername(username)) {
     return { error: { message: 'invalid_username' } };
   }
@@ -66,7 +66,7 @@ async function ferraSignUp(email, password, username) {
   return window.supabaseClient.auth.signUp({
     email,
     password,
-    options: { data: { username } },
+    options: { data: { username, display_name: (displayName || '').trim() || undefined } },
   });
 }
 

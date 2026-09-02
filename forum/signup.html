@@ -34,6 +34,11 @@
       <div style="font-size:11.5px;color:var(--text-dim);margin-top:6px;">3 à 24 caractères, lettres/chiffres/underscore uniquement (pas d'espace), avec au moins 1 majuscule.</div>
     </div>
     <div class="field">
+      <label for="signupDisplayName">Nom d'affichage (optionnel)</label>
+      <input type="text" id="signupDisplayName" maxlength="32" autocomplete="nickname">
+      <div style="font-size:11.5px;color:var(--text-dim);margin-top:6px;">Le nom montré aux autres joueurs (profil, classements du Launcher...). Modifiable plus tard — sinon ton pseudo sera utilisé.</div>
+    </div>
+    <div class="field">
       <label for="signupEmail">Email</label>
       <input type="email" id="signupEmail" required autocomplete="email">
     </div>
@@ -54,6 +59,7 @@
 document.getElementById('signupForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const username = document.getElementById('signupUsername').value.trim();
+  const displayName = document.getElementById('signupDisplayName').value.trim();
   const email = document.getElementById('signupEmail').value.trim();
   const password = document.getElementById('signupPassword').value;
   const errEl = document.getElementById('signupError');
@@ -65,7 +71,7 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
     errEl.classList.add('show');
     return;
   }
-  const { data, error } = await ferraSignUp(email, password, username);
+  const { data, error } = await ferraSignUp(email, password, username, displayName);
   if (error) {
     // Message dédié pour le vrai souci rencontré (31/08/2026) : la limite
     // d'envoi d'emails de confirmation de Supabase (quelques emails/heure
