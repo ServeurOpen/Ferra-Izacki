@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel Admin — FERRA</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  /* ============================================================
+     Panel Admin du SITE (05/09/2026, demande explicite : "le plus beau des
+     panels, un truc qui donne envie de vérifier, on doit se dire WOW").
+     Volontairement en français uniquement, jamais traduit — même logique
+     que le panel admin du Launcher : un seul lecteur (ferra.izacki@gmail.com),
+     aucune raison de maintenir 3 langues pour une page qu'un seul compte voit.
+     ============================================================ */
+  .panel-wrap{max-width:1080px;margin:0 auto;padding:0 24px 80px;}
+  .panel-head{padding:44px 0 30px;}
+  .panel-head h1{
+    font-size:32px;margin:0 0 8px;background:linear-gradient(135deg,var(--text),var(--copper-glow));
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .panel-head p{color:var(--text-dim);margin:0;font-size:14px;}
+
+  .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-bottom:32px;}
+  .kpi-card{
+    position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.01));
+    border:1px solid var(--panel-edge);border-radius:16px;padding:22px 22px 20px;
+    transition:transform .18s,border-color .18s,box-shadow .18s;
+  }
+  .kpi-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,var(--copper-glow),var(--gold));opacity:0.85;
+  }
+  .kpi-card:hover{transform:translateY(-3px);border-color:rgba(242,164,90,0.4);box-shadow:0 16px 40px rgba(0,0,0,0.35);}
+  .kpi-icon{font-size:22px;margin-bottom:10px;opacity:0.9;}
+  .kpi-num{font-family:'Rajdhani',sans-serif;font-size:34px;font-weight:700;line-height:1;letter-spacing:0.5px;}
+  .kpi-lbl{color:var(--text-dim);font-size:12px;margin-top:6px;letter-spacing:0.3px;}
+  .kpi-delta{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:700;margin-top:10px;padding:3px 9px;border-radius:999px;}
+  .kpi-delta.up{color:var(--valid);background:rgba(107,214,127,0.12);}
+  .kpi-delta.down{color:var(--danger);background:rgba(224,102,95,0.12);}
+  .kpi-delta.flat{color:var(--text-dim);background:rgba(255,255,255,0.05);}
+  .kpi-split{display:flex;height:8px;border-radius:999px;overflow:hidden;margin-top:12px;background:rgba(255,255,255,0.06);}
+  .kpi-split-a{background:linear-gradient(90deg,var(--copper-glow),var(--gold));}
+  .kpi-split-b{background:rgba(255,255,255,0.14);}
+  .kpi-split-legend{display:flex;justify-content:space-between;font-size:10.5px;color:var(--text-dim);margin-top:6px;}
+
+  .panel-section{background:rgba(255,255,255,0.02);border:1px solid var(--panel-edge);border-radius:16px;padding:24px 24px 20px;margin-bottom:22px;}
+  .panel-section h3{margin:0 0 4px;font-size:15px;display:flex;align-items:center;gap:8px;}
+  .panel-section .sub{color:var(--text-dim);font-size:12.5px;margin:0 0 16px;}
+  .panel-chart-canvas{width:100%;height:200px;display:block;}
+
+  .panel-table-wrap{overflow-x:auto;}
+  .panel-table{width:100%;border-collapse:collapse;font-size:12.8px;}
+  .panel-table th{
+    text-align:left;color:var(--text-dim);font-weight:600;font-size:10.5px;letter-spacing:0.5px;
+    text-transform:uppercase;padding:9px 12px;border-bottom:1px solid var(--panel-edge);white-space:nowrap;
+  }
+  .panel-table td{padding:11px 12px;border-bottom:1px solid var(--panel-edge);white-space:nowrap;}
+  .panel-table tr:last-child td{border-bottom:none;}
+  .panel-table tr:hover td{background:rgba(255,255,255,0.025);}
+  .panel-reset-btn{
+    font-size:11.5px;font-weight:700;padding:6px 12px;border-radius:8px;cursor:pointer;
+    background:rgba(90,160,224,0.12);color:var(--info);border:1px solid rgba(90,160,224,0.3);
+    transition:filter .15s;
+  }
+  .panel-reset-btn:hover{filter:brightness(1.25);}
+  .panel-reset-btn:disabled{opacity:0.5;cursor:default;}
+
+  .panel-refresh-row{display:flex;justify-content:flex-end;margin-bottom:8px;}
+
+  @keyframes panelFadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+  .panel-anim{animation:panelFadeUp .5s ease both;}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="site-nav">
+    <a href="index.html" class="brand">FER<span>RA</span></a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link" data-i18n="nav.home">Accueil</a>
+      <a href="launcher.html" class="nav-link" data-i18n="nav.launcher">Launcher</a>
+      <a href="forum/index.html" class="nav-link" data-i18n="nav.forum">Forum</a>
+      <a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a>
+      <a href="launcher.html" class="nav-cta" data-i18n="nav.download">⬇ Télécharger</a>
+      <span id="navAuth" class="nav-auth"></span>
+    </div>
+  </nav>
+</header>
+
+<div class="panel-wrap">
+
+  <div id="needAccess" class="card" style="display:none;text-align:center;margin-top:60px;">
+    <p id="needAccessText" style="margin:0;"></p>
+  </div>
+
+  <div id="panelWrap" style="display:none;">
+    <div class="panel-head panel-anim">
+      <h1>📊 Panel Admin — Site</h1>
+      <p>Visites, téléchargements du Launcher, comptes joueurs — visible uniquement sur ce compte.</p>
+    </div>
+
+    <div class="panel-refresh-row">
+      <button class="btn btn-ghost btn-sm" id="panelRefreshBtn" style="width:auto;">🔄 Rafraîchir</button>
+    </div>
+
+    <div class="kpi-grid" id="kpiGrid"></div>
+
+    <div class="panel-section panel-anim">
+      <h3>📈 Visites du site — 14 derniers jours</h3>
+      <p class="sub">Chaque chargement de page compte comme une visite (visiteurs anonymes compris).</p>
+      <canvas class="panel-chart-canvas" id="visitsChart" width="1000" height="200"></canvas>
+    </div>
+
+    <div class="panel-section panel-anim">
+      <h3>⬇ Téléchargements du Launcher — 14 derniers jours</h3>
+      <p class="sub">Clic sur le bouton de téléchargement (déclenchement, pas confirmation de fin de téléchargement).</p>
+      <canvas class="panel-chart-canvas" id="downloadsChart" width="1000" height="200"></canvas>
+    </div>
+
+    <div class="panel-section panel-anim">
+      <h3>👥 Comptes joueurs</h3>
+      <p class="sub">Un lien de réinitialisation envoie exactement le même email sécurisé que "mot de passe oublié" — le mot de passe réel n'est jamais visible ni récupérable, même ici.</p>
+      <div class="panel-table-wrap">
+        <table class="panel-table">
+          <thead><tr><th>Email</th><th>Créé le</th><th>Dernière connexion</th><th></th></tr></thead>
+          <tbody id="panelPlayersBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<a href="faq.html" class="faq-bubble" title="Questions fréquentes"><span class="faq-bubble-icon">❓</span><span>FAQ</span></a>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script>
+(async function () {
+  await ferraI18nInit('');
+  ferraRenderNavAuth('navAuth', '');
+  ferraI18nApply();
+
+  const session = await ferraGetSession();
+  const needAccess = document.getElementById('needAccess');
+  const needAccessText = document.getElementById('needAccessText');
+  if (!session) {
+    needAccessText.innerHTML = 'Connecte-toi pour accéder à cette page.';
+    needAccess.style.display = 'block';
+    return;
+  }
+  if (!ferraIsAdminModeActive(session)) {
+    needAccessText.innerHTML = "Cette page est réservée à l'administrateur.";
+    needAccess.style.display = 'block';
+    return;
+  }
+  document.getElementById('panelWrap').style.display = 'block';
+
+  // ---- Compteur animé (montée de 0 à la valeur finale) ----
+  function animateNumber(el, target, duration) {
+    duration = duration || 900;
+    const start = performance.now();
+    function tick(now) {
+      const p = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased).toLocaleString('fr-FR');
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function deltaBadge(today, yesterday) {
+    if (yesterday === 0 && today === 0) return `<span class="kpi-delta flat">— vs hier</span>`;
+    if (yesterday === 0) return `<span class="kpi-delta up">▲ nouveau vs hier</span>`;
+    const pct = Math.round(((today - yesterday) / yesterday) * 100);
+    if (pct === 0) return `<span class="kpi-delta flat">= vs hier</span>`;
+    const cls = pct > 0 ? 'up' : 'down';
+    const arrow = pct > 0 ? '▲' : '▼';
+    return `<span class="kpi-delta ${cls}">${arrow} ${Math.abs(pct)}% vs hier</span>`;
+  }
+
+  // ---- Graphique en barres (canvas, dégradé + coins arrondis + animation) ----
+  function drawBarChart(canvasId, data, color1, color2) {
+    const canvas = document.getElementById(canvasId);
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    const styles = getComputedStyle(document.body);
+    const dim = styles.getPropertyValue('--text-dim').trim() || '#8890a0';
+    const text = styles.getPropertyValue('--text').trim() || '#e7e9ee';
+
+    const padTop = 26, padBottom = 30, padSide = 10;
+    const chartH = H - padTop - padBottom;
+    const maxVal = Math.max(1, ...data.map((d) => d.count));
+    const slotW = (W - padSide * 2) / data.length;
+    const barW = Math.min(30, slotW * 0.55);
+
+    const grad = ctx.createLinearGradient(0, padTop, 0, H - padBottom);
+    grad.addColorStop(0, color1);
+    grad.addColorStop(1, color2);
+
+    function roundRectTop(x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x, y + h);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h);
+      ctx.closePath();
+    }
+
+    let frame = 0;
+    const totalFrames = 26;
+    function render() {
+      ctx.clearRect(0, 0, W, H);
+      ctx.strokeStyle = dim;
+      ctx.globalAlpha = 0.25;
+      ctx.beginPath();
+      ctx.moveTo(padSide, H - padBottom);
+      ctx.lineTo(W - padSide, H - padBottom);
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+
+      const progress = Math.min(1, frame / totalFrames);
+      const eased = 1 - Math.pow(1 - progress, 3);
+
+      data.forEach((d, i) => {
+        const cx = padSide + slotW * i + slotW / 2;
+        const barH = (d.count / maxVal) * chartH * eased;
+        const y = H - padBottom - barH;
+        ctx.fillStyle = grad;
+        ctx.shadowColor = color1;
+        ctx.shadowBlur = 8;
+        roundRectTop(cx - barW / 2, y, barW, Math.max(1, barH), 5);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        if (d.count > 0 && progress > 0.7) {
+          ctx.globalAlpha = (progress - 0.7) / 0.3;
+          ctx.fillStyle = text;
+          ctx.font = '600 11px Rajdhani, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(String(d.count), cx, y - 6);
+          ctx.globalAlpha = 1;
+        }
+        ctx.fillStyle = dim;
+        ctx.font = '500 10px Oswald, sans-serif';
+        ctx.textAlign = 'center';
+        const label = d.date.slice(5).replace('-', '/');
+        ctx.fillText(label, cx, H - padBottom + 16);
+      });
+
+      if (frame < totalFrames) {
+        frame++;
+        requestAnimationFrame(render);
+      }
+    }
+    render();
+  }
+
+  function formatDate(iso) {
+    if (!iso) return '—';
+    return new Date(iso).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
+  }
+  function formatDateTime(iso) {
+    if (!iso) return 'jamais';
+    return new Date(iso).toLocaleString('fr-FR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+  }
+
+  async function loadPanel() {
+    const kpiGrid = document.getElementById('kpiGrid');
+    kpiGrid.innerHTML = `<div class="kpi-card"><div class="kpi-num">…</div><div class="kpi-lbl">Chargement</div></div>`;
+
+    const { data: sessionData } = await window.supabaseClient.auth.getSession();
+    const token = sessionData.session?.access_token;
+    if (!token) return;
+    let stats;
+    try {
+      const res = await fetch(`${window.FERRA_CONFIG.SUPABASE_URL}/functions/v1/admin-site-stats`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) throw new Error('http_' + res.status);
+      stats = await res.json();
+    } catch (err) {
+      kpiGrid.innerHTML = `<div class="kpi-card"><div class="kpi-num">—</div><div class="kpi-lbl">Impossible de charger les statistiques</div></div>`;
+      console.error(err);
+      return;
+    }
+
+    const anonPct = stats.visitsTotal > 0 ? Math.round((stats.anonVisits / stats.visitsTotal) * 100) : 0;
+    kpiGrid.innerHTML = `
+      <div class="kpi-card panel-anim">
+        <div class="kpi-icon">👁️</div>
+        <div class="kpi-num" id="kpiVisits">0</div>
+        <div class="kpi-lbl">Visites totales</div>
+        ${deltaBadge(stats.visitsToday, stats.visitsYesterday)}
+      </div>
+      <div class="kpi-card panel-anim">
+        <div class="kpi-icon">⬇</div>
+        <div class="kpi-num" id="kpiDownloads">0</div>
+        <div class="kpi-lbl">Téléchargements Launcher</div>
+        ${deltaBadge(stats.downloadsToday, stats.downloadsYesterday)}
+      </div>
+      <div class="kpi-card panel-anim">
+        <div class="kpi-icon">🧑‍🚀</div>
+        <div class="kpi-num" id="kpiAccounts">0</div>
+        <div class="kpi-lbl">Comptes créés</div>
+        ${deltaBadge(stats.accountsToday, stats.accountsYesterday)}
+      </div>
+      <div class="kpi-card panel-anim">
+        <div class="kpi-icon">🔀</div>
+        <div class="kpi-num" style="font-size:20px;">${anonPct}% anonymes</div>
+        <div class="kpi-lbl">Connectés vs visiteurs sans compte</div>
+        <div class="kpi-split"><div class="kpi-split-a" style="width:${100 - anonPct}%"></div><div class="kpi-split-b" style="width:${anonPct}%"></div></div>
+        <div class="kpi-split-legend"><span>${stats.loggedVisits} connectés</span><span>${stats.anonVisits} anonymes</span></div>
+      </div>
+    `;
+    animateNumber(document.getElementById('kpiVisits'), stats.visitsTotal);
+    animateNumber(document.getElementById('kpiDownloads'), stats.downloadsTotal);
+    animateNumber(document.getElementById('kpiAccounts'), stats.accountsTotal);
+
+    drawBarChart('visitsChart', stats.visitsByDay, '#f2a45a', '#b5691f');
+    drawBarChart('downloadsChart', stats.downloadsByDay, '#5aa0e0', '#2e5f8a');
+
+    document.getElementById('panelPlayersBody').innerHTML = stats.players.map((p) => `
+      <tr>
+        <td>${p.email}</td>
+        <td>${formatDate(p.createdAt)}</td>
+        <td>${formatDateTime(p.lastSignInAt)}</td>
+        <td><button class="panel-reset-btn" data-email="${p.email}">📧 Lien de réinitialisation</button></td>
+      </tr>
+    `).join('');
+  }
+
+  document.getElementById('panelPlayersBody').addEventListener('click', async (e) => {
+    const btn = e.target.closest('.panel-reset-btn');
+    if (!btn || btn.disabled) return;
+    const email = btn.dataset.email;
+    btn.disabled = true;
+    const original = btn.textContent;
+    btn.textContent = 'Envoi…';
+    const { error } = await window.supabaseClient.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin + '/forum/reset-password.html',
+    });
+    btn.textContent = error ? '❌ Échec' : '✅ Envoyé';
+    setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 2500);
+  });
+
+  document.getElementById('panelRefreshBtn').addEventListener('click', loadPanel);
+  loadPanel();
+})();
+</script>
+</body>
+</html>

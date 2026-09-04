@@ -30,7 +30,7 @@
     <h1 style="letter-spacing:3px;">LAUNCHER IZACKI</h1>
     <p class="lead" data-i18n="launcherPage.lead">Un seul launcher pour installer, mettre à jour et lancer tous mes jeux — FERRA, Tower Défense Infini, Anime Clicker, et ceux à venir. Fini les .exe éparpillés dans ton dossier Téléchargements.</p>
     <div class="hero-actions">
-      <a href="games/files/IzackiLauncher-Setup.exe" class="btn btn-primary" data-i18n="launcherPage.downloadCta">⬇ Télécharger le Launcher</a>
+      <a href="games/files/IzackiLauncher-Setup.exe" class="btn btn-primary" id="launcherDownloadBtn" data-i18n="launcherPage.downloadCta">⬇ Télécharger le Launcher</a>
       <a href="#jeux" class="btn btn-ghost" data-i18n="home.ctaGames">🎮 Voir les jeux</a>
     </div>
     <p style="margin-top:16px;color:var(--text-dim);font-size:13px;" data-i18n="launcherPage.smartscreenNote">Windows • ~2,3 Mo — Windows peut afficher un avertissement SmartScreen à l'installation (éditeur non signé). <a href="#smartscreen" style="color:var(--copper-glow);font-weight:600;">C'est normal, voir comment continuer →</a></p>
@@ -190,6 +190,18 @@
   await ferraI18nInit('');
   ferraRenderNavAuth('navAuth', '');
   ferraI18nApply();
+
+  // Compteur de téléchargements (05/09/2026, demande explicite : "nombre
+  // de téléchargement launcher") — best-effort, fire-and-forget : compte le
+  // CLIC sur le bouton (déclenchement du téléchargement), pas une
+  // confirmation que le fichier a fini de télécharger, comme la quasi
+  // totalité des compteurs de téléchargement sur le web. N'empêche jamais
+  // le téléchargement lui-même même si l'insert échoue.
+  document.getElementById('launcherDownloadBtn')?.addEventListener('click', () => {
+    try {
+      window.supabaseClient.from('launcher_downloads').insert({}).then(() => {}, () => {});
+    } catch (err) {}
+  });
 })();
 </script>
 </body>

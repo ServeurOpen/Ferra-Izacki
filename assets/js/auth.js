@@ -174,6 +174,29 @@ async function ferraSignOutTo(redirectPath) {
   window.location.href = redirectPath;
 }
 
+// ============================================================
+// Statistiques du site — visite (05/09/2026, demande explicite : "nombre de
+// visite sur le site"). Volontairement discret : un simple insert
+// fire-and-forget (jamais attendu, jamais bloquant pour l'affichage de la
+// page, et une erreur réseau/RLS ne doit jamais casser le rendu du menu qui
+// l'appelle) — voir migration_16_site_analytics.sql pour ce qui est
+// réellement stocké (juste le chemin, l'heure, et l'id du compte SI
+// connecté). Appelée une seule fois par page depuis ferraRenderNavAuth
+// (déjà exécutée sur TOUTES les pages), pas besoin d'un script séparé à
+// ajouter partout.
+// ============================================================
+function ferraLogVisit(session) {
+  try {
+    window.supabaseClient
+      .from('site_visits')
+      .insert({ path: location.pathname, user_id: session?.user?.id || null })
+      .then(() => {}, () => {});
+  } catch (err) {
+    // Silencieux à dessein — une visite non comptée n'est jamais une
+    // raison de perturber le joueur.
+  }
+}
+
 // Widget compact "Connexion / Inscription" affiché en haut à droite du menu
 // sur TOUTES les pages du site (voir .nav-auth dans style.css) — même
 // compte que le forum et, à terme, le Launcher : plus besoin d'aller sur le
@@ -185,10 +208,20 @@ async function ferraRenderNavAuth(elId, prefix) {
   prefix = prefix || '';
   const session = await ferraGetSession();
   ferraApplyAdminModeStyling(session);
+  ferraLogVisit(session);
   if (session) {
     const adminBadge = ferraIsAdminModeActive(session) ? `<span class="admin-mode-badge">🛡️ Admin</span>` : '';
+    // Lien Panel (05/09/2026) — visible UNIQUEMENT en mode admin actif,
+    // jamais pour un joueur normal même si son email était par erreur dans
+    // FERRA_ADMIN_EMAILS (impossible ici, mais même logique de prudence que
+    // partout ailleurs) : la vraie protection reste côté serveur
+    // (admin-site-stats revérifie l'email), ce lien n'est qu'un raccourci.
+    const panelLink = ferraIsAdminModeActive(session)
+      ? `<a href="${prefix}panel.html" class="nav-link">${ferraT('nav.panel', '📊 Panel')}</a>`
+      : '';
     el.innerHTML = `
       <span class="nav-auth-user">👤 <b>${ferraEscape(session.profile?.username || ferraT('nav.defaultPlayer', 'Joueur'))}</b>${adminBadge}</span>
+      ${panelLink}
       <a href="${prefix}parametres.html" class="nav-link">${ferraT('nav.settings', '⚙ Paramètres')}</a>
       <button class="nav-auth-logout" id="ferraNavLogoutBtn">${ferraT('nav.logout', 'Déconnexion')}</button>
     `;
