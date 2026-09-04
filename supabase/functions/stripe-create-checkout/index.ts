@@ -86,7 +86,11 @@ Deno.serve(async (req: Request) => {
         {
           price_data: {
             currency: "eur",
-            product_data: { name: `Izacki — ${pkg.label}` },
+            // tax_code requis par Managed Payments pour calculer la bonne
+            // TVA automatiquement — "Digital Goods > Digital Games and
+            // Add-ons" (voir l'erreur du 05/09/2026 :
+            // "the product tax code is missing").
+            product_data: { name: `Izacki — ${pkg.label}`, tax_code: "txcd_10103001" },
             unit_amount: pkg.amountCents,
           },
           quantity: 1,
