@@ -319,10 +319,16 @@
         <div class="kpi-split"><div class="kpi-split-a" style="width:${100 - anonPct}%"></div><div class="kpi-split-b" style="width:${anonPct}%"></div></div>
         <div class="kpi-split-legend"><span>${stats.loggedVisits} connectés</span><span>${stats.anonVisits} anonymes</span></div>
       </div>
+      <div class="kpi-card panel-anim">
+        <div class="kpi-icon">🟢</div>
+        <div class="kpi-num" id="kpiOnline">0</div>
+        <div class="kpi-lbl">Joueurs en ligne maintenant (Launcher)</div>
+      </div>
     `;
     animateNumber(document.getElementById('kpiVisits'), stats.visitsTotal);
     animateNumber(document.getElementById('kpiDownloads'), stats.downloadsTotal);
     animateNumber(document.getElementById('kpiAccounts'), stats.accountsTotal);
+    animateNumber(document.getElementById('kpiOnline'), stats.onlineNow || 0);
 
     drawBarChart('visitsChart', stats.visitsByDay, '#f2a45a', '#b5691f');
     drawBarChart('downloadsChart', stats.downloadsByDay, '#5aa0e0', '#2e5f8a');
