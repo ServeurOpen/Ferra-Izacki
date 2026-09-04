@@ -1,10 +1,10 @@
 {
-  "version": "0.2.29",
-  "notes": "Ajout du 'Mot de passe oublie' sur l'ecran de connexion (il manquait).",
+  "version": "0.2.30",
+  "notes": "Modale credits agrandie et barre de defilement passee en sombre (retour joueur : le contenu debordait et la barre blanche jurait sur le theme).",
   "pub_date": "2026-09-05T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDhyUCtwTVVJUlJGUGFqMmg2ZEpUdXVzeVVHdURVcjI2R21USE1TVXgyM2ZhSXlmaEJ6Sm1VUjVEOVMrUTA1U1JFT0pOd0NyZzBPMmFZZFlIUEw5ZWd3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NTQ5MjcwCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4yOV94NjQtc2V0dXAuZXhlCkVOb2lSNjZucExGeWlSMDRtS2JneHZzU2lCdEtudmNkOE1hL2RxMkhGZTZ6OWtMbUliVWtYWWFONUJxbDIvaWpaV2xZWWdYMlN0VVlGZWdiSDFIQUNnPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTHpZTll0K3RJY29FVVdodFBLeURsTTBLQUIwL29jbEZoRS9zOXhwdjdydTc2djdrTkN4VXJ4N1ZYS2xBY0NMSWV2QzYxcUtmdFJhTmJVYXA1eVA2ZGdFPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NTUwNzg5CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4zMF94NjQtc2V0dXAuZXhlCjdHTDNITjNTTGZ5YklqNytFV1d5TVpWZnBDNktzNWs5YjdReGcyT3J0YjFjL0JSYXhaYzhkRVlWY1lybFF3S3UwbGN3M0xxVm9VZUlqZnUyUUNvREFRPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
