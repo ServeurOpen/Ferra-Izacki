@@ -1,10 +1,10 @@
 {
-  "version": "0.2.27",
-  "notes": "Correctif visuel : les cases de la recompense quotidienne sont desormais de vrais carres (le canvas se redimensionne a la largeur reelle du conteneur au lieu d'etre etire par le CSS).",
+  "version": "0.2.28",
+  "notes": "Parrainage : partage ton tag, ton filleul renseigne le \"Code de parrainage\" a son inscription, tu touches 20 credits quand il atteint le jour 3 de sa recompense quotidienne (plafonds anti-abus : 3 par appareil/IP, 5 par semaine).",
   "pub_date": "2026-09-05T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTHdCc3dMV2NDK2FOSDNKZHZITUlkelBKM0plV1ZuYzdQd1I5WERvODFhWlFmQkppaUdvb0Q1cmxRVGtFZkd1ZzM2Qm1Cd0FmZU4rM2FKdkNKYnB1WXdrPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NTQ3NDQxCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4yN194NjQtc2V0dXAuZXhlCmF2MWU4SThIVS9PWVpsTld5UVJ5Tmg0VHBPeEZTa1FLb0FmTWlJWlV0L2h5dUFQWVNmN3VjS1RETEJRQkROR3F0QlV3TFpxYUxxa0RncDdmblByQ0FnPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTCtuNG1PZGtKdUovcnRtamlRUnB2Tk9TUHBjODdvZXJ3Q3o5cFp1UGtZUlFmMW5wVlhYK1lTM1F1b3FJK3VkYnVwWkczM0crb3I5WWRsMzl5OHZqRGdvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NTQ4MDEyCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4yOF94NjQtc2V0dXAuZXhlCkRXdW9iT3RKdmpZT1BlelY4RWcyT2gzUk5GdTBHMll3RHBRVk1VdmdYWWRIQ3Nxdm45cmpvaU5FSEhXR2srN043RUNvK1JWVkpNL1F4Y25VNzRObUNRPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
