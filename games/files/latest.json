@@ -1,10 +1,10 @@
 {
-  "version": "0.2.31",
-  "notes": "Nouveau bouton 'Recharger mon solde' dans la modale credits - ouvre la page de paiement par carte dans ton navigateur.",
-  "pub_date": "2026-09-05T00:00:00Z",
+  "version": "0.2.32",
+  "notes": "Panel admin : dons de credits (individuel/tous les joueurs) avec pop up stylé, systeme de bannissement (temporaire ou définitif) avec écran de blocage + contestation par email.",
+  "pub_date": "2026-09-05T12:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTC80TDlISkF4cEtaZjhpbjhFSjFKQjBPVlQvZ3VkMzlYVzBYZ0ROb09mS2NnTXNYSWlURDdxdHVlVVVVbVRJZkNCWXN2bXN3ZHBmQ2FkbWtuakJjZkFjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NTUyMTA5CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4zMV94NjQtc2V0dXAuZXhlCmxyMW9TUTR3NEFmRUNDQklDTmZEUTZQdjN3TzJPeFc2bVBXejk0emIvTkpwWXlvRitEY296YjlzZjlUR0pta29GTjRHRnJHRjZEVDRQcEdtT3ZPTUNBPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTC8yWjY0VW9rUVhMcGM1T0w2SUN3ZDlwUnNnQ1dnMjd4dE1zNkNVWlNFdzBZakFCK2R0eUpZakg2VEtGcElXQzB0cmRqb1JFYUxCNlZCRTZrTU1aYndrPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NTU1ODg2CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4zMl94NjQtc2V0dXAuZXhlCkMwZ1RPYk1iTndiSGNuWGRyZmFEUkp4M3VsZkNiOVFiUU9vL0pNQ0hhOTllUHBOVElDQVR5MUR2dEFrdVhhTzc1RnVwWlQrQTVuZkhkektZcHUvT0R3PT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
