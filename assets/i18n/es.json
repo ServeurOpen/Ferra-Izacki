@@ -272,6 +272,7 @@
     "usernameRules": "De 3 a 24 caracteres, solo letras/números/guion bajo (sin espacios), con al menos 1 mayúscula.",
     "displayName": "Nombre para mostrar (opcional)",
     "displayNameHint": "El nombre mostrado a los demás jugadores (perfil, clasificaciones del Launcher...). Se puede cambiar más tarde — si no, se usará tu nombre de usuario.",
+    "referral": "Código de invitación (opcional)",
     "submit": "Crear mi cuenta",
     "hasAccount": "¿Ya tienes una cuenta?",
     "loginLink": "Inicia sesión",
