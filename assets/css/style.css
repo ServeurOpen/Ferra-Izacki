@@ -24,6 +24,21 @@
   --radius-sm:8px;
   --shadow-soft:0 14px 40px rgba(0,0,0,0.45);
 }
+/* Mode Admin (05/09/2026, même technique que le Launcher — voir
+   ferraApplyAdminModeStyling dans auth.js) : redéfinit juste les 2
+   variables d'accent utilisées PARTOUT sur le site, pour une teinte
+   violette reconnaissable au premier coup d'œil sans retoucher un seul
+   composant. */
+body.admin-mode{
+  --copper-glow:#b48cff;
+  --copper-dark:#7a4fe0;
+}
+.admin-mode-badge{
+  margin-left:8px;font-size:10.5px;font-weight:700;letter-spacing:0.5px;
+  padding:3px 9px;border-radius:999px;color:#141014;
+  background:linear-gradient(135deg,var(--copper-glow),#7a4fe0);
+  vertical-align:middle;display:inline-block;
+}
 
 *,*::before,*::after{box-sizing:border-box;}
 html{scroll-behavior:smooth;}

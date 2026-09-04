@@ -17,13 +17,64 @@ async function ferraGetSession() {
     if (!user) return null;
     const { data: profile } = await window.supabaseClient
       .from('profiles')
-      .select('id, username')
+      .select('id, username, admin_mode_disabled')
       .eq('id', user.id)
       .single();
     return { user, profile };
   } catch (err) {
     console.error('[FERRA] ferraGetSession a échoué (Supabase non configuré ou hors ligne) :', err);
     return null;
+  }
+}
+
+// ============================================================
+// Mode Admin sur le site (05/09/2026, demande explicite : "on est
+// directement en mode Administrateur qui pareil peut être désactivé dans
+// l'onglet paramètre du site... si on désactive pour réactiver il faut
+// mettre un mdp") — même compte/mêmes principes que le Launcher :
+//   - ferra.izacki@gmail.com est TOUJOURS en mode admin par défaut
+//     (visuel violet + badge), sauf s'il l'a désactivé lui-même
+//     (admin_mode_disabled=true en base, voir migration_14).
+//   - Désactiver ne demande rien (juste un update de son propre profil).
+//   - Réactiver EXIGE le bon mot de passe, vérifié côté serveur (voir
+//     supabase/functions/verify-admin-password) — jamais en clair ici.
+// ============================================================
+const FERRA_ADMIN_EMAILS = ['ferra.izacki@gmail.com'];
+function ferraIsAdminEmail(session) {
+  return !!session && FERRA_ADMIN_EMAILS.includes((session.user.email || '').trim().toLowerCase());
+}
+function ferraIsAdminModeActive(session) {
+  return ferraIsAdminEmail(session) && !session.profile?.admin_mode_disabled;
+}
+// Appelée sur CHAQUE page (voir ferraRenderNavAuth) — retinte tout le site
+// d'un coup via les 2 variables CSS d'accent déjà utilisées partout (voir
+// body.admin-mode dans style.css), pas besoin de retoucher un composant.
+function ferraApplyAdminModeStyling(session) {
+  document.body.classList.toggle('admin-mode', ferraIsAdminModeActive(session));
+}
+async function ferraDisableAdminMode(userId) {
+  await window.supabaseClient.from('profiles').update({ admin_mode_disabled: true }).eq('id', userId);
+}
+// Renvoie true si le mot de passe était bon (et réactive alors le mode
+// admin sur le profil), false sinon — jamais lancé côté client seul.
+async function ferraReenableAdminMode(userId, password) {
+  const { data: { session: authSession } } = await window.supabaseClient.auth.getSession();
+  const token = authSession?.access_token;
+  if (!token) return false;
+  try {
+    const res = await fetch(`${window.FERRA_CONFIG.SUPABASE_URL}/functions/v1/verify-admin-password`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password }),
+    });
+    if (!res.ok) return false;
+    const body = await res.json();
+    if (!body.valid) return false;
+    await window.supabaseClient.from('profiles').update({ admin_mode_disabled: false }).eq('id', userId);
+    return true;
+  } catch (err) {
+    console.error('[FERRA] ferraReenableAdminMode a échoué :', err);
+    return false;
   }
 }
 
@@ -133,16 +184,19 @@ async function ferraRenderNavAuth(elId, prefix) {
   if (!el) return;
   prefix = prefix || '';
   const session = await ferraGetSession();
+  ferraApplyAdminModeStyling(session);
   if (session) {
+    const adminBadge = ferraIsAdminModeActive(session) ? `<span class="admin-mode-badge">🛡️ Admin</span>` : '';
     el.innerHTML = `
-      <span class="nav-auth-user">👤 <b>${ferraEscape(session.profile?.username || 'Joueur')}</b></span>
-      <button class="nav-auth-logout" id="ferraNavLogoutBtn">Déconnexion</button>
+      <span class="nav-auth-user">👤 <b>${ferraEscape(session.profile?.username || ferraT('nav.defaultPlayer', 'Joueur'))}</b>${adminBadge}</span>
+      <a href="${prefix}parametres.html" class="nav-link">${ferraT('nav.settings', '⚙ Paramètres')}</a>
+      <button class="nav-auth-logout" id="ferraNavLogoutBtn">${ferraT('nav.logout', 'Déconnexion')}</button>
     `;
     document.getElementById('ferraNavLogoutBtn').addEventListener('click', () => ferraSignOutTo(prefix + 'index.html'));
   } else {
     el.innerHTML = `
-      <a href="${prefix}forum/login.html" class="nav-link">Connexion</a>
-      <a href="${prefix}forum/signup.html" class="nav-auth-signup">Inscription</a>
+      <a href="${prefix}forum/login.html" class="nav-link">${ferraT('nav.connexion', 'Connexion')}</a>
+      <a href="${prefix}forum/signup.html" class="nav-auth-signup">${ferraT('nav.inscription', 'Inscription')}</a>
     `;
   }
 }
@@ -154,16 +208,17 @@ async function ferraRenderUserWidget(elId) {
   const el = document.getElementById(elId);
   if (!el) return null;
   const session = await ferraGetSession();
+  ferraApplyAdminModeStyling(session);
   if (session) {
     el.innerHTML = `
-      <span class="forum-user">👤 Connecté en tant que <b>${ferraEscape(session.profile?.username || 'Joueur')}</b></span>
-      <button class="btn btn-ghost btn-sm" id="ferraLogoutBtn">Se déconnecter</button>
+      <span class="forum-user">👤 ${ferraT('forum.connectedAs', 'Connecté en tant que')} <b>${ferraEscape(session.profile?.username || ferraT('nav.defaultPlayer', 'Joueur'))}</b></span>
+      <button class="btn btn-ghost btn-sm" id="ferraLogoutBtn">${ferraT('forum.logout', 'Se déconnecter')}</button>
     `;
     document.getElementById('ferraLogoutBtn').addEventListener('click', ferraSignOut);
   } else {
     el.innerHTML = `
-      <a href="${ferraForumPath('login.html')}" class="btn btn-ghost btn-sm">Se connecter</a>
-      <a href="${ferraForumPath('signup.html')}" class="btn btn-primary btn-sm">Créer un compte</a>
+      <a href="${ferraForumPath('login.html')}" class="btn btn-ghost btn-sm">${ferraT('nav.login', 'Se connecter')}</a>
+      <a href="${ferraForumPath('signup.html')}" class="btn btn-primary btn-sm">${ferraT('nav.signup', 'Créer un compte')}</a>
     `;
   }
   return session;

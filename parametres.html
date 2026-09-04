@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="settings.title">Paramètres — FERRA</title>
+<meta name="description" content="Langue du site et options de ton compte FERRA.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛏️</text></svg>">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  .lang-switch{display:flex;gap:10px;flex-wrap:wrap;}
+  .lang-btn{
+    display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:10px;
+    border:1px solid var(--panel-edge);background:var(--bg-panel-2);color:var(--text);
+    cursor:pointer;font-size:13.5px;font-weight:600;transition:border-color .15s,background .15s;
+  }
+  .lang-btn:hover{border-color:var(--copper-glow);}
+  .lang-btn.active{border-color:var(--copper-glow);background:rgba(242,164,90,0.12);color:var(--copper-glow);}
+  .lang-flag{font-size:18px;}
+  .settings-section{margin-bottom:26px;}
+  .settings-section h3{font-size:14px;letter-spacing:0.3px;margin:0 0 12px;}
+  .settings-section .sub{color:var(--text-dim);font-size:13px;margin:0 0 14px;}
+  .admin-status-row{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+  .admin-status-pill{
+    font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;
+  }
+  .admin-status-pill.on{background:rgba(180,140,255,0.16);color:#b48cff;}
+  .admin-status-pill.off{background:rgba(255,255,255,0.06);color:var(--text-dim);}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="site-nav">
+    <a href="index.html" class="brand">FER<span>RA</span></a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link" data-i18n="nav.home">Accueil</a>
+      <a href="launcher.html" class="nav-link" data-i18n="nav.launcher">Launcher</a>
+      <a href="forum/index.html" class="nav-link" data-i18n="nav.forum">Forum</a>
+      <a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a>
+      <a href="launcher.html" class="nav-cta" data-i18n="nav.download">⬇ Télécharger</a>
+      <span id="navAuth" class="nav-auth"></span>
+    </div>
+  </nav>
+</header>
+
+<div class="page-header">
+  <div class="container-narrow">
+    <h1 data-i18n="settings.heading">⚙ Paramètres</h1>
+    <p data-i18n="settings.sub">Langue du site et options de ton compte.</p>
+  </div>
+</div>
+
+<section style="padding-top:10px;">
+  <div class="container-narrow" style="max-width:560px;">
+
+    <div id="needLogin" class="card" style="display:none;text-align:center;">
+      <p style="margin-bottom:14px;" data-i18n="settings.needLogin">Connecte-toi pour accéder à tes paramètres.</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <a href="forum/login.html" class="btn btn-primary btn-sm" data-i18n="nav.login">Se connecter</a>
+        <a href="forum/signup.html" class="btn btn-ghost btn-sm" data-i18n="nav.signup">Créer un compte</a>
+      </div>
+    </div>
+
+    <div id="settingsWrap" class="card" style="display:none;">
+
+      <div class="settings-section">
+        <h3 data-i18n="settings.language.title">🌐 Langue</h3>
+        <p class="sub" data-i18n="settings.language.sub">S'applique à tout le site, mémorisé pour tes prochaines visites.</p>
+        <div class="lang-switch" id="langSwitch">
+          <button class="lang-btn" data-lang="fr"><span class="lang-flag">🇫🇷</span> Français</button>
+          <button class="lang-btn" data-lang="en"><span class="lang-flag">🇬🇧</span> English</button>
+          <button class="lang-btn" data-lang="es"><span class="lang-flag">🇪🇸</span> Español</button>
+        </div>
+      </div>
+
+      <div class="settings-section" id="adminSection" style="display:none;">
+        <h3 data-i18n="settings.admin.title">🛡️ Mode Administrateur</h3>
+        <div class="admin-status-row">
+          <span class="admin-status-pill" id="adminStatusPill"></span>
+          <button class="btn btn-ghost btn-sm" id="adminToggleBtn" style="width:auto;white-space:nowrap;"></button>
+        </div>
+        <div id="adminPasswordWrap" style="display:none;margin-top:14px;">
+          <div class="form-error" id="adminPasswordError"></div>
+          <div class="field">
+            <label for="adminPasswordInput" data-i18n="settings.admin.passwordLabel">Mot de passe de réactivation</label>
+            <input type="password" id="adminPasswordInput" autocomplete="off">
+          </div>
+          <button class="btn btn-primary btn-sm" id="adminPasswordSubmitBtn" data-i18n="settings.admin.reactivate">Réactiver</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-row">
+    <div class="footer-note" data-i18n="footer.note">FERRA — projet indépendant, développé avec passion. © 2026.</div>
+    <div class="footer-links">
+      <a href="index.html" data-i18n="nav.home">Accueil</a>
+      <a href="launcher.html" data-i18n="nav.launcher">Launcher</a>
+      <a href="forum/index.html" data-i18n="nav.forum">Forum</a>
+      <a href="contact.html" data-i18n="nav.contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<a href="faq.html" class="faq-bubble" title="Questions fréquentes"><span class="faq-bubble-icon">❓</span><span>FAQ</span></a>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script>
+(async function () {
+  await ferraI18nInit('');
+  ferraRenderNavAuth('navAuth', '');
+  ferraI18nApply();
+
+  document.querySelectorAll('#langSwitch .lang-btn').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.lang === ferraI18nCurrentLang());
+    btn.addEventListener('click', async () => {
+      await ferraI18nSetLang(btn.dataset.lang);
+      document.querySelectorAll('#langSwitch .lang-btn').forEach((b) => b.classList.toggle('active', b === btn));
+      ferraI18nApply();
+    });
+  });
+
+  const session = await ferraGetSession();
+  if (!session) {
+    document.getElementById('needLogin').style.display = 'block';
+    return;
+  }
+  document.getElementById('settingsWrap').style.display = 'block';
+
+  if (ferraIsAdminEmail(session)) {
+    const adminSection = document.getElementById('adminSection');
+    const pill = document.getElementById('adminStatusPill');
+    const toggleBtn = document.getElementById('adminToggleBtn');
+    const passwordWrap = document.getElementById('adminPasswordWrap');
+    adminSection.style.display = 'block';
+
+    function refreshAdminUI(active) {
+      pill.textContent = active ? '● Activé' : '○ Désactivé';
+      pill.className = 'admin-status-pill ' + (active ? 'on' : 'off');
+      toggleBtn.textContent = active ? 'Désactiver' : 'Réactiver…';
+      passwordWrap.style.display = active ? 'none' : (passwordWrap.dataset.opened === '1' ? 'block' : 'none');
+    }
+    let active = !session.profile?.admin_mode_disabled;
+    refreshAdminUI(active);
+
+    toggleBtn.addEventListener('click', async () => {
+      if (active) {
+        await ferraDisableAdminMode(session.user.id);
+        active = false;
+        refreshAdminUI(active);
+        ferraApplyAdminModeStyling({ ...session, profile: { ...session.profile, admin_mode_disabled: true } });
+      } else {
+        passwordWrap.dataset.opened = '1';
+        passwordWrap.style.display = 'block';
+        document.getElementById('adminPasswordInput').focus();
+      }
+    });
+
+    document.getElementById('adminPasswordSubmitBtn').addEventListener('click', async () => {
+      const errEl = document.getElementById('adminPasswordError');
+      errEl.classList.remove('show');
+      const pwd = document.getElementById('adminPasswordInput').value;
+      const ok = await ferraReenableAdminMode(session.user.id, pwd);
+      if (!ok) {
+        errEl.textContent = 'Mot de passe incorrect.';
+        errEl.classList.add('show');
+        return;
+      }
+      active = true;
+      passwordWrap.dataset.opened = '0';
+      document.getElementById('adminPasswordInput').value = '';
+      refreshAdminUI(active);
+      ferraApplyAdminModeStyling({ ...session, profile: { ...session.profile, admin_mode_disabled: false } });
+    });
+  }
+})();
+</script>
+</body>
+</html>
