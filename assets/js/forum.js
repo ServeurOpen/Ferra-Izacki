@@ -103,8 +103,11 @@ async function ferraCreatePost(threadId, authorId, content) {
 
 function ferraFormatDate(iso) {
   const d = new Date(iso);
-  return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' }) +
-    ' à ' + d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+  const lang = (typeof ferraI18nCurrentLang === 'function') ? ferraI18nCurrentLang() : 'fr';
+  const locale = { fr: 'fr-FR', en: 'en-US', es: 'es-ES' }[lang] || 'fr-FR';
+  const joiner = { fr: 'à', en: 'at', es: 'a las' }[lang] || 'à';
+  return d.toLocaleDateString(locale, { day: 'numeric', month: 'short', year: 'numeric' }) +
+    ' ' + joiner + ' ' + d.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' });
 }
 
 function ferraInitials(name) {

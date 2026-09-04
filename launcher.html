@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Launcher Izacki</title>
+<title data-i18n="launcherPage.pageTitle">Launcher Izacki</title>
 <meta name="description" content="Un seul launcher pour installer et lancer tous les jeux d'Izacki : FERRA, Tower Défense Infini, Anime Clicker.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
 <link rel="stylesheet" href="assets/css/style.css">
@@ -14,11 +14,11 @@
   <nav class="site-nav">
     <a href="index.html" class="brand">FER<span>RA</span></a>
     <div class="nav-links">
-      <a href="index.html" class="nav-link">Accueil</a>
-      <a href="launcher.html" class="nav-link active">Launcher</a>
-      <a href="forum/index.html" class="nav-link">Forum</a>
-      <a href="contact.html" class="nav-link">Contact</a>
-      <a href="launcher.html" class="nav-cta">⬇ Télécharger</a>
+      <a href="index.html" class="nav-link" data-i18n="nav.home">Accueil</a>
+      <a href="launcher.html" class="nav-link active" data-i18n="nav.launcher">Launcher</a>
+      <a href="forum/index.html" class="nav-link" data-i18n="nav.forum">Forum</a>
+      <a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a>
+      <a href="launcher.html" class="nav-cta" data-i18n="nav.download">⬇ Télécharger</a>
       <span id="navAuth" class="nav-auth"></span>
     </div>
   </nav>
@@ -26,25 +26,25 @@
 
 <section class="hero" style="padding:80px 0 60px;">
   <div class="container">
-    <div class="hero-badge">🚀 Disponible</div>
+    <div class="hero-badge" data-i18n="launcherPage.badge">🚀 Disponible</div>
     <h1 style="letter-spacing:3px;">LAUNCHER IZACKI</h1>
-    <p class="lead">Un seul launcher pour installer, mettre à jour et lancer tous mes jeux — FERRA, Tower Défense Infini, Anime Clicker, et ceux à venir. Fini les .exe éparpillés dans ton dossier Téléchargements.</p>
+    <p class="lead" data-i18n="launcherPage.lead">Un seul launcher pour installer, mettre à jour et lancer tous mes jeux — FERRA, Tower Défense Infini, Anime Clicker, et ceux à venir. Fini les .exe éparpillés dans ton dossier Téléchargements.</p>
     <div class="hero-actions">
-      <a href="games/files/IzackiLauncher-Setup.exe" class="btn btn-primary">⬇ Télécharger le Launcher</a>
-      <a href="#jeux" class="btn btn-ghost">🎮 Voir les jeux</a>
+      <a href="games/files/IzackiLauncher-Setup.exe" class="btn btn-primary" data-i18n="launcherPage.downloadCta">⬇ Télécharger le Launcher</a>
+      <a href="#jeux" class="btn btn-ghost" data-i18n="home.ctaGames">🎮 Voir les jeux</a>
     </div>
-    <p style="margin-top:16px;color:var(--text-dim);font-size:13px;">Windows • ~2,3 Mo — Windows peut afficher un avertissement SmartScreen à l'installation (éditeur non signé). <a href="#smartscreen" style="color:var(--copper-glow);font-weight:600;">C'est normal, voir comment continuer →</a></p>
+    <p style="margin-top:16px;color:var(--text-dim);font-size:13px;" data-i18n="launcherPage.smartscreenNote">Windows • ~2,3 Mo — Windows peut afficher un avertissement SmartScreen à l'installation (éditeur non signé). <a href="#smartscreen" style="color:var(--copper-glow);font-weight:600;">C'est normal, voir comment continuer →</a></p>
   </div>
 </section>
 
 <section id="smartscreen">
   <div class="container-narrow">
-    <div class="section-tag">⚠️ Un message Windows apparaît ?</div>
-    <h2 class="section-title">« L'application a été bloquée par mesure de protection »</h2>
-    <p class="section-lead">C'est normal et sans danger — voici pourquoi, et comment continuer en 2 clics.</p>
+    <div class="section-tag" data-i18n="launcherPage.ss.tag">⚠️ Un message Windows apparaît ?</div>
+    <h2 class="section-title" data-i18n="launcherPage.ss.title">« L'application a été bloquée par mesure de protection »</h2>
+    <p class="section-lead" data-i18n="launcherPage.ss.lead">C'est normal et sans danger — voici pourquoi, et comment continuer en 2 clics.</p>
 
     <div class="card" style="margin-bottom:24px;padding:22px 26px;">
-      <p style="color:var(--text-dim);line-height:1.75;font-size:14.5px;margin:0;">
+      <p style="color:var(--text-dim);line-height:1.75;font-size:14.5px;margin:0;" data-i18n="launcherPage.ss.explain">
         Ce message apparaît sur <b>tout logiciel indépendant non signé numériquement</b> par un éditeur reconnu de Microsoft — un certificat de signature coûte plusieurs centaines d'euros par an, hors de portée d'un petit projet perso comme celui-ci pour l'instant. Ça ne veut <b>pas</b> dire que le Launcher est dangereux : c'est juste que Windows ne connaît pas encore l'éditeur.
       </p>
     </div>
@@ -52,18 +52,18 @@
     <div class="grid grid-2" style="gap:24px;margin-bottom:24px;">
       <div class="card">
         <div class="card-icon">1️⃣</div>
-        <h3>Clique sur « Informations complémentaires »</h3>
-        <p>Un petit lien grisé, sous le message d'avertissement bleu.</p>
+        <h3 data-i18n="launcherPage.ss.step1.title">Clique sur « Informations complémentaires »</h3>
+        <p data-i18n="launcherPage.ss.step1.desc">Un petit lien grisé, sous le message d'avertissement bleu.</p>
       </div>
       <div class="card">
         <div class="card-icon">2️⃣</div>
-        <h3>Clique sur « Exécuter quand même »</h3>
-        <p>Le bouton apparaît juste en dessous — l'installation démarre normalement.</p>
+        <h3 data-i18n="launcherPage.ss.step2.title">Clique sur « Exécuter quand même »</h3>
+        <p data-i18n="launcherPage.ss.step2.desc">Le bouton apparaît juste en dessous — l'installation démarre normalement.</p>
       </div>
     </div>
 
     <div class="card" style="border-color:rgba(107,214,127,0.35);background:rgba(107,214,127,0.06);padding:20px 26px;">
-      <p style="color:var(--text-dim);line-height:1.75;font-size:14px;margin:0;">
+      <p style="color:var(--text-dim);line-height:1.75;font-size:14px;margin:0;" data-i18n="launcherPage.ss.reassure">
         ✅ <b style="color:var(--valid);">Important à savoir</b> : cliquer sur « Exécuter quand même » ne désactive <b>aucune</b> protection de ton PC (ni l'antivirus, ni le pare-feu, ni SmartScreen lui-même) — c'est juste une autorisation ponctuelle pour ce fichier précis. Pas besoin de désactiver quoi que ce soit dans les réglages Windows.
       </p>
     </div>
@@ -72,39 +72,39 @@
 
 <section>
   <div class="container">
-    <div class="section-tag">Pourquoi un launcher</div>
-    <h2 class="section-title">Une vraie bibliothèque, pas un dossier de .exe</h2>
-    <p class="section-lead">Une vraie bibliothèque de jeux, à l'échelle d'un développeur indépendant.</p>
+    <div class="section-tag" data-i18n="launcherPage.why.tag">Pourquoi un launcher</div>
+    <h2 class="section-title" data-i18n="launcherPage.why.title">Une vraie bibliothèque, pas un dossier de .exe</h2>
+    <p class="section-lead" data-i18n="launcherPage.why.lead">Une vraie bibliothèque de jeux, à l'échelle d'un développeur indépendant.</p>
     <div class="grid grid-3">
       <div class="card">
         <div class="card-icon">📥</div>
-        <h3>Installe en un clic</h3>
-        <p>Choisis un jeu dans la bibliothèque, clique sur Installer — le launcher télécharge et range tout proprement, sans avoir à chercher le bon fichier sur le site.</p>
+        <h3 data-i18n="launcherPage.why.f1.title">Installe en un clic</h3>
+        <p data-i18n="launcherPage.why.f1.desc">Choisis un jeu dans la bibliothèque, clique sur Installer — le launcher télécharge et range tout proprement, sans avoir à chercher le bon fichier sur le site.</p>
       </div>
       <div class="card">
         <div class="card-icon">▶️</div>
-        <h3>Lance directement</h3>
-        <p>Une fois installé, un jeu se lance depuis le launcher — plus besoin de retrouver l'exécutable dans tes dossiers.</p>
+        <h3 data-i18n="launcherPage.why.f2.title">Lance directement</h3>
+        <p data-i18n="launcherPage.why.f2.desc">Une fois installé, un jeu se lance depuis le launcher — plus besoin de retrouver l'exécutable dans tes dossiers.</p>
       </div>
       <div class="card">
         <div class="card-icon">🔄</div>
-        <h3>Toujours à jour</h3>
-        <p>Le launcher te prévient dès qu'une nouvelle version d'un jeu sort — un clic pour mettre à jour, jamais une version périmée.</p>
+        <h3 data-i18n="launcherPage.why.f3.title">Toujours à jour</h3>
+        <p data-i18n="launcherPage.why.f3.desc">Le launcher te prévient dès qu'une nouvelle version d'un jeu sort — un clic pour mettre à jour, jamais une version périmée.</p>
       </div>
       <div class="card">
         <div class="card-icon">🗂️</div>
-        <h3>Une seule bibliothèque</h3>
-        <p>Tous mes jeux au même endroit, avec leur icône, leur progression et leurs infos — au fur et à mesure que j'en sors de nouveaux.</p>
+        <h3 data-i18n="launcherPage.why.f4.title">Une seule bibliothèque</h3>
+        <p data-i18n="launcherPage.why.f4.desc">Tous mes jeux au même endroit, avec leur icône, leur progression et leurs infos — au fur et à mesure que j'en sors de nouveaux.</p>
       </div>
       <div class="card">
         <div class="card-icon">🔑</div>
-        <h3>Un seul compte</h3>
-        <p>Connecte-toi une fois — le même compte que le forum FERRA — pour accéder à toute ta bibliothèque.</p>
+        <h3 data-i18n="launcherPage.why.f5.title">Un seul compte</h3>
+        <p data-i18n="launcherPage.why.f5.desc">Connecte-toi une fois — le même compte que le forum FERRA — pour accéder à toute ta bibliothèque.</p>
       </div>
       <div class="card">
         <div class="card-icon">💳</div>
-        <h3>Achats à venir</h3>
-        <p>Certains jeux resteront gratuits, d'autres auront un prix — payables directement depuis le launcher, en toute sécurité.</p>
+        <h3 data-i18n="launcherPage.why.f6.title">Achats à venir</h3>
+        <p data-i18n="launcherPage.why.f6.desc">Certains jeux resteront gratuits, d'autres auront un prix — payables directement depuis le launcher, en toute sécurité.</p>
       </div>
     </div>
   </div>
@@ -112,41 +112,41 @@
 
 <section id="jeux">
   <div class="container">
-    <div class="section-tag">La bibliothèque</div>
-    <h2 class="section-title">Les jeux du Launcher</h2>
-    <p class="section-lead">Les 3 jeux installables directement depuis le Launcher.</p>
+    <div class="section-tag" data-i18n="launcherPage.library.tag">La bibliothèque</div>
+    <h2 class="section-title" data-i18n="launcherPage.library.title">Les jeux du Launcher</h2>
+    <p class="section-lead" data-i18n="launcherPage.library.lead">Les 3 jeux installables directement depuis le Launcher.</p>
     <div class="grid grid-3">
       <a href="games/ferra.html" class="game-card">
         <div class="game-card-thumb">
           <img src="assets/img/screenshot-gameplay.png" alt="FERRA — capture d'écran">
-          <span class="game-card-price">Gratuit</span>
+          <span class="game-card-price" data-i18n="home.games.free">Gratuit</span>
         </div>
         <div class="game-card-body">
           <h3>FERRA</h3>
-          <p>Survie &amp; automatisation — reconstruis un monde, protège ton feu, affronte une météorite.</p>
-          <span class="game-card-genre">Survie / Automatisation</span>
+          <p data-i18n="home.games.ferra.desc">Survie &amp; automatisation — reconstruis un monde, protège ton feu, affronte une météorite.</p>
+          <span class="game-card-genre" data-i18n="home.games.ferra.genre">Survie / Automatisation</span>
         </div>
       </a>
       <a href="games/tower-defense.html" class="game-card">
         <div class="game-card-thumb">
           <img src="assets/img/screenshot-towerdefense-1.png" alt="Tower Défense Infini — capture d'écran">
-          <span class="game-card-price">Gratuit</span>
+          <span class="game-card-price" data-i18n="home.games.free">Gratuit</span>
         </div>
         <div class="game-card-body">
           <h3>Tower Défense Infini</h3>
-          <p>Des vagues sans fin, des tours élémentaires à combiner — glace, feu, poison, glu — et un vrai système de prestige.</p>
-          <span class="game-card-genre">Tower Défense</span>
+          <p data-i18n="launcherPage.library.tdDesc">Des vagues sans fin, des tours élémentaires à combiner — glace, feu, poison, glu — et un vrai système de prestige.</p>
+          <span class="game-card-genre" data-i18n="home.games.td.genre">Tower Défense</span>
         </div>
       </a>
       <a href="games/anime-clicker.html" class="game-card">
         <div class="game-card-thumb">
           <img src="assets/img/screenshot-animeclicker-1.png" alt="Anime Clicker — capture d'écran">
-          <span class="game-card-price">Gratuit</span>
+          <span class="game-card-price" data-i18n="home.games.free">Gratuit</span>
         </div>
         <div class="game-card-body">
           <h3>Anime Clicker</h3>
-          <p>Un clicker multi-univers — Naruto, One Piece, My Hero Academia et bien d'autres à débloquer, avec prestige.</p>
-          <span class="game-card-genre">Clicker / Incrémental</span>
+          <p data-i18n="launcherPage.library.acDesc">Un clicker multi-univers — Naruto, One Piece, My Hero Academia et bien d'autres à débloquer, avec prestige.</p>
+          <span class="game-card-genre" data-i18n="home.games.ac.genre">Clicker / Incrémental</span>
         </div>
       </a>
     </div>
@@ -156,12 +156,12 @@
 <section>
   <div class="container-narrow">
     <div class="launcher-promo">
-      <h2 class="section-title" style="margin-bottom:6px;">Envie d'en savoir plus sur chaque jeu ?</h2>
-      <p>Chaque jeu a sa propre page avec ses fonctionnalités et ses captures d'écran — le bouton d'installation là-bas renvoie aussi vers le Launcher.</p>
+      <h2 class="section-title" style="margin-bottom:6px;" data-i18n="launcherPage.moreInfo.title">Envie d'en savoir plus sur chaque jeu ?</h2>
+      <p data-i18n="launcherPage.moreInfo.desc">Chaque jeu a sa propre page avec ses fonctionnalités et ses captures d'écran — le bouton d'installation là-bas renvoie aussi vers le Launcher.</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-        <a href="games/ferra.html" class="btn btn-primary">Voir FERRA</a>
-        <a href="games/tower-defense.html" class="btn btn-ghost">Voir Tower Défense</a>
-        <a href="games/anime-clicker.html" class="btn btn-ghost">Voir Anime Clicker</a>
+        <a href="games/ferra.html" class="btn btn-primary" data-i18n="launcherPage.moreInfo.seeFerra">Voir FERRA</a>
+        <a href="games/tower-defense.html" class="btn btn-ghost" data-i18n="launcherPage.moreInfo.seeTd">Voir Tower Défense</a>
+        <a href="games/anime-clicker.html" class="btn btn-ghost" data-i18n="launcherPage.moreInfo.seeAc">Voir Anime Clicker</a>
       </div>
     </div>
   </div>
@@ -169,12 +169,12 @@
 
 <footer class="site-footer">
   <div class="container footer-row">
-    <div class="footer-note">Izacki — projet indépendant, développé avec passion. © 2026.</div>
+    <div class="footer-note" data-i18n="footer.note">Izacki — projet indépendant, développé avec passion. © 2026.</div>
     <div class="footer-links">
-      <a href="index.html">Accueil</a>
-      <a href="launcher.html">Launcher</a>
-      <a href="forum/index.html">Forum</a>
-      <a href="contact.html">Contact</a>
+      <a href="index.html" data-i18n="nav.home">Accueil</a>
+      <a href="launcher.html" data-i18n="nav.launcher">Launcher</a>
+      <a href="forum/index.html" data-i18n="nav.forum">Forum</a>
+      <a href="contact.html" data-i18n="nav.contact">Contact</a>
     </div>
   </div>
 </footer>
@@ -184,6 +184,13 @@
 <script src="assets/js/config.js"></script>
 <script src="assets/js/supabase-client.js"></script>
 <script src="assets/js/auth.js"></script>
-<script>ferraRenderNavAuth('navAuth', '');</script>
+<script src="assets/js/i18n.js"></script>
+<script>
+(async function () {
+  await ferraI18nInit('');
+  ferraRenderNavAuth('navAuth', '');
+  ferraI18nApply();
+})();
+</script>
 </body>
 </html>

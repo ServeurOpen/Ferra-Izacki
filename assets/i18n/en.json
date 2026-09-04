@@ -1,0 +1,380 @@
+{
+  "nav": {
+    "home": "Home",
+    "launcher": "Launcher",
+    "forum": "Forum",
+    "contact": "Contact",
+    "download": "⬇ Download",
+    "login": "Log in",
+    "signup": "Create an account",
+    "connexion": "Log in",
+    "inscription": "Sign up",
+    "settings": "⚙ Settings",
+    "logout": "Log out",
+    "defaultPlayer": "Player",
+    "infosChangelog": "Info &amp; Changelog"
+  },
+  "game": {
+    "screenshots": { "tag": "Screenshots", "title": "In-game" },
+    "reqs": {
+      "tag": "Requirements", "title": "Minimum requirements",
+      "system": "System", "space": "Space", "account": "Account", "accountVal": "Izacki account (free)",
+      "recommended": "Recommended", "screen": "Screen", "keyboard": "Keyboard"
+    }
+  },
+  "ferraPage": {
+    "pageTitle": "FERRA — Iron Automation",
+    "tag": "⛏️ Survival / Automation",
+    "tagline": "A world to rebuild, a fire to protect, a meteor to face. Mine, automate, defend your camp — and get ready for the night.",
+    "installCta": "🚀 Install via the Launcher — free",
+    "controls": "WASD/Arrows + mouse",
+    "shot2": "Bunker &amp; meteor",
+    "shot3": "Professions &amp; achievements",
+    "footerInfos": "FERRA info",
+    "about": {
+      "tag": "About this game",
+      "title": "A survival game that never stops",
+      "p1": "From pickaxe in hand to electric drills, from the skill tree to professions, every FERRA run is built tile by tile. Protect your campfire, gather iron, wood, stone and copper, then automate everything with drills — classic or electric, powered by a real grid (solar panels, wind turbines, generators, a nuclear plant, batteries).",
+      "p2": "By day, you gather and build. At night, monsters roam. And in the distance, a meteor approaches — build your bunker or bet on evacuation, every choice has real consequences."
+    },
+    "features": {
+      "tag": "Features",
+      "f1": "Full gathering and automation — from hand-mining to electric drills",
+      "f2": "A complete power grid: solar, wind, generator, nuclear, batteries",
+      "f3": "Skill tree and a Professions system with real rewards",
+      "f4": "Day/night cycle — turrets, barracks and a torch to survive the night",
+      "f5": "Bunker Tycoon or Evacuation when the meteor strikes, with a real narrative follow-up",
+      "f6": "Community forum and a unified player account",
+      "moreLink": "📖 See all the info &amp; the full changelog →"
+    }
+  },
+  "tdPage": {
+    "pageTitle": "Tower Defense Infinite",
+    "tag": "🏹 Tower Defense",
+    "tagline": "Endless zombie waves, elemental towers to combine into real synergies, and weather that changes everything mid-fight.",
+    "mouse": "Mouse", "mouseVal": "Click + wheel",
+    "about": {
+      "title": "Classic at heart, never-ending in practice",
+      "p1": "Tower Defense Infinite starts from a base you already know: place towers, slow enemies, hold the line. Cannon and Archer tower to start — then very quickly, the game changes nature. The waves never end, and to hold on you'll need to unlock and combine elemental towers: ice to slow, fire to burn over time, poison to wear down, glue to root in place. Each has its strengths, and the real combos appear when you make them work together.",
+      "p2": "Dynamic weather disrupts the battlefield mid-run, and a Prestige system lets you restart with permanent bonuses once the current wave gets too hard — to come back stronger, again and again."
+    },
+    "features": {
+      "f1": "Endless waves — the game never stops, difficulty keeps climbing",
+      "f2": "10 towers to unlock by playing: Cannon, Archer, Ice, Fire, Wind, Tesla, Poison, Military Barracks, Glue, and the Prestige Tower",
+      "f3": "Real synergies between elements — combine ice + fire, poison + glue and many more combos",
+      "f4": "Dynamic weather that directly affects combat",
+      "f5": "Prestige system with permanent bonuses (+% gold, game speed, a special map)",
+      "f6": "34 achievements to unlock, detailed stats (combat, defense, economy, dedication...)",
+      "f7": "Built-in wiki — zombies, towers, synergies and cursed waves, all explained in-game",
+      "f8": "Cursed waves and bosses to break the routine"
+    }
+  },
+  "acPage": {
+    "pageTitle": "Anime Clicker",
+    "tag": "⚡ Clicker / Incremental",
+    "tagline": "Click, unlock, embody your favorite anime universes — Naruto, One Piece, My Hero Academia and many more to come, each with its own upgrades.",
+    "shot3": "More universes coming soon",
+    "screenVal": "All formats — mobile to Full HD",
+    "mouseVal": "Simple click",
+    "about": {
+      "title": "A clicker that crosses universes",
+      "p1": "Anime Clicker takes the classic clicker formula — click to progress, unlock upgrades, let it run automatically — and dresses it up with the best-known anime universes. Start in the Naruto universe: gather chakra by clicking, unlock Shadow Clone or Rasengan for automatic production, and get ready for Sage Mode.",
+      "p2": "Other universes — One Piece, My Hero Academia, and many more — unlock as you progress, each with its own upgrades and visual atmosphere. A Reincarnation system lets you restart everything for permanent bonuses once a universe is well underway."
+    },
+    "features": {
+      "f1": "Several anime universes to unlock by playing — Naruto, One Piece, My Hero Academia and more to come",
+      "f2": "Themed upgrades specific to each universe (clicks and automatic production)",
+      "f3": "Reincarnation (prestige) system to push further on every run",
+      "f4": "Achievements and stats to unlock",
+      "f5": "Auto-save — pick up exactly where you left off",
+      "f6": "Adapts to every screen, from mobile to Full HD"
+    }
+  },
+  "infosPage": {
+    "pageTitle": "Info &amp; Changelog — FERRA",
+    "heading": "📖 Info &amp; Changelog — FERRA",
+    "sub": "What's already in the game, what's coming, and the update history.",
+    "already": "🕹️ Already in the game",
+    "upcoming": "🚧 In the works",
+    "changelogTitle": "🗓️ Update history",
+    "endAug": "Late August 2026",
+    "betaVersion": "Beta version",
+    "c1": { "title": "Basic survival", "desc": "A campfire to feed, hunger/thirst/stench, a day/night cycle, night monsters, turrets and defense barracks." },
+    "c2": { "title": "Resources &amp; production", "desc": "Wood, stone, iron, copper — by hand or with automatic drills, up to electric drills." },
+    "c3": { "title": "Electricity", "desc": "Solar panels, generators, storage batteries and a Central to track production/consumption live." },
+    "c4": { "title": "Skill tree", "desc": "Combat, Mining, Woodcutting, Transport, Comfort — 5 linear branches, paid with level points." },
+    "c5": { "title": "Professions", "desc": "Woodcutter, Miner, Fisherman, Farmer, Engineer — passive progression that unlocks real rewards (planting your own deposits, smelting without help...)." },
+    "c6": { "title": "Bunker &amp; meteor", "desc": "A meteor threatens the world — build your bunker or prepare an evacuation, each path has its own consequences." },
+    "c7": { "title": "Economy", "desc": "Manual and automatic selling (Trader), a Bank with interest, a cart and warehouses to store more." },
+    "c8": { "title": "Exploration", "desc": "Full-screen map, fog of war, points of interest to discover, main and side quests." },
+    "u1": { "title": "Dynamic weather", "desc": "Rain, wind, blizzard, storm, fog, eclipse — each with a real impact on the game." },
+    "u2": { "title": "Lore &amp; cutscenes", "desc": "A real story to uncover: notes hidden around the world, an intro cutscene, ruins to explore." },
+    "u3": { "title": "Map 2", "desc": "A new map to unlock after surviving the meteor on Map 1." },
+    "u4": { "title": "Procedural generation", "desc": "A world generated in chunks, Minecraft-style, as you explore." },
+    "ch1": { "title": "🏅 Professions system", "desc": "5 professions (Woodcutter, Miner, Fisherman, Farmer, Engineer) with real passive progression and tier rewards — plant your own trees/deposits/fishing spots, or smelt metal without help." },
+    "ch2": { "title": "🔋 Power grid", "desc": "Copper, solar panels, generators, storage batteries and a Central to track everything live. Electric drills with a futuristic design." },
+    "ch3": { "title": "☄️ Meteor arc &amp; Divine Spell", "desc": "A final choice between building a bunker or betting on evacuation, with real consequences. Map 1 ends with a divine spell cutscene." },
+    "ch4": { "title": "🏚️ Bunker Tycoon", "desc": "An isometric 3D bunker to furnish room by room, furniture buyable with gold, a bunker safety note." },
+    "ch5": { "title": "⚙️ Optimizations &amp; skill tree", "desc": "Successive optimization passes (rendering, minimap), a 5-branch skill tree, a Player Menu with upgrades paid in gold." },
+    "ch6": { "title": "🌱 First steps", "desc": "Basic survival, manual gathering, first drills, campfire, night monsters, turrets, quests." }
+  },
+  "launcherPage": {
+    "pageTitle": "Izacki Launcher",
+    "badge": "🚀 Available",
+    "lead": "A single launcher to install, update and launch all my games — FERRA, Tower Defense Infinite, Anime Clicker, and more to come. No more .exe files scattered in your Downloads folder.",
+    "downloadCta": "⬇ Download the Launcher",
+    "smartscreenNote": "Windows • ~2.3 MB — Windows may show a SmartScreen warning during install (unsigned publisher). <a href=\"#smartscreen\" style=\"color:var(--copper-glow);font-weight:600;\">That's normal, here's how to continue →</a>",
+    "ss": {
+      "tag": "⚠️ Seeing a Windows message?",
+      "title": "\"This app has been blocked for your protection\"",
+      "lead": "That's normal and safe — here's why, and how to continue in 2 clicks.",
+      "explain": "This message appears on <b>any independent software not digitally signed</b> by a publisher recognized by Microsoft — a signing certificate costs several hundred euros a year, out of reach for a small personal project like this one for now. It does <b>not</b> mean the Launcher is dangerous: Windows simply doesn't know the publisher yet.",
+      "step1": { "title": "Click \"More info\"", "desc": "A small greyed-out link, under the blue warning message." },
+      "step2": { "title": "Click \"Run anyway\"", "desc": "The button appears right below — installation starts normally." },
+      "reassure": "✅ <b style=\"color:var(--valid);\">Good to know</b>: clicking \"Run anyway\" doesn't disable <b>any</b> protection on your PC (not your antivirus, not your firewall, not SmartScreen itself) — it's just a one-time permission for this specific file. No need to disable anything in Windows settings."
+    },
+    "why": {
+      "tag": "Why a launcher",
+      "title": "A real library, not a folder of .exe files",
+      "lead": "A real game library, at an independent developer's scale.",
+      "f1": { "title": "Install in one click", "desc": "Pick a game from the library, click Install — the launcher downloads and organizes everything cleanly, no need to hunt for the right file on the site." },
+      "f2": { "title": "Launch directly", "desc": "Once installed, a game launches straight from the launcher — no more digging through folders for the executable." },
+      "f3": { "title": "Always up to date", "desc": "The launcher notifies you as soon as a new version of a game is out — one click to update, never an outdated version." },
+      "f4": { "title": "One single library", "desc": "All my games in one place, with their icon, progress and info — as I release new ones." },
+      "f5": { "title": "One single account", "desc": "Log in once — the same account as the FERRA forum — to access your entire library." },
+      "f6": { "title": "Purchases coming soon", "desc": "Some games will stay free, others will have a price — payable directly from the launcher, safely." }
+    },
+    "library": {
+      "tag": "The library",
+      "title": "The Launcher's games",
+      "lead": "The 3 games installable directly from the Launcher.",
+      "tdDesc": "Endless waves, elemental towers to combine — ice, fire, poison, glue — and a real prestige system.",
+      "acDesc": "A multiverse clicker — Naruto, One Piece, My Hero Academia and many more to unlock, with prestige."
+    },
+    "moreInfo": {
+      "title": "Want to know more about each game?",
+      "desc": "Each game has its own page with its features and screenshots — the install button over there also links back to the Launcher.",
+      "seeFerra": "See FERRA", "seeTd": "See Tower Defense", "seeAc": "See Anime Clicker"
+    }
+  },
+  "faqPage": {
+    "pageTitle": "FAQ — Izacki",
+    "heading": "❓ Frequently Asked Questions",
+    "sub": "Installation, Windows security, accounts, profiles, games — answers to the most common questions.",
+    "searchPlaceholder": "🔍 Search a keyword (e.g. antivirus, password, avatar...)",
+    "noResults": "No question matches — try another word, or ask your question on the <a href=\"forum/index.html\" style=\"color:var(--copper-glow);\">forum</a>.",
+    "s1": {
+      "title": "🛡️ Installation &amp; Windows security",
+      "q1": { "q": "Windows shows \"Windows protected your PC\" (SmartScreen) — is it a virus?", "a": "No, that's normal and safe. This message appears on <b>any independent software not digitally signed</b> by a publisher recognized by Microsoft — a signing certificate costs several hundred euros a year, out of reach for a small independent project for now.<br><br>To continue: click <b>\"More info\"</b> (a small grey link under the message), then <b>\"Run anyway\"</b>. This doesn't disable <b>any</b> protection on your PC — it's just a one-time permission for this specific file." },
+      "q2": { "q": "I don't see a \"More info\" link, just an OK button — what do I do?", "a": "That means Windows protection is set to <b>\"Block\"</b> instead of <b>\"Warn\"</b>. Admin mode changes nothing here, a setting needs adjusting:<br><br>1. Open <b>Windows Security</b> (search in the Start menu)<br>2. <b>App &amp; browser control</b><br>3. Under <b>Reputation-based protection</b>, open its settings<br>4. Switch <b>\"Check apps and files\"</b> from <b>Block</b> to <b>Warn</b><br>5. Restart the installer — the \"More info\" link should now appear." },
+      "q3": { "q": "My antivirus (Windows Defender or other) removes the file or quarantines it", "a": "This is a <b>false positive</b>: antivirus software is wary by default of unsigned, rarely downloaded executables, even when they contain nothing malicious. If this happens:<br><br>• Restore the file from your antivirus quarantine<br>• Or add an exception for <code>IzackiLauncher-Setup.exe</code> before re-downloading<br><br>If you'd rather not, that's completely understandable — let us know on the <a href=\"forum/index.html\">forum</a>, we'll look into where it's coming from." },
+      "q4": { "q": "The browser flat out blocks the file download", "a": "Some browsers (Edge, Chrome) show a warning <b>before</b> the file is even saved, something like \"This file is unusual and could be dangerous.\" Click the <b>three dots ( ⋯ )</b> next to the download in the browser bar, then choose <b>\"Keep\"</b> / \"Keep anyway\"." },
+      "q5": { "q": "Where does the Launcher install games?", "a": "By default in the app's data folder (hidden, managed automatically). You can change this location in <b>Settings → Storage → Change folder</b> from the Launcher — your already-installed games will be moved automatically, no need to re-download them." }
+    },
+    "s2": {
+      "title": "🔑 Account &amp; login",
+      "q1": { "q": "Do the Launcher and the site use the same account?", "a": "Yes — a single account for the forum, the site and the Launcher. No need to sign up again everywhere." },
+      "q2": { "q": "I forgot my password, what do I do?", "a": "From the <a href=\"forum/login.html\">forum</a> login screen, use the password recovery link. Since the Launcher uses the same account, a new password will work in both places." },
+      "q3": { "q": "What is my \"tag\" (Username#123)?", "a": "It's your unique Discord-style identifier — your <b>username</b> followed by a <b>number</b> assigned when your account was created. It lets people add you as a friend unambiguously, even if someone else picked the same username. It's visible top-right of the Launcher and in Settings, and can never be changed (unlike your display name)." }
+    },
+    "s3": {
+      "title": "🖼️ Profile, banner &amp; avatar",
+      "q1": { "q": "How do I change my banner or avatar?", "a": "In the Launcher, <b>Settings → My Profile</b>: click directly on the frame (banner) or the circle overlapping it (avatar) to upload your own image, or pick one of the visuals provided by the launcher right below — no upload needed in that case.<br><br>Recommended sizes: banner <b>1200 × 300 px</b>, avatar <b>512 × 512 px</b> (square preferred)." },
+      "q2": { "q": "My display name is different from my username, is that normal?", "a": "Yes. Your <b>username#number</b> (e.g. <code>Izacki#1</code>) is your permanent identifier, never changeable. Your <b>display name</b> is what other players see on your profile and can be changed freely in Settings → My Profile — if empty, your username#number shows instead." },
+      "q3": { "q": "What does a \"private\" profile do?", "a": "A private profile hides your banner, achievements and playtime from other players — only your tag (username#number) stays visible, needed so your friends can find you. It's a one-click toggle in Settings → My Profile." }
+    },
+    "s4": {
+      "title": "🎮 Games &amp; achievements",
+      "q1": { "q": "How do I install a game?", "a": "From the <b>Store</b> tab, click a game to see its page (description, screenshots) then click <b>Install</b>. Once installed, find it in <b>My Games</b> with a real <b>Play</b> button to launch it directly." },
+      "q2": { "q": "My achievements don't show on the game's page", "a": "Achievements only sync when the game is launched <b>from the Launcher</b> (not via a direct shortcut to the executable). Also make sure you're logged in before starting a run." },
+      "q3": { "q": "How do I quit a game cleanly?", "a": "Press <b>Escape</b> in-game to open the pause menu, then <b>Quit game</b> — your progress is saved automatically before closing." },
+      "q4": { "q": "How do I uninstall a game?", "a": "From <b>My Games</b>, click the game's card then the 🗑 icon next to the Play button. You can also see the space used by each game in Settings → Storage." },
+      "q5": { "q": "Are the games paid?", "a": "All current games (FERRA, Tower Defense Infinite, Anime Clicker) are <b>free</b>. Some future games may be paid, purchasable directly from the Launcher." }
+    },
+    "s5": {
+      "title": "🔄 Updates",
+      "q1": { "q": "How do I know if an update is available?", "a": "The Launcher automatically blocks you if you try to launch an outdated game, and redirects you to the <b>Download</b> tab. You can also turn on the <b>\"Automatic updates\"</b> switch in that tab to never think about it again." },
+      "q2": { "q": "Does the Launcher itself update on its own?", "a": "Yes, it checks automatically on startup and installs itself if a new version exists — you never need to manually re-download the installer (except for an exceptional internal security change, announced on the forum)." }
+    },
+    "s6": {
+      "title": "💬 Another question?",
+      "desc": "Ask your question on the <a href=\"forum/index.html\" style=\"color:var(--copper-glow);font-weight:600;\">forum</a> (Support &amp; bugs category) or via the <a href=\"contact.html\" style=\"color:var(--copper-glow);font-weight:600;\">Contact</a> page — we'll answer as soon as we can."
+    }
+  },
+  "contactPage": {
+    "pageTitle": "Contact — FERRA",
+    "heading": "✉️ Contact",
+    "sub": "A bug? An idea? A question? Your message goes out directly from your FERRA account, so we always know who's writing to us.",
+    "needLogin": "Log in with your FERRA account (the same as the forum) to write to us — this avoids fake messages and lets us reply to you directly.",
+    "sent": "Message sent! We'll reply by email if needed.",
+    "category": "Category",
+    "catBug": "🐞 Bug report",
+    "catSuggestion": "💡 Suggestion",
+    "catQuestion": "❓ Question",
+    "catOther": "📨 Other",
+    "message": "Message",
+    "messagePlaceholder": "Describe your problem, your idea, your question...",
+    "send": "Send",
+    "connectedAs": "Logged in as",
+    "notConfigured": "The contact form isn't set up yet (see README.md, EmailJS section).",
+    "writeFirst": "Write a message before sending.",
+    "sending": "Sending...",
+    "sendFailed": "Couldn't send the message — try again in a moment."
+  },
+  "forum": {
+    "connectedAs": "Logged in as",
+    "logout": "Log out",
+    "loading": "Loading…"
+  },
+  "forumIndex": {
+    "pageTitle": "Forum — FERRA",
+    "heading": "💬 FERRA Forum",
+    "sub": "Discussions, support, ideas — pick a category to see the threads.",
+    "loadingCategories": "Loading categories…",
+    "noCategories": "No category yet.",
+    "thread": "thread",
+    "threads": "threads",
+    "notConfigured": "The forum isn't set up yet.",
+    "notConfiguredHint": "(see the site's README.md — assets/js/config.js to fill in)"
+  },
+  "forumCategory": {
+    "newThread": "✏️ New thread",
+    "loadingThreads": "Loading threads…",
+    "notFound": "Category not found.",
+    "titleSuffix": "FERRA Forum",
+    "noThreads": "No thread here yet — be the first to open one!",
+    "reply": "reply",
+    "replies": "replies",
+    "by": "by",
+    "loadError": "Couldn't load this category."
+  },
+  "loginPage": {
+    "pageTitle": "Login — FERRA Forum",
+    "heading": "🔑 Login",
+    "sub": "Good to see you again, adventurer.",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Log in",
+    "forgotPassword": "Forgot your password?",
+    "noAccount": "No account yet?",
+    "signupLink": "Sign up",
+    "errEmailNotConfirmed": "This account hasn't confirmed its email yet — check your inbox (and spam), or contact us if the email never arrived.",
+    "errRateLimit": "Too many recent attempts — try again in a few minutes.",
+    "errInvalid": "Incorrect email or password."
+  },
+  "signupPage": {
+    "pageTitle": "Create an account — FERRA Forum",
+    "heading": "🆕 Create an account",
+    "sub": "Join the FERRA community.",
+    "created": "Account created!",
+    "username": "Username",
+    "usernameRules": "3 to 24 characters, letters/digits/underscore only (no spaces), with at least 1 uppercase letter.",
+    "displayName": "Display name (optional)",
+    "displayNameHint": "The name shown to other players (profile, Launcher leaderboards...). Changeable later — otherwise your username will be used.",
+    "submit": "Create my account",
+    "hasAccount": "Already have an account?",
+    "loginLink": "Log in",
+    "invalidUsername": "Invalid username — ",
+    "errEmailUsed": "This email is already in use.",
+    "errUsernameUsed": "This username is already taken.",
+    "errRateLimit": "Too many recent account creations (email sending limit) — try again in a few minutes.",
+    "errDisabled": "Sign-ups are temporarily disabled server-side — let us know via contact.",
+    "errGeneric": "Couldn't create the account — try again.",
+    "okConnected": "Account created and logged in! Heading to the forum...",
+    "okNeedsConfirm": "Account created! Check your emails to confirm your address (and spam folder), then log in."
+  },
+  "forgotPage": {
+    "pageTitle": "Forgot password — FERRA Forum",
+    "heading": "🔓 Forgot password",
+    "sub": "Enter your email — we'll send you a link to choose a new one.",
+    "sent": "Email sent! Check your inbox — <b>and remember to check your spam folder</b>, the link may land there. It stays valid for about 1 hour.",
+    "submit": "Send the link",
+    "backToLogin": "← Back to login",
+    "errRateLimit": "Too many recent requests — try again in a few minutes.",
+    "errGeneric": "Couldn't send the email — try again."
+  },
+  "resetPage": {
+    "pageTitle": "New password — FERRA Forum",
+    "heading": "🔑 New password",
+    "sub": "Choose your new password.",
+    "updated": "Password updated! You can now log in.",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm password",
+    "submit": "Confirm",
+    "errInvalidLink": "This link is no longer valid (already used, or expired after ~1h) — request a new one from the \"forgot password\" page.",
+    "errMismatch": "The two passwords don't match.",
+    "errExpiredRetry": "Invalid or expired link — request a new one from the \"forgot password\" page.",
+    "errUpdateFailed": "Couldn't update the password — try again."
+  },
+  "newThreadPage": {
+    "pageTitle": "New thread — FERRA Forum",
+    "breadcrumbNew": "New thread",
+    "heading": "✏️ New thread",
+    "needLogin": "Log in to open a thread.",
+    "threadTitle": "Thread title",
+    "threadTitlePlaceholder": "A clear, short title",
+    "message": "Message",
+    "messagePlaceholder": "Explain your topic in detail...",
+    "submit": "Post the thread",
+    "missingCategory": "Missing category.",
+    "errRequired": "The title and message are required.",
+    "errCreateFailed": "Couldn't create the thread — try again."
+  },
+  "threadPage": {
+    "loading": "Loading thread…",
+    "replyHeading": "✍️ Reply",
+    "replyPlaceholder": "Your message...",
+    "replySubmit": "Send the reply",
+    "loginPrompt": "Log in to reply to this thread.",
+    "notFound": "Thread not found.",
+    "defaultCategory": "Category",
+    "errWriteFirst": "Write a message before sending.",
+    "errReplyFailed": "Couldn't send the reply — try again.",
+    "loadError": "Couldn't load this thread."
+  },
+  "footer": {
+    "note": "FERRA — an independent project, made with passion. © 2026."
+  },
+  "home": {
+    "pageTitle": "Izacki — FERRA, Tower Defense Infinite, Anime Clicker",
+    "badge": "🚀 The Izacki Launcher is coming",
+    "lead": "An independent developer, several games — soon united in a single launcher to install once, so you can download and launch everything from one place.",
+    "ctaLauncher": "🚀 Discover the Launcher",
+    "ctaGames": "🎮 See the games",
+    "games": {
+      "tag": "My games",
+      "title": "Three games, one developer",
+      "lead": "Each has its own page — screenshots, features, requirements — and will soon be installable directly from the Launcher.",
+      "free": "Free",
+      "ferra": { "desc": "Survival &amp; automation — rebuild a world, protect your fire, face a meteor.", "genre": "Survival / Automation" },
+      "td": { "desc": "Endless waves, elemental towers to combine, dynamic weather and prestige.", "genre": "Tower Defense" },
+      "ac": { "desc": "A multiverse clicker — Naruto, One Piece, My Hero Academia and many more to unlock.", "genre": "Clicker / Incremental" }
+    },
+    "promo": {
+      "tag": "One launcher, every game",
+      "title": "The Izacki Launcher is coming",
+      "desc": "Install, update and launch FERRA, Tower Defense Infinite and Anime Clicker from one place — a real game library, at an independent developer's scale."
+    },
+    "community": {
+      "tag": "Join the community",
+      "title": "The FERRA forum is open",
+      "lead": "Share your runs, suggest ideas, report a bug, or just come chat with other players.",
+      "cta": "💬 Go to the forum"
+    }
+  },
+  "settings": {
+    "title": "Settings — FERRA",
+    "heading": "⚙ Settings",
+    "sub": "Site language and account options.",
+    "needLogin": "Log in to access your settings.",
+    "language": {
+      "title": "🌐 Language",
+      "sub": "Applies to the whole site, remembered for your next visits."
+    },
+    "admin": {
+      "title": "🛡️ Admin Mode",
+      "passwordLabel": "Reactivation password",
+      "reactivate": "Reactivate"
+    }
+  }
+}
