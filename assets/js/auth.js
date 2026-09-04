@@ -125,6 +125,59 @@ async function ferraSignIn(email, password) {
   return window.supabaseClient.auth.signInWithPassword({ email, password });
 }
 
+// ============================================================
+// Parrainage (05/09/2026) — voir migration_18_parrainage.sql. Le tag du
+// parrain (format "Pseudo#123") n'est associé qu'APRÈS un signUp() réussi
+// (il faut déjà une session pour appeler set_referral, en security
+// definer) — jamais au moment du formulaire lui-même. `referralTag` peut
+// être vide (inscription sans parrainage), c'est le cas normal.
+// ============================================================
+function ferraGetDeviceId() {
+  try {
+    let id = localStorage.getItem('ferra_device_id');
+    if (!id) {
+      id = 'dev_' + Math.random().toString(36).slice(2) + Date.now().toString(36);
+      localStorage.setItem('ferra_device_id', id);
+    }
+    return id;
+  } catch {
+    return null;
+  }
+}
+
+// Jamais bloquant pour l'inscription : chaque étape est dans son propre
+// try/catch silencieux, un souci ici ne doit jamais empêcher le compte
+// tout neuf de fonctionner normalement.
+async function ferraApplyReferral(referralTag) {
+  try {
+    const deviceId = ferraGetDeviceId();
+    if (deviceId) await window.supabaseClient.rpc('record_signup_device', { p_device_id: deviceId });
+  } catch (err) {
+    console.error('[FERRA] record_signup_device a échoué :', err);
+  }
+  try {
+    const { data: { session } } = await window.supabaseClient.auth.getSession();
+    const token = session?.access_token;
+    if (token && window.FERRA_CONFIG) {
+      await fetch(`${window.FERRA_CONFIG.SUPABASE_URL}/functions/v1/record-signup-ip`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+      });
+    }
+  } catch (err) {
+    console.error('[FERRA] record-signup-ip a échoué :', err);
+  }
+  try {
+    const match = referralTag ? /^(.+)#(\d+)$/.exec(referralTag.trim()) : null;
+    if (match) {
+      const [, username, numberStr] = match;
+      await window.supabaseClient.rpc('set_referral', { p_username: username.trim(), p_number: Number(numberStr) });
+    }
+  } catch (err) {
+    console.error('[FERRA] set_referral a échoué :', err);
+  }
+}
+
 // Connexion par EMAIL OU PSEUDO — un seul champ "identifiant" côté
 // formulaire (voir forum/login.html). Un pseudo ne contenant jamais de
 // "@" (voir FERRA_USERNAME_REGEX), la présence de "@" suffit à distinguer
