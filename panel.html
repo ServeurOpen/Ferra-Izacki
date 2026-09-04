@@ -72,6 +72,28 @@
 
   @keyframes panelFadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
   .panel-anim{animation:panelFadeUp .5s ease both;}
+
+  /* ⚡ Actions (05/09/2026, demande explicite : "une autre catégorie en
+     haut de celle des graphiques... commandes genre pour give des
+     crédits... Ban quelqu'un") — même section que dans le Launcher. */
+  .panel-action-sub{padding:16px 0;border-top:1px solid var(--panel-edge);}
+  .panel-action-sub:first-of-type{border-top:none;padding-top:0;}
+  .panel-action-sub h4{margin:0 0 10px;font-size:13px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+  .panel-action-hint{font-weight:400;color:var(--text-dim);font-size:11.5px;}
+  .panel-action-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+  .panel-action-row select, .panel-action-row input{
+    background:var(--bg-panel-2);border:1px solid var(--panel-edge);border-radius:8px;
+    color:var(--text);padding:8px 10px;font-size:12.5px;font-family:inherit;flex:1;min-width:120px;
+  }
+  .panel-action-status{font-size:12px;color:var(--text-dim);margin-top:8px;}
+  .btn-danger{color:#fff;background:linear-gradient(180deg,#e0665f,#a5352f);border:none;}
+  .panel-unban-btn{
+    font-size:11.5px;font-weight:700;padding:6px 12px;border-radius:8px;cursor:pointer;
+    background:rgba(107,214,127,0.12);color:var(--valid);border:1px solid rgba(107,214,127,0.3);
+    transition:filter .15s;
+  }
+  .panel-unban-btn:hover{filter:brightness(1.2);}
+  .panel-unban-btn:disabled{opacity:0.55;cursor:default;}
 </style>
 </head>
 <body>
@@ -104,6 +126,59 @@
 
     <div class="panel-refresh-row">
       <button class="btn btn-ghost btn-sm" id="panelRefreshBtn" style="width:auto;">🔄 Rafraîchir</button>
+    </div>
+
+    <div class="panel-section panel-anim">
+      <h3>⚡ Actions</h3>
+      <p class="sub">Mêmes actions que dans le panel admin du Launcher — visibles ici pour agir sans ouvrir l'appli.</p>
+
+      <div class="panel-action-sub">
+        <h4>🎁 Créditer un joueur <span class="panel-action-hint">— ex. gagnant d'un concours</span></h4>
+        <div class="panel-action-row">
+          <select id="actionGrantPlayerSelect"></select>
+          <input type="number" id="actionGrantAmount" placeholder="Montant" value="50" min="1" style="max-width:100px;">
+          <input type="text" id="actionGrantReason" placeholder="Raison" value="Concours" style="max-width:160px;">
+          <button class="btn btn-primary btn-sm" id="actionGrantBtn" style="flex:none;width:auto;">Créditer</button>
+        </div>
+        <div class="panel-action-status" id="actionGrantStatus"></div>
+      </div>
+
+      <div class="panel-action-sub">
+        <h4>🎉 Créditer TOUT LE MONDE <span class="panel-action-hint">— déclenche un pop up chez chaque joueur</span></h4>
+        <div class="panel-action-row">
+          <input type="number" id="actionGrantAllAmount" placeholder="Montant" value="10" min="1" style="max-width:100px;">
+          <input type="text" id="actionGrantAllReason" placeholder="Raison" value="Cadeau du créateur" style="max-width:200px;">
+          <button class="btn btn-primary btn-sm" id="actionGrantAllBtn" style="flex:none;width:auto;">Offrir à tous</button>
+        </div>
+        <div class="panel-action-status" id="actionGrantAllStatus"></div>
+      </div>
+
+      <div class="panel-action-sub">
+        <h4>⛔ Bannir un joueur</h4>
+        <div class="panel-action-row">
+          <select id="actionBanPlayerSelect"></select>
+          <select id="actionBanDuration" style="max-width:150px;">
+            <option value="1">1 heure</option>
+            <option value="24" selected>24 heures</option>
+            <option value="168">7 jours</option>
+            <option value="720">30 jours</option>
+            <option value="permanent">Définitif</option>
+          </select>
+          <input type="text" id="actionBanReason" placeholder="Raison (obligatoire)" style="max-width:220px;">
+          <button class="btn btn-danger btn-sm" id="actionBanBtn" style="flex:none;width:auto;">Bannir</button>
+        </div>
+        <div class="panel-action-status" id="actionBanStatus"></div>
+      </div>
+
+      <div class="panel-action-sub">
+        <h4>🚫 Joueurs actuellement bannis</h4>
+        <div class="panel-table-wrap">
+          <table class="panel-table">
+            <thead><tr><th>Email</th><th>Raison</th><th>Fin</th><th></th></tr></thead>
+            <tbody id="actionBansBody"><tr><td colspan="4" style="color:var(--text-dim);">Chargement…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
     </div>
 
     <div class="kpi-grid" id="kpiGrid"></div>
@@ -341,7 +416,96 @@
         <td><button class="panel-reset-btn" data-email="${p.email}">📧 Lien de réinitialisation</button></td>
       </tr>
     `).join('');
+
+    const playerOptions = stats.players.map((p) => `<option value="${p.userId}">${p.email}</option>`).join('');
+    document.getElementById('actionGrantPlayerSelect').innerHTML = playerOptions;
+    document.getElementById('actionBanPlayerSelect').innerHTML = playerOptions;
+
+    loadActionBans();
   }
+
+  // ---- ⚡ Actions (05/09/2026, demande explicite) — mêmes fonctions RPC
+  // que le panel admin du Launcher (voir migration_21_actions_admin.sql),
+  // revérifiées côté serveur à chaque appel (jamais fié au seul JS ici). ----
+  async function loadActionBans() {
+    const body = document.getElementById('actionBansBody');
+    const { data, error } = await window.supabaseClient.rpc('admin_list_bans');
+    if (error || !data || data.length === 0) {
+      body.innerHTML = `<tr><td colspan="4" style="color:var(--text-dim);">Aucun joueur banni.</td></tr>`;
+      return;
+    }
+    body.innerHTML = data.map((b) => `
+      <tr>
+        <td>${b.email}</td>
+        <td>${b.reason}</td>
+        <td>${b.banned_until ? formatDateTime(b.banned_until) : 'Définitif'}</td>
+        <td><button class="panel-unban-btn" data-user-id="${b.user_id}">Débannir</button></td>
+      </tr>
+    `).join('');
+  }
+
+  document.getElementById('actionGrantBtn').addEventListener('click', async () => {
+    const select = document.getElementById('actionGrantPlayerSelect');
+    const amountInput = document.getElementById('actionGrantAmount');
+    const reasonInput = document.getElementById('actionGrantReason');
+    const statusEl = document.getElementById('actionGrantStatus');
+    const amount = parseInt(amountInput.value, 10);
+    if (!select.value) { statusEl.textContent = 'Choisis un joueur.'; return; }
+    if (!amount || amount <= 0) { statusEl.textContent = 'Montant invalide.'; return; }
+    statusEl.textContent = 'Envoi en cours…';
+    const { data, error } = await window.supabaseClient.rpc('admin_grant_credits', {
+      p_target_user_id: select.value, p_amount: amount, p_reason: reasonInput.value || 'Concours',
+    });
+    statusEl.textContent = (!error && data && data.ok)
+      ? `✅ +${amount} crédits envoyés — nouveau solde : ${data.newBalance}.`
+      : `❌ Échec : ${(data && data.reason) || (error && error.message) || 'erreur'}`;
+  });
+
+  document.getElementById('actionGrantAllBtn').addEventListener('click', async () => {
+    const amountInput = document.getElementById('actionGrantAllAmount');
+    const reasonInput = document.getElementById('actionGrantAllReason');
+    const statusEl = document.getElementById('actionGrantAllStatus');
+    const amount = parseInt(amountInput.value, 10);
+    if (!amount || amount <= 0) { statusEl.textContent = 'Montant invalide.'; return; }
+    if (!confirm(`Offrir ${amount} crédits à TOUS les joueurs ? Chacun verra un pop up.`)) return;
+    statusEl.textContent = 'Envoi en cours…';
+    const { data, error } = await window.supabaseClient.rpc('admin_grant_credits_all', {
+      p_amount: amount, p_reason: reasonInput.value || 'Cadeau du créateur',
+    });
+    statusEl.textContent = (!error && data && data.ok)
+      ? `✅ +${amount} crédits envoyés à ${data.count} joueur(s).`
+      : `❌ Échec : ${(data && data.reason) || (error && error.message) || 'erreur'}`;
+  });
+
+  document.getElementById('actionBanBtn').addEventListener('click', async () => {
+    const select = document.getElementById('actionBanPlayerSelect');
+    const durationSelect = document.getElementById('actionBanDuration');
+    const reasonInput = document.getElementById('actionBanReason');
+    const statusEl = document.getElementById('actionBanStatus');
+    const reason = reasonInput.value.trim();
+    if (!select.value) { statusEl.textContent = 'Choisis un joueur.'; return; }
+    if (!reason) { statusEl.textContent = 'La raison est obligatoire.'; return; }
+    const durationHours = durationSelect.value === 'permanent' ? null : parseInt(durationSelect.value, 10);
+    const label = select.options[select.selectedIndex]?.textContent || 'ce joueur';
+    const durationLabel = durationHours === null ? 'définitivement' : `pour ${durationSelect.options[durationSelect.selectedIndex].textContent}`;
+    if (!confirm(`Bannir ${label} ${durationLabel} ?`)) return;
+    statusEl.textContent = 'Envoi en cours…';
+    const { data, error } = await window.supabaseClient.rpc('admin_ban_user', {
+      p_target_user_id: select.value, p_reason: reason, p_duration_hours: durationHours,
+    });
+    statusEl.textContent = (!error && data && data.ok) ? '✅ Joueur banni.' : `❌ Échec : ${(data && data.reason) || (error && error.message) || 'erreur'}`;
+    if (!error && data && data.ok) { reasonInput.value = ''; loadActionBans(); }
+  });
+
+  document.getElementById('actionBansBody').addEventListener('click', async (e) => {
+    const btn = e.target.closest('.panel-unban-btn');
+    if (!btn || btn.disabled) return;
+    btn.disabled = true;
+    btn.textContent = '…';
+    const { data, error } = await window.supabaseClient.rpc('admin_unban_user', { p_target_user_id: btn.dataset.userId });
+    if (!error && data && data.ok) loadActionBans();
+    else { btn.disabled = false; btn.textContent = 'Débannir'; }
+  });
 
   document.getElementById('panelPlayersBody').addEventListener('click', async (e) => {
     const btn = e.target.closest('.panel-reset-btn');
