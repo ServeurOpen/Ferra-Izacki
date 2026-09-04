@@ -1,10 +1,10 @@
 {
-  "version": "0.2.24",
-  "notes": "Notification native si tu recois une demande d'ami pendant ton absence, et le menu d'invitation a jouer entierement restyle (un bouton Inviter + un menu stylise pour choisir le jeu, fini le menu deroulant blanc hors theme).",
-  "pub_date": "2026-09-02T00:00:00Z",
+  "version": "0.2.25",
+  "notes": "Panel admin : detail des sessions par joueur. Credits : bonus de bienvenue (+10), recompense quotidienne (5/jour, 25 le jour 7) avec affichage du solde et sous-menu \"comment gagner des credits\".",
+  "pub_date": "2026-09-04T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRYnl3TGw3L3R6MUV1cnZUcjM5eE5ROUV5SnAvS0h1T3A1VzMrS2hCOW9laVJwVnZ0Z3RBUnpJN2tiUEVKU2dVRFhGQzU1OUZvb3JMTXhxVkJvWlJVYysvRTVZOGZxSGdjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4Mzc2OTU2CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4yNF94NjQtc2V0dXAuZXhlCmVLWmpjWWFFUGJHY0V6WTJhbmJpd2lWbCt3TjdQWFVOSlZ2dktPUUtXa1BYWGsva3lOMkdCQmVDY1diVml2WXpCTnloSHVWTEFDbUNxY0EvOEE4akRBPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDBrS3hhSnlsdEROWUxRUGNQcm11VGNsaFdmTXRGRnVCMzU0TlBPQmdyNmcxZGJhdVYwVm9YbEY2WlNaRjRLK3YzSkVRRFZEMVQ3d0RqYndDcHVOa3cwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NTQxMjk1CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4yNV94NjQtc2V0dXAuZXhlCktRMHRrZUJjRnl0ano3TWVvQmhRQ3d2TEFjd0t1VVVBeUl2NGZaWC9pZTBDa0R5U3QrZmdYZERsQTlvQXk2NVVxMkdKN0hWbDVhUnE1NExKeUtDdEN3PT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
