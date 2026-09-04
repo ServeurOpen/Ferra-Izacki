@@ -16,7 +16,7 @@
 // ============================================================
 
 import { createClient } from "jsr:@supabase/supabase-js@2";
-import Stripe from "npm:stripe@17?target=deno";
+import Stripe from "npm:stripe@17";
 
 const CORS_HEADERS: Record<string, string> = {
   "Access-Control-Allow-Origin": "*",

@@ -26,7 +26,7 @@
 // ============================================================
 
 import { createClient } from "jsr:@supabase/supabase-js@2";
-import Stripe from "npm:stripe@17?target=deno";
+import Stripe from "npm:stripe@17";
 
 Deno.serve(async (req: Request) => {
   const signature = req.headers.get("stripe-signature");
