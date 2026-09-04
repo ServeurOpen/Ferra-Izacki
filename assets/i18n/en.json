@@ -272,6 +272,7 @@
     "usernameRules": "3 to 24 characters, letters/digits/underscore only (no spaces), with at least 1 uppercase letter.",
     "displayName": "Display name (optional)",
     "displayNameHint": "The name shown to other players (profile, Launcher leaderboards...). Changeable later — otherwise your username will be used.",
+    "referral": "Referral code (optional)",
     "submit": "Create my account",
     "hasAccount": "Already have an account?",
     "loginLink": "Log in",
