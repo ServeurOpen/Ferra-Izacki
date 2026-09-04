@@ -71,7 +71,9 @@ Deno.serve(async (req: Request) => {
   }
 
   const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY")!, {
-    apiVersion: "2024-06-20",
+    // Managed Payments exige au moins 2025-03-31.basil (voir l'erreur du
+    // 05/09/2026 : "Managed Payments is not supported on API version 2024-06-20").
+    apiVersion: "2025-03-31.basil",
     httpClient: Stripe.createFetchHttpClient(),
   });
 

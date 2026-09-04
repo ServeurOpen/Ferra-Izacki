@@ -33,7 +33,9 @@ Deno.serve(async (req: Request) => {
   const body = await req.text();
 
   const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY")!, {
-    apiVersion: "2024-06-20",
+    // Même version que stripe-create-checkout (Managed Payments exige au
+    // moins 2025-03-31.basil) — garder les deux fonctions synchronisées.
+    apiVersion: "2025-03-31.basil",
     httpClient: Stripe.createFetchHttpClient(),
   });
 
