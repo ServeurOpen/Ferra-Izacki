@@ -78,7 +78,10 @@ Deno.serve(async (req: Request) => {
   try {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      payment_method_types: ["card"],
+      // Pas de "payment_method_types" ici : avec Managed Payments (activé
+      // sur ce compte), Stripe choisit lui-même les moyens de paiement à
+      // proposer — ce paramètre est désormais rejeté ("Unsupported
+      // parameter: payment_method_types"), voir l'erreur du 05/09/2026.
       line_items: [
         {
           price_data: {
