@@ -32,4 +32,12 @@ window.FERRA_CONFIG = {
   EMAILJS_PUBLIC_KEY: 'PCnj87nh3gvT_HnRX',
   EMAILJS_SERVICE_ID: 'service_l296tdx',
   EMAILJS_TEMPLATE_ID: 'template_6ucelvn',
+
+  // Clé PUBLIQUE Stripe (05/09/2026) — sans risque à exposer ici, c'est sa
+  // fonction (sert juste à initialiser Stripe.js côté navigateur). La clé
+  // SECRÈTE, elle, ne doit JAMAIS apparaître dans un fichier du site — voir
+  // supabase/functions/stripe-create-checkout (secret Supabase STRIPE_SECRET_KEY).
+  // Clé de TEST pour l'instant (pk_test_...) : aucun vrai paiement tant
+  // qu'elle n'est pas remplacée par une clé pk_live_...
+  STRIPE_PUBLISHABLE_KEY: 'pk_test_51UC32AInW2eznHjdxJLMX6Mq9JaZCRQ6EB2KZ5yvUZHLoWXMWEFArtjU2mksv3bNQr6MIhp95ivm06U7jQhk8Ks300ukomABbs',
 };
