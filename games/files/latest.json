@@ -1,10 +1,10 @@
 {
-  "version": "0.2.25",
-  "notes": "Panel admin : detail des sessions par joueur. Credits : bonus de bienvenue (+10), recompense quotidienne (5/jour, 25 le jour 7) avec affichage du solde et sous-menu \"comment gagner des credits\".",
-  "pub_date": "2026-09-04T00:00:00Z",
+  "version": "0.2.26",
+  "notes": "Recompenses quotidiennes redessinees a la Roblox (7 cases sur canvas, symbole de credit personnalise, jour reclamable anime). Nouvelles facons de gagner des credits : marquer nos emails en non-spam (+2), et un outil admin pour crediter un gagnant de concours.",
+  "pub_date": "2026-09-05T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDBrS3hhSnlsdEROWUxRUGNQcm11VGNsaFdmTXRGRnVCMzU0TlBPQmdyNmcxZGJhdVYwVm9YbEY2WlNaRjRLK3YzSkVRRFZEMVQ3d0RqYndDcHVOa3cwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NTQxMjk1CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4yNV94NjQtc2V0dXAuZXhlCktRMHRrZUJjRnl0ano3TWVvQmhRQ3d2TEFjd0t1VVVBeUl2NGZaWC9pZTBDa0R5U3QrZmdYZERsQTlvQXk2NVVxMkdKN0hWbDVhUnE1NExKeUtDdEN3PT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTC9SMmZYSlZsck5UbTU4NitPWjhCdUJYNHpOZXpzTGJzcVJvSmdacm9Da2U5ZzNXczJCbjgvRUdaclNscVNDREdHbTk0TUVwUGhoQkF3dWVYNHJYcmc0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NTQ0NTI1CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4yNl94NjQtc2V0dXAuZXhlCnNQT29tVy8xK2kvLytlWlViSXBKbG1xNDVoVkNvbURnWHA2elgyMjV0ejhZOG1uSy9TdWZrR20xd2IxWlJvWmlscWliNmdWUDVLMFlNQXRpTHNRR0JBPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
