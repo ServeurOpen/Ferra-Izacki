@@ -46,6 +46,10 @@
       <label for="signupPassword" data-i18n="loginPage.password">Mot de passe</label>
       <input type="password" id="signupPassword" minlength="6" required autocomplete="new-password">
     </div>
+    <div class="field">
+      <label for="signupReferral" data-i18n="signupPage.referral">Code de parrainage (optionnel)</label>
+      <input type="text" id="signupReferral" placeholder="Pseudo#123" autocomplete="off">
+    </div>
     <button type="submit" class="btn btn-primary btn-block" data-i18n="signupPage.submit">Créer mon compte</button>
   </form>
   <p class="sub" style="margin-top:18px;"><span data-i18n="signupPage.hasAccount">Déjà un compte ?</span> <a href="login.html" style="color:var(--copper-glow);font-weight:600;" data-i18n="signupPage.loginLink">Connecte-toi</a></p>
@@ -60,6 +64,13 @@
 (async function () {
   await ferraI18nInit('../');
   ferraI18nApply();
+  // Lien de parrainage partagé (ex. site.com/forum/signup.html?ref=Pseudo-123)
+  // — pré-remplit le champ, modifiable/effaçable par le joueur.
+  const refParam = new URLSearchParams(location.search).get('ref');
+  if (refParam) {
+    const m = /^(.+)-(\d+)$/.exec(refParam.trim());
+    document.getElementById('signupReferral').value = m ? `${m[1]}#${m[2]}` : refParam;
+  }
 })();
 document.getElementById('signupForm').addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -67,6 +78,7 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
   const displayName = document.getElementById('signupDisplayName').value.trim();
   const email = document.getElementById('signupEmail').value.trim();
   const password = document.getElementById('signupPassword').value;
+  const referralTag = document.getElementById('signupReferral').value.trim();
   const errEl = document.getElementById('signupError');
   const okEl = document.getElementById('signupSuccess');
   errEl.classList.remove('show');
@@ -102,6 +114,7 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
   // vraiment confirmer par email avant de pouvoir se connecter.
   document.getElementById('signupForm').style.display = 'none';
   if (data && data.session) {
+    await ferraApplyReferral(referralTag);
     okEl.textContent = ferraT('signupPage.okConnected', 'Compte créé et connecté ! Direction le forum...');
     okEl.classList.add('show');
     setTimeout(() => { window.location.href = 'index.html'; }, 1200);

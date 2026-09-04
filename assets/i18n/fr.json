@@ -272,6 +272,7 @@
     "usernameRules": "3 à 24 caractères, lettres/chiffres/underscore uniquement (pas d'espace), avec au moins 1 majuscule.",
     "displayName": "Nom d'affichage (optionnel)",
     "displayNameHint": "Le nom montré aux autres joueurs (profil, classements du Launcher...). Modifiable plus tard — sinon ton pseudo sera utilisé.",
+    "referral": "Code de parrainage (optionnel)",
     "submit": "Créer mon compte",
     "hasAccount": "Déjà un compte ?",
     "loginLink": "Connecte-toi",

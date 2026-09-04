@@ -1,10 +1,10 @@
 {
-  "version": "0.2.26",
-  "notes": "Recompenses quotidiennes redessinees a la Roblox (7 cases sur canvas, symbole de credit personnalise, jour reclamable anime). Nouvelles facons de gagner des credits : marquer nos emails en non-spam (+2), et un outil admin pour crediter un gagnant de concours.",
+  "version": "0.2.27",
+  "notes": "Correctif visuel : les cases de la recompense quotidienne sont desormais de vrais carres (le canvas se redimensionne a la largeur reelle du conteneur au lieu d'etre etire par le CSS).",
   "pub_date": "2026-09-05T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTC9SMmZYSlZsck5UbTU4NitPWjhCdUJYNHpOZXpzTGJzcVJvSmdacm9Da2U5ZzNXczJCbjgvRUdaclNscVNDREdHbTk0TUVwUGhoQkF3dWVYNHJYcmc0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NTQ0NTI1CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4yNl94NjQtc2V0dXAuZXhlCnNQT29tVy8xK2kvLytlWlViSXBKbG1xNDVoVkNvbURnWHA2elgyMjV0ejhZOG1uSy9TdWZrR20xd2IxWlJvWmlscWliNmdWUDVLMFlNQXRpTHNRR0JBPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTHdCc3dMV2NDK2FOSDNKZHZITUlkelBKM0plV1ZuYzdQd1I5WERvODFhWlFmQkppaUdvb0Q1cmxRVGtFZkd1ZzM2Qm1Cd0FmZU4rM2FKdkNKYnB1WXdrPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NTQ3NDQxCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4yN194NjQtc2V0dXAuZXhlCmF2MWU4SThIVS9PWVpsTld5UVJ5Tmg0VHBPeEZTa1FLb0FmTWlJWlV0L2h5dUFQWVNmN3VjS1RETEJRQkROR3F0QlV3TFpxYUxxa0RncDdmblByQ0FnPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
