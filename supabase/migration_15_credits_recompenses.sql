@@ -36,6 +36,7 @@ create table if not exists public.credit_transactions (
 create index if not exists credit_transactions_user_idx on public.credit_transactions (user_id);
 
 alter table public.credit_transactions enable row level security;
+drop policy if exists "Un joueur voit uniquement son propre historique de credits" on public.credit_transactions;
 create policy "Un joueur voit uniquement son propre historique de credits"
   on public.credit_transactions for select
   using (auth.uid() = user_id);

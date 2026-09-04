@@ -29,6 +29,7 @@ alter table public.site_visits enable row level security;
 -- qui insère user_id=null (auth.uid() vaut aussi null hors connexion), OU
 -- un joueur connecté qui insère SON PROPRE id — jamais l'id de quelqu'un
 -- d'autre, même en trafiquant l'appel réseau.
+drop policy if exists "Logger une visite (visiteur ou joueur connecte)" on public.site_visits;
 create policy "Logger une visite (visiteur ou joueur connecte)"
   on public.site_visits for insert
   with check (user_id is not distinct from auth.uid());
@@ -41,6 +42,7 @@ create index if not exists launcher_downloads_created_idx on public.launcher_dow
 
 alter table public.launcher_downloads enable row level security;
 
+drop policy if exists "Logger un telechargement (public)" on public.launcher_downloads;
 create policy "Logger un telechargement (public)"
   on public.launcher_downloads for insert
   with check (true);
