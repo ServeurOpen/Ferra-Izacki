@@ -316,9 +316,21 @@ section{padding:64px 0;}
 .empty-state{text-align:center;padding:60px 20px;color:var(--text-dim);}
 .empty-state .big-icon{font-size:44px;margin-bottom:14px;opacity:0.6;}
 
+/* En dessous de 640px, la place manque pour tout le menu (Accueil/Launcher/
+   Forum/Contact/Télécharger) — pas de vrai menu hamburger pour l'instant,
+   donc on masque juste les liens de page et le bouton Télécharger, mais on
+   garde TOUJOURS visible le widget de connexion (#navAuth, séparateur à
+   gauche) : c'est lui qui porte Connexion/Inscription (ou le pseudo +
+   Déconnexion une fois connecté), donc il doit rester accessible même sur
+   mobile — retour utilisateur du 04/09/2026. Le sélecteur `.nav-links > `
+   ne cible que les enfants DIRECTS de .nav-links (les liens de page et le
+   bouton Télécharger) : les liens à l'intérieur de #navAuth (Connexion,
+   Paramètres...) ne sont pas des enfants directs et restent donc affichés. */
 @media (max-width:640px){
-  .nav-links{display:none;}
+  .nav-links{display:flex;}
+  .nav-links > .nav-link, .nav-links > .nav-cta{display:none;}
   .site-nav{flex-wrap:wrap;}
+  .nav-auth{margin-left:0;padding-left:0;border-left:none;}
 }
 
 /* ============================================================ launcher/plateforme (31/08/2026) ====
