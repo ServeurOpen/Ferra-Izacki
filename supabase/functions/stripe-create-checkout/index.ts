@@ -24,13 +24,17 @@ const CORS_HEADERS: Record<string, string> = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
-// 100 crédits = 1€ (taux fixé dès le départ du projet). Ajoute/retire des
-// paliers ici librement, aucun autre fichier à changer.
+// Prix dégressif au crédit (05/09/2026, demande explicite : "500 à 3,49
+// [au lieu de 5€], plus t'achètes plus c'est rentable à l'unité") — le
+// palier 500 sert de tarif de référence (0,00698 €/crédit), chaque palier
+// suivant est en dessous de ce taux. Prix RÉELLEMENT facturé ici
+// (amountCents) — le prix barré affiché côté site (solde.html) n'est que
+// visuel, calculé à partir de ce même taux de référence.
 const CREDIT_PACKAGES: Record<string, { amountCents: number; credits: number; label: string }> = {
-  "500": { amountCents: 500, credits: 500, label: "500 crédits" },
-  "1000": { amountCents: 1000, credits: 1000, label: "1000 crédits" },
-  "2000": { amountCents: 2000, credits: 2000, label: "2000 crédits" },
-  "5000": { amountCents: 5000, credits: 5000, label: "5000 crédits" },
+  "500": { amountCents: 349, credits: 500, label: "500 crédits" },
+  "1000": { amountCents: 599, credits: 1000, label: "1000 crédits" },
+  "2000": { amountCents: 1099, credits: 2000, label: "2000 crédits" },
+  "5000": { amountCents: 2499, credits: 5000, label: "5000 crédits" },
 };
 
 const SITE_ORIGIN = "https://serveuropen.github.io/Ferra-Izacki";

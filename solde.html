@@ -10,13 +10,23 @@
 <style>
   .credit-packs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:22px 0;}
   .credit-pack{
-    background:var(--bg-panel-2);border:1px solid var(--panel-edge);border-radius:14px;
+    position:relative;background:var(--bg-panel-2);border:1px solid var(--panel-edge);border-radius:14px;
     padding:22px 16px;text-align:center;cursor:pointer;transition:border-color .15s,transform .15s;
   }
   .credit-pack:hover{border-color:var(--copper-glow);transform:translateY(-2px);}
   .credit-pack:disabled{opacity:0.6;cursor:default;transform:none;}
   .credit-pack .amount{font-family:'Rajdhani',sans-serif;font-size:26px;font-weight:800;color:var(--copper-glow);}
   .credit-pack .price{color:var(--text-dim);font-size:13px;margin-top:4px;}
+  .credit-pack .price-old{text-decoration:line-through;opacity:0.55;margin-right:4px;}
+  /* Plus t'achètes, plus c'est rentable à l'unité (05/09/2026) — le badge
+     de réduction rend la dégressivité visible en un coup d'œil, calculée
+     par rapport au tarif de référence du plus petit palier (500 crédits). */
+  .pack-badge{
+    position:absolute;top:-9px;right:10px;background:linear-gradient(135deg,var(--gold),var(--copper-dark));
+    color:var(--bg-void);font-weight:800;font-size:10.5px;padding:3px 9px;border-radius:999px;
+    box-shadow:0 4px 10px rgba(242,164,90,0.3);
+  }
+  .pack-badge.best{background:linear-gradient(135deg,#6bd67f,#2f8f45);box-shadow:0 4px 10px rgba(107,214,127,0.3);}
   .solde-note{background:rgba(90,160,224,0.08);border:1px solid rgba(90,160,224,0.25);border-radius:10px;padding:12px 14px;font-size:12.5px;color:var(--text-dim);margin-top:10px;}
 </style>
 </head>
@@ -59,10 +69,25 @@
       <div id="soldeErr" class="form-error" style="display:none;"></div>
 
       <div class="credit-packs">
-        <button class="credit-pack" data-pack="500"><div class="amount">500</div><div class="price">5,00 €</div></button>
-        <button class="credit-pack" data-pack="1000"><div class="amount">1000</div><div class="price">10,00 €</div></button>
-        <button class="credit-pack" data-pack="2000"><div class="amount">2000</div><div class="price">20,00 €</div></button>
-        <button class="credit-pack" data-pack="5000"><div class="amount">5000</div><div class="price">50,00 €</div></button>
+        <button class="credit-pack" data-pack="500">
+          <div class="amount">500</div>
+          <div class="price">3,49 €</div>
+        </button>
+        <button class="credit-pack" data-pack="1000">
+          <span class="pack-badge">-14%</span>
+          <div class="amount">1000</div>
+          <div class="price"><span class="price-old">6,98 €</span> 5,99 €</div>
+        </button>
+        <button class="credit-pack" data-pack="2000">
+          <span class="pack-badge">-21%</span>
+          <div class="amount">2000</div>
+          <div class="price"><span class="price-old">13,96 €</span> 10,99 €</div>
+        </button>
+        <button class="credit-pack" data-pack="5000">
+          <span class="pack-badge best">-28%</span>
+          <div class="amount">5000</div>
+          <div class="price"><span class="price-old">34,90 €</span> 24,99 €</div>
+        </button>
       </div>
 
       <div class="solde-note">Paiement sécurisé par carte via Stripe. Tu seras redirigé vers une page de paiement, puis ramené ici une fois terminé — ton solde se met à jour dans le Launcher au prochain lancement.</div>
