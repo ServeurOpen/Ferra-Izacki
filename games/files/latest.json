@@ -1,10 +1,10 @@
 {
-  "version": "0.2.28",
-  "notes": "Parrainage : partage ton tag, ton filleul renseigne le \"Code de parrainage\" a son inscription, tu touches 20 credits quand il atteint le jour 3 de sa recompense quotidienne (plafonds anti-abus : 3 par appareil/IP, 5 par semaine).",
+  "version": "0.2.29",
+  "notes": "Ajout du 'Mot de passe oublie' sur l'ecran de connexion (il manquait).",
   "pub_date": "2026-09-05T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTCtuNG1PZGtKdUovcnRtamlRUnB2Tk9TUHBjODdvZXJ3Q3o5cFp1UGtZUlFmMW5wVlhYK1lTM1F1b3FJK3VkYnVwWkczM0crb3I5WWRsMzl5OHZqRGdvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NTQ4MDEyCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4yOF94NjQtc2V0dXAuZXhlCkRXdW9iT3RKdmpZT1BlelY4RWcyT2gzUk5GdTBHMll3RHBRVk1VdmdYWWRIQ3Nxdm45cmpvaU5FSEhXR2srN043RUNvK1JWVkpNL1F4Y25VNzRObUNRPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDhyUCtwTVVJUlJGUGFqMmg2ZEpUdXVzeVVHdURVcjI2R21USE1TVXgyM2ZhSXlmaEJ6Sm1VUjVEOVMrUTA1U1JFT0pOd0NyZzBPMmFZZFlIUEw5ZWd3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NTQ5MjcwCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4yOV94NjQtc2V0dXAuZXhlCkVOb2lSNjZucExGeWlSMDRtS2JneHZzU2lCdEtudmNkOE1hL2RxMkhGZTZ6OWtMbUliVWtYWWFONUJxbDIvaWpaV2xZWWdYMlN0VVlGZWdiSDFIQUNnPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
