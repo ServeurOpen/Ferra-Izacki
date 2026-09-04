@@ -100,6 +100,27 @@ Deno.serve(async (req: Request) => {
     perUser.set(s.user_id as string, entry);
   }
 
+  // ---- Détail des sessions par joueur (05/09/2026, demande explicite :
+  // "on voit le détail de ses dernières sessions, 1ere connexion 17 min, 2e
+  // 30 min etc.") — les sessions sont déjà chargées ci-dessus (sessionsRes),
+  // pas besoin d'un aller-retour réseau supplémentaire ni d'un endpoint
+  // séparé : on les regroupe par joueur et on les trie de la plus récente
+  // à la plus ancienne, tronquées aux 30 dernières pour ne pas alourdir la
+  // réponse sur un compte qui ouvrirait le Launcher très souvent. ----
+  const sessionsByUser = new Map<string, { startedAt: string; endedAt: string | null; durationSecs: number }[]>();
+  for (const s of sessions) {
+    const started = new Date(s.started_at as string).getTime();
+    const end = new Date((s.ended_at as string) || (s.last_heartbeat as string)).getTime();
+    const secs = Math.max(0, Math.round((end - started) / 1000));
+    const list = sessionsByUser.get(s.user_id as string) || [];
+    list.push({ startedAt: s.started_at as string, endedAt: (s.ended_at as string) || null, durationSecs: secs });
+    sessionsByUser.set(s.user_id as string, list);
+  }
+  for (const list of sessionsByUser.values()) {
+    list.sort((a, b) => (a.startedAt < b.startedAt ? 1 : -1));
+    list.length = Math.min(list.length, 30);
+  }
+
   const players = Array.from(usersById.entries()).map(([userId, u]: [string, any]) => {
     const profile: any = profilesById.get(userId) || {};
     const agg = perUser.get(userId) || { totalSecs: 0, lastSeen: null, sessionCount: 0 };
@@ -112,6 +133,7 @@ Deno.serve(async (req: Request) => {
       totalLauncherSecs: agg.totalSecs,
       sessionCount: agg.sessionCount,
       lastSeen: agg.lastSeen,
+      sessions: sessionsByUser.get(userId) || [],
     };
   }).sort((a, b) => b.totalLauncherSecs - a.totalLauncherSecs);
 
