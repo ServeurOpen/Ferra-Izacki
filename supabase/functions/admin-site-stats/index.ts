@@ -71,15 +71,26 @@ Deno.serve(async (req: Request) => {
 
   const admin = createClient(SUPABASE_URL, SERVICE_ROLE_KEY);
 
-  const [visitsRes, downloadsRes, usersRes] = await Promise.all([
+  // "En ligne maintenant" (05/09/2026, demande explicite : "le nombre de
+  // total de joueur connecté en simultanée") — basé sur les sessions
+  // Launcher dont le dernier battement de cœur (toutes les 60s tant que
+  // l'appli tourne, voir migration_13) date de moins de 3 minutes ET qui
+  // n'ont pas été fermées proprement. Une fenêtre de 3 minutes (pas 60s
+  // pile) absorbe un battement en retard sans compter quelqu'un comme
+  // hors-ligne trop vite ; au-delà, on considère l'appli fermée/plantée.
+  const onlineThreshold = new Date(Date.now() - 3 * 60_000).toISOString();
+
+  const [visitsRes, downloadsRes, usersRes, onlineRes] = await Promise.all([
     admin.from("site_visits").select("path, user_id, created_at"),
     admin.from("launcher_downloads").select("created_at"),
     admin.auth.admin.listUsers({ perPage: 1000 }),
+    admin.from("launcher_sessions").select("user_id").is("ended_at", null).gt("last_heartbeat", onlineThreshold),
   ]);
 
   const visits = visitsRes.data || [];
   const downloads = downloadsRes.data || [];
   const users = usersRes.data?.users || [];
+  const onlineNow = new Set((onlineRes.data || []).map((s: any) => s.user_id)).size;
 
   const todayKey = dayKey(new Date().toISOString());
   const yesterdayKey = dayKey(new Date(Date.now() - 86_400_000).toISOString());
@@ -139,6 +150,7 @@ Deno.serve(async (req: Request) => {
       accountsTotal: users.length,
       accountsToday,
       accountsYesterday,
+      onlineNow,
       players,
     }),
     { status: 200, headers: { ...CORS_HEADERS, "Content-Type": "application/json" } }
