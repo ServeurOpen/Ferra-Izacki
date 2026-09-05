@@ -250,6 +250,132 @@ function ferraLogVisit(session) {
   }
 }
 
+// ============================================================
+// Bannissement du SITE (05/09/2026, demande explicite : "le site peut ban
+// site et launcher, le launcher que launcher") — un ban de portée 'site'
+// ou 'both' bloque le site en plein écran, exactement comme le Launcher
+// (voir user_bans/admin_ban_user dans migration_22_ban_scope_realtime.sql).
+// Un ban 'launcher' seul ne doit JAMAIS bloquer le site.
+// Appelée depuis ferraRenderNavAuth/ferraRenderUserWidget (donc sur TOUTES
+// les pages qui affichent le menu ou le widget forum) — un seul endroit à
+// modifier pour couvrir tout le site.
+// ============================================================
+let ferraBanOverlayShown = false;
+async function ferraCheckBanAndBlock(session) {
+  if (!session || ferraBanOverlayShown) return;
+  try {
+    const { data } = await window.supabaseClient
+      .from('user_bans')
+      .select('reason, banned_until, scope')
+      .eq('user_id', session.user.id)
+      .maybeSingle();
+    if (!data) return;
+    if (data.scope !== 'site' && data.scope !== 'both') return;
+    if (data.banned_until && new Date(data.banned_until).getTime() <= Date.now()) return;
+    ferraBanOverlayShown = true;
+    ferraShowBanOverlay(data);
+  } catch (err) {
+    console.error('[FERRA] vérification de ban échouée :', err);
+  }
+}
+
+function ferraFormatBanCountdown(untilIso) {
+  const ms = new Date(untilIso).getTime() - Date.now();
+  if (ms <= 0) return '0s';
+  const totalSec = Math.floor(ms / 1000);
+  const days = Math.floor(totalSec / 86400);
+  const hours = Math.floor((totalSec % 86400) / 3600);
+  const mins = Math.floor((totalSec % 3600) / 60);
+  const secs = totalSec % 60;
+  const parts = [];
+  if (days > 0) parts.push(`${days}j`);
+  if (days > 0 || hours > 0) parts.push(`${hours}h`);
+  parts.push(`${mins}min`);
+  parts.push(`${secs}s`);
+  return parts.join(' ');
+}
+
+function ferraShowBanOverlay(ban) {
+  const overlay = document.createElement('div');
+  overlay.className = 'ferra-ban-overlay';
+  overlay.innerHTML = `
+    <div class="ferra-ban-card">
+      <div class="ferra-ban-icon">⛔</div>
+      <h1 class="ferra-ban-title">Compte suspendu</h1>
+      <div class="ferra-ban-reason-label">Raison :</div>
+      <div class="ferra-ban-reason"></div>
+      <div class="ferra-ban-countdown"></div>
+      <button class="ferra-ban-contest-btn" type="button">📩 Contester ce bannissement</button>
+      <div class="ferra-ban-contest-form" style="display:none;">
+        <textarea placeholder="Explique ta situation en quelques lignes…" maxlength="4000" rows="5"></textarea>
+        <div class="ferra-ban-contest-actions">
+          <button class="ferra-ban-contest-send" type="button">Envoyer à l'administrateur</button>
+        </div>
+        <div class="ferra-ban-contest-status"></div>
+      </div>
+    </div>
+  `;
+  overlay.querySelector('.ferra-ban-reason').textContent = ban.reason;
+  document.documentElement.appendChild(overlay);
+  document.body.style.overflow = 'hidden';
+
+  const countdownEl = overlay.querySelector('.ferra-ban-countdown');
+  if (ban.banned_until) {
+    const tick = () => {
+      const remaining = new Date(ban.banned_until).getTime() - Date.now();
+      if (remaining <= 0) { location.reload(); return; }
+      countdownEl.textContent = `⏳ Débloqué dans ${ferraFormatBanCountdown(ban.banned_until)}`;
+    };
+    tick();
+    setInterval(tick, 1000);
+  } else {
+    countdownEl.textContent = '🔒 Bannissement définitif';
+  }
+
+  overlay.querySelector('.ferra-ban-contest-btn').addEventListener('click', () => {
+    const form = overlay.querySelector('.ferra-ban-contest-form');
+    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+  });
+  overlay.querySelector('.ferra-ban-contest-send').addEventListener('click', async () => {
+    const messageInput = overlay.querySelector('.ferra-ban-contest-form textarea');
+    const statusEl = overlay.querySelector('.ferra-ban-contest-status');
+    const sendBtn = overlay.querySelector('.ferra-ban-contest-send');
+    const message = messageInput.value.trim();
+    if (!message) {
+      statusEl.textContent = "Écris un message avant d'envoyer.";
+      statusEl.className = 'ferra-ban-contest-status err';
+      return;
+    }
+    sendBtn.disabled = true;
+    statusEl.textContent = 'Envoi en cours…';
+    statusEl.className = 'ferra-ban-contest-status';
+    try {
+      const { data: { session: authSession } } = await window.supabaseClient.auth.getSession();
+      const token = authSession?.access_token;
+      const res = await fetch(`${window.FERRA_CONFIG.SUPABASE_URL}/functions/v1/contest-ban`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message }),
+      });
+      const body = await res.json().catch(() => ({}));
+      if (res.ok) {
+        statusEl.textContent = "✅ Message envoyé à l'administrateur.";
+        statusEl.className = 'ferra-ban-contest-status ok';
+        messageInput.value = '';
+      } else {
+        statusEl.textContent = body.error === 'too_soon'
+          ? '❌ Tu as déjà contesté récemment — réessaie plus tard.'
+          : "❌ Échec de l'envoi, réessaie plus tard.";
+        statusEl.className = 'ferra-ban-contest-status err';
+      }
+    } catch (err) {
+      statusEl.textContent = "❌ Échec de l'envoi, réessaie plus tard.";
+      statusEl.className = 'ferra-ban-contest-status err';
+    }
+    sendBtn.disabled = false;
+  });
+}
+
 // Widget compact "Connexion / Inscription" affiché en haut à droite du menu
 // sur TOUTES les pages du site (voir .nav-auth dans style.css) — même
 // compte que le forum et, à terme, le Launcher : plus besoin d'aller sur le
@@ -262,6 +388,7 @@ async function ferraRenderNavAuth(elId, prefix) {
   const session = await ferraGetSession();
   ferraApplyAdminModeStyling(session);
   ferraLogVisit(session);
+  ferraCheckBanAndBlock(session);
   if (session) {
     const adminBadge = ferraIsAdminModeActive(session) ? `<span class="admin-mode-badge">🛡️ Admin</span>` : '';
     // Lien Panel (05/09/2026) — visible UNIQUEMENT en mode admin actif,
@@ -295,6 +422,7 @@ async function ferraRenderUserWidget(elId) {
   if (!el) return null;
   const session = await ferraGetSession();
   ferraApplyAdminModeStyling(session);
+  ferraCheckBanAndBlock(session);
   if (session) {
     el.innerHTML = `
       <span class="forum-user">👤 ${ferraT('forum.connectedAs', 'Connecté en tant que')} <b>${ferraEscape(session.profile?.username || ferraT('nav.defaultPlayer', 'Joueur'))}</b></span>

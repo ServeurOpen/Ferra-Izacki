@@ -465,3 +465,51 @@ section{padding:64px 0;}
 .faq-answer{padding:4px 20px 18px;color:var(--text-dim);font-size:13.5px;line-height:1.75;}
 .faq-answer b{color:var(--text);}
 .faq-answer code{background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;font-size:12.5px;}
+
+/* ============================================================
+   Écran de bannissement DU SITE (05/09/2026, demande explicite) — même
+   esprit que l'écran plein écran du Launcher, injecté en JS par
+   ferraShowBanOverlay (voir assets/js/auth.js), au-dessus de tout.
+   ============================================================ */
+.ferra-ban-overlay{
+  position:fixed;inset:0;z-index:9000;background:rgba(8,6,10,0.94);backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;padding:24px;
+  animation:ferraFadeIn .25s ease both;
+}
+@keyframes ferraFadeIn{from{opacity:0;}to{opacity:1;}}
+.ferra-ban-card{
+  width:100%;max-width:480px;background:linear-gradient(180deg,var(--bg-panel),var(--bg-panel-2));
+  border:1px solid rgba(224,102,95,0.4);border-radius:18px;padding:34px 30px;text-align:center;
+  box-shadow:0 30px 80px rgba(0,0,0,0.6),0 0 0 1px rgba(224,102,95,0.12) inset;
+}
+.ferra-ban-icon{font-size:44px;margin-bottom:10px;filter:drop-shadow(0 0 14px rgba(224,102,95,0.6));}
+.ferra-ban-title{margin:0 0 18px;font-size:22px;color:var(--danger);letter-spacing:0.3px;}
+.ferra-ban-reason-label{font-size:11px;text-transform:uppercase;letter-spacing:0.6px;color:var(--text-dim);margin-bottom:6px;}
+.ferra-ban-reason{
+  font-size:14.5px;font-weight:600;background:rgba(224,102,95,0.08);border:1px solid rgba(224,102,95,0.25);
+  border-radius:10px;padding:12px 14px;margin-bottom:18px;line-height:1.5;
+}
+.ferra-ban-countdown{
+  font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:800;color:var(--copper-glow);
+  margin-bottom:22px;letter-spacing:0.5px;
+}
+.ferra-ban-contest-btn{
+  width:100%;padding:12px;border-radius:10px;border:1px solid var(--panel-edge);
+  background:rgba(255,255,255,0.05);color:var(--text);font-weight:700;font-size:13px;cursor:pointer;
+  transition:border-color .15s,background .15s;
+}
+.ferra-ban-contest-btn:hover{border-color:var(--copper-glow);background:rgba(242,164,90,0.08);}
+.ferra-ban-contest-form{margin-top:16px;text-align:left;animation:ferraFadeIn .2s ease both;}
+.ferra-ban-contest-form textarea{
+  width:100%;resize:vertical;background:var(--bg-panel-2);border:1px solid var(--panel-edge);border-radius:10px;
+  color:var(--text);padding:10px 12px;font-size:13px;font-family:inherit;box-sizing:border-box;
+}
+.ferra-ban-contest-actions{margin-top:14px;}
+.ferra-ban-contest-send{
+  width:100%;padding:11px;border-radius:10px;border:none;cursor:pointer;font-weight:700;font-size:13px;
+  color:var(--bg-void);background:linear-gradient(180deg,var(--gold),var(--copper-dark));
+}
+.ferra-ban-contest-send:disabled{opacity:0.6;cursor:default;}
+.ferra-ban-contest-status{margin-top:10px;font-size:12px;text-align:center;color:var(--text-dim);}
+.ferra-ban-contest-status.ok{color:var(--valid);}
+.ferra-ban-contest-status.err{color:var(--danger);}
