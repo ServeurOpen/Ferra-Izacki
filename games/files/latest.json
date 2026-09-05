@@ -1,10 +1,10 @@
 {
-  "version": "0.2.36",
-  "notes": "Nouveau : marketplace 'Sortir mon jeu' (Phase 1) - bouton dans la Boutique pour soumettre ton propre jeu, modération admin, notifications de résultat.",
-  "pub_date": "2026-09-05T18:00:00Z",
+  "version": "0.2.37",
+  "notes": "Correctif : le fichier de jeu soumis ('Sortir mon jeu') garde maintenant sa vraie extension (.exe/.zip) au lieu de celle du type sélectionné dans la liste.",
+  "pub_date": "2026-09-05T19:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTCtCT3NrMG01bTlWU2VqRzFoanl5L1J2WmpEbGZkd3hTcGZVaFRhN3BxcWxNWnY2d252SW13SnFoeTZxbUNSQnVVZXpzeE9ycWI1eGpnME9zUlFGOWdVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NTkzNzQzCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4zNl94NjQtc2V0dXAuZXhlCitWaDc1Y25helBMSmJ5OEZPOTZWY20zWi9uc1hyMGhuVHBPbU9nTnM5bTlYS010VFFWTVlDV01OWXJvVXBzV291OEtDQk1USWNsSUdlSlBHNHNkSEJRPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTHhhQmlCT00rdDBmTUtTRVRBZk1hd0lFc096c2xQdnR1c2I3QlorMlM2MW1FblFjWS9ZRytvSzlNUTAxMTlFUnU4ZDkwWFRWdHJuT3N1RGNaQ3YxWlFBPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NTk0ODc0CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4zN194NjQtc2V0dXAuZXhlCncxQnN4MmJQdDc5UDhXMk1LMGwweFJxZ2J2a3ZPT2ttNjdveGFvNmZBY2ZHdnRkWHkvSG9aQW1GejdqMEVoQzdaQ3gxVmNFTTc2ZW1obndLWFZDb0JnPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
