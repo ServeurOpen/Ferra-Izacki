@@ -1,10 +1,10 @@
 {
-  "version": "0.2.41",
-  "notes": "Nouveau : Portail des créateurs (onglet 🎨) - éligibilité au retrait, jeux publiés + crédits gagnés, demande de retrait PayPal. Achat de jeux du marketplace en crédits directement dans la Boutique.",
-  "pub_date": "2026-09-05T23:00:00Z",
+  "version": "0.2.42",
+  "notes": "Les jeux .exe du marketplace se téléchargent et se lancent maintenant directement dans le Launcher (comme les jeux officiels), avec suivi du temps de jeu dans le Portail créateurs.",
+  "pub_date": "2026-09-06T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTCt3UE14N1RXeGlzZFJaYXJhVUpjcnRGTXJoWlNiRGtadkhuR1NtK3NpdkpEZnptWDBsS0lSd0FDcGFCZXNxaDJVSVdEeGlKdnJZS3ZhZjJ1eHo4T3c4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NjA1MDc3CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi40MV94NjQtc2V0dXAuZXhlCnNZNTRIL1hsSTVEUVBwV2x6V1RRS3FTendMS2FkenZNMjh4WWRKbFFVYVN2Y1l0QUFhUExmU3RUV3VLaTFXL0gvdEVtV2w1WndoalliNHdqaEhpbEFBPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDM0Sk9WQW9NNG5hY0xBdHhQQ0lUbTd1ZWpzTDZreGE0NmU4bFRVWnRRMURhNkpURmNXTjRGSUVQdXlrM3kxRzZSYWFPbzdJaHE4RmxKSjZVdnl2alFFPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NjQyNzkwCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi40Ml94NjQtc2V0dXAuZXhlCisvd21VRjR2eEk4UlE4N0RGUFBSMXE2QktTMExIbHJvY3I0eGlxK1B4MHpGbmJxT2xTV2RaWlN4ZXJzK2YxNVJuK05jekhpYS8ySitRdVFzKzByOEN3PT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
