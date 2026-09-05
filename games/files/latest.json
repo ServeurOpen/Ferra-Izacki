@@ -1,10 +1,10 @@
 {
-  "version": "0.2.33",
-  "notes": "Dons de credits/ban instantanes (temps reel, sans redemarrer), portee de ban launcher-only, barre de recherche joueurs dans le panel admin.",
-  "pub_date": "2026-09-05T14:00:00Z",
+  "version": "0.2.34",
+  "notes": "Correctif : le panel admin affiche maintenant la vraie erreur au lieu de 'Aucun joueur banni' quand quelque chose se passe mal côté serveur.",
+  "pub_date": "2026-09-05T16:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDcvelZONGRtN01aeWdXd1NySHhzNnFSa25LbTJVQ0dTR29INWtpZXlCWTd1a1BPZTV6UDNFUm5sU2NCcHkvRFhVYTZ0aW5rRTU0WTVGcC9saWZ1ZlFNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NTg5NjkxCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4zM194NjQtc2V0dXAuZXhlCk54eCt2Z01yWkxXOTVJMDNWUERVZjhtZGVTV3dLMW03TnJjeEtzRVM0aHIxREhsNERzKzFDNU5Od3hldXBKU21sSlhmdW1TUzVGdzN4M2MxOG9GWkRBPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDg2MkRHWERDVGIxdTI4RFZOWFRLYkFxOEcxMlRRVzlVS2ROcVVNaFBJb3JVelgrY0tkYUppdkpoTWJJU1hrYXZ6dk4xVGhsNkRndkJkQUJkOS9mTVEwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NTkxMzQ0CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4zNF94NjQtc2V0dXAuZXhlCmNEUTRzc09VanVuSmZhZDF4d2VqREtIRlpCMkF6RzBNaTFPaTNoRVpDbFNlcVZ0VDFuVldQTlNpelplTzYyL1NvNExYN3ZoZXZTQlIvY0xYdlpISEFRPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
