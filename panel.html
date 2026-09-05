@@ -94,6 +94,11 @@
   }
   .panel-unban-btn:hover{filter:brightness(1.2);}
   .panel-unban-btn:disabled{opacity:0.55;cursor:default;}
+  .panel-search-input{
+    width:100%;box-sizing:border-box;background:var(--bg-panel-2);border:1px solid var(--panel-edge);
+    border-radius:9px;color:var(--text);padding:9px 12px;font-size:13px;font-family:inherit;margin-bottom:12px;
+  }
+  .panel-search-input:focus{outline:none;border-color:var(--copper-glow);}
 </style>
 </head>
 <body>
@@ -154,9 +159,14 @@
       </div>
 
       <div class="panel-action-sub">
-        <h4>⛔ Bannir un joueur</h4>
+        <h4>⛔ Bannir un joueur <span class="panel-action-hint">— depuis le site, tu peux choisir la portée</span></h4>
         <div class="panel-action-row">
           <select id="actionBanPlayerSelect"></select>
+          <select id="actionBanScope" style="max-width:160px;">
+            <option value="both" selected>Site + Launcher</option>
+            <option value="site">Site seulement</option>
+            <option value="launcher">Launcher seulement</option>
+          </select>
           <select id="actionBanDuration" style="max-width:150px;">
             <option value="1">1 heure</option>
             <option value="24" selected>24 heures</option>
@@ -174,8 +184,8 @@
         <h4>🚫 Joueurs actuellement bannis</h4>
         <div class="panel-table-wrap">
           <table class="panel-table">
-            <thead><tr><th>Email</th><th>Raison</th><th>Fin</th><th></th></tr></thead>
-            <tbody id="actionBansBody"><tr><td colspan="4" style="color:var(--text-dim);">Chargement…</td></tr></tbody>
+            <thead><tr><th>Email</th><th>Raison</th><th>Portée</th><th>Fin</th><th></th></tr></thead>
+            <tbody id="actionBansBody"><tr><td colspan="5" style="color:var(--text-dim);">Chargement…</td></tr></tbody>
           </table>
         </div>
       </div>
@@ -198,6 +208,7 @@
     <div class="panel-section panel-anim">
       <h3>👥 Comptes joueurs</h3>
       <p class="sub">Un lien de réinitialisation envoie exactement le même email sécurisé que "mot de passe oublié" — le mot de passe réel n'est jamais visible ni récupérable, même ici.</p>
+      <input type="text" id="panelPlayersSearch" class="panel-search-input" placeholder="🔎 Rechercher un joueur (email)…">
       <div class="panel-table-wrap">
         <table class="panel-table">
           <thead><tr><th>Email</th><th>Créé le</th><th>Dernière connexion</th><th></th></tr></thead>
@@ -346,6 +357,30 @@
     return new Date(iso).toLocaleString('fr-FR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
   }
 
+  // Recherche dans la liste des comptes (05/09/2026, demande explicite :
+  // "si ya beaucoup de joueur ça peut être long") — filtrage client-side
+  // par email, la liste complète est déjà chargée d'un coup par
+  // admin-site-stats, pas besoin d'un aller-retour serveur par frappe.
+  let lastPanelPlayers = [];
+  function renderPanelPlayersBody(query) {
+    const q = (query || '').trim().toLowerCase();
+    const filtered = q ? lastPanelPlayers.filter((p) => p.email.toLowerCase().includes(q)) : lastPanelPlayers;
+    const body = document.getElementById('panelPlayersBody');
+    if (filtered.length === 0) {
+      body.innerHTML = `<tr><td colspan="4" style="color:var(--text-dim);">Aucun joueur ne correspond à "${query}".</td></tr>`;
+      return;
+    }
+    body.innerHTML = filtered.map((p) => `
+      <tr>
+        <td>${p.email}</td>
+        <td>${formatDate(p.createdAt)}</td>
+        <td>${formatDateTime(p.lastSignInAt)}</td>
+        <td><button class="panel-reset-btn" data-email="${p.email}">📧 Lien de réinitialisation</button></td>
+      </tr>
+    `).join('');
+  }
+  document.getElementById('panelPlayersSearch').addEventListener('input', (e) => renderPanelPlayersBody(e.target.value));
+
   async function loadPanel() {
     const kpiGrid = document.getElementById('kpiGrid');
     kpiGrid.innerHTML = `<div class="kpi-card"><div class="kpi-num">…</div><div class="kpi-lbl">Chargement</div></div>`;
@@ -408,14 +443,8 @@
     drawBarChart('visitsChart', stats.visitsByDay, '#f2a45a', '#b5691f');
     drawBarChart('downloadsChart', stats.downloadsByDay, '#5aa0e0', '#2e5f8a');
 
-    document.getElementById('panelPlayersBody').innerHTML = stats.players.map((p) => `
-      <tr>
-        <td>${p.email}</td>
-        <td>${formatDate(p.createdAt)}</td>
-        <td>${formatDateTime(p.lastSignInAt)}</td>
-        <td><button class="panel-reset-btn" data-email="${p.email}">📧 Lien de réinitialisation</button></td>
-      </tr>
-    `).join('');
+    lastPanelPlayers = stats.players;
+    renderPanelPlayersBody(document.getElementById('panelPlayersSearch').value);
 
     const playerOptions = stats.players.map((p) => `<option value="${p.userId}">${p.email}</option>`).join('');
     document.getElementById('actionGrantPlayerSelect').innerHTML = playerOptions;
@@ -430,14 +459,24 @@
   async function loadActionBans() {
     const body = document.getElementById('actionBansBody');
     const { data, error } = await window.supabaseClient.rpc('admin_list_bans');
-    if (error || !data || data.length === 0) {
-      body.innerHTML = `<tr><td colspan="4" style="color:var(--text-dim);">Aucun joueur banni.</td></tr>`;
+    // 05/09/2026 : avant, une vraie erreur RPC (permission, colonne
+    // manquante, etc.) était affichée comme "Aucun joueur banni", ce qui
+    // rendait le bug invisible — on distingue maintenant clairement une
+    // erreur réelle d'une liste vide.
+    if (error) {
+      body.innerHTML = `<tr><td colspan="5" style="color:var(--danger);">❌ Erreur : ${error.message || 'inconnue'}</td></tr>`;
+      console.error('[FERRA] admin_list_bans a échoué :', error);
+      return;
+    }
+    if (!data || data.length === 0) {
+      body.innerHTML = `<tr><td colspan="5" style="color:var(--text-dim);">Aucun joueur banni.</td></tr>`;
       return;
     }
     body.innerHTML = data.map((b) => `
       <tr>
         <td>${b.email}</td>
         <td>${b.reason}</td>
+        <td>${scopeLabel(b.scope)}</td>
         <td>${b.banned_until ? formatDateTime(b.banned_until) : 'Définitif'}</td>
         <td><button class="panel-unban-btn" data-user-id="${b.user_id}">Débannir</button></td>
       </tr>
@@ -477,8 +516,13 @@
       : `❌ Échec : ${(data && data.reason) || (error && error.message) || 'erreur'}`;
   });
 
+  function scopeLabel(scope) {
+    return { launcher: 'Launcher', site: 'Site', both: 'Site + Launcher' }[scope] || scope;
+  }
+
   document.getElementById('actionBanBtn').addEventListener('click', async () => {
     const select = document.getElementById('actionBanPlayerSelect');
+    const scopeSelect = document.getElementById('actionBanScope');
     const durationSelect = document.getElementById('actionBanDuration');
     const reasonInput = document.getElementById('actionBanReason');
     const statusEl = document.getElementById('actionBanStatus');
@@ -488,10 +532,10 @@
     const durationHours = durationSelect.value === 'permanent' ? null : parseInt(durationSelect.value, 10);
     const label = select.options[select.selectedIndex]?.textContent || 'ce joueur';
     const durationLabel = durationHours === null ? 'définitivement' : `pour ${durationSelect.options[durationSelect.selectedIndex].textContent}`;
-    if (!confirm(`Bannir ${label} ${durationLabel} ?`)) return;
+    if (!confirm(`Bannir ${label} ${durationLabel} (portée : ${scopeLabel(scopeSelect.value)}) ?`)) return;
     statusEl.textContent = 'Envoi en cours…';
     const { data, error } = await window.supabaseClient.rpc('admin_ban_user', {
-      p_target_user_id: select.value, p_reason: reason, p_duration_hours: durationHours,
+      p_target_user_id: select.value, p_reason: reason, p_duration_hours: durationHours, p_scope: scopeSelect.value,
     });
     statusEl.textContent = (!error && data && data.ok) ? '✅ Joueur banni.' : `❌ Échec : ${(data && data.reason) || (error && error.message) || 'erreur'}`;
     if (!error && data && data.ok) { reasonInput.value = ''; loadActionBans(); }
