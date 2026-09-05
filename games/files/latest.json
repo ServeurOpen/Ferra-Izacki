@@ -1,10 +1,10 @@
 {
-  "version": "0.2.49",
-  "notes": "Nouveau : onglet Transactions dans les paramètres (historique crédit gagné/débité), jeux du marketplace achetés visibles dans Mes jeux avec leur fiche complète, minimum 3 captures d'écran exigées pour publier un jeu.",
-  "pub_date": "2026-09-06T20:00:00Z",
+  "version": "0.2.50",
+  "notes": "Nouveau : la fiche d'un jeu affiche désormais \"Fait par : Ferra\" (jeux officiels) ou \"Fait par : (pseudo du vendeur)\" (jeux du marketplace) au-dessus du bouton Jouer/Acheter.",
+  "pub_date": "2026-09-06T21:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDg3eEZMUGtoOEhlNEhlVnN1SUhCREFrUlNFdHBLanZyYmtxQzFuemU0ckVYTTBhK1hsZk96bkVFc2NlSXltMk5MajlZZ25VamJ3UVFqMXNaZ2JLS0FjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NjQ3MzIxCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi40OV94NjQtc2V0dXAuZXhlCnN2YkdLZWZQeGhNVm1BQjd3NHd3aDJUdjUxSVlDWWNoMThqNTUxWTF6RzJpVlN2RnFQVGwrVmMwR2JsSDU4ZHQwd0RBS1dGbkdnOStpUWt5NUdEMEJRPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDZLazhlZThCWFkzVXhEamRGdGJRN1UwdDBIWFNNNkM0dlFqTkN1YmhWbUR4S1k2Tnl6UmRXMDZXYkxJUElRbGVmS3BiL09BT3l4K3Y0S1VaSHgzSVE4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NjQ4MzA2CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi41MF94NjQtc2V0dXAuZXhlCnFraFdIOGJ0d1l2UmdITHRLVUlEa1VjZ1dRTlRlMCtiUE9wVnNNNmgrWGEvN05kYTlXU1pOdHJRZFB0WWxiTnZUMCswVnMyeDNndERhd2dGZmlBd0F3PT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
