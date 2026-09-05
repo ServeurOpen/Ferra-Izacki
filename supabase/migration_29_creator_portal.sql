@@ -119,8 +119,11 @@ create table if not exists public.platform_finance (
   total_payout_cents bigint not null default 0
 );
 insert into public.platform_finance (id) values (true) on conflict (id) do nothing;
--- Aucune policy RLS "authenticated" : lu/écrit uniquement via des
--- fonctions security definer (admin) ou la clé de service (webhook Stripe).
+alter table public.platform_finance enable row level security;
+-- Aucune policy pour "authenticated"/"anon" (RLS activé sans policy =
+-- accès refusé à tout le monde côté PostgREST) : lu/écrit UNIQUEMENT via
+-- des fonctions security definer (admin) ou la clé de service (webhook
+-- Stripe), qui contournent RLS par nature — jamais lu/écrit en direct.
 
 -- credit_stripe_topup (migration_20) recrédité pour aussi alimenter le
 -- compteur "argent réellement entré" — sans cette étape, le garde-fou de
