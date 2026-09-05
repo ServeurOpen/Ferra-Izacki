@@ -80,17 +80,22 @@ Deno.serve(async (req: Request) => {
   // hors-ligne trop vite ; au-delà, on considère l'appli fermée/plantée.
   const onlineThreshold = new Date(Date.now() - 3 * 60_000).toISOString();
 
-  const [visitsRes, downloadsRes, usersRes, onlineRes] = await Promise.all([
+  const [visitsRes, downloadsRes, usersRes, onlineRes, profilesRes] = await Promise.all([
     admin.from("site_visits").select("path, user_id, created_at"),
     admin.from("launcher_downloads").select("created_at"),
     admin.auth.admin.listUsers({ perPage: 1000 }),
     admin.from("launcher_sessions").select("user_id").is("ended_at", null).gt("last_heartbeat", onlineThreshold),
+    // Pseudo de chaque joueur (05/09/2026, demande explicite : "je vois le
+    // mail mais aussi le nom du joueur qui se compte aussi dans la
+    // recherche") — auth.users n'a pas le pseudo, il vit dans profiles.
+    admin.from("profiles").select("id, username"),
   ]);
 
   const visits = visitsRes.data || [];
   const downloads = downloadsRes.data || [];
   const users = usersRes.data?.users || [];
   const onlineNow = new Set((onlineRes.data || []).map((s: any) => s.user_id)).size;
+  const usernameById = new Map((profilesRes.data || []).map((p: any) => [p.id, p.username as string]));
 
   const todayKey = dayKey(new Date().toISOString());
   const yesterdayKey = dayKey(new Date(Date.now() - 86_400_000).toISOString());
@@ -130,6 +135,7 @@ Deno.serve(async (req: Request) => {
     .map((u: any) => ({
       userId: u.id,
       email: u.email || "",
+      username: usernameById.get(u.id) || "",
       createdAt: u.created_at || null,
       lastSignInAt: u.last_sign_in_at || null,
     }))

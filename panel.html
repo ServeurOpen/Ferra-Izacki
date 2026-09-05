@@ -208,10 +208,10 @@
     <div class="panel-section panel-anim">
       <h3>👥 Comptes joueurs</h3>
       <p class="sub">Un lien de réinitialisation envoie exactement le même email sécurisé que "mot de passe oublié" — le mot de passe réel n'est jamais visible ni récupérable, même ici.</p>
-      <input type="text" id="panelPlayersSearch" class="panel-search-input" placeholder="🔎 Rechercher un joueur (email)…">
+      <input type="text" id="panelPlayersSearch" class="panel-search-input" placeholder="🔎 Rechercher un joueur (pseudo ou email)…">
       <div class="panel-table-wrap">
         <table class="panel-table">
-          <thead><tr><th>Email</th><th>Créé le</th><th>Dernière connexion</th><th></th></tr></thead>
+          <thead><tr><th>Pseudo</th><th>Email</th><th>Créé le</th><th>Dernière connexion</th><th></th></tr></thead>
           <tbody id="panelPlayersBody"></tbody>
         </table>
       </div>
@@ -364,14 +364,17 @@
   let lastPanelPlayers = [];
   function renderPanelPlayersBody(query) {
     const q = (query || '').trim().toLowerCase();
-    const filtered = q ? lastPanelPlayers.filter((p) => p.email.toLowerCase().includes(q)) : lastPanelPlayers;
+    const filtered = q
+      ? lastPanelPlayers.filter((p) => p.email.toLowerCase().includes(q) || (p.username || '').toLowerCase().includes(q))
+      : lastPanelPlayers;
     const body = document.getElementById('panelPlayersBody');
     if (filtered.length === 0) {
-      body.innerHTML = `<tr><td colspan="4" style="color:var(--text-dim);">Aucun joueur ne correspond à "${query}".</td></tr>`;
+      body.innerHTML = `<tr><td colspan="5" style="color:var(--text-dim);">Aucun joueur ne correspond à "${query}".</td></tr>`;
       return;
     }
     body.innerHTML = filtered.map((p) => `
       <tr>
+        <td>${p.username || '—'}</td>
         <td>${p.email}</td>
         <td>${formatDate(p.createdAt)}</td>
         <td>${formatDateTime(p.lastSignInAt)}</td>
@@ -446,7 +449,7 @@
     lastPanelPlayers = stats.players;
     renderPanelPlayersBody(document.getElementById('panelPlayersSearch').value);
 
-    const playerOptions = stats.players.map((p) => `<option value="${p.userId}">${p.email}</option>`).join('');
+    const playerOptions = stats.players.map((p) => `<option value="${p.userId}">${p.username ? p.username + ' — ' : ''}${p.email}</option>`).join('');
     document.getElementById('actionGrantPlayerSelect').innerHTML = playerOptions;
     document.getElementById('actionBanPlayerSelect').innerHTML = playerOptions;
 
