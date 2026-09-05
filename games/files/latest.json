@@ -1,10 +1,10 @@
 {
-  "version": "0.2.35",
-  "notes": "Boutique : le bouton 'Installer' ouvre maintenant directement la fiche du jeu au lieu d'une simple phrase.",
-  "pub_date": "2026-09-05T17:00:00Z",
+  "version": "0.2.36",
+  "notes": "Nouveau : marketplace 'Sortir mon jeu' (Phase 1) - bouton dans la Boutique pour soumettre ton propre jeu, modération admin, notifications de résultat.",
+  "pub_date": "2026-09-05T18:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTHlRcWxENkRxRmgzamZvdUhoMmpNdmtjRlJDQWN2RldjUFNkWDJoNEJuMjgyQkVPc1dTbThXNHFpZ2d1NXhPaCt4UXVVaFdEa2tPbm9GM1BBaGZqUlFrPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NTkyMzY5CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4zNV94NjQtc2V0dXAuZXhlCkVqd1V5VXQzZEhTR0ZSOW9JV1pPTWhvMTU5ZFZaZmcyVUdTRjJTckcxWTU4SzI3ZVc4N05SQ2dqdFY2RU9tSHQzaFBOTDBDbEhON2hSWldHYjRHcUJnPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTCtCT3NrMG01bTlWU2VqRzFoanl5L1J2WmpEbGZkd3hTcGZVaFRhN3BxcWxNWnY2d252SW13SnFoeTZxbUNSQnVVZXpzeE9ycWI1eGpnME9zUlFGOWdVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NTkzNzQzCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4zNl94NjQtc2V0dXAuZXhlCitWaDc1Y25helBMSmJ5OEZPOTZWY20zWi9uc1hyMGhuVHBPbU9nTnM5bTlYS010VFFWTVlDV01OWXJvVXBzV291OEtDQk1USWNsSUdlSlBHNHNkSEJRPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
