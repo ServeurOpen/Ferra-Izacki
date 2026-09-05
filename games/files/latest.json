@@ -1,10 +1,10 @@
 {
-  "version": "0.2.47",
-  "notes": "Nouveau : système de remboursement complet - bouton 'Demander un remboursement' sur les jeux achetés, panel admin dédié (Launcher + site).",
-  "pub_date": "2026-09-06T05:00:00Z",
+  "version": "0.2.48",
+  "notes": "Nouveau : sélecteur de profils façon Netflix (change de compte sans ressaisir ton mot de passe) + liste des jeux du marketplace mise à jour en temps réel.",
+  "pub_date": "2026-09-06T06:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTHdTaWtuOHlhT1AvQmh2cEpOOUFRQ1JkazB2eEZzT01mUWdPZXU2c0k0bnNFWWdMNDVobFJvT1luc2NTREZYWFRmMjhhWFVXR0FvUG1Nc1A5MnJUR1FnPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NjQ1MzM4CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi40N194NjQtc2V0dXAuZXhlClVaajlFWXFCOW4vTkE3SDd4WW9UN1pGd1hyd3dxZFU2STFUNnNzTTlxSzRWZHVGTjlneVNaNVJ3QjB4NzVmcUtmVTRSOVdmNjc0M09KbEs3Z1dBT0JBPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDJLVWE5K1lSQ1FtNGFVaTZ6NFVIVjBpenpDY2FRMDE4V3ZUdHNWaW5RcW0vSEovSmYwNlRzTjBnT0JiTTNPNS9zVUhpTjRUTk5zaFRwdUFFN3VRMEFjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NjQ2MTgzCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi40OF94NjQtc2V0dXAuZXhlCmphMms0Um8xN2xPMHZBTWF0eE11Q3d5SGQrQW5iQTRueis5K1pQQ3A1cFEwWWFtajlLVGh0OVdzRXhURkk3THNMVkplUXVVenY1TGdYT2RYZUoxY0JnPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
