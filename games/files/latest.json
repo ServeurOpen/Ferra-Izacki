@@ -1,10 +1,10 @@
 {
-  "version": "0.2.45",
-  "notes": "Nouveau : fiche plein écran pour les jeux du marketplace (clic sur une carte 'Jeux des joueurs'), comme les jeux officiels — captures, description, achat/installation/lecture.",
-  "pub_date": "2026-09-06T03:00:00Z",
+  "version": "0.2.46",
+  "notes": "Récompense quotidienne rééquilibrée : 6 crédits/jour, 20 le jour 7 (~2 mois pour gagner un jeu à 500 crédits gratuitement).",
+  "pub_date": "2026-09-06T04:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTCtkV21yQ3BYREwremloSEs3Wm4wYnMvNjArNGl0aHExd0tDbEd6MlZ5YU9QMC96d2ROL0VDdzdaRlhtdWltYlJ3dlh1U2xHQmhvSVB5aWFBV2F5N0F3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NjQzOTkwCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi40NV94NjQtc2V0dXAuZXhlCm9QZ0h3RGswZWJycVJCNWNvOU91ZFNwbWh5Tk1DRkRPZURLRHlqMVJFbVVrWjNyb1licVY1bXJ3UFhielAxb1l1bXBkQUJMMTUvZlN2Y3FHVzlhUkFnPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTHpGSEdvVG1OU3MxbjhvbHlWSkNWMThRc2xOaXAvWXJQdVFDSEZXNEpqOUlSSkloM1AvVU1hWGU1QlJQeUNFMDEwUTdEZlJNMzV2ODFDNi9veXZZL3dVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NjQ0NDAzCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi40Nl94NjQtc2V0dXAuZXhlCklCVjY1K1lCNTIvNXc5MTgyNjVrY3JCOFhVd2FSZitZbTMyQk9kSVBHaDI2dnQ5NEFLRXFUZk5KcjZmQnNnZE04WDRqNzA3TVVhL21RNkV5RWJBTUNRPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
