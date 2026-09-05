@@ -15,6 +15,16 @@
 -- À exécuter UNE FOIS dans Supabase (remplace tout, sans risque).
 -- ============================================================
 
+-- Supabase exécute tout le script collé dans UNE SEULE transaction : la
+-- toute première tentative de migration_22 a échoué en cours de route, ce
+-- qui a annulé (rollback) TOUT ce qui précédait dans ce même script — y
+-- compris cet ajout de colonne, jamais réellement resté en base (voir
+-- l'erreur "column scope of relation user_bans does not exist" du
+-- 05/09/2026). Remis ici, "if not exists" le rend sans risque à rejouer.
+alter table public.user_bans add column if not exists scope text not null default 'launcher';
+alter table public.user_bans drop constraint if exists user_bans_scope_check;
+alter table public.user_bans add constraint user_bans_scope_check check (scope in ('launcher', 'site', 'both'));
+
 do $$
 declare
   r record;
@@ -177,5 +187,22 @@ begin
 end;
 $$;
 grant execute on function public.admin_list_bans() to authenticated;
+
+-- ---- Realtime (probablement aussi annulé par le même rollback — protégé
+-- ici par un bloc exception pour ne JAMAIS faire échouer tout le script si
+-- c'est déjà en place, ex. "supabase_realtime" en FOR ALL TABLES). ----
+do $$
+begin
+  begin
+    alter publication supabase_realtime add table public.user_bans;
+  exception when others then
+    raise notice 'user_bans déjà dans la publication (ou publication FOR ALL TABLES) : %', sqlerrm;
+  end;
+  begin
+    alter publication supabase_realtime add table public.credit_gift_notifications;
+  exception when others then
+    raise notice 'credit_gift_notifications déjà dans la publication (ou publication FOR ALL TABLES) : %', sqlerrm;
+  end;
+end $$;
 
 NOTIFY pgrst, 'reload schema';
