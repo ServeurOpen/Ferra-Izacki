@@ -208,6 +208,16 @@
         <h4>🎮 Jeux en attente de modération <span class="panel-action-hint">— "Sortir mon jeu"</span></h4>
         <div id="adminPendingGamesList"><p style="color:var(--text-dim);font-size:12.5px;">Chargement…</p></div>
       </div>
+
+      <div class="panel-action-sub">
+        <h4>💸 Demandes de retrait <span class="panel-action-hint" id="financeHint">— Portail créateurs</span></h4>
+        <div id="adminWithdrawalsList"><p style="color:var(--text-dim);font-size:12.5px;">Chargement…</p></div>
+      </div>
+
+      <div class="panel-action-sub">
+        <h4>↩ Demandes de remboursement</h4>
+        <div id="adminRefundsList"><p style="color:var(--text-dim);font-size:12.5px;">Chargement…</p></div>
+      </div>
     </div>
 
     <div class="kpi-grid" id="kpiGrid"></div>
@@ -474,6 +484,8 @@
 
     loadActionBans();
     loadAdminPendingGames();
+    loadAdminWithdrawals();
+    loadAdminRefunds();
   }
 
   // ---- 🎮 Modération "Sortir mon jeu" (05/09/2026, demande explicite) —
@@ -549,6 +561,128 @@
       btn.disabled = true;
       const { data, error } = await window.supabaseClient.rpc('admin_review_game', { p_game_id: gameId, p_approve: false, p_rejection_reason: reason });
       if (!error && data && data.ok) { await sendReviewEmail(); loadAdminPendingGames(); }
+      else { btn.disabled = false; alert(`Échec : ${(data && data.reason) || (error && error.message) || 'erreur'}`); }
+    }
+  });
+
+  // ---- 💸 Retraits PayPal (05/09/2026, demande explicite) — mêmes
+  // fonctions RPC que le Launcher (voir migration_29_creator_portal.sql),
+  // le paiement réel passe par la fonction Edge process-withdrawal. ----
+  function formatEurosFromCents(cents) {
+    return (cents / 100).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
+  }
+  async function loadAdminWithdrawals() {
+    const el = document.getElementById('adminWithdrawalsList');
+    const hint = document.getElementById('financeHint');
+    const [{ data: requests, error }, { data: finance }] = await Promise.all([
+      window.supabaseClient.rpc('admin_list_withdrawal_requests'),
+      window.supabaseClient.rpc('admin_get_platform_finance'),
+    ]);
+    if (finance && hint) hint.textContent = `— Portail créateurs · Disponible pour les retraits : ${formatEurosFromCents(finance.availableCents)}`;
+    if (error) { el.innerHTML = `<p style="color:var(--danger);font-size:12.5px;">❌ Erreur : ${error.message}</p>`; return; }
+    if (!requests || requests.length === 0) { el.innerHTML = `<p style="color:var(--text-dim);font-size:12.5px;">Aucune demande en attente.</p>`; return; }
+    el.innerHTML = requests.map((r) => `
+      <div class="admin-pending-game-card" data-request-id="${r.id}">
+        <div class="admin-pending-game-head">
+          <h5>${r.seller_email} — ${r.amount_credits} crédits → ${formatEurosFromCents(r.payout_cents)}</h5>
+          <span class="admin-pending-game-meta">PayPal : ${r.paypal_email}</span>
+        </div>
+        <div class="admin-pending-game-actions">
+          <button class="btn btn-primary btn-sm" style="flex:none;width:auto;" data-action="pay" data-id="${r.id}">💸 Payer via PayPal</button>
+          <input type="text" placeholder="Raison du refus (obligatoire pour refuser)" data-reason-for="${r.id}">
+          <button class="btn btn-danger btn-sm" style="flex:none;width:auto;" data-action="reject" data-id="${r.id}">✖ Refuser</button>
+        </div>
+      </div>
+    `).join('');
+  }
+  document.getElementById('adminWithdrawalsList').addEventListener('click', async (e) => {
+    const btn = e.target.closest('button[data-action]');
+    if (!btn) return;
+    const requestId = btn.dataset.id;
+    if (btn.dataset.action === 'pay') {
+      if (!confirm('Confirmer le paiement PayPal réel de cette demande ?')) return;
+      btn.disabled = true; btn.textContent = 'Envoi…';
+      const { data: sessionData } = await window.supabaseClient.auth.getSession();
+      const token = sessionData.session?.access_token;
+      try {
+        const res = await fetch(`${window.FERRA_CONFIG.SUPABASE_URL}/functions/v1/process-withdrawal`, {
+          method: 'POST', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ requestId }),
+        });
+        const body = await res.json().catch(() => ({}));
+        if (res.ok) loadAdminWithdrawals();
+        else { btn.disabled = false; btn.textContent = '💸 Payer via PayPal'; alert(`Échec : ${body.error || 'erreur'}`); }
+      } catch (err) { btn.disabled = false; btn.textContent = '💸 Payer via PayPal'; alert('Échec réseau'); }
+    } else if (btn.dataset.action === 'reject') {
+      const reasonInput = document.querySelector(`input[data-reason-for="${requestId}"]`);
+      const reason = (reasonInput?.value || '').trim();
+      if (!reason) { alert('Indique une raison de refus.'); return; }
+      btn.disabled = true;
+      const { data, error } = await window.supabaseClient.rpc('admin_reject_withdrawal', { p_request_id: requestId, p_reason: reason });
+      if (!error && data && data.ok) loadAdminWithdrawals();
+      else { btn.disabled = false; alert(`Échec : ${(data && data.reason) || (error && error.message) || 'erreur'}`); }
+    }
+  });
+
+  // ---- ↩ Remboursements (05/09/2026, demande explicite) — voir
+  // migration_33_refunds.sql. ----
+  function formatSecsShort(secs) {
+    const h = Math.floor(secs / 3600), m = Math.floor((secs % 3600) / 60);
+    return h > 0 ? `${h}h${m}min` : `${m}min`;
+  }
+  async function loadAdminRefunds() {
+    const el = document.getElementById('adminRefundsList');
+    const { data, error } = await window.supabaseClient.rpc('admin_list_refund_requests');
+    if (error) { el.innerHTML = `<p style="color:var(--danger);font-size:12.5px;">❌ Erreur : ${error.message}</p>`; return; }
+    if (!data || data.length === 0) { el.innerHTML = `<p style="color:var(--text-dim);font-size:12.5px;">Aucune demande en attente.</p>`; return; }
+    el.innerHTML = data.map((r) => `
+      <div class="admin-pending-game-card" data-request-id="${r.id}">
+        <div class="admin-pending-game-head">
+          <h5>${r.buyer_email} — ${r.game_title} — ${r.amount_credits} crédits</h5>
+          <span class="admin-pending-game-meta">Vendeur : ${r.seller_email}</span>
+        </div>
+        <p class="admin-pending-game-desc">
+          ⏱ Joué ${formatSecsShort(r.playtime_secs_at_request)} · 📅 Possédé depuis ${Number(r.days_owned_at_request).toFixed(1)} j ·
+          ${r.meets_policy ? '<b style="color:var(--valid);">✅ Respecte la règle (≤1h / ≤7j) — accepter recommandé</b>' : '<b style="color:var(--danger);">❌ Hors règle — refuser recommandé</b>'}
+          ${r.buyer_message ? `<br>💬 "${r.buyer_message}"` : ''}
+        </p>
+        <div class="admin-pending-game-actions">
+          <button class="btn btn-primary btn-sm" style="flex:none;width:auto;" data-action="approve" data-id="${r.id}">✔ Rembourser</button>
+          <input type="text" placeholder="Raison du refus (obligatoire pour refuser)" data-reason-for="${r.id}">
+          <button class="btn btn-danger btn-sm" style="flex:none;width:auto;" data-action="reject" data-id="${r.id}">✖ Refuser</button>
+        </div>
+      </div>
+    `).join('');
+  }
+  async function sendRefundResultEmail(requestId) {
+    try {
+      const { data: sessionData } = await window.supabaseClient.auth.getSession();
+      const token = sessionData.session?.access_token;
+      if (token) {
+        await fetch(`${window.FERRA_CONFIG.SUPABASE_URL}/functions/v1/send-refund-result-email`, {
+          method: 'POST', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ requestId }),
+        });
+      }
+    } catch (err) { console.error('[FERRA] send-refund-result-email a échoué :', err); }
+  }
+  document.getElementById('adminRefundsList').addEventListener('click', async (e) => {
+    const btn = e.target.closest('button[data-action]');
+    if (!btn) return;
+    const requestId = btn.dataset.id;
+    if (btn.dataset.action === 'approve') {
+      if (!confirm('Confirmer le remboursement ? Les crédits seront rendus à l\'acheteur et repris au vendeur.')) return;
+      btn.disabled = true;
+      const { data, error } = await window.supabaseClient.rpc('admin_process_refund', { p_request_id: requestId, p_approve: true, p_reason: null });
+      if (!error && data && data.ok) { await sendRefundResultEmail(requestId); loadAdminRefunds(); }
+      else { btn.disabled = false; alert(`Échec : ${(data && data.reason) || (error && error.message) || 'erreur'}`); }
+    } else if (btn.dataset.action === 'reject') {
+      const reasonInput = document.querySelector(`input[data-reason-for="${requestId}"]`);
+      const reason = (reasonInput?.value || '').trim();
+      if (!reason) { alert('Indique une raison de refus.'); return; }
+      btn.disabled = true;
+      const { data, error } = await window.supabaseClient.rpc('admin_process_refund', { p_request_id: requestId, p_approve: false, p_reason: reason });
+      if (!error && data && data.ok) { await sendRefundResultEmail(requestId); loadAdminRefunds(); }
       else { btn.disabled = false; alert(`Échec : ${(data && data.reason) || (error && error.message) || 'erreur'}`); }
     }
   });
