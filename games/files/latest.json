@@ -1,10 +1,10 @@
 {
-  "version": "0.2.34",
-  "notes": "Correctif : le panel admin affiche maintenant la vraie erreur au lieu de 'Aucun joueur banni' quand quelque chose se passe mal côté serveur.",
-  "pub_date": "2026-09-05T16:00:00Z",
+  "version": "0.2.35",
+  "notes": "Boutique : le bouton 'Installer' ouvre maintenant directement la fiche du jeu au lieu d'une simple phrase.",
+  "pub_date": "2026-09-05T17:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDg2MkRHWERDVGIxdTI4RFZOWFRLYkFxOEcxMlRRVzlVS2ROcVVNaFBJb3JVelgrY0tkYUppdkpoTWJJU1hrYXZ6dk4xVGhsNkRndkJkQUJkOS9mTVEwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NTkxMzQ0CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4zNF94NjQtc2V0dXAuZXhlCmNEUTRzc09VanVuSmZhZDF4d2VqREtIRlpCMkF6RzBNaTFPaTNoRVpDbFNlcVZ0VDFuVldQTlNpelplTzYyL1NvNExYN3ZoZXZTQlIvY0xYdlpISEFRPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTHlRcWxENkRxRmgzamZvdUhoMmpNdmtjRlJDQWN2RldjUFNkWDJoNEJuMjgyQkVPc1dTbThXNHFpZ2d1NXhPaCt4UXVVaFdEa2tPbm9GM1BBaGZqUlFrPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NTkyMzY5CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4zNV94NjQtc2V0dXAuZXhlCkVqd1V5VXQzZEhTR0ZSOW9JV1pPTWhvMTU5ZFZaZmcyVUdTRjJTckcxWTU4SzI3ZVc4N05SQ2dqdFY2RU9tSHQzaFBOTDBDbEhON2hSWldHYjRHcUJnPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
