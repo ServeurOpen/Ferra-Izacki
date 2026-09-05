@@ -94,6 +94,20 @@
   }
   .panel-unban-btn:hover{filter:brightness(1.2);}
   .panel-unban-btn:disabled{opacity:0.55;cursor:default;}
+  .admin-pending-game-card{
+    background:var(--bg-panel-2);border:1px solid var(--panel-edge);border-radius:12px;padding:14px 16px;margin-bottom:12px;
+  }
+  .admin-pending-game-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;}
+  .admin-pending-game-head h5{margin:0;font-size:14.5px;}
+  .admin-pending-game-meta{font-size:11px;color:var(--text-dim);}
+  .admin-pending-game-desc{font-size:12.5px;color:var(--text-dim);margin:8px 0;line-height:1.5;}
+  .admin-pending-game-shots{display:flex;gap:8px;margin:8px 0;flex-wrap:wrap;}
+  .admin-pending-game-shots img{width:80px;height:50px;object-fit:cover;border-radius:6px;border:1px solid var(--panel-edge);}
+  .admin-pending-game-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px;}
+  .admin-pending-game-actions input{
+    flex:1;min-width:160px;background:var(--bg-panel);border:1px solid var(--panel-edge);border-radius:8px;
+    color:var(--text);padding:7px 10px;font-size:12px;font-family:inherit;
+  }
   .panel-search-input{
     width:100%;box-sizing:border-box;background:var(--bg-panel-2);border:1px solid var(--panel-edge);
     border-radius:9px;color:var(--text);padding:9px 12px;font-size:13px;font-family:inherit;margin-bottom:12px;
@@ -188,6 +202,11 @@
             <tbody id="actionBansBody"><tr><td colspan="5" style="color:var(--text-dim);">Chargement…</td></tr></tbody>
           </table>
         </div>
+      </div>
+
+      <div class="panel-action-sub">
+        <h4>🎮 Jeux en attente de modération <span class="panel-action-hint">— "Sortir mon jeu"</span></h4>
+        <div id="adminPendingGamesList"><p style="color:var(--text-dim);font-size:12.5px;">Chargement…</p></div>
       </div>
     </div>
 
@@ -454,7 +473,85 @@
     document.getElementById('actionBanPlayerSelect').innerHTML = playerOptions;
 
     loadActionBans();
+    loadAdminPendingGames();
   }
+
+  // ---- 🎮 Modération "Sortir mon jeu" (05/09/2026, demande explicite) —
+  // mêmes fonctions RPC que le Launcher (voir migration_26_game_marketplace.sql).
+  function formatEuros(cents) {
+    return (cents / 100).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
+  }
+  function gameScreenshotUrl(path) {
+    return window.supabaseClient.storage.from('game-submission-screenshots').getPublicUrl(path).data.publicUrl;
+  }
+  async function loadAdminPendingGames() {
+    const el = document.getElementById('adminPendingGamesList');
+    const { data, error } = await window.supabaseClient.rpc('admin_list_pending_games');
+    if (error) {
+      el.innerHTML = `<p style="color:var(--danger);font-size:12.5px;">❌ Erreur : ${error.message}</p>`;
+      return;
+    }
+    if (!data || data.length === 0) {
+      el.innerHTML = `<p style="color:var(--text-dim);font-size:12.5px;">Aucun jeu en attente.</p>`;
+      return;
+    }
+    el.innerHTML = data.map((g) => `
+      <div class="admin-pending-game-card" data-game-id="${g.id}">
+        <div class="admin-pending-game-head">
+          <h5>${g.title} — ${g.price_cents === 0 ? 'Gratuit' : formatEuros(g.price_cents)}</h5>
+          <span class="admin-pending-game-meta">${g.seller_email} · ${g.file_type} · ${(g.file_size_bytes / (1024*1024)).toFixed(1)} Mo</span>
+        </div>
+        <p class="admin-pending-game-desc">${g.description}</p>
+        <div class="admin-pending-game-shots">
+          ${(g.screenshot_paths || []).map((p) => `<img src="${gameScreenshotUrl(p)}" alt="">`).join('')}
+        </div>
+        <button class="btn btn-ghost btn-sm" style="width:auto;" data-action="download" data-path="${g.file_path}">⬇ Télécharger le fichier</button>
+        <div class="admin-pending-game-actions">
+          <button class="btn btn-primary btn-sm" style="flex:none;width:auto;" data-action="approve" data-id="${g.id}">✔ Accepter</button>
+          <input type="text" placeholder="Raison du refus (obligatoire pour refuser)" data-reason-for="${g.id}">
+          <button class="btn btn-danger btn-sm" style="flex:none;width:auto;" data-action="reject" data-id="${g.id}">✖ Refuser</button>
+        </div>
+      </div>
+    `).join('');
+  }
+  document.getElementById('adminPendingGamesList').addEventListener('click', async (e) => {
+    const btn = e.target.closest('button[data-action]');
+    if (!btn) return;
+    const action = btn.dataset.action;
+    if (action === 'download') {
+      const { data, error } = await window.supabaseClient.storage.from('game-submission-files').createSignedUrl(btn.dataset.path, 3600);
+      if (!error && data) window.open(data.signedUrl, '_blank');
+      return;
+    }
+    const gameId = btn.dataset.id;
+    async function sendReviewEmail() {
+      try {
+        const { data: sessionData } = await window.supabaseClient.auth.getSession();
+        const token = sessionData.session?.access_token;
+        if (token) {
+          await fetch(`${window.FERRA_CONFIG.SUPABASE_URL}/functions/v1/send-game-review-email`, {
+            method: 'POST',
+            headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ gameId }),
+          });
+        }
+      } catch (err) { console.error('[FERRA] send-game-review-email a échoué :', err); }
+    }
+    if (action === 'approve') {
+      btn.disabled = true;
+      const { data, error } = await window.supabaseClient.rpc('admin_review_game', { p_game_id: gameId, p_approve: true, p_rejection_reason: null });
+      if (!error && data && data.ok) { await sendReviewEmail(); loadAdminPendingGames(); }
+      else { btn.disabled = false; alert(`Échec : ${(data && data.reason) || (error && error.message) || 'erreur'}`); }
+    } else if (action === 'reject') {
+      const reasonInput = document.querySelector(`input[data-reason-for="${gameId}"]`);
+      const reason = (reasonInput?.value || '').trim();
+      if (!reason) { alert('Indique une raison de refus.'); return; }
+      btn.disabled = true;
+      const { data, error } = await window.supabaseClient.rpc('admin_review_game', { p_game_id: gameId, p_approve: false, p_rejection_reason: reason });
+      if (!error && data && data.ok) { await sendReviewEmail(); loadAdminPendingGames(); }
+      else { btn.disabled = false; alert(`Échec : ${(data && data.reason) || (error && error.message) || 'erreur'}`); }
+    }
+  });
 
   // ---- ⚡ Actions (05/09/2026, demande explicite) — mêmes fonctions RPC
   // que le panel admin du Launcher (voir migration_21_actions_admin.sql),
