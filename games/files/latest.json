@@ -1,10 +1,10 @@
 {
-  "version": "0.2.39",
-  "notes": "Sortir mon jeu : le prix se fixe maintenant en crédits (pas en euros), cohérent avec le reste du Launcher.",
-  "pub_date": "2026-09-05T21:00:00Z",
+  "version": "0.2.40",
+  "notes": "Nouveau lien dans le menu du compte : Conditions & Confidentialité (politique de confidentialité, CGU, remboursements, règlement de publication des jeux).",
+  "pub_date": "2026-09-05T22:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDNMc3JrbVluRitEWWR0QUlrNFlGYmFQQmRqeEZWL0RMTVlmK3JjRDN2S3Y2cTBmOE9JTDdJTG5aTHp0cXlLcmZIbnQzRGpRSXM5REdRdi9jTzBBSXdjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NTk1OTQwCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4zOV94NjQtc2V0dXAuZXhlCm56bmNOL0ZKSlpwTGVGR2ZYQUxqZmx3M2w1b2JNcUdpazJ1VFhtLytTY2RTTDgybkRTVGlldlZsdFNBZWNiZjdadDVKWWswcE1YN2srenRpVVdiQkJnPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDhwS0krUXRNSkpPNmVYT2h2ZTJYTDBTTnE4TzdzTS91WW0xSnh0VmM5M3RmWnJuMUpBTHNyY3RxZytKT1oyaElnZzdRZ21ibU5LMFBNWi9LNUhWbGdjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NjAzNDM2CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi40MF94NjQtc2V0dXAuZXhlCnoyN3JGanlTa0RxQTRvSWpSZ2JOUHNUVWgwNkpSNnNBeXVYL1F1Y1lybkJLSzh5akxiUFN3WUZYS3EzLzgwZGdGd1dCNmhNaGtWdkV5VjVkcFY1ZkR3PT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
