@@ -1,10 +1,10 @@
 {
-  "version": "0.2.42",
-  "notes": "Les jeux .exe du marketplace se téléchargent et se lancent maintenant directement dans le Launcher (comme les jeux officiels), avec suivi du temps de jeu dans le Portail créateurs.",
-  "pub_date": "2026-09-06T00:00:00Z",
+  "version": "0.2.43",
+  "notes": "Correctifs : récompense quotidienne du jour 7 ramenée à 15 crédits, erreur de modération des jeux (colonne renommée) corrigée.",
+  "pub_date": "2026-09-06T01:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDM0Sk9WQW9NNG5hY0xBdHhQQ0lUbTd1ZWpzTDZreGE0NmU4bFRVWnRRMURhNkpURmNXTjRGSUVQdXlrM3kxRzZSYWFPbzdJaHE4RmxKSjZVdnl2alFFPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NjQyNzkwCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi40Ml94NjQtc2V0dXAuZXhlCisvd21VRjR2eEk4UlE4N0RGUFBSMXE2QktTMExIbHJvY3I0eGlxK1B4MHpGbmJxT2xTV2RaWlN4ZXJzK2YxNVJuK05jekhpYS8ySitRdVFzKzByOEN3PT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDdzWXh3ampkd21FSnFjYzhMenpyb2IvYi9QOUxRZlRtcCt1WFNRNE8weHR3Z1ZkWjlrQ3NPc0pTVWI5Y05YR2dEZVc3Z2tlZ0NVcitab2ZoaUdNUlFVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NjQzMzc5CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi40M194NjQtc2V0dXAuZXhlCllUUEc0UWhPZ0NGMlo3YnVJQTJFUHFHcFMvZnZBT3lUOEdJdzc3M2xpQktUbHZldWIzam5SUExyRnFIY2w3elAzcEVrMEhUZ2hQd2ZvekFxeXJ3MUJRPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
