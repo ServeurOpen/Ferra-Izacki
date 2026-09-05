@@ -478,8 +478,8 @@
 
   // ---- 🎮 Modération "Sortir mon jeu" (05/09/2026, demande explicite) —
   // mêmes fonctions RPC que le Launcher (voir migration_26_game_marketplace.sql).
-  function formatEuros(cents) {
-    return (cents / 100).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
+  function formatCredits(amount) {
+    return `${amount.toLocaleString('fr-FR')} 💰`;
   }
   function gameScreenshotUrl(path) {
     return window.supabaseClient.storage.from('game-submission-screenshots').getPublicUrl(path).data.publicUrl;
@@ -498,7 +498,7 @@
     el.innerHTML = data.map((g) => `
       <div class="admin-pending-game-card" data-game-id="${g.id}">
         <div class="admin-pending-game-head">
-          <h5>${g.title} — ${g.price_cents === 0 ? 'Gratuit' : formatEuros(g.price_cents)}</h5>
+          <h5>${g.title} — ${g.price_credits === 0 ? 'Gratuit' : formatCredits(g.price_credits)}</h5>
           <span class="admin-pending-game-meta">${g.seller_email} · ${g.file_type} · ${(g.file_size_bytes / (1024*1024)).toFixed(1)} Mo</span>
         </div>
         <p class="admin-pending-game-desc">${g.description}</p>
