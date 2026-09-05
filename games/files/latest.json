@@ -1,10 +1,10 @@
 {
-  "version": "0.2.37",
-  "notes": "Correctif : le fichier de jeu soumis ('Sortir mon jeu') garde maintenant sa vraie extension (.exe/.zip) au lieu de celle du type sélectionné dans la liste.",
-  "pub_date": "2026-09-05T19:00:00Z",
+  "version": "0.2.38",
+  "notes": "Sortir mon jeu : le type de fichier (HTML/exe) se règle automatiquement dès que tu choisis ton fichier, plus besoin de le sélectionner à la main.",
+  "pub_date": "2026-09-05T20:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTHhhQmlCT00rdDBmTUtTRVRBZk1hd0lFc096c2xQdnR1c2I3QlorMlM2MW1FblFjWS9ZRytvSzlNUTAxMTlFUnU4ZDkwWFRWdHJuT3N1RGNaQ3YxWlFBPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NTk0ODc0CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4zN194NjQtc2V0dXAuZXhlCncxQnN4MmJQdDc5UDhXMk1LMGwweFJxZ2J2a3ZPT2ttNjdveGFvNmZBY2ZHdnRkWHkvSG9aQW1GejdqMEVoQzdaQ3gxVmNFTTc2ZW1obndLWFZDb0JnPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTHlZZ1dFd1hJc1FRQkJWQ3p1ZWQxVjNaRE9yWGdFS2E1NDV5Y2ZXbWE1ZXg4K3AzdVlEV0xuQ1BXRFJ2SVRZQVVMbkJNTWM4NWx1WGg0cFNxeDRnR0FFPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NTk1MzUxCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi4zOF94NjQtc2V0dXAuZXhlCmtYTlQrclZlOGY3ZkZ0dlhZUlZXMHRlSUZuQmdXaml5QTRxenU0MmZZenUwWDZtZExKU1E0aXlHMEZsTVBhVWpaMzR3SXhIVU93a1JwUkpaTm85Z0N3PT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
