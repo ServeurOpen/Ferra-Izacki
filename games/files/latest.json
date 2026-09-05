@@ -1,10 +1,10 @@
 {
-  "version": "0.2.43",
-  "notes": "Correctifs : récompense quotidienne du jour 7 ramenée à 15 crédits, erreur de modération des jeux (colonne renommée) corrigée.",
-  "pub_date": "2026-09-06T01:00:00Z",
+  "version": "0.2.44",
+  "notes": "Correctifs : changement de compte sans redémarrer (crédits/amis/notifications se rechargent bien pour le nouveau compte), verrou supplémentaire empêchant un joueur normal d'accéder à l'onglet admin.",
+  "pub_date": "2026-09-06T02:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDdzWXh3ampkd21FSnFjYzhMenpyb2IvYi9QOUxRZlRtcCt1WFNRNE8weHR3Z1ZkWjlrQ3NPc0pTVWI5Y05YR2dEZVc3Z2tlZ0NVcitab2ZoaUdNUlFVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NjQzMzc5CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi40M194NjQtc2V0dXAuZXhlCllUUEc0UWhPZ0NGMlo3YnVJQTJFUHFHcFMvZnZBT3lUOEdJdzc3M2xpQktUbHZldWIzam5SUExyRnFIY2w3elAzcEVrMEhUZ2hQd2ZvekFxeXJ3MUJRPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDJweDduOHpGYWpqV3BjYkZ6SHZ1YVJYRHNzTHZMa29QN2RubHU0ZjhLTWIzOWpUQ2pRY1N2OEg5alUyWHpTajl4RFJEb1ZwamZkek4yV01sTURNYWdBPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NjQzNjIxCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi40NF94NjQtc2V0dXAuZXhlCmhsTHd2NURzdTNxN0Zib3F3T09yUFZnWFVLNzNuV1V0b1VSS0R6QmNPdi9yRWgxcnRUa0FDNStqMjBmU2xKWVovenRwNnkva3prR21kRnVwQmZ6YUJnPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
