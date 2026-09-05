@@ -56,6 +56,11 @@ end;
 $$;
 grant execute on function public.admin_ban_user(uuid, text, int, text) to authenticated;
 
+-- Postgres refuse un simple "create or replace" quand la forme du retour
+-- change (nouvelle colonne "scope") — il faut la supprimer d'abord (voir
+-- l'erreur "cannot change return type of existing function" du 05/09/2026).
+drop function if exists public.admin_list_bans();
+
 create or replace function public.admin_list_bans()
 returns table(user_id uuid, email text, reason text, banned_until timestamptz, banned_by uuid, created_at timestamptz, scope text)
 language plpgsql
