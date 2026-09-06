@@ -1,10 +1,10 @@
 {
-  "version": "0.2.61",
-  "notes": "Correctif important : \"Changer de compte\" (profils façon Netflix) déconnectait instantanément au lieu de se souvenir du profil — ça ne se déconnecte plus du tout côté serveur. Les tokens 🪙 affichent maintenant une décimale qui avance en douceur entre 2 tokens entiers.",
-  "pub_date": "2026-09-06T18:37:41Z",
+  "version": "0.2.62",
+  "notes": "Boutique réorganisée : nos jeux en premier, puis \"Sortir mon jeu\", puis les jeux des joueurs (avec une barre de recherche par titre), et la Boutique Profil tout en bas.",
+  "pub_date": "2026-09-06T21:31:43Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTHhPL0FrNEdmMVdyVjlBbjdONkF6dThkS2gyT0FCeXZaU3E0QS9YN3NpeFVSaE9hSEdiUDVOR0x0SFBMZ2d4T1REekdJL1VYbmdQRGlpZDlFdTc3c2dZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NzE5ODYxCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi42MV94NjQtc2V0dXAuZXhlCnUvazdJNW5yUnVweUJNWUlDUHFIQW8wSEJyZ2tPVEhBejRiMlR0TC9zSmY3UHN6QWNONnhPQU9Pd0s5WFRhZTJjcXNST3FWMkluelh1emdhZHZxSkNnPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTCtBeTBOcDNUb1VManZGVDJLTlZZQ1dmMzMxUEZxUG9KeDF1V3JlODRNRHcydElHVEpseGlCSmpnM2xNS0drTUdYMDkrNjdZeG5OMWpzRVljYkJCZHc4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NzMwMzAzCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi42Ml94NjQtc2V0dXAuZXhlCmRMLzNHZTJyZUVSQmU5UVVxbHl3VWczaTZSZDZ2M2ZRUFk4Z3ZMQ3dEeTRlQUh0T05YQ2EvVkFjZE1UcnBPQzErRlZqZ3RhMzZ6LzZCOHY3MFJmL0NRPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
