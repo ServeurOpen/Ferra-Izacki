@@ -1,10 +1,10 @@
 {
-  "version": "0.2.54",
-  "notes": "Assistance : tickets fermés repliables, badge non-lu précis, pièces jointes (bug reports). Admin : suppression d'un jeu du marketplace avec raison envoyée par email. Correctif : les profils façon Netflix ne redemandaient plus le mot de passe après une rotation automatique de session.",
-  "pub_date": "2026-09-07T10:00:00Z",
+  "version": "0.2.55",
+  "notes": "Admin : 3e action de modération \"Mettre en examen\" (notif temps réel au vendeur), liste des bannis repliable, mot de passe de passage obligatoire pour bannir/créditer. Joueurs : likes ❤️ sur les jeux du marketplace, solde de crédits qui se met à jour en temps réel (retraits refusés, remboursements...).",
+  "pub_date": "2026-09-07T11:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDNnN2toNS9kWG9iclphZXhQVm92eUxXNXB1S0E4dkxFKzQ1SXBYb3NESFBRSTdKZWJra2VGL2swcmFoTmtSUWhYZ2tMNTVMZlluM1lCRGJXQmlLaFF3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NjkzMjQ1CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi41NF94NjQtc2V0dXAuZXhlCmlwemd3K2JEdlM1ZUErZ0Z5QmcxR3R6QjNBYzJFWUtZZlhhbEQ2a2hvdUxZaFVZUEN4RXlXMHBWRzFIV0oyOTFaNkZjY1dMTTgrUHNYbDZHR2NIZUF3PT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDBaS25iU0l5Lzd4b1Jib1JEdkkrNUt2VkptTlBDL0FwTitiS1pUaTlwU21VcUp3cEE3TGg1NXVmRHJuWmRsaWFmL2o2V2h4WTFaRGI4QnY1NGlMa2dJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4Njk2NDYzCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi41NV94NjQtc2V0dXAuZXhlCk5HSUVRVEI1UUQreWM5bmlWU1lSZlNmN2xTU0tBeHRsV0NQdWlHRVIrc3dJUW55RmtwVGFKdjhWYzVQSVY4VmJTSFlFQVVBVU1HaCtiaDEyMTQrV0F3PT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
