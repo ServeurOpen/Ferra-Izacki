@@ -1,10 +1,10 @@
 {
-  "version": "0.2.65",
-  "notes": "Correctif de sécurité important : impossible désormais d'ouvrir plusieurs fois le même jeu en même temps (empêche de farmer les tokens/crédits en multipliant les fenêtres). Nouveau : bouton \"Payer TOUT\" pour traiter tous les retraits PayPal en attente d'un coup, en toute sécurité.",
-  "pub_date": "2026-09-06T23:21:56Z",
+  "version": "0.2.66",
+  "notes": "Correctif : \"Mettre à jour\" (onglet Téléchargement) affichait son erreur sur un autre onglet quand ça échouait — invisible, donnant l'impression que rien ne se passait. L'erreur s'affiche maintenant directement sous le bouton (souvent : le jeu est encore ouvert, ferme-le avant de mettre à jour).",
+  "pub_date": "2026-09-06T23:34:47Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTCtMd2w4RnN1ckNoeEdSY0M0c3RWTjcwcEU3QTJ3T29RRk0wb1dFQVh1WDdsaDFtQ2tpbjVYRmcyZS9xVzJsTTVqbkFTbmpNMVpOTjNTQlc4M2VxNkFBPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NzM2OTE2CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi42NV94NjQtc2V0dXAuZXhlCisySzBYQWFBSlZjRHFWek9NaXhpYndrUEd6MHdQZFZxeUxwblFDTndMTW9MR0lwZTZzT2dnOU5hZEw4dE9heDNDNXJQVnRHTkkwdHBqZHhFVDdNZkJnPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDV5endNUHFjYkJ1Vzc5ZXRDZ201dDRUYzF0UkVka0k3RVZkTWVWUFEzQXJUZTB2Y3lwSnhLcVhWdkEwcDRPOUswbkFyK2l5Nld2VHduaDQvbXEzWndBPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NzM3Njg3CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi42Nl94NjQtc2V0dXAuZXhlCnFnZmlBYXJKRzNRYU80SEw5cDZYOW96Y3RXdDdCTmR2U2VoWTNRRzNIV05ZaEVLRzdEMG95ajZJNnZMNGF4WnlaZVBMcFYrU1QzTnZuV1JxOWFzbEFnPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
