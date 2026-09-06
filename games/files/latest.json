@@ -1,10 +1,10 @@
 {
-  "version": "0.2.63",
-  "notes": "Correctif : le cadre de la case \"jour 7\" (récompense quotidienne) débordait du cadre gris. Parrainage : toast dédié pour le filleul et notification visible pour le parrain quand la récompense est distribuée. \"Sortir mon jeu\" précise maintenant la rémunération selon les ventes.",
-  "pub_date": "2026-09-06T22:10:28Z",
+  "version": "0.2.64",
+  "notes": "Onglet Parrainage : rappel ajouté sous le compteur pour expliquer que ça ne bouge qu'une fois que ton ami atteint son 3e jour de connexion.",
+  "pub_date": "2026-09-06T22:19:44Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDFQdy9wK0p1bjdaZDBKd3pPLzBQdWZYRFJLTXlGdFdGZkVxUXEwbGF3ZUNHUmxPMVFyd3QxL0xVMG16b3R6TThwNHlHRHhUQkZ6TFFUTVVZQTI2eUFVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NzMyNjI4CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi42M194NjQtc2V0dXAuZXhlCkt0RVplK1pncmhlUnpmN3VqVjZDT3lSYU1vSFN6eVpVaXFMb1N5dXpSaE45OHUwQ3hXTnN3dXZ2ZnVIc1EwcnoyVnVOT2F3cUczaFp2Q3prcnllaERnPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDlOcDFjQXBRbzJ2ZTJyWjdBWGdmb0lVL2hXYmgyQXpabEl1M1JUUnFZQmxzWTdndWZncTdQTmdNd09xK1FTbFR6bEEzaXZQWmVUV0VsSmdYOTZXQndjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NzMzMTg0CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi42NF94NjQtc2V0dXAuZXhlCks5bkYxQnFaWDFLSE9xVlZHYVVLWnhmSmRKVld0aExUOEEyV2xmOHdzNlZJb1VJNUU5Uytud1d2THN6WmxzVzFHbEc2cjF0K1lYK1NzOFpuUDZWL0F3PT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
