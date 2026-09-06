@@ -4,16 +4,19 @@
 -- crédits au joueur et 10 à celui qui rejoint").
 --
 -- 🐞 BUG TROUVÉ EN COURS DE ROUTE (pas demandé, découvert en préparant ce
--- changement) : migration_32 (rééquilibrage 6/20 du 05/09/2026) a
--- remplacé claim_daily_reward() par une version qui NE CONTENAIT PLUS le
--- versement au parrain ajouté par migration_18 — un `create or replace`
--- sur la même fonction remplace TOUT son corps, et la version de
--- migration_32 avait été réécrite à partir de zéro sans reporter ce
--- bloc. Conséquence réelle : depuis migration_32, AUCUN parrain n'a
--- perçu ses crédits de parrainage, même quand un filleul atteignait bien
--- le jour 3 — silencieusement, sans erreur visible nulle part. Cette
--- migration restaure le versement au parrain (montants actuels 6/20,
--- pas les anciens 5/25 de migration_18) ET ajoute le nouveau bonus filleul.
+-- changement, attribution corrigée après une revue de code adversariale) :
+-- migration_31_fixes.sql (05/09/2026, "jour 7 : 25 -> 15 crédits") a été
+-- LA PREMIÈRE à remplacer claim_daily_reward() par une version qui NE
+-- CONTENAIT PLUS le versement au parrain ajouté par migration_18 — un
+-- `create or replace` sur la même fonction remplace TOUT son corps, et
+-- cette version-là avait été réécrite à partir de zéro sans reporter ce
+-- bloc. migration_32 (rééquilibrage 6/20, juste après) n'a fait que
+-- reporter ce corps déjà cassé en changeant les montants. Conséquence
+-- réelle : depuis migration_31, AUCUN parrain n'a perçu ses crédits de
+-- parrainage, même quand un filleul atteignait bien le jour 3 —
+-- silencieusement, sans erreur visible nulle part. Cette migration
+-- restaure le versement au parrain (montants actuels 6/20, pas les
+-- anciens 5/25 de migration_18) ET ajoute le nouveau bonus filleul.
 --
 -- Le filleul touche son bonus au MÊME moment que le parrain (jour 3 de
 -- SA récompense quotidienne) — un seul point de déclenchement à
