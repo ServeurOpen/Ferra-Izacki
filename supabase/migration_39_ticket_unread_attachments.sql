@@ -42,7 +42,15 @@ create policy "Un joueur gere ses propres pieces jointes de ticket"
 
 -- ---- send_ticket_message étendue : pièce jointe optionnelle + tient
 -- last_message_at à jour ----
-create or replace function public.send_ticket_message(p_ticket_id uuid, p_message text, p_attachment_path text default null)
+-- DROP obligatoire : nouveau paramètre = signature différente de la
+-- version migration_37 (uuid, text) — "create or replace" créerait un
+-- doublon (uuid, text, text default null) au lieu de remplacer, et comme
+-- ce nouveau paramètre a une valeur par défaut, PostgREST pourrait alors
+-- hésiter entre les deux à chaque appel à 2 arguments (même piège que
+-- migration_23/43).
+drop function if exists public.send_ticket_message(uuid, text);
+
+create function public.send_ticket_message(p_ticket_id uuid, p_message text, p_attachment_path text default null)
 returns jsonb
 language plpgsql
 security definer
@@ -101,7 +109,13 @@ $$;
 grant execute on function public.mark_ticket_seen(uuid) to authenticated;
 
 -- ---- admin_list_support_tickets étendue (last_message_at/admin_last_seen_at) ----
-create or replace function public.admin_list_support_tickets()
+-- DROP obligatoire : on ajoute 2 colonnes à la table de retour, Postgres
+-- refuse de changer le type de retour d'une fonction existante avec un
+-- simple "create or replace" (erreur 42P13, même piège que d'habitude
+-- sur ce projet quand une signature change).
+drop function if exists public.admin_list_support_tickets();
+
+create function public.admin_list_support_tickets()
 returns table(
   id uuid, user_email text, category text, subject text, status text,
   refund_request_id uuid, created_at timestamptz, closed_at timestamptz,
@@ -181,3 +195,5 @@ begin
 end;
 $$;
 grant execute on function public.admin_process_refund(uuid, boolean, text) to authenticated;
+
+NOTIFY pgrst, 'reload schema';
