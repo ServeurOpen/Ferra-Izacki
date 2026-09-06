@@ -148,6 +148,16 @@
     color:var(--valid);font-weight:600;text-align:center;max-width:92%;
   }
   .ticket-row-cursor{cursor:pointer;}
+
+  /* Mot de passe de passage (06/09/2026) — voir migration_43. Modale
+     volontairement IMPASSABLE : pas de croix, pas de fermeture au clic
+     en dehors, seul "Annuler" abandonne l'action. */
+  #adminPassphraseModal .ticket-modal-card{width:440px;text-align:center;}
+  #adminPassphraseInput{
+    width:100%;box-sizing:border-box;background:var(--bg-panel-2);border:1px solid var(--panel-edge);
+    border-radius:8px;color:var(--text);padding:9px 11px;font-size:11px;font-family:monospace;
+    text-align:left;resize:vertical;margin-top:10px;
+  }
 </style>
 </head>
 <body>
@@ -229,14 +239,18 @@
         <div class="panel-action-status" id="actionBanStatus"></div>
       </div>
 
+      <!-- 06/09/2026, demande explicite : "il peut y en avoir beaucoup...
+           pouvoir la replier/déplier" — repliée par défaut. -->
       <div class="panel-action-sub">
-        <h4>🚫 Joueurs actuellement bannis</h4>
-        <div class="panel-table-wrap">
-          <table class="panel-table">
-            <thead><tr><th>Email</th><th>Raison</th><th>Portée</th><th>Fin</th><th></th></tr></thead>
-            <tbody id="actionBansBody"><tr><td colspan="5" style="color:var(--text-dim);">Chargement…</td></tr></tbody>
-          </table>
-        </div>
+        <details class="ticket-closed-details">
+          <summary>🚫 Joueurs actuellement bannis <span id="actionBansCount"></span></summary>
+          <div class="panel-table-wrap" style="max-height:340px;overflow-y:auto;">
+            <table class="panel-table">
+              <thead><tr><th>Email</th><th>Raison</th><th>Portée</th><th>Fin</th><th></th></tr></thead>
+              <tbody id="actionBansBody"><tr><td colspan="5" style="color:var(--text-dim);">Chargement…</td></tr></tbody>
+            </table>
+          </div>
+        </details>
       </div>
 
       <div class="panel-action-sub">
@@ -563,6 +577,7 @@
           <h5>${g.title} — ${g.price_credits === 0 ? 'Gratuit' : formatCredits(g.price_credits)}</h5>
           <span class="admin-pending-game-meta">${g.seller_email} · ${g.file_type} · ${(g.file_size_bytes / (1024*1024)).toFixed(1)} Mo</span>
         </div>
+        ${g.status === 'under_review' ? `<span class="ticket-status-badge open" style="margin-bottom:6px;display:inline-block;">🔎 En examen</span>` : ''}
         <p class="admin-pending-game-desc">${g.description}</p>
         <div class="admin-pending-game-shots">
           ${(g.screenshot_paths || []).map((p) => `<img src="${gameScreenshotUrl(p)}" alt="">`).join('')}
@@ -570,6 +585,7 @@
         <button class="btn btn-ghost btn-sm" style="width:auto;" data-action="download" data-path="${g.file_path}">⬇ Télécharger le fichier</button>
         <div class="admin-pending-game-actions">
           <button class="btn btn-primary btn-sm" style="flex:none;width:auto;" data-action="approve" data-id="${g.id}">✔ Accepter</button>
+          ${g.status === 'pending' ? `<button class="btn btn-ghost btn-sm" style="flex:none;width:auto;" data-action="examine" data-id="${g.id}">🔎 Mettre en examen</button>` : ''}
           <input type="text" placeholder="Raison du refus (obligatoire pour refuser)" data-reason-for="${g.id}">
           <button class="btn btn-danger btn-sm" style="flex:none;width:auto;" data-action="reject" data-id="${g.id}">✖ Refuser</button>
         </div>
@@ -603,6 +619,11 @@
       btn.disabled = true;
       const { data, error } = await window.supabaseClient.rpc('admin_review_game', { p_game_id: gameId, p_approve: true, p_rejection_reason: null });
       if (!error && data && data.ok) { await sendReviewEmail(); loadAdminPendingGames(); }
+      else { btn.disabled = false; alert(`Échec : ${(data && data.reason) || (error && error.message) || 'erreur'}`); }
+    } else if (action === 'examine') {
+      btn.disabled = true;
+      const { data, error } = await window.supabaseClient.rpc('admin_set_game_under_review', { p_game_id: gameId });
+      if (!error && data && data.ok) { loadAdminPendingGames(); }
       else { btn.disabled = false; alert(`Échec : ${(data && data.reason) || (error && error.message) || 'erreur'}`); }
     } else if (action === 'reject') {
       const reasonInput = document.querySelector(`input[data-reason-for="${gameId}"]`);
@@ -752,6 +773,8 @@
       console.error('[FERRA] admin_list_bans a échoué :', error);
       return;
     }
+    const countEl = document.getElementById('actionBansCount');
+    if (countEl) countEl.textContent = (data && data.length > 0) ? `(${data.length})` : '';
     if (!data || data.length === 0) {
       body.innerHTML = `<tr><td colspan="5" style="color:var(--text-dim);">Aucun joueur banni.</td></tr>`;
       return;
@@ -767,6 +790,57 @@
     `).join('');
   }
 
+  // ---- Mot de passe de passage (06/09/2026, demande explicite) — voir
+  // migration_43. Modale IMPASSABLE : jamais de croix ni de fermeture au
+  // clic en dehors, seul "Annuler" abandonne l'action. Reboucle sur
+  // "mot de passe incorrect" tant que la bonne empreinte n'est pas
+  // fournie (jusqu'au verrouillage temporaire décidé par le serveur). ----
+  function showAdminPassphraseError(msg) {
+    const el = document.getElementById('adminPassphraseError');
+    el.textContent = msg;
+    el.style.display = '';
+  }
+  function runAdminActionWithPassphrase(actionLabel, actionFn) {
+    const modal = document.getElementById('adminPassphraseModal');
+    const input = document.getElementById('adminPassphraseInput');
+    const errorEl = document.getElementById('adminPassphraseError');
+    const confirmBtn = document.getElementById('adminPassphraseConfirmBtn');
+    const cancelBtn = document.getElementById('adminPassphraseCancelBtn');
+    document.getElementById('adminPassphraseActionLabel').textContent = actionLabel;
+    input.value = '';
+    errorEl.style.display = 'none';
+    modal.classList.add('open');
+    return new Promise((resolve) => {
+      function cleanup() {
+        confirmBtn.removeEventListener('click', onConfirm);
+        cancelBtn.removeEventListener('click', onCancel);
+        modal.classList.remove('open');
+      }
+      function onCancel() { cleanup(); resolve(null); }
+      async function onConfirm() {
+        const passphrase = input.value.trim();
+        if (!passphrase) return;
+        confirmBtn.disabled = true;
+        const result = await actionFn(passphrase);
+        confirmBtn.disabled = false;
+        if (result.reason === 'wrong_passphrase') {
+          showAdminPassphraseError('❌ Mot de passe incorrect — réessaie.');
+          input.value = '';
+          input.focus();
+          return;
+        }
+        if (result.reason === 'locked') {
+          showAdminPassphraseError('🔒 Trop de tentatives — réessaie dans quelques minutes.');
+          return;
+        }
+        cleanup();
+        resolve(result);
+      }
+      confirmBtn.addEventListener('click', onConfirm);
+      cancelBtn.addEventListener('click', onCancel);
+    });
+  }
+
   document.getElementById('actionGrantBtn').addEventListener('click', async () => {
     const select = document.getElementById('actionGrantPlayerSelect');
     const amountInput = document.getElementById('actionGrantAmount');
@@ -775,13 +849,17 @@
     const amount = parseInt(amountInput.value, 10);
     if (!select.value) { statusEl.textContent = 'Choisis un joueur.'; return; }
     if (!amount || amount <= 0) { statusEl.textContent = 'Montant invalide.'; return; }
-    statusEl.textContent = 'Envoi en cours…';
-    const { data, error } = await window.supabaseClient.rpc('admin_grant_credits', {
-      p_target_user_id: select.value, p_amount: amount, p_reason: reasonInput.value || 'Concours',
+    const playerLabel = select.options[select.selectedIndex]?.textContent || 'ce joueur';
+    const result = await runAdminActionWithPassphrase(`Créditer ${playerLabel} de ${amount} crédits`, async (pw) => {
+      const { data, error } = await window.supabaseClient.rpc('admin_grant_credits', {
+        p_target_user_id: select.value, p_amount: amount, p_reason: reasonInput.value || 'Concours', p_passphrase: pw,
+      });
+      return (!error && data) ? data : { ok: false, reason: (error && error.message) || 'erreur' };
     });
-    statusEl.textContent = (!error && data && data.ok)
-      ? `✅ +${amount} crédits envoyés — nouveau solde : ${data.newBalance}.`
-      : `❌ Échec : ${(data && data.reason) || (error && error.message) || 'erreur'}`;
+    if (!result) return;
+    statusEl.textContent = result.ok
+      ? `✅ +${amount} crédits envoyés — nouveau solde : ${result.newBalance}.`
+      : `❌ Échec : ${result.reason}`;
   });
 
   document.getElementById('actionGrantAllBtn').addEventListener('click', async () => {
@@ -791,13 +869,16 @@
     const amount = parseInt(amountInput.value, 10);
     if (!amount || amount <= 0) { statusEl.textContent = 'Montant invalide.'; return; }
     if (!confirm(`Offrir ${amount} crédits à TOUS les joueurs ? Chacun verra un pop up.`)) return;
-    statusEl.textContent = 'Envoi en cours…';
-    const { data, error } = await window.supabaseClient.rpc('admin_grant_credits_all', {
-      p_amount: amount, p_reason: reasonInput.value || 'Cadeau du créateur',
+    const result = await runAdminActionWithPassphrase(`Offrir ${amount} crédits à TOUS les joueurs`, async (pw) => {
+      const { data, error } = await window.supabaseClient.rpc('admin_grant_credits_all', {
+        p_amount: amount, p_reason: reasonInput.value || 'Cadeau du créateur', p_passphrase: pw,
+      });
+      return (!error && data) ? data : { ok: false, reason: (error && error.message) || 'erreur' };
     });
-    statusEl.textContent = (!error && data && data.ok)
-      ? `✅ +${amount} crédits envoyés à ${data.count} joueur(s).`
-      : `❌ Échec : ${(data && data.reason) || (error && error.message) || 'erreur'}`;
+    if (!result) return;
+    statusEl.textContent = result.ok
+      ? `✅ +${amount} crédits envoyés à ${result.count} joueur(s).`
+      : `❌ Échec : ${result.reason}`;
   });
 
   function scopeLabel(scope) {
@@ -817,12 +898,15 @@
     const label = select.options[select.selectedIndex]?.textContent || 'ce joueur';
     const durationLabel = durationHours === null ? 'définitivement' : `pour ${durationSelect.options[durationSelect.selectedIndex].textContent}`;
     if (!confirm(`Bannir ${label} ${durationLabel} (portée : ${scopeLabel(scopeSelect.value)}) ?`)) return;
-    statusEl.textContent = 'Envoi en cours…';
-    const { data, error } = await window.supabaseClient.rpc('admin_ban_user', {
-      p_target_user_id: select.value, p_reason: reason, p_duration_hours: durationHours, p_scope: scopeSelect.value,
+    const result = await runAdminActionWithPassphrase(`Bannir ${label}`, async (pw) => {
+      const { data, error } = await window.supabaseClient.rpc('admin_ban_user', {
+        p_target_user_id: select.value, p_reason: reason, p_duration_hours: durationHours, p_scope: scopeSelect.value, p_passphrase: pw,
+      });
+      return (!error && data) ? data : { ok: false, reason: (error && error.message) || 'erreur' };
     });
-    statusEl.textContent = (!error && data && data.ok) ? '✅ Joueur banni.' : `❌ Échec : ${(data && data.reason) || (error && error.message) || 'erreur'}`;
-    if (!error && data && data.ok) { reasonInput.value = ''; loadActionBans(); }
+    if (!result) return;
+    statusEl.textContent = result.ok ? '✅ Joueur banni.' : `❌ Échec : ${result.reason}`;
+    if (result.ok) { reasonInput.value = ''; loadActionBans(); }
   });
 
   document.getElementById('actionBansBody').addEventListener('click', async (e) => {
@@ -858,6 +942,22 @@
      explicite) — voir migration_37_support_tickets.sql. Un ticket
      "Remboursement" se ferme et répond tout seul dès que la demande liée
      est traitée dans "Demandes de remboursement" ci-dessus. -->
+<!-- Mot de passe de passage — Ban / Créditer un joueur / Créditer tout le
+     monde (06/09/2026, demande explicite) — impassable, voir migration_43. -->
+<div class="ticket-modal-overlay" id="adminPassphraseModal">
+  <div class="ticket-modal-card">
+    <div style="font-size:34px;margin-bottom:8px;">🔐</div>
+    <h2 style="margin:0 0 6px;">Mot de passe de passage requis</h2>
+    <p class="sub" id="adminPassphraseActionLabel" style="margin:0;">Cette action est protégée.</p>
+    <textarea id="adminPassphraseInput" rows="3" placeholder="Colle le mot de passe de passage…" autocomplete="off"></textarea>
+    <div id="adminPassphraseError" style="display:none;color:var(--danger);font-size:12.5px;margin-top:8px;"></div>
+    <div style="display:flex;gap:10px;margin-top:16px;">
+      <button class="btn btn-ghost btn-sm" id="adminPassphraseCancelBtn" style="width:auto;flex:1;">Annuler</button>
+      <button class="btn btn-primary btn-sm" id="adminPassphraseConfirmBtn" style="width:auto;flex:1;">Confirmer</button>
+    </div>
+  </div>
+</div>
+
 <div class="ticket-modal-overlay" id="ticketModal">
   <div class="ticket-modal-card">
     <button class="ticket-modal-close" id="ticketModalClose" title="Fermer">✕</button>
