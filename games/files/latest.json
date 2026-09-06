@@ -1,10 +1,10 @@
 {
-  "version": "0.2.60",
-  "notes": "Tokens 🪙 et crédits en vrai temps réel pendant que tu joues (toutes les 5s, plus seulement à la fermeture du jeu — le total gagné ne change pas). Correctif : \"Créditer tout le monde\" qui échouait, et les titres des jeux du marketplace dans les stats admin.",
-  "pub_date": "2026-09-06T18:11:06Z",
+  "version": "0.2.61",
+  "notes": "Correctif important : \"Changer de compte\" (profils façon Netflix) déconnectait instantanément au lieu de se souvenir du profil — ça ne se déconnecte plus du tout côté serveur. Les tokens 🪙 affichent maintenant une décimale qui avance en douceur entre 2 tokens entiers.",
+  "pub_date": "2026-09-06T18:37:41Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDFUWEtiWmI4Ry9RSklQUTNwenVYcjJZS1pWdlRGcXVHYzEzMGF2MUtMSDliQWF4TG1hQ0wyeDQ0ZVd5alB3RXZWMkdYV256dWh1K3hJUkJwclJPWHdVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NzE4MjY2CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi42MF94NjQtc2V0dXAuZXhlCjAzbFVLUkhsRGRkcXZHUVBmSTdxZStBM096VnVjbWtYYVJDZExFNzIrQm9KRERMNzI3amFvY1VvTUxpUnpmMmdpY3dNNlROQXBIc05VV1dJZWgyUUFRPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTHhPL0FrNEdmMVdyVjlBbjdONkF6dThkS2gyT0FCeXZaU3E0QS9YN3NpeFVSaE9hSEdiUDVOR0x0SFBMZ2d4T1REekdJL1VYbmdQRGlpZDlFdTc3c2dZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NzE5ODYxCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi42MV94NjQtc2V0dXAuZXhlCnUvazdJNW5yUnVweUJNWUlDUHFIQW8wSEJyZ2tPVEhBejRiMlR0TC9zSmY3UHN6QWNONnhPQU9Pd0s5WFRhZTJjcXNST3FWMkluelh1emdhZHZxSkNnPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
