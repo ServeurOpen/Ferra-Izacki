@@ -62,12 +62,18 @@ Deno.serve(async (req: Request) => {
   // joueurs (RLS ignorée) et la liste des emails (schéma auth).
   const admin = createClient(SUPABASE_URL, SERVICE_ROLE_KEY);
 
-  const [usersRes, profilesRes, sessionsRes, gameStatsRes] = await Promise.all([
+  const [usersRes, profilesRes, sessionsRes, gameStatsRes, submittedGamesRes] = await Promise.all([
     admin.auth.admin.listUsers({ perPage: 1000 }),
     admin.from("profiles").select("id, username, display_name, player_number"),
     admin.from("launcher_sessions").select("user_id, started_at, ended_at, last_heartbeat"),
     admin.from("game_stats").select("user_id, game_id, total_secs, last_played_at"),
+    // 06/09/2026, retour joueur : "les lignes bizarres" — game_stats.game_id
+    // d'un jeu du marketplace est l'UUID brut de submitted_games (voir
+    // migration_30), pas un id lisible comme "tower-defense" — sans cette
+    // table, "Temps cumulé par jeu" affichait du charabia pour ces lignes.
+    admin.from("submitted_games").select("id, title"),
   ]);
+  const marketplaceTitleById = new Map((submittedGamesRes.data || []).map((g: any) => [g.id, g.title as string]));
 
   const profilesById = new Map((profilesRes.data || []).map((p: any) => [p.id, p]));
   const usersById = new Map((usersRes.data?.users || []).map((u: any) => [u.id, u]));
@@ -143,7 +149,7 @@ Deno.serve(async (req: Request) => {
     gameTotalsMap.set(g.game_id as string, (gameTotalsMap.get(g.game_id as string) || 0) + (g.total_secs as number || 0));
   }
   const gameTotals = Array.from(gameTotalsMap.entries())
-    .map(([gameId, totalSecs]) => ({ gameId, totalSecs }))
+    .map(([gameId, totalSecs]) => ({ gameId, totalSecs, gameTitle: marketplaceTitleById.get(gameId) || null }))
     .sort((a, b) => b.totalSecs - a.totalSecs);
 
   return new Response(
