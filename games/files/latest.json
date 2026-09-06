@@ -1,10 +1,10 @@
 {
-  "version": "0.2.52",
-  "notes": "Nouveau : \"Fait par : Ferra\" / \"Fait par : (pseudo)\" affiché aussi sur les cartes (pas juste la fiche), et bannière optionnelle pour les jeux du marketplace (sinon visuel générique à la place d'une carte vide).",
-  "pub_date": "2026-09-06T23:00:00Z",
+  "version": "0.2.53",
+  "notes": "Nouveau : onglet 🎧 Assistance — ouvre un ticket (Question/Bug/Remboursement/Autre) et discute avec l'équipe Ferra directement dans le Launcher. Un ticket \"Remboursement\" reçoit une réponse automatique et se ferme tout seul dès que la demande est traitée.",
+  "pub_date": "2026-09-07T09:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDErdnJVYXRPdk0xZFJ2R29FL3JlTVF4aGs4L1NDYkVITWdFMjNDdWVoMEJBZEdja2h0UkNMQ2xNL3Z5ZVJRVlBHZnZlcHhDQmljc0IxVWpjZDJxdncwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4Njg3OTA4CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi41Ml94NjQtc2V0dXAuZXhlCnFrZW9DcVZnSE5uamdyeEJ5RzY0N0E5VjFmWEVZdTNNdUVCaXp4TEFHVGRkWlBqYi9qZ3JxaTgyemJBZ3l1VzV6dkZWOXVnQXBsTVFRaTI1NlU1TEFBPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDlWUWVLU3dJanVSMURxODBGbUVKcThOY2ZNYmEyUlNkT3E5QzhxdzFUSDVhZVdPWWdSeDhIa3FPemRvOE1ISmdSOTNFWGgrZWdrMWZvVFBtM2Vad3d3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NjkwNDY4CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi41M194NjQtc2V0dXAuZXhlCnd0NXJlTHB4WnJTN0Z2ZTVZR05Odmxpb3dpWjRTUExXeTF6SVV0OW9mSGNDSWxGeHF0dXNhaHAyeDFzWmR0aVNXQ0IxNUllVS9YSG5WdWRXelZNWUJBPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
