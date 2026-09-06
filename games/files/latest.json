@@ -1,10 +1,10 @@
 {
-  "version": "0.2.55",
-  "notes": "Admin : 3e action de modération \"Mettre en examen\" (notif temps réel au vendeur), liste des bannis repliable, mot de passe de passage obligatoire pour bannir/créditer. Joueurs : likes ❤️ sur les jeux du marketplace, solde de crédits qui se met à jour en temps réel (retraits refusés, remboursements...).",
-  "pub_date": "2026-09-07T11:00:00Z",
+  "version": "0.2.56",
+  "notes": "Correctif : mot de passe de passage admin (erreur digest()). Marketplace : like ❤️ possible directement sur la fiche du jeu. Nouveau : Tablette de la Banque FERRA, profil joueur vitrine (jeux publiés), onglet Parrainage (20 crédits pour le parrain, 10 pour le filleul, 5 récompensés/semaine max).",
+  "pub_date": "2026-09-06T12:57:37Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDBaS25iU0l5Lzd4b1Jib1JEdkkrNUt2VkptTlBDL0FwTitiS1pUaTlwU21VcUp3cEE3TGg1NXVmRHJuWmRsaWFmL2o2V2h4WTFaRGI4QnY1NGlMa2dJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4Njk2NDYzCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi41NV94NjQtc2V0dXAuZXhlCk5HSUVRVEI1UUQreWM5bmlWU1lSZlNmN2xTU0tBeHRsV0NQdWlHRVIrc3dJUW55RmtwVGFKdjhWYzVQSVY4VmJTSFlFQVVBVU1HaCtiaDEyMTQrV0F3PT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTHlQZ09OM1RoNWk0YzNIUnU4M1NkeUpGdnZncFRqNTlId3hCOEFSK3VtRlNaU2laYnNrdjVkemw0cEdNZm02bEJZVElWUU5mNCtxLzNHRUxJVEpHK2c0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4Njk5NDU3CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi41Nl94NjQtc2V0dXAuZXhlCllOTXVCUmkwUTVLc0E1R0xOYjFuS2VSK3poTWJsOTJYWkR3eFRLcnU0eTYyenMyU3RnVGZUb09saHZYNUZxc1A4SGVudTRwMndhc3lHTHI3S1YybEJnPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
