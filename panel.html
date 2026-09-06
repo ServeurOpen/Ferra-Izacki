@@ -260,6 +260,7 @@
 
       <div class="panel-action-sub">
         <h4>💸 Demandes de retrait <span class="panel-action-hint" id="financeHint">— Portail créateurs</span></h4>
+        <button class="btn btn-primary btn-sm" id="adminPayAllBtn" style="width:auto;margin-bottom:10px;display:none;">💰 Payer TOUT</button>
         <div id="adminWithdrawalsList"><p style="color:var(--text-dim);font-size:12.5px;">Chargement…</p></div>
       </div>
 
@@ -642,14 +643,29 @@
   function formatEurosFromCents(cents) {
     return (cents / 100).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
   }
+  let payAllRequestsCache = [];
   async function loadAdminWithdrawals() {
     const el = document.getElementById('adminWithdrawalsList');
     const hint = document.getElementById('financeHint');
+    const payAllBtn = document.getElementById('adminPayAllBtn');
     const [{ data: requests, error }, { data: finance }] = await Promise.all([
       window.supabaseClient.rpc('admin_list_withdrawal_requests'),
       window.supabaseClient.rpc('admin_get_platform_finance'),
     ]);
+    payAllRequestsCache = requests || [];
     if (finance && hint) hint.textContent = `— Portail créateurs · Disponible pour les retraits : ${formatEurosFromCents(finance.availableCents)}`;
+    // "Payer TOUT" (06/09/2026, demande explicite) — total réel affiché,
+    // caché s'il n'y a rien en attente.
+    if (payAllBtn) {
+      if (!error && payAllRequestsCache.length > 0) {
+        const totalCents = payAllRequestsCache.reduce((sum, r) => sum + r.payout_cents, 0);
+        payAllBtn.style.display = '';
+        payAllBtn.disabled = false;
+        payAllBtn.textContent = `💰 Payer TOUT (${payAllRequestsCache.length} demande${payAllRequestsCache.length > 1 ? 's' : ''} — ${formatEurosFromCents(totalCents)})`;
+      } else {
+        payAllBtn.style.display = 'none';
+      }
+    }
     if (error) { el.innerHTML = `<p style="color:var(--danger);font-size:12.5px;">❌ Erreur : ${error.message}</p>`; return; }
     if (!requests || requests.length === 0) { el.innerHTML = `<p style="color:var(--text-dim);font-size:12.5px;">Aucune demande en attente.</p>`; return; }
     el.innerHTML = requests.map((r) => `
@@ -666,6 +682,52 @@
       </div>
     `).join('');
   }
+  // Un seul paiement — réutilisé par le clic individuel ET par "Payer
+  // TOUT" ci-dessous, pour ne jamais dupliquer l'appel réseau réel.
+  async function payOneWithdrawal(requestId) {
+    const { data: sessionData } = await window.supabaseClient.auth.getSession();
+    const token = sessionData.session?.access_token;
+    try {
+      const res = await fetch(`${window.FERRA_CONFIG.SUPABASE_URL}/functions/v1/process-withdrawal`, {
+        method: 'POST', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ requestId }),
+      });
+      const body = await res.json().catch(() => ({}));
+      if (res.ok) return { ok: true };
+      return { ok: false, reason: body.error || 'erreur' };
+    } catch (err) {
+      return { ok: false, reason: 'network' };
+    }
+  }
+  document.getElementById('adminPayAllBtn').addEventListener('click', async () => {
+    const btn = document.getElementById('adminPayAllBtn');
+    const list = payAllRequestsCache;
+    if (list.length === 0) return;
+    const totalCents = list.reduce((sum, r) => sum + r.payout_cents, 0);
+    if (!confirm(`Confirmer le paiement PayPal réel de ${list.length} demande(s), pour un total de ${formatEurosFromCents(totalCents)} ?`)) return;
+    btn.disabled = true;
+    let paid = 0, failed = 0, insufficientFunds = false;
+    // Un par un, JAMAIS en parallèle — le garde-fou de solvabilité relit le
+    // solde réel à chaque appel (voir process-withdrawal) ; des appels
+    // simultanés pourraient tous lire le même solde avant qu'aucun ne
+    // l'ait mis à jour, et laisser passer plus de paiements que ce que la
+    // plateforme a réellement encaissé. La sécurité avant la vitesse.
+    for (const r of list) {
+      btn.textContent = `💰 Paiement en cours… (${paid + failed + 1}/${list.length})`;
+      const result = await payOneWithdrawal(r.id);
+      if (result.ok) { paid++; }
+      else {
+        failed++;
+        if (result.reason === 'insufficient_platform_funds') { insufficientFunds = true; break; }
+      }
+    }
+    await loadAdminWithdrawals();
+    const skipped = list.length - paid - failed;
+    let summary = `✅ ${paid} paiement${paid > 1 ? 's' : ''} envoyé${paid > 1 ? 's' : ''}.`;
+    if (failed > 0) summary += ` ❌ ${failed} échec${failed > 1 ? 's' : ''}.`;
+    if (insufficientFunds) summary += ` 💸 Fonds de la plateforme insuffisants pour continuer — ${skipped} demande(s) restée(s) en attente.`;
+    alert(summary);
+  });
   document.getElementById('adminWithdrawalsList').addEventListener('click', async (e) => {
     const btn = e.target.closest('button[data-action]');
     if (!btn) return;
@@ -673,17 +735,9 @@
     if (btn.dataset.action === 'pay') {
       if (!confirm('Confirmer le paiement PayPal réel de cette demande ?')) return;
       btn.disabled = true; btn.textContent = 'Envoi…';
-      const { data: sessionData } = await window.supabaseClient.auth.getSession();
-      const token = sessionData.session?.access_token;
-      try {
-        const res = await fetch(`${window.FERRA_CONFIG.SUPABASE_URL}/functions/v1/process-withdrawal`, {
-          method: 'POST', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ requestId }),
-        });
-        const body = await res.json().catch(() => ({}));
-        if (res.ok) loadAdminWithdrawals();
-        else { btn.disabled = false; btn.textContent = '💸 Payer via PayPal'; alert(`Échec : ${body.error || 'erreur'}`); }
-      } catch (err) { btn.disabled = false; btn.textContent = '💸 Payer via PayPal'; alert('Échec réseau'); }
+      const result = await payOneWithdrawal(requestId);
+      if (result.ok) loadAdminWithdrawals();
+      else { btn.disabled = false; btn.textContent = '💸 Payer via PayPal'; alert(`Échec : ${result.reason}`); }
     } else if (btn.dataset.action === 'reject') {
       const reasonInput = document.querySelector(`input[data-reason-for="${requestId}"]`);
       const reason = (reasonInput?.value || '').trim();
