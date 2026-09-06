@@ -1,10 +1,10 @@
 {
-  "version": "0.2.62",
-  "notes": "Boutique réorganisée : nos jeux en premier, puis \"Sortir mon jeu\", puis les jeux des joueurs (avec une barre de recherche par titre), et la Boutique Profil tout en bas.",
-  "pub_date": "2026-09-06T21:31:43Z",
+  "version": "0.2.63",
+  "notes": "Correctif : le cadre de la case \"jour 7\" (récompense quotidienne) débordait du cadre gris. Parrainage : toast dédié pour le filleul et notification visible pour le parrain quand la récompense est distribuée. \"Sortir mon jeu\" précise maintenant la rémunération selon les ventes.",
+  "pub_date": "2026-09-06T22:10:28Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTCtBeTBOcDNUb1VManZGVDJLTlZZQ1dmMzMxUEZxUG9KeDF1V3JlODRNRHcydElHVEpseGlCSmpnM2xNS0drTUdYMDkrNjdZeG5OMWpzRVljYkJCZHc4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NzMwMzAzCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi42Ml94NjQtc2V0dXAuZXhlCmRMLzNHZTJyZUVSQmU5UVVxbHl3VWczaTZSZDZ2M2ZRUFk4Z3ZMQ3dEeTRlQUh0T05YQ2EvVkFjZE1UcnBPQzErRlZqZ3RhMzZ6LzZCOHY3MFJmL0NRPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDFQdy9wK0p1bjdaZDBKd3pPLzBQdWZYRFJLTXlGdFdGZkVxUXEwbGF3ZUNHUmxPMVFyd3QxL0xVMG16b3R6TThwNHlHRHhUQkZ6TFFUTVVZQTI2eUFVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NzMyNjI4CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi42M194NjQtc2V0dXAuZXhlCkt0RVplK1pncmhlUnpmN3VqVjZDT3lSYU1vSFN6eVpVaXFMb1N5dXpSaE45OHUwQ3hXTnN3dXZ2ZnVIc1EwcnoyVnVOT2F3cUczaFp2Q3prcnllaERnPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
