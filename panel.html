@@ -113,6 +113,41 @@
     border-radius:9px;color:var(--text);padding:9px 12px;font-size:13px;font-family:inherit;margin-bottom:12px;
   }
   .panel-search-input:focus{outline:none;border-color:var(--copper-glow);}
+
+  /* Service Client (06/09/2026) — même vocabulaire visuel que le Launcher. */
+  .ticket-modal-overlay{
+    position:fixed;inset:0;background:rgba(6,7,9,0.68);backdrop-filter:blur(3px);
+    display:none;align-items:center;justify-content:center;z-index:200;
+  }
+  .ticket-modal-overlay.open{display:flex;}
+  .ticket-modal-card{
+    width:560px;max-width:92vw;max-height:84vh;overflow-y:auto;border-radius:16px;
+    background:var(--bg-panel);border:1px solid var(--panel-edge);box-shadow:0 24px 60px rgba(0,0,0,0.5);
+    position:relative;padding:30px;
+  }
+  .ticket-modal-close{
+    position:absolute;top:16px;right:16px;background:none;border:none;color:var(--text-dim);
+    font-size:18px;cursor:pointer;
+  }
+  .ticket-modal-close:hover{color:var(--text);}
+  .ticket-thread-head{display:flex;gap:8px;align-items:center;}
+  .ticket-category-badge{
+    font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;
+    background:rgba(255,255,255,0.06);color:var(--text-dim);text-transform:uppercase;letter-spacing:0.3px;
+  }
+  .ticket-status-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;}
+  .ticket-status-badge.open{background:rgba(94,209,132,0.15);color:var(--valid);}
+  .ticket-status-badge.closed{background:rgba(255,255,255,0.06);color:var(--text-dim);}
+  .ticket-messages{display:flex;flex-direction:column;gap:10px;max-height:340px;overflow-y:auto;padding:4px 2px 12px;margin-bottom:6px;}
+  .ticket-message{max-width:80%;padding:9px 13px;border-radius:12px;font-size:13px;line-height:1.5;}
+  .ticket-message-meta{font-size:10.5px;opacity:0.65;margin-top:4px;}
+  .ticket-message.player{align-self:flex-start;background:var(--bg-panel-2);border:1px solid var(--panel-edge);border-bottom-left-radius:3px;}
+  .ticket-message.admin{align-self:flex-end;background:linear-gradient(180deg,var(--gold),var(--copper-dark));color:#141014;border-bottom-right-radius:3px;}
+  .ticket-message.system{
+    align-self:center;background:rgba(94,209,132,0.12);border:1px solid rgba(94,209,132,0.3);
+    color:var(--valid);font-weight:600;text-align:center;max-width:92%;
+  }
+  .ticket-row-cursor{cursor:pointer;}
 </style>
 </head>
 <body>
@@ -217,6 +252,15 @@
       <div class="panel-action-sub">
         <h4>↩ Demandes de remboursement</h4>
         <div id="adminRefundsList"><p style="color:var(--text-dim);font-size:12.5px;">Chargement…</p></div>
+      </div>
+
+      <!-- Service Client (06/09/2026, demande explicite) — voir
+           migration_37_support_tickets.sql. Un ticket "Remboursement" se
+           ferme et répond tout seul dès que la demande liée est traitée
+           ci-dessus (admin_process_refund). -->
+      <div class="panel-action-sub">
+        <h4>🎧 Tickets d'assistance <span class="panel-action-hint" id="ticketsHint"></span></h4>
+        <div id="adminTicketsList"><p style="color:var(--text-dim);font-size:12.5px;">Chargement…</p></div>
       </div>
     </div>
 
@@ -486,6 +530,12 @@
     loadAdminPendingGames();
     loadAdminWithdrawals();
     loadAdminRefunds();
+    // Défini dans le 2e <script> en bas de page (autre IIFE, voir
+    // loadAdminTicketsPanel) — se charge déjà tout seul au premier
+    // affichage ; ce garde-fou couvre juste le clic "🔄 Actualiser" et
+    // les 2 succès de remboursement plus bas, où window.loadAdminTicketsPanel
+    // est déjà défini à coup sûr (page entièrement chargée à ce moment-là).
+    if (window.loadAdminTicketsPanel) window.loadAdminTicketsPanel();
   }
 
   // ---- 🎮 Modération "Sortir mon jeu" (05/09/2026, demande explicite) —
@@ -674,7 +724,7 @@
       if (!confirm('Confirmer le remboursement ? Les crédits seront rendus à l\'acheteur et repris au vendeur.')) return;
       btn.disabled = true;
       const { data, error } = await window.supabaseClient.rpc('admin_process_refund', { p_request_id: requestId, p_approve: true, p_reason: null });
-      if (!error && data && data.ok) { await sendRefundResultEmail(requestId); loadAdminRefunds(); }
+      if (!error && data && data.ok) { await sendRefundResultEmail(requestId); loadAdminRefunds(); if (window.loadAdminTicketsPanel) window.loadAdminTicketsPanel(); }
       else { btn.disabled = false; alert(`Échec : ${(data && data.reason) || (error && error.message) || 'erreur'}`); }
     } else if (btn.dataset.action === 'reject') {
       const reasonInput = document.querySelector(`input[data-reason-for="${requestId}"]`);
@@ -682,7 +732,7 @@
       if (!reason) { alert('Indique une raison de refus.'); return; }
       btn.disabled = true;
       const { data, error } = await window.supabaseClient.rpc('admin_process_refund', { p_request_id: requestId, p_approve: false, p_reason: reason });
-      if (!error && data && data.ok) { await sendRefundResultEmail(requestId); loadAdminRefunds(); }
+      if (!error && data && data.ok) { await sendRefundResultEmail(requestId); loadAdminRefunds(); if (window.loadAdminTicketsPanel) window.loadAdminTicketsPanel(); }
       else { btn.disabled = false; alert(`Échec : ${(data && data.reason) || (error && error.message) || 'erreur'}`); }
     }
   });
@@ -801,6 +851,148 @@
 
   document.getElementById('panelRefreshBtn').addEventListener('click', loadPanel);
   loadPanel();
+})();
+</script>
+
+<!-- Service Client — conversation d'un ticket (06/09/2026, demande
+     explicite) — voir migration_37_support_tickets.sql. Un ticket
+     "Remboursement" se ferme et répond tout seul dès que la demande liée
+     est traitée dans "Demandes de remboursement" ci-dessus. -->
+<div class="ticket-modal-overlay" id="ticketModal">
+  <div class="ticket-modal-card">
+    <button class="ticket-modal-close" id="ticketModalClose" title="Fermer">✕</button>
+    <div class="ticket-thread-head">
+      <span class="ticket-category-badge" id="ticketModalCategory">—</span>
+      <span class="ticket-status-badge" id="ticketModalStatus">—</span>
+    </div>
+    <h2 id="ticketModalSubject" style="margin:8px 0 4px;">—</h2>
+    <p style="margin:0 0 16px;color:var(--text-dim);font-size:12px;" id="ticketModalUser"></p>
+    <div class="ticket-messages" id="ticketModalMessages"></div>
+    <p id="ticketModalRefundNote" style="display:none;color:var(--copper-glow);font-size:12.5px;margin-top:4px;">💳 Remboursement lié — accepte/refuse dans "Demandes de remboursement" ci-dessus, le ticket se ferme et répond tout seul.</p>
+    <div id="ticketModalReplyRow">
+      <textarea id="ticketModalReplyInput" class="panel-search-input" rows="2" style="margin-bottom:0;resize:vertical;" placeholder="Écris une réponse…"></textarea>
+      <div style="display:flex;gap:8px;margin-top:8px;">
+        <button class="btn btn-primary btn-sm" style="width:auto;" id="ticketModalReplyBtn">Envoyer</button>
+        <button class="btn btn-danger btn-sm" style="width:auto;" id="ticketModalCloseTicketBtn">🔒 Fermer le ticket</button>
+      </div>
+    </div>
+    <p id="ticketModalClosedNote" style="display:none;color:var(--text-dim);font-size:12.5px;margin-top:10px;">🔒 Ce ticket est fermé.</p>
+  </div>
+</div>
+<script>
+(function () {
+  let ticketsCache = [];
+  let openTicketId = null;
+  const CATEGORY_LABELS = {
+    question: { icon: '❓', label: 'Question' },
+    bug: { icon: '🐞', label: 'Bug' },
+    refund: { icon: '💳', label: 'Remboursement' },
+    other: { icon: '📩', label: 'Autre' },
+  };
+  function ticketDateStr(iso) {
+    return new Date(iso).toLocaleString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+  }
+  async function loadAdminTicketsPanel() {
+    const el = document.getElementById('adminTicketsList');
+    if (!el) return;
+    const { data, error } = await window.supabaseClient.rpc('admin_list_support_tickets');
+    if (error) { el.innerHTML = `<p style="color:var(--danger);font-size:12.5px;">❌ Erreur : ${error.message}</p>`; return; }
+    ticketsCache = data || [];
+    const openCount = ticketsCache.filter((t) => t.status === 'open').length;
+    const hint = document.getElementById('ticketsHint');
+    if (hint) hint.textContent = openCount > 0 ? `— ${openCount} ouvert(s)` : '';
+    if (ticketsCache.length === 0) { el.innerHTML = `<p style="color:var(--text-dim);font-size:12.5px;">Aucun ticket pour l'instant.</p>`; return; }
+    el.innerHTML = ticketsCache.map((t) => {
+      const cat = CATEGORY_LABELS[t.category] || { icon: '📩', label: t.category };
+      return `
+      <div class="admin-pending-game-card ticket-row-cursor" data-ticket-id="${t.id}">
+        <div class="admin-pending-game-head">
+          <h5>${cat.icon} ${t.subject}</h5>
+          <span class="admin-pending-game-meta">${t.user_email} · ${ticketDateStr(t.created_at)}</span>
+        </div>
+        <p class="admin-pending-game-desc">
+          <span class="ticket-category-badge">${cat.label}</span>
+          <span class="ticket-status-badge ${t.status}">${t.status === 'open' ? 'Ouvert' : 'Fermé'}</span>
+        </p>
+      </div>`;
+    }).join('');
+    el.querySelectorAll('[data-ticket-id]').forEach((row) => {
+      row.addEventListener('click', () => openTicketModal(row.dataset.ticketId));
+    });
+  }
+  function renderTicketMessages(messages) {
+    const box = document.getElementById('ticketModalMessages');
+    box.innerHTML = (messages || []).map((m) => {
+      const cls = m.sender === 'admin' ? 'admin' : m.sender === 'system' ? 'system' : 'player';
+      return `
+      <div class="ticket-message ${cls}">
+        ${String(m.message).replace(/</g, '&lt;')}
+        <div class="ticket-message-meta">${ticketDateStr(m.created_at)}</div>
+      </div>`;
+    }).join('');
+    box.scrollTop = box.scrollHeight;
+  }
+  async function openTicketModal(ticketId) {
+    const ticket = ticketsCache.find((t) => t.id === ticketId);
+    if (!ticket) return;
+    openTicketId = ticketId;
+    const cat = CATEGORY_LABELS[ticket.category] || { icon: '📩', label: ticket.category };
+    document.getElementById('ticketModalCategory').innerHTML = `${cat.icon} ${cat.label}`;
+    const statusEl = document.getElementById('ticketModalStatus');
+    statusEl.textContent = ticket.status === 'open' ? 'Ouvert' : 'Fermé';
+    statusEl.className = `ticket-status-badge ${ticket.status}`;
+    document.getElementById('ticketModalSubject').textContent = ticket.subject;
+    document.getElementById('ticketModalUser').textContent = ticket.user_email;
+    const isPendingRefund = !!ticket.refund_request_id && ticket.status === 'open';
+    document.getElementById('ticketModalRefundNote').style.display = isPendingRefund ? '' : 'none';
+    document.getElementById('ticketModalReplyRow').style.display = ticket.status === 'open' ? '' : 'none';
+    document.getElementById('ticketModalClosedNote').style.display = ticket.status === 'closed' ? '' : 'none';
+    document.getElementById('ticketModalReplyInput').value = '';
+    const { data: msgs } = await window.supabaseClient
+      .from('support_ticket_messages').select('sender, message, created_at').eq('ticket_id', ticketId).order('created_at', { ascending: true });
+    renderTicketMessages(msgs);
+    document.getElementById('ticketModal').classList.add('open');
+  }
+  document.getElementById('ticketModalClose').addEventListener('click', () => { document.getElementById('ticketModal').classList.remove('open'); openTicketId = null; });
+  document.getElementById('ticketModal').addEventListener('click', (e) => {
+    if (e.target.id === 'ticketModal') { e.currentTarget.classList.remove('open'); openTicketId = null; }
+  });
+  document.getElementById('ticketModalReplyBtn').addEventListener('click', async () => {
+    if (!openTicketId) return;
+    const input = document.getElementById('ticketModalReplyInput');
+    const text = input.value.trim();
+    if (!text) return;
+    const btn = document.getElementById('ticketModalReplyBtn');
+    btn.disabled = true;
+    const { data, error } = await window.supabaseClient.rpc('send_ticket_message', { p_ticket_id: openTicketId, p_message: text });
+    btn.disabled = false;
+    if (!error && data && data.ok) {
+      input.value = '';
+      const { data: msgs } = await window.supabaseClient
+        .from('support_ticket_messages').select('sender, message, created_at').eq('ticket_id', openTicketId).order('created_at', { ascending: true });
+      renderTicketMessages(msgs);
+    } else {
+      alert(`Échec : ${(data && data.reason) || (error && error.message) || 'erreur'}`);
+    }
+  });
+  document.getElementById('ticketModalCloseTicketBtn').addEventListener('click', async () => {
+    if (!openTicketId) return;
+    if (!confirm('Fermer ce ticket ?')) return;
+    const { data, error } = await window.supabaseClient.rpc('admin_close_ticket', { p_ticket_id: openTicketId });
+    if (!error && data && data.ok) {
+      document.getElementById('ticketModal').classList.remove('open');
+      openTicketId = null;
+      loadAdminTicketsPanel();
+    }
+  });
+  window.loadAdminTicketsPanel = loadAdminTicketsPanel;
+  // Auto-chargement au premier affichage — loadPanel() (autre IIFE, plus
+  // haut dans la page) s'exécute avant que CE script ne soit même parsé,
+  // donc son propre appel à window.loadAdminTicketsPanel n'aurait rien
+  // trouvé lors du tout 1er chargement ; celui-ci couvre ce cas précis
+  // (les rechargements suivants — bouton Actualiser, remboursement traité
+  // — passent eux par l'appel plus haut, une fois ce script bien chargé).
+  loadAdminTicketsPanel();
 })();
 </script>
 </body>
