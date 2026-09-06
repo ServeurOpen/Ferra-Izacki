@@ -1,10 +1,10 @@
 {
-  "version": "0.2.51",
-  "notes": "Correctif : la sélection de captures d'écran (soumission d'un jeu au marketplace) s'accumule maintenant sur plusieurs clics au lieu de remplacer la précédente à chaque fois — vignettes avec bouton ✕ pour en retirer une.",
-  "pub_date": "2026-09-06T22:00:00Z",
+  "version": "0.2.52",
+  "notes": "Nouveau : \"Fait par : Ferra\" / \"Fait par : (pseudo)\" affiché aussi sur les cartes (pas juste la fiche), et bannière optionnelle pour les jeux du marketplace (sinon visuel générique à la place d'une carte vide).",
+  "pub_date": "2026-09-06T23:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDlLVTExQTRxbEx6NU9GNklWb2R4UGxkcjFDTURWNUpVK2loKy8rREJYQ2tSb3ZIaGdYUkRmVTRYbUZlcTdsWkhLaXVGMEtJbFB5aVRxL29RUUluWHdVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NjQ5MzcxCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi41MV94NjQtc2V0dXAuZXhlCkZPZXFQR0lYeHlGZ0JCak0wRW9ZTkJDMlhlU2RGS0xuWnltdDlYY0lyMkxIN3QzeGxsYkZIVU56QzdpOFlhbXVFMHZjckRIT0Q1Y2JxMnJCV3liYUN3PT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDErdnJVYXRPdk0xZFJ2R29FL3JlTVF4aGs4L1NDYkVITWdFMjNDdWVoMEJBZEdja2h0UkNMQ2xNL3Z5ZVJRVlBHZnZlcHhDQmljc0IxVWpjZDJxdncwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4Njg3OTA4CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi41Ml94NjQtc2V0dXAuZXhlCnFrZW9DcVZnSE5uamdyeEJ5RzY0N0E5VjFmWEVZdTNNdUVCaXp4TEFHVGRkWlBqYi9qZ3JxaTgyemJBZ3l1VzV6dkZWOXVnQXBsTVFRaTI1NlU1TEFBPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
