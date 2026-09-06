@@ -59,7 +59,7 @@ drop function if exists public.admin_list_pending_games();
 create function public.admin_list_pending_games()
 returns table(
   id uuid, seller_id uuid, seller_email text, title text, description text,
-  price_cents int, file_type text, file_path text, file_size_bytes bigint,
+  price_credits int, file_type text, file_path text, file_size_bytes bigint,
   screenshot_paths text[], created_at timestamptz, status text
 )
 language plpgsql
