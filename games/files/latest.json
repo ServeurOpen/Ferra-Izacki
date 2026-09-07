@@ -1,10 +1,10 @@
 {
-  "version": "0.2.72",
-  "notes": "Panel Admin : nouveau bouton pour retirer des crédits à un joueur (même mot de passe de passage, solde jamais négatif).",
-  "pub_date": "2026-09-07T21:26:13Z",
+  "version": "0.2.73",
+  "notes": "Classement : nouvelle catégorie « Achats de crédits » (top soutiens, en crédits — jamais en euros).",
+  "pub_date": "2026-09-07T21:39:17Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTC9iRDlYYTJlZXlDWU1pLzJJRlJLdWY1SEM1Z0J6WmQ4eUIzQ2NuUC9Ya1gwN3lQajh6UU5RRERpMW1pK2ZLcGVjdE8rVW1EQUdoMEw3N204N09oYXdNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4ODE2MzczCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi43Ml94NjQtc2V0dXAuZXhlCktDbGlFVkxCSWhJMFp3a1J3eHVPV0NBVys0U0xBKzh3MUdYWmpoQ1lZdmlKRk9XYkxoU1ZFNWMxMnVKajFtMTJEVW9XekFSVHc5TGs4VlJLWDUycUFBPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDVsK0JyUUhwQ1A1dEZCUlh6SFQzb2RWaS92bElIUlNxMm9wRUE1TmJFa2E1N0NaWkRjK0pvR25mQ1MzbmY4YTdMRi9aU1ZEMXNQcGV5ckN6bUM3Y2djPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4ODE3MTU3CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi43M194NjQtc2V0dXAuZXhlClFBT3h1Ly92WTZ3SlNJK0JQcE85b1d6OS9aWTFobUxic3FxVGZraVZnV1Q0NlgvYTk4ZzVRWUp1ZXZrQ3dvc05UNXVpeDZIK2FzajAwcTkwNXhuQ0JRPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
