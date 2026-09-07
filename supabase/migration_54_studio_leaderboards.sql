@@ -39,13 +39,13 @@ begin
       ), ranked as (
         select a.uid, a.val,
                coalesce(p.display_name, p.username, 'Joueur') as dn,
-               p.avatar_url,
+               p.avatar_url as av,
                coalesce(p.is_private, false) as priv,
                row_number() over (order by a.val desc) as rnk
         from agg a join public.profiles p on p.id = a.uid
         where a.val > 0
       )
-      select uid, dn, avatar_url, val, rnk from ranked
+      select uid, dn, av, val, rnk::integer from ranked
       where not priv or uid = auth.uid()
       order by rnk limit v_limit;
 
@@ -58,13 +58,13 @@ begin
         select p.id as uid,
                (p.tokens + p.token_playtime_remainder_secs / 60.0)::numeric as val,
                coalesce(p.display_name, p.username, 'Joueur') as dn,
-               p.avatar_url,
+               p.avatar_url as av,
                coalesce(p.is_private, false) as priv,
                row_number() over (order by (p.tokens + p.token_playtime_remainder_secs / 60.0) desc) as rnk
         from public.profiles p
         where p.tokens > 0
       )
-      select uid, dn, avatar_url, val, rnk from ranked
+      select uid, dn, av, val, rnk::integer from ranked
       where not priv or uid = auth.uid()
       order by rnk limit v_limit;
 
@@ -73,13 +73,13 @@ begin
       with ranked as (
         select p.id as uid, p.credits::numeric as val,
                coalesce(p.display_name, p.username, 'Joueur') as dn,
-               p.avatar_url,
+               p.avatar_url as av,
                coalesce(p.is_private, false) as priv,
                row_number() over (order by p.credits desc) as rnk
         from public.profiles p
         where p.credits > 0
       )
-      select uid, dn, avatar_url, val, rnk from ranked
+      select uid, dn, av, val, rnk::integer from ranked
       where not priv or uid = auth.uid()
       order by rnk limit v_limit;
 
@@ -96,12 +96,12 @@ begin
       ), ranked as (
         select a.uid, a.val,
                coalesce(p.display_name, p.username, 'Joueur') as dn,
-               p.avatar_url,
+               p.avatar_url as av,
                coalesce(p.is_private, false) as priv,
                row_number() over (order by a.val desc) as rnk
         from agg a join public.profiles p on p.id = a.uid
       )
-      select uid, dn, avatar_url, val, rnk from ranked
+      select uid, dn, av, val, rnk::integer from ranked
       where not priv or uid = auth.uid()
       order by rnk limit v_limit;
 
@@ -118,12 +118,12 @@ begin
       ), ranked as (
         select a.uid, a.val,
                coalesce(p.display_name, p.username, 'Joueur') as dn,
-               p.avatar_url,
+               p.avatar_url as av,
                coalesce(p.is_private, false) as priv,
                row_number() over (order by a.val desc) as rnk
         from agg a join public.profiles p on p.id = a.uid
       )
-      select uid, dn, avatar_url, val, rnk from ranked
+      select uid, dn, av, val, rnk::integer from ranked
       where not priv or uid = auth.uid()
       order by rnk limit v_limit;
 
