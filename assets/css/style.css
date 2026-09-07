@@ -90,6 +90,16 @@ button{font-family:inherit;cursor:pointer;}
 }
 .nav-toggle{display:none;}
 
+/* Icône Discord dans la navigation (07/09/2026, demande explicite : "liée
+   le au site et launcher... avec un petit logo discord") — mène vers le
+   serveur officiel Izacki. */
+.nav-discord{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:999px;color:var(--text-dim);
+  transition:color .15s,background .15s;
+}
+.nav-discord:hover{color:#5865F2;background:rgba(88,101,242,0.12);}
+
 /* Widget connexion/inscription en coin haut-droit, sur TOUTES les pages du
    site (plus seulement le forum) — même compte partout (site/forum/launcher),
    donc pas besoin d'aller sur le forum juste pour se connecter. Rempli en JS
