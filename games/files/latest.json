@@ -1,10 +1,10 @@
 {
-  "version": "0.2.68",
-  "notes": "Notification de ventes pour les créateurs : pop-up groupé au login récapitulant les ventes reçues pendant l'absence (montant total + détail par vente, jeu/montant/acheteur).",
-  "pub_date": "2026-09-07T06:28:08Z",
+  "version": "0.2.69",
+  "notes": "Suppression de compte (RGPD) dans Paramètres + suivi d'erreurs léger pour l'admin (Panel Admin).",
+  "pub_date": "2026-09-07T08:36:47Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDJMcXFZeGpiMXk4ZnhZbmJtaE5aWnFRanpwbmdQNExqWmVaNG8ySlJuTWFOOEZhM09SakZRZGNRWkpVendhU1kvYTgyL0FpWVB6TGpmUU04WExMRnc4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NzYyNDg4CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi42OF94NjQtc2V0dXAuZXhlCnlKV3d5elVqdXJFSjJoS0owMWJUcGdydVlkOTNjQUtHdmt5bnlKTlg1dHk2NEo3b3ZGOTlPTjFjNEFyd0JPeHFhSEkyYzJDT0lJa0twNUFFRldVVkN3PT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDhPUHVwTC90d1owZ2RJaitRTUtDQUs4dlNRWFp5dlY3STZzOThjOFFYM01Fay83clVaYjdiRjlRNGEwbFMydk1EVU1wcTRUQkhkTEVRUWFrK2VCSUFjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4NzcwMjA3CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi42OV94NjQtc2V0dXAuZXhlCkRNSDF0VThidkMzZnhZZHNGL0txelgzanhhMmVEUWlvcWtzNUpiMnQycW9ydTRtY0JSeTB1WnpDU2FJYm1jT2Nta3d3MjNxUHFXVzdYYVlTditoQUFnPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
