@@ -62,7 +62,7 @@ Deno.serve(async (req: Request) => {
   // joueurs (RLS ignorée) et la liste des emails (schéma auth).
   const admin = createClient(SUPABASE_URL, SERVICE_ROLE_KEY);
 
-  const [usersRes, profilesRes, sessionsRes, gameStatsRes, submittedGamesRes] = await Promise.all([
+  const [usersRes, profilesRes, sessionsRes, gameStatsRes, submittedGamesRes, errorReportsRes] = await Promise.all([
     admin.auth.admin.listUsers({ perPage: 1000 }),
     admin.from("profiles").select("id, username, display_name, player_number"),
     admin.from("launcher_sessions").select("user_id, started_at, ended_at, last_heartbeat"),
@@ -72,6 +72,10 @@ Deno.serve(async (req: Request) => {
     // migration_30), pas un id lisible comme "tower-defense" — sans cette
     // table, "Temps cumulé par jeu" affichait du charabia pour ces lignes.
     admin.from("submitted_games").select("id, title"),
+    // 07/09/2026, suivi d'erreurs léger (voir migration_53) : les 200
+    // derniers rapports, tous joueurs confondus — RLS empêche un joueur de
+    // lire ceux des autres, seul ce rôle de service le peut.
+    admin.from("error_reports").select("id, user_id, source, message, stack, app_version, os_info, created_at").order("created_at", { ascending: false }).limit(200),
   ]);
   const marketplaceTitleById = new Map((submittedGamesRes.data || []).map((g: any) => [g.id, g.title as string]));
 
@@ -152,12 +156,29 @@ Deno.serve(async (req: Request) => {
     .map(([gameId, totalSecs]) => ({ gameId, totalSecs, gameTitle: marketplaceTitleById.get(gameId) || null }))
     .sort((a, b) => b.totalSecs - a.totalSecs);
 
+  // ---- Suivi d'erreurs (07/09/2026) : tag joueur lisible réutilisant les
+  // mêmes maps que "players" ci-dessus. ----
+  const errorReports = (errorReportsRes.data || []).map((r: any) => {
+    const profile: any = r.user_id ? profilesById.get(r.user_id) || {} : {};
+    return {
+      id: r.id,
+      userTag: r.user_id ? (profile.player_number ? `${profile.username}#${profile.player_number}` : profile.username || "?") : null,
+      source: r.source,
+      message: r.message,
+      stack: r.stack,
+      appVersion: r.app_version,
+      osInfo: r.os_info,
+      createdAt: r.created_at,
+    };
+  });
+
   return new Response(
     JSON.stringify({
       connectionsTotal: sessions.length,
       connectionsByDay,
       players,
       gameTotals,
+      errorReports,
     }),
     { status: 200, headers: { ...CORS_HEADERS, "Content-Type": "application/json" } }
   );
