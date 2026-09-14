@@ -1,10 +1,10 @@
 {
-  "version": "0.2.73",
-  "notes": "Classement : nouvelle catégorie « Achats de crédits » (top soutiens, en crédits — jamais en euros).",
-  "pub_date": "2026-09-07T21:39:17Z",
+  "version": "0.2.74",
+  "notes": "FERRA débloqué dans le launcher (le jeu affichait encore « Développement en cours » alors qu'il est publié à jour).",
+  "pub_date": "2026-09-13T21:31:28Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDVsK0JyUUhwQ1A1dEZCUlh6SFQzb2RWaS92bElIUlNxMm9wRUE1TmJFa2E1N0NaWkRjK0pvR25mQ1MzbmY4YTdMRi9aU1ZEMXNQcGV5ckN6bUM3Y2djPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg4ODE3MTU3CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi43M194NjQtc2V0dXAuZXhlClFBT3h1Ly92WTZ3SlNJK0JQcE85b1d6OS9aWTFobUxic3FxVGZraVZnV1Q0NlgvYTk4ZzVRWUp1ZXZrQ3dvc05UNXVpeDZIK2FzajAwcTkwNXhuQ0JRPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTHh1UnIyeUJoT0RxSjR1SXk5T0czc2JUTEsxNFJvSUVOMjV3YmVoMlJ4RHR6NGN6Y01kMC9jNlhjOHFadVcxTUxhdmg2cHByNzErNWlvUDFtQlhaWlFBPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg5MzM1MDQ5CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi43NF94NjQtc2V0dXAuZXhlCkc4RlU2aUFxQUJtL0FMN2NBeE4yRndOTG9BOE5nTDFCakVCU0E4NndEeERzeU9yMjVJMnZ5RjUybnM5a3YzbjV3d0l4aEhoWW5sS21YUDd6OWxjS0RRPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
