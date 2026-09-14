@@ -1,10 +1,10 @@
 {
-  "version": "0.2.74",
-  "notes": "FERRA débloqué dans le launcher (le jeu affichait encore « Développement en cours » alors qu'il est publié à jour).",
-  "pub_date": "2026-09-13T21:31:28Z",
+  "version": "0.2.75",
+  "notes": "Compteur d'heures de développement (menu Admin) : la v0.2.74 avait été buildée avant que ce code soit committé, il était donc absent de l'exe publié — corrigé, la fonctionnalité est maintenant bien incluse.",
+  "pub_date": "2026-09-14T12:59:26Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTHh1UnIyeUJoT0RxSjR1SXk5T0czc2JUTEsxNFJvSUVOMjV3YmVoMlJ4RHR6NGN6Y01kMC9jNlhjOHFadVcxTUxhdmg2cHByNzErNWlvUDFtQlhaWlFBPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg5MzM1MDQ5CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi43NF94NjQtc2V0dXAuZXhlCkc4RlU2aUFxQUJtL0FMN2NBeE4yRndOTG9BOE5nTDFCakVCU0E4NndEeERzeU9yMjVJMnZ5RjUybnM5a3YzbjV3d0l4aEhoWW5sS21YUDd6OWxjS0RRPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDdJTEVpUTFsYVl5Zm9GcWlCQVZwOFVLRkR6UENSOEViQVliR2I4Vk91cUVuYS81QlhoTVIwQUluQmx4aGdwckxNZzZRbzhzbjVFdWFTazdXaFFTQXdzPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg5MzkwNzQyCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi43NV94NjQtc2V0dXAuZXhlCk1yYkJwcTB1Ry9HcW9rL0N1T0U0NlM4RkVRUjdpQUtoYWxvUU1aRG95ZWNPeGc1cHZ5dEtkQldYeHNYbllESEs3U05HU3hGcUMwU3hGWkFLcU9tZUNnPT0K",
       "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
     }
   }
