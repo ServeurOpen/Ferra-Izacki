@@ -251,6 +251,27 @@ function ferraLogVisit(session) {
 }
 
 // ============================================================
+// Heures de développement — heartbeat côté SITE (14/09/2026, demande
+// explicite : "un compteur d'heure de développement... le site... un
+// mécanisme qui monte dès que le launcher, site, ou jeux est allumé").
+// Même principe que le heartbeat Launcher (voir startLauncherSessionTracking
+// côté main.ts, qui appelle logDevTime sur le même tick) : toutes les 60s
+// tant que la page reste ouverte, SI le compte
+// connecté est l'admin (voir migration_57_dev_hours.sql — le RPC log_dev_time
+// refuse silencieusement pour tout autre compte, jamais bloquant pour un
+// joueur normal). Un intervalle par page (pas de suivi cross-page), démarré
+// depuis ferraRenderNavAuth qui tourne déjà sur CHAQUE page du site.
+// ============================================================
+let ferraDevHoursTimer = null;
+function ferraStartDevHoursHeartbeat(session) {
+  if (ferraDevHoursTimer) clearInterval(ferraDevHoursTimer);
+  if (!ferraIsAdminModeActive(session)) return;
+  ferraDevHoursTimer = setInterval(() => {
+    window.supabaseClient.rpc('log_dev_time', { p_source: 'site', p_secs: 60 }).then(() => {}, () => {});
+  }, 60_000);
+}
+
+// ============================================================
 // Bannissement du SITE (05/09/2026, demande explicite : "le site peut ban
 // site et launcher, le launcher que launcher") — un ban de portée 'site'
 // ou 'both' bloque le site en plein écran, exactement comme le Launcher
@@ -389,6 +410,7 @@ async function ferraRenderNavAuth(elId, prefix) {
   ferraApplyAdminModeStyling(session);
   ferraLogVisit(session);
   ferraCheckBanAndBlock(session);
+  ferraStartDevHoursHeartbeat(session);
   if (session) {
     const adminBadge = ferraIsAdminModeActive(session) ? `<span class="admin-mode-badge">🛡️ Admin</span>` : '';
     // Lien Panel (05/09/2026) — visible UNIQUEMENT en mode admin actif,
