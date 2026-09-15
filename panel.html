@@ -1055,11 +1055,19 @@
     const { data, error } = await window.supabaseClient.rpc('admin_list_support_tickets');
     if (error) { el.innerHTML = `<p style="color:var(--danger);font-size:12.5px;">❌ Erreur : ${error.message}</p>`; return; }
     ticketsCache = data || [];
-    const openCount = ticketsCache.filter((t) => t.status === 'open').length;
+    // Séparés en 2 groupes (15/09/2026, demande explicite : "il faudrait un
+    // menu déroulant [pour les] tickets fermés") — même raisonnement déjà
+    // appliqué à "🚫 Joueurs actuellement bannis" juste au-dessus (06/09/2026,
+    // "il peut y en avoir beaucoup... pouvoir la replier/déplier") : sans ça,
+    // les tickets déjà traités s'accumulent indéfiniment et noient les rares
+    // tickets ouverts qui ont réellement besoin d'attention.
+    const openTickets = ticketsCache.filter((t) => t.status === 'open');
+    const closedTickets = ticketsCache.filter((t) => t.status !== 'open');
+    const openCount = openTickets.length;
     const hint = document.getElementById('ticketsHint');
     if (hint) hint.textContent = openCount > 0 ? `— ${openCount} ouvert(s)` : '';
     if (ticketsCache.length === 0) { el.innerHTML = `<p style="color:var(--text-dim);font-size:12.5px;">Aucun ticket pour l'instant.</p>`; return; }
-    el.innerHTML = ticketsCache.map((t) => {
+    const ticketCardHTML = (t) => {
       const cat = CATEGORY_LABELS[t.category] || { icon: '📩', label: t.category };
       return `
       <div class="admin-pending-game-card ticket-row-cursor" data-ticket-id="${t.id}">
@@ -1072,7 +1080,20 @@
           <span class="ticket-status-badge ${t.status}">${t.status === 'open' ? 'Ouvert' : 'Fermé'}</span>
         </p>
       </div>`;
-    }).join('');
+    };
+    const openHTML = openTickets.length
+      ? openTickets.map(ticketCardHTML).join('')
+      : `<p style="color:var(--text-dim);font-size:12.5px;">Aucun ticket ouvert pour l'instant.</p>`;
+    // Repliés par défaut, même classe/style que le menu déroulant des bans
+    // (voir plus haut) — cohérent visuellement avec l'existant plutôt qu'un
+    // 2e système différent.
+    const closedHTML = closedTickets.length
+      ? `<details class="ticket-closed-details">
+          <summary>🔒 Tickets fermés <span>(${closedTickets.length})</span></summary>
+          ${closedTickets.map(ticketCardHTML).join('')}
+        </details>`
+      : '';
+    el.innerHTML = openHTML + closedHTML;
     el.querySelectorAll('[data-ticket-id]').forEach((row) => {
       row.addEventListener('click', () => openTicketModal(row.dataset.ticketId));
     });
