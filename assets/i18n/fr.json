@@ -70,27 +70,6 @@
       "f8": "Des vagues maudites et des boss pour casser la routine"
     }
   },
-  "acPage": {
-    "pageTitle": "Anime Clicker",
-    "tag": "⚡ Clicker / Incrémental",
-    "tagline": "Clique, débloque, incarne tes univers d'anime préférés — Naruto, One Piece, My Hero Academia et bien d'autres à venir, chacun avec ses propres améliorations.",
-    "shot3": "D'autres univers à venir",
-    "screenVal": "Tous formats — mobile à Full HD",
-    "mouseVal": "Clic simple",
-    "about": {
-      "title": "Un clicker qui traverse les univers",
-      "p1": "Anime Clicker reprend la formule du clicker — clique pour progresser, débloque des améliorations, laisse tourner en automatique — et l'habille avec les univers d'anime les plus connus. Commence dans l'univers Naruto : accumule du chakra en cliquant, débloque le Kage Bunshin ou le Rasengan pour produire automatiquement, et prépare-toi pour le Mode Sage.",
-      "p2": "D'autres univers — One Piece, My Hero Academia, et plein d'autres — se débloquent au fil de la progression, chacun avec ses propres améliorations et sa propre ambiance visuelle. Un système de Réincarnation permet de tout relancer contre des bonus permanents une fois qu'un univers est bien avancé."
-    },
-    "features": {
-      "f1": "Plusieurs univers d'anime à débloquer en jouant — Naruto, One Piece, My Hero Academia et d'autres à venir",
-      "f2": "Améliorations thématiques propres à chaque univers (clics et production automatique)",
-      "f3": "Système de Réincarnation (prestige) pour progresser plus loin à chaque run",
-      "f4": "Succès et statistiques à débloquer",
-      "f5": "Sauvegarde automatique — reprends exactement où tu t'es arrêté",
-      "f6": "S'adapte à tous les écrans, du mobile au Full HD"
-    }
-  },
   "infosPage": {
     "pageTitle": "Infos &amp; Changelog — FERRA",
     "heading": "📖 Infos &amp; Changelog — FERRA",
@@ -122,7 +101,7 @@
   "launcherPage": {
     "pageTitle": "Launcher Izacki",
     "badge": "🚀 Disponible",
-    "lead": "Un seul launcher pour installer, mettre à jour et lancer tous mes jeux — FERRA, Tower Défense Infini, Anime Clicker, et ceux à venir. Fini les .exe éparpillés dans ton dossier Téléchargements.",
+    "lead": "Un seul launcher pour installer, mettre à jour et lancer tous mes jeux — FERRA, Tower Défense Infini, et ceux à venir. Fini les .exe éparpillés dans ton dossier Téléchargements.",
     "downloadCta": "⬇ Télécharger le Launcher",
     "smartscreenNote": "Windows • ~2,3 Mo — Windows peut afficher un avertissement SmartScreen à l'installation (éditeur non signé). <a href=\"#smartscreen\" style=\"color:var(--copper-glow);font-weight:600;\">C'est normal, voir comment continuer →</a>",
     "ss": {
@@ -148,14 +127,13 @@
     "library": {
       "tag": "La bibliothèque",
       "title": "Les jeux du Launcher",
-      "lead": "Les 3 jeux installables directement depuis le Launcher.",
-      "tdDesc": "Des vagues sans fin, des tours élémentaires à combiner — glace, feu, poison, glu — et un vrai système de prestige.",
-      "acDesc": "Un clicker multi-univers — Naruto, One Piece, My Hero Academia et bien d'autres à débloquer, avec prestige."
+      "lead": "Les 2 jeux installables directement depuis le Launcher.",
+      "tdDesc": "Des vagues sans fin, des tours élémentaires à combiner — glace, feu, poison, glu — et un vrai système de prestige."
     },
     "moreInfo": {
       "title": "Envie d'en savoir plus sur chaque jeu ?",
       "desc": "Chaque jeu a sa propre page avec ses fonctionnalités et ses captures d'écran — le bouton d'installation là-bas renvoie aussi vers le Launcher.",
-      "seeFerra": "Voir FERRA", "seeTd": "Voir Tower Défense", "seeAc": "Voir Anime Clicker"
+      "seeFerra": "Voir FERRA", "seeTd": "Voir Tower Défense"
     }
   },
   "faqPage": {
@@ -190,7 +168,7 @@
       "q2": { "q": "Mes succès ne s'affichent pas sur la fiche du jeu", "a": "Les succès se synchronisent uniquement quand le jeu est lancé <b>depuis le Launcher</b> (pas via un raccourci direct vers l'exécutable). Vérifie aussi que tu es bien connecté avant de lancer une partie." },
       "q3": { "q": "Comment quitter proprement un jeu ?", "a": "Appuie sur <b>Échap</b> en jeu pour ouvrir le menu pause, puis <b>Quitter le jeu</b> — ta progression est sauvegardée automatiquement avant la fermeture." },
       "q4": { "q": "Comment désinstaller un jeu ?", "a": "Depuis <b>Mes jeux</b>, clique sur la fiche du jeu puis sur l'icône 🗑 à côté du bouton Jouer. Tu peux aussi voir l'espace utilisé par chaque jeu dans Paramètres → Stockage." },
-      "q5": { "q": "Les jeux sont-ils payants ?", "a": "Tous les jeux actuels (FERRA, Tower Défense Infini, Anime Clicker) sont <b>gratuits</b>. Certains jeux futurs pourraient être payants, achetables directement depuis le Launcher." }
+      "q5": { "q": "Les jeux sont-ils payants ?", "a": "Tous les jeux actuels (FERRA, Tower Défense Infini) sont <b>gratuits</b>. Certains jeux futurs pourraient être payants, achetables directement depuis le Launcher." }
     },
     "s5": {
       "title": "🔄 Mises à jour",
@@ -338,24 +316,23 @@
     "note": "FERRA — projet indépendant, développé avec passion. © 2026."
   },
   "home": {
-    "pageTitle": "Izacki — FERRA, Tower Défense Infini, Anime Clicker",
+    "pageTitle": "Izacki — FERRA, Tower Défense Infini",
     "badge": "🚀 Le Launcher Izacki arrive",
     "lead": "Un développeur indépendant, plusieurs jeux — bientôt réunis dans un seul launcher à installer une fois, pour tout télécharger et lancer depuis un même endroit.",
     "ctaLauncher": "🚀 Découvrir le Launcher",
     "ctaGames": "🎮 Voir les jeux",
     "games": {
       "tag": "Mes jeux",
-      "title": "Trois jeux, un seul développeur",
+      "title": "Deux jeux, un seul développeur",
       "lead": "Chacun a sa propre page — captures, fonctionnalités, configuration requise — et sera bientôt installable directement depuis le Launcher.",
       "free": "Gratuit",
       "ferra": { "desc": "Survie &amp; automatisation — reconstruis un monde, protège ton feu, affronte une météorite.", "genre": "Survie / Automatisation" },
-      "td": { "desc": "Vagues sans fin, tours élémentaires à combiner, météo dynamique et prestige.", "genre": "Tower Défense" },
-      "ac": { "desc": "Un clicker multivers — Naruto, One Piece, My Hero Academia et bien d'autres à débloquer.", "genre": "Clicker / Incrémental" }
+      "td": { "desc": "Vagues sans fin, tours élémentaires à combiner, météo dynamique et prestige.", "genre": "Tower Défense" }
     },
     "promo": {
       "tag": "Un seul launcher, tous les jeux",
       "title": "Le Launcher Izacki arrive",
-      "desc": "Installe, mets à jour et lance FERRA, Tower Défense Infini et Anime Clicker depuis un seul endroit — une vraie bibliothèque de jeux, à l'échelle d'un développeur indépendant."
+      "desc": "Installe, mets à jour et lance FERRA et Tower Défense Infini depuis un seul endroit — une vraie bibliothèque de jeux, à l'échelle d'un développeur indépendant."
     },
     "community": {
       "tag": "Rejoins la communauté",

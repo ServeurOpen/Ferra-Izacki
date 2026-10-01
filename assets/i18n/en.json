@@ -70,27 +70,6 @@
       "f8": "Cursed waves and bosses to break the routine"
     }
   },
-  "acPage": {
-    "pageTitle": "Anime Clicker",
-    "tag": "⚡ Clicker / Incremental",
-    "tagline": "Click, unlock, embody your favorite anime universes — Naruto, One Piece, My Hero Academia and many more to come, each with its own upgrades.",
-    "shot3": "More universes coming soon",
-    "screenVal": "All formats — mobile to Full HD",
-    "mouseVal": "Simple click",
-    "about": {
-      "title": "A clicker that crosses universes",
-      "p1": "Anime Clicker takes the classic clicker formula — click to progress, unlock upgrades, let it run automatically — and dresses it up with the best-known anime universes. Start in the Naruto universe: gather chakra by clicking, unlock Shadow Clone or Rasengan for automatic production, and get ready for Sage Mode.",
-      "p2": "Other universes — One Piece, My Hero Academia, and many more — unlock as you progress, each with its own upgrades and visual atmosphere. A Reincarnation system lets you restart everything for permanent bonuses once a universe is well underway."
-    },
-    "features": {
-      "f1": "Several anime universes to unlock by playing — Naruto, One Piece, My Hero Academia and more to come",
-      "f2": "Themed upgrades specific to each universe (clicks and automatic production)",
-      "f3": "Reincarnation (prestige) system to push further on every run",
-      "f4": "Achievements and stats to unlock",
-      "f5": "Auto-save — pick up exactly where you left off",
-      "f6": "Adapts to every screen, from mobile to Full HD"
-    }
-  },
   "infosPage": {
     "pageTitle": "Info &amp; Changelog — FERRA",
     "heading": "📖 Info &amp; Changelog — FERRA",
@@ -122,7 +101,7 @@
   "launcherPage": {
     "pageTitle": "Izacki Launcher",
     "badge": "🚀 Available",
-    "lead": "A single launcher to install, update and launch all my games — FERRA, Tower Defense Infinite, Anime Clicker, and more to come. No more .exe files scattered in your Downloads folder.",
+    "lead": "A single launcher to install, update and launch all my games — FERRA, Tower Defense Infinite, and more to come. No more .exe files scattered in your Downloads folder.",
     "downloadCta": "⬇ Download the Launcher",
     "smartscreenNote": "Windows • ~2.3 MB — Windows may show a SmartScreen warning during install (unsigned publisher). <a href=\"#smartscreen\" style=\"color:var(--copper-glow);font-weight:600;\">That's normal, here's how to continue →</a>",
     "ss": {
@@ -148,14 +127,13 @@
     "library": {
       "tag": "The library",
       "title": "The Launcher's games",
-      "lead": "The 3 games installable directly from the Launcher.",
-      "tdDesc": "Endless waves, elemental towers to combine — ice, fire, poison, glue — and a real prestige system.",
-      "acDesc": "A multiverse clicker — Naruto, One Piece, My Hero Academia and many more to unlock, with prestige."
+      "lead": "The 2 games installable directly from the Launcher.",
+      "tdDesc": "Endless waves, elemental towers to combine — ice, fire, poison, glue — and a real prestige system."
     },
     "moreInfo": {
       "title": "Want to know more about each game?",
       "desc": "Each game has its own page with its features and screenshots — the install button over there also links back to the Launcher.",
-      "seeFerra": "See FERRA", "seeTd": "See Tower Defense", "seeAc": "See Anime Clicker"
+      "seeFerra": "See FERRA", "seeTd": "See Tower Defense"
     }
   },
   "faqPage": {
@@ -190,7 +168,7 @@
       "q2": { "q": "My achievements don't show on the game's page", "a": "Achievements only sync when the game is launched <b>from the Launcher</b> (not via a direct shortcut to the executable). Also make sure you're logged in before starting a run." },
       "q3": { "q": "How do I quit a game cleanly?", "a": "Press <b>Escape</b> in-game to open the pause menu, then <b>Quit game</b> — your progress is saved automatically before closing." },
       "q4": { "q": "How do I uninstall a game?", "a": "From <b>My Games</b>, click the game's card then the 🗑 icon next to the Play button. You can also see the space used by each game in Settings → Storage." },
-      "q5": { "q": "Are the games paid?", "a": "All current games (FERRA, Tower Defense Infinite, Anime Clicker) are <b>free</b>. Some future games may be paid, purchasable directly from the Launcher." }
+      "q5": { "q": "Are the games paid?", "a": "All current games (FERRA, Tower Defense Infinite) are <b>free</b>. Some future games may be paid, purchasable directly from the Launcher." }
     },
     "s5": {
       "title": "🔄 Updates",
@@ -338,24 +316,23 @@
     "note": "FERRA — an independent project, made with passion. © 2026."
   },
   "home": {
-    "pageTitle": "Izacki — FERRA, Tower Defense Infinite, Anime Clicker",
+    "pageTitle": "Izacki — FERRA, Tower Defense Infinite",
     "badge": "🚀 The Izacki Launcher is coming",
     "lead": "An independent developer, several games — soon united in a single launcher to install once, so you can download and launch everything from one place.",
     "ctaLauncher": "🚀 Discover the Launcher",
     "ctaGames": "🎮 See the games",
     "games": {
       "tag": "My games",
-      "title": "Three games, one developer",
+      "title": "Two games, one developer",
       "lead": "Each has its own page — screenshots, features, requirements — and will soon be installable directly from the Launcher.",
       "free": "Free",
       "ferra": { "desc": "Survival &amp; automation — rebuild a world, protect your fire, face a meteor.", "genre": "Survival / Automation" },
-      "td": { "desc": "Endless waves, elemental towers to combine, dynamic weather and prestige.", "genre": "Tower Defense" },
-      "ac": { "desc": "A multiverse clicker — Naruto, One Piece, My Hero Academia and many more to unlock.", "genre": "Clicker / Incremental" }
+      "td": { "desc": "Endless waves, elemental towers to combine, dynamic weather and prestige.", "genre": "Tower Defense" }
     },
     "promo": {
       "tag": "One launcher, every game",
       "title": "The Izacki Launcher is coming",
-      "desc": "Install, update and launch FERRA, Tower Defense Infinite and Anime Clicker from one place — a real game library, at an independent developer's scale."
+      "desc": "Install, update and launch FERRA and Tower Defense Infinite from one place — a real game library, at an independent developer's scale."
     },
     "community": {
       "tag": "Join the community",
