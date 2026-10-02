@@ -1,10 +1,10 @@
 {
-  "version": "0.2.76",
-  "notes": "Correction des mises à jour des jeux : le Launcher ne lisait plus la liste des versions depuis le 15/09 (redirection du site), donc plus aucune mise à jour de jeu n'était détectée. Anime Clicker est retiré du catalogue. Quand la vérification échoue, un avertissement clair remplace désormais le faux « tous tes jeux sont à jour ».",
-  "pub_date": "2026-10-02T12:11:13Z",
+  "version": "0.2.77",
+  "notes": "Nouveau Launcher : refonte complète, plus proche d'une vraie plateforme de jeux. Navigation en haut, bibliothèque avec favoris et tri, gestionnaire de téléchargements, notifications, couleurs d'accent au choix dans les Paramètres, fenêtres et écrans de connexion repensés. Désinstaller un jeu demande maintenant une confirmation en deux clics.",
+  "pub_date": "2026-10-02T17:56:29Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDhFa3VUVUVtcktwL2NuVElNa2grUWJHYTloWjlRdUZVQ3ZmbGt1VFkzSzdSQVVWbytBbFByMTVyTzRVWjdNWG5sOXZTUXBqeW9sL2ZpbEswaWZBZGd3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkwOTQzMDMwCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi43Nl94NjQtc2V0dXAuZXhlCjQ0R3BkemhybVNla1E2a3ZIWkpudWxIMGd1enVkQXluY1pITDFQWFU0YWZHMGVMYW54SW5nL3pDdWFhVy85OWZKUWdoN1VweVpybllGZUthN05kakFnPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDllZE4wMitZV2lralVRUThPSmNNc3pqODRtTUR2SFM3NFh1KzNOTnhDWmdlNmVlR1V6aHFFU2lQb3NidEJrVU5uMXo3YnFIUUZRQmo4SFpvSkFBbnc4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkwOTYxMjA5CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi43N194NjQtc2V0dXAuZXhlCjgyWHJyR2dibUpzZlY3dGJBQTBXT3NxUW5Cd1dISEZ1bThmNnFwN1A4YVFSUW8xTmlnOW9DZnJGREJpTXpkVVRGNEVNWktML1R4Kzk2WGppb0dNV0FRPT0K",
       "url": "https://izackiferra.com/games/files/IzackiLauncher-Setup.exe"
     }
   }
