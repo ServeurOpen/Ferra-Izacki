@@ -1,0 +1,58 @@
+{
+  "ferra": [
+    {
+      "version": "1.0.14",
+      "date": "2026-09-28",
+      "title": "Hôtel de Ville, prêts de ressources et refonte des ruines",
+      "notes": [
+        "Nouveau bâtiment : l'Hôtel de Ville (un seul par partie), qui pose une muraille automatique de 7 cases autour de ton camp, avec une porte.",
+        "Prêts de ressources au Comptoir de Cuivre : bois, pierre et fer, remboursés en 10 jours avec 10 % d'intérêt.",
+        "Fiche des dettes (touche K) : le suivi de tes prêts et de ta dette à la banque en un coup d'œil.",
+        "Carrière entièrement redessinée.",
+        "Ruines : brume colorée, reprise d'une exploration interrompue et interface dédiée.",
+        "Carnet de notes de la capsule, récapitulatif de vente défilant et laser des tourelles retouché."
+      ]
+    },
+    {
+      "version": "1.0.13",
+      "title": "Cinématique de fin du Sort Divin refaite",
+      "notes": [
+        "La fin du jeu utilise maintenant le même moteur de cinématique que l'intro.",
+        "Correction : l'interface et l'invite d'interaction restaient affichées pendant la cinématique."
+      ]
+    },
+    {
+      "version": "1.0.11",
+      "date": "2026-09-14",
+      "title": "Difficulté des ruines selon la distance",
+      "notes": [
+        "La difficulté des ruines dépend maintenant de leur distance à ton camp : plus elles sont loin, plus elles sont dures."
+      ]
+    },
+    {
+      "version": "1.0.10",
+      "date": "2026-09-14",
+      "title": "Fourneau, feux de camp et corrections d'interface",
+      "notes": [
+        "Nouveau bâtiment : le Fourneau.",
+        "Nouveaux paliers pour le feu de camp.",
+        "Barre de ressources réorganisée, avec correction d'une coupure d'affichage.",
+        "Corrections du glisser-déposer et du menu contextuel (clic droit)."
+      ]
+    }
+  ],
+  "tower-defense": [
+    {
+      "version": "1.0.22",
+      "date": "2026-10-02",
+      "title": "Nouveau menu d'accueil",
+      "notes": [
+        "Écran d'accueil complet : Lancer une partie, Charger une partie, Paramètres, Crédits et Quitter le jeu, avec un fond animé qui montre les vraies tours et les vrais zombies du jeu.",
+        "Nouvelles polices (Orbitron et Chakra Petch) pour une interface plus lisible.",
+        "Transitions fluides entre les écrans du menu.",
+        "Le choix de qualité des effets visuels s'applique tout de suite, même menu ouvert.",
+        "Clavier : Échap fonctionne aussi depuis les interrupteurs des Paramètres, et le curseur se place dans le nom de la partie."
+      ]
+    }
+  ]
+}
