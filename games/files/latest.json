@@ -1,11 +1,11 @@
 {
-  "version": "0.2.75",
-  "notes": "Compteur d'heures de développement (menu Admin) : la v0.2.74 avait été buildée avant que ce code soit committé, il était donc absent de l'exe publié — corrigé, la fonctionnalité est maintenant bien incluse.",
-  "pub_date": "2026-09-14T12:59:26Z",
+  "version": "0.2.76",
+  "notes": "Correction des mises à jour des jeux : le Launcher ne lisait plus la liste des versions depuis le 15/09 (redirection du site), donc plus aucune mise à jour de jeu n'était détectée. Anime Clicker est retiré du catalogue. Quand la vérification échoue, un avertissement clair remplace désormais le faux « tous tes jeux sont à jour ».",
+  "pub_date": "2026-10-02T12:11:13Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDdJTEVpUTFsYVl5Zm9GcWlCQVZwOFVLRkR6UENSOEViQVliR2I4Vk91cUVuYS81QlhoTVIwQUluQmx4aGdwckxNZzZRbzhzbjVFdWFTazdXaFFTQXdzPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg5MzkwNzQyCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi43NV94NjQtc2V0dXAuZXhlCk1yYkJwcTB1Ry9HcW9rL0N1T0U0NlM4RkVRUjdpQUtoYWxvUU1aRG95ZWNPeGc1cHZ5dEtkQldYeHNYbllESEs3U05HU3hGcUMwU3hGWkFLcU9tZUNnPT0K",
-      "url": "https://serveuropen.github.io/Ferra-Izacki/games/files/IzackiLauncher-Setup.exe"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDhFa3VUVUVtcktwL2NuVElNa2grUWJHYTloWjlRdUZVQ3ZmbGt1VFkzSzdSQVVWbytBbFByMTVyTzRVWjdNWG5sOXZTUXBqeW9sL2ZpbEswaWZBZGd3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkwOTQzMDMwCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi43Nl94NjQtc2V0dXAuZXhlCjQ0R3BkemhybVNla1E2a3ZIWkpudWxIMGd1enVkQXluY1pITDFQWFU0YWZHMGVMYW54SW5nL3pDdWFhVy85OWZKUWdoN1VweVpybllGZUthN05kakFnPT0K",
+      "url": "https://izackiferra.com/games/files/IzackiLauncher-Setup.exe"
     }
   }
 }
