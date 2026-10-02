@@ -1,10 +1,10 @@
 {
-  "version": "0.2.77",
-  "notes": "Nouveau Launcher : refonte complète, plus proche d'une vraie plateforme de jeux. Navigation en haut, bibliothèque avec favoris et tri, gestionnaire de téléchargements, notifications, couleurs d'accent au choix dans les Paramètres, fenêtres et écrans de connexion repensés. Désinstaller un jeu demande maintenant une confirmation en deux clics.",
-  "pub_date": "2026-10-02T17:56:29Z",
+  "version": "0.2.78",
+  "notes": "Les récompenses quotidiennes en crédits, le parrainage et le classement par crédits sont supprimés. Nouveau taux de retrait pour les créateurs : 0,35 € pour 100 crédits. Petits nettoyages de l'interface (fenêtre Mes crédits, formulaire de publication d'un jeu).",
+  "pub_date": "2026-10-02T19:28:21Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDllZE4wMitZV2lralVRUThPSmNNc3pqODRtTUR2SFM3NFh1KzNOTnhDWmdlNmVlR1V6aHFFU2lQb3NidEJrVU5uMXo3YnFIUUZRQmo4SFpvSkFBbnc4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkwOTYxMjA5CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi43N194NjQtc2V0dXAuZXhlCjgyWHJyR2dibUpzZlY3dGJBQTBXT3NxUW5Cd1dISEZ1bThmNnFwN1A4YVFSUW8xTmlnOW9DZnJGREJpTXpkVVRGNEVNWktML1R4Kzk2WGppb0dNV0FRPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTHhYVTd5dmNuV3ZpWndiNmxldk5mdURsYnFIdkRpNUVab0lncmhEN3hiSm5ZQVN5M2Q5c2VqWjFJRmY5dkFhU2tQdUZRc1ltaGZiQW9rRnlvQ1Z5Unc0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkwOTY5MjY3CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi43OF94NjQtc2V0dXAuZXhlCjE4NVdtbksyNWtNVUFJUlA5Zm8yQnFTTVRYNlI0Zk5iMnJxK2grWmozRjlZNjNqdGtTZDZPWmlRYVpQckN1TjBTcjNOOXRmSHFvTW11TW82MGZNTEN3PT0K",
       "url": "https://izackiferra.com/games/files/IzackiLauncher-Setup.exe"
     }
   }
