@@ -523,3 +523,20 @@ section{padding:64px 0;}
 .ferra-ban-contest-status{margin-top:10px;font-size:12px;text-align:center;color:var(--text-dim);}
 .ferra-ban-contest-status.ok{color:var(--valid);}
 .ferra-ban-contest-status.err{color:var(--danger);}
+
+/* ============================================================
+   Très grands écrans (03/10/2026, retour joueur : "ma copine a un grand écran
+   et j'ai l'impression que ça ne paraît pas proportionné sur le site, ça
+   diffère beaucoup selon la taille de l'écran"). Toute la mise en page est
+   en pixels fixes (conteneurs de 1080 / 760 / 400 px) : sur un écran 2K/4K
+   elle restait minuscule au milieu d'un grand vide. On agrandit donc la page
+   entière par paliers pour qu'elle garde la même allure qu'à ~1900 px de
+   large (inchangée en dessous de 2000 px). `zoom` : Chrome/Edge/Safari et
+   Firefox >= 126 ; ailleurs la page reste simplement à la taille normale.
+   `body{min-height:calc(100vh / zoom)}` compense la hauteur minimale de 100vh. */
+@media (min-width:2000px){ html{zoom:1.1;}  body{min-height:calc(100vh / 1.1);} }
+@media (min-width:2300px){ html{zoom:1.25;} body{min-height:calc(100vh / 1.25);} }
+@media (min-width:2600px){ html{zoom:1.4;}  body{min-height:calc(100vh / 1.4);} }
+@media (min-width:3000px){ html{zoom:1.6;}  body{min-height:calc(100vh / 1.6);} }
+@media (min-width:3400px){ html{zoom:1.8;}  body{min-height:calc(100vh / 1.8);} }
+@media (min-width:3800px){ html{zoom:2;}    body{min-height:calc(100vh / 2);} }

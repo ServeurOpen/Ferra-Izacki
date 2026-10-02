@@ -1,6 +1,16 @@
 {
   "ferra": [
     {
+      "version": "1.0.15",
+      "date": "2026-10-03",
+      "title": "Bulle de quête translucide et visite des menus plus claire",
+      "notes": [
+        "La bulle de quête est maintenant translucide : tu vois le décor à travers.",
+        "Nouveau bouton « Ranger » pour mettre la bulle de quête sur le côté d'un clic. Une pastille « Quête » reste au bord de l'écran pour la rouvrir, et ton choix est mémorisé.",
+        "Visite guidée des menus : le bouton « Passer la visite » ne recouvre plus jamais les bulles d'explication."
+      ]
+    },
+    {
       "version": "1.0.14",
       "date": "2026-09-28",
       "title": "Hôtel de Ville, prêts de ressources et refonte des ruines",
