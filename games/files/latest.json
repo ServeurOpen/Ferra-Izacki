@@ -1,10 +1,10 @@
 {
-  "version": "0.2.80",
-  "notes": "Succès en direct : une carte « Succès débloqué » apparaît dans le Launcher dès qu'un jeu en débloque un. Annonces permanentes avec timer « temps restant » dans la cloche. Succès pour les jeux des joueurs : éditeur avec une bibliothèque de plus de 200 icônes (30 succès inclus, forfaits en crédits) et pont pour les jeux .exe. Médaillons de succès retravaillés.",
-  "pub_date": "2026-10-03T10:10:44Z",
+  "version": "0.2.81",
+  "notes": "Le Launcher ne s'ouvre plus qu'une seule fois : relancer l'application ramène la fenêtre existante au premier plan. Un jeu déjà ouvert n'est plus relancé, même après avoir fermé puis rouvert le Launcher, et un double-clic sur Jouer n'affiche plus de fausse erreur. Fiche de Tower Défense Infini réécrite avec des informations vérifiées.",
+  "pub_date": "2026-10-05T14:38:43Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDduQ1A1RVh2Nm8ydy9Id0JxdS9SeGhpbXZxblpkMk1jNmpsUFhWTWlZMGMxQkNvRVJrd2ZlTjBzdGVabUxYVHVITkhYVHJWcjBkRW82WDRyTGVWV2dRPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkxMDIyMjA2CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi44MF94NjQtc2V0dXAuZXhlCkIwUDN4YXpHV05jOHpKRnhUWkpuMmxIcHJ6bFBRMUtIcWhzV3VuRjNYM2wvOWh5UFk3VkRaNHhKKzFNb3pyKzB4Z1pOWHpaU3Y4MEZnRU1PZHhHV0NBPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDFzT3MvRml4SjBFV0RJaHpGR3NtUit6L2pyMk9WeUVQdDh5eEdtdTFZMUUxVjFNbDg0bktYd2VnNVZKMWhHL3FoZUpwQTNNMXN3bnJiODdzMWZ2L0FvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkxMjExMTA1CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi44MV94NjQtc2V0dXAuZXhlCm5BdEVVT1RXOW1yOGlNd21tYkErRm84WTVHdUdEbG1JRGJiaXR2NlhKTWgwWGpTNjkvMXZJRDdFRUNTWFJ3aWFUeGxGN3pMRWx0aC9HZTdTeHFYNEJRPT0K",
       "url": "https://izackiferra.com/games/files/IzackiLauncher-Setup.exe"
     }
   }

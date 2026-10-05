@@ -1,6 +1,14 @@
 {
   "ferra": [
     {
+      "version": "1.0.17",
+      "date": "2026-10-05",
+      "title": "Une seule fenêtre à la fois",
+      "notes": [
+        "Le jeu ne s'ouvre plus qu'une seule fois : relancer l'exécutable ramène la fenêtre déjà ouverte au premier plan."
+      ]
+    },
+    {
       "version": "1.0.16",
       "date": "2026-10-03",
       "title": "Popup de succès façon Steam",
@@ -62,6 +70,21 @@
     }
   ],
   "tower-defense": [
+    {
+      "version": "1.0.24",
+      "date": "2026-10-05",
+      "title": "Zombies animés, route redessinée et menus plus clairs",
+      "notes": [
+        "Les zombies marchent maintenant avec les bras qui balancent le long du corps. Ils sont vus de profil sur une route horizontale, de face quand elle descend et de dos quand elle monte.",
+        "Le jeu est plus fluide quand beaucoup d’ennemis sont à l’écran.",
+        "La route est redessinée : plus large, avec un liseré marqué et une ligne centrale en pointillés, et elle s’adapte à la météo.",
+        "Le menu Échap propose un bouton « Retour au menu principal » : ta partie est sauvegardée automatiquement.",
+        "« Charger une partie » affiche la dernière partie sauvegardée en premier. La suppression d’une sauvegarde demande confirmation dans une fenêtre du jeu. L’import et l’export de codes de sauvegarde sont retirés.",
+        "Le niveau des tours s’affiche dans une capsule bronze, argent ou or sous chaque tour.",
+        "La barre d’icônes du panneau de droite reste en haut pendant le défilement, et les barres de défilement sont plus discrètes.",
+        "Le jeu ne s’ouvre plus qu’une seule fois : relancer l’exécutable ramène la fenêtre déjà ouverte au premier plan."
+      ]
+    },
     {
       "version": "1.0.23",
       "date": "2026-10-03",
