@@ -1,0 +1,10 @@
+{
+  "ferra": {
+    "1.0.16": "ffe1338285f6b02447dc7824edcaf9a96388b5df037449d03444f616aad0e18a",
+    "1.0.17": "757f804e28cb50e6079b127474edd5fac4d4f85583ed05e77da8de59547f9917"
+  },
+  "tower-defense": {
+    "1.0.23": "e0ba47d6c0ee1b2ef135c03af01bc82bb6e5f54558fcf2ed4f575c55d213aac0",
+    "1.0.24": "15310b18a0235a297f10c7a91ee28a5bfc8cbc532634ffd067bc0386439d2eae"
+  }
+}
