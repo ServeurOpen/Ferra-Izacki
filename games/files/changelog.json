@@ -71,6 +71,14 @@
   ],
   "tower-defense": [
     {
+      "version": "1.0.25",
+      "date": "2026-10-05",
+      "title": "Bandeau des vagues maudites remonté",
+      "notes": [
+        "Le bandeau « vague maudite en cours » est remonté dans le coin du terrain : il ne cache plus les premiers ennemis sur la route."
+      ]
+    },
+    {
       "version": "1.0.24",
       "date": "2026-10-05",
       "title": "Zombies animés, route redessinée et menus plus clairs",
