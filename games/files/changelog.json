@@ -71,6 +71,14 @@
   ],
   "tower-defense": [
     {
+      "version": "1.0.26",
+      "date": "2026-10-10",
+      "title": "Les boss restent sur la route",
+      "notes": [
+        "Les gros ennemis et les boss sont recentrés sur la route quand elle est horizontale : ils ne dépassent plus au-dessus d’elle. La barre de vie suit le nouveau placement."
+      ]
+    },
+    {
       "version": "1.0.25",
       "date": "2026-10-05",
       "title": "Bandeau des vagues maudites remonté",
