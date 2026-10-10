@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title data-i18n="tdPage.pageTitle">Tower Défense Infini</title>
-<meta name="description" content="Tower Défense Infini — vagues sans fin, tours élémentaires combinables, météo dynamique et système de prestige. Un jeu d'Izacki.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏹</text></svg>">
+<meta name="description" content="Tower Défense Infini : un tower defense gratuit sur Windows. Des vagues de zombies sans fin, dix tours à débloquer, un système de prestige. Un jeu d'Izacki.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%23161920%22/><path d=%22M8 25V11h3.4v2.2h2.4V11h4.4v2.2h2.4V11H24v14z%22 fill=%22%23f2a45a%22/></svg>">
 <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
@@ -24,90 +24,135 @@
   </nav>
 </header>
 
-<section style="padding-top:30px;">
+<section class="gp-top">
   <div class="container">
     <div class="game-banner">
       <img src="../assets/img/screenshot-towerdefense-1.png" alt="Tower Défense Infini — capture d'écran de gameplay">
       <div class="game-banner-body">
-        <span class="game-banner-tag" data-i18n="tdPage.tag">🏹 Tower Défense</span>
+        <div class="gp-eyebrow" data-i18n="tdPage.tag">Tower defense</div>
         <h1 class="game-banner-title">Tower Défense Infini</h1>
-        <p class="game-banner-tagline" data-i18n="tdPage.tagline">Des vagues de zombies qui ne s'arrêtent jamais, des tours élémentaires à combiner en vraies synergies, et une météo qui change tout en plein combat.</p>
+        <p class="game-banner-tagline" data-i18n="tdPage.tagline">Un tower defense contre des vagues de zombies sans fin : tu poses des tours le long de la route et tu vois jusqu'où tu tiens.</p>
         <div class="game-banner-actions">
-          <a href="../launcher.html" class="btn btn-primary" data-i18n="ferraPage.installCta">🚀 Installer via le Launcher — gratuit</a>
+          <a href="../launcher.html" class="btn btn-primary" data-i18n="tdPage.installCta">Installer avec le Launcher</a>
+          <span class="gp-banner-meta" data-i18n="tdPage.installMeta">Gratuit · Windows 10/11 · environ 4 Mo</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section style="padding-top:10px;">
-  <div class="container">
-    <div class="grid grid-2" style="gap:40px;align-items:start;">
-      <div>
-        <div class="section-tag" style="text-align:left;" data-i18n="ferraPage.about.tag">À propos de ce jeu</div>
-        <h2 class="section-title" style="text-align:left;font-size:26px;" data-i18n="tdPage.about.title">Classique dans l'âme, jamais dans la durée</h2>
-        <p style="color:var(--text-dim);line-height:1.75;font-size:14.5px;" data-i18n="tdPage.about.p1">
-          Tower Défense Infini part d'une base que tu connais déjà : poser des tours, ralentir des ennemis, tenir la ligne.
-          Canon et tour d'archer pour commencer — puis très vite, la partie change de nature. Les vagues n'ont pas de fin,
-          et pour tenir, il faut débloquer et combiner des tours élémentaires : glace pour ralentir, feu pour brûler dans la
-          durée, poison pour ronger, glu pour immobiliser. Chacune a ses forces, et les vraies combos apparaissent quand tu
-          les fais travailler ensemble.
-        </p>
-        <p style="color:var(--text-dim);line-height:1.75;font-size:14.5px;margin-top:14px;" data-i18n="tdPage.about.p2">
-          Une météo dynamique vient perturber le champ de bataille en cours de partie, et un système de Prestige permet de
-          tout relancer avec des bonus permanents une fois que la vague en cours devient trop dure — pour repartir plus
-          fort, encore et encore.
-        </p>
+<section class="gp-body">
+  <div class="container gp-layout">
+
+    <div class="gp-main">
+      <h2 data-i18n="tdPage.play.title">Comment ça se joue</h2>
+      <p data-i18n="tdPage.play.p">Les zombies arrivent par la route et tu dois les arrêter avant qu'ils atteignent ta base. Tu poses des tours sur les côtés, tu gagnes de l'or à chaque zombie tué et tu le dépenses en nouvelles tours ou en améliorations (trois niveaux par tour). Chaque zombie qui passe te coûte des vies : 20 sur la carte facile, 3 sur les cartes extrêmes. Il n'y a pas de dernière vague, elles deviennent juste plus dures.</p>
+
+      <h2 data-i18n="tdPage.towers.title">Les tours</h2>
+      <p data-i18n="tdPage.towers.p">Dix tours. Neuf se débloquent au fil des vagues (Canon, Archer, Glace, Feu, Vent, Tesla, Poison, Caserne Militaire, Glu), la dixième, la Tour du Prestige, avec le Prestige. L'Archer perce toute une file d'ennemis, la Tesla enchaîne jusqu'à trois cibles, la Caserne envoie une jeep, un camion ou un tank selon son niveau. La barre de raccourcis n'a que cinq emplacements : il faut choisir. Les tours peuvent aussi se combiner, avec cinq synergies cachées. Par exemple, un zombie gelé qui prend un tir de Feu encaisse des dégâts en plus et perd son gel.</p>
+      <div class="gp-table-wrap">
+        <table class="gp-towers">
+          <thead>
+            <tr>
+              <th scope="col" data-i18n="tdPage.towers.th1">Tour</th>
+              <th scope="col" data-i18n="tdPage.towers.th2">Débloquée</th>
+              <th scope="col" data-i18n="tdPage.towers.th3">Rôle</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row" data-i18n="tdPage.towers.n1">Canon</th>
+            <td><span data-i18n="tdPage.towers.wave">Vague</span> 1</td>
+            <td data-i18n="tdPage.towers.d1">Tir sur une seule cible, sans faiblesse particulière.</td>
+          </tr>
+          <tr>
+            <th scope="row" data-i18n="tdPage.towers.n2">Archer</th>
+            <td><span data-i18n="tdPage.towers.wave">Vague</span> 5</td>
+            <td data-i18n="tdPage.towers.d2">Flèche perçante qui touche tous les ennemis alignés, avec plus de dégâts en bout de ligne.</td>
+          </tr>
+          <tr>
+            <th scope="row" data-i18n="tdPage.towers.n3">Glace</th>
+            <td><span data-i18n="tdPage.towers.wave">Vague</span> 10</td>
+            <td data-i18n="tdPage.towers.d3">Ralentit sa cible. +50&nbsp;% de dégâts sur les zombies de feu, −50&nbsp;% sur ceux de glace.</td>
+          </tr>
+          <tr>
+            <th scope="row" data-i18n="tdPage.towers.n4">Feu</th>
+            <td><span data-i18n="tdPage.towers.wave">Vague</span> 20</td>
+            <td data-i18n="tdPage.towers.d4">Brûlure continue. +50&nbsp;% de dégâts sur les zombies de glace, −50&nbsp;% sur ceux de feu.</td>
+          </tr>
+          <tr>
+            <th scope="row" data-i18n="tdPage.towers.n5">Vent</th>
+            <td><span data-i18n="tdPage.towers.wave">Vague</span> 30</td>
+            <td data-i18n="tdPage.towers.d5">Lames de vent en cône qui font saigner les ennemis touchés.</td>
+          </tr>
+          <tr>
+            <th scope="row" data-i18n="tdPage.towers.n6">Tesla</th>
+            <td><span data-i18n="tdPage.towers.wave">Vague</span> 45</td>
+            <td data-i18n="tdPage.towers.d6">Éclair qui enchaîne jusqu'à 3 ennemis et les immobilise un court instant.</td>
+          </tr>
+          <tr>
+            <th scope="row" data-i18n="tdPage.towers.n7">Poison</th>
+            <td><span data-i18n="tdPage.towers.wave">Vague</span> 60</td>
+            <td data-i18n="tdPage.towers.d7">Boule toxique qui explose en nuage et empoisonne tous les ennemis du cercle.</td>
+          </tr>
+          <tr>
+            <th scope="row" data-i18n="tdPage.towers.n8">Caserne Militaire</th>
+            <td><span data-i18n="tdPage.towers.wave">Vague</span> 70</td>
+            <td data-i18n="tdPage.towers.d8">Toutes les 30 s, un véhicule (jeep, camion, tank) parcourt la route en percutant les zombies.</td>
+          </tr>
+          <tr>
+            <th scope="row" data-i18n="tdPage.towers.n9">Glu</th>
+            <td><span data-i18n="tdPage.towers.wave">Vague</span> 80</td>
+            <td data-i18n="tdPage.towers.d9">Englue et ralentit sa cible. Au niveau 3, la boule éclate en flaque et ralentit tout le groupe.</td>
+          </tr>
+          <tr>
+            <th scope="row" data-i18n="tdPage.towers.n10">Tour du Prestige</th>
+            <td><span data-i18n="tdPage.towers.prestige">Prestige</span> 1</td>
+            <td data-i18n="tdPage.towers.d10">Un seul exemplaire à la fois. Elle saute d'un endroit à l'autre ou reste fixe, et frappe en zone.</td>
+          </tr>
+          </tbody>
+        </table>
       </div>
-      <div>
-        <div class="section-tag" style="text-align:left;" data-i18n="ferraPage.features.tag">Fonctionnalités</div>
-        <ul class="feature-list">
-          <li data-i18n="tdPage.features.f1">Vagues infinies — le jeu ne s'arrête jamais, la difficulté monte en continu</li>
-          <li data-i18n="tdPage.features.f2">10 tours à débloquer en jouant : Canon, Archer, Glace, Feu, Vent, Tesla, Poison, Caserne Militaire, Glu, et la Tour du Prestige</li>
-          <li data-i18n="tdPage.features.f3">Vraies synergies entre éléments — combine glace + feu, poison + glu et bien d'autres combos</li>
-          <li data-i18n="tdPage.features.f4">Météo dynamique qui influence directement le combat</li>
-          <li data-i18n="tdPage.features.f5">Système de Prestige avec bonus permanents (+% d'or, vitesse de jeu, carte spéciale)</li>
-          <li data-i18n="tdPage.features.f6">34 succès à débloquer, statistiques détaillées (combat, défense, économie, assiduité...)</li>
-          <li data-i18n="tdPage.features.f7">Wiki intégré — zombies, tours, synergies et vagues maudites, tout est expliqué en jeu</li>
-          <li data-i18n="tdPage.features.f8">Des vagues maudites et des boss pour casser la routine</li>
-        </ul>
-      </div>
+
+      <h2 data-i18n="tdPage.long.title">Quand la partie dure</h2>
+      <p data-i18n="tdPage.long.p">Dès la vague 15, certaines vagues sont maudites (Horde, Essaim, Vitesse Démoniaque, Enragés, Blindage Maudit) et changent les règles de la vague en cours. Un mini-boss arrive aux vagues 5, 15, 25…, un boss aux vagues 10, 20, 30… (cinq boss différents, tirés à la roulette). À partir de la vague 30, la météo peut s'en mêler pendant environ une minute et demie : Neige, Canicule, Éclipse, Tempête de sable, Aurore Boréale, Pluie de Météores, ou Bonheur, qui double l'or lâché par les ennemis.</p>
+
+      <h2 data-i18n="tdPage.prestige.title">Prestige</h2>
+      <p data-i18n="tdPage.prestige.p">Quand tu atteins la vague 200, tu peux passer Prestige. La partie repart de zéro (vague, or, tours), mais ton profil, tes stats et tes succès restent, et chaque niveau ajoute 50&nbsp;% d'or par zombie tué et 100 d'or de départ. Prestige 1 débloque aussi la Tour du Prestige, la vitesse x3 et une sixième carte, la Spirale du Prestige (quatre portails, 3 vies). Prestige 2 ajoute une compétence passive qui annule une défaite par partie, avec un temps de recharge.</p>
     </div>
+
+    <aside class="gp-side">
+      <h2 data-i18n="tdPage.facts.title">Infos</h2>
+      <dl class="gp-facts">
+        <div><dt data-i18n="tdPage.facts.publisher">Éditeur</dt><dd data-i18n="tdPage.facts.publisherVal">Izacki</dd></div>
+        <div><dt data-i18n="tdPage.facts.price">Prix</dt><dd data-i18n="tdPage.facts.priceVal">Gratuit</dd></div>
+        <div><dt data-i18n="tdPage.facts.platform">Plateforme</dt><dd data-i18n="tdPage.facts.platformVal">Windows 10/11</dd></div>
+        <div><dt data-i18n="tdPage.facts.size">Taille</dt><dd data-i18n="tdPage.facts.sizeVal">~4 Mo</dd></div>
+        <div><dt data-i18n="tdPage.facts.account">Compte</dt><dd data-i18n="tdPage.facts.accountVal">Compte Izacki (gratuit)</dd></div>
+        <div><dt data-i18n="tdPage.facts.lang">Langue du jeu</dt><dd data-i18n="tdPage.facts.langVal">Français</dd></div>
+      </dl>
+      <h3 data-i18n="tdPage.facts.inGame">Dans le jeu</h3>
+      <dl class="gp-facts">
+        <div><dt data-i18n="tdPage.facts.towers">Tours</dt><dd data-i18n="tdPage.facts.towersVal">10, avec 3 niveaux chacune</dd></div>
+        <div><dt data-i18n="tdPage.facts.maps">Cartes</dt><dd data-i18n="tdPage.facts.mapsVal">6, de 1 à 4 portails</dd></div>
+        <div><dt data-i18n="tdPage.facts.ach">Succès</dt><dd data-i18n="tdPage.facts.achVal">124</dd></div>
+        <div><dt data-i18n="tdPage.facts.wiki">Wiki</dt><dd data-i18n="tdPage.facts.wikiVal">Intégré au jeu</dd></div>
+        <div><dt data-i18n="tdPage.facts.controls">Commandes</dt><dd data-i18n="tdPage.facts.controlsVal">Souris et raccourcis clavier</dd></div>
+        <div><dt data-i18n="tdPage.facts.save">Sauvegarde</dt><dd data-i18n="tdPage.facts.saveVal">Sur l'ordinateur, liée à ton compte</dd></div>
+        <div><dt data-i18n="tdPage.facts.board">Classement</dt><dd data-i18n="tdPage.facts.boardVal">Meilleure vague, via le Launcher</dd></div>
+      </dl>
+    </aside>
+
   </div>
 </section>
 
-<section>
+<section class="gp-shots-section">
   <div class="container">
-    <div class="section-tag" data-i18n="game.screenshots.tag">Captures d'écran</div>
-    <h2 class="section-title" data-i18n="game.screenshots.title">En jeu</h2>
-    <div class="shot-gallery">
+    <h2 class="gp-h2" data-i18n="game.screenshots.tag">Captures d'écran</h2>
+    <div class="shot-gallery gp-shots">
       <div class="shot-frame"><img src="../assets/img/screenshot-towerdefense-1.png" alt="Vague en cours, tours placées sur le chemin"></div>
       <div class="shot-frame"><img src="../assets/img/screenshot-towerdefense-2.png" alt="Vue de la carte avant le début d'une vague"></div>
       <div class="shot-frame"><img src="../assets/img/screenshot-towerdefense-3.png" alt="Panneau des statistiques et succès"></div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="container-narrow">
-    <div class="section-tag" data-i18n="game.reqs.tag">Configuration requise</div>
-    <h2 class="section-title" style="margin-bottom:26px;" data-i18n="game.reqs.title">Config minimale</h2>
-    <div class="reqs-grid">
-      <div class="reqs-col">
-        <h4 data-i18n="game.reqs.system">Système</h4>
-        <dl>
-          <dt>OS</dt><dd>Windows 10/11</dd>
-          <dt data-i18n="game.reqs.space">Espace</dt><dd>~150 Mo</dd>
-          <dt data-i18n="game.reqs.account">Compte</dt><dd data-i18n="game.reqs.accountVal">Compte Izacki (gratuit)</dd>
-        </dl>
-      </div>
-      <div class="reqs-col">
-        <h4 data-i18n="game.reqs.recommended">Recommandé</h4>
-        <dl>
-          <dt data-i18n="game.reqs.screen">Écran</dt><dd>1920×1080</dd>
-          <dt data-i18n="tdPage.mouse">Souris</dt><dd data-i18n="tdPage.mouseVal">Clic + molette</dd>
-        </dl>
-      </div>
     </div>
   </div>
 </section>

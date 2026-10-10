@@ -50,24 +50,45 @@
     }
   },
   "tdPage": {
-    "pageTitle": "Tower Defense Infini",
-    "tag": "🏹 Tower Defense",
-    "tagline": "Oleadas de zombis que nunca terminan, torres elementales para combinar en verdaderas sinergias, y un clima que lo cambia todo en pleno combate.",
-    "mouse": "Ratón", "mouseVal": "Clic + rueda",
-    "about": {
-      "title": "Clásico en el fondo, interminable en la práctica",
-      "p1": "Tower Defense Infini parte de una base que ya conoces: colocar torres, ralentizar enemigos, mantener la línea. Cañón y torre de arquero para empezar — pero muy pronto la partida cambia de naturaleza. Las oleadas no tienen fin, y para resistir hay que desbloquear y combinar torres elementales: hielo para ralentizar, fuego para quemar con el tiempo, veneno para desgastar, pegamento para inmovilizar. Cada una tiene sus puntos fuertes, y las verdaderas combinaciones aparecen cuando las haces trabajar juntas.",
-      "p2": "Un clima dinámico perturba el campo de batalla durante la partida, y un sistema de Prestigio permite reiniciarlo todo con bonificaciones permanentes cuando la oleada actual se vuelve demasiado difícil — para volver más fuerte, una y otra vez."
+    "pageTitle": "Tower Défense Infini",
+    "tag": "Tower defense",
+    "tagline": "Un tower defense contra oleadas de zombis sin fin: colocas torres a lo largo del camino y ves hasta dónde aguantas.",
+    "installCta": "Instalar con el Launcher",
+    "installMeta": "Gratis · Windows 10/11 · unos 4 MB",
+    "play": { "title": "Cómo se juega", "p": "Los zombis llegan por el camino y tienes que pararlos antes de que alcancen tu base. Colocas torres a los lados, ganas oro por cada zombi que matas y lo gastas en torres nuevas o en mejoras (tres niveles por torre). Cada zombi que pasa te cuesta vidas: 20 en el mapa fácil, 3 en los mapas extremos. No hay una última oleada, simplemente se ponen más duras." },
+    "towers": {
+      "title": "Las torres",
+      "p": "Diez torres. Nueve se desbloquean al subir de oleada (Cañón, Arquero, Hielo, Fuego, Viento, Tesla, Veneno, Cuartel Militar, Pegamento) y la décima, la Torre del Prestigio, llega con el Prestigio. El Arquero atraviesa una fila entera de enemigos, la Tesla encadena hasta tres objetivos y el Cuartel manda por el camino un jeep, un camión o un tanque según su nivel. La barra de atajos solo tiene cinco huecos, así que hay que elegir. Las torres también se pueden combinar, con cinco sinergias ocultas. Por ejemplo, un zombi congelado que recibe un disparo de Fuego sufre daño extra y pierde la congelación.",
+      "th1": "Torre", "th2": "Se desbloquea", "th3": "Función",
+      "wave": "Oleada", "prestige": "Prestigio",
+      "n1": "Cañón", "d1": "Disparo a un solo objetivo, sin debilidades particulares.",
+      "n2": "Arquero", "d2": "Flecha perforante que alcanza a todos los enemigos en línea, con más daño al final del alcance.",
+      "n3": "Hielo", "d3": "Ralentiza a su objetivo. +50 % de daño a los zombis de fuego, −50 % a los de hielo.",
+      "n4": "Fuego", "d4": "Quemadura continua. +50 % de daño a los zombis de hielo, −50 % a los de fuego.",
+      "n5": "Viento", "d5": "Cuchillas de viento en cono que hacen sangrar a los enemigos.",
+      "n6": "Tesla", "d6": "Rayo que encadena hasta 3 enemigos y los aturde un instante.",
+      "n7": "Veneno", "d7": "Bola tóxica que estalla en una nube y envenena a todos los enemigos del círculo.",
+      "n8": "Cuartel Militar", "d8": "Cada 30 s, un vehículo (jeep, camión, tanque) recorre todo el camino arrollando zombis.",
+      "n9": "Pegamento", "d9": "Pega y ralentiza a su objetivo. En el nivel 3, la bola salpica y ralentiza a todo el grupo.",
+      "n10": "Torre del Prestigio", "d10": "Una a la vez. Salta por el mapa o se queda fija, y golpea en zona."
     },
-    "features": {
-      "f1": "Oleadas infinitas — el juego nunca se detiene, la dificultad sube sin parar",
-      "f2": "10 torres por desbloquear jugando: Cañón, Arquero, Hielo, Fuego, Viento, Tesla, Veneno, Cuartel Militar, Pegamento, y la Torre del Prestigio",
-      "f3": "Verdaderas sinergias entre elementos — combina hielo + fuego, veneno + pegamento y muchas otras combinaciones",
-      "f4": "Clima dinámico que influye directamente en el combate",
-      "f5": "Sistema de Prestigio con bonificaciones permanentes (+% de oro, velocidad de juego, mapa especial)",
-      "f6": "34 logros por desbloquear, estadísticas detalladas (combate, defensa, economía, constancia...)",
-      "f7": "Wiki integrada — zombis, torres, sinergias y oleadas malditas, todo explicado en el juego",
-      "f8": "Oleadas malditas y jefes para romper la rutina"
+    "long": { "title": "Cuando la partida se alarga", "p": "A partir de la oleada 15, algunas oleadas están malditas (Horda, Enjambre, Velocidad Demoníaca, Enfurecidos, Blindaje Maldito) y cambian las reglas de la oleada en curso. Un minijefe aparece en las oleadas 5, 15, 25…, un jefe en las 10, 20, 30… (cinco jefes distintos, elegidos por una ruleta). Desde la oleada 30, el clima puede intervenir durante minuto y medio más o menos: Nieve, Canícula, Eclipse, Tormenta de arena, Aurora Boreal, Lluvia de Meteoritos o Felicidad, que duplica el oro que sueltan los enemigos." },
+    "prestige": { "title": "Prestigio", "p": "Cuando llegas a la oleada 200, puedes pasar a Prestigio. La partida vuelve a empezar (oleada, oro, torres), pero conservas tu perfil, tus estadísticas y tus logros, y cada nivel suma un 50 % de oro por zombi eliminado y 100 de oro inicial. Prestigio 1 desbloquea además la Torre del Prestigio, la velocidad x3 y un sexto mapa, la Espiral del Prestigio (cuatro portales, 3 vidas). Prestigio 2 añade una habilidad pasiva que anula una derrota por partida, con tiempo de recarga." },
+    "facts": {
+      "title": "Información", "inGame": "En el juego",
+      "publisher": "Editor", "publisherVal": "Izacki",
+      "price": "Precio", "priceVal": "Gratis",
+      "platform": "Plataforma", "platformVal": "Windows 10/11",
+      "size": "Tamaño", "sizeVal": "~4 MB",
+      "account": "Cuenta", "accountVal": "Cuenta Izacki (gratis)",
+      "lang": "Idioma del juego", "langVal": "Francés",
+      "towers": "Torres", "towersVal": "10, con 3 niveles cada una",
+      "maps": "Mapas", "mapsVal": "6, de 1 a 4 portales",
+      "ach": "Logros", "achVal": "124",
+      "wiki": "Wiki", "wikiVal": "Integrada en el juego",
+      "save": "Guardado", "saveVal": "En tu ordenador, vinculado a tu cuenta",
+      "board": "Clasificación", "boardVal": "Mejor oleada, desde el Launcher",
+      "controls": "Controles", "controlsVal": "Ratón y atajos de teclado"
     }
   },
   "infosPage": {

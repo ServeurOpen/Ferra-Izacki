@@ -524,6 +524,61 @@ section{padding:64px 0;}
 .ferra-ban-contest-status.ok{color:var(--valid);}
 .ferra-ban-contest-status.err{color:var(--danger);}
 
+/* ============================================================ fiche d'un jeu (Tower Défense) ====
+   03/10/2026, retour joueur : la page jeu faisait "générée par IA". Texte à
+   gauche avec de vrais titres de section, bloc d'infos factuel à droite
+   (façon fiche Steam), tableau des tours, galerie à une grande capture et
+   deux petites. Sélecteurs gp-* dédiés : rien d'existant n'est modifié, la
+   page FERRA garde son gabarit. */
+.gp-top{padding:30px 0 0;}
+.gp-eyebrow{
+  font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--gold);margin:0 0 8px;text-shadow:0 1px 10px rgba(0,0,0,0.6);
+}
+.gp-top .game-banner-tagline{color:#c4c9d3;}
+.gp-banner-meta{align-self:center;font-size:13.5px;color:var(--text-dim);}
+.gp-body{padding:20px 0;}
+.gp-layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:56px;align-items:start;}
+.gp-main h2{font-size:24px;font-weight:700;letter-spacing:0.3px;margin:44px 0 12px;}
+.gp-main h2:first-child{margin-top:0;}
+.gp-main p{margin:0 0 14px;font-size:15.5px;font-weight:400;line-height:1.75;color:#c4c9d3;}
+.gp-table-wrap{margin:22px 0 4px;overflow-x:auto;}
+.gp-towers{width:100%;border-collapse:collapse;font-size:14px;}
+.gp-towers th,.gp-towers td{padding:11px 16px 11px 0;text-align:left;vertical-align:top;border-bottom:1px solid var(--panel-edge);}
+.gp-towers thead th{
+  padding-bottom:8px;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:600;letter-spacing:1.2px;
+  text-transform:uppercase;color:var(--text-dim);white-space:nowrap;
+}
+.gp-towers tbody th{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:16px;white-space:nowrap;color:var(--text);}
+.gp-towers td:nth-child(2){white-space:nowrap;color:var(--text-dim);}
+.gp-towers td:nth-child(3){color:#c4c9d3;font-weight:400;line-height:1.55;}
+.gp-side{position:sticky;top:90px;}
+.gp-side h2{font-size:20px;font-weight:700;margin:0 0 6px;}
+.gp-side h3{font-size:15px;font-weight:600;color:var(--text-dim);margin:28px 0 2px;}
+.gp-facts{margin:0;font-size:13.5px;}
+.gp-facts div{display:flex;justify-content:space-between;gap:18px;padding:9px 0;border-bottom:1px solid var(--panel-edge);}
+.gp-facts dt{flex:none;color:var(--text-dim);}
+.gp-facts dd{margin:0;text-align:right;color:var(--text);font-weight:400;}
+.gp-shots-section{padding:30px 0 70px;}
+.gp-h2{font-size:24px;font-weight:700;letter-spacing:0.3px;text-align:left;margin:0 0 16px;}
+.gp-shots{grid-template-columns:2fr 1fr;grid-template-rows:auto auto;gap:12px;}
+.gp-shots .shot-frame:first-child{grid-row:1 / span 2;aspect-ratio:auto;}
+@media (max-width:900px){
+  .gp-layout{grid-template-columns:minmax(0,1fr);gap:40px;}
+  .gp-side{position:static;}
+}
+@media (max-width:760px){
+  .gp-shots{grid-template-columns:1fr;grid-template-rows:none;}
+  .gp-shots .shot-frame:first-child{grid-row:auto;aspect-ratio:16/9;}
+}
+@media (max-width:640px){
+  .gp-towers,.gp-towers tbody{display:block;}
+  .gp-towers thead{display:none;}
+  .gp-towers tbody tr{display:grid;grid-template-columns:1fr auto;gap:2px 14px;padding:11px 0;border-bottom:1px solid var(--panel-edge);}
+  .gp-towers tbody th,.gp-towers td{padding:0;border:0;}
+  .gp-towers td:nth-child(3){grid-column:1 / -1;}
+}
+
 /* ============================================================
    Très grands écrans (03/10/2026, retour joueur : "ma copine a un grand écran
    et j'ai l'impression que ça ne paraît pas proportionné sur le site, ça

@@ -51,23 +51,44 @@
   },
   "tdPage": {
     "pageTitle": "Tower Défense Infini",
-    "tag": "🏹 Tower Défense",
-    "tagline": "Des vagues de zombies qui ne s'arrêtent jamais, des tours élémentaires à combiner en vraies synergies, et une météo qui change tout en plein combat.",
-    "mouse": "Souris", "mouseVal": "Clic + molette",
-    "about": {
-      "title": "Classique dans l'âme, jamais dans la durée",
-      "p1": "Tower Défense Infini part d'une base que tu connais déjà : poser des tours, ralentir des ennemis, tenir la ligne. Canon et tour d'archer pour commencer — puis très vite, la partie change de nature. Les vagues n'ont pas de fin, et pour tenir, il faut débloquer et combiner des tours élémentaires : glace pour ralentir, feu pour brûler dans la durée, poison pour ronger, glu pour immobiliser. Chacune a ses forces, et les vraies combos apparaissent quand tu les fais travailler ensemble.",
-      "p2": "Une météo dynamique vient perturber le champ de bataille en cours de partie, et un système de Prestige permet de tout relancer avec des bonus permanents une fois que la vague en cours devient trop dure — pour repartir plus fort, encore et encore."
+    "tag": "Tower defense",
+    "tagline": "Un tower defense contre des vagues de zombies sans fin : tu poses des tours le long de la route et tu vois jusqu'où tu tiens.",
+    "installCta": "Installer avec le Launcher",
+    "installMeta": "Gratuit · Windows 10/11 · environ 4 Mo",
+    "play": { "title": "Comment ça se joue", "p": "Les zombies arrivent par la route et tu dois les arrêter avant qu'ils atteignent ta base. Tu poses des tours sur les côtés, tu gagnes de l'or à chaque zombie tué et tu le dépenses en nouvelles tours ou en améliorations (trois niveaux par tour). Chaque zombie qui passe te coûte des vies : 20 sur la carte facile, 3 sur les cartes extrêmes. Il n'y a pas de dernière vague, elles deviennent juste plus dures." },
+    "towers": {
+      "title": "Les tours",
+      "p": "Dix tours. Neuf se débloquent au fil des vagues (Canon, Archer, Glace, Feu, Vent, Tesla, Poison, Caserne Militaire, Glu), la dixième, la Tour du Prestige, avec le Prestige. L'Archer perce toute une file d'ennemis, la Tesla enchaîne jusqu'à trois cibles, la Caserne envoie une jeep, un camion ou un tank selon son niveau. La barre de raccourcis n'a que cinq emplacements : il faut choisir. Les tours peuvent aussi se combiner, avec cinq synergies cachées. Par exemple, un zombie gelé qui prend un tir de Feu encaisse des dégâts en plus et perd son gel.",
+      "th1": "Tour", "th2": "Débloquée", "th3": "Rôle",
+      "wave": "Vague", "prestige": "Prestige",
+      "n1": "Canon", "d1": "Tir sur une seule cible, sans faiblesse particulière.",
+      "n2": "Archer", "d2": "Flèche perçante qui touche tous les ennemis alignés, avec plus de dégâts en bout de ligne.",
+      "n3": "Glace", "d3": "Ralentit sa cible. +50 % de dégâts sur les zombies de feu, −50 % sur ceux de glace.",
+      "n4": "Feu", "d4": "Brûlure continue. +50 % de dégâts sur les zombies de glace, −50 % sur ceux de feu.",
+      "n5": "Vent", "d5": "Lames de vent en cône qui font saigner les ennemis touchés.",
+      "n6": "Tesla", "d6": "Éclair qui enchaîne jusqu'à 3 ennemis et les immobilise un court instant.",
+      "n7": "Poison", "d7": "Boule toxique qui explose en nuage et empoisonne tous les ennemis du cercle.",
+      "n8": "Caserne Militaire", "d8": "Toutes les 30 s, un véhicule (jeep, camion, tank) parcourt la route en percutant les zombies.",
+      "n9": "Glu", "d9": "Englue et ralentit sa cible. Au niveau 3, la boule éclate en flaque et ralentit tout le groupe.",
+      "n10": "Tour du Prestige", "d10": "Un seul exemplaire à la fois. Elle saute d'un endroit à l'autre ou reste fixe, et frappe en zone."
     },
-    "features": {
-      "f1": "Vagues infinies — le jeu ne s'arrête jamais, la difficulté monte en continu",
-      "f2": "10 tours à débloquer en jouant : Canon, Archer, Glace, Feu, Vent, Tesla, Poison, Caserne Militaire, Glu, et la Tour du Prestige",
-      "f3": "Vraies synergies entre éléments — combine glace + feu, poison + glu et bien d'autres combos",
-      "f4": "Météo dynamique qui influence directement le combat",
-      "f5": "Système de Prestige avec bonus permanents (+% d'or, vitesse de jeu, carte spéciale)",
-      "f6": "34 succès à débloquer, statistiques détaillées (combat, défense, économie, assiduité...)",
-      "f7": "Wiki intégré — zombies, tours, synergies et vagues maudites, tout est expliqué en jeu",
-      "f8": "Des vagues maudites et des boss pour casser la routine"
+    "long": { "title": "Quand la partie dure", "p": "Dès la vague 15, certaines vagues sont maudites (Horde, Essaim, Vitesse Démoniaque, Enragés, Blindage Maudit) et changent les règles de la vague en cours. Un mini-boss arrive aux vagues 5, 15, 25…, un boss aux vagues 10, 20, 30… (cinq boss différents, tirés à la roulette). À partir de la vague 30, la météo peut s'en mêler pendant environ une minute et demie : Neige, Canicule, Éclipse, Tempête de sable, Aurore Boréale, Pluie de Météores, ou Bonheur, qui double l'or lâché par les ennemis." },
+    "prestige": { "title": "Prestige", "p": "Quand tu atteins la vague 200, tu peux passer Prestige. La partie repart de zéro (vague, or, tours), mais ton profil, tes stats et tes succès restent, et chaque niveau ajoute 50 % d'or par zombie tué et 100 d'or de départ. Prestige 1 débloque aussi la Tour du Prestige, la vitesse x3 et une sixième carte, la Spirale du Prestige (quatre portails, 3 vies). Prestige 2 ajoute une compétence passive qui annule une défaite par partie, avec un temps de recharge." },
+    "facts": {
+      "title": "Infos", "inGame": "Dans le jeu",
+      "publisher": "Éditeur", "publisherVal": "Izacki",
+      "price": "Prix", "priceVal": "Gratuit",
+      "platform": "Plateforme", "platformVal": "Windows 10/11",
+      "size": "Taille", "sizeVal": "~4 Mo",
+      "account": "Compte", "accountVal": "Compte Izacki (gratuit)",
+      "lang": "Langue du jeu", "langVal": "Français",
+      "towers": "Tours", "towersVal": "10, avec 3 niveaux chacune",
+      "maps": "Cartes", "mapsVal": "6, de 1 à 4 portails",
+      "ach": "Succès", "achVal": "124",
+      "wiki": "Wiki", "wikiVal": "Intégré au jeu",
+      "save": "Sauvegarde", "saveVal": "Sur l'ordinateur, liée à ton compte",
+      "board": "Classement", "boardVal": "Meilleure vague, via le Launcher",
+      "controls": "Commandes", "controlsVal": "Souris et raccourcis clavier"
     }
   },
   "infosPage": {

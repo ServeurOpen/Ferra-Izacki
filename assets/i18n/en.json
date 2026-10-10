@@ -50,24 +50,45 @@
     }
   },
   "tdPage": {
-    "pageTitle": "Tower Defense Infinite",
-    "tag": "🏹 Tower Defense",
-    "tagline": "Endless zombie waves, elemental towers to combine into real synergies, and weather that changes everything mid-fight.",
-    "mouse": "Mouse", "mouseVal": "Click + wheel",
-    "about": {
-      "title": "Classic at heart, never-ending in practice",
-      "p1": "Tower Defense Infinite starts from a base you already know: place towers, slow enemies, hold the line. Cannon and Archer tower to start — then very quickly, the game changes nature. The waves never end, and to hold on you'll need to unlock and combine elemental towers: ice to slow, fire to burn over time, poison to wear down, glue to root in place. Each has its strengths, and the real combos appear when you make them work together.",
-      "p2": "Dynamic weather disrupts the battlefield mid-run, and a Prestige system lets you restart with permanent bonuses once the current wave gets too hard — to come back stronger, again and again."
+    "pageTitle": "Tower Défense Infini",
+    "tag": "Tower defense",
+    "tagline": "A tower defense against endless zombie waves: you place towers along the road and see how long you can hold.",
+    "installCta": "Install with the Launcher",
+    "installMeta": "Free · Windows 10/11 · about 4 MB",
+    "play": { "title": "How it plays", "p": "Zombies come down the road and you have to stop them before they reach your base. You place towers along the sides, earn gold for every zombie you kill, and spend it on new towers or upgrades (three levels per tower). Each zombie that gets through costs you lives: 20 on the easy map, 3 on the extreme ones. There is no last wave, they just get harder." },
+    "towers": {
+      "title": "The towers",
+      "p": "Ten towers. Nine unlock as you climb the waves (Cannon, Archer, Ice, Fire, Wind, Tesla, Poison, Military Barracks, Glue) and the tenth, the Prestige Tower, comes with Prestige. The Archer pierces a whole line of enemies, the Tesla chains up to three targets, and the Barracks sends a jeep, a truck or a tank down the road depending on its level. The hotbar only has five slots, so you have to choose. Towers can also be combined, with five hidden synergies. For example, a frozen zombie that takes a Fire shot takes bonus damage and loses its freeze.",
+      "th1": "Tower", "th2": "Unlocked", "th3": "Role",
+      "wave": "Wave", "prestige": "Prestige",
+      "n1": "Cannon", "d1": "Single-target shots, no particular weakness.",
+      "n2": "Archer", "d2": "Piercing arrow that hits every enemy in line, with more damage at the far end.",
+      "n3": "Ice", "d3": "Slows its target. +50% damage to fire zombies, −50% to ice zombies.",
+      "n4": "Fire", "d4": "Constant burn. +50% damage to ice zombies, −50% to fire zombies.",
+      "n5": "Wind", "d5": "Cone of wind blades that make enemies bleed.",
+      "n6": "Tesla", "d6": "Lightning that chains up to 3 enemies and briefly stuns them.",
+      "n7": "Poison", "d7": "Toxic ball that bursts into a cloud and poisons every enemy in the circle.",
+      "n8": "Military Barracks", "d8": "Every 30 s, a vehicle (jeep, truck, tank) drives the whole road, ramming zombies.",
+      "n9": "Glue", "d9": "Sticks to and slows its target. At level 3 the ball splashes and slows the whole group.",
+      "n10": "Prestige Tower", "d10": "One at a time. It jumps around the map or stays put, and hits an area."
     },
-    "features": {
-      "f1": "Endless waves — the game never stops, difficulty keeps climbing",
-      "f2": "10 towers to unlock by playing: Cannon, Archer, Ice, Fire, Wind, Tesla, Poison, Military Barracks, Glue, and the Prestige Tower",
-      "f3": "Real synergies between elements — combine ice + fire, poison + glue and many more combos",
-      "f4": "Dynamic weather that directly affects combat",
-      "f5": "Prestige system with permanent bonuses (+% gold, game speed, a special map)",
-      "f6": "34 achievements to unlock, detailed stats (combat, defense, economy, dedication...)",
-      "f7": "Built-in wiki — zombies, towers, synergies and cursed waves, all explained in-game",
-      "f8": "Cursed waves and bosses to break the routine"
+    "long": { "title": "When a run drags on", "p": "From wave 15, some waves are cursed (Horde, Swarm, Demonic Speed, Enraged, Cursed Armor) and change the rules for the wave in progress. A mini-boss shows up on waves 5, 15, 25…, a boss on waves 10, 20, 30… (five different bosses, picked by a roulette). From wave 30, weather can kick in for about a minute and a half: Snow, Heatwave, Eclipse, Sandstorm, Northern Lights, Meteor Shower, or Happiness, which doubles the gold enemies drop." },
+    "prestige": { "title": "Prestige", "p": "When you reach wave 200, you can go Prestige. The run starts over (wave, gold, towers), but your profile, stats and achievements stay, and each level adds 50% gold per kill and 100 starting gold. Prestige 1 also unlocks the Prestige Tower, x3 speed and a sixth map, the Prestige Spiral (four portals, 3 lives). Prestige 2 adds a passive skill that cancels one defeat per run, with a cooldown." },
+    "facts": {
+      "title": "Info", "inGame": "In the game",
+      "publisher": "Publisher", "publisherVal": "Izacki",
+      "price": "Price", "priceVal": "Free",
+      "platform": "Platform", "platformVal": "Windows 10/11",
+      "size": "Size", "sizeVal": "~4 MB",
+      "account": "Account", "accountVal": "Izacki account (free)",
+      "lang": "Game language", "langVal": "French",
+      "towers": "Towers", "towersVal": "10, with 3 levels each",
+      "maps": "Maps", "mapsVal": "6, with 1 to 4 portals",
+      "ach": "Achievements", "achVal": "124",
+      "wiki": "Wiki", "wikiVal": "Built into the game",
+      "save": "Saves", "saveVal": "On your computer, tied to your account",
+      "board": "Leaderboard", "boardVal": "Best wave, through the Launcher",
+      "controls": "Controls", "controlsVal": "Mouse and keyboard shortcuts"
     }
   },
   "infosPage": {
