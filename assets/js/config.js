@@ -37,6 +37,6 @@ window.FERRA_CONFIG = {
   // fonction (sert juste à initialiser Stripe.js côté navigateur). La clé
   // SECRÈTE, elle, ne doit JAMAIS apparaître dans un fichier du site — voir
   // supabase/functions/stripe-create-checkout (secret Supabase STRIPE_SECRET_KEY).
-  // Clé LIVE depuis le 10/10/2026 (compte Stripe de la micro-entreprise FerraIzacki).
+  // Clé LIVE depuis le 10/10/2026 (compte Stripe de la micro-entreprise Ferra.Izacki).
   STRIPE_PUBLISHABLE_KEY: 'pk_live_51UC31yRDfjLFMBwdKA4vwcrSPokl0feOYC6Bxp8mhPBXwpbF32QHwd3dKGMjjjA8o8NDfSgjFIRzpC1oFzhGQocU00Rl1ADBcE',
 };
