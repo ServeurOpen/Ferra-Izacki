@@ -143,6 +143,53 @@
     errEl.style.display = 'block';
   }
 
+  // 11/10/2026 (plafonds d'achat, migration_66) — durée lisible à partir de retryAfterSeconds renvoyé par
+  // stripe-create-checkout ("" si absent ou nul : on n'affiche alors aucun délai).
+  function formatRetryDelay(seconds) {
+    const s = Math.ceil(Number(seconds));
+    if (!isFinite(s) || s <= 0) return '';
+    if (s < 60) return "moins d'une minute";
+    const totalMin = Math.ceil(s / 60);
+    if (totalMin < 60) return totalMin + ' min';
+    const totalH = Math.floor(totalMin / 60);
+    const min = totalMin % 60;
+    if (totalH < 24) return totalH + ' h' + (min ? ' ' + min + ' min' : '');
+    const days = Math.floor(totalH / 24);
+    const hours = totalH % 24;
+    return days + ' j' + (hours ? ' ' + hours + ' h' : '');
+  }
+
+  // Message affiché quand stripe-create-checkout refuse ou échoue. 'purchase_limit' (429) : plafond d'achat atteint, avec le
+  // délai avant de pouvoir réessayer ; le message « limite atteinte » n'est réservé qu'aux raisons qui en sont vraiment une
+  // (daily_packs, weekly_amount, new_accounts_global_limit) — pour toute autre raison (unknown_user, invalid_amount...) le
+  // joueur est renvoyé au support, la raison exacte est dans la console (voir le gestionnaire de clic plus bas) ;
+  // 'sales_paused' (503) : les ventes sont suspendues par le propriétaire ; 'limits_unavailable' (503) : la vérification
+  // des plafonds est momentanément impossible (aucun paiement n'est créé dans ce cas). Toute autre erreur garde le
+  // message d'avant.
+  function checkoutErrorMessage(body) {
+    const code = body && body.error;
+    if (code === 'sales_paused' || (code === 'purchase_limit' && body.reason === 'sales_paused')) {
+      return 'Les achats de crédits sont temporairement suspendus. Reviens un peu plus tard.';
+    }
+    if (code === 'purchase_limit') {
+      const delay = formatRetryDelay(body.retryAfterSeconds);
+      if (body.reason === 'disabled_user') {
+        return "Ton compte ne peut pas acheter de crédits pour le moment. Contacte le support si tu penses que c'est une erreur.";
+      }
+      if (body.reason === 'too_many_open') {
+        return "Tu as déjà des paiements en cours. Termine-les ou attends qu'ils expirent" + (delay ? ', puis réessaie dans environ ' + delay : '') + '.';
+      }
+      if (body.reason === 'daily_packs' || body.reason === 'weekly_amount' || body.reason === 'new_accounts_global_limit') {
+        return "Tu as atteint la limite d'achats de crédits pour cette période. " + (delay ? 'Réessaie dans environ ' + delay + '.' : 'Réessaie plus tard.');
+      }
+      return 'Impossible de démarrer le paiement, contacte le support.';
+    }
+    if (code === 'limits_unavailable') {
+      return 'Service momentanément indisponible, réessaie dans quelques minutes.';
+    }
+    return 'Impossible de démarrer le paiement — réessaie dans un instant.';
+  }
+
   document.querySelectorAll('.credit-pack').forEach((btn) => {
     btn.addEventListener('click', async () => {
       document.querySelectorAll('.credit-pack').forEach((b) => { b.disabled = true; });
@@ -156,15 +203,21 @@
           headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
           body: JSON.stringify({ packageId: btn.dataset.pack }),
         });
-        const body = await res.json();
-        if (!res.ok || !body.url) throw new Error(body.error || 'unknown');
+        const body = await res.json().catch(() => null);
+        if (!res.ok || !body || !body.url) {
+          // La raison du refus (ex. unknown_user) est ajoutée au message de l'erreur : c'est ce que le support lit dans
+          // la console quand le joueur n'a vu que « contacte le support ».
+          const failure = new Error(((body && body.error) || 'unknown') + (body && body.reason ? ' : ' + body.reason : ''));
+          failure.checkoutBody = body;
+          throw failure;
+        }
         window.location.href = body.url;
       } catch (err) {
-        errEl.textContent = 'Impossible de démarrer le paiement — réessaie dans un instant.';
+        errEl.textContent = checkoutErrorMessage(err && err.checkoutBody);
         errEl.classList.add('show');
         errEl.style.display = 'block';
         document.querySelectorAll('.credit-pack').forEach((b) => { b.disabled = false; });
-        console.error(err);
+        console.error(err, err && err.checkoutBody);
       }
     });
   });
