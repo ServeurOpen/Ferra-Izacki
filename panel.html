@@ -108,6 +108,23 @@
     flex:1;min-width:160px;background:var(--bg-panel);border:1px solid var(--panel-edge);border-radius:8px;
     color:var(--text);padding:7px 10px;font-size:12px;font-family:inherit;
   }
+  /* Retraits des créateurs (Stripe Connect, 11/10/2026) : statut, puces de risque, indicateurs */
+  .wd-toggle{display:flex;align-items:center;gap:8px;margin:0 0 12px;font-size:12.5px;color:var(--text-dim);cursor:pointer;}
+  .wd-badge{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap;}
+  .wd-badge.is-ok{background:rgba(94,209,132,0.15);color:var(--valid);}
+  .wd-badge.is-warn{background:rgba(224,176,74,0.15);color:#e0b04a;}
+  .wd-badge.is-info{background:rgba(88,166,224,0.15);color:#58a6e0;}
+  .wd-badge.is-danger{background:rgba(224,102,95,0.15);color:var(--danger);}
+  .wd-badge.is-muted{background:rgba(255,255,255,0.06);color:var(--text-dim);}
+  .wd-money{margin:10px 0 0;font-size:12.5px;line-height:1.5;}
+  .wd-risk{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:10px;}
+  .wd-chip{font-size:11.5px;padding:2px 9px;border-radius:6px;color:#e0b04a;background:rgba(224,176,74,0.08);border:1px solid rgba(224,176,74,0.3);}
+  .wd-card[data-risk="high"] .wd-chip{color:var(--danger);background:rgba(224,102,95,0.08);border-color:rgba(224,102,95,0.3);}
+  .wd-facts{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:4px 18px;font-size:11.5px;line-height:1.5;color:var(--text-dim);}
+  .wd-note{margin:10px 0 0;font-size:12px;line-height:1.5;color:var(--text-dim);}
+  .wd-note.is-error{color:#e0b04a;}
+  .wd-note.is-legacy{padding:8px 12px;border:1px solid rgba(224,176,74,0.3);border-radius:8px;background:rgba(224,176,74,0.06);color:var(--text);}
+  .wd-card.is-legacy{border-style:dashed;}
   .panel-search-input{
     width:100%;box-sizing:border-box;background:var(--bg-panel-2);border:1px solid var(--panel-edge);
     border-radius:9px;color:var(--text);padding:9px 12px;font-size:13px;font-family:inherit;margin-bottom:12px;
@@ -263,7 +280,8 @@
 
       <div class="panel-action-sub">
         <h4>💸 Demandes de retrait <span class="panel-action-hint" id="financeHint">— Portail créateurs</span></h4>
-        <button class="btn btn-primary btn-sm" id="adminPayAllBtn" style="width:auto;margin-bottom:10px;display:none;">💰 Payer TOUT</button>
+        <button class="btn btn-primary btn-sm" id="adminPayAllBtn" style="width:auto;margin-bottom:10px;display:none;">💰 Approuver tout (sans alerte)</button>
+        <label class="wd-toggle"><input type="checkbox" id="adminWithdrawalsClosedToggle"> Afficher aussi les retraits terminés (payés ou refusés)</label>
         <div id="adminWithdrawalsList"><p style="color:var(--text-dim);font-size:12.5px;">Chargement…</p></div>
       </div>
 
@@ -640,115 +658,307 @@
     }
   });
 
-  // ---- 💸 Retraits PayPal (05/09/2026, demande explicite) — mêmes
-  // fonctions RPC que le Launcher (voir migration_29_creator_portal.sql),
-  // le paiement réel passe par la fonction Edge process-withdrawal. ----
+  // ---- 💸 Retraits des créateurs (Stripe Connect, 11/10/2026) — mêmes fonctions que le Launcher
+  // (admin_list_withdrawals, admin_reject_withdrawal, fonction Edge process-withdrawal). La validation reste
+  // MANUELLE : chaque carte montre les indicateurs de risque calculés par le serveur, puis « Approuver et verser »
+  // déclenche le transfert Stripe vers le compte du créateur (idempotent : ne paie jamais deux fois). ----
   function formatEurosFromCents(cents) {
     return (cents / 100).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
   }
-  let payAllRequestsCache = [];
+  function wdEsc(s) {
+    return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function wdNum(n) { return Number(n || 0).toLocaleString('fr-FR'); }
+  function wdPlural(n, one, many) { return Math.abs(n) > 1 ? many : one; }
+  const WD_STATUS = {
+    pending: ['En attente de validation', 'warn'],
+    approved: ['Approuvé, en attente de versement', 'info'],
+    processing: ['Virement en cours', 'info'],
+    failed: ['Virement en échec', 'danger'],
+    paid: ['Payé', 'ok'],
+    rejected: ['Refusé', 'muted'],
+  };
+  const WD_ACCOUNT = { not_configured: 'non configuré', incomplete: 'informations manquantes', pending_verification: 'en vérification', active: 'actif', restricted: 'restreint' };
+  const WD_LEVEL = { none: ['Aucune alerte', 'ok'], attention: ['À vérifier', 'warn'], high: ['Risque élevé', 'danger'] };
+  let withdrawalsCache = [];
+  let wdProcessingTimeoutMinutes = null; // réglage processing_timeout_minutes (admin_list_withdrawals), null = inconnu
+  // Demandes que « Approuver tout » peut traiter : aucune alerte, pas une ancienne demande, prêtes à verser.
+  function wdBulkCandidates() {
+    return withdrawalsCache.filter((r) => !r.legacy && !r.transferUncertain && r.risk && r.risk.level === 'none' && (r.status === 'pending' || r.status === 'approved'));
+  }
+  function wdChips(r) {
+    const k = r.risk || {};
+    const out = [];
+    (k.flags || []).forEach((flag) => {
+      switch (flag) {
+        case 'single_buyer_concentration': out.push(`Un seul acheteur : ${wdNum(k.topBuyerSharePct)} % des gains`); break;
+        case 'few_buyers': out.push(`Peu d'acheteurs : ${wdNum(k.distinctBuyers)}`); break;
+        case 'new_buyer_accounts':
+          out.push(k.newBuyerDays != null
+            ? `${wdNum(k.newBuyersSharePct)} % des gains viennent de comptes de moins de ${wdNum(k.newBuyerDays)} jours`
+            : `${wdNum(k.newBuyersSharePct)} % des gains viennent de comptes récents`);
+          break;
+        case 'refunded_buyers': out.push(`Acheteurs avec remboursement ou litige Stripe : ${wdNum(k.refundedBuyersSharePct)} % des gains`); break;
+        case 'refunded_sales': out.push(`${wdNum(k.refundedSalesCount)} ${wdPlural(k.refundedSalesCount, 'vente remboursée', 'ventes remboursées')}`); break;
+        case 'new_creator_account': out.push(`Compte créateur de ${wdNum(k.creatorAccountAgeDays)} ${wdPlural(k.creatorAccountAgeDays, 'jour', 'jours')}`); break;
+        case 'previous_failed': out.push('Un virement précédent a échoué'); break;
+        case 'previous_rejected': out.push('Retrait précédent refusé'); break;
+        case 'banned_account': out.push('Compte du créateur banni : aucun virement ne partira'); break;
+        case 'deleted_account': out.push('Compte du créateur supprimé : aucun virement ne partira'); break;
+        default: out.push(String(flag));
+      }
+    });
+    return out;
+  }
+  function wdLastError(r) {
+    if (!r.lastErrorCode && !r.lastErrorMessage) return null;
+    const known = {
+      insufficient_stripe_balance: 'Solde Stripe disponible insuffisant : le retrait reste approuvé, réessaie quand les fonds seront disponibles.',
+      insufficient_platform_funds: "Garde-fou : l'argent encaissé net ne couvre pas ce retrait.",
+      account_not_ready: "Le compte de paiement du créateur n'est pas prêt.",
+    };
+    const base = (r.lastErrorCode && known[r.lastErrorCode]) || r.lastErrorMessage || r.lastErrorCode || '';
+    return r.attemptCount > 0 ? `${base} (tentative ${r.attemptCount})` : base;
+  }
+  // Messages d'erreur clairs selon la réponse de process-withdrawal.
+  function wdErrorText(reason, b) {
+    b = b || {};
+    switch (reason) {
+      case 'insufficient_stripe_balance':
+        return `Solde Stripe disponible insuffisant (${formatEurosFromCents(Number(b.availableCents) || 0)} disponibles, ${formatEurosFromCents(Number(b.neededCents) || 0)} nécessaires). Le retrait reste approuvé : réessaie quand les fonds seront disponibles.`;
+      case 'insufficient_platform_funds': return "Garde-fou : l'argent encaissé net ne couvre pas ce retrait.";
+      case 'account_not_ready': return `Le compte de paiement du créateur n'est pas prêt (${WD_ACCOUNT[b.accountStatus] || b.accountStatus || 'statut inconnu'}).`;
+      case 'stripe_error': {
+        // Le statut RÉEL de la demande est dans la réponse : « approved » = Stripe n'a pas répondu (rien n'a été refusé ni mis
+        // en échec) ; « failed » = refus net enregistré ; doute (uncertain) = on ne sait pas si un virement est parti.
+        const code = b.code ? ` (${b.code})` : '';
+        if (b.code === 'transfer_mismatch') return "Stripe a renvoyé un virement qui ne correspond pas à la demande (montant ou destination) : il n'est PAS marqué payé. Contrôle le virement dans Stripe, puis clique sur « Vérifier chez Stripe ».";
+        if (b.uncertain === true || b.status === 'processing') return `Stripe a répondu d'une façon qui ne permet pas de conclure${code} : le résultat du virement est incertain. Clique sur « Vérifier chez Stripe » avant tout nouvel essai.`;
+        if (b.status === 'failed') return `Stripe a refusé le virement${code}. Retrait en échec réessayable, aucun débit en double.`;
+        return `Stripe n'a pas répondu${code} : rien n'a été refusé ni payé, le retrait reste approuvé. Réessaie dans quelques minutes.`;
+      }
+      case 'account_disabled': {
+        const why = b.block === 'banned' ? 'banni' : b.block === 'deleted' ? 'supprimé' : 'suspendu';
+        return `Le compte du créateur est ${why} : le virement n'a pas été envoyé. Si tu refuses la demande, ses crédits lui sont rendus.`;
+      }
+      case 'country_not_allowed': return `Le pays du compte de paiement${b.accountCountry ? ` (${b.accountCountry})` : ''} n'est plus dans la liste des pays acceptés : le virement n'a pas été envoyé. Remets le pays dans le réglage « allowed_countries » ou refuse la demande.`;
+      case 'stripe_unreachable': return "Stripe n'a pas répondu : résultat incertain. Clique sur « Vérifier chez Stripe » avant tout nouvel essai.";
+      case 'paid_but_db_update_failed': return `Le virement est parti (${b.transferId || 'identifiant inconnu'}) mais l'enregistrement a échoué : clique sur « Vérifier chez Stripe », ne refuse pas.`;
+      case 'in_progress': return 'Un traitement est déjà en cours pour ce retrait.';
+      case 'request_rejected': return 'Cette demande a déjà été refusée.';
+      case 'legacy_request': return 'Ancienne demande (avant Stripe) : refuse-la, les crédits sont rendus au créateur.';
+      case 'withdrawals_disabled': return 'Les retraits sont suspendus : le réglage « withdrawals_enabled » est désactivé en base.';
+      case 'invalid_state': return "Cette demande n'est plus dans un état qui permet cette action. La liste va être actualisée.";
+      case 'forbidden': return "Action réservée à l'administrateur.";
+      case 'unauthorized':
+      case 'no_session': return 'Session expirée : reconnecte-toi puis réessaie.';
+      case 'stripe_not_configured': return 'Les paiements ne sont pas configurés côté serveur : la clé Stripe (STRIPE_SECRET_KEY) est absente de la fonction process-withdrawal.';
+      case 'service_unavailable': return "Le service de paiement est momentanément indisponible (base de données injoignable ou mise à jour SQL pas encore installée). Aucun virement n'a été envoyé par cet appel : réessaie dans quelques minutes.";
+      case 'not_found': return 'Demande introuvable : la liste va être actualisée.';
+      case 'internal_error': return 'Erreur interne de la fonction process-withdrawal : réessaie, puis consulte ses journaux dans Supabase si cela continue.';
+      case 'network': return 'Connexion impossible. Vérifie ta connexion internet puis réessaie.';
+      default: return `Échec : ${reason || 'erreur inconnue'}`;
+    }
+  }
+  // Boutons proposés pour une demande. Le doute (transferUncertain) est posé par la BASE : tant qu'il pèse, ni « verser » ni
+  // « refuser » (un virement a peut-être déjà quitté Stripe, la base refuse d'ailleurs le refus) : seulement « Vérifier chez Stripe ».
+  function wdButtons(r) {
+    const doubt = r.transferUncertain === true;
+    return {
+      approve: !r.legacy && !doubt && (r.status === 'pending' || r.status === 'approved'),
+      retry: !r.legacy && r.status === 'failed' && !doubt,
+      check: !r.legacy && (r.status === 'processing' || ((r.status === 'failed' || r.status === 'approved') && doubt)),
+      resume: !r.legacy && r.status === 'processing',
+      reject: (r.status === 'pending' || r.status === 'approved' || r.status === 'failed') && !doubt,
+    };
+  }
+  // Délai de reprise d'un virement abandonné : réglage processing_timeout_minutes renvoyé par admin_list_withdrawals
+  // (jamais un chiffre écrit ici ; sans valeur connue, aucune durée n'est annoncée).
+  function wdResumeHint(minutes) {
+    const wait = typeof minutes === 'number' && minutes > 0 ? `depuis plus de ${wdNum(minutes)} ${wdPlural(minutes, 'minute', 'minutes')}` : 'depuis un moment';
+    return `À utiliser seulement si le virement reste « en cours » ${wait} : avant ce délai le serveur refuse la reprise, un autre traitement peut encore être en train de verser.`;
+  }
+  // Texte affiché après « Vérifier chez Stripe » (corps de la réponse de process-withdrawal, action check).
+  function wdCheckText(b) {
+    b = b || {};
+    const label = (WD_STATUS[String(b.status)] || [String(b.status || 'inconnu')])[0];
+    if (b.anomaly === true) return `ANOMALIE : un virement Stripe${b.transferId ? ` (${b.transferId})` : ''} existe pour cette demande alors qu'elle est « ${label} ». Le créateur a reçu l'argent ET garde ses crédits. Rien n'a été modifié : annule le virement dans le tableau de bord Stripe ou retire-lui les crédits, puis contrôle son compte.`;
+    if (b.transferFound) return "Virement retrouvé chez Stripe : le retrait est marqué payé, aucun second virement n'a été créé.";
+    if (b.status === 'failed' || b.status === 'approved') return 'Aucun virement chez Stripe pour ce retrait : tu peux relancer le virement sans risque de doublon.';
+    return `Aucun virement trouvé chez Stripe pour l'instant (statut : ${label}). Si le retrait reste « en cours », attends quelques minutes puis utilise « Reprendre le virement ».`;
+  }
+  function wdActionsHtml(r) {
+    const id = wdEsc(r.id);
+    const { approve: canApprove, retry: canRetry, check: canCheck, resume: canResume, reject: canReject } = wdButtons(r);
+    const parts = [];
+    if (canApprove) parts.push(`<button class="btn btn-primary btn-sm" style="flex:none;width:auto;" data-action="approve" data-id="${id}">💸 Approuver et verser</button>`);
+    if (canRetry) parts.push(`<button class="btn btn-primary btn-sm" style="flex:none;width:auto;" data-action="approve" data-id="${id}">🔁 Réessayer le virement</button>`);
+    if (canCheck) parts.push(`<button class="btn btn-primary btn-sm" style="flex:none;width:auto;" data-action="check" data-id="${id}">🔎 Vérifier chez Stripe</button>`);
+    if (canResume) parts.push(`<button class="btn btn-ghost btn-sm" style="flex:none;width:auto;" data-action="approve" data-id="${id}" title="${wdEsc(wdResumeHint(wdProcessingTimeoutMinutes))}">Reprendre le virement</button>`);
+    if (canReject) {
+      parts.push(`<input type="text" placeholder="Raison du refus (obligatoire pour refuser)" data-reason-for="${id}">`);
+      parts.push(`<button class="btn btn-danger btn-sm" style="flex:none;width:auto;" data-action="reject" data-id="${id}">✖ Refuser</button>`);
+    }
+    return parts.length ? `<div class="admin-pending-game-actions">${parts.join('')}</div>` : '';
+  }
   async function loadAdminWithdrawals() {
     const el = document.getElementById('adminWithdrawalsList');
     const hint = document.getElementById('financeHint');
-    const payAllBtn = document.getElementById('adminPayAllBtn');
-    const [{ data: requests, error }, { data: finance }] = await Promise.all([
-      window.supabaseClient.rpc('admin_list_withdrawal_requests'),
-      window.supabaseClient.rpc('admin_get_platform_finance'),
-    ]);
-    payAllRequestsCache = requests || [];
-    if (finance && hint) hint.textContent = `— Portail créateurs · Disponible pour les retraits : ${formatEurosFromCents(finance.availableCents)}`;
-    // "Payer TOUT" (06/09/2026, demande explicite) — total réel affiché,
-    // caché s'il n'y a rien en attente.
-    if (payAllBtn) {
-      if (!error && payAllRequestsCache.length > 0) {
-        const totalCents = payAllRequestsCache.reduce((sum, r) => sum + r.payout_cents, 0);
-        payAllBtn.style.display = '';
-        payAllBtn.disabled = false;
-        payAllBtn.textContent = `💰 Payer TOUT (${payAllRequestsCache.length} demande${payAllRequestsCache.length > 1 ? 's' : ''} — ${formatEurosFromCents(totalCents)})`;
+    const approveAllBtn = document.getElementById('adminPayAllBtn');
+    const includeClosed = document.getElementById('adminWithdrawalsClosedToggle').checked;
+    const { data, error } = await window.supabaseClient.rpc('admin_list_withdrawals', { p_include_closed: includeClosed, p_limit: 100 });
+    withdrawalsCache = (!error && data && data.requests) || [];
+    wdProcessingTimeoutMinutes = !error && data && data.platform && typeof data.platform.processingTimeoutMinutes === 'number' ? data.platform.processingTimeoutMinutes : null;
+    if (!error && data && data.platform && hint) {
+      const p = data.platform;
+      const inFlight = p.committedCents > 0 ? ` (dont ${formatEurosFromCents(p.committedCents)} en cours de virement)` : '';
+      hint.textContent = `— Portail créateurs · Disponible pour les retraits : ${formatEurosFromCents(p.availableCents)}${inFlight}. Le solde Stripe disponible est vérifié au moment du virement.`;
+    }
+    // « Approuver tout (sans alerte) » : seulement les demandes sans aucune alerte, une par une.
+    if (approveAllBtn) {
+      const candidates = wdBulkCandidates();
+      if (!error && candidates.length > 0) {
+        const totalCents = candidates.reduce((sum, r) => sum + r.payoutCents, 0);
+        approveAllBtn.style.display = '';
+        approveAllBtn.disabled = false;
+        approveAllBtn.textContent = `💰 Approuver tout (sans alerte) — ${candidates.length} demande${candidates.length > 1 ? 's' : ''}, ${formatEurosFromCents(totalCents)}`;
       } else {
-        payAllBtn.style.display = 'none';
+        approveAllBtn.style.display = 'none';
       }
     }
-    if (error) { el.innerHTML = `<p style="color:var(--danger);font-size:12.5px;">❌ Erreur : ${error.message}</p>`; return; }
-    if (!requests || requests.length === 0) { el.innerHTML = `<p style="color:var(--text-dim);font-size:12.5px;">Aucune demande en attente.</p>`; return; }
-    el.innerHTML = requests.map((r) => `
-      <div class="admin-pending-game-card" data-request-id="${r.id}">
+    if (error) { el.innerHTML = `<p style="color:var(--danger);font-size:12.5px;">❌ Erreur : ${wdEsc(error.message)}</p>`; return; }
+    if (withdrawalsCache.length === 0) { el.innerHTML = `<p style="color:var(--text-dim);font-size:12.5px;">Aucune demande en attente.</p>`; return; }
+    el.innerHTML = withdrawalsCache.map((r) => {
+      const st = WD_STATUS[r.status] || [wdEsc(r.status), 'muted'];
+      const level = WD_LEVEL[(r.risk && r.risk.level) || 'none'] || WD_LEVEL.none;
+      const k = r.risk || {};
+      const prev = k.previous || {};
+      const s = r.seller || {};
+      const isOpen = r.status !== 'paid' && r.status !== 'rejected';
+      const account = r.payoutAccount
+        ? `Compte de paiement : ${WD_ACCOUNT[r.payoutAccount.status] || wdEsc(r.payoutAccount.status)}${r.payoutAccount.country ? ` (${wdEsc(r.payoutAccount.country)})` : ''}`
+        : 'Compte de paiement : aucun';
+      const chips = wdChips(r);
+      const err = isOpen ? wdLastError(r) : null;
+      const facts = [
+        `Compte créateur : ${wdNum(k.creatorAccountAgeDays)} ${wdPlural(k.creatorAccountAgeDays, 'jour', 'jours')}`,
+        `${wdNum(s.approvedGames)} ${wdPlural(s.approvedGames, 'jeu publié', 'jeux publiés')}`,
+        `${wdNum(k.salesCount)} ${wdPlural(k.salesCount, 'vente', 'ventes')} · ${wdNum(k.distinctBuyers)} ${wdPlural(k.distinctBuyers, 'acheteur distinct', 'acheteurs distincts')}`,
+        `Plus gros acheteur : ${wdNum(k.topBuyerSharePct)} % des gains`,
+        `Comptes récents : ${wdNum(k.newBuyersSharePct)} % des gains`,
+        `Remboursements ou litiges : ${wdNum(k.refundedBuyersSharePct)} % des gains · ${wdNum(k.refundedSalesCount)} ${wdPlural(k.refundedSalesCount, 'vente remboursée', 'ventes remboursées')}`,
+        `Retraits précédents : ${wdNum(prev.paidCount)} ${wdPlural(prev.paidCount, 'payé', 'payés')}${prev.paidCount > 0 ? ` (${formatEurosFromCents(prev.paidCents)})` : ''}, ${wdNum(prev.rejectedCount)} ${wdPlural(prev.rejectedCount, 'refusé', 'refusés')}, ${wdNum(prev.failedCount)} ${wdPlural(prev.failedCount, 'échec', 'échecs')}`,
+      ];
+      const feeLine = r.feeCents > 0
+        ? `${formatEurosFromCents(r.grossCents)} brut − ${formatEurosFromCents(r.feeCents)} de frais de traitement = ${formatEurosFromCents(r.payoutCents)} net`
+        : `${formatEurosFromCents(r.grossCents)} brut, sans frais de traitement = ${formatEurosFromCents(r.payoutCents)} net`;
+      const hold = r.holdDaysApplied != null
+        ? ` · crédits vendus depuis au moins ${wdNum(r.holdDaysApplied)} ${wdPlural(r.holdDaysApplied, 'jour', 'jours')}${r.firstWithdrawal ? ' (premier retrait)' : ''}`
+        : '';
+      return `
+      <div class="admin-pending-game-card wd-card${r.legacy ? ' is-legacy' : ''}" ${isOpen ? 'data-request-id' : 'data-withdrawal-id'}="${wdEsc(r.id)}" data-risk="${wdEsc(k.level || 'none')}">
         <div class="admin-pending-game-head">
-          <h5>${r.seller_email} — ${r.amount_credits} crédits → ${formatEurosFromCents(r.payout_cents)}</h5>
-          <span class="admin-pending-game-meta">PayPal : ${r.paypal_email}</span>
+          <h5>${wdEsc(s.email)} — ${wdNum(r.amountCredits)} crédits → ${formatEurosFromCents(r.payoutCents)}</h5>
+          <span class="wd-badge is-${st[1]}">${st[0]}</span>
         </div>
-        <div class="admin-pending-game-actions">
-          <button class="btn btn-primary btn-sm" style="flex:none;width:auto;" data-action="pay" data-id="${r.id}">💸 Payer via PayPal</button>
-          <input type="text" placeholder="Raison du refus (obligatoire pour refuser)" data-reason-for="${r.id}">
-          <button class="btn btn-danger btn-sm" style="flex:none;width:auto;" data-action="reject" data-id="${r.id}">✖ Refuser</button>
-        </div>
-      </div>
-    `).join('');
+        <span class="admin-pending-game-meta">${s.username ? wdEsc(s.username) + ' · ' : ''}${account} · demandé le ${new Date(r.createdAt).toLocaleDateString('fr-FR')}</span>
+        <p class="wd-money">${feeLine}${hold}</p>
+        ${r.legacy
+          ? `<p class="wd-note is-legacy">Ancienne demande (avant Stripe) : refuse-la, les crédits sont rendus au créateur.</p>`
+          : `<div class="wd-risk">
+              <span class="wd-badge is-${level[1]}">${level[0]}</span>
+              ${chips.map((c) => `<span class="wd-chip">${wdEsc(c)}</span>`).join('')}
+            </div>
+            <ul class="wd-facts">${facts.map((f) => `<li>${f}</li>`).join('')}</ul>`}
+        ${err ? `<p class="wd-note is-error">${wdEsc(err)}</p>` : ''}
+        ${r.transferUncertain && isOpen ? `<p class="wd-note is-error">Résultat du virement incertain : vérifie chez Stripe avant tout nouvel essai.</p>` : ''}
+        ${r.status === 'paid' && r.stripeTransferId ? `<p class="wd-note">Virement Stripe : ${wdEsc(r.stripeTransferId)}</p>` : ''}
+        ${wdActionsHtml(r)}
+      </div>`;
+    }).join('');
   }
-  // Un seul paiement — réutilisé par le clic individuel ET par "Payer
-  // TOUT" ci-dessous, pour ne jamais dupliquer l'appel réseau réel.
-  async function payOneWithdrawal(requestId) {
+  // Appel de la fonction Edge process-withdrawal (approve | check). Renvoie { ok, reason, body }.
+  async function callProcessWithdrawal(requestId, action) {
     const { data: sessionData } = await window.supabaseClient.auth.getSession();
     const token = sessionData.session?.access_token;
+    if (!token) return { ok: false, reason: 'no_session', body: {} };
     try {
       const res = await fetch(`${window.FERRA_CONFIG.SUPABASE_URL}/functions/v1/process-withdrawal`, {
         method: 'POST', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ requestId }),
+        body: JSON.stringify({ requestId, action }),
       });
       const body = await res.json().catch(() => ({}));
-      if (res.ok) return { ok: true };
-      return { ok: false, reason: body.error || 'erreur' };
+      if (res.ok) return { ok: true, body };
+      return { ok: false, reason: body.error || `http_${res.status}`, body };
     } catch (err) {
-      return { ok: false, reason: 'network' };
+      return { ok: false, reason: 'network', body: {} };
     }
   }
+  document.getElementById('adminWithdrawalsClosedToggle').addEventListener('change', () => loadAdminWithdrawals());
   document.getElementById('adminPayAllBtn').addEventListener('click', async () => {
     const btn = document.getElementById('adminPayAllBtn');
-    const list = payAllRequestsCache;
+    const list = wdBulkCandidates();
     if (list.length === 0) return;
-    const totalCents = list.reduce((sum, r) => sum + r.payout_cents, 0);
-    if (!confirm(`Confirmer le paiement PayPal réel de ${list.length} demande(s), pour un total de ${formatEurosFromCents(totalCents)} ?`)) return;
+    const totalCents = list.reduce((sum, r) => sum + r.payoutCents, 0);
+    if (!confirm(`Approuver et verser ${list.length} demande${list.length > 1 ? 's' : ''} sans alerte, pour un total de ${formatEurosFromCents(totalCents)} ?`)) return;
     btn.disabled = true;
-    let paid = 0, failed = 0, insufficientFunds = false;
-    // Un par un, JAMAIS en parallèle — le garde-fou de solvabilité relit le
-    // solde réel à chaque appel (voir process-withdrawal) ; des appels
-    // simultanés pourraient tous lire le même solde avant qu'aucun ne
-    // l'ait mis à jour, et laisser passer plus de paiements que ce que la
-    // plateforme a réellement encaissé. La sécurité avant la vitesse.
+    let paid = 0, failed = 0, stopText = null;
+    // Un par un, JAMAIS en parallèle — le serveur relit le solde Stripe disponible et le garde-fou de solvabilité à
+    // chaque virement ; des appels simultanés pourraient tous lire le même solde avant qu'aucun ne l'ait mis à jour.
     for (const r of list) {
-      btn.textContent = `💰 Paiement en cours… (${paid + failed + 1}/${list.length})`;
-      const result = await payOneWithdrawal(r.id);
-      if (result.ok) { paid++; }
-      else {
-        failed++;
-        if (result.reason === 'insufficient_platform_funds') { insufficientFunds = true; break; }
+      btn.textContent = `💰 Virement en cours… (${paid + failed + 1}/${list.length})`;
+      const result = await callProcessWithdrawal(r.id, 'approve');
+      if (result.ok) { paid++; continue; }
+      failed++;
+      if (['insufficient_platform_funds', 'insufficient_stripe_balance', 'stripe_unreachable', 'paid_but_db_update_failed'].includes(result.reason)) {
+        stopText = wdErrorText(result.reason, result.body);
+        break;
       }
     }
     await loadAdminWithdrawals();
     const skipped = list.length - paid - failed;
-    let summary = `✅ ${paid} paiement${paid > 1 ? 's' : ''} envoyé${paid > 1 ? 's' : ''}.`;
+    let summary = `✅ ${paid} virement${paid > 1 ? 's' : ''} envoyé${paid > 1 ? 's' : ''}.`;
     if (failed > 0) summary += ` ❌ ${failed} échec${failed > 1 ? 's' : ''}.`;
-    if (insufficientFunds) summary += ` 💸 Fonds de la plateforme insuffisants pour continuer — ${skipped} demande(s) restée(s) en attente.`;
+    if (stopText) summary += `\n\n${stopText}${skipped > 0 ? `\n${skipped} demande${skipped > 1 ? 's' : ''} non traitée${skipped > 1 ? 's' : ''}, restée${skipped > 1 ? 's' : ''} en attente.` : ''}`;
     alert(summary);
   });
   document.getElementById('adminWithdrawalsList').addEventListener('click', async (e) => {
     const btn = e.target.closest('button[data-action]');
     if (!btn) return;
     const requestId = btn.dataset.id;
-    if (btn.dataset.action === 'pay') {
-      if (!confirm('Confirmer le paiement PayPal réel de cette demande ?')) return;
+    const action = btn.dataset.action;
+    const req = withdrawalsCache.find((r) => r.id === requestId);
+    if (action === 'approve') {
+      if (!req) return;
+      if (!confirm(`Approuver ce retrait ? ${formatEurosFromCents(req.payoutCents)} seront virés sur le compte Stripe de ${req.seller.email}.`)) return;
+      const label = btn.textContent;
       btn.disabled = true; btn.textContent = 'Envoi…';
-      const result = await payOneWithdrawal(requestId);
-      if (result.ok) loadAdminWithdrawals();
-      else { btn.disabled = false; btn.textContent = '💸 Payer via PayPal'; alert(`Échec : ${result.reason}`); }
-    } else if (btn.dataset.action === 'reject') {
+      const result = await callProcessWithdrawal(requestId, 'approve');
+      if (result.ok) {
+        if (result.body.adopted) alert("Un virement existait déjà chez Stripe pour ce retrait : il a été rattaché, aucun second virement n'a été créé.");
+      } else {
+        alert(wdErrorText(result.reason, result.body));
+      }
+      btn.disabled = false; btn.textContent = label;
+      loadAdminWithdrawals();
+    } else if (action === 'check') {
+      btn.disabled = true; btn.textContent = 'Vérification…';
+      const result = await callProcessWithdrawal(requestId, 'check');
+      alert(result.ok ? wdCheckText(result.body) : wdErrorText(result.reason, result.body));
+      loadAdminWithdrawals();
+    } else if (action === 'reject') {
       const reasonInput = document.querySelector(`input[data-reason-for="${requestId}"]`);
       const reason = (reasonInput?.value || '').trim();
       if (!reason) { alert('Indique une raison de refus.'); return; }
       btn.disabled = true;
       const { data, error } = await window.supabaseClient.rpc('admin_reject_withdrawal', { p_request_id: requestId, p_reason: reason });
-      if (!error && data && data.ok) loadAdminWithdrawals();
-      else { btn.disabled = false; alert(`Échec : ${(data && data.reason) || (error && error.message) || 'erreur'}`); }
+      if (!error && data && data.ok) { loadAdminWithdrawals(); return; }
+      btn.disabled = false;
+      const code = data && data.reason;
+      if (code === 'in_progress') alert('Un traitement est déjà en cours pour ce retrait.');
+      else if (code === 'transfer_uncertain') alert("Le résultat du virement est incertain : clique d'abord sur « Vérifier chez Stripe ».");
+      else if (code === 'not_found_or_already_processed') { alert('Cette demande a déjà été traitée. La liste va être actualisée.'); loadAdminWithdrawals(); }
+      else alert(`Échec : ${code || (error && error.message) || 'erreur'}`);
     }
   });
 
