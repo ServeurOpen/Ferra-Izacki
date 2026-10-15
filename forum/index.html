@@ -44,7 +44,7 @@
 
 <footer class="site-footer">
   <div class="container footer-row">
-    <div class="footer-note" data-i18n="footer.note">FERRA — projet indépendant, développé avec passion. © 2026.</div>
+    <div class="footer-note" data-i18n="footer.note">FERRA — projet indépendant, développé avec passion. © 2026 Vincent Dubois, Ferra.Izacki. Tous droits réservés.</div>
     <div class="footer-links">
       <a href="../index.html" data-i18n="nav.home">Accueil</a>
       <a href="../launcher.html" data-i18n="nav.launcher">Launcher</a>
@@ -87,7 +87,7 @@
       </a>
     `).join('');
   } catch (err) {
-    listEl.innerHTML = `<div class="empty-state"><div class="big-icon">⚠️</div>${ferraT('forumIndex.notConfigured', "Le forum n'est pas encore configuré.")}<br><span style="font-size:12px;">${ferraT('forumIndex.notConfiguredHint', '(voir le README.md du site — assets/js/config.js à compléter)')}</span></div>`;
+    listEl.innerHTML = `<div class="empty-state"><div class="big-icon">⚠️</div>${ferraT('forumIndex.notConfigured', "Le forum est momentanément indisponible.")}<br><span style="font-size:12px;">${ferraT('forumIndex.notConfiguredHint', "Réessaie dans quelques minutes.")}</span></div>`;
     console.error(err);
   }
 })();

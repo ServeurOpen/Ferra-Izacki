@@ -216,7 +216,7 @@
     "messagePlaceholder": "Describe your problem, your idea, your question...",
     "send": "Send",
     "connectedAs": "Logged in as",
-    "notConfigured": "The contact form isn't set up yet (see README.md, EmailJS section).",
+    "notConfigured": "The contact form is temporarily unavailable. Try again in a few minutes or write to us on Discord.",
     "writeFirst": "Write a message before sending.",
     "sending": "Sending...",
     "sendFailed": "Couldn't send the message — try again in a moment."
@@ -234,8 +234,8 @@
     "noCategories": "No category yet.",
     "thread": "thread",
     "threads": "threads",
-    "notConfigured": "The forum isn't set up yet.",
-    "notConfiguredHint": "(see the site's README.md — assets/js/config.js to fill in)"
+    "notConfigured": "The forum is temporarily unavailable.",
+    "notConfiguredHint": "Please try again in a few minutes."
   },
   "forumCategory": {
     "newThread": "✏️ New thread",
@@ -278,7 +278,7 @@
     "errEmailUsed": "This email is already in use.",
     "errUsernameUsed": "This username is already taken.",
     "errRateLimit": "Too many recent account creations (email sending limit) — try again in a few minutes.",
-    "errDisabled": "Sign-ups are temporarily disabled server-side — let us know via contact.",
+    "errDisabled": "Sign-ups are temporarily closed. Try again later or contact us.",
     "errGeneric": "Couldn't create the account — try again.",
     "okConnected": "Account created and logged in! Heading to the forum...",
     "okNeedsConfirm": "Account created! Check your emails to confirm your address (and spam folder), then log in."

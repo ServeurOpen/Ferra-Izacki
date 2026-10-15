@@ -80,6 +80,7 @@
       <a href="forum/index.html" data-i18n="nav.forum">Forum</a>
       <a href="contact.html" data-i18n="nav.contact">Contact</a>
       <a href="conditions.html">📜 Conditions &amp; Confidentialité</a>
+      <a href="licence.html">📄 Licence du Launcher</a>
     </div>
   </div>
 </footer>
@@ -119,7 +120,7 @@
     okEl.classList.remove('show');
 
     if (!emailConfigured) {
-      errEl.textContent = ferraT('contactPage.notConfigured', "Le formulaire de contact n'est pas encore configuré (voir README.md, section EmailJS).");
+      errEl.textContent = ferraT('contactPage.notConfigured', "Le formulaire de contact est momentanément indisponible. Réessaie dans quelques minutes ou écris-nous sur Discord.");
       errEl.classList.add('show');
       return;
     }

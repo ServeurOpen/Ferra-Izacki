@@ -90,7 +90,7 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
       : msg.includes('rate limit') || msg.includes('429') || msg.includes('email rate limit exceeded')
       ? ferraT('signupPage.errRateLimit', "Trop de créations de compte récentes (limite d'envoi d'emails) — réessaie dans quelques minutes.")
       : msg.includes('disabled')
-      ? ferraT('signupPage.errDisabled', "Les inscriptions sont temporairement désactivées côté serveur — préviens-nous en contact.")
+      ? ferraT('signupPage.errDisabled', "Les inscriptions sont momentanément fermées. Réessaie plus tard ou contacte-nous.")
       : ferraT('signupPage.errGeneric', 'Impossible de créer le compte — réessaie.');
     errEl.classList.add('show');
     return;

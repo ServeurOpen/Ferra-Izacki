@@ -216,7 +216,7 @@
     "messagePlaceholder": "Describe tu problema, tu idea, tu pregunta...",
     "send": "Enviar",
     "connectedAs": "Conectado como",
-    "notConfigured": "El formulario de contacto aún no está configurado (ver README.md, sección EmailJS).",
+    "notConfigured": "El formulario de contacto no está disponible por el momento. Inténtalo de nuevo en unos minutos o escríbenos en Discord.",
     "writeFirst": "Escribe un mensaje antes de enviar.",
     "sending": "Enviando...",
     "sendFailed": "No se pudo enviar el mensaje — inténtalo de nuevo en un momento."
@@ -234,8 +234,8 @@
     "noCategories": "Todavía no hay ninguna categoría.",
     "thread": "tema",
     "threads": "temas",
-    "notConfigured": "El foro aún no está configurado.",
-    "notConfiguredHint": "(consulta el README.md del sitio — assets/js/config.js por completar)"
+    "notConfigured": "El foro no está disponible por el momento.",
+    "notConfiguredHint": "Inténtalo de nuevo en unos minutos."
   },
   "forumCategory": {
     "newThread": "✏️ Nuevo tema",
@@ -278,7 +278,7 @@
     "errEmailUsed": "Este email ya está en uso.",
     "errUsernameUsed": "Este nombre de usuario ya está en uso.",
     "errRateLimit": "Demasiadas creaciones de cuenta recientes (límite de envío de emails) — inténtalo de nuevo en unos minutos.",
-    "errDisabled": "Los registros están temporalmente desactivados en el servidor — avísanos por contacto.",
+    "errDisabled": "Los registros están cerrados temporalmente. Inténtalo más tarde o contáctanos.",
     "errGeneric": "No se pudo crear la cuenta — inténtalo de nuevo.",
     "okConnected": "¡Cuenta creada y conectada! Vamos al foro...",
     "okNeedsConfirm": "¡Cuenta creada! Revisa tus emails para confirmar tu dirección (y el spam), luego inicia sesión."
