@@ -12,10 +12,6 @@
 </head>
 <body>
 
-<!-- Page de retour de Stripe (11/10/2026, retraits des créateurs par Stripe Connect).
-     Stripe renvoie le créateur ici à la fin (ou à l'interruption) de l'inscription de son compte de paiement,
-     avec ?retour=1 (inscription terminée) ou ?reprise=1 (lien expiré). Page statique : AUCUN script Supabase,
-     aucune donnée personnelle ou bancaire, jamais lue ni envoyée. Le Launcher relit le statut tout seul. -->
 <header class="site-header">
   <nav class="site-nav">
     <a href="index.html" class="brand">FER<span>RA</span></a>
@@ -67,7 +63,6 @@
 
 <script>
 (function () {
-  // Seul le paramètre d'adresse choisit le message (aucune donnée n'est lue ni envoyée).
   var q = new URLSearchParams(location.search);
   if (q.get("reprise") === "1" && q.get("retour") !== "1") {
     document.getElementById("msgRetour").style.display = "none";

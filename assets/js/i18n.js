@@ -1,22 +1,3 @@
-// ============================================================
-// FERRA — Système de traduction (05/09/2026, demande explicite : "dans
-// l'onglet paramètre on puisse changer de langue anglais, français,
-// espagnol").
-//
-// Convention : chaque texte traduisible porte data-i18n="cle.imbriquee"
-// (contenu HTML — les dictionnaires sont ÉCRITS PAR NOUS, jamais du
-// contenu joueur, donc innerHTML est sûr ici, contrairement au reste du
-// site qui passe tout texte joueur par ferraEscape) et data-i18n-placeholder
-// pour un attribut placeholder de champ de formulaire. Le français reste
-// la langue de référence (site écrit directement en français) : le
-// dictionnaire fr.json en est la copie exacte, pour qu'un retour explicite
-// au français réapplique la bonne version plutôt que de compter sur le
-// texte d'origine encore présent dans le DOM.
-//
-// Persisté en localStorage (par navigateur, pas par compte) — un visiteur
-// non connecté doit pouvoir changer de langue tout autant qu'un joueur
-// connecté.
-// ============================================================
 
 const FERRA_I18N_CACHE = {};
 
@@ -34,19 +15,6 @@ async function ferraI18nLoadDict(lang, prefix) {
   }
 }
 
-// ============================================================
-// Sélecteur de langue plein écran à la toute première visite (05/09/2026,
-// demande explicite : "une page pleine tout l'écran... 3 drapeaux
-// français/anglais/espagnol... Choisissez votre langue (Français par
-// défaut)... et un Valider. C'est l'entrée du site.") — ne s'affiche QUE si
-// 'ferra_lang' n'existe pas encore en localStorage (jamais choisi), donc
-// une seule fois par navigateur, quelle que soit la page d'arrivée (pas que
-// l'accueil : un lien direct vers un sujet du forum, par exemple, doit
-// aussi la déclencher si c'est la toute première visite).
-// Couleurs/polices reprises des variables CSS déjà définies dans style.css
-// (voir :root) pour rester cohérent avec le reste du site sans dupliquer la
-// palette ici.
-// ============================================================
 const FERRA_LANG_GATE_OPTIONS = [
   { code: 'fr', flag: '🇫🇷', label: 'Français' },
   { code: 'en', flag: '🇬🇧', label: 'English' },
@@ -131,8 +99,6 @@ function ferraShowLanguageGate() {
   });
 }
 
-// prefix : '' depuis une page à la racine, '../' depuis games/ ou forum/ —
-// même convention que ferraRenderNavAuth.
 async function ferraI18nInit(prefix) {
   prefix = prefix || '';
   let saved = null;
@@ -158,21 +124,12 @@ function ferraI18nLookup(dict, key) {
   return key.split('.').reduce((o, k) => (o && o[k] != null ? o[k] : undefined), dict);
 }
 
-// Pour le contenu généré en JS (innerHTML dynamique, ex. le widget de
-// connexion du menu — voir ferraRenderNavAuth dans auth.js) : contrairement
-// à data-i18n, ce texte n'existe pas encore dans le DOM au moment du
-// balayage de ferraI18nApply(), impossible de le cibler après coup.
-// `fallback` (toujours le texte français) est renvoyé si le dictionnaire
-// n'est pas encore chargé, pour ne jamais afficher une clé brute.
 function ferraT(key, fallback) {
   const dict = (window.FERRA_I18N && window.FERRA_I18N.dict) || {};
   const val = ferraI18nLookup(dict, key);
   return val != null ? val : fallback;
 }
 
-// Applique le dictionnaire courant à toute la page — à rappeler après
-// chaque changement de langue (voir ferraI18nSetLang) ET une fois au
-// chargement de chaque page.
 function ferraI18nApply() {
   const dict = (window.FERRA_I18N && window.FERRA_I18N.dict) || {};
   document.querySelectorAll('[data-i18n]').forEach((el) => {

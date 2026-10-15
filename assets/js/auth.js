@@ -1,16 +1,4 @@
-// ============================================================
-// FERRA — Authentification du forum (inscription/connexion/déconnexion),
-// partagée par toutes les pages du forum. Repose sur Supabase Auth
-// (email + mot de passe) — voir assets/js/supabase-client.js.
-// ============================================================
 
-// Récupère l'utilisateur connecté (ou null) + son profil (pseudo) associé.
-// Utilisé par chaque page du forum pour savoir qui écrit/répond.
-// Volontairement protégée par un try/catch : tant que Supabase n'est pas
-// configuré (ou en cas de coupure réseau), l'appel réseau échoue — sans
-// ça, chaque page appelante plantait en entier (voir ferraRenderUserWidget,
-// appelée sans garde en tête de chaque page du forum) au lieu d'afficher
-// son propre message "pas encore configuré/erreur de chargement".
 async function ferraGetSession() {
   try {
     const { data: { user } } = await window.supabaseClient.auth.getUser();
@@ -27,18 +15,6 @@ async function ferraGetSession() {
   }
 }
 
-// ============================================================
-// Mode Admin sur le site (05/09/2026, demande explicite : "on est
-// directement en mode Administrateur qui pareil peut être désactivé dans
-// l'onglet paramètre du site... si on désactive pour réactiver il faut
-// mettre un mdp") — même compte/mêmes principes que le Launcher :
-//   - ferra.izacki@gmail.com est TOUJOURS en mode admin par défaut
-//     (visuel violet + badge), sauf s'il l'a désactivé lui-même
-//     (admin_mode_disabled=true en base, voir migration_14).
-//   - Désactiver ne demande rien (juste un update de son propre profil).
-//   - Réactiver EXIGE le bon mot de passe, vérifié côté serveur (voir
-//     supabase/functions/verify-admin-password) — jamais en clair ici.
-// ============================================================
 const FERRA_ADMIN_EMAILS = ['ferra.izacki@gmail.com'];
 function ferraIsAdminEmail(session) {
   return !!session && FERRA_ADMIN_EMAILS.includes((session.user.email || '').trim().toLowerCase());
@@ -46,17 +22,12 @@ function ferraIsAdminEmail(session) {
 function ferraIsAdminModeActive(session) {
   return ferraIsAdminEmail(session) && !session.profile?.admin_mode_disabled;
 }
-// Appelée sur CHAQUE page (voir ferraRenderNavAuth) — retinte tout le site
-// d'un coup via les 2 variables CSS d'accent déjà utilisées partout (voir
-// body.admin-mode dans style.css), pas besoin de retoucher un composant.
 function ferraApplyAdminModeStyling(session) {
   document.body.classList.toggle('admin-mode', ferraIsAdminModeActive(session));
 }
 async function ferraDisableAdminMode(userId) {
   await window.supabaseClient.from('profiles').update({ admin_mode_disabled: true }).eq('id', userId);
 }
-// Renvoie true si le mot de passe était bon (et réactive alors le mode
-// admin sur le profil), false sinon — jamais lancé côté client seul.
 async function ferraReenableAdminMode(userId, password) {
   const { data: { session: authSession } } = await window.supabaseClient.auth.getSession();
   const token = authSession?.access_token;
@@ -78,25 +49,12 @@ async function ferraReenableAdminMode(userId, password) {
   }
 }
 
-// Règle des pseudos (compte site = compte forum, un seul et même pseudo
-// partout) : lettres/chiffres/underscore uniquement — donc jamais
-// d'espace ni de caractère bizarre — et au moins une majuscule. La même
-// règle est appliquée côté base de données (voir
-// supabase/migration_2_comptes.sql) en filet de sécurité.
 const FERRA_USERNAME_REGEX = /^(?=.*[A-Z])[A-Za-z0-9_]{3,24}$/;
 const FERRA_USERNAME_RULES = "3 à 24 caractères, lettres/chiffres/underscore uniquement (pas d'espace ni d'accent), avec au moins 1 majuscule.";
 function ferraValidateUsername(username) {
   return FERRA_USERNAME_REGEX.test(username || '');
 }
 
-// Vérifie si un pseudo est déjà pris (insensible à la casse — "Test" et
-// "test" comptent comme le même pseudo, cf. la contrainte SQL + la
-// comparaison lower() de get_email_by_username). Utilisée AVANT
-// l'inscription pour donner un message clair tout de suite : le message
-// d'erreur renvoyé par Supabase quand le pseudo est en doublon est un
-// générique "Database error saving new user" (le trigger handle_new_user
-// échoue sur la contrainte unique de profiles.username) qui ne dit pas du
-// tout à l'utilisateur ce qui a coincé.
 async function ferraUsernameTaken(username) {
   const { data } = await window.supabaseClient
     .from('profiles')
@@ -125,18 +83,12 @@ async function ferraSignIn(email, password) {
   return window.supabaseClient.auth.signInWithPassword({ email, password });
 }
 
-// Connexion par EMAIL OU PSEUDO — un seul champ "identifiant" côté
-// formulaire (voir forum/login.html). Un pseudo ne contenant jamais de
-// "@" (voir FERRA_USERNAME_REGEX), la présence de "@" suffit à distinguer
-// les deux cas sans ambiguïté.
 async function ferraSignInWithIdentifier(identifier, password) {
   identifier = (identifier || '').trim();
   let email = identifier;
   if (!identifier.includes('@')) {
     const { data, error } = await window.supabaseClient.rpc('get_email_by_username', { p_username: identifier });
     if (error || !data) {
-      // Message volontairement identique à un mot de passe incorrect —
-      // ne pas révéler si c'est le pseudo ou le mot de passe qui est faux.
       return { error: { message: 'Invalid login credentials' } };
     }
     email = data;
@@ -144,19 +96,11 @@ async function ferraSignInWithIdentifier(identifier, password) {
   return ferraSignIn(email, password);
 }
 
-// Mot de passe oublié — étape 1 : envoie un email contenant un lien de
-// réinitialisation. Le lien pointe vers reset-password.html, qui contient
-// un jeton temporaire dans l'URL ; supabase-js le détecte automatiquement
-// à l'ouverture de la page (detectSessionInUrl, activé par défaut) et
-// ouvre une session "recovery" le temps de choisir un nouveau mot de passe.
 async function ferraSendPasswordReset(email) {
   const redirectTo = window.location.origin + window.location.pathname.replace(/forgot-password\.html$/, 'reset-password.html');
   return window.supabaseClient.auth.resetPasswordForEmail(email, { redirectTo });
 }
 
-// Mot de passe oublié — étape 2 : appelée depuis reset-password.html une
-// fois que le joueur a choisi son nouveau mot de passe. Nécessite la
-// session "recovery" ouverte par le lien reçu par email (voir ci-dessus).
 async function ferraUpdatePassword(newPassword) {
   return window.supabaseClient.auth.updateUser({ password: newPassword });
 }
@@ -165,26 +109,11 @@ async function ferraSignOut() {
   await ferraSignOutTo('index.html');
 }
 
-// Déconnexion générique avec redirection paramétrable — utilisée par le
-// widget de connexion du menu (ferraRenderNavAuth), présent sur TOUTES les
-// pages du site (pas que le forum), donc 'index.html' seul ne suffit pas :
-// depuis games/ferra.html par exemple, il faut '../index.html'.
 async function ferraSignOutTo(redirectPath) {
   await window.supabaseClient.auth.signOut();
   window.location.href = redirectPath;
 }
 
-// ============================================================
-// Statistiques du site — visite (05/09/2026, demande explicite : "nombre de
-// visite sur le site"). Volontairement discret : un simple insert
-// fire-and-forget (jamais attendu, jamais bloquant pour l'affichage de la
-// page, et une erreur réseau/RLS ne doit jamais casser le rendu du menu qui
-// l'appelle) — voir migration_16_site_analytics.sql pour ce qui est
-// réellement stocké (juste le chemin, l'heure, et l'id du compte SI
-// connecté). Appelée une seule fois par page depuis ferraRenderNavAuth
-// (déjà exécutée sur TOUTES les pages), pas besoin d'un script séparé à
-// ajouter partout.
-// ============================================================
 function ferraLogVisit(session) {
   try {
     window.supabaseClient
@@ -192,23 +121,9 @@ function ferraLogVisit(session) {
       .insert({ path: location.pathname, user_id: session?.user?.id || null })
       .then(() => {}, () => {});
   } catch (err) {
-    // Silencieux à dessein — une visite non comptée n'est jamais une
-    // raison de perturber le joueur.
   }
 }
 
-// ============================================================
-// Heures de développement — heartbeat côté SITE (14/09/2026, demande
-// explicite : "un compteur d'heure de développement... le site... un
-// mécanisme qui monte dès que le launcher, site, ou jeux est allumé").
-// Même principe que le heartbeat Launcher (voir startLauncherSessionTracking
-// côté main.ts, qui appelle logDevTime sur le même tick) : toutes les 60s
-// tant que la page reste ouverte, SI le compte
-// connecté est l'admin (voir migration_57_dev_hours.sql — le RPC log_dev_time
-// refuse silencieusement pour tout autre compte, jamais bloquant pour un
-// joueur normal). Un intervalle par page (pas de suivi cross-page), démarré
-// depuis ferraRenderNavAuth qui tourne déjà sur CHAQUE page du site.
-// ============================================================
 let ferraDevHoursTimer = null;
 function ferraStartDevHoursHeartbeat(session) {
   if (ferraDevHoursTimer) clearInterval(ferraDevHoursTimer);
@@ -218,16 +133,6 @@ function ferraStartDevHoursHeartbeat(session) {
   }, 60_000);
 }
 
-// ============================================================
-// Bannissement du SITE (05/09/2026, demande explicite : "le site peut ban
-// site et launcher, le launcher que launcher") — un ban de portée 'site'
-// ou 'both' bloque le site en plein écran, exactement comme le Launcher
-// (voir user_bans/admin_ban_user dans migration_22_ban_scope_realtime.sql).
-// Un ban 'launcher' seul ne doit JAMAIS bloquer le site.
-// Appelée depuis ferraRenderNavAuth/ferraRenderUserWidget (donc sur TOUTES
-// les pages qui affichent le menu ou le widget forum) — un seul endroit à
-// modifier pour couvrir tout le site.
-// ============================================================
 let ferraBanOverlayShown = false;
 async function ferraCheckBanAndBlock(session) {
   if (!session || ferraBanOverlayShown) return;
@@ -344,11 +249,6 @@ function ferraShowBanOverlay(ban) {
   });
 }
 
-// Widget compact "Connexion / Inscription" affiché en haut à droite du menu
-// sur TOUTES les pages du site (voir .nav-auth dans style.css) — même
-// compte que le forum et, à terme, le Launcher : plus besoin d'aller sur le
-// forum juste pour se connecter. `prefix` vaut '' depuis une page à la
-// racine du site, '../' depuis une page dans un sous-dossier (games/, forum/).
 async function ferraRenderNavAuth(elId, prefix) {
   const el = document.getElementById(elId);
   if (!el) return;
@@ -360,11 +260,6 @@ async function ferraRenderNavAuth(elId, prefix) {
   ferraStartDevHoursHeartbeat(session);
   if (session) {
     const adminBadge = ferraIsAdminModeActive(session) ? `<span class="admin-mode-badge">🛡️ Admin</span>` : '';
-    // Lien Panel (05/09/2026) — visible UNIQUEMENT en mode admin actif,
-    // jamais pour un joueur normal même si son email était par erreur dans
-    // FERRA_ADMIN_EMAILS (impossible ici, mais même logique de prudence que
-    // partout ailleurs) : la vraie protection reste côté serveur
-    // (admin-site-stats revérifie l'email), ce lien n'est qu'un raccourci.
     const panelLink = ferraIsAdminModeActive(session)
       ? `<a href="${prefix}panel.html" class="nav-link">${ferraT('nav.panel', '📊 Panel')}</a>`
       : '';
@@ -383,9 +278,6 @@ async function ferraRenderNavAuth(elId, prefix) {
   }
 }
 
-// Petit widget "connecté en tant que X / Se connecter" affiché en haut de
-// chaque page du forum (voir #forumUserWidget dans le HTML) — un seul point
-// de rendu, réutilisé partout pour ne jamais désynchroniser l'affichage.
 async function ferraRenderUserWidget(elId) {
   const el = document.getElementById(elId);
   if (!el) return null;
@@ -407,19 +299,12 @@ async function ferraRenderUserWidget(elId) {
   return session;
 }
 
-// Échappement HTML minimal — TOUT contenu utilisateur (pseudo, titre de
-// sujet, message) passe par ici avant d'être injecté en innerHTML, pour
-// qu'un joueur ne puisse jamais casser la mise en page (ou pire) avec du
-// HTML dans son message.
 function ferraEscape(str) {
   const div = document.createElement('div');
   div.textContent = str == null ? '' : String(str);
   return div.innerHTML;
 }
 
-// Les pages du forum vivent à 2 profondeurs différentes (forum/index.html
-// vs forum/thread.html, qui restent au même niveau en réalité) — gardé en
-// fonction à part au cas où la structure bougerait plus tard.
 function ferraForumPath(page) {
   return page;
 }

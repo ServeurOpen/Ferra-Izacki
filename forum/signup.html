@@ -78,11 +78,6 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
   }
   const { data, error } = await ferraSignUp(email, password, username, displayName);
   if (error) {
-    // Message dédié pour le vrai souci rencontré (31/08/2026) : la limite
-    // d'envoi d'emails de confirmation de Supabase (quelques emails/heure
-    // par défaut) fait échouer l'inscription avec un 429 générique —
-    // voir README.md, section "Comptes joueurs", pour désactiver la
-    // confirmation par email (recommandé pour un petit forum).
     const msg = (error.message || '').toLowerCase();
     errEl.textContent = msg.includes('already') ? ferraT('signupPage.errEmailUsed', 'Cet email est déjà utilisé.')
       : msg === 'username_taken' || msg.includes('duplicate') || msg.includes('unique') || msg.includes('database error saving new user')
@@ -95,11 +90,6 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
     errEl.classList.add('show');
     return;
   }
-  // Avec "Confirm email" désactivé côté Supabase, signUp() renvoie une
-  // session tout de suite (data.session non nul) : le compte est déjà actif,
-  // pas besoin de confirmer quoi que ce soit. Si "Confirm email" est encore
-  // actif (ou pour un ancien réglage), data.session reste vide et il faut
-  // vraiment confirmer par email avant de pouvoir se connecter.
   document.getElementById('signupForm').style.display = 'none';
   if (data && data.session) {
     okEl.textContent = ferraT('signupPage.okConnected', 'Compte créé et connecté ! Direction le forum...');

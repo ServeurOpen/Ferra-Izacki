@@ -57,23 +57,8 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   const password = document.getElementById('loginPassword').value;
   const errEl = document.getElementById('loginError');
   errEl.classList.remove('show');
-  // Connexion par EMAIL uniquement (le pseudo reste le nom affiché sur le
-  // forum, mais ne sert plus à se connecter) — voir auth.js pour le
-  // pourquoi : la connexion par pseudo reposait sur une fonction SQL
-  // (get_email_by_username) jamais réellement déployée en base, donc
-  // toujours en échec, quel que soit le pseudo tapé. En plus de corriger
-  // ça, un champ email dédié (type="email", autocomplete="email") permet
-  // au gestionnaire de mots de passe du navigateur d'enregistrer et de
-  // proposer l'auto-remplissage email+mot de passe, au lieu de pseudo+mot
-  // de passe qui ne servait à rien pour se reconnecter.
   const { error } = await ferraSignIn(email, password);
   if (error) {
-    // Messages distincts pour les cas fréquents (31/08/2026, retour joueur
-    // "même quand ça marche la connexion ne fonctionne pas") — un compte
-    // créé avant la désactivation de la confirmation par email reste
-    // bloqué avec le message générique "identifiants incorrects", ce qui
-    // ressemblait à un mot de passe faux alors que le vrai souci est
-    // ailleurs. Voir README.md, section "Comptes joueurs".
     const msg = (error.message || '').toLowerCase();
     errEl.textContent = msg.includes('email not confirmed')
       ? ferraT('loginPage.errEmailNotConfirmed', "Ce compte n'a pas encore confirmé son email — vérifie ta boîte mail (et les spams), ou écris-nous en contact si l'email n'est jamais arrivé.")

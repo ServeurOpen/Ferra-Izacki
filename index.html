@@ -113,9 +113,6 @@
 <script src="assets/js/i18n.js"></script>
 <script>
 (async function () {
-  // i18n AVANT le rendu du widget de connexion : ferraRenderNavAuth génère
-  // son HTML dynamiquement (ferraT lit le dictionnaire déjà chargé),
-  // l'ordre inverse afficherait le français une frame avant la bonne langue.
   await ferraI18nInit('');
   ferraRenderNavAuth('navAuth', '');
   ferraI18nApply();

@@ -8,13 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
-  /* ============================================================
-     Panel Admin du SITE (05/09/2026, demande explicite : "le plus beau des
-     panels, un truc qui donne envie de vérifier, on doit se dire WOW").
-     Volontairement en français uniquement, jamais traduit — même logique
-     que le panel admin du Launcher : un seul lecteur (ferra.izacki@gmail.com),
-     aucune raison de maintenir 3 langues pour une page qu'un seul compte voit.
-     ============================================================ */
+  
   .panel-wrap{max-width:1080px;margin:0 auto;padding:0 24px 80px;}
   .panel-head{padding:44px 0 30px;}
   .panel-head h1{
@@ -73,9 +67,6 @@
   @keyframes panelFadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
   .panel-anim{animation:panelFadeUp .5s ease both;}
 
-  /* ⚡ Actions (05/09/2026, demande explicite : "une autre catégorie en
-     haut de celle des graphiques... commandes genre pour give des
-     crédits... Ban quelqu'un") — même section que dans le Launcher. */
   .panel-action-sub{padding:16px 0;border-top:1px solid var(--panel-edge);}
   .panel-action-sub:first-of-type{border-top:none;padding-top:0;}
   .panel-action-sub h4{margin:0 0 10px;font-size:13px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
@@ -108,7 +99,7 @@
     flex:1;min-width:160px;background:var(--bg-panel);border:1px solid var(--panel-edge);border-radius:8px;
     color:var(--text);padding:7px 10px;font-size:12px;font-family:inherit;
   }
-  /* Retraits des créateurs (Stripe Connect, 11/10/2026) : statut, puces de risque, indicateurs */
+  
   .wd-toggle{display:flex;align-items:center;gap:8px;margin:0 0 12px;font-size:12.5px;color:var(--text-dim);cursor:pointer;}
   .wd-badge{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap;}
   .wd-badge.is-ok{background:rgba(94,209,132,0.15);color:var(--valid);}
@@ -131,7 +122,6 @@
   }
   .panel-search-input:focus{outline:none;border-color:var(--copper-glow);}
 
-  /* Service Client (06/09/2026) — même vocabulaire visuel que le Launcher. */
   .ticket-modal-overlay{
     position:fixed;inset:0;background:rgba(6,7,9,0.68);backdrop-filter:blur(3px);
     display:none;align-items:center;justify-content:center;z-index:200;
@@ -166,9 +156,6 @@
   }
   .ticket-row-cursor{cursor:pointer;}
 
-  /* Mot de passe de passage (06/09/2026) — voir migration_43. Modale
-     volontairement IMPASSABLE : pas de croix, pas de fermeture au clic
-     en dehors, seul "Annuler" abandonne l'action. */
   #adminPassphraseModal .ticket-modal-card{width:440px;text-align:center;}
   #adminPassphraseInput{
     width:100%;box-sizing:border-box;background:var(--bg-panel-2);border:1px solid var(--panel-edge);
@@ -259,9 +246,7 @@
         <div class="panel-action-status" id="actionBanStatus"></div>
       </div>
 
-      <!-- 06/09/2026, demande explicite : "il peut y en avoir beaucoup...
-           pouvoir la replier/déplier" — repliée par défaut. -->
-      <div class="panel-action-sub">
+            <div class="panel-action-sub">
         <details class="ticket-closed-details">
           <summary>🚫 Joueurs actuellement bannis <span id="actionBansCount"></span></summary>
           <div class="panel-table-wrap" style="max-height:340px;overflow-y:auto;">
@@ -290,11 +275,7 @@
         <div id="adminRefundsList"><p style="color:var(--text-dim);font-size:12.5px;">Chargement…</p></div>
       </div>
 
-      <!-- Service Client (06/09/2026, demande explicite) — voir
-           migration_37_support_tickets.sql. Un ticket "Remboursement" se
-           ferme et répond tout seul dès que la demande liée est traitée
-           ci-dessus (admin_process_refund). -->
-      <div class="panel-action-sub">
+            <div class="panel-action-sub">
         <h4>🎧 Tickets d'assistance <span class="panel-action-hint" id="ticketsHint"></span></h4>
         <div id="adminTicketsList"><p style="color:var(--text-dim);font-size:12.5px;">Chargement…</p></div>
       </div>
@@ -356,7 +337,6 @@
   }
   document.getElementById('panelWrap').style.display = 'block';
 
-  // ---- Compteur animé (montée de 0 à la valeur finale) ----
   function animateNumber(el, target, duration) {
     duration = duration || 900;
     const start = performance.now();
@@ -379,7 +359,6 @@
     return `<span class="kpi-delta ${cls}">${arrow} ${Math.abs(pct)}% vs hier</span>`;
   }
 
-  // ---- Graphique en barres (canvas, dégradé + coins arrondis + animation) ----
   function drawBarChart(canvasId, data, color1, color2) {
     const canvas = document.getElementById(canvasId);
     const ctx = canvas.getContext('2d');
@@ -466,10 +445,6 @@
     return new Date(iso).toLocaleString('fr-FR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
   }
 
-  // Recherche dans la liste des comptes (05/09/2026, demande explicite :
-  // "si ya beaucoup de joueur ça peut être long") — filtrage client-side
-  // par email, la liste complète est déjà chargée d'un coup par
-  // admin-site-stats, pas besoin d'un aller-retour serveur par frappe.
   let lastPanelPlayers = [];
   function renderPanelPlayersBody(query) {
     const q = (query || '').trim().toLowerCase();
@@ -566,16 +541,9 @@
     loadAdminPendingGames();
     loadAdminWithdrawals();
     loadAdminRefunds();
-    // Défini dans le 2e <script> en bas de page (autre IIFE, voir
-    // loadAdminTicketsPanel) — se charge déjà tout seul au premier
-    // affichage ; ce garde-fou couvre juste le clic "🔄 Actualiser" et
-    // les 2 succès de remboursement plus bas, où window.loadAdminTicketsPanel
-    // est déjà défini à coup sûr (page entièrement chargée à ce moment-là).
     if (window.loadAdminTicketsPanel) window.loadAdminTicketsPanel();
   }
 
-  // ---- 🎮 Modération "Sortir mon jeu" (05/09/2026, demande explicite) —
-  // mêmes fonctions RPC que le Launcher (voir migration_26_game_marketplace.sql).
   function formatCredits(amount) {
     return `${amount.toLocaleString('fr-FR')} 💰`;
   }
@@ -658,10 +626,6 @@
     }
   });
 
-  // ---- 💸 Retraits des créateurs (Stripe Connect, 11/10/2026) — mêmes fonctions que le Launcher
-  // (admin_list_withdrawals, admin_reject_withdrawal, fonction Edge process-withdrawal). La validation reste
-  // MANUELLE : chaque carte montre les indicateurs de risque calculés par le serveur, puis « Approuver et verser »
-  // déclenche le transfert Stripe vers le compte du créateur (idempotent : ne paie jamais deux fois). ----
   function formatEurosFromCents(cents) {
     return (cents / 100).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
   }
@@ -681,8 +645,7 @@
   const WD_ACCOUNT = { not_configured: 'non configuré', incomplete: 'informations manquantes', pending_verification: 'en vérification', active: 'actif', restricted: 'restreint' };
   const WD_LEVEL = { none: ['Aucune alerte', 'ok'], attention: ['À vérifier', 'warn'], high: ['Risque élevé', 'danger'] };
   let withdrawalsCache = [];
-  let wdProcessingTimeoutMinutes = null; // réglage processing_timeout_minutes (admin_list_withdrawals), null = inconnu
-  // Demandes que « Approuver tout » peut traiter : aucune alerte, pas une ancienne demande, prêtes à verser.
+  let wdProcessingTimeoutMinutes = null;
   function wdBulkCandidates() {
     return withdrawalsCache.filter((r) => !r.legacy && !r.transferUncertain && r.risk && r.risk.level === 'none' && (r.status === 'pending' || r.status === 'approved'));
   }
@@ -720,7 +683,6 @@
     const base = (r.lastErrorCode && known[r.lastErrorCode]) || r.lastErrorMessage || r.lastErrorCode || '';
     return r.attemptCount > 0 ? `${base} (tentative ${r.attemptCount})` : base;
   }
-  // Messages d'erreur clairs selon la réponse de process-withdrawal.
   function wdErrorText(reason, b) {
     b = b || {};
     switch (reason) {
@@ -729,8 +691,6 @@
       case 'insufficient_platform_funds': return "Garde-fou : l'argent encaissé net ne couvre pas ce retrait.";
       case 'account_not_ready': return `Le compte de paiement du créateur n'est pas prêt (${WD_ACCOUNT[b.accountStatus] || b.accountStatus || 'statut inconnu'}).`;
       case 'stripe_error': {
-        // Le statut RÉEL de la demande est dans la réponse : « approved » = Stripe n'a pas répondu (rien n'a été refusé ni mis
-        // en échec) ; « failed » = refus net enregistré ; doute (uncertain) = on ne sait pas si un virement est parti.
         const code = b.code ? ` (${b.code})` : '';
         if (b.code === 'transfer_mismatch') return "Stripe a renvoyé un virement qui ne correspond pas à la demande (montant ou destination) : il n'est PAS marqué payé. Contrôle le virement dans Stripe, puis clique sur « Vérifier chez Stripe ».";
         if (b.uncertain === true || b.status === 'processing') return `Stripe a répondu d'une façon qui ne permet pas de conclure${code} : le résultat du virement est incertain. Clique sur « Vérifier chez Stripe » avant tout nouvel essai.`;
@@ -760,8 +720,6 @@
       default: return `Échec : ${reason || 'erreur inconnue'}`;
     }
   }
-  // Boutons proposés pour une demande. Le doute (transferUncertain) est posé par la BASE : tant qu'il pèse, ni « verser » ni
-  // « refuser » (un virement a peut-être déjà quitté Stripe, la base refuse d'ailleurs le refus) : seulement « Vérifier chez Stripe ».
   function wdButtons(r) {
     const doubt = r.transferUncertain === true;
     return {
@@ -772,13 +730,10 @@
       reject: (r.status === 'pending' || r.status === 'approved' || r.status === 'failed') && !doubt,
     };
   }
-  // Délai de reprise d'un virement abandonné : réglage processing_timeout_minutes renvoyé par admin_list_withdrawals
-  // (jamais un chiffre écrit ici ; sans valeur connue, aucune durée n'est annoncée).
   function wdResumeHint(minutes) {
     const wait = typeof minutes === 'number' && minutes > 0 ? `depuis plus de ${wdNum(minutes)} ${wdPlural(minutes, 'minute', 'minutes')}` : 'depuis un moment';
     return `À utiliser seulement si le virement reste « en cours » ${wait} : avant ce délai le serveur refuse la reprise, un autre traitement peut encore être en train de verser.`;
   }
-  // Texte affiché après « Vérifier chez Stripe » (corps de la réponse de process-withdrawal, action check).
   function wdCheckText(b) {
     b = b || {};
     const label = (WD_STATUS[String(b.status)] || [String(b.status || 'inconnu')])[0];
@@ -814,7 +769,6 @@
       const inFlight = p.committedCents > 0 ? ` (dont ${formatEurosFromCents(p.committedCents)} en cours de virement)` : '';
       hint.textContent = `— Portail créateurs · Disponible pour les retraits : ${formatEurosFromCents(p.availableCents)}${inFlight}. Le solde Stripe disponible est vérifié au moment du virement.`;
     }
-    // « Approuver tout (sans alerte) » : seulement les demandes sans aucune alerte, une par une.
     if (approveAllBtn) {
       const candidates = wdBulkCandidates();
       if (!error && candidates.length > 0) {
@@ -877,7 +831,6 @@
       </div>`;
     }).join('');
   }
-  // Appel de la fonction Edge process-withdrawal (approve | check). Renvoie { ok, reason, body }.
   async function callProcessWithdrawal(requestId, action) {
     const { data: sessionData } = await window.supabaseClient.auth.getSession();
     const token = sessionData.session?.access_token;
@@ -903,8 +856,6 @@
     if (!confirm(`Approuver et verser ${list.length} demande${list.length > 1 ? 's' : ''} sans alerte, pour un total de ${formatEurosFromCents(totalCents)} ?`)) return;
     btn.disabled = true;
     let paid = 0, failed = 0, stopText = null;
-    // Un par un, JAMAIS en parallèle — le serveur relit le solde Stripe disponible et le garde-fou de solvabilité à
-    // chaque virement ; des appels simultanés pourraient tous lire le même solde avant qu'aucun ne l'ait mis à jour.
     for (const r of list) {
       btn.textContent = `💰 Virement en cours… (${paid + failed + 1}/${list.length})`;
       const result = await callProcessWithdrawal(r.id, 'approve');
@@ -962,8 +913,6 @@
     }
   });
 
-  // ---- ↩ Remboursements (05/09/2026, demande explicite) — voir
-  // migration_33_refunds.sql. ----
   function formatSecsShort(secs) {
     const h = Math.floor(secs / 3600), m = Math.floor((secs % 3600) / 60);
     return h > 0 ? `${h}h${m}min` : `${m}min`;
@@ -1025,16 +974,9 @@
     }
   });
 
-  // ---- ⚡ Actions (05/09/2026, demande explicite) — mêmes fonctions RPC
-  // que le panel admin du Launcher (voir migration_21_actions_admin.sql),
-  // revérifiées côté serveur à chaque appel (jamais fié au seul JS ici). ----
   async function loadActionBans() {
     const body = document.getElementById('actionBansBody');
     const { data, error } = await window.supabaseClient.rpc('admin_list_bans');
-    // 05/09/2026 : avant, une vraie erreur RPC (permission, colonne
-    // manquante, etc.) était affichée comme "Aucun joueur banni", ce qui
-    // rendait le bug invisible — on distingue maintenant clairement une
-    // erreur réelle d'une liste vide.
     if (error) {
       body.innerHTML = `<tr><td colspan="5" style="color:var(--danger);">❌ Erreur : ${error.message || 'inconnue'}</td></tr>`;
       console.error('[FERRA] admin_list_bans a échoué :', error);
@@ -1057,11 +999,6 @@
     `).join('');
   }
 
-  // ---- Mot de passe de passage (06/09/2026, demande explicite) — voir
-  // migration_43. Modale IMPASSABLE : jamais de croix ni de fermeture au
-  // clic en dehors, seul "Annuler" abandonne l'action. Reboucle sur
-  // "mot de passe incorrect" tant que la bonne empreinte n'est pas
-  // fournie (jusqu'au verrouillage temporaire décidé par le serveur). ----
   function showAdminPassphraseError(msg) {
     const el = document.getElementById('adminPassphraseError');
     el.textContent = msg;
@@ -1205,12 +1142,6 @@
 })();
 </script>
 
-<!-- Service Client — conversation d'un ticket (06/09/2026, demande
-     explicite) — voir migration_37_support_tickets.sql. Un ticket
-     "Remboursement" se ferme et répond tout seul dès que la demande liée
-     est traitée dans "Demandes de remboursement" ci-dessus. -->
-<!-- Mot de passe de passage — Ban / Créditer un joueur / Créditer tout le
-     monde (06/09/2026, demande explicite) — impassable, voir migration_43. -->
 <div class="ticket-modal-overlay" id="adminPassphraseModal">
   <div class="ticket-modal-card">
     <div style="font-size:34px;margin-bottom:8px;">🔐</div>
@@ -1265,12 +1196,6 @@
     const { data, error } = await window.supabaseClient.rpc('admin_list_support_tickets');
     if (error) { el.innerHTML = `<p style="color:var(--danger);font-size:12.5px;">❌ Erreur : ${error.message}</p>`; return; }
     ticketsCache = data || [];
-    // Séparés en 2 groupes (15/09/2026, demande explicite : "il faudrait un
-    // menu déroulant [pour les] tickets fermés") — même raisonnement déjà
-    // appliqué à "🚫 Joueurs actuellement bannis" juste au-dessus (06/09/2026,
-    // "il peut y en avoir beaucoup... pouvoir la replier/déplier") : sans ça,
-    // les tickets déjà traités s'accumulent indéfiniment et noient les rares
-    // tickets ouverts qui ont réellement besoin d'attention.
     const openTickets = ticketsCache.filter((t) => t.status === 'open');
     const closedTickets = ticketsCache.filter((t) => t.status !== 'open');
     const openCount = openTickets.length;
@@ -1294,9 +1219,6 @@
     const openHTML = openTickets.length
       ? openTickets.map(ticketCardHTML).join('')
       : `<p style="color:var(--text-dim);font-size:12.5px;">Aucun ticket ouvert pour l'instant.</p>`;
-    // Repliés par défaut, même classe/style que le menu déroulant des bans
-    // (voir plus haut) — cohérent visuellement avec l'existant plutôt qu'un
-    // 2e système différent.
     const closedHTML = closedTickets.length
       ? `<details class="ticket-closed-details">
           <summary>🔒 Tickets fermés <span>(${closedTickets.length})</span></summary>
@@ -1374,12 +1296,6 @@
     }
   });
   window.loadAdminTicketsPanel = loadAdminTicketsPanel;
-  // Auto-chargement au premier affichage — loadPanel() (autre IIFE, plus
-  // haut dans la page) s'exécute avant que CE script ne soit même parsé,
-  // donc son propre appel à window.loadAdminTicketsPanel n'aurait rien
-  // trouvé lors du tout 1er chargement ; celui-ci couvre ce cas précis
-  // (les rechargements suivants — bouton Actualiser, remboursement traité
-  // — passent eux par l'appel plus haut, une fois ce script bien chargé).
   loadAdminTicketsPanel();
 })();
 </script>

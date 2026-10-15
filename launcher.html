@@ -184,12 +184,6 @@
   ferraRenderNavAuth('navAuth', '');
   ferraI18nApply();
 
-  // Compteur de téléchargements (05/09/2026, demande explicite : "nombre
-  // de téléchargement launcher") — best-effort, fire-and-forget : compte le
-  // CLIC sur le bouton (déclenchement du téléchargement), pas une
-  // confirmation que le fichier a fini de télécharger, comme la quasi
-  // totalité des compteurs de téléchargement sur le web. N'empêche jamais
-  // le téléchargement lui-même même si l'insert échoue.
   document.getElementById('launcherDownloadBtn')?.addEventListener('click', () => {
     try {
       window.supabaseClient.from('launcher_downloads').insert({}).then(() => {}, () => {});

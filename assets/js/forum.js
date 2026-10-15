@@ -1,9 +1,3 @@
-// ============================================================
-// FERRA — Accès aux données du forum (catégories/sujets/messages), voir
-// supabase/schema.sql pour la structure des tables. Chaque fonction
-// renvoie directement les données (ou lève une erreur Supabase) — les
-// pages appelantes gèrent l'affichage/les erreurs à leur façon.
-// ============================================================
 
 async function ferraFetchCategories() {
   const { data: categories, error } = await window.supabaseClient
@@ -12,8 +6,6 @@ async function ferraFetchCategories() {
     .order('sort_order', { ascending: true });
   if (error) throw error;
 
-  // Nombre de sujets par catégorie — un compte séparé par catégorie (peu
-  // de catégories, largement acceptable plutôt qu'une jointure complexe).
   const withCounts = await Promise.all(categories.map(async (cat) => {
     const { count } = await window.supabaseClient
       .from('threads')
@@ -73,8 +65,6 @@ async function ferraFetchPosts(threadId) {
   return data;
 }
 
-// Crée un sujet ET son tout premier message en une seule opération —
-// jamais un sujet vide sans message d'ouverture.
 async function ferraCreateThread(categoryId, authorId, title, firstMessage) {
   const { data: thread, error: threadErr } = await window.supabaseClient
     .from('threads')

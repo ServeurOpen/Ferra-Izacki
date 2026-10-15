@@ -299,7 +299,6 @@
   ferraRenderNavAuth('navAuth', '');
   ferraI18nApply();
 
-  // Surligne le lien de la section visible dans la sous-nav en collant au scroll.
   const links = document.querySelectorAll('.legal-nav a');
   const sections = Array.from(links).map((l) => document.querySelector(l.getAttribute('href')));
   function onScroll() {

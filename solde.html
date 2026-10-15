@@ -18,9 +18,7 @@
   .credit-pack .amount{font-family:'Rajdhani',sans-serif;font-size:26px;font-weight:800;color:var(--copper-glow);}
   .credit-pack .price{color:var(--text-dim);font-size:13px;margin-top:4px;}
   .credit-pack .price-old{text-decoration:line-through;opacity:0.55;margin-right:4px;}
-  /* Plus t'achètes, plus c'est rentable à l'unité (05/09/2026) — le badge
-     de réduction rend la dégressivité visible en un coup d'œil, calculée
-     par rapport au tarif de référence du plus petit palier (500 crédits). */
+  
   .pack-badge{
     position:absolute;top:-9px;right:10px;background:linear-gradient(135deg,var(--gold),var(--copper-dark));
     color:var(--bg-void);font-weight:800;font-size:10.5px;padding:3px 9px;border-radius:999px;
@@ -144,8 +142,6 @@
     errEl.style.display = 'block';
   }
 
-  // 11/10/2026 (plafonds d'achat, migration_66) — durée lisible à partir de retryAfterSeconds renvoyé par
-  // stripe-create-checkout ("" si absent ou nul : on n'affiche alors aucun délai).
   function formatRetryDelay(seconds) {
     const s = Math.ceil(Number(seconds));
     if (!isFinite(s) || s <= 0) return '';
@@ -160,13 +156,6 @@
     return days + ' j' + (hours ? ' ' + hours + ' h' : '');
   }
 
-  // Message affiché quand stripe-create-checkout refuse ou échoue. 'purchase_limit' (429) : plafond d'achat atteint, avec le
-  // délai avant de pouvoir réessayer ; le message « limite atteinte » n'est réservé qu'aux raisons qui en sont vraiment une
-  // (daily_packs, weekly_amount, new_accounts_global_limit) — pour toute autre raison (unknown_user, invalid_amount...) le
-  // joueur est renvoyé au support, la raison exacte est dans la console (voir le gestionnaire de clic plus bas) ;
-  // 'sales_paused' (503) : les ventes sont suspendues par le propriétaire ; 'limits_unavailable' (503) : la vérification
-  // des plafonds est momentanément impossible (aucun paiement n'est créé dans ce cas). Toute autre erreur garde le
-  // message d'avant.
   function checkoutErrorMessage(body) {
     const code = body && body.error;
     if (code === 'sales_paused' || (code === 'purchase_limit' && body.reason === 'sales_paused')) {
@@ -206,8 +195,6 @@
         });
         const body = await res.json().catch(() => null);
         if (!res.ok || !body || !body.url) {
-          // La raison du refus (ex. unknown_user) est ajoutée au message de l'erreur : c'est ce que le support lit dans
-          // la console quand le joueur n'a vu que « contacte le support ».
           const failure = new Error(((body && body.error) || 'unknown') + (body && body.reason ? ' : ' + body.reason : ''));
           failure.checkoutBody = body;
           throw failure;
