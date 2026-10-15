@@ -87,6 +87,7 @@
     <div class="legal-block">
       <h3>Les paiements</h3>
       <p>Quand tu recharges ton solde par carte bancaire, le paiement est traité entièrement par <b>Stripe</b> — Izacki ne voit, ne stocke et ne peut jamais accéder à ton numéro de carte. On reçoit juste la confirmation "paiement réussi" et le montant, rien d'autre.</p>
+      <p>Si tu es créateur et que tu veux retirer tes gains, tu crées un compte de paiement chez Stripe (Stripe Connect). Stripe te demande directement les informations nécessaires (identité, coordonnées bancaires, selon ton pays) : Izacki ne voit pas ton numéro de compte bancaire ni tes pièces d'identité. Izacki conserve seulement l'identifiant de ton compte Stripe, son statut (non configuré, en vérification, actif, restreint), ton pays et l'historique de tes retraits.</p>
     </div>
 
     <div class="legal-block">
@@ -111,7 +112,7 @@
 
     <div class="legal-block">
       <h3>Les crédits</h3>
-      <p>Les crédits achetés sur Izacki n'ont de valeur que <b>dans l'écosystème Izacki</b> (Launcher, jeux, marketplace) — ce ne sont pas des espèces, pas une crypto-monnaie, et ils ne peuvent pas être échangés en dehors des mécanismes officiels prévus sur la plateforme (achat de contenu, vente d'un jeu soumis, retrait via PayPal pour les vendeurs).</p>
+      <p>Les crédits achetés sur Izacki n'ont de valeur que <b>dans l'écosystème Izacki</b> (Launcher, jeux, marketplace) — ce ne sont pas des espèces, pas une crypto-monnaie, et ils ne peuvent pas être échangés en dehors des mécanismes officiels prévus sur la plateforme (achat de contenu, vente d'un jeu soumis, retrait en argent réel via Stripe pour les créateurs, aux conditions décrites plus bas).</p>
     </div>
 
     <div class="legal-block">
@@ -154,7 +155,7 @@
 
     <div class="legal-block">
       <h3>Paiement</h3>
-      <p>Le paiement par carte bancaire est traité par <b>Stripe</b>, prestataire de paiement sécurisé (voir la <a href="#confidentialite" style="color:var(--copper-glow);">politique de confidentialité</a>). Le retrait de crédits gagnés en argent réel par un vendeur se fait via <b>PayPal</b>, dans les conditions décrites plus bas.</p>
+      <p>Le paiement par carte bancaire est traité par <b>Stripe</b>, prestataire de paiement sécurisé (voir la <a href="#confidentialite" style="color:var(--copper-glow);">politique de confidentialité</a>). Le retrait de crédits gagnés en argent réel par un créateur se fait par virement via <b>Stripe</b> (compte de paiement Stripe Connect du créateur), dans les conditions décrites plus bas.</p>
     </div>
 
     <div class="legal-block">
@@ -194,13 +195,22 @@
 
     <div class="legal-block">
       <h3>Retrait de crédits en argent réel (Portail créateurs)</h3>
-      <p>Un vendeur peut demander la conversion de ses crédits gagnés en argent réel via PayPal, sous réserve de remplir <b>toutes</b> ces conditions :</p>
+      <p>Un créateur peut demander la conversion de ses <b>crédits gagnés</b> (ceux obtenus par la vente de ses jeux, pas ceux qu'il a achetés) en argent réel, par virement via Stripe, sous réserve de remplir <b>toutes</b> ces conditions :</p>
       <ul>
         <li>Avoir au moins <b>1 jeu publié</b> (accepté par la modération),</li>
-        <li>Avoir réalisé au moins <b>5 ventes</b> au total,</li>
-        <li>Avoir un solde d'au moins <b>1000 crédits</b>.</li>
+        <li>Avoir réalisé au moins <b>5 ventes</b> de jeux de joueurs,</li>
+        <li>Avoir un <b>compte de paiement Stripe actif</b> : Stripe vérifie ton identité et tes coordonnées bancaires, et le compte n'est ouvert que dans les pays pris en charge (la liste est affichée dans le Launcher au moment de la configuration, et le pays du compte ne peut plus être changé ensuite),</li>
+        <li>Demander au moins <b>5 000 crédits retirables</b> en une fois.</li>
       </ul>
-      <p>Le taux de conversion est de <b>0,35€ pour 100 crédits</b> (soit moins que le prix d'achat des crédits : Izacki garde la différence). Chaque demande est validée manuellement par l'équipe Izacki avant tout versement PayPal réel.</p>
+      <p><b>Taux de conversion.</b> 100 crédits = 0,35 € (soit moins que le prix d'achat des crédits : Izacki garde la différence). Le montant exact que tu recevras est affiché dans le Launcher avant que tu confirmes.</p>
+      <p><b>Frais de traitement.</b> 2,00 € sont retenus sur ton premier retrait de chaque mois civil (fuseau horaire de Paris). Les retraits suivants du même mois n'ont pas de frais. Le montant des frais et le net que tu recevras sont affichés avant la confirmation.</p>
+      <p><b>Délai avant de pouvoir retirer.</b> Un gain devient retirable 30 jours après la vente (60 jours pour ton tout premier retrait). Les crédits encore verrouillés et leur date de déblocage sont visibles dans le Launcher. Ce délai laisse le temps aux remboursements et aux contestations bancaires éventuelles.</p>
+      <p><b>Plafond pour les nouveaux créateurs.</b> Tant qu'aucun de tes retraits n'a été payé, et pendant les 3 mois qui suivent ton premier retrait payé, tu ne peux pas recevoir plus de 50 € nets par mois civil. Au-delà, la demande est refusée avec un message qui indique ce qu'il te reste ce mois-ci.</p>
+      <p><b>Validation.</b> Chaque demande est examinée manuellement par l'équipe Izacki avant tout versement. Izacki peut refuser une demande, notamment en cas de doute sur l'origine des gains (achats répétés d'un même compte, comptes récents, remboursements ou contestations). Une demande refusée est annulée et les crédits te sont rendus. Un seul retrait peut être en cours à la fois.</p>
+      <p><b>Remboursements et contestations.</b> Si une vente est remboursée ou contestée auprès de la banque d'un joueur, les crédits correspondants sont repris sur tes gains. Si cela arrive après un virement, Izacki peut compenser le montant sur tes gains suivants, y compris par la suspension de tes retraits tant que la somme n'est pas couverte.</p>
+      <p><b>Délais et incidents.</b> Le virement n'est lancé qu'une fois la demande validée et les fonds disponibles chez Stripe. Les délais de réception sur ton compte bancaire dépendent ensuite de Stripe et de ta banque. En cas d'échec du virement, tes crédits restent réservés et le virement est relancé, sans double débit.</p>
+      <p><b>Responsabilité fiscale.</b> Tu es seul responsable de la déclaration de tes revenus et du respect de tes obligations fiscales et sociales dans ton pays (statut, déclaration des revenus, TVA le cas échéant). Izacki ne donne aucun conseil fiscal. Izacki peut être tenu de transmettre certaines informations sur les vendeurs à l'administration fiscale.</p>
+      <p><b>Suspension.</b> Izacki peut suspendre les retraits (en général ou pour un compte précis) en cas de suspicion de fraude, de demande d'une autorité, ou de restriction du compte Stripe du créateur.</p>
     </div>
   </section>
 
@@ -254,7 +264,7 @@
     <div class="legal-block">
       <h3>Hébergement</h3>
       <p>Ce site est hébergé par <b>GitHub Pages</b> (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis — <a href="https://github.com" target="_blank" rel="noopener" style="color:var(--copper-glow);">github.com</a>).</p>
-      <p>Les comptes, données de jeu et fonctions de connexion sont hébergés par <b>Supabase</b> (Supabase Inc.). Les emails transactionnels sont envoyés via <b>Resend</b>. Les paiements par carte sont traités par <b>Stripe</b>, et les versements aux vendeurs par <b>PayPal</b> — voir le détail dans la <a href="#confidentialite" style="color:var(--copper-glow);">politique de confidentialité</a>.</p>
+      <p>Les comptes, données de jeu et fonctions de connexion sont hébergés par <b>Supabase</b> (Supabase Inc.). Les emails transactionnels sont envoyés via <b>Resend</b>. Les paiements par carte sont traités par <b>Stripe</b>, et les versements aux créateurs sont effectués par <b>Stripe</b> (Stripe Connect) — voir le détail dans la <a href="#confidentialite" style="color:var(--copper-glow);">politique de confidentialité</a>.</p>
     </div>
 
     <div class="legal-block">
