@@ -1,10 +1,10 @@
 {
-  "version": "0.2.83",
-  "notes": "Retraits des créateurs par Stripe : nouveau bloc « Paiements » dans le portail créateur (inscription chez Stripe, crédits retirables et verrouillés, frais et plafond affichés avant la confirmation), écran de validation des retraits avec indicateurs de risque pour l’administrateur, et libellés clairs pour les remboursements et litiges.",
-  "pub_date": "2026-10-15T15:10:05Z",
+  "version": "0.2.84",
+  "notes": "Licence d’utilisation et mentions de copyright dans les Paramètres, textes d’aide plus clairs pour les créateurs, et petites corrections de messages.",
+  "pub_date": "2026-10-15T16:57:47Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTDI3RUFmOFJ5bGtWMEdUbzZxeWhZSGdOUkxqODFzZVhPcHMwRjVwZThPS3BueTRzd25meFcyVWZ1TjVQL084RnFDWFN6cXJiUENROTc5emVmNzRlZndvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkyMDc2OTkzCWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi44M194NjQtc2V0dXAuZXhlCmNaNnZVRGRXUnpNMWlnbzFxRjRCSFQ2VU5yV216Q0lIa3dpZ1E4OHJWTTQzT1VreGo2M1ZpbjFBZmE0Wk9nWWtuVGpTeStxbXByR2RUNW9tSlovYkNRPT0K",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTU3dFTDFEeDIvTC81OWhGZlc0UHJEMnVnN1gvb3JZWk1URkxORXozOEhKRVgwSmRiZ0IwTmlkck1VSmhFYWV0aEd1ODNJT01DY2hzVTdyNkVLWElvMHB3c1BQYzNQZndZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkyMDgzNDU5CWZpbGU6SXphY2tpIExhdW5jaGVyXzAuMi44NF94NjQtc2V0dXAuZXhlCkpwRFllR2doY3hkMEJESFI1azdwNi9rSE1qc0owYlhmaitGbllQZ3RwQmFuNUJuRWh5RDZuNFV2citIclZTQUVaVE5LWGVSamRJdWEra3JtRW1GZUF3PT0K",
       "url": "https://izackiferra.com/games/files/IzackiLauncher-Setup.exe"
     }
   }
