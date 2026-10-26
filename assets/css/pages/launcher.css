@@ -1,0 +1,7 @@
+.launcher-dl{display:grid;gap:2.5rem var(--gap);align-items:start}
+.launcher-dl__act{display:grid;gap:1.75rem;align-content:start}
+.launcher-dl__get{display:grid;gap:.75rem;justify-items:start}
+.launcher-note{margin-top:1.25rem;max-width:36rem}
+@media (min-width:72rem){.launcher-dl{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}}
+
+.kv dd>a.text-link:only-child{display:inline-block;padding-block:.75rem;margin-block:-.75rem}

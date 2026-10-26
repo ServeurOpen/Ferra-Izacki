@@ -1,0 +1,35 @@
+{
+  "forumIndex": {
+    "meta": {
+      "title": "Player forum: help, ideas and discussion | Izacki",
+      "description": "The Izacki forum: discussions, help and ideas about the games and the Launcher. A free Izacki account is all you need to post."
+    },
+    "crumb": "Forum",
+    "title": "Izacki Forum",
+    "lead": "Discussions, help and ideas: pick a category to see its threads.",
+    "loading": "Loading categories…",
+    "noCategories": "No categories yet.",
+    "notConfigured": "The forum is temporarily unavailable.",
+    "notConfiguredHint": "Try again in a few minutes.",
+    "thread": "thread",
+    "threads": "threads",
+    "cat": {
+      "annonces": {
+        "name": "Announcements",
+        "desc": "Official news from Izacki."
+      },
+      "general": {
+        "name": "General discussion",
+        "desc": "Talk about the games, share your runs, ask your questions."
+      },
+      "support": {
+        "name": "Support and bugs",
+        "desc": "Having trouble at launch or in game? Describe it here."
+      },
+      "idees": {
+        "name": "Ideas and suggestions",
+        "desc": "Suggest what you would like to see in the games and the Launcher."
+      }
+    }
+  }
+}

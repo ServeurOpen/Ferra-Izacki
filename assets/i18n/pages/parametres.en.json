@@ -1,0 +1,50 @@
+{
+  "parametres": {
+    "meta": {
+      "title": "Settings | Izacki",
+      "description": "Site language and access to your credits."
+    },
+    "side": {
+      "label": "Account menu",
+      "account": "Account",
+      "credits": "Credits",
+      "settings": "Settings",
+      "help": "Help",
+      "faq": "FAQ",
+      "contact": "Contact"
+    },
+    "crumb": "Account",
+    "title": "Settings",
+    "lead": "The site language and access to your credits.",
+    "login": {
+      "title": "Log in to open your settings.",
+      "text": "One free Izacki account for the site, the forum and the Launcher."
+    },
+    "language": {
+      "title": "Language",
+      "label": "Site language",
+      "hint": "Applies to the whole site and is remembered for your next visits."
+    },
+    "credits": {
+      "title": "Credits",
+      "text": "Top up your credits balance by bank card.",
+      "cta": "Top up my credits"
+    },
+    "profile": {
+      "title": "Profile and account",
+      "text": "Your profile, privacy and account deletion are managed in the Launcher, under Paramètres (Settings).",
+      "cta": "Read the help"
+    },
+    "admin": {
+      "title": "Administrator mode",
+      "hint": "When enabled, it gives access to the Panel and turns the site purple.",
+      "on": "Enabled",
+      "off": "Disabled",
+      "disable": "Disable",
+      "reenable": "Re-enable…",
+      "passwordLabel": "Re-enable password",
+      "reactivate": "Re-enable",
+      "wrongPassword": "Incorrect password."
+    }
+  }
+}

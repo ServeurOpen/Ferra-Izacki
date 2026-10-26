@@ -1,0 +1,35 @@
+{
+  "forumIndex": {
+    "meta": {
+      "title": "Forum des joueurs : entraide et idées | Izacki",
+      "description": "Le forum d'Izacki : discussions, entraide et idées sur les jeux et le Launcher. Un compte Izacki gratuit suffit pour écrire."
+    },
+    "crumb": "Forum",
+    "title": "Forum Izacki",
+    "lead": "Discussions, entraide et idées : choisis une catégorie pour voir les sujets.",
+    "loading": "Chargement des catégories…",
+    "noCategories": "Aucune catégorie pour l'instant.",
+    "notConfigured": "Le forum est momentanément indisponible.",
+    "notConfiguredHint": "Réessaie dans quelques minutes.",
+    "thread": "sujet",
+    "threads": "sujets",
+    "cat": {
+      "annonces": {
+        "name": "Annonces",
+        "desc": "Les nouvelles officielles d'Izacki."
+      },
+      "general": {
+        "name": "Discussion générale",
+        "desc": "Parle des jeux, partage tes parties, pose tes questions."
+      },
+      "support": {
+        "name": "Support et bugs",
+        "desc": "Un souci au lancement ou en jeu ? Décris-le ici."
+      },
+      "idees": {
+        "name": "Idées et suggestions",
+        "desc": "Propose ce que tu aimerais voir dans les jeux et le Launcher."
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "paiementsCreateur": {
+    "meta": {
+      "title": "Pagos de creadores | Izacki",
+      "description": "Regreso de Stripe tras configurar la cuenta de pagos de creador."
+    },
+    "hero": {
+      "title": "Pagos de creadores",
+      "lead": "Configuración de tu cuenta de pagos de Stripe."
+    },
+    "back": "Regreso de Stripe. Puedes cerrar esta página y volver al Launcher: tu estado se actualiza solo.",
+    "resume": "El enlace de Stripe ha caducado. Vuelve al Launcher y haz clic en «Reprendre l'inscription» (reanudar el registro).",
+    "hint": "Esta página no muestra ninguna información personal ni bancaria."
+  }
+}

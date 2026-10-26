@@ -1,0 +1,36 @@
+{
+  "forumSignup": {
+    "meta": {
+      "title": "Créer un compte | Izacki",
+      "description": "Crée un compte Izacki gratuit : il sert sur le site, sur le forum et dans le Launcher."
+    },
+    "crumb": "Créer un compte",
+    "title": "Créer un compte",
+    "lead": "Rejoins la communauté Izacki.",
+    "rail": {
+      "label": "Nouveau compte",
+      "meta": "Gratuit, e-mail à confirmer"
+    },
+    "username": "Pseudo",
+    "usernameRules": "3 à 24 caractères, lettres, chiffres ou underscore, sans espace ni accent, avec au moins une majuscule.",
+    "displayName": "Nom d'affichage (facultatif)",
+    "displayNameHint": "Le nom montré aux autres joueurs. Modifiable plus tard ; sinon, ton pseudo est utilisé.",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "passwordHint": "6 caractères au minimum.",
+    "submit": "Créer mon compte",
+    "legal": "Les conditions d'utilisation et la politique de confidentialité sont dans",
+    "legalLink": "Conditions &amp; Confidentialité",
+    "hasAccount": "Déjà un compte ?",
+    "loginLink": "Connecte-toi",
+    "created": "Compte créé. Confirme ton adresse e-mail avec le message que nous venons de t'envoyer.",
+    "invalidUsername": "Pseudo invalide : ",
+    "errEmailUsed": "Cet e-mail est déjà utilisé.",
+    "errUsernameUsed": "Ce pseudo est déjà utilisé.",
+    "errRateLimit": "Trop de créations de compte récentes (limite d'envoi d'e-mails). Réessaie dans quelques minutes.",
+    "errDisabled": "Les inscriptions sont momentanément fermées. Réessaie plus tard ou contacte-nous.",
+    "errGeneric": "Impossible de créer le compte. Réessaie.",
+    "okConnected": "Compte créé et connecté. Tu es redirigé vers le forum.",
+    "okNeedsConfirm": "Compte créé. Vérifie ta boîte de réception (et les spams) pour confirmer ton adresse e-mail, puis connecte-toi."
+  }
+}

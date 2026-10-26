@@ -1,0 +1,85 @@
+{
+  "solde": {
+    "meta": {
+      "title": "Recharger mes crédits | Izacki",
+      "description": "Recharge ton solde de crédits Izacki par carte bancaire."
+    },
+    "side": {
+      "label": "Menu du compte",
+      "account": "Compte",
+      "credits": "Crédits",
+      "settings": "Paramètres",
+      "help": "Aide",
+      "faq": "Questions fréquentes",
+      "contact": "Contact"
+    },
+    "crumb": "Compte",
+    "title": "Recharger mes crédits",
+    "lead": "Les crédits servent à payer des jeux et du contenu dans le Launcher. Plus le pack est grand, moins le crédit coûte cher.",
+    "login": {
+      "title": "Connecte-toi pour recharger tes crédits.",
+      "text": "Tes crédits sont liés à ton compte Izacki, le même sur le site et dans le Launcher."
+    },
+    "packs": {
+      "title": "Choisis un pack de crédits",
+      "meta": "Paiement par carte, via Stripe",
+      "label": "Packs de crédits"
+    },
+    "pack": {
+      "credits": "crédits",
+      "pay": "Payer par carte",
+      "best": "Meilleure valeur",
+      "q500": "500",
+      "q1000": "1 000",
+      "q2000": "2 000",
+      "q5000": "5 000",
+      "p500": "3,99 €",
+      "p1000": "6,49 €",
+      "p2000": "11,99 €",
+      "p5000": "26,99 €",
+      "per500": "0,80 € pour 100 crédits",
+      "per1000": "0,65 € pour 100 crédits",
+      "per2000": "0,60 € pour 100 crédits",
+      "per5000": "0,54 € pour 100 crédits"
+    },
+    "how": {
+      "title": "Comment ça se passe",
+      "paymentLabel": "Paiement",
+      "paymentText": "Par carte, sur une page de paiement Stripe. L'authentification 3-D Secure peut être demandée.",
+      "returnLabel": "Retour",
+      "returnText": "Tu reviens sur cette page une fois le paiement terminé.",
+      "balanceLabel": "Solde",
+      "balanceText": "Il se met à jour dans le Launcher quelques secondes après le paiement.",
+      "useLabel": "Usage",
+      "useText": "Les crédits n'ont de valeur que dans l'écosystème Izacki : ce ne sont ni des espèces ni une cryptomonnaie.",
+      "limitsLabel": "Limites",
+      "limitsText": "Des plafonds d'achat par jour et par semaine existent."
+    },
+    "legal": {
+      "lead": "À lire avant de payer :",
+      "terms": "Conditions de vente",
+      "refunds": "Remboursements"
+    },
+    "msg": {
+      "success": "Paiement reçu. Tes crédits ont été ajoutés ; ton solde se met à jour dans le Launcher en quelques secondes.",
+      "canceled": "Paiement annulé. Aucun montant n'a été débité."
+    },
+    "err": {
+      "salesPaused": "Les achats de crédits sont temporairement suspendus. Reviens un peu plus tard.",
+      "disabledUser": "Ton compte ne peut pas acheter de crédits pour le moment. Contacte-nous si tu penses que c'est une erreur.",
+      "tooManyOpen": "Tu as déjà des paiements en cours. Termine-les ou attends qu'ils expirent.",
+      "tooManyOpenRetry": "Tu as déjà des paiements en cours. Termine-les ou attends qu'ils expirent, puis réessaie dans environ",
+      "limit": "Tu as atteint la limite d'achats de crédits pour cette période. Réessaie plus tard.",
+      "limitRetry": "Tu as atteint la limite d'achats de crédits pour cette période. Réessaie dans environ",
+      "purchaseLimit": "Impossible de démarrer le paiement. Contacte-nous.",
+      "unavailable": "Service momentanément indisponible. Réessaie dans quelques minutes.",
+      "generic": "Impossible de démarrer le paiement. Réessaie dans un instant."
+    },
+    "delay": {
+      "lessThanMinute": "une minute",
+      "min": "min",
+      "h": "h",
+      "d": "j"
+    }
+  }
+}

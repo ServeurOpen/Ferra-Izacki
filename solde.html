@@ -1,190 +1,325 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Recharger mon solde — FERRA</title>
-<meta name="description" content="Recharge ton solde de crédits Izacki par carte bancaire.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💳</text></svg>">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0C0D0F">
+<title data-i18n="solde.meta.title">Recharger mes crédits | Izacki</title>
+<meta name="description" content="Recharge ton solde de crédits Izacki par carte bancaire." data-i18n-content="solde.meta.description">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preload" href="assets/fonts/saira.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/jetbrains-mono.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css">
-<style>
-  .credit-packs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:22px 0;}
-  .credit-pack{
-    position:relative;background:var(--bg-panel-2);border:1px solid var(--panel-edge);border-radius:14px;
-    padding:22px 16px;text-align:center;cursor:pointer;transition:border-color .15s,transform .15s;
-  }
-  .credit-pack:hover{border-color:var(--copper-glow);transform:translateY(-2px);}
-  .credit-pack:disabled{opacity:0.6;cursor:default;transform:none;}
-  .credit-pack .amount{font-family:'Rajdhani',sans-serif;font-size:26px;font-weight:800;color:var(--copper-glow);}
-  .credit-pack .price{color:var(--text-dim);font-size:13px;margin-top:4px;}
-  .credit-pack .price-old{text-decoration:line-through;opacity:0.55;margin-right:4px;}
-  
-  .pack-badge{
-    position:absolute;top:-9px;right:10px;background:linear-gradient(135deg,var(--gold),var(--copper-dark));
-    color:var(--bg-void);font-weight:800;font-size:10.5px;padding:3px 9px;border-radius:999px;
-    box-shadow:0 4px 10px rgba(242,164,90,0.3);
-  }
-  .pack-badge.best{background:linear-gradient(135deg,#6bd67f,#2f8f45);box-shadow:0 4px 10px rgba(107,214,127,0.3);}
-  .solde-note{background:rgba(90,160,224,0.08);border:1px solid rgba(90,160,224,0.25);border-radius:10px;padding:12px 14px;font-size:12.5px;color:var(--text-dim);margin-top:10px;}
-</style>
+<link rel="stylesheet" href="assets/css/pages/account.css">
+<script>(function(d){d.classList.add("js");var l="",q=/[?&]lang=(fr|en|es)(?:&|$)/.exec(location.search);if(q){l=q[1]}else{try{l=localStorage.getItem("ferra_lang")||""}catch(e){}}if(!/^(fr|en|es)$/.test(l)){var a=navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||"fr"];l="fr";for(var i=0;i<a.length;i++){var c=String(a[i]).slice(0,2).toLowerCase();if(/^(fr|en|es)$/.test(c)){l=c;break}}}d.lang=l;if(l!=="fr"){d.classList.add("i18n-pending");setTimeout(function(){d.classList.remove("i18n-pending")},3000)}})(document.documentElement)</script>
 </head>
-<body>
-
-<header class="site-header">
-  <nav class="site-nav">
-    <a href="index.html" class="brand">FER<span>RA</span></a>
-    <div class="nav-links">
-      <a href="index.html" class="nav-link" data-i18n="nav.home">Accueil</a>
-      <a href="launcher.html" class="nav-link" data-i18n="nav.launcher">Launcher</a>
-      <a href="forum/index.html" class="nav-link" data-i18n="nav.forum">Forum</a>
-      <a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a>
-      <a href="launcher.html" class="nav-cta" data-i18n="nav.download">⬇ Télécharger</a>
-      <a href="https://discord.gg/bv2w8spATk" class="nav-discord" target="_blank" rel="noopener" title="Rejoindre le Discord" aria-label="Discord">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.099.246.198.373.292a.077.077 0 0 1-.006.127c-.598.35-1.22.645-1.873.893a.076.076 0 0 0-.041.106c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.946 2.419-2.157 2.419zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.175 1.094 2.157 2.418 0 1.334-.946 2.419-2.157 2.419z"/></svg>
-      </a>
-      <span id="navAuth" class="nav-auth"></span>
+<body data-page="solde">
+<a class="skip" href="#contenu" data-i18n="shell.skip">Aller au contenu</a>
+<header class="site-header" data-shell="header">
+<div class="wrap header-row">
+  <a class="brand" href="index.html" aria-label="Izacki, accueil" data-i18n-attr="aria-label:shell.brand.home"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"/><rect class="brand__sq" x="12" y="12" width="10" height="10"/></svg><span class="brand__word">Izacki</span></a>
+  <a class="btn btn--primary btn--sm btn--nowrap header-dl" href="launcher.html#telecharger"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#download"/></svg><span class="header-dl__t" data-i18n="shell.download">Télécharger</span></a>
+  <button class="btn btn--outline btn--sm btn--icon menu-btn" type="button" aria-expanded="false" aria-controls="nav-panel" aria-label="Ouvrir le menu" data-i18n-attr="aria-label:shell.menu.open"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#menu"/></svg></button>
+  <div class="nav-panel" id="nav-panel">
+    <nav aria-label="Navigation principale" data-i18n-attr="aria-label:shell.nav.label">
+      <ul class="nav">
+        <li><a href="launcher.html"><span data-i18n="shell.nav.launcher">Launcher</span></a></li>
+        <li><a href="index.html#jeux"><span data-i18n="shell.nav.games">Jeux</span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#chevron-down"/></svg></a>
+          <div class="nav-sub"><a href="games/ferra.html">FERRA<small data-i18n="shell.nav.ferraSub">Survie / automatisation</small></a><a href="games/tower-defense.html">Tower Défense Infini<small data-i18n="shell.nav.tdSub">Tower defense</small></a></div></li>
+        <li><a href="launcher.html#createurs"><span data-i18n="shell.nav.creators">Créateurs</span></a></li>
+        <li><a href="forum/index.html"><span data-i18n="shell.nav.community">Communauté</span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#chevron-down"/></svg></a>
+          <div class="nav-sub"><a href="forum/index.html"><span data-i18n="shell.nav.forum">Forum</span><small data-i18n="shell.nav.forumSub">Sujets et réponses</small></a><a href="https://discord.gg/bv2w8spATk" target="_blank" rel="noopener noreferrer">Discord<svg class="icon icon--fill" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#discord"/></svg><span class="sr-only" data-i18n="shell.newTab">(s'ouvre dans un nouvel onglet)</span><small data-i18n="shell.nav.discordSub">Le serveur d'Izacki</small></a></div></li>
+        <li><a href="faq.html"><span data-i18n="shell.nav.help">Aide</span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#chevron-down"/></svg></a>
+          <div class="nav-sub"><a href="faq.html"><span data-i18n="shell.nav.faq">Questions fréquentes</span><small data-i18n="shell.nav.faqSub">Installation, compte, crédits</small></a><a href="contact.html"><span data-i18n="shell.nav.contact">Contact</span><small data-i18n="shell.nav.contactSub">Écrire à l'équipe</small></a></div></li>
+      </ul>
+    </nav>
+    <div class="tools">
+      <span id="navAuth" class="auth" data-state="loading"></span>
+      <div class="lang" role="group" aria-label="Langue du site" data-i18n-attr="aria-label:shell.lang.label"><button type="button" lang="fr" data-lang="fr" aria-label="Français" aria-pressed="true">FR</button><button type="button" lang="en" data-lang="en" aria-label="English" aria-pressed="false">EN</button><button type="button" lang="es" data-lang="es" aria-label="Español" aria-pressed="false">ES</button></div>
+      <a class="btn btn--primary btn--sm btn--nowrap" href="launcher.html#telecharger"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#download"/></svg><span data-i18n="shell.download">Télécharger</span></a>
     </div>
-  </nav>
-</header>
-
-<div class="page-header">
-  <div class="container-narrow">
-    <h1>💳 Recharger mon solde</h1>
-    <p>Les crédits servent à payer des jeux et du contenu dans le Launcher. Plus le pack est grand, moins le crédit coûte cher.</p>
   </div>
 </div>
+</header>
+<main id="contenu" tabindex="-1">
+  <div class="wrap">
+    <div class="app">
+      <aside class="side" aria-label="Menu du compte" data-i18n-attr="aria-label:solde.side.label">
+        <div>
+          <p class="label" data-i18n="solde.side.account">Compte</p>
+          <ul>
+            <li><a href="solde.html" aria-current="page"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#wallet"/></svg><span data-i18n="solde.side.credits">Crédits</span></a></li>
+            <li><a href="parametres.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#gear"/></svg><span data-i18n="solde.side.settings">Paramètres</span></a></li>
+          </ul>
+          <p class="label" data-i18n="solde.side.help">Aide</p>
+          <ul>
+            <li><a href="faq.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#help"/></svg><span data-i18n="solde.side.faq">Questions fréquentes</span></a></li>
+            <li><a href="contact.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#mail"/></svg><span data-i18n="solde.side.contact">Contact</span></a></li>
+          </ul>
+        </div>
+      </aside>
+      <div class="app__main">
+        <header class="app__head">
+          <div>
+            <nav aria-label="Fil d'Ariane" data-i18n-attr="aria-label:common.crumbs"><ol class="crumbs"><li><a href="index.html" data-i18n="common.home">Accueil</a></li><li data-i18n="solde.crumb">Compte</li><li aria-current="page" data-i18n="solde.side.credits">Crédits</li></ol></nav>
+            <h1 id="h1" class="t-title t-title--app" data-i18n="solde.title">Recharger mes crédits</h1>
+            <p class="measure" data-i18n="solde.lead">Les crédits servent à payer des jeux et du contenu dans le Launcher. Plus le pack est grand, moins le crédit coûte cher.</p>
+          </div>
+        </header>
 
-<section style="padding-top:10px;">
-  <div class="container-narrow" style="max-width:560px;">
+        <div id="soldeLoading" class="acc-loading" role="status" aria-busy="true">
+          <span class="sr-only" data-i18n="common.loading">Chargement…</span>
+          <div class="checkout" aria-hidden="true">
+            <div class="panel">
+              <div class="panel__head"><span class="skeleton skeleton--line acc-loading__title"></span></div>
+              <div class="panel__body">
+                <div class="packs">
+                  <span class="skeleton skeleton--block"></span>
+                  <span class="skeleton skeleton--block"></span>
+                  <span class="skeleton skeleton--block"></span>
+                  <span class="skeleton skeleton--block"></span>
+                </div>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel__head"><span class="skeleton skeleton--line acc-loading__title"></span></div>
+              <div class="panel__body">
+                <span class="skeleton skeleton--line"></span>
+                <span class="skeleton skeleton--line"></span>
+                <span class="skeleton skeleton--line"></span>
+              </div>
+            </div>
+          </div>
+        </div>
 
-    <div id="needLogin" class="card" style="display:none;text-align:center;">
-      <p style="margin-bottom:14px;">Connecte-toi pour recharger ton solde.</p>
-      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-        <a href="forum/login.html" class="btn btn-primary btn-sm" data-i18n="nav.login">Se connecter</a>
-        <a href="forum/signup.html" class="btn btn-ghost btn-sm" data-i18n="nav.signup">Créer un compte</a>
+        <div id="needLogin" style="display:none">
+          <div class="state">
+            <div class="state__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#lock"/></svg></div>
+            <div>
+              <h2 class="t-h3" data-i18n="solde.login.title">Connecte-toi pour recharger tes crédits.</h2>
+              <p data-i18n="solde.login.text">Tes crédits sont liés à ton compte Izacki, le même sur le site et dans le Launcher.</p>
+              <div class="actions">
+                <a class="btn btn--primary" href="forum/login.html" data-i18n="nav.login">Se connecter</a>
+                <a class="btn btn--outline" href="forum/signup.html" data-i18n="nav.signup">Créer un compte</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="soldeWrap" style="display:none">
+          <div class="acc-flow">
+            <div id="soldeMsg" class="form-success" role="status" style="display:none"></div>
+            <div id="soldeErr" class="form-error" role="alert" style="display:none"></div>
+
+            <div class="checkout">
+              <section class="panel" aria-labelledby="solde-packs-t">
+                <div class="panel__head">
+                  <h2 id="solde-packs-t" data-i18n="solde.packs.title">Choisis un pack de crédits</h2>
+                  <span class="meta" data-i18n="solde.packs.meta">Paiement par carte, via Stripe</span>
+                </div>
+                <div class="panel__body">
+                  <div class="packs" role="group" aria-label="Packs de crédits" data-i18n-attr="aria-label:solde.packs.label">
+                    <button class="credit-pack pack-btn" type="button" data-pack="500">
+                      <span class="pack-btn__qty" data-i18n="solde.pack.q500">500</span>
+                      <span class="pack-btn__unit" data-i18n="solde.pack.credits">crédits</span>
+                      <span class="pack-btn__price" data-i18n="solde.pack.p500">3,99&nbsp;€</span>
+                      <span class="pack-btn__per" data-i18n="solde.pack.per500">0,80&nbsp;€ pour 100&nbsp;crédits</span>
+                      <span class="pack-btn__go"><span data-i18n="solde.pack.pay">Payer par carte</span><svg class="icon icon-arrow" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#arrow-right"/></svg></span>
+                    </button>
+                    <button class="credit-pack pack-btn" type="button" data-pack="1000">
+                      <span class="pack-btn__qty" data-i18n="solde.pack.q1000">1&nbsp;000</span>
+                      <span class="pack-btn__unit" data-i18n="solde.pack.credits">crédits</span>
+                      <span class="pack-btn__price" data-i18n="solde.pack.p1000">6,49&nbsp;€</span>
+                      <span class="pack-btn__per" data-i18n="solde.pack.per1000">0,65&nbsp;€ pour 100&nbsp;crédits</span>
+                      <span class="pack-btn__go"><span data-i18n="solde.pack.pay">Payer par carte</span><svg class="icon icon-arrow" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#arrow-right"/></svg></span>
+                    </button>
+                    <button class="credit-pack pack-btn" type="button" data-pack="2000">
+                      <span class="pack-btn__qty" data-i18n="solde.pack.q2000">2&nbsp;000</span>
+                      <span class="pack-btn__unit" data-i18n="solde.pack.credits">crédits</span>
+                      <span class="pack-btn__price" data-i18n="solde.pack.p2000">11,99&nbsp;€</span>
+                      <span class="pack-btn__per" data-i18n="solde.pack.per2000">0,60&nbsp;€ pour 100&nbsp;crédits</span>
+                      <span class="pack-btn__go"><span data-i18n="solde.pack.pay">Payer par carte</span><svg class="icon icon-arrow" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#arrow-right"/></svg></span>
+                    </button>
+                    <button class="credit-pack pack-btn" type="button" data-pack="5000">
+                      <span class="pack-btn__qty" data-i18n="solde.pack.q5000">5&nbsp;000</span>
+                      <span class="pack-btn__unit" data-i18n="solde.pack.credits">crédits</span>
+                      <span class="pack-btn__price" data-i18n="solde.pack.p5000">26,99&nbsp;€</span>
+                      <span class="pack-btn__per" data-i18n="solde.pack.per5000">0,54&nbsp;€ pour 100&nbsp;crédits</span>
+                      <span class="pack-btn__go"><span data-i18n="solde.pack.pay">Payer par carte</span><svg class="icon icon-arrow" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#arrow-right"/></svg></span>
+                    </button>
+                  </div>
+                </div>
+              </section>
+              <section class="panel" aria-labelledby="solde-how-t">
+                <div class="panel__head">
+                  <h2 id="solde-how-t" data-i18n="solde.how.title">Comment ça se passe</h2>
+                </div>
+                <div class="panel__body">
+                  <dl class="kv kv--tight">
+                    <dt data-i18n="solde.how.paymentLabel">Paiement</dt>
+                    <dd data-i18n="solde.how.paymentText">Par carte, sur une page de paiement Stripe. L'authentification 3-D Secure peut être demandée.</dd>
+                    <dt data-i18n="solde.how.returnLabel">Retour</dt>
+                    <dd data-i18n="solde.how.returnText">Tu reviens sur cette page une fois le paiement terminé.</dd>
+                    <dt data-i18n="solde.how.balanceLabel">Solde</dt>
+                    <dd data-i18n="solde.how.balanceText">Il se met à jour dans le Launcher quelques secondes après le paiement.</dd>
+                    <dt data-i18n="solde.how.useLabel">Usage</dt>
+                    <dd data-i18n="solde.how.useText">Les crédits n'ont de valeur que dans l'écosystème Izacki&nbsp;: ce ne sont ni des espèces ni une cryptomonnaie.</dd>
+                    <dt data-i18n="solde.how.limitsLabel">Limites</dt>
+                    <dd data-i18n="solde.how.limitsText">Des plafonds d'achat par jour et par semaine existent.</dd>
+                  </dl>
+                </div>
+              </section>
+            </div>
+
+            <div class="acc-notes">
+              <p class="hint acc-legal"><span data-i18n="solde.legal.lead">À lire avant de payer&nbsp;:</span><a class="text-link" href="conditions.html#cgv" data-i18n="solde.legal.terms">Conditions de vente</a><a class="text-link" href="conditions.html#remboursements" data-i18n="solde.legal.refunds">Remboursements</a></p>
+              <p class="hint not-fr" data-i18n="common.frenchOnly">Le Launcher et les jeux sont en français.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
-    <div id="soldeWrap" style="display:none;">
-      <div id="soldeMsg" class="form-success" style="display:none;"></div>
-      <div id="soldeErr" class="form-error" style="display:none;"></div>
-
-      <div class="credit-packs">
-        <button class="credit-pack" data-pack="500">
-          <div class="amount">500</div>
-          <div class="price">3,99 €</div>
-        </button>
-        <button class="credit-pack" data-pack="1000">
-          <span class="pack-badge">-19%</span>
-          <div class="amount">1000</div>
-          <div class="price"><span class="price-old">7,98 €</span> 6,49 €</div>
-        </button>
-        <button class="credit-pack" data-pack="2000">
-          <span class="pack-badge">-25%</span>
-          <div class="amount">2000</div>
-          <div class="price"><span class="price-old">15,96 €</span> 11,99 €</div>
-        </button>
-        <button class="credit-pack" data-pack="5000">
-          <span class="pack-badge best">-32%</span>
-          <div class="amount">5000</div>
-          <div class="price"><span class="price-old">39,90 €</span> 26,99 €</div>
-        </button>
-      </div>
-
-      <div class="solde-note">Paiement sécurisé par carte via Stripe. Tu seras redirigé vers une page de paiement, puis ramené ici une fois terminé — ton solde se met à jour dans le Launcher au prochain lancement.</div>
-    </div>
-
   </div>
-</section>
-
-<footer class="site-footer">
-  <div class="container footer-row">
-    <div class="footer-note" data-i18n="footer.note">FERRA — projet indépendant, développé avec passion. © 2026 Vincent Dubois, Ferra.Izacki. Tous droits réservés.</div>
-    <div class="footer-links">
-      <a href="index.html" data-i18n="nav.home">Accueil</a>
-      <a href="launcher.html" data-i18n="nav.launcher">Launcher</a>
-      <a href="forum/index.html" data-i18n="nav.forum">Forum</a>
-      <a href="contact.html" data-i18n="nav.contact">Contact</a>
-      <a href="conditions.html">📜 Conditions &amp; Confidentialité</a>
-      <a href="licence.html">📄 Licence du Launcher</a>
+</main>
+<footer class="site-footer" data-shell="footer">
+<div class="wrap">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="index.html" aria-label="Izacki, accueil" data-i18n-attr="aria-label:shell.brand.home"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"/><rect class="brand__sq" x="12" y="12" width="10" height="10"/></svg><span class="brand__word">Izacki</span></a>
+      <p data-i18n="shell.footer.blurb">Studio de jeux indépendant. Deux jeux gratuits, le Launcher pour les installer, un forum et un Discord pour en parler.</p>
     </div>
+    <nav aria-labelledby="f-izacki"><h2 id="f-izacki" data-i18n="shell.footer.izacki">Izacki</h2><ul><li><a href="index.html" data-i18n="shell.footer.home">Accueil</a></li><li><a href="launcher.html" data-i18n="shell.footer.launcher">Launcher</a></li><li><a href="launcher.html#createurs" data-i18n="shell.footer.publish">Publier un jeu</a></li></ul></nav>
+    <nav aria-labelledby="f-jeux"><h2 id="f-jeux" data-i18n="shell.footer.games">Jeux</h2><ul><li><a href="games/ferra.html">FERRA</a></li><li><a href="games/tower-defense.html">Tower Défense Infini</a></li></ul></nav>
+    <nav aria-labelledby="f-aide"><h2 id="f-aide" data-i18n="shell.footer.help">Aide et communauté</h2><ul><li><a href="faq.html" data-i18n="shell.footer.faq">Questions fréquentes</a></li><li><a href="contact.html" data-i18n="shell.footer.contact">Contact</a></li><li><a href="forum/index.html" data-i18n="shell.footer.forum">Forum</a></li><li><a href="https://discord.gg/bv2w8spATk" target="_blank" rel="noopener noreferrer">Discord<span class="sr-only" data-i18n="shell.newTab">(s'ouvre dans un nouvel onglet)</span></a></li></ul></nav>
   </div>
+  <div class="footer-base">
+    <p data-i18n="shell.footer.copyright">© 2026 Vincent Dubois, Ferra.Izacki. Tous droits réservés.</p>
+    <nav aria-label="Informations légales" class="footer-legal" data-i18n-attr="aria-label:shell.footer.legalNav"><a href="conditions.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#list"/></svg><span data-i18n="shell.footer.terms">Conditions &amp; Confidentialité</span></a><a href="licence.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#file"/></svg><span data-i18n="shell.footer.licence">Licence du Launcher</span></a></nav>
+    <div class="lang" role="group" aria-label="Langue du site" data-i18n-attr="aria-label:shell.lang.label"><button type="button" lang="fr" data-lang="fr" aria-label="Français" aria-pressed="true">FR</button><button type="button" lang="en" data-lang="en" aria-label="English" aria-pressed="false">EN</button><button type="button" lang="es" data-lang="es" aria-label="Español" aria-pressed="false">ES</button></div>
+  </div>
+</div>
 </footer>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/vendor/supabase.js"></script>
 <script src="assets/js/config.js"></script>
 <script src="assets/js/supabase-client.js"></script>
 <script src="assets/js/auth.js"></script>
 <script src="assets/js/i18n.js"></script>
+<script src="assets/js/shell.js"></script>
 <script>
 (async function () {
   await ferraI18nInit('');
   ferraRenderNavAuth('navAuth', '');
   ferraI18nApply();
 
+  const loadingEl = document.getElementById('soldeLoading');
   const session = await ferraGetSession();
+  loadingEl.hidden = true;
   if (!session) {
     document.getElementById('needLogin').style.display = 'block';
     return;
   }
   document.getElementById('soldeWrap').style.display = 'block';
 
+  (function markBestValue() {
+    const rated = Array.from(document.querySelectorAll('.credit-pack')).map((btn) => {
+      const priceMatch = ((btn.querySelector('.pack-btn__price') || {}).textContent || '').match(/\d+(?:[.,]\d+)?/);
+      const price = priceMatch ? parseFloat(priceMatch[0].replace(',', '.')) : NaN;
+      const credits = parseInt(((btn.querySelector('.pack-btn__qty') || {}).textContent || '').replace(/\D/g, ''), 10);
+      return { btn, per100: price / credits * 100 };
+    }).filter((p) => isFinite(p.per100) && p.per100 > 0);
+    if (rated.length < 2) return;
+    const lowest = Math.min(...rated.map((p) => p.per100));
+    const best = rated.filter((p) => p.per100 - lowest < 1e-9);
+    if (best.length !== 1) return;
+    const tag = document.createElement('span');
+    tag.className = 'badge badge--solid badge--plain pack-btn__badge';
+    tag.setAttribute('data-i18n', 'solde.pack.best');
+    tag.textContent = ferraT('solde.pack.best', 'Meilleure valeur');
+    best[0].btn.insertBefore(tag, best[0].btn.querySelector('.pack-btn__go'));
+  })();
+
   const params = new URLSearchParams(location.search);
   const msgEl = document.getElementById('soldeMsg');
   const errEl = document.getElementById('soldeErr');
+  const notices = new Map();
+
+  function showNotice(el, render) {
+    notices.set(el, render);
+    el.textContent = render();
+    el.classList.add('show');
+    el.style.display = 'block';
+  }
+
+  function hideNotice(el) {
+    notices.delete(el);
+    el.classList.remove('show');
+    el.style.display = 'none';
+  }
+
+  document.addEventListener('ferra:i18n', () => {
+    notices.forEach((render, el) => { el.textContent = render(); });
+  });
+
   if (params.get('success')) {
-    msgEl.textContent = '✅ Paiement reçu ! Ton solde a été crédité — relance le Launcher pour le voir apparaître (ça peut prendre quelques secondes).';
-    msgEl.classList.add('show');
-    msgEl.style.display = 'block';
+    showNotice(msgEl, () => ferraT('solde.msg.success', 'Paiement reçu. Tes crédits ont été ajoutés ; ton solde se met à jour dans le Launcher en quelques secondes.'));
   } else if (params.get('canceled')) {
-    errEl.textContent = 'Paiement annulé — aucun montant n\'a été débité.';
-    errEl.classList.add('show');
-    errEl.style.display = 'block';
+    showNotice(errEl, () => ferraT('solde.msg.canceled', "Paiement annulé. Aucun montant n'a été débité."));
   }
 
   function formatRetryDelay(seconds) {
     const s = Math.ceil(Number(seconds));
     if (!isFinite(s) || s <= 0) return '';
-    if (s < 60) return "moins d'une minute";
+    const nb = ' ';
+    if (s < 60) return ferraT('solde.delay.lessThanMinute', "moins d'une minute");
     const totalMin = Math.ceil(s / 60);
-    if (totalMin < 60) return totalMin + ' min';
+    if (totalMin < 60) return totalMin + nb + ferraT('solde.delay.min', 'min');
     const totalH = Math.floor(totalMin / 60);
     const min = totalMin % 60;
-    if (totalH < 24) return totalH + ' h' + (min ? ' ' + min + ' min' : '');
+    if (totalH < 24) return totalH + nb + ferraT('solde.delay.h', 'h') + (min ? ' ' + min + nb + ferraT('solde.delay.min', 'min') : '');
     const days = Math.floor(totalH / 24);
     const hours = totalH % 24;
-    return days + ' j' + (hours ? ' ' + hours + ' h' : '');
+    return days + nb + ferraT('solde.delay.d', 'j') + (hours ? ' ' + hours + nb + ferraT('solde.delay.h', 'h') : '');
   }
 
   function checkoutErrorMessage(body) {
     const code = body && body.error;
     if (code === 'sales_paused' || (code === 'purchase_limit' && body.reason === 'sales_paused')) {
-      return 'Les achats de crédits sont temporairement suspendus. Reviens un peu plus tard.';
+      return ferraT('solde.err.salesPaused', 'Les achats de crédits sont temporairement suspendus. Reviens un peu plus tard.');
     }
     if (code === 'purchase_limit') {
       const delay = formatRetryDelay(body.retryAfterSeconds);
       if (body.reason === 'disabled_user') {
-        return "Ton compte ne peut pas acheter de crédits pour le moment. Contacte le support si tu penses que c'est une erreur.";
+        return ferraT('solde.err.disabledUser', "Ton compte ne peut pas acheter de crédits pour le moment. Contacte-nous si tu penses que c'est une erreur.");
       }
       if (body.reason === 'too_many_open') {
-        return "Tu as déjà des paiements en cours. Termine-les ou attends qu'ils expirent" + (delay ? ', puis réessaie dans environ ' + delay : '') + '.';
+        return delay
+          ? ferraT('solde.err.tooManyOpenRetry', "Tu as déjà des paiements en cours. Termine-les ou attends qu'ils expirent, puis réessaie dans environ") + ' ' + delay + '.'
+          : ferraT('solde.err.tooManyOpen', "Tu as déjà des paiements en cours. Termine-les ou attends qu'ils expirent.");
       }
       if (body.reason === 'daily_packs' || body.reason === 'weekly_amount' || body.reason === 'new_accounts_global_limit') {
-        return "Tu as atteint la limite d'achats de crédits pour cette période. " + (delay ? 'Réessaie dans environ ' + delay + '.' : 'Réessaie plus tard.');
+        return delay
+          ? ferraT('solde.err.limitRetry', "Tu as atteint la limite d'achats de crédits pour cette période. Réessaie dans environ") + ' ' + delay + '.'
+          : ferraT('solde.err.limit', "Tu as atteint la limite d'achats de crédits pour cette période. Réessaie plus tard.");
       }
-      return 'Impossible de démarrer le paiement, contacte le support.';
+      return ferraT('solde.err.purchaseLimit', 'Impossible de démarrer le paiement. Contacte-nous.');
     }
     if (code === 'limits_unavailable') {
-      return 'Service momentanément indisponible, réessaie dans quelques minutes.';
+      return ferraT('solde.err.unavailable', 'Service momentanément indisponible. Réessaie dans quelques minutes.');
     }
-    return 'Impossible de démarrer le paiement — réessaie dans un instant.';
+    return ferraT('solde.err.generic', 'Impossible de démarrer le paiement. Réessaie dans un instant.');
   }
 
   document.querySelectorAll('.credit-pack').forEach((btn) => {
     btn.addEventListener('click', async () => {
       document.querySelectorAll('.credit-pack').forEach((b) => { b.disabled = true; });
-      errEl.classList.remove('show');
-      errEl.style.display = 'none';
+      btn.setAttribute('aria-busy', 'true');
+      hideNotice(errEl);
       try {
         const { data: sessionData } = await window.supabaseClient.auth.getSession();
         const token = sessionData.session?.access_token;
@@ -195,17 +330,17 @@
         });
         const body = await res.json().catch(() => null);
         if (!res.ok || !body || !body.url) {
-          const failure = new Error(((body && body.error) || 'unknown') + (body && body.reason ? ' : ' + body.reason : ''));
+          const failure = new Error('checkout');
           failure.checkoutBody = body;
           throw failure;
         }
         window.location.href = body.url;
       } catch (err) {
-        errEl.textContent = checkoutErrorMessage(err && err.checkoutBody);
-        errEl.classList.add('show');
-        errEl.style.display = 'block';
+        const body = err && err.checkoutBody;
+        showNotice(errEl, () => checkoutErrorMessage(body));
+        btn.removeAttribute('aria-busy');
         document.querySelectorAll('.credit-pack').forEach((b) => { b.disabled = false; });
-        console.error(err, err && err.checkoutBody);
+        console.warn('Le paiement n’a pas pu démarrer.');
       }
     });
   });

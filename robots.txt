@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /games/files/
+
+Sitemap: https://izackiferra.com/sitemap.xml

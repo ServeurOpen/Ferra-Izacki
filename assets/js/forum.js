@@ -103,3 +103,30 @@ function ferraFormatDate(iso) {
 function ferraInitials(name) {
   return (name || '?').trim().slice(0, 2).toUpperCase();
 }
+
+function ferraCategoryIcon(slug) {
+  const icons = { annonces: 'megaphone', general: 'chat', support: 'help', idees: 'bulb' };
+  return Object.prototype.hasOwnProperty.call(icons, slug) ? icons[slug] : 'chat';
+}
+
+function ferraStateHtml(title, text, opts) {
+  const o = opts || {};
+  const icon = o.icon || (o.err ? 'error' : 'box');
+  const action = o.action ? `<div class="actions"><a class="btn btn--outline btn--sm" href="${o.action.href}">${o.action.label}</a></div>` : '';
+  return `<div class="state${o.err ? ' state--err' : ''}"><div class="state__icon">${ferraIconHtml(icon)}</div><div><h2 class="t-h3">${title}</h2>${text ? `<p>${text}</p>` : ''}${action}</div></div>`;
+}
+
+function ferraCategoryHtml(cat, name, desc, word) {
+  return `<li class="topic"><a class="topic__link" href="category.html?slug=${encodeURIComponent(cat.slug)}"><span class="topic__icon">${ferraIconHtml(ferraCategoryIcon(cat.slug))}</span><span class="topic__main"><span class="topic__title">${ferraEscape(name)}</span>${desc ? `<span class="topic__desc">${ferraEscape(desc)}</span>` : ''}</span><span class="topic__count"><b>${cat.threadCount}</b>${word}</span></a></li>`;
+}
+
+function ferraTopicHtml(thread, by, pinned, word) {
+  const who = ferraEscape(thread.profiles?.username || ferraT('nav.defaultPlayer', 'Joueur'));
+  const badge = thread.pinned ? `<span class="badge badge--info badge--plain">${pinned}</span>` : '';
+  return `<li class="topic topic--thread"><a class="topic__link" href="thread.html?id=${encodeURIComponent(thread.id)}"><span class="topic__main"><span class="topic__title">${ferraEscape(thread.title)}${badge}</span><span class="topic__meta"><span>${by} ${who}</span><span>${ferraFormatDate(thread.created_at)}</span></span></span><span class="topic__count"><b>${thread.replyCount}</b>${word}</span></a></li>`;
+}
+
+function ferraPostHtml(post) {
+  const name = post.profiles?.username || ferraT('nav.defaultPlayer', 'Joueur');
+  return `<article class="post"><div class="post__who"><span class="avatar avatar--lg" aria-hidden="true">${ferraEscape(ferraInitials(post.profiles?.username))}</span><span class="post__name">${ferraEscape(name)}</span></div><div class="post__body"><time class="post__date" datetime="${ferraEscape(post.created_at)}">${ferraFormatDate(post.created_at)}</time><div class="post__text">${ferraEscape(post.content)}</div></div></article>`;
+}

@@ -1,0 +1,51 @@
+{
+  "contact": {
+    "meta": {
+      "title": "Contact the team: bug, idea or question | Izacki",
+      "description": "Write to the Izacki team: a bug, an idea or a question. The form requires an account; the email address and the Discord are open to everyone."
+    },
+    "crumb": "Contact",
+    "hero": {
+      "title": "Contact",
+      "lead": "A bug, an idea or a question: write to us."
+    },
+    "form": {
+      "label": "Form",
+      "meta": "For Izacki accounts only",
+      "title": "Write to the team.",
+      "category": "Category",
+      "catBug": "Bug report",
+      "catSuggestion": "Suggestion",
+      "catQuestion": "Question",
+      "catOther": "Other",
+      "message": "Message",
+      "placeholder": "Describe your problem, your idea or your question.",
+      "hint": "Your message is sent from your Izacki account: the team receives your username, your email address and your text, sent through a messaging service.",
+      "success": "Message sent. We will reply as soon as we can, by email if needed."
+    },
+    "needLogin": {
+      "title": "Log in to write to us",
+      "text": "The form is for Izacki accounts only: your message is sent from your account, which lets us reply to you. Without an account, you can write to us by email or on Discord: <a href=\"#autres\">see the other ways to reach us</a>.",
+      "login": "Log in",
+      "signup": "Create an account"
+    },
+    "other": {
+      "label": "Other ways",
+      "meta": "Open to everyone",
+      "title": "Reach us another way.",
+      "email": "Email",
+      "discord": "Discord",
+      "discordLink": "Join the Izacki server",
+      "support": "Support",
+      "supportText": "In the Launcher, Support works through tickets: question, bug, refund or other. You can attach a screenshot; the reply arrives in the ticket.",
+      "delay": "Response time",
+      "delayText": "We reply as soon as we can."
+    },
+    "connectedAs": "Logged in as",
+    "notConfigured": "The contact form is temporarily unavailable. Try again in a few minutes or write to us on Discord.",
+    "writeFirst": "Write a message before sending.",
+    "sending": "Sending…",
+    "sendFailed": "The message could not be sent. Try again in a moment.",
+    "send": "Send"
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "faq": {
+    "meta": {
+      "title": "Preguntas frecuentes | Izacki",
+      "description": "Instalación, advertencia de Windows, cuenta, créditos, actualizaciones: respuestas a las preguntas más habituales sobre el Launcher y los juegos de Izacki."
+    },
+    "crumb": "Preguntas frecuentes",
+    "hero": {
+      "title": "Preguntas frecuentes",
+      "lead": "Instalación, cuenta, créditos y juegos: las respuestas a las preguntas más habituales."
+    },
+    "rail": {
+      "label": "Ayuda",
+      "meta": "Búsqueda y secciones"
+    },
+    "search": {
+      "title": "Búsqueda y preguntas",
+      "label": "Buscar en las preguntas",
+      "placeholder": "Palabra clave: antivirus, créditos"
+    },
+    "noResults": "Ninguna pregunta coincide. Prueba con otra palabra o escríbenos desde la página de <a href=\"contact.html\">Contacto</a>.",
+    "nav": {
+      "label": "Secciones"
+    },
+    "more": {
+      "title": "¿Otra pregunta?",
+      "text": "Pregunta en el <a href=\"forum/index.html\">foro</a> (categoría «Soporte y errores»), escríbenos desde la página de <a href=\"contact.html\">Contacto</a>, abre un ticket desde la Asistencia del Launcher o únete al <a href=\"https://discord.gg/bv2w8spATk\" target=\"_blank\" rel=\"noopener noreferrer\">Discord<span class=\"sr-only\"> (se abre en una pestaña nueva)</span></a>. Respondemos en cuanto podemos.",
+      "cta": "Contáctanos"
+    },
+    "groups": {
+      "installation": "Instalación y Windows",
+      "compte": "Cuenta e inicio de sesión",
+      "profil": "Perfil",
+      "jeux": "Juegos y logros",
+      "misesAJour": "Actualizaciones",
+      "credits": "Créditos y pagos",
+      "createurs": "Creadores",
+      "donnees": "Cuenta y datos"
+    },
+    "smartscreen": {
+      "q": "Windows muestra una advertencia al ejecutar el instalador. ¿Es normal?",
+      "a": "<p>El Launcher aún no está firmado por un editor certificado, así que Windows puede mostrar una pantalla de protección la primera vez que ejecutas el instalador. Para continuar:</p><ol class=\"steps\"><li>Haz clic en <b>«Más información»</b>.</li><li>Después, haz clic en <b>«Ejecutar de todas formas»</b>.</li></ol><p>Esta autorización solo vale para ese archivo.</p>"
+    },
+    "pasDeLien": {
+      "q": "No veo «Más información», solo un botón Aceptar.",
+      "a": "<p>Según los ajustes de Windows, es posible que el enlace no aparezca. Ocurre, por ejemplo, en un ordenador gestionado por un centro educativo o una empresa, o según los ajustes de Seguridad de Windows (Control de aplicaciones y del explorador). Consulta al administrador del equipo o <a href=\"contact.html\">escríbenos</a>.</p>"
+    },
+    "antivirus": {
+      "q": "Mi antivirus elimina el archivo o lo pone en cuarentena.",
+      "a": "<p>Un antivirus puede desconfiar de un ejecutable poco común y sin firmar. Restaura el archivo desde la cuarentena o añade una excepción para <code>IzackiLauncher-Setup.exe</code>, y vuelve a descargarlo o instalarlo.</p>"
+    },
+    "navigateur": {
+      "q": "El navegador bloquea la descarga.",
+      "a": "<p>Edge o Chrome pueden marcar un archivo poco común. Abre el menú <b>…</b> de la descarga y elige <b>«Conservar»</b> (o <b>«Conservar de todos modos»</b>).</p>"
+    },
+    "dossierInstallation": {
+      "q": "¿Dónde instala los juegos el Launcher?",
+      "a": "<p>De forma predeterminada, en una carpeta gestionada por la aplicación. Puedes cambiarla en <b>Paramètres</b> (ajustes) y luego en <b>Téléchargements et stockage</b> (descargas y almacenamiento), con el botón «Changer le dossier» (cambiar la carpeta). Los juegos ya instalados se mueven, y allí también se muestra el espacio que ocupa cada juego.</p>"
+    },
+    "configuration": {
+      "q": "¿Qué requisitos hay?",
+      "a": "<p>Windows 10 u 11 (64 bits), menos de 3 MB para el Launcher y una cuenta Izacki gratuita. El Launcher y los juegos están en francés. No hay versión para macOS ni para Linux.</p>"
+    },
+    "memeCompte": {
+      "q": "¿El Launcher y el sitio usan la misma cuenta?",
+      "a": "<p>Sí: una sola cuenta Izacki sirve en el sitio, en el foro y en el Launcher. Tu correo electrónico debe confirmarse al registrarte.</p>"
+    },
+    "motDePasse": {
+      "q": "He olvidado mi contraseña.",
+      "a": "<p>Puedes restablecerla desde la pantalla de inicio de sesión del Launcher o desde la <a href=\"forum/forgot-password.html\">página de recuperación</a> del sitio. El enlace que recibes abre una página del sitio, y la nueva contraseña vale en todas partes.</p>"
+    },
+    "tag": {
+      "q": "¿Qué es mi tag (Nombre#Número)?",
+      "a": "<p>Es tu identificador único: tu nombre de usuario seguido de un número. No se puede modificar nunca, aparece en el Launcher y sirve para que te añadan como amigo.</p>"
+    },
+    "avatar": {
+      "q": "¿Cómo cambio mi avatar o mi banner?",
+      "a": "<p>En <b>Boutique</b> (la tienda), abre <b>Personnalisation du profil</b> (personalización del perfil): los avatares y los banners se consiguen con tokens. Una vez desbloqueados, se equipan gratis en <b>Paramètres</b> (ajustes) y luego en <b>Profil</b>. Ya no se puede importar una imagen personal.</p>"
+    },
+    "jetons": {
+      "q": "¿Para qué sirven los tokens?",
+      "a": "<p>Ganas un token por cada minuto jugado. Los tokens sirven para desbloquear imágenes de perfil, avatares y banners, en la tienda.</p>"
+    },
+    "nomAffichage": {
+      "q": "Mi nombre para mostrar es distinto de mi nombre de usuario. ¿Es normal?",
+      "a": "<p>Sí. Tu tag sigue siendo tu identificador. El nombre para mostrar se cambia en <b>Paramètres</b> (ajustes) y luego en <b>Profil</b>; si está vacío, se muestra tu tag.</p>"
+    },
+    "profilPrive": {
+      "q": "¿Para qué sirve el perfil privado?",
+      "a": "<p>Oculta tu banner, tus logros y tu tiempo de juego. Solo tu tag sigue siendo visible en <b>Amis</b> (amigos).</p>"
+    },
+    "installerJeu": {
+      "q": "¿Cómo instalo un juego?",
+      "a": "<p>Abre <b>Boutique</b> (la tienda), luego la ficha del juego y haz clic en <b>Installer</b> (instalar). Después, búscalo en <b>Bibliothèque</b> (biblioteca), luego en <b>Mes jeux</b> (mis juegos) y haz clic en <b>Jouer</b> (jugar).</p>"
+    },
+    "succes": {
+      "q": "Mis logros no aparecen.",
+      "a": "<p>Los logros se sincronizan cuando el juego se inicia desde el Launcher con la sesión iniciada.</p>"
+    },
+    "quitter": {
+      "q": "¿Cómo salgo de un juego correctamente?",
+      "a": "<p>Pulsa <b>Esc</b> y elige <b>«Quitter le jeu»</b> (salir del juego). El guardado es automático, tanto en FERRA como en Tower Défense Infini.</p>"
+    },
+    "desinstaller": {
+      "q": "¿Cómo desinstalo un juego?",
+      "a": "<p>En la ficha del juego, haz clic en <b>Désinstaller</b> (desinstalar) y confirma con un segundo clic. El espacio que ocupa cada juego aparece en <b>Paramètres</b> (ajustes) y luego en <b>Téléchargements et stockage</b> (descargas y almacenamiento).</p>"
+    },
+    "payants": {
+      "q": "¿Los juegos son de pago?",
+      "a": "<p>FERRA y Tower Défense Infini son gratuitos. Los juegos de la comunidad tienen un precio en créditos, a veces cero.</p>"
+    },
+    "majJeu": {
+      "q": "¿Cómo sé si un juego tiene una actualización?",
+      "a": "<p>Un juego oficial que no está actualizado no se inicia: el Launcher te envía a <b>Bibliothèque</b> (biblioteca) y luego a <b>Téléchargements</b> (descargas). El ajuste <b>«Mises à jour automatiques»</b> (actualizaciones automáticas) las instala sin hacer clic; está desactivado de forma predeterminada y es propio de cada dispositivo.</p>"
+    },
+    "majLauncher": {
+      "q": "¿El Launcher se actualiza solo?",
+      "a": "<p>Sí. Comprueba al iniciarse, descarga la actualización y se reinicia. Las actualizaciones están firmadas. Si la actualización automática falla, un aviso propone la descarga manual.</p>"
+    },
+    "creditsQuoi": {
+      "q": "¿Para qué sirven los créditos?",
+      "a": "<p>Los créditos son la moneda interna de Izacki: no son dinero en efectivo ni una criptomoneda. Sirven para pagar juegos de la comunidad y paquetes de logros para creadores. Se ofrece una bonificación de bienvenida única de +10 créditos la primera vez que inicias sesión.</p>"
+    },
+    "creditsAcheter": {
+      "q": "¿Cómo compro créditos?",
+      "a": "<p>Desde la página <a href=\"solde.html\">Recargar mis créditos</a>, con tarjeta, en una página de pago de Stripe (puede pedirse la autenticación 3-D Secure). Tu saldo se actualiza en el Launcher en unos segundos. Existen límites de compra diarios y semanales.</p>"
+    },
+    "remboursement": {
+      "q": "¿Puedo pedir un reembolso?",
+      "a": "<p>Un juego de la comunidad puede reembolsarse a petición, desde la ficha del juego o mediante un ticket de asistencia. El equipo revisa cada solicitud a mano. Como referencia: una hora de juego y siete días. Los detalles están en las <a href=\"conditions.html#remboursements\">condiciones de reembolso</a>.</p>"
+    },
+    "publier": {
+      "q": "¿Cómo publico un juego?",
+      "a": "<p>En el espacio <b>Créateurs</b> (Creadores) del Launcher, haz clic en <b>«Sortir mon jeu»</b> (publicar mi juego): archivo del juego, nombre, precio en créditos, descripción y capturas. El equipo examina cada juego antes de publicarlo. Más información en la <a href=\"launcher.html#createurs\">página del Launcher</a>.</p>"
+    },
+    "retraits": {
+      "q": "¿Cómo retiro el dinero que he ganado?",
+      "a": "<p>Los retiros en dinero real se hacen por transferencia a través de Stripe, en las condiciones indicadas en la página de <a href=\"conditions.html#remboursements\">Condiciones y privacidad</a>.</p>"
+    },
+    "supprimerCompte": {
+      "q": "¿Cómo elimino mi cuenta?",
+      "a": "<p>En el Launcher: <b>Paramètres</b> (ajustes) y luego <b>Compte</b> (cuenta); se vuelve a pedir tu contraseña. Se borran tu nombre de usuario, tu avatar, tu banner y tu correo electrónico, pero los juegos que has publicado siguen a la venta. No se puede deshacer. También puedes escribir a la dirección indicada en la <a href=\"contact.html#autres\">página de contacto</a>.</p>"
+    },
+    "langue": {
+      "q": "¿En qué idiomas está el sitio?",
+      "a": "<p>El sitio está en francés, inglés y español. El Launcher y los juegos solo están en francés.</p>"
+    }
+  }
+}

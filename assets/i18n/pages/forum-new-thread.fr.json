@@ -1,0 +1,39 @@
+{
+  "forumNewThread": {
+    "meta": {
+      "title": "Nouveau sujet | Izacki",
+      "description": "Ouvre un sujet sur le forum d'Izacki : choisis un titre clair et décris ta question ou ton idée."
+    },
+    "crumbForum": "Forum",
+    "crumb": "Nouveau sujet",
+    "title": "Nouveau sujet",
+    "defaultCategory": "Catégorie",
+    "loginTitle": "Connecte-toi pour ouvrir un sujet.",
+    "loginText": "Un compte Izacki gratuit suffit pour écrire sur le forum.",
+    "threadTitle": "Titre du sujet",
+    "threadTitlePlaceholder": "Un titre clair et court",
+    "threadTitleHint": "140 caractères au maximum.",
+    "message": "Message",
+    "messagePlaceholder": "Explique ton sujet en détail…",
+    "submit": "Publier le sujet",
+    "errRequired": "Le titre et le message sont obligatoires.",
+    "errCreateFailed": "Impossible de créer le sujet. Réessaie.",
+    "backToForum": "Retour au forum",
+    "missingCategory": "Catégorie manquante.",
+    "loadError": "Impossible de charger cette catégorie.",
+    "cat": {
+      "annonces": {
+        "name": "Annonces"
+      },
+      "general": {
+        "name": "Discussion générale"
+      },
+      "support": {
+        "name": "Support et bugs"
+      },
+      "idees": {
+        "name": "Idées et suggestions"
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "parametres": {
+    "meta": {
+      "title": "Ajustes | Izacki",
+      "description": "Idioma del sitio y acceso a tus créditos."
+    },
+    "side": {
+      "label": "Menú de la cuenta",
+      "account": "Cuenta",
+      "credits": "Créditos",
+      "settings": "Ajustes",
+      "help": "Ayuda",
+      "faq": "Preguntas frecuentes",
+      "contact": "Contacto"
+    },
+    "crumb": "Cuenta",
+    "title": "Ajustes",
+    "lead": "El idioma del sitio y el acceso a tus créditos.",
+    "login": {
+      "title": "Inicia sesión para acceder a tus ajustes.",
+      "text": "Una sola cuenta Izacki, gratuita, para el sitio, el foro y el Launcher."
+    },
+    "language": {
+      "title": "Idioma",
+      "label": "Idioma del sitio",
+      "hint": "Se aplica a todo el sitio y se recuerda en tus próximas visitas."
+    },
+    "credits": {
+      "title": "Créditos",
+      "text": "Recarga tu saldo de créditos con tarjeta bancaria.",
+      "cta": "Recargar mis créditos"
+    },
+    "profile": {
+      "title": "Perfil y cuenta",
+      "text": "Tu perfil, la privacidad y la eliminación de la cuenta se gestionan en el Launcher, en Paramètres (Ajustes).",
+      "cta": "Leer la ayuda"
+    },
+    "admin": {
+      "title": "Modo administrador",
+      "hint": "Activado, da acceso al Panel y colorea el sitio de violeta.",
+      "on": "Activado",
+      "off": "Desactivado",
+      "disable": "Desactivar",
+      "reenable": "Reactivar…",
+      "passwordLabel": "Contraseña de reactivación",
+      "reactivate": "Reactivar",
+      "wrongPassword": "Contraseña incorrecta."
+    }
+  }
+}

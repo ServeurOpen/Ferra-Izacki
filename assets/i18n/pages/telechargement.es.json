@@ -1,0 +1,21 @@
+{
+  "telechargement": {
+    "meta": {
+      "title": "Descargar el Launcher | Izacki",
+      "description": "La descarga del Launcher de Izacki está en la página del Launcher: requisitos, instalación y ayuda."
+    },
+    "crumb": "Descargar el Launcher",
+    "hero": {
+      "title": "La descarga está en la página del Launcher.",
+      "lead": "Esta dirección es la antigua página de descarga. Los requisitos, la instalación y la ayuda están reunidos en la página del Launcher."
+    },
+    "next": {
+      "label": "Después",
+      "meta": "Los dos juegos",
+      "title": "Instala el Launcher y luego un juego.",
+      "see": "Ver la ficha del juego",
+      "ferra": "Un juego de supervivencia y automatización: protege tu hoguera, automatiza tu producción y prepárate para el meteorito.",
+      "td": "Un juego de tower defense: oleadas que se encadenan, diez torres que mejorar y combinar, y un sistema de prestigio."
+    }
+  }
+}

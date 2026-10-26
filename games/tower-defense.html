@@ -1,180 +1,350 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title data-i18n="tdPage.pageTitle">Tower Défense Infini</title>
-<meta name="description" content="Tower Défense Infini : un tower defense gratuit sur Windows. Des vagues de zombies sans fin, dix tours à débloquer, un système de prestige. Un jeu d'Izacki.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%23161920%22/><path d=%22M8 25V11h3.4v2.2h2.4V11h4.4v2.2h2.4V11H24v14z%22 fill=%22%23f2a45a%22/></svg>">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0C0D0F">
+<title data-i18n="towerDefense.meta.title">Tower Défense Infini | Izacki</title>
+<meta name="description" content="Tower Défense Infini est un tower defense gratuit pour Windows : des vagues de zombies sans fin, dix tours à combiner, six cartes et un prestige." data-i18n-content="towerDefense.meta.description">
+<link rel="canonical" href="https://izackiferra.com/games/tower-defense.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:site_name" content="Izacki">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://izackiferra.com/games/tower-defense.html">
+<meta property="og:title" content="Tower Défense Infini | Izacki" data-i18n-content="towerDefense.meta.title">
+<meta property="og:description" content="Tower Défense Infini est un tower defense gratuit pour Windows : des vagues de zombies sans fin, dix tours à combiner, six cartes et un prestige." data-i18n-content="towerDefense.meta.description">
+<meta property="og:image" content="https://izackiferra.com/assets/img/games/td-share-fr-1200.jpg" data-i18n-content="towerDefense.meta.shareImage">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Tower Défense Infini, tower defense gratuit&nbsp;: le titre et les mentions «&nbsp;Gratuit&nbsp;» et «&nbsp;Dans le Launcher Izacki&nbsp;» sur une capture du jeu." data-i18n-content="towerDefense.meta.imageAlt">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tower Défense Infini | Izacki" data-i18n-content="towerDefense.meta.title">
+<meta name="twitter:description" content="Tower Défense Infini est un tower defense gratuit pour Windows : des vagues de zombies sans fin, dix tours à combiner, six cartes et un prestige." data-i18n-content="towerDefense.meta.description">
+<meta name="twitter:image" content="https://izackiferra.com/assets/img/games/td-share-fr-1200.jpg" data-i18n-content="towerDefense.meta.shareImage">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="preload" href="../assets/fonts/saira.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/jetbrains-mono.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/css/style.css">
+<script>(function(d){d.classList.add("js");var l="",q=/[?&]lang=(fr|en|es)(?:&|$)/.exec(location.search);if(q){l=q[1]}else{try{l=localStorage.getItem("ferra_lang")||""}catch(e){}}if(!/^(fr|en|es)$/.test(l)){var a=navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||"fr"];l="fr";for(var i=0;i<a.length;i++){var c=String(a[i]).slice(0,2).toLowerCase();if(/^(fr|en|es)$/.test(c)){l=c;break}}}d.lang=l;if(l!=="fr"){d.classList.add("i18n-pending");setTimeout(function(){d.classList.remove("i18n-pending")},3000)}})(document.documentElement)</script>
+<link rel="stylesheet" href="../assets/css/pages/games.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"VideoGame","name":"Tower Défense Infini","description":"Un tower defense contre des vagues de zombies sans fin : tu poses des tours le long de la route et tu vois jusqu'où tu tiens.","genre":["Tower defense"],"gamePlatform":"Windows","operatingSystem":"Windows 10, Windows 11","applicationCategory":"Game","inLanguage":"fr","image":"https://izackiferra.com/assets/img/games/td-share-fr-1200.jpg","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"publisher":{"@type":"Organization","name":"Izacki","url":"https://izackiferra.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://izackiferra.com/"},{"@type":"ListItem","position":2,"name":"Tower Défense Infini","item":"https://izackiferra.com/games/tower-defense.html"}]}]}</script>
 </head>
-<body>
-
-<header class="site-header">
-  <nav class="site-nav">
-    <a href="../index.html" class="brand">FER<span>RA</span></a>
-    <div class="nav-links">
-      <a href="../index.html" class="nav-link" data-i18n="nav.home">Accueil</a>
-      <a href="../launcher.html" class="nav-link active" data-i18n="nav.launcher">Launcher</a>
-      <a href="../forum/index.html" class="nav-link" data-i18n="nav.forum">Forum</a>
-      <a href="../contact.html" class="nav-link" data-i18n="nav.contact">Contact</a>
-      <a href="../launcher.html" class="nav-cta" data-i18n="nav.download">⬇ Télécharger</a>
-      <span id="navAuth" class="nav-auth"></span>
+<body data-page="tower-defense" data-with="releases">
+<a class="skip" href="#contenu" data-i18n="shell.skip">Aller au contenu</a>
+<header class="site-header" data-shell="header">
+<div class="wrap header-row">
+  <a class="brand" href="../index.html" aria-label="Izacki, accueil" data-i18n-attr="aria-label:shell.brand.home"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"/><rect class="brand__sq" x="12" y="12" width="10" height="10"/></svg><span class="brand__word">Izacki</span></a>
+  <a class="btn btn--primary btn--sm btn--nowrap header-dl" href="../launcher.html#telecharger"><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#download"/></svg><span class="header-dl__t" data-i18n="shell.download">Télécharger</span></a>
+  <button class="btn btn--outline btn--sm btn--icon menu-btn" type="button" aria-expanded="false" aria-controls="nav-panel" aria-label="Ouvrir le menu" data-i18n-attr="aria-label:shell.menu.open"><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#menu"/></svg></button>
+  <div class="nav-panel" id="nav-panel">
+    <nav aria-label="Navigation principale" data-i18n-attr="aria-label:shell.nav.label">
+      <ul class="nav">
+        <li><a href="../launcher.html"><span data-i18n="shell.nav.launcher">Launcher</span></a></li>
+        <li><a href="../index.html#jeux" aria-current="true"><span data-i18n="shell.nav.games">Jeux</span><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#chevron-down"/></svg></a>
+          <div class="nav-sub"><a href="../games/ferra.html">FERRA<small data-i18n="shell.nav.ferraSub">Survie / automatisation</small></a><a href="../games/tower-defense.html" aria-current="page">Tower Défense Infini<small data-i18n="shell.nav.tdSub">Tower defense</small></a></div></li>
+        <li><a href="../launcher.html#createurs"><span data-i18n="shell.nav.creators">Créateurs</span></a></li>
+        <li><a href="../forum/index.html"><span data-i18n="shell.nav.community">Communauté</span><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#chevron-down"/></svg></a>
+          <div class="nav-sub"><a href="../forum/index.html"><span data-i18n="shell.nav.forum">Forum</span><small data-i18n="shell.nav.forumSub">Sujets et réponses</small></a><a href="https://discord.gg/bv2w8spATk" target="_blank" rel="noopener noreferrer">Discord<svg class="icon icon--fill" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#discord"/></svg><span class="sr-only" data-i18n="shell.newTab">(s'ouvre dans un nouvel onglet)</span><small data-i18n="shell.nav.discordSub">Le serveur d'Izacki</small></a></div></li>
+        <li><a href="../faq.html"><span data-i18n="shell.nav.help">Aide</span><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#chevron-down"/></svg></a>
+          <div class="nav-sub"><a href="../faq.html"><span data-i18n="shell.nav.faq">Questions fréquentes</span><small data-i18n="shell.nav.faqSub">Installation, compte, crédits</small></a><a href="../contact.html"><span data-i18n="shell.nav.contact">Contact</span><small data-i18n="shell.nav.contactSub">Écrire à l'équipe</small></a></div></li>
+      </ul>
+    </nav>
+    <div class="tools">
+      <span id="navAuth" class="auth" data-state="loading"></span>
+      <div class="lang" role="group" aria-label="Langue du site" data-i18n-attr="aria-label:shell.lang.label"><button type="button" lang="fr" data-lang="fr" aria-label="Français" aria-pressed="true">FR</button><button type="button" lang="en" data-lang="en" aria-label="English" aria-pressed="false">EN</button><button type="button" lang="es" data-lang="es" aria-label="Español" aria-pressed="false">ES</button></div>
+      <a class="btn btn--primary btn--sm btn--nowrap" href="../launcher.html#telecharger"><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#download"/></svg><span data-i18n="shell.download">Télécharger</span></a>
     </div>
-  </nav>
+  </div>
+</div>
 </header>
+<main id="contenu" tabindex="-1">
 
-<section class="gp-top">
-  <div class="container">
-    <div class="game-banner">
-      <img src="../assets/img/screenshot-towerdefense-1.png" alt="Tower Défense Infini — capture d'écran de gameplay">
-      <div class="game-banner-body">
-        <div class="gp-eyebrow" data-i18n="tdPage.tag">Tower defense</div>
-        <h1 class="game-banner-title">Tower Défense Infini</h1>
-        <p class="game-banner-tagline" data-i18n="tdPage.tagline">Un tower defense contre des vagues de zombies sans fin : tu poses des tours le long de la route et tu vois jusqu'où tu tiens.</p>
-        <div class="game-banner-actions">
-          <a href="../launcher.html" class="btn btn-primary" data-i18n="tdPage.installCta">Installer avec le Launcher</a>
-          <span class="gp-banner-meta" data-i18n="tdPage.installMeta">Gratuit · Windows 10/11 · environ 4 Mo</span>
+<section class="hero hero--page section--flush" aria-labelledby="h1">
+  <div class="wrap">
+    <nav class="hero__crumbs" aria-label="Fil d'Ariane" data-i18n-attr="aria-label:common.crumbs"><ol class="crumbs"><li><a href="../index.html" data-i18n="common.home">Accueil</a></li><li><a href="../index.html#jeux" data-i18n="shell.nav.games">Jeux</a></li><li aria-current="page">Tower Défense Infini</li></ol></nav>
+    <div class="hero__kicker"><p class="label label--mark" data-i18n="common.genre.td">Tower defense</p></div>
+    <h1 id="h1" class="t-display t-display--narrow">Tower Défense Infini</h1>
+    <div class="actions hero__cta"><a class="btn btn--primary btn--lg" href="../launcher.html#telecharger"><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#download"/></svg><span data-i18n="common.cta.install">Installer avec le Launcher</span></a></div>
+    <p class="via"><span data-i18n="common.via">S'installe et se met à jour avec</span> <a class="lockup" href="../launcher.html"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"/><rect class="brand__sq" x="12" y="12" width="10" height="10"/></svg><span class="lockup__name">Izacki</span> <span class="lockup__sub">Launcher</span></a></p>
+    <div class="hero__plate-wide">
+      <figure class="plate plate--wide">
+        <span class="plate__marks" aria-hidden="true"></span>
+        <div class="plate__frame">
+          <picture>
+            <source media="(min-width:48rem)" type="image/webp" srcset="../assets/img/games/td-wide-fr-1280.webp 1280w, ../assets/img/games/td-wide-fr-1920.webp 1920w, ../assets/img/games/td-wide-fr-2560.webp 2560w" sizes="(min-width:100rem) 1500px, 100vw" data-i18n-attr="srcset:towerDefense.hero.wideSrcset">
+            <source type="image/webp" srcset="../assets/img/games/td-hero-fr-640.webp 640w, ../assets/img/games/td-hero-fr-1280.webp 1280w" sizes="100vw" data-i18n-attr="srcset:towerDefense.hero.srcset">
+            <img class="plate__img" src="../assets/img/games/td-hero-fr-1280.png" width="1280" height="720" alt="Bannière de Tower Défense Infini&nbsp;: «&nbsp;Défends la route, vague après vague.&nbsp;», avec les mentions «&nbsp;Gratuit&nbsp;» et «&nbsp;Dans le Launcher Izacki&nbsp;», sur des captures du jeu." data-i18n-attr="src:towerDefense.hero.src;alt:towerDefense.hero.plateAlt" fetchpriority="high" decoding="async">
+          </picture>
+        </div>
+        <figcaption>
+          <dl class="cart cart--5"><div><dt data-i18n="common.version">Version</dt><dd class="num" data-game-version="tower-defense">1.0.26</dd></div><div><dt data-i18n="common.plate.updated">Mise à jour</dt><dd class="num"><time datetime="2026-10-10" data-game-date="tower-defense">10 octobre 2026</time></dd></div><div><dt data-i18n="common.plate.size">Taille</dt><dd data-i18n="common.size.td">Environ 4&nbsp;Mo</dd></div><div><dt data-i18n="common.plate.price">Prix</dt><dd data-i18n="common.free">Gratuit</dd></div><div><dt data-i18n="common.plate.platform">Plateforme</dt><dd data-i18n="common.windows">Windows 10/11</dd></div></dl>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="jouer" aria-labelledby="jouer-t">
+  <div class="wrap">
+    <div class="split">
+      <div class="rail">
+        <p class="label label--mark" data-i18n="towerDefense.play.label">Principe</p>
+        <p class="rail__meta meta" data-i18n="towerDefense.play.meta">Comment ça se joue</p>
+      </div>
+      <div class="main">
+        <div class="section-head">
+          <h2 id="jouer-t" class="t-h2" data-i18n="towerDefense.play.title">Arrêter les zombies avant la base.</h2>
+        </div>
+        <div class="prose">
+          <p class="t-lead" data-i18n="towerDefense.play.lead">Un tower defense contre des vagues de zombies sans fin&nbsp;: tu poses des tours le long de la route et tu vois jusqu'où tu tiens.</p>
+          <p data-i18n="towerDefense.play.text">Les zombies arrivent par la route et tu dois les arrêter avant qu'ils atteignent ta base. Tu poses des tours sur les côtés, tu gagnes de l'or à chaque zombie tué et tu le dépenses en nouvelles tours ou en améliorations (trois niveaux par tour). Chaque zombie qui passe te coûte des vies&nbsp;: 20 sur la carte facile, 3 sur les cartes extrêmes. Il n'y a pas de dernière vague, elles deviennent juste plus dures.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="gp-body">
-  <div class="container gp-layout">
-
-    <div class="gp-main">
-      <h2 data-i18n="tdPage.play.title">Comment ça se joue</h2>
-      <p data-i18n="tdPage.play.p">Les zombies arrivent par la route et tu dois les arrêter avant qu'ils atteignent ta base. Tu poses des tours sur les côtés, tu gagnes de l'or à chaque zombie tué et tu le dépenses en nouvelles tours ou en améliorations (trois niveaux par tour). Chaque zombie qui passe te coûte des vies : 20 sur la carte facile, 3 sur les cartes extrêmes. Il n'y a pas de dernière vague, elles deviennent juste plus dures.</p>
-
-      <h2 data-i18n="tdPage.towers.title">Les tours</h2>
-      <p data-i18n="tdPage.towers.p">Dix tours. Neuf se débloquent au fil des vagues (Canon, Archer, Glace, Feu, Vent, Tesla, Poison, Caserne Militaire, Glu), la dixième, la Tour du Prestige, avec le Prestige. L'Archer perce toute une file d'ennemis, la Tesla enchaîne jusqu'à trois cibles, la Caserne envoie une jeep, un camion ou un tank selon son niveau. La barre de raccourcis n'a que cinq emplacements : il faut choisir. Les tours peuvent aussi se combiner, avec cinq synergies cachées. Par exemple, un zombie gelé qui prend un tir de Feu encaisse des dégâts en plus et perd son gel.</p>
-      <div class="gp-table-wrap">
-        <table class="gp-towers">
-          <thead>
-            <tr>
-              <th scope="col" data-i18n="tdPage.towers.th1">Tour</th>
-              <th scope="col" data-i18n="tdPage.towers.th2">Débloquée</th>
-              <th scope="col" data-i18n="tdPage.towers.th3">Rôle</th>
-            </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <th scope="row" data-i18n="tdPage.towers.n1">Canon</th>
-            <td><span data-i18n="tdPage.towers.wave">Vague</span> 1</td>
-            <td data-i18n="tdPage.towers.d1">Tir sur une seule cible, sans faiblesse particulière.</td>
-          </tr>
-          <tr>
-            <th scope="row" data-i18n="tdPage.towers.n2">Archer</th>
-            <td><span data-i18n="tdPage.towers.wave">Vague</span> 5</td>
-            <td data-i18n="tdPage.towers.d2">Flèche perçante qui touche tous les ennemis alignés, avec plus de dégâts en bout de ligne.</td>
-          </tr>
-          <tr>
-            <th scope="row" data-i18n="tdPage.towers.n3">Glace</th>
-            <td><span data-i18n="tdPage.towers.wave">Vague</span> 10</td>
-            <td data-i18n="tdPage.towers.d3">Ralentit sa cible. +50&nbsp;% de dégâts sur les zombies de feu, −50&nbsp;% sur ceux de glace.</td>
-          </tr>
-          <tr>
-            <th scope="row" data-i18n="tdPage.towers.n4">Feu</th>
-            <td><span data-i18n="tdPage.towers.wave">Vague</span> 20</td>
-            <td data-i18n="tdPage.towers.d4">Brûlure continue. +50&nbsp;% de dégâts sur les zombies de glace, −50&nbsp;% sur ceux de feu.</td>
-          </tr>
-          <tr>
-            <th scope="row" data-i18n="tdPage.towers.n5">Vent</th>
-            <td><span data-i18n="tdPage.towers.wave">Vague</span> 30</td>
-            <td data-i18n="tdPage.towers.d5">Lames de vent en cône qui font saigner les ennemis touchés.</td>
-          </tr>
-          <tr>
-            <th scope="row" data-i18n="tdPage.towers.n6">Tesla</th>
-            <td><span data-i18n="tdPage.towers.wave">Vague</span> 45</td>
-            <td data-i18n="tdPage.towers.d6">Éclair qui enchaîne jusqu'à 3 ennemis et les immobilise un court instant.</td>
-          </tr>
-          <tr>
-            <th scope="row" data-i18n="tdPage.towers.n7">Poison</th>
-            <td><span data-i18n="tdPage.towers.wave">Vague</span> 60</td>
-            <td data-i18n="tdPage.towers.d7">Boule toxique qui explose en nuage et empoisonne tous les ennemis du cercle.</td>
-          </tr>
-          <tr>
-            <th scope="row" data-i18n="tdPage.towers.n8">Caserne Militaire</th>
-            <td><span data-i18n="tdPage.towers.wave">Vague</span> 70</td>
-            <td data-i18n="tdPage.towers.d8">Toutes les 30 s, un véhicule (jeep, camion, tank) parcourt la route en percutant les zombies.</td>
-          </tr>
-          <tr>
-            <th scope="row" data-i18n="tdPage.towers.n9">Glu</th>
-            <td><span data-i18n="tdPage.towers.wave">Vague</span> 80</td>
-            <td data-i18n="tdPage.towers.d9">Englue et ralentit sa cible. Au niveau 3, la boule éclate en flaque et ralentit tout le groupe.</td>
-          </tr>
-          <tr>
-            <th scope="row" data-i18n="tdPage.towers.n10">Tour du Prestige</th>
-            <td><span data-i18n="tdPage.towers.prestige">Prestige</span> 1</td>
-            <td data-i18n="tdPage.towers.d10">Un seul exemplaire à la fois. Elle saute d'un endroit à l'autre ou reste fixe, et frappe en zone.</td>
-          </tr>
-          </tbody>
-        </table>
+<section class="section" id="galerie" aria-labelledby="gal-t">
+  <div class="wrap">
+    <div class="split">
+      <div class="rail">
+        <p class="label label--mark" data-i18n="towerDefense.gallery.label">Captures</p>
+        <p class="rail__meta meta" data-i18n="towerDefense.gallery.meta">Six captures du jeu</p>
       </div>
-
-      <h2 data-i18n="tdPage.long.title">Quand la partie dure</h2>
-      <p data-i18n="tdPage.long.p">Dès la vague 15, certaines vagues sont maudites (Horde, Essaim, Vitesse Démoniaque, Enragés, Blindage Maudit) et changent les règles de la vague en cours. Un mini-boss arrive aux vagues 5, 15, 25…, un boss aux vagues 10, 20, 30… (cinq boss différents, tirés à la roulette). À partir de la vague 30, la météo peut s'en mêler pendant environ une minute et demie : Neige, Canicule, Éclipse, Tempête de sable, Aurore Boréale, Pluie de Météores, ou Bonheur, qui double l'or lâché par les ennemis.</p>
-
-      <h2 data-i18n="tdPage.prestige.title">Prestige</h2>
-      <p data-i18n="tdPage.prestige.p">Quand tu atteins la vague 200, tu peux passer Prestige. La partie repart de zéro (vague, or, tours), mais ton profil, tes stats et tes succès restent, et chaque niveau ajoute 50&nbsp;% d'or par zombie tué et 100 d'or de départ. Prestige 1 débloque aussi la Tour du Prestige, la vitesse x3 et une sixième carte, la Spirale du Prestige (quatre portails, 3 vies). Prestige 2 ajoute une compétence passive qui annule une défaite par partie, avec un temps de recharge.</p>
+      <div class="main">
+        <div class="section-head">
+          <h2 id="gal-t" class="t-h2" data-i18n="towerDefense.gallery.title">En jeu.</h2>
+        </div>
+      </div>
     </div>
-
-    <aside class="gp-side">
-      <h2 data-i18n="tdPage.facts.title">Infos</h2>
-      <dl class="gp-facts">
-        <div><dt data-i18n="tdPage.facts.publisher">Éditeur</dt><dd data-i18n="tdPage.facts.publisherVal">Izacki</dd></div>
-        <div><dt data-i18n="tdPage.facts.price">Prix</dt><dd data-i18n="tdPage.facts.priceVal">Gratuit</dd></div>
-        <div><dt data-i18n="tdPage.facts.platform">Plateforme</dt><dd data-i18n="tdPage.facts.platformVal">Windows 10/11</dd></div>
-        <div><dt data-i18n="tdPage.facts.size">Taille</dt><dd data-i18n="tdPage.facts.sizeVal">~4 Mo</dd></div>
-        <div><dt data-i18n="tdPage.facts.account">Compte</dt><dd data-i18n="tdPage.facts.accountVal">Compte Izacki (gratuit)</dd></div>
-        <div><dt data-i18n="tdPage.facts.lang">Langue du jeu</dt><dd data-i18n="tdPage.facts.langVal">Français</dd></div>
-      </dl>
-      <h3 data-i18n="tdPage.facts.inGame">Dans le jeu</h3>
-      <dl class="gp-facts">
-        <div><dt data-i18n="tdPage.facts.towers">Tours</dt><dd data-i18n="tdPage.facts.towersVal">10, avec 3 niveaux chacune</dd></div>
-        <div><dt data-i18n="tdPage.facts.maps">Cartes</dt><dd data-i18n="tdPage.facts.mapsVal">6, de 1 à 4 portails</dd></div>
-        <div><dt data-i18n="tdPage.facts.ach">Succès</dt><dd data-i18n="tdPage.facts.achVal">124</dd></div>
-        <div><dt data-i18n="tdPage.facts.wiki">Wiki</dt><dd data-i18n="tdPage.facts.wikiVal">Intégré au jeu</dd></div>
-        <div><dt data-i18n="tdPage.facts.controls">Commandes</dt><dd data-i18n="tdPage.facts.controlsVal">Souris et raccourcis clavier</dd></div>
-        <div><dt data-i18n="tdPage.facts.save">Sauvegarde</dt><dd data-i18n="tdPage.facts.saveVal">Sur l'ordinateur, liée à ton compte</dd></div>
-        <div><dt data-i18n="tdPage.facts.board">Classement</dt><dd data-i18n="tdPage.facts.boardVal">Meilleure vague, via le Launcher</dd></div>
-      </dl>
-    </aside>
-
+    <div class="gallery">
+      <figure class="plate">
+        <span class="plate__marks" aria-hidden="true"></span>
+        <div class="plate__frame">
+          <picture>
+            <source type="image/webp" srcset="../assets/img/games/td-classique-ecran-640.webp 640w, ../assets/img/games/td-classique-ecran-1280.webp 1280w, ../assets/img/games/td-classique-ecran-1920.webp 1920w" sizes="(min-width:72rem) 30vw, (min-width:40rem) 46vw, 100vw">
+            <img class="plate__img" src="../assets/img/games/td-classique-ecran-960.png" width="960" height="540" alt="Capture de Tower Défense Infini, carte «&nbsp;Sentier Paisible&nbsp;»&nbsp;: canons, archers, tours de glace et de feu face à une vague de zombies." data-i18n-attr="alt:towerDefense.gallery.classic.alt" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <figcaption class="plate__note" data-i18n="towerDefense.gallery.classic.cap">Carte «&nbsp;Sentier Paisible&nbsp;»&nbsp;: canons, archers, tours de glace et de feu face à une vague de zombies.</figcaption>
+      </figure>
+      <figure class="plate">
+        <span class="plate__marks" aria-hidden="true"></span>
+        <div class="plate__frame">
+          <picture>
+            <source type="image/webp" srcset="../assets/img/games/td-eclipse-boss-terrain-640.webp 640w, ../assets/img/games/td-eclipse-boss-terrain-1280.webp 1280w, ../assets/img/games/td-eclipse-boss-terrain-1920.webp 1920w" sizes="(min-width:72rem) 30vw, (min-width:40rem) 46vw, 100vw">
+            <img class="plate__img" src="../assets/img/games/td-eclipse-boss-terrain-960.png" width="960" height="540" alt="Capture de Tower Défense Infini, événement «&nbsp;Éclipse&nbsp;» sur la carte «&nbsp;Chaos Total&nbsp;»&nbsp;: le boss «&nbsp;Roi des Enfers&nbsp;» avance sous sa barre de vie." data-i18n-attr="alt:towerDefense.gallery.eclipse.alt" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <figcaption class="plate__note" data-i18n="towerDefense.gallery.eclipse.cap">Événement «&nbsp;Éclipse&nbsp;» sur la carte «&nbsp;Chaos Total&nbsp;»&nbsp;: le boss «&nbsp;Roi des Enfers&nbsp;» avance sous sa barre de vie.</figcaption>
+      </figure>
+      <figure class="plate">
+        <span class="plate__marks" aria-hidden="true"></span>
+        <div class="plate__frame">
+          <picture>
+            <source type="image/webp" srcset="../assets/img/games/td-neige-terrain-640.webp 640w, ../assets/img/games/td-neige-terrain-1280.webp 1280w, ../assets/img/games/td-neige-terrain-1920.webp 1920w" sizes="(min-width:72rem) 30vw, (min-width:40rem) 46vw, 100vw">
+            <img class="plate__img" src="../assets/img/games/td-neige-terrain-960.png" width="960" height="540" alt="Capture de Tower Défense Infini, événement «&nbsp;Neige&nbsp;» sur la carte «&nbsp;La Spirale du Prestige&nbsp;»&nbsp;: une route en spirale couverte de neige, défendue par des tours variées." data-i18n-attr="alt:towerDefense.gallery.snow.alt" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <figcaption class="plate__note" data-i18n="towerDefense.gallery.snow.cap">Événement «&nbsp;Neige&nbsp;» sur la carte «&nbsp;La Spirale du Prestige&nbsp;»&nbsp;: une route en spirale couverte de neige, défendue par des tours variées.</figcaption>
+      </figure>
+      <figure class="plate">
+        <span class="plate__marks" aria-hidden="true"></span>
+        <div class="plate__frame">
+          <picture>
+            <source type="image/webp" srcset="../assets/img/games/td-aurore-terrain-640.webp 640w, ../assets/img/games/td-aurore-terrain-1280.webp 1280w, ../assets/img/games/td-aurore-terrain-1920.webp 1920w" sizes="(min-width:72rem) 30vw, (min-width:40rem) 46vw, 100vw">
+            <img class="plate__img" src="../assets/img/games/td-aurore-terrain-960.png" width="960" height="540" alt="Capture de Tower Défense Infini, événement météo «&nbsp;Aurore Boréale&nbsp;» sur la carte «&nbsp;Ravin Tortueux&nbsp;»&nbsp;: des rubans lumineux au-dessus du chemin et des tours." data-i18n-attr="alt:towerDefense.gallery.aurora.alt" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <figcaption class="plate__note" data-i18n="towerDefense.gallery.aurora.cap">Événement météo «&nbsp;Aurore Boréale&nbsp;» sur la carte «&nbsp;Ravin Tortueux&nbsp;»&nbsp;: des rubans lumineux au-dessus du chemin et des tours.</figcaption>
+      </figure>
+      <figure class="plate">
+        <span class="plate__marks" aria-hidden="true"></span>
+        <div class="plate__frame">
+          <picture>
+            <source type="image/webp" srcset="../assets/img/games/td-canicule-terrain-640.webp 640w, ../assets/img/games/td-canicule-terrain-1280.webp 1280w, ../assets/img/games/td-canicule-terrain-1920.webp 1920w" sizes="(min-width:72rem) 30vw, (min-width:40rem) 46vw, 100vw">
+            <img class="plate__img" src="../assets/img/games/td-canicule-terrain-960.png" width="960" height="540" alt="Capture de Tower Défense Infini, événement «&nbsp;Canicule&nbsp;» sur la carte «&nbsp;Double Assaut&nbsp;»&nbsp;: un soleil brûlant, une route orange et des vagues de zombies." data-i18n-attr="alt:towerDefense.gallery.heat.alt" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <figcaption class="plate__note" data-i18n="towerDefense.gallery.heat.cap">Événement «&nbsp;Canicule&nbsp;» sur la carte «&nbsp;Double Assaut&nbsp;»&nbsp;: un soleil brûlant, une route orange et des vagues de zombies.</figcaption>
+      </figure>
+      <figure class="plate">
+        <span class="plate__marks" aria-hidden="true"></span>
+        <div class="plate__frame">
+          <picture>
+            <source type="image/webp" srcset="../assets/img/games/td-meteores-terrain-640.webp 640w, ../assets/img/games/td-meteores-terrain-1280.webp 1280w, ../assets/img/games/td-meteores-terrain-1920.webp 1920w" sizes="(min-width:72rem) 30vw, (min-width:40rem) 46vw, 100vw">
+            <img class="plate__img" src="../assets/img/games/td-meteores-terrain-960.png" width="960" height="540" alt="Capture de Tower Défense Infini, événement «&nbsp;Pluie de Météores&nbsp;» sur la carte «&nbsp;Double Assaut&nbsp;», où les zombies arrivent par deux routes." data-i18n-attr="alt:towerDefense.gallery.meteors.alt" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <figcaption class="plate__note" data-i18n="towerDefense.gallery.meteors.cap">Événement «&nbsp;Pluie de Météores&nbsp;» sur la carte «&nbsp;Double Assaut&nbsp;», où les zombies arrivent par deux routes.</figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
-<section class="gp-shots-section">
-  <div class="container">
-    <h2 class="gp-h2" data-i18n="game.screenshots.tag">Captures d'écran</h2>
-    <div class="shot-gallery gp-shots">
-      <div class="shot-frame"><img src="../assets/img/screenshot-towerdefense-1.png" alt="Vague en cours, tours placées sur le chemin"></div>
-      <div class="shot-frame"><img src="../assets/img/screenshot-towerdefense-2.png" alt="Vue de la carte avant le début d'une vague"></div>
-      <div class="shot-frame"><img src="../assets/img/screenshot-towerdefense-3.png" alt="Panneau des statistiques et succès"></div>
+<section class="section" id="tours" aria-labelledby="tours-t">
+  <div class="wrap">
+    <div class="split">
+      <div class="rail">
+        <p class="label label--mark" data-i18n="towerDefense.towers.label">Tours</p>
+        <p class="rail__meta meta" data-i18n="towerDefense.towers.meta">Dix tours, trois niveaux chacune</p>
+      </div>
+      <div class="main">
+        <div class="stack stack--lg">
+          <h2 id="tours-t" class="t-h2" data-i18n="towerDefense.towers.title">Les tours.</h2>
+          <p class="measure-wide" data-i18n="towerDefense.towers.intro">Dix tours. Neuf se débloquent au fil des vagues, la dixième, la Tour du Prestige, avec le Prestige. La barre de raccourcis n'a que cinq emplacements&nbsp;: il faut choisir. Les tours peuvent aussi se combiner, avec cinq synergies cachées. Par exemple, un zombie gelé qui prend un tir de Feu encaisse des dégâts en plus et perd son gel.</p>
+          <div class="table-wrap" role="region" aria-label="Tableau des tours" data-i18n-attr="aria-label:towerDefense.towers.regionLabel" tabindex="0">
+            <table class="table table--stack" role="table">
+              <caption data-i18n="towerDefense.towers.caption">Les dix tours et leur déblocage</caption>
+              <thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader" data-i18n="towerDefense.towers.colTower">Tour</th><th scope="col" class="num" role="columnheader" data-i18n="towerDefense.towers.colUnlock">Débloquée</th><th scope="col" role="columnheader" data-i18n="towerDefense.towers.colRole">Rôle</th></tr></thead>
+              <tbody>
+              <tr role="row"><th scope="row" role="rowheader">Canon</th><td class="num" role="cell"><span data-i18n="towerDefense.towers.wave">Vague</span> 1</td><td role="cell" data-i18n="towerDefense.towers.t1">Tir sur une seule cible, sans faiblesse particulière.</td></tr>
+              <tr role="row"><th scope="row" role="rowheader">Archer</th><td class="num" role="cell"><span data-i18n="towerDefense.towers.wave">Vague</span> 5</td><td role="cell" data-i18n="towerDefense.towers.t2">Flèche perçante qui touche tous les ennemis alignés, avec plus de dégâts en bout de ligne.</td></tr>
+              <tr role="row"><th scope="row" role="rowheader">Glace</th><td class="num" role="cell"><span data-i18n="towerDefense.towers.wave">Vague</span> 10</td><td role="cell" data-i18n="towerDefense.towers.t3">Ralentit sa cible. +50&nbsp;% de dégâts sur les zombies de feu, −50&nbsp;% sur ceux de glace.</td></tr>
+              <tr role="row"><th scope="row" role="rowheader">Feu</th><td class="num" role="cell"><span data-i18n="towerDefense.towers.wave">Vague</span> 20</td><td role="cell" data-i18n="towerDefense.towers.t4">Brûlure continue. +50&nbsp;% de dégâts sur les zombies de glace, −50&nbsp;% sur ceux de feu.</td></tr>
+              <tr role="row"><th scope="row" role="rowheader">Vent</th><td class="num" role="cell"><span data-i18n="towerDefense.towers.wave">Vague</span> 30</td><td role="cell" data-i18n="towerDefense.towers.t5">Lames de vent en cône qui font saigner les ennemis touchés.</td></tr>
+              <tr role="row"><th scope="row" role="rowheader">Tesla</th><td class="num" role="cell"><span data-i18n="towerDefense.towers.wave">Vague</span> 45</td><td role="cell" data-i18n="towerDefense.towers.t6">Éclair qui enchaîne jusqu'à 3 ennemis et les immobilise un court instant.</td></tr>
+              <tr role="row"><th scope="row" role="rowheader">Poison</th><td class="num" role="cell"><span data-i18n="towerDefense.towers.wave">Vague</span> 60</td><td role="cell" data-i18n="towerDefense.towers.t7">Boule toxique qui explose en nuage et empoisonne tous les ennemis du cercle.</td></tr>
+              <tr role="row"><th scope="row" role="rowheader">Caserne Militaire</th><td class="num" role="cell"><span data-i18n="towerDefense.towers.wave">Vague</span> 70</td><td role="cell" data-i18n="towerDefense.towers.t8">Toutes les 30 s, un véhicule (jeep, camion, tank) parcourt la route en percutant les zombies.</td></tr>
+              <tr role="row"><th scope="row" role="rowheader">Glu</th><td class="num" role="cell"><span data-i18n="towerDefense.towers.wave">Vague</span> 80</td><td role="cell" data-i18n="towerDefense.towers.t9">Englue et ralentit sa cible. Au niveau 3, la boule éclate en flaque et ralentit tout le groupe.</td></tr>
+              <tr role="row"><th scope="row" role="rowheader">Tour du Prestige</th><td class="num" role="cell"><span data-i18n="towerDefense.towers.prestige">Prestige</span> 1</td><td role="cell" data-i18n="towerDefense.towers.t10">Un seul exemplaire à la fois. Elle saute d'un endroit à l'autre ou reste fixe, et frappe en zone.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="meta not-fr" data-i18n="towerDefense.towers.names">Les noms des tours, des vagues et des événements sont ceux du jeu, qui est en français.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<footer class="site-footer">
-  <div class="container footer-row">
-    <div class="footer-note" data-i18n="footer.note">FERRA — projet indépendant, développé avec passion. © 2026 Vincent Dubois, Ferra.Izacki. Tous droits réservés.</div>
-    <div class="footer-links">
-      <a href="../index.html" data-i18n="nav.home">Accueil</a>
-      <a href="../launcher.html" data-i18n="nav.launcher">Launcher</a>
-      <a href="../forum/index.html" data-i18n="nav.forum">Forum</a>
-      <a href="../contact.html" data-i18n="nav.contact">Contact</a>
+<section class="section" id="longue" aria-labelledby="longue-t">
+  <div class="wrap">
+    <div class="split">
+      <div class="rail">
+        <p class="label label--mark" data-i18n="towerDefense.long.label">Longue partie</p>
+        <p class="rail__meta meta" data-i18n="towerDefense.long.meta">Vagues maudites, boss, Prestige</p>
+      </div>
+      <div class="main">
+        <div class="section-head">
+          <h2 id="longue-t" class="t-h2" data-i18n="towerDefense.long.title">Quand la partie dure.</h2>
+        </div>
+        <div class="rows">
+          <div class="row"><h3 data-i18n="towerDefense.long.cursed.title">Vagues maudites et boss</h3><p data-i18n="towerDefense.long.cursed.text">Dès la vague 15, certaines vagues sont maudites (Horde, Essaim, Vitesse Démoniaque, Enragés, Blindage Maudit) et changent les règles de la vague en cours. Un mini-boss arrive aux vagues 5, 15, 25…, un boss aux vagues 10, 20, 30… (cinq boss différents, tirés à la roulette).</p></div>
+          <div class="row"><h3 data-i18n="towerDefense.long.weather.title">Météo</h3><p data-i18n="towerDefense.long.weather.text">À partir de la vague 30, la météo peut s'en mêler pendant environ une minute et demie&nbsp;: Neige, Canicule, Éclipse, Tempête de sable, Aurore Boréale, Pluie de Météores, ou Bonheur, qui double l'or lâché par les ennemis.</p></div>
+          <div class="row"><h3 data-i18n="towerDefense.long.prestige.title">Prestige</h3><p data-i18n="towerDefense.long.prestige.text">Quand tu atteins la vague 200, tu peux passer Prestige. La partie repart de zéro (vague, or, tours), mais ton profil, tes stats et tes succès restent, et chaque niveau ajoute 50&nbsp;% d'or par zombie tué et 100 d'or de départ. Prestige 1 débloque aussi la Tour du Prestige, la vitesse x3 et une sixième carte, la Spirale du Prestige (quatre portails, 3 vies). Prestige 2 ajoute une compétence passive qui annule une défaite par partie, avec un temps de recharge.</p></div>
+        </div>
+        <p class="meta not-fr games-note" data-i18n="towerDefense.towers.names">Les noms des tours, des vagues et des événements sont ceux du jeu, qui est en français.</p>
+      </div>
     </div>
   </div>
+</section>
+
+<section class="section" id="infos" aria-labelledby="infos-t">
+  <div class="wrap">
+    <div class="split">
+      <div class="rail">
+        <p class="label label--mark" data-i18n="towerDefense.info.label">Infos</p>
+        <p class="rail__meta meta" data-i18n="towerDefense.info.meta">Configuration et contenu</p>
+      </div>
+      <div class="main">
+        <div class="section-head">
+          <h2 id="infos-t" class="t-h2" data-i18n="towerDefense.info.title">En bref.</h2>
+        </div>
+        <div class="two-col">
+          <div>
+            <h3 class="t-h3 col-title" data-i18n="towerDefense.info.config">Configuration</h3>
+            <dl class="kv">
+              <dt data-i18n="towerDefense.info.publisher">Éditeur</dt><dd data-i18n="towerDefense.info.publisherValue">Izacki</dd>
+              <dt data-i18n="common.plate.platform">Plateforme</dt><dd data-i18n="common.windows">Windows 10/11</dd>
+              <dt data-i18n="common.plate.size">Taille</dt><dd data-i18n="common.size.td">Environ 4&nbsp;Mo</dd>
+              <dt data-i18n="common.plate.price">Prix</dt><dd data-i18n="common.free">Gratuit</dd>
+              <dt data-i18n="towerDefense.info.account">Compte</dt><dd data-i18n="towerDefense.info.accountValue">Compte Izacki gratuit, pour le Launcher</dd>
+              <dt data-i18n="towerDefense.info.language">Langue</dt><dd data-i18n="common.language.french">Français</dd>
+              <dt data-i18n="towerDefense.info.controls">Commandes</dt><dd data-i18n="towerDefense.info.controlsValue">Souris et raccourcis clavier</dd>
+            </dl>
+          </div>
+          <div>
+            <h3 class="t-h3 col-title" data-i18n="towerDefense.info.inGame">Dans le jeu</h3>
+            <dl class="kv">
+              <dt data-i18n="towerDefense.info.towers">Tours</dt><dd data-i18n="towerDefense.info.towersValue">10, avec 3 niveaux chacune</dd>
+              <dt data-i18n="towerDefense.info.maps">Cartes</dt><dd data-i18n="towerDefense.info.mapsValue">6, de 1 à 4 portails</dd>
+              <dt data-i18n="towerDefense.info.achievements">Succès</dt><dd>124</dd>
+              <dt data-i18n="towerDefense.info.wiki">Wiki</dt><dd data-i18n="towerDefense.info.wikiValue">Intégré au jeu</dd>
+              <dt data-i18n="towerDefense.info.save">Sauvegarde</dt><dd data-i18n="towerDefense.info.saveValue">Sur ton ordinateur&nbsp;; succès et classement liés à ton compte Izacki</dd>
+              <dt data-i18n="towerDefense.info.board">Classement</dt><dd data-i18n="towerDefense.info.boardValue">Meilleure vague, consultable dans le jeu</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="nouveautes" aria-labelledby="nv-t">
+  <div class="wrap">
+    <div class="split">
+      <div class="rail">
+        <p class="label label--mark" data-i18n="towerDefense.news.label">Nouveautés</p>
+        <p class="rail__meta meta" data-i18n="towerDefense.news.meta">Notes de version</p>
+      </div>
+      <div class="main">
+        <div class="section-head">
+          <h2 id="nv-t" class="t-h2" data-i18n="towerDefense.news.title">Dernières versions.</h2>
+        </div>
+        <div class="acc" data-changelog="tower-defense" data-limit="5">
+          <details open><summary><span class="acc__sum"><span class="badge badge--plain">v1.0.26</span><span>Les boss restent sur la route</span></span><span class="acc__right"><span class="meta"><time datetime="2026-10-10">10 octobre 2026</time></span><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#plus"/></svg></span></summary><div class="acc__body"><ul class="prose"><li>Les gros ennemis et les boss sont recentrés sur la route quand elle est horizontale : ils ne dépassent plus au-dessus d’elle. La barre de vie suit le nouveau placement.</li></ul></div></details>
+          <details><summary><span class="acc__sum"><span class="badge badge--plain">v1.0.25</span><span>Bandeau des vagues maudites remonté</span></span><span class="acc__right"><span class="meta"><time datetime="2026-10-05">5 octobre 2026</time></span><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#plus"/></svg></span></summary><div class="acc__body"><ul class="prose"><li>Le bandeau « vague maudite en cours » est remonté dans le coin du terrain : il ne cache plus les premiers ennemis sur la route.</li></ul></div></details>
+          <details><summary><span class="acc__sum"><span class="badge badge--plain">v1.0.24</span><span>Zombies animés, route redessinée et menus plus clairs</span></span><span class="acc__right"><span class="meta"><time datetime="2026-10-05">5 octobre 2026</time></span><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#plus"/></svg></span></summary><div class="acc__body"><ul class="prose"><li>Les zombies marchent maintenant avec les bras qui balancent le long du corps. Ils sont vus de profil sur une route horizontale, de face quand elle descend et de dos quand elle monte.</li><li>Le jeu est plus fluide quand beaucoup d’ennemis sont à l’écran.</li><li>La route est redessinée : plus large, avec un liseré marqué et une ligne centrale en pointillés, et elle s’adapte à la météo.</li><li>Le menu Échap propose un bouton « Retour au menu principal » : ta partie est sauvegardée automatiquement.</li><li>« Charger une partie » affiche la dernière partie sauvegardée en premier. La suppression d’une sauvegarde demande confirmation dans une fenêtre du jeu. L’import et l’export de codes de sauvegarde sont retirés.</li><li>Le niveau des tours s’affiche dans une capsule bronze, argent ou or sous chaque tour.</li><li>La barre d’icônes du panneau de droite reste en haut pendant le défilement, et les barres de défilement sont plus discrètes.</li><li>Le jeu ne s’ouvre plus qu’une seule fois : relancer l’exécutable ramène la fenêtre déjà ouverte au premier plan.</li></ul></div></details>
+          <details><summary><span class="acc__sum"><span class="badge badge--plain">v1.0.23</span><span>Popup de succès façon Steam</span></span><span class="acc__right"><span class="meta"><time datetime="2026-10-03">3 octobre 2026</time></span><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#plus"/></svg></span></summary><div class="acc__body"><ul class="prose"><li>Quand tu débloques un succès, une carte noire glisse en haut à droite du terrain avec un médaillon dessiné aux couleurs de la catégorie, le nom et la description, avec un petit accord (désactivable avec les sons spéciaux).</li><li>Si plusieurs succès tombent en même temps, les cartes s'affichent l'une après l'autre.</li><li>Les succès débloqués apparaissent aussi en direct dans le Launcher.</li></ul></div></details>
+          <details><summary><span class="acc__sum"><span class="badge badge--plain">v1.0.22</span><span>Nouveau menu d'accueil</span></span><span class="acc__right"><span class="meta"><time datetime="2026-10-02">2 octobre 2026</time></span><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#plus"/></svg></span></summary><div class="acc__body"><ul class="prose"><li>Écran d'accueil complet : Lancer une partie, Charger une partie, Paramètres, Crédits et Quitter le jeu, avec un fond animé qui montre les vraies tours et les vrais zombies du jeu.</li><li>Nouvelles polices (Orbitron et Chakra Petch) pour une interface plus lisible.</li><li>Transitions fluides entre les écrans du menu.</li><li>Le choix de qualité des effets visuels s'applique tout de suite, même menu ouvert.</li><li>Clavier : Échap fonctionne aussi depuis les interrupteurs des Paramètres, et le curseur se place dans le nom de la partie.</li></ul></div></details>
+        </div>
+        <p class="meta not-fr games-note" data-i18n="common.notesFrench">Les notes de version sont publiées en français.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="band-t">
+  <div class="wrap band__grid">
+    <div class="stack stack--md"><p class="band__label" data-i18n="common.band.label">Télécharger</p><h2 id="band-t" class="t-h2 band__title" data-i18n="towerDefense.band.title">Installe le Launcher, puis lance Tower Défense Infini.</h2></div>
+    <div class="stack stack--sm"><a class="btn btn--on-accent btn--lg" href="../launcher.html#telecharger"><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#download"/></svg><span data-i18n="common.cta.download">Télécharger le Launcher</span></a><p class="band__note" data-i18n="common.band.note">Windows 10/11 · moins de 3&nbsp;Mo<br>Gratuit, avec un compte Izacki gratuit</p></div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer" data-shell="footer">
+<div class="wrap">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="../index.html" aria-label="Izacki, accueil" data-i18n-attr="aria-label:shell.brand.home"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"/><rect class="brand__sq" x="12" y="12" width="10" height="10"/></svg><span class="brand__word">Izacki</span></a>
+      <p data-i18n="shell.footer.blurb">Studio de jeux indépendant. Deux jeux gratuits, le Launcher pour les installer, un forum et un Discord pour en parler.</p>
+    </div>
+    <nav aria-labelledby="f-izacki"><h2 id="f-izacki" data-i18n="shell.footer.izacki">Izacki</h2><ul><li><a href="../index.html" data-i18n="shell.footer.home">Accueil</a></li><li><a href="../launcher.html" data-i18n="shell.footer.launcher">Launcher</a></li><li><a href="../launcher.html#createurs" data-i18n="shell.footer.publish">Publier un jeu</a></li></ul></nav>
+    <nav aria-labelledby="f-jeux"><h2 id="f-jeux" data-i18n="shell.footer.games">Jeux</h2><ul><li><a href="../games/ferra.html">FERRA</a></li><li><a href="../games/tower-defense.html">Tower Défense Infini</a></li></ul></nav>
+    <nav aria-labelledby="f-aide"><h2 id="f-aide" data-i18n="shell.footer.help">Aide et communauté</h2><ul><li><a href="../faq.html" data-i18n="shell.footer.faq">Questions fréquentes</a></li><li><a href="../contact.html" data-i18n="shell.footer.contact">Contact</a></li><li><a href="../forum/index.html" data-i18n="shell.footer.forum">Forum</a></li><li><a href="https://discord.gg/bv2w8spATk" target="_blank" rel="noopener noreferrer">Discord<span class="sr-only" data-i18n="shell.newTab">(s'ouvre dans un nouvel onglet)</span></a></li></ul></nav>
+  </div>
+  <div class="footer-base">
+    <p data-i18n="shell.footer.copyright">© 2026 Vincent Dubois, Ferra.Izacki. Tous droits réservés.</p>
+    <nav aria-label="Informations légales" class="footer-legal" data-i18n-attr="aria-label:shell.footer.legalNav"><a href="../conditions.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#list"/></svg><span data-i18n="shell.footer.terms">Conditions &amp; Confidentialité</span></a><a href="../licence.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#file"/></svg><span data-i18n="shell.footer.licence">Licence du Launcher</span></a></nav>
+    <div class="lang" role="group" aria-label="Langue du site" data-i18n-attr="aria-label:shell.lang.label"><button type="button" lang="fr" data-lang="fr" aria-label="Français" aria-pressed="true">FR</button><button type="button" lang="en" data-lang="en" aria-label="English" aria-pressed="false">EN</button><button type="button" lang="es" data-lang="es" aria-label="Español" aria-pressed="false">ES</button></div>
+  </div>
+</div>
 </footer>
-
-<a href="../faq.html" class="faq-bubble" title="Questions fréquentes"><span class="faq-bubble-icon">❓</span><span>FAQ</span></a>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../assets/js/vendor/supabase.js"></script>
 <script src="../assets/js/config.js"></script>
 <script src="../assets/js/supabase-client.js"></script>
 <script src="../assets/js/auth.js"></script>
 <script src="../assets/js/i18n.js"></script>
+<script src="../assets/js/shell.js"></script>
+<script src="../assets/js/releases.js"></script>
 <script>
 (async function () {
   await ferraI18nInit('../');

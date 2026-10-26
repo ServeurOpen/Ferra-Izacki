@@ -1,0 +1,51 @@
+{
+  "shell": {
+    "skip": "Ir al contenido",
+    "brand": {
+      "home": "Izacki, inicio"
+    },
+    "menu": {
+      "open": "Abrir el menú",
+      "close": "Cerrar el menú"
+    },
+    "nav": {
+      "label": "Navegación principal",
+      "launcher": "Launcher",
+      "games": "Juegos",
+      "ferraSub": "Supervivencia / automatización",
+      "tdSub": "Tower defense",
+      "creators": "Creadores",
+      "community": "Comunidad",
+      "forum": "Foro",
+      "forumSub": "Temas y respuestas",
+      "discordSub": "El servidor de Izacki",
+      "help": "Ayuda",
+      "faq": "Preguntas frecuentes",
+      "faqSub": "Instalación, cuenta, créditos",
+      "contact": "Contacto",
+      "contactSub": "Escribir al equipo"
+    },
+    "download": "Descargar",
+    "lang": {
+      "label": "Idioma del sitio"
+    },
+    "newTab": "(se abre en una pestaña nueva)",
+    "ogAlt": "Izacki, estudio de juegos independiente: el Launcher, FERRA y Tower Défense Infini.",
+    "footer": {
+      "blurb": "Estudio de juegos independiente. Dos juegos gratuitos, el Launcher para instalarlos, un foro y un Discord para hablar de ellos.",
+      "izacki": "Izacki",
+      "home": "Inicio",
+      "launcher": "Launcher",
+      "publish": "Publicar un juego",
+      "games": "Juegos",
+      "help": "Ayuda y comunidad",
+      "faq": "Preguntas frecuentes",
+      "contact": "Contacto",
+      "forum": "Foro",
+      "copyright": "© 2026 Vincent Dubois, Ferra.Izacki. Todos los derechos reservados.",
+      "legalNav": "Información legal",
+      "terms": "Condiciones y privacidad",
+      "licence": "Licencia del Launcher"
+    }
+  }
+}

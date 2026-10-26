@@ -1,0 +1,22 @@
+.faq-tools .actions{gap:.5rem}
+.faq-tools .hint:empty{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.faq-more{margin-top:clamp(2.5rem,1.5rem + 3vw,4rem)}
+.faq-more .state h2{margin-bottom:.35rem;font-size:1.85rem;line-height:1.08}
+
+.contact-wrap{max-width:40rem}
+.contact-wrap>.meta{margin-bottom:1.5rem}
+.contact-kv{max-width:46rem}
+
+.contact-slot{min-height:27rem}
+@media (min-width:40rem){.contact-slot{min-height:31rem}}
+.contact-slot:has(#needLogin[style*="block"]){min-height:0}
+.contact-slot:has(#needLogin[style*="block"],#contactWrap[style*="block"])>.contact-loading{display:none}
+html:not(.js) .contact-slot{min-height:0}
+html:not(.js) .contact-loading{display:none}
+.contact-loading{display:grid;gap:1.5rem;max-width:40rem}
+.contact-loading__tall{height:12rem}
+.contact-wrap .form-error:not(.show),.contact-wrap .form-success:not(.show){display:block;position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+.pay-state{max-width:44rem}
+.pay-state .hint{margin-top:.85rem}
+.pay-msg p{max-width:34rem;font-size:1.1875rem;line-height:1.5;color:var(--craie-2)}

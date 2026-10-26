@@ -1,0 +1,365 @@
+{
+  "panel": {
+    "meta": {
+      "title": "Administration panel | Izacki",
+      "description": "Izacki administration panel."
+    },
+    "side": {
+      "label": "Panel menu",
+      "title": "Administration",
+      "overview": "Overview",
+      "actions": "Actions",
+      "moderation": "Moderation",
+      "finance": "Finance",
+      "support": "Support",
+      "accounts": "Accounts"
+    },
+    "crumb": "Administration",
+    "title": "Administration panel",
+    "lead": "Visits, Launcher downloads and player accounts.",
+    "refresh": "Refresh",
+    "check": "Checking access…",
+    "access": {
+      "title": "Restricted access"
+    },
+    "visits": {
+      "title": "Site visits, last 14 days",
+      "hint": "Every page load counts as a visit, anonymous visitors included.",
+      "chart": "Visits per day over the last 14 days"
+    },
+    "downloads": {
+      "title": "Launcher downloads, last 14 days",
+      "hint": "A click on the download button counts as one download: it does not confirm that the download has finished.",
+      "chart": "Launcher downloads per day over the last 14 days"
+    },
+    "actions": {
+      "title": "Actions",
+      "hint": "The same actions as in the Launcher panel, so you can act without opening the app."
+    },
+    "field": {
+      "player": "Player",
+      "amount": "Amount",
+      "reason": "Reason",
+      "scope": "Scope",
+      "duration": "Duration",
+      "required": "required"
+    },
+    "grant": {
+      "title": "Credit a player",
+      "hint": "For example, a contest winner",
+      "btn": "Credit",
+      "badAmount": "Invalid amount.",
+      "thisPlayer": "this player",
+      "action": "Credit {n} credits to {player}",
+      "defaultReason": "Contest",
+      "done": "+{n} credits sent. New balance: {balance}."
+    },
+    "all": {
+      "title": "Credit everyone",
+      "hint": "Shows a notification to every player",
+      "btn": "Give to everyone",
+      "confirm": "Give {n} credits to ALL players? Everyone will see a pop-up.",
+      "action": "Give {n} credits to ALL players",
+      "defaultReason": "Gift from the creator",
+      "done": "+{n} credits sent to {count} player(s)."
+    },
+    "ban": {
+      "title": "Ban a player",
+      "hint": "From the site, you choose the scope",
+      "reasonPh": "Reason for the ban",
+      "btn": "Ban",
+      "reasonRequired": "The reason is required.",
+      "forever": "permanently",
+      "for": "for {d}",
+      "confirm": "Ban {label} {duration} (scope: {scope})?",
+      "action": "Ban {label}",
+      "done": "Player banned."
+    },
+    "bans": {
+      "title": "Players currently banned",
+      "region": "Banned players",
+      "none": "No banned players."
+    },
+    "col": {
+      "email": "Email",
+      "reason": "Reason",
+      "scope": "Scope",
+      "end": "Ends",
+      "action": "Action",
+      "username": "Username",
+      "created": "Created",
+      "lastLogin": "Last sign-in"
+    },
+    "mod": {
+      "title": "Games awaiting moderation",
+      "hint": "Games submitted from “Sortir mon jeu”",
+      "none": "No games awaiting review.",
+      "underReview": "Under review",
+      "shotAlt": "Game screenshot",
+      "download": "Download the file",
+      "accept": "Accept",
+      "examine": "Put under review"
+    },
+    "fin": {
+      "title": "Finance",
+      "hint": "Withdrawals and refunds"
+    },
+    "wd": {
+      "title": "Withdrawal requests",
+      "closed": "Also show completed withdrawals (paid or rejected)",
+      "hint": "Creator portal",
+      "payAll": "Approve all (no alerts)",
+      "status": {
+        "pending": "Awaiting approval",
+        "approved": "Approved, awaiting payout",
+        "processing": "Transfer in progress",
+        "failed": "Transfer failed",
+        "paid": "Paid",
+        "rejected": "Rejected"
+      },
+      "statusUnknown": "unknown status",
+      "account": {
+        "not_configured": "not set up",
+        "incomplete": "information missing",
+        "pending_verification": "being verified",
+        "active": "active",
+        "restricted": "restricted"
+      },
+      "level": {
+        "none": "No alerts",
+        "attention": "To check",
+        "high": "High risk"
+      },
+      "chip": {
+        "single": "A single buyer: {pct}% of earnings",
+        "few": "Few buyers: {n}",
+        "newDays": "{pct}% of earnings come from accounts less than {days} days old",
+        "newRecent": "{pct}% of earnings come from recent accounts",
+        "refundedBuyers": "Buyers with a Stripe refund or dispute: {pct}% of earnings",
+        "newCreator": "Creator account is {n} {unit} old",
+        "prevFailed": "A previous transfer failed",
+        "prevRejected": "Previous withdrawal rejected",
+        "banned": "Creator's account banned: no transfer will be sent",
+        "deleted": "Creator's account deleted: no transfer will be sent"
+      },
+      "lastError": {
+        "insufficient_stripe_balance": "Not enough available Stripe balance: the withdrawal stays approved, try again when the funds are available.",
+        "insufficient_platform_funds": "Safeguard: the net money collected does not cover this withdrawal.",
+        "account_not_ready": "The creator's payout account is not ready.",
+        "attempt": "{base} (attempt {n})"
+      },
+      "err": {
+        "insufficient_stripe_balance": "Not enough available Stripe balance ({available} available, {needed} needed). The withdrawal stays approved: try again when the funds are available.",
+        "account_not_ready": "The creator's payout account is not ready ({status}).",
+        "transfer_mismatch": "Stripe returned a transfer that does not match the request (amount or destination): it is NOT marked as paid. Check the transfer in Stripe, then click “Check with Stripe”.",
+        "stripe_uncertain": "Stripe answered in a way that does not allow a conclusion{code}: the transfer result is uncertain. Click “Check with Stripe” before trying again.",
+        "stripe_failed": "Stripe declined the transfer{code}. The withdrawal is marked as failed and can be retried; there is no double debit.",
+        "stripe_noanswer": "Stripe did not respond{code}: nothing was declined or paid, the withdrawal stays approved. Try again in a few minutes.",
+        "account_disabled": "The creator's account is {why}: the transfer was not sent. If you reject the request, their credits are returned to them.",
+        "country_not_allowed": "The country of the payout account{country} is no longer in the list of accepted countries: the transfer was not sent. Add it back to the accepted countries in the platform settings, or reject the request.",
+        "stripe_unreachable": "Stripe did not respond: the result is uncertain. Click “Check with Stripe” before trying again.",
+        "paid_but_db_update_failed": "The transfer was sent ({id}) but saving it failed: click “Check with Stripe”, do not reject.",
+        "in_progress": "This withdrawal is already being processed.",
+        "request_rejected": "This request has already been rejected.",
+        "legacy_request": "Old request (before Stripe): reject it, the credits are returned to the creator.",
+        "withdrawals_disabled": "Withdrawals are suspended: they are turned off in the platform settings.",
+        "invalid_state": "This request is no longer in a state that allows this action. The list will be refreshed.",
+        "forbidden": "Action reserved for the administrator.",
+        "session": "Session expired: sign in again, then try again.",
+        "stripe_not_configured": "Payments are not set up yet: the withdrawal service is missing its Stripe secret key.",
+        "service_unavailable": "The payment service is temporarily unavailable. No transfer was sent by this request: try again in a few minutes.",
+        "not_found": "Request not found: the list will be refreshed.",
+        "internal_error": "Internal error in the withdrawal service: try again, then check the server logs if it keeps happening.",
+        "network": "Connection failed. Check your internet connection, then try again."
+      },
+      "why": {
+        "banned": "banned",
+        "deleted": "deleted",
+        "suspended": "suspended"
+      },
+      "idUnknown": "unknown identifier",
+      "btn": {
+        "approve": "Approve and pay out",
+        "retry": "Retry the transfer",
+        "check": "Check with Stripe",
+        "resume": "Resume the transfer"
+      },
+      "resume": {
+        "since": "for more than {n} {unit}",
+        "moment": "for a while",
+        "hint": "Use only if the transfer stays “in progress” {wait}: before that delay the server refuses to resume, because another process may still be sending the money."
+      },
+      "check": {
+        "anomaly": "ANOMALY: a Stripe transfer{transfer} exists for this request although it is “{label}”. The creator received the money AND keeps their credits. Nothing was changed: cancel the transfer in the Stripe dashboard or remove their credits, then check their account.",
+        "found": "Transfer found in Stripe: the withdrawal is marked as paid, no second transfer was created.",
+        "none": "No transfer in Stripe for this withdrawal: you can send the transfer again without risk of a duplicate.",
+        "pending": "No transfer found in Stripe for now (status: {label}). If the withdrawal stays “in progress”, wait a few minutes, then use “Resume the transfer”."
+      },
+      "platform": "Creator portal · Available for withdrawals: {available}{inflight}. The available Stripe balance is checked when the transfer is made.",
+      "inFlight": " (of which {amount} being transferred)",
+      "payAllN": "Approve all (no alerts) — {n} {unit}, {total}",
+      "none": "No pending requests.",
+      "accountLine": "Payout account: {status}{country}",
+      "accountNone": "Payout account: none",
+      "fact": {
+        "creator": "Creator account: {n} {unit} old",
+        "top": "Largest buyer: {pct}% of earnings",
+        "recent": "Recent accounts: {pct}% of earnings",
+        "refunds": "Refunds or disputes: {pct}% of earnings · {n} {unit}",
+        "prev": "Previous withdrawals: {paid} {paidUnit}{amount}, {rejected} {rejectedUnit}, {failed} {failedUnit}"
+      },
+      "feeWith": "{gross} gross − {fee} processing fees = {net} net",
+      "feeNone": "{gross} gross, no processing fees = {net} net",
+      "hold": " · credits sold at least {n} {unit} ago",
+      "firstWithdrawal": " (first withdrawal)",
+      "requestedOn": "requested on {date}",
+      "uncertain": "Transfer result uncertain: check with Stripe before trying again.",
+      "stripeId": "Stripe transfer: {id}",
+      "payAllConfirm": "Approve and pay out {n} {unit} without alerts, for a total of {total}?",
+      "payAllProgress": "Transfer in progress… ({i}/{n})",
+      "approveConfirm": "Approve this withdrawal? {amount} will be transferred to the Stripe account of {email}.",
+      "adopted": "A transfer already existed in Stripe for this withdrawal: it was linked, and no second transfer was created.",
+      "uncertainReject": "The transfer result is uncertain: click “Check with Stripe” first.",
+      "alreadyDone": "This request has already been processed. The list will be refreshed."
+    },
+    "rf": {
+      "title": "Refund requests",
+      "none": "No pending requests.",
+      "seller": "Seller: {email}",
+      "played": "Played {time} · Owned for {days} d",
+      "meets": "Within the policy (≤1 h / ≤7 d): accepting recommended",
+      "outside": "Outside the policy: rejecting recommended",
+      "msg": "Buyer’s message: “{msg}”",
+      "btn": "Refund",
+      "confirm": "Confirm the refund? The credits will be returned to the buyer and taken back from the seller."
+    },
+    "support": {
+      "title": "Support tickets"
+    },
+    "accounts": {
+      "title": "Player accounts",
+      "hint": "A reset link sends the same secure email as “Forgot password”: the real password is never visible or recoverable, even here.",
+      "search": "Search for a player",
+      "searchPh": "Search for a player (username or email)…",
+      "region": "Player accounts"
+    },
+    "pass": {
+      "title": "Passphrase required",
+      "input": "Passphrase",
+      "ph": "Paste the passphrase…",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "protected": "This action is protected.",
+      "wrong": "Incorrect passphrase: try again.",
+      "locked": "Too many attempts: try again in a few minutes."
+    },
+    "ticket": {
+      "messages": "Ticket messages",
+      "refundNote": "Linked refund: accept or reject it in “Refund requests” above, and the ticket closes and replies on its own.",
+      "closedNote": "This ticket is closed.",
+      "reply": "Reply",
+      "replyPh": "Write a reply…",
+      "send": "Send",
+      "closeTicket": "Close ticket",
+      "cat": {
+        "question": "Question",
+        "bug": "Bug",
+        "refund": "Refund",
+        "other": "Other"
+      },
+      "status": {
+        "open": "Open",
+        "closed": "Closed"
+      },
+      "openCount": "{n} open",
+      "none": "No tickets yet.",
+      "noneOpen": "No open tickets at the moment.",
+      "open": "Open ticket",
+      "closedGroup": "Closed tickets",
+      "closeConfirm": "Close this ticket?"
+    },
+    "gate": {
+      "login": "Sign in to access this page.",
+      "admin": "This page is reserved for the administrator."
+    },
+    "delta": {
+      "none": "— vs yesterday",
+      "new": "new vs yesterday",
+      "same": "= vs yesterday",
+      "pct": "{sign}{pct}% vs yesterday"
+    },
+    "kpi": {
+      "loading": "Loading",
+      "error": "Unable to load the statistics",
+      "visits": "Total visits",
+      "downloads": "Launcher downloads",
+      "accounts": "Accounts created",
+      "online": "Players online",
+      "onlineSub": "Right now, in the Launcher",
+      "split": "Signed in vs visitors without an account",
+      "anon": "{pct}% anonymous",
+      "splitSub": "{logged} signed in · {anon} anonymous"
+    },
+    "never": "never",
+    "unknown": "unknown",
+    "err": {
+      "line": "Error: {msg}",
+      "unknown": "unknown",
+      "word": "error",
+      "noReason": "unknown error"
+    },
+    "fail": "Failed: {reason}",
+    "players": {
+      "none": "No player matches “{query}”.",
+      "reset": "Reset link"
+    },
+    "btn": {
+      "sending": "Sending…",
+      "sent": "Sent",
+      "failed": "Failed",
+      "unban": "Unban",
+      "checking": "Checking…"
+    },
+    "credits": "credit|credits",
+    "free": "Free",
+    "unit": {
+      "mb": "MB"
+    },
+    "reject": {
+      "label": "Reason for rejection",
+      "ph": "Reason for rejection (required)",
+      "btn": "Reject",
+      "need": "Enter a reason for the rejection."
+    },
+    "pl": {
+      "day": "day|days",
+      "minute": "minute|minutes",
+      "refundedSale": "refunded sale|refunded sales",
+      "sale": "sale|sales",
+      "buyerDistinct": "distinct buyer|distinct buyers",
+      "gamePublished": "published game|published games",
+      "paid": "paid|paid",
+      "rejected": "rejected|rejected",
+      "failure": "failure|failures",
+      "request": "request|requests",
+      "transferSent": "transfer sent|transfers sent",
+      "skipped": "request not processed, left pending|requests not processed, left pending"
+    },
+    "scope": {
+      "site": "Website",
+      "both": "Website + Launcher"
+    },
+    "scopeOpt": {
+      "site": "Website only",
+      "launcher": "Launcher only"
+    },
+    "dur": {
+      "h1": "1 hour",
+      "h24": "24 hours",
+      "d7": "7 days",
+      "d30": "30 days",
+      "perm": "Permanent"
+    },
+    "pickPlayer": "Choose a player."
+  }
+}

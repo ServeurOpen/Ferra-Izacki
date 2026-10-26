@@ -1,0 +1,14 @@
+{
+  "ferraInfos": {
+    "meta": {
+      "title": "Información y novedades de FERRA | Izacki",
+      "description": "La información y las notas de versión de FERRA están en la página del juego."
+    },
+    "hero": {
+      "title": "La información de FERRA está en la página del juego.",
+      "lead": "Las notas de versión, los requisitos y las funciones de FERRA están reunidos en la página del juego.",
+      "news": "Ver las novedades de FERRA",
+      "page": "Ver la ficha de FERRA"
+    }
+  }
+}

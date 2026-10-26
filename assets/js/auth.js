@@ -1,4 +1,3 @@
-
 async function ferraGetSession() {
   try {
     const { data: { user } } = await window.supabaseClient.auth.getUser();
@@ -10,7 +9,7 @@ async function ferraGetSession() {
       .single();
     return { user, profile };
   } catch (err) {
-    console.error('[FERRA] ferraGetSession a échoué (Supabase non configuré ou hors ligne) :', err);
+    console.warn('Connexion au compte indisponible.');
     return null;
   }
 }
@@ -44,7 +43,7 @@ async function ferraReenableAdminMode(userId, password) {
     await window.supabaseClient.from('profiles').update({ admin_mode_disabled: false }).eq('id', userId);
     return true;
   } catch (err) {
-    console.error('[FERRA] ferraReenableAdminMode a échoué :', err);
+    console.warn('Réactivation impossible pour le moment.');
     return false;
   }
 }
@@ -133,6 +132,18 @@ function ferraStartDevHoursHeartbeat(session) {
   }, 60_000);
 }
 
+function ferraAssetPrefix() {
+  return (window.FERRA_I18N && window.FERRA_I18N.prefix) || ferraNavAuthState.prefix || '';
+}
+
+function ferraAuthInitials(name) {
+  return (name || '?').trim().slice(0, 2).toUpperCase();
+}
+
+function ferraIconHtml(name) {
+  return `<svg class="icon" aria-hidden="true" focusable="false"><use href="${ferraAssetPrefix()}assets/img/icons.svg#${name}"/></svg>`;
+}
+
 let ferraBanOverlayShown = false;
 async function ferraCheckBanAndBlock(session) {
   if (!session || ferraBanOverlayShown) return;
@@ -148,23 +159,24 @@ async function ferraCheckBanAndBlock(session) {
     ferraBanOverlayShown = true;
     ferraShowBanOverlay(data);
   } catch (err) {
-    console.error('[FERRA] vérification de ban échouée :', err);
+    console.warn('Vérification du compte indisponible.');
   }
 }
 
 function ferraFormatBanCountdown(untilIso) {
+  const unit = (key, fallback) => ' ' + ferraT('ban.unit.' + key, fallback);
   const ms = new Date(untilIso).getTime() - Date.now();
-  if (ms <= 0) return '0s';
+  if (ms <= 0) return '0' + unit('s', 's');
   const totalSec = Math.floor(ms / 1000);
   const days = Math.floor(totalSec / 86400);
   const hours = Math.floor((totalSec % 86400) / 3600);
   const mins = Math.floor((totalSec % 3600) / 60);
   const secs = totalSec % 60;
   const parts = [];
-  if (days > 0) parts.push(`${days}j`);
-  if (days > 0 || hours > 0) parts.push(`${hours}h`);
-  parts.push(`${mins}min`);
-  parts.push(`${secs}s`);
+  if (days > 0) parts.push(days + unit('d', 'j'));
+  if (days > 0 || hours > 0) parts.push(hours + unit('h', 'h'));
+  parts.push(mins + unit('min', 'min'));
+  parts.push(secs + unit('s', 's'));
   return parts.join(' ');
 }
 
@@ -172,42 +184,79 @@ function ferraShowBanOverlay(ban) {
   const overlay = document.createElement('div');
   overlay.className = 'ferra-ban-overlay';
   overlay.innerHTML = `
-    <div class="ferra-ban-card">
-      <div class="ferra-ban-icon">⛔</div>
-      <h1 class="ferra-ban-title">Compte suspendu</h1>
-      <div class="ferra-ban-reason-label">Raison :</div>
-      <div class="ferra-ban-reason"></div>
+    <div class="ferra-ban-card" role="alertdialog" aria-modal="true" aria-labelledby="ferraBanTitle" aria-describedby="ferraBanReason">
+      <div class="ferra-ban-icon">${ferraIconHtml('ban')}</div>
+      <h2 class="ferra-ban-title" id="ferraBanTitle" tabindex="-1"></h2>
+      <div class="ferra-ban-reason-label label"></div>
+      <div class="ferra-ban-reason" id="ferraBanReason"></div>
       <div class="ferra-ban-countdown"></div>
-      <button class="ferra-ban-contest-btn" type="button">📩 Contester ce bannissement</button>
-      <div class="ferra-ban-contest-form" style="display:none;">
-        <textarea placeholder="Explique ta situation en quelques lignes…" maxlength="4000" rows="5"></textarea>
+      <button class="ferra-ban-contest-btn btn btn--outline" type="button" aria-expanded="false" aria-controls="ferraBanContestForm"></button>
+      <div class="ferra-ban-contest-form" id="ferraBanContestForm" style="display:none;">
+        <textarea class="textarea" maxlength="4000" rows="5"></textarea>
         <div class="ferra-ban-contest-actions">
-          <button class="ferra-ban-contest-send" type="button">Envoyer à l'administrateur</button>
+          <button class="ferra-ban-contest-send btn btn--primary" type="button"></button>
         </div>
-        <div class="ferra-ban-contest-status"></div>
+        <div class="ferra-ban-contest-status" role="status"></div>
       </div>
     </div>
   `;
+  overlay.querySelector('.ferra-ban-title').textContent = ferraT('ban.title', 'Compte suspendu');
+  overlay.querySelector('.ferra-ban-reason-label').textContent = ferraT('ban.reasonLabel', 'Raison');
   overlay.querySelector('.ferra-ban-reason').textContent = ban.reason;
+  overlay.querySelector('.ferra-ban-contest-btn').textContent = ferraT('ban.contest', 'Contester ce bannissement');
+  overlay.querySelector('.ferra-ban-contest-send').textContent = ferraT('ban.send', "Envoyer à l'administrateur");
+  const textarea = overlay.querySelector('.ferra-ban-contest-form textarea');
+  textarea.setAttribute('placeholder', ferraT('ban.placeholder', 'Explique ta situation en quelques lignes…'));
+  textarea.setAttribute('aria-label', ferraT('ban.yourSituation', 'Ta situation'));
   document.documentElement.appendChild(overlay);
   document.body.style.overflow = 'hidden';
+  document.body.inert = true;
+  overlay.querySelector('.ferra-ban-title').focus();
 
   const countdownEl = overlay.querySelector('.ferra-ban-countdown');
   if (ban.banned_until) {
     const tick = () => {
       const remaining = new Date(ban.banned_until).getTime() - Date.now();
       if (remaining <= 0) { location.reload(); return; }
-      countdownEl.textContent = `⏳ Débloqué dans ${ferraFormatBanCountdown(ban.banned_until)}`;
+      countdownEl.textContent = `${ferraT('ban.unlockIn', 'Débloqué dans')} ${ferraFormatBanCountdown(ban.banned_until)}`;
     };
     tick();
     setInterval(tick, 1000);
   } else {
-    countdownEl.textContent = '🔒 Bannissement définitif';
+    countdownEl.textContent = ferraT('ban.permanent', 'Bannissement définitif');
   }
 
-  overlay.querySelector('.ferra-ban-contest-btn').addEventListener('click', () => {
-    const form = overlay.querySelector('.ferra-ban-contest-form');
-    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+  const contestBtn = overlay.querySelector('.ferra-ban-contest-btn');
+  const contestForm = overlay.querySelector('.ferra-ban-contest-form');
+  const setContestOpen = (open) => {
+    contestForm.style.display = open ? 'block' : 'none';
+    contestBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  };
+  contestBtn.addEventListener('click', () => {
+    const open = contestForm.style.display === 'none';
+    setContestOpen(open);
+    if (open) textarea.focus();
+  });
+  overlay.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' || e.key === 'Esc') {
+      if (contestForm.style.display !== 'none') {
+        setContestOpen(false);
+        contestBtn.focus();
+      }
+      return;
+    }
+    if (e.key !== 'Tab') return;
+    const items = Array.from(overlay.querySelectorAll('button:not([disabled]), textarea:not([disabled])'))
+      .filter((el) => el.getClientRects().length > 0);
+    if (!items.length) return;
+    const at = items.indexOf(document.activeElement);
+    if (e.shiftKey && at <= 0) {
+      e.preventDefault();
+      items[items.length - 1].focus();
+    } else if (!e.shiftKey && at === items.length - 1) {
+      e.preventDefault();
+      items[0].focus();
+    }
   });
   overlay.querySelector('.ferra-ban-contest-send').addEventListener('click', async () => {
     const messageInput = overlay.querySelector('.ferra-ban-contest-form textarea');
@@ -215,12 +264,12 @@ function ferraShowBanOverlay(ban) {
     const sendBtn = overlay.querySelector('.ferra-ban-contest-send');
     const message = messageInput.value.trim();
     if (!message) {
-      statusEl.textContent = "Écris un message avant d'envoyer.";
+      statusEl.textContent = ferraT('ban.writeFirst', "Écris un message avant d'envoyer.");
       statusEl.className = 'ferra-ban-contest-status err';
       return;
     }
     sendBtn.disabled = true;
-    statusEl.textContent = 'Envoi en cours…';
+    statusEl.textContent = ferraT('ban.sending', 'Envoi en cours…');
     statusEl.className = 'ferra-ban-contest-status';
     try {
       const { data: { session: authSession } } = await window.supabaseClient.auth.getSession();
@@ -232,50 +281,74 @@ function ferraShowBanOverlay(ban) {
       });
       const body = await res.json().catch(() => ({}));
       if (res.ok) {
-        statusEl.textContent = "✅ Message envoyé à l'administrateur.";
+        statusEl.textContent = ferraT('ban.sent', "Message envoyé à l'administrateur.");
         statusEl.className = 'ferra-ban-contest-status ok';
         messageInput.value = '';
       } else {
         statusEl.textContent = body.error === 'too_soon'
-          ? '❌ Tu as déjà contesté récemment — réessaie plus tard.'
-          : "❌ Échec de l'envoi, réessaie plus tard.";
+          ? ferraT('ban.tooSoon', 'Tu as déjà contesté récemment. Réessaie plus tard.')
+          : ferraT('ban.failed', "Échec de l'envoi, réessaie plus tard.");
         statusEl.className = 'ferra-ban-contest-status err';
       }
     } catch (err) {
-      statusEl.textContent = "❌ Échec de l'envoi, réessaie plus tard.";
+      statusEl.textContent = ferraT('ban.failed', "Échec de l'envoi, réessaie plus tard.");
       statusEl.className = 'ferra-ban-contest-status err';
     }
     sendBtn.disabled = false;
   });
 }
 
+const ferraNavAuthState = { el: null, prefix: '', session: undefined };
+
+function ferraPaintNavAuth() {
+  const { el, prefix, session } = ferraNavAuthState;
+  if (!el || session === undefined) return;
+  if (session) {
+    const name = session.profile?.username || ferraT('nav.defaultPlayer', 'Joueur');
+    const admin = ferraIsAdminModeActive(session);
+    el.innerHTML = `
+      <span class="menu auth__menu">
+        <button class="menu__toggle" type="button" aria-expanded="false" aria-controls="authMenuPanel" data-menu-toggle>
+          <span class="avatar" aria-hidden="true">${ferraEscape(ferraAuthInitials(name))}</span><span class="auth__name">${ferraEscape(name)}</span>
+          ${admin ? `<span class="badge badge--solid badge--plain auth__admin">${ferraEscape(ferraT('nav.admin', 'Admin'))}</span>` : ''}
+          ${ferraIconHtml('chevron-down')}
+        </button>
+        <div class="menu__panel" id="authMenuPanel">
+          <div class="auth__who"><span class="avatar" aria-hidden="true">${ferraEscape(ferraAuthInitials(name))}</span><span class="auth__who-name">${ferraEscape(name)}</span>${admin ? `<span class="badge badge--solid badge--plain">${ferraEscape(ferraT('nav.admin', 'Admin'))}</span>` : ''}</div>
+          ${admin ? `<a class="menu__item" href="${prefix}panel.html">${ferraIconHtml('shield')}${ferraEscape(ferraT('nav.panel', 'Panel'))}</a>` : ''}
+          <a class="menu__item" href="${prefix}parametres.html">${ferraIconHtml('gear')}${ferraEscape(ferraT('nav.settings', 'Paramètres'))}</a>
+          <a class="menu__item" href="${prefix}solde.html">${ferraIconHtml('wallet')}${ferraEscape(ferraT('nav.credits', 'Recharger mes crédits'))}</a>
+          <button class="menu__item" id="ferraNavLogoutBtn" type="button">${ferraIconHtml('logout')}${ferraEscape(ferraT('nav.logout', 'Déconnexion'))}</button>
+        </div>
+      </span>
+    `;
+    el.querySelector('.menu__toggle').setAttribute('aria-label', `${ferraT('nav.account', 'Compte')}, ${name}`);
+    document.getElementById('ferraNavLogoutBtn').addEventListener('click', () => ferraSignOutTo(prefix + 'index.html'));
+    el.setAttribute('data-state', 'in');
+  } else {
+    el.innerHTML = `
+      <a class="auth__link" href="${prefix}forum/login.html">${ferraEscape(ferraT('nav.connexion', 'Connexion'))}</a>
+      <a class="btn btn--outline btn--sm btn--nowrap" href="${prefix}forum/signup.html">${ferraEscape(ferraT('nav.inscription', 'Inscription'))}</a>
+    `;
+    el.setAttribute('data-state', 'out');
+  }
+}
+
+document.addEventListener('ferra:i18n', ferraPaintNavAuth);
+
 async function ferraRenderNavAuth(elId, prefix) {
   const el = document.getElementById(elId);
   if (!el) return;
   prefix = prefix || '';
+  ferraNavAuthState.el = el;
+  ferraNavAuthState.prefix = prefix;
   const session = await ferraGetSession();
   ferraApplyAdminModeStyling(session);
   ferraLogVisit(session);
   ferraCheckBanAndBlock(session);
   ferraStartDevHoursHeartbeat(session);
-  if (session) {
-    const adminBadge = ferraIsAdminModeActive(session) ? `<span class="admin-mode-badge">🛡️ Admin</span>` : '';
-    const panelLink = ferraIsAdminModeActive(session)
-      ? `<a href="${prefix}panel.html" class="nav-link">${ferraT('nav.panel', '📊 Panel')}</a>`
-      : '';
-    el.innerHTML = `
-      <span class="nav-auth-user">👤 <b>${ferraEscape(session.profile?.username || ferraT('nav.defaultPlayer', 'Joueur'))}</b>${adminBadge}</span>
-      ${panelLink}
-      <a href="${prefix}parametres.html" class="nav-link">${ferraT('nav.settings', '⚙ Paramètres')}</a>
-      <button class="nav-auth-logout" id="ferraNavLogoutBtn">${ferraT('nav.logout', 'Déconnexion')}</button>
-    `;
-    document.getElementById('ferraNavLogoutBtn').addEventListener('click', () => ferraSignOutTo(prefix + 'index.html'));
-  } else {
-    el.innerHTML = `
-      <a href="${prefix}forum/login.html" class="nav-link">${ferraT('nav.connexion', 'Connexion')}</a>
-      <a href="${prefix}forum/signup.html" class="nav-auth-signup">${ferraT('nav.inscription', 'Inscription')}</a>
-    `;
-  }
+  ferraNavAuthState.session = session;
+  ferraPaintNavAuth();
 }
 
 async function ferraRenderUserWidget(elId) {
@@ -285,15 +358,16 @@ async function ferraRenderUserWidget(elId) {
   ferraApplyAdminModeStyling(session);
   ferraCheckBanAndBlock(session);
   if (session) {
+    const name = session.profile?.username || ferraT('nav.defaultPlayer', 'Joueur');
     el.innerHTML = `
-      <span class="forum-user">👤 ${ferraT('forum.connectedAs', 'Connecté en tant que')} <b>${ferraEscape(session.profile?.username || ferraT('nav.defaultPlayer', 'Joueur'))}</b></span>
-      <button class="btn btn-ghost btn-sm" id="ferraLogoutBtn">${ferraT('forum.logout', 'Se déconnecter')}</button>
+      <span class="forum-user__who"><span class="avatar" aria-hidden="true">${ferraEscape(ferraAuthInitials(name))}</span><span><span data-forum-connected>${ferraEscape(ferraT('forum.connectedAs', 'Connecté en tant que'))}</span> <b>${ferraEscape(name)}</b></span></span>
+      <button class="btn btn--outline btn--sm" id="ferraLogoutBtn" type="button">${ferraEscape(ferraT('forum.logout', 'Se déconnecter'))}</button>
     `;
     document.getElementById('ferraLogoutBtn').addEventListener('click', ferraSignOut);
   } else {
     el.innerHTML = `
-      <a href="${ferraForumPath('login.html')}" class="btn btn-ghost btn-sm">${ferraT('nav.login', 'Se connecter')}</a>
-      <a href="${ferraForumPath('signup.html')}" class="btn btn-primary btn-sm">${ferraT('nav.signup', 'Créer un compte')}</a>
+      <a class="btn btn--outline btn--sm" href="${ferraForumPath('login.html')}">${ferraEscape(ferraT('nav.login', 'Se connecter'))}</a>
+      <a class="btn btn--primary btn--sm" href="${ferraForumPath('signup.html')}">${ferraEscape(ferraT('nav.signup', 'Créer un compte'))}</a>
     `;
   }
   return session;

@@ -1,0 +1,39 @@
+{
+  "forumNewThread": {
+    "meta": {
+      "title": "Nuevo tema | Izacki",
+      "description": "Abre un tema en el foro de Izacki: elige un título claro y describe tu pregunta o tu idea."
+    },
+    "crumbForum": "Foro",
+    "crumb": "Nuevo tema",
+    "title": "Nuevo tema",
+    "defaultCategory": "Categoría",
+    "loginTitle": "Inicia sesión para abrir un tema.",
+    "loginText": "Basta una cuenta Izacki gratuita para escribir en el foro.",
+    "threadTitle": "Título del tema",
+    "threadTitlePlaceholder": "Un título claro y corto",
+    "threadTitleHint": "Máximo 140 caracteres.",
+    "message": "Mensaje",
+    "messagePlaceholder": "Explica tu tema con detalle…",
+    "submit": "Publicar el tema",
+    "errRequired": "El título y el mensaje son obligatorios.",
+    "errCreateFailed": "No se ha podido crear el tema. Inténtalo de nuevo.",
+    "backToForum": "Volver al foro",
+    "missingCategory": "Falta la categoría.",
+    "loadError": "No se ha podido cargar esta categoría.",
+    "cat": {
+      "annonces": {
+        "name": "Anuncios"
+      },
+      "general": {
+        "name": "Discusión general"
+      },
+      "support": {
+        "name": "Soporte y errores"
+      },
+      "idees": {
+        "name": "Ideas y sugerencias"
+      }
+    }
+  }
+}

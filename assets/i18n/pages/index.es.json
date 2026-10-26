@@ -1,0 +1,99 @@
+{
+  "index": {
+    "meta": {
+      "title": "Izacki, estudio de juegos independiente",
+      "description": "Izacki es un estudio de juegos independiente. FERRA y Tower Défense Infini son gratuitos, y el Launcher los instala y los actualiza en Windows."
+    },
+    "hero": {
+      "kicker": "Estudio de juegos independiente",
+      "l1": "Un estudio independiente.",
+      "l2": "Un Launcher.",
+      "l3": "Dos juegos gratuitos.",
+      "lead": "Izacki es un estudio de juegos independiente. FERRA y Tower Défense Infini son gratuitos: los instalas, los lanzas y los actualizas desde el Launcher, en Windows.",
+      "ctaGames": "Ver los juegos",
+      "plateAlt": "La pantalla Boutique (la tienda) del Launcher de Izacki: un juego destacado, luego FERRA y Tower Défense Infini, con filtros para todos los juegos, los de Izacki, los de la comunidad y los gratuitos.",
+      "screen": "Boutique (Tienda)"
+    },
+    "specs": {
+      "account": "Cuenta",
+      "lang": "Idioma"
+    },
+    "games": {
+      "label": "Juegos",
+      "meta": "Dos juegos, los dos gratuitos",
+      "title": "Dos juegos, dos géneros.",
+      "ferraAlt": "Captura de FERRA: un campamento alrededor de la hoguera, con perforadoras, hornos, una casa y farolas.",
+      "tdAlt": "Captura de Tower Défense Infini: el jefe «Roi des Enfers» avanza bajo su barra de vida durante el evento «Éclipse» en el mapa «Chaos Total».",
+      "ferraText": "Un mundo por reconstruir, una hoguera que proteger, un meteorito al que hacer frente. Extrae, automatiza, defiende tu campamento y prepárate para la noche.",
+      "tdText": "Un tower defense contra oleadas de zombis sin fin: colocas torres a lo largo del camino y ves hasta dónde aguantas.",
+      "more": "Ver la ficha del juego"
+    },
+    "launcher": {
+      "label": "Launcher",
+      "title": "Instalar, lanzar, actualizar.",
+      "lead": "El Launcher de Izacki reúne la tienda, tu biblioteca, la comunidad, el espacio de creadores y la asistencia. Se actualiza solo y comprueba la integridad de un juego de Izacki antes de lanzarlo.",
+      "names": "Los nombres de los espacios son los del Launcher, que está en francés.",
+      "spaces": {
+        "store": {
+          "title": "Boutique",
+          "text": "La tienda: búsqueda y filtros para todos los juegos, los de Izacki, los de la comunidad o los gratuitos. Los juegos de Izacki son gratuitos; los de la comunidad tienen un precio en créditos, a veces cero."
+        },
+        "library": {
+          "title": "Bibliothèque",
+          "text": "La biblioteca: tus juegos instalados, con búsqueda y orden. Cada juego tiene cuatro pestañas: resumen, logros, novedades e información. Las actualizaciones y las instalaciones están en la sección Descargas."
+        },
+        "community": {
+          "title": "Communauté",
+          "text": "La comunidad: amigos y grupos con chat, clasificación y enlace al Discord. Añades a un amigo con su tag, con el formato Usuario#Número."
+        },
+        "creators": {
+          "title": "Créateurs",
+          "text": "El espacio de creadores: publicar un juego, seguir sus ventas y sus retiros. El equipo revisa cada juego antes de publicarlo."
+        },
+        "support": {
+          "title": "Assistance",
+          "text": "La asistencia: para una duda, un error o un reembolso, abres un ticket. Puedes adjuntar una captura de pantalla y la respuesta llega en el ticket."
+        },
+        "all": {
+          "title": "Verlo todo",
+          "text": "La página del Launcher detalla cada espacio, la configuración necesaria y la ayuda para instalar.",
+          "cta": "Ver el Launcher"
+        }
+      }
+    },
+    "versions": {
+      "label": "Versiones",
+      "meta": "Últimas publicaciones",
+      "title": "Últimas versiones.",
+      "lead": "Las notas completas de los juegos están en su página y en la pestaña Novedades del Launcher."
+    },
+    "community": {
+      "label": "Comunidad",
+      "meta": "Foro, Discord, asistencia",
+      "title": "Dónde encontrarnos.",
+      "forum": {
+        "title": "Foro de Izacki",
+        "text": "Charla, pide ayuda, propón ideas o avisa de un error. Basta una cuenta Izacki gratuita para escribir.",
+        "cta": "Abrir el foro"
+      },
+      "discord": {
+        "text": "Encuentra a la comunidad en el servidor de Discord de Izacki, accesible también desde el espacio Comunidad del Launcher.",
+        "cta": "Unirse al Discord"
+      },
+      "support": {
+        "title": "Asistencia",
+        "text": "Las respuestas a las preguntas habituales están en las preguntas frecuentes. Para un error o un reembolso, abre un ticket desde Asistencia en el Launcher; la respuesta llega en el ticket.",
+        "cta": "Ver la ayuda"
+      },
+      "publish": {
+        "title": "Publicar un juego",
+        "text": "Para publicar tu juego, usa el espacio Creadores del Launcher: envías el juego con un nombre, un precio y imágenes. El equipo revisa cada juego antes de publicarlo.",
+        "cta": "Saber más",
+        "ctaSr": "sobre el espacio Creadores"
+      }
+    },
+    "band": {
+      "title": "Instala el Launcher y lanza FERRA o Tower Défense Infini."
+    }
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "ferra": {
+    "meta": {
+      "title": "FERRA, a survival and automation game | Izacki",
+      "description": "FERRA is a free survival and automation game for Windows: protect your campfire, automate your production, get ready for the meteorite.",
+      "imageAlt": "FERRA, a survival and automation game: the title and the “Free” and “In the Izacki Launcher” mentions over a capture of the game.",
+      "shareImage": "https://izackiferra.com/assets/img/games/ferra-share-en-1200.jpg"
+    },
+    "hero": {
+      "lead": "A world to rebuild, a fire to protect, a meteorite to face. Mine, automate, defend your camp, and get ready for the night.",
+      "plateAlt": "FERRA banner, a survival and automation game: “A world to rebuild, a fire to protect, a meteorite to face.”, with the “Free” and “In the Izacki Launcher” mentions, over a capture of the game.",
+      "srcset": "../assets/img/games/ferra-hero-en-640.webp 640w, ../assets/img/games/ferra-hero-en-1280.webp 1280w, ../assets/img/games/ferra-hero-en-1920.webp 1920w",
+      "src": "../assets/img/games/ferra-hero-en-1280.png"
+    },
+    "presentation": {
+      "label": "Overview",
+      "meta": "A survival game",
+      "title": "Build tile by tile.",
+      "p1": "Every FERRA run is built tile by tile. Protect your campfire, gather iron, wood, stone and copper, then automate everything with drills, classic or electric, powered by an electrical grid.",
+      "p2": "By day, you gather and build. At night, monsters roam. In the distance, a meteorite approaches: bunker or evacuation, your choice.",
+      "coverAlt": "Illustration of FERRA: the title on a metal plate, in front of a factory of pipes, drills and conveyor belts, with a wind turbine and trees in the background.",
+      "coverNote": "Illustration · The game cover."
+    },
+    "gallery": {
+      "label": "Screenshots",
+      "meta": "Seven screenshots of the game",
+      "title": "The camp in pictures.",
+      "wide": {
+        "alt": "FERRA screenshot: wide daytime view of the camp, from the drill field to the pond.",
+        "cap": "Wide daytime view of the camp, from the drill field to the pond."
+      },
+      "drills": {
+        "alt": "FERRA screenshot: electric drills on ore deposits, with batteries, a generator, a wind turbine and solar panels.",
+        "cap": "Electric drills on ore deposits, with batteries, a generator, a wind turbine and solar panels."
+      },
+      "furnaces": {
+        "alt": "FERRA screenshot: two smoking furnaces by a pond, with the house and worker cabins nearby.",
+        "cap": "Two smoking furnaces by a pond, with the house and worker cabins nearby."
+      },
+      "lake": {
+        "alt": "FERRA screenshot: fishing huts on a pond, among the camp's drills and street lamps.",
+        "cap": "Fishing huts on a pond, among the camp's drills and street lamps."
+      },
+      "dusk": {
+        "alt": "FERRA screenshot: the camp at dusk, lamps lit, turrets in place and glowing-eyed creatures lurking at the edges.",
+        "cap": "The camp at dusk, lamps lit, turrets in place and glowing-eyed creatures lurking at the edges."
+      },
+      "meteor": {
+        "alt": "FERRA screenshot: a meteorite streaks across the sky above the camp at dusk.",
+        "cap": "A meteorite streaks across the sky above the camp at dusk."
+      },
+      "monsters": {
+        "alt": "FERRA screenshot: the base at dusk: monsters prowl at the edge of the light while the turrets stand watch.",
+        "cap": "The base at dusk: monsters prowl at the edge of the light while the turrets stand watch."
+      }
+    },
+    "features": {
+      "label": "In the game",
+      "meta": "Seven elements",
+      "title": "What FERRA contains.",
+      "note": "The names of buildings, skills and modes are those of the game, which is in French.",
+      "harvest": {
+        "title": "Gathering and automation",
+        "text": "Gather wood, stone, iron and copper, then use classic or electric drills to automate production."
+      },
+      "power": {
+        "title": "Electrical grid",
+        "text": "Solar panels, wind turbines, generators, a nuclear plant, batteries and a Central power your machines."
+      },
+      "skills": {
+        "title": "Skills and jobs",
+        "text": "A skill tree (Combat, Mineur, Bûcheron, Transport, Confort) and five jobs: Bûcheron, Mineur, Pêcheur, Fermier, Ingénieur."
+      },
+      "daynight": {
+        "title": "Day, night and weather",
+        "text": "The day/night cycle brings night monsters. The weather changes: rain, strong wind, light snow, blizzard, storm, fog, eclipse."
+      },
+      "defense": {
+        "title": "Defense",
+        "text": "Turrets, barracks and a torch to hold out until morning."
+      },
+      "meteor": {
+        "title": "The meteorite",
+        "text": "A meteorite threatens the world. You choose between Bunker Tycoon, an isometric bunker to fit out, and the Évacuation."
+      },
+      "achievements": {
+        "title": "Achievements",
+        "text": "Achievements spread over seven categories, with Bronze, Silver, Gold and Platinum tiers."
+      }
+    },
+    "config": {
+      "label": "Requirements",
+      "meta": "Required and recommended",
+      "title": "Requirements.",
+      "required": "Required",
+      "recommended": "Recommended",
+      "system": "System",
+      "space": "Space",
+      "account": "Account",
+      "accountValue": "Free Izacki account, for the Launcher",
+      "language": "Language",
+      "screen": "Screen",
+      "controls": "Controls",
+      "controlsValue": "WASD (ZQSD on an AZERTY keyboard) or arrow keys, and mouse"
+    },
+    "news": {
+      "label": "What's new",
+      "meta": "Release notes",
+      "title": "Latest versions."
+    },
+    "band": {
+      "title": "Install the Launcher, then play FERRA."
+    }
+  }
+}

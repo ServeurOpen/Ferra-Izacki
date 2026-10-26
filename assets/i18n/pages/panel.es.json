@@ -1,0 +1,365 @@
+{
+  "panel": {
+    "meta": {
+      "title": "Panel de administración | Izacki",
+      "description": "Panel de administración de Izacki."
+    },
+    "side": {
+      "label": "Menú del panel",
+      "title": "Administración",
+      "overview": "Resumen",
+      "actions": "Acciones",
+      "moderation": "Moderación",
+      "finance": "Finanzas",
+      "support": "Asistencia",
+      "accounts": "Cuentas"
+    },
+    "crumb": "Administración",
+    "title": "Panel de administración",
+    "lead": "Visitas, descargas del Launcher y cuentas de jugadores.",
+    "refresh": "Actualizar",
+    "check": "Comprobando el acceso…",
+    "access": {
+      "title": "Acceso restringido"
+    },
+    "visits": {
+      "title": "Visitas del sitio, últimos 14 días",
+      "hint": "Cada carga de página cuenta como una visita, incluidos los visitantes anónimos.",
+      "chart": "Visitas por día en los últimos 14 días"
+    },
+    "downloads": {
+      "title": "Descargas del Launcher, últimos 14 días",
+      "hint": "Un clic en el botón de descarga cuenta como una descarga: no confirma que la descarga haya terminado.",
+      "chart": "Descargas del Launcher por día en los últimos 14 días"
+    },
+    "actions": {
+      "title": "Acciones",
+      "hint": "Las mismas acciones que en el panel del Launcher, para actuar sin abrir la aplicación."
+    },
+    "field": {
+      "player": "Jugador",
+      "amount": "Importe",
+      "reason": "Motivo",
+      "scope": "Alcance",
+      "duration": "Duración",
+      "required": "obligatorio"
+    },
+    "grant": {
+      "title": "Acreditar a un jugador",
+      "hint": "Por ejemplo, el ganador de un concurso",
+      "btn": "Acreditar",
+      "badAmount": "Importe no válido.",
+      "thisPlayer": "este jugador",
+      "action": "Abonar {n} créditos a {player}",
+      "defaultReason": "Concurso",
+      "done": "+{n} créditos enviados. Nuevo saldo: {balance}."
+    },
+    "all": {
+      "title": "Acreditar a todos",
+      "hint": "Muestra una notificación a cada jugador",
+      "btn": "Regalar a todos",
+      "confirm": "¿Regalar {n} créditos a TODOS los jugadores? Cada uno verá una ventana emergente.",
+      "action": "Regalar {n} créditos a TODOS los jugadores",
+      "defaultReason": "Regalo del creador",
+      "done": "+{n} créditos enviados a {count} jugador(es)."
+    },
+    "ban": {
+      "title": "Banear a un jugador",
+      "hint": "Desde el sitio, eliges el alcance",
+      "reasonPh": "Motivo del baneo",
+      "btn": "Banear",
+      "reasonRequired": "El motivo es obligatorio.",
+      "forever": "de forma definitiva",
+      "for": "durante {d}",
+      "confirm": "¿Banear a {label} {duration} (alcance: {scope})?",
+      "action": "Banear a {label}",
+      "done": "Jugador baneado."
+    },
+    "bans": {
+      "title": "Jugadores baneados actualmente",
+      "region": "Jugadores baneados",
+      "none": "Ningún jugador baneado."
+    },
+    "col": {
+      "email": "Correo",
+      "reason": "Motivo",
+      "scope": "Alcance",
+      "end": "Fin",
+      "action": "Acción",
+      "username": "Apodo",
+      "created": "Creada el",
+      "lastLogin": "Último acceso"
+    },
+    "mod": {
+      "title": "Juegos pendientes de moderación",
+      "hint": "Juegos enviados desde «Sortir mon jeu»",
+      "none": "Ningún juego pendiente.",
+      "underReview": "En revisión",
+      "shotAlt": "Captura de pantalla del juego",
+      "download": "Descargar el archivo",
+      "accept": "Aceptar",
+      "examine": "Poner en revisión"
+    },
+    "fin": {
+      "title": "Finanzas",
+      "hint": "Retiradas y reembolsos"
+    },
+    "wd": {
+      "title": "Solicitudes de retirada",
+      "closed": "Mostrar también las retiradas terminadas (pagadas o rechazadas)",
+      "hint": "Portal de creadores",
+      "payAll": "Aprobar todo (sin alertas)",
+      "status": {
+        "pending": "Pendiente de validación",
+        "approved": "Aprobado, pendiente de pago",
+        "processing": "Transferencia en curso",
+        "failed": "Transferencia fallida",
+        "paid": "Pagado",
+        "rejected": "Rechazado"
+      },
+      "statusUnknown": "estado desconocido",
+      "account": {
+        "not_configured": "sin configurar",
+        "incomplete": "faltan datos",
+        "pending_verification": "en verificación",
+        "active": "activa",
+        "restricted": "restringida"
+      },
+      "level": {
+        "none": "Sin alertas",
+        "attention": "Por revisar",
+        "high": "Riesgo alto"
+      },
+      "chip": {
+        "single": "Un solo comprador: {pct}\u00a0% de las ganancias",
+        "few": "Pocos compradores: {n}",
+        "newDays": "{pct}\u00a0% de las ganancias provienen de cuentas de menos de {days} días",
+        "newRecent": "{pct}\u00a0% de las ganancias provienen de cuentas recientes",
+        "refundedBuyers": "Compradores con reembolso o disputa en Stripe: {pct}\u00a0% de las ganancias",
+        "newCreator": "Cuenta de creador de {n} {unit}",
+        "prevFailed": "Una transferencia anterior falló",
+        "prevRejected": "Retirada anterior rechazada",
+        "banned": "Cuenta del creador baneada: no se enviará ninguna transferencia",
+        "deleted": "Cuenta del creador eliminada: no se enviará ninguna transferencia"
+      },
+      "lastError": {
+        "insufficient_stripe_balance": "Saldo disponible de Stripe insuficiente: la retirada sigue aprobada, vuelve a intentarlo cuando haya fondos disponibles.",
+        "insufficient_platform_funds": "Salvaguarda: el dinero neto cobrado no cubre esta retirada.",
+        "account_not_ready": "La cuenta de pago del creador no está lista.",
+        "attempt": "{base} (intento {n})"
+      },
+      "err": {
+        "insufficient_stripe_balance": "Saldo disponible de Stripe insuficiente ({available} disponibles, {needed} necesarios). La retirada sigue aprobada: vuelve a intentarlo cuando haya fondos disponibles.",
+        "account_not_ready": "La cuenta de pago del creador no está lista ({status}).",
+        "transfer_mismatch": "Stripe devolvió una transferencia que no coincide con la solicitud (importe o destino): NO se marca como pagada. Revisa la transferencia en Stripe y haz clic en «Comprobar en Stripe».",
+        "stripe_uncertain": "Stripe respondió de un modo que no permite concluir{code}: el resultado de la transferencia es incierto. Haz clic en «Comprobar en Stripe» antes de volver a intentarlo.",
+        "stripe_failed": "Stripe rechazó la transferencia{code}. La retirada figura como fallida y se puede reintentar; no hay doble cargo.",
+        "stripe_noanswer": "Stripe no respondió{code}: no se ha rechazado ni pagado nada, la retirada sigue aprobada. Vuelve a intentarlo en unos minutos.",
+        "account_disabled": "La cuenta del creador está {why}: no se ha enviado la transferencia. Si rechazas la solicitud, se le devuelven sus créditos.",
+        "country_not_allowed": "El país de la cuenta de pago{country} ya no está en la lista de países aceptados: no se ha enviado la transferencia. Vuelve a añadirlo a los países aceptados en los ajustes de la plataforma, o rechaza la solicitud.",
+        "stripe_unreachable": "Stripe no respondió: resultado incierto. Haz clic en «Comprobar en Stripe» antes de volver a intentarlo.",
+        "paid_but_db_update_failed": "La transferencia se envió ({id}) pero falló el registro: haz clic en «Comprobar en Stripe», no la rechaces.",
+        "in_progress": "Esta retirada ya se está procesando.",
+        "request_rejected": "Esta solicitud ya fue rechazada.",
+        "legacy_request": "Solicitud antigua (anterior a Stripe): recházala, los créditos se devuelven al creador.",
+        "withdrawals_disabled": "Las retiradas están suspendidas: están desactivadas en los ajustes de la plataforma.",
+        "invalid_state": "Esta solicitud ya no está en un estado que permita esta acción. Se actualizará la lista.",
+        "forbidden": "Acción reservada al administrador.",
+        "session": "Sesión caducada: vuelve a iniciar sesión y reinténtalo.",
+        "stripe_not_configured": "Los pagos aún no están configurados: falta la clave secreta de Stripe del servicio de retirada.",
+        "service_unavailable": "El servicio de pago no está disponible temporalmente. Esta solicitud no ha enviado ninguna transferencia: vuelve a intentarlo en unos minutos.",
+        "not_found": "Solicitud no encontrada: se actualizará la lista.",
+        "internal_error": "Error interno del servicio de retirada: vuelve a intentarlo y, si continúa, consulta los registros del servidor.",
+        "network": "No se puede conectar. Comprueba tu conexión a internet y vuelve a intentarlo."
+      },
+      "why": {
+        "banned": "baneada",
+        "deleted": "eliminada",
+        "suspended": "suspendida"
+      },
+      "idUnknown": "identificador desconocido",
+      "btn": {
+        "approve": "Aprobar y pagar",
+        "retry": "Reintentar la transferencia",
+        "check": "Comprobar en Stripe",
+        "resume": "Reanudar la transferencia"
+      },
+      "resume": {
+        "since": "desde hace más de {n} {unit}",
+        "moment": "desde hace un rato",
+        "hint": "Úsalo solo si la transferencia sigue «en curso» {wait}: antes de ese plazo el servidor rechaza la reanudación, porque otro proceso aún puede estar enviando el dinero."
+      },
+      "check": {
+        "anomaly": "ANOMALÍA: existe una transferencia de Stripe{transfer} para esta solicitud aunque figura como «{label}». El creador recibió el dinero Y conserva sus créditos. No se ha modificado nada: cancela la transferencia en el panel de Stripe o retírale los créditos y revisa su cuenta.",
+        "found": "Transferencia encontrada en Stripe: la retirada se marca como pagada y no se ha creado una segunda transferencia.",
+        "none": "No hay ninguna transferencia en Stripe para esta retirada: puedes volver a lanzarla sin riesgo de duplicado.",
+        "pending": "De momento no se ha encontrado ninguna transferencia en Stripe (estado: {label}). Si la retirada sigue «en curso», espera unos minutos y usa «Reanudar la transferencia»."
+      },
+      "platform": "Portal de creadores · Disponible para retiradas: {available}{inflight}. El saldo disponible de Stripe se comprueba en el momento de la transferencia.",
+      "inFlight": " (de los cuales {amount} en curso de transferencia)",
+      "payAllN": "Aprobar todo (sin alertas) — {n} {unit}, {total}",
+      "none": "Ninguna solicitud pendiente.",
+      "accountLine": "Cuenta de pago: {status}{country}",
+      "accountNone": "Cuenta de pago: ninguna",
+      "fact": {
+        "creator": "Cuenta de creador: {n} {unit} de antigüedad",
+        "top": "Mayor comprador: {pct}\u00a0% de las ganancias",
+        "recent": "Cuentas recientes: {pct}\u00a0% de las ganancias",
+        "refunds": "Reembolsos o disputas: {pct}\u00a0% de las ganancias · {n} {unit}",
+        "prev": "Retiradas anteriores: {paid} {paidUnit}{amount}, {rejected} {rejectedUnit}, {failed} {failedUnit}"
+      },
+      "feeWith": "{gross} brutos − {fee} de gastos de tramitación = {net} netos",
+      "feeNone": "{gross} brutos, sin gastos de tramitación = {net} netos",
+      "hold": " · créditos vendidos hace al menos {n} {unit}",
+      "firstWithdrawal": " (primera retirada)",
+      "requestedOn": "solicitado el {date}",
+      "uncertain": "Resultado de la transferencia incierto: comprueba en Stripe antes de volver a intentarlo.",
+      "stripeId": "Transferencia de Stripe: {id}",
+      "payAllConfirm": "¿Aprobar y pagar {n} {unit} sin alertas, por un total de {total}?",
+      "payAllProgress": "Transferencia en curso… ({i}/{n})",
+      "approveConfirm": "¿Aprobar esta retirada? Se transferirán {amount} a la cuenta de Stripe de {email}.",
+      "adopted": "Ya existía una transferencia en Stripe para esta retirada: se ha vinculado y no se ha creado una segunda transferencia.",
+      "uncertainReject": "El resultado de la transferencia es incierto: haz clic primero en «Comprobar en Stripe».",
+      "alreadyDone": "Esta solicitud ya se ha procesado. Se actualizará la lista."
+    },
+    "rf": {
+      "title": "Solicitudes de reembolso",
+      "none": "Ninguna solicitud pendiente.",
+      "seller": "Vendedor: {email}",
+      "played": "Jugado {time} · En posesión desde hace {days} d",
+      "meets": "Cumple la norma (≤1 h / ≤7 d): se recomienda aceptar",
+      "outside": "Fuera de la norma: se recomienda rechazar",
+      "msg": "Mensaje del comprador: «{msg}»",
+      "btn": "Reembolsar",
+      "confirm": "¿Confirmar el reembolso? Los créditos se devolverán al comprador y se retirarán al vendedor."
+    },
+    "support": {
+      "title": "Tickets de asistencia"
+    },
+    "accounts": {
+      "title": "Cuentas de jugadores",
+      "hint": "Un enlace de restablecimiento envía el mismo correo seguro que «Contraseña olvidada»: la contraseña real nunca es visible ni recuperable, ni siquiera aquí.",
+      "search": "Buscar un jugador",
+      "searchPh": "Buscar un jugador (apodo o correo)…",
+      "region": "Cuentas de jugadores"
+    },
+    "pass": {
+      "title": "Se requiere la contraseña de paso",
+      "input": "Contraseña de paso",
+      "ph": "Pega la contraseña de paso…",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "protected": "Esta acción está protegida.",
+      "wrong": "Contraseña incorrecta: inténtalo de nuevo.",
+      "locked": "Demasiados intentos: vuelve a intentarlo en unos minutos."
+    },
+    "ticket": {
+      "messages": "Mensajes del ticket",
+      "refundNote": "Reembolso vinculado: acéptalo o recházalo en «Solicitudes de reembolso», más arriba; el ticket se cierra y responde solo.",
+      "closedNote": "Este ticket está cerrado.",
+      "reply": "Respuesta",
+      "replyPh": "Escribe una respuesta…",
+      "send": "Enviar",
+      "closeTicket": "Cerrar el ticket",
+      "cat": {
+        "question": "Pregunta",
+        "bug": "Bug",
+        "refund": "Reembolso",
+        "other": "Otro"
+      },
+      "status": {
+        "open": "Abierto",
+        "closed": "Cerrado"
+      },
+      "openCount": "{n} abierto(s)",
+      "none": "Todavía no hay tickets.",
+      "noneOpen": "No hay tickets abiertos por ahora.",
+      "open": "Abrir el ticket",
+      "closedGroup": "Tickets cerrados",
+      "closeConfirm": "¿Cerrar este ticket?"
+    },
+    "gate": {
+      "login": "Inicia sesión para acceder a esta página.",
+      "admin": "Esta página está reservada al administrador."
+    },
+    "delta": {
+      "none": "— vs ayer",
+      "new": "nuevo vs ayer",
+      "same": "= vs ayer",
+      "pct": "{sign}{pct}\u00a0% vs ayer"
+    },
+    "kpi": {
+      "loading": "Cargando",
+      "error": "No se pueden cargar las estadísticas",
+      "visits": "Visitas totales",
+      "downloads": "Descargas del Launcher",
+      "accounts": "Cuentas creadas",
+      "online": "Jugadores en línea",
+      "onlineSub": "Ahora mismo, en el Launcher",
+      "split": "Conectados frente a visitantes sin cuenta",
+      "anon": "{pct}\u00a0% anónimos",
+      "splitSub": "{logged} conectados · {anon} anónimos"
+    },
+    "never": "nunca",
+    "unknown": "desconocido",
+    "err": {
+      "line": "Error: {msg}",
+      "unknown": "desconocido",
+      "word": "error",
+      "noReason": "error desconocido"
+    },
+    "fail": "Fallo: {reason}",
+    "players": {
+      "none": "Ningún jugador coincide con «{query}».",
+      "reset": "Enlace de restablecimiento"
+    },
+    "btn": {
+      "sending": "Enviando…",
+      "sent": "Enviado",
+      "failed": "Error",
+      "unban": "Quitar el baneo",
+      "checking": "Comprobando…"
+    },
+    "credits": "crédito|créditos",
+    "free": "Gratis",
+    "unit": {
+      "mb": "MB"
+    },
+    "reject": {
+      "label": "Motivo del rechazo",
+      "ph": "Motivo del rechazo (obligatorio)",
+      "btn": "Rechazar",
+      "need": "Indica un motivo de rechazo."
+    },
+    "pl": {
+      "day": "día|días",
+      "minute": "minuto|minutos",
+      "refundedSale": "venta reembolsada|ventas reembolsadas",
+      "sale": "venta|ventas",
+      "buyerDistinct": "comprador distinto|compradores distintos",
+      "gamePublished": "juego publicado|juegos publicados",
+      "paid": "pagado|pagados",
+      "rejected": "rechazado|rechazados",
+      "failure": "fallo|fallos",
+      "request": "solicitud|solicitudes",
+      "transferSent": "transferencia enviada|transferencias enviadas",
+      "skipped": "solicitud sin procesar, que sigue pendiente|solicitudes sin procesar, que siguen pendientes"
+    },
+    "scope": {
+      "site": "Sitio web",
+      "both": "Sitio web + Launcher"
+    },
+    "scopeOpt": {
+      "site": "Solo el sitio web",
+      "launcher": "Solo el Launcher"
+    },
+    "dur": {
+      "h1": "1 hora",
+      "h24": "24 horas",
+      "d7": "7 días",
+      "d30": "30 días",
+      "perm": "Definitivo"
+    },
+    "pickPlayer": "Elige un jugador."
+  }
+}

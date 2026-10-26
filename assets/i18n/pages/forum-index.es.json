@@ -1,0 +1,35 @@
+{
+  "forumIndex": {
+    "meta": {
+      "title": "Foro de jugadores: ayuda, ideas y debate | Izacki",
+      "description": "El foro de Izacki: conversaciones, ayuda e ideas sobre los juegos y el Launcher. Basta una cuenta Izacki gratuita para escribir."
+    },
+    "crumb": "Foro",
+    "title": "Foro de Izacki",
+    "lead": "Conversaciones, ayuda e ideas: elige una categoría para ver sus temas.",
+    "loading": "Cargando categorías…",
+    "noCategories": "Todavía no hay categorías.",
+    "notConfigured": "El foro no está disponible por el momento.",
+    "notConfiguredHint": "Vuelve a intentarlo en unos minutos.",
+    "thread": "tema",
+    "threads": "temas",
+    "cat": {
+      "annonces": {
+        "name": "Anuncios",
+        "desc": "Las novedades oficiales de Izacki."
+      },
+      "general": {
+        "name": "Discusión general",
+        "desc": "Habla de los juegos, comparte tus partidas, haz tus preguntas."
+      },
+      "support": {
+        "name": "Soporte y errores",
+        "desc": "¿Un problema al iniciar o en el juego? Descríbelo aquí."
+      },
+      "idees": {
+        "name": "Ideas y sugerencias",
+        "desc": "Propón lo que te gustaría ver en los juegos y en el Launcher."
+      }
+    }
+  }
+}

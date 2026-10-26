@@ -1,134 +1,329 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title data-i18n="ferraPage.pageTitle">FERRA — Automatisation de Fer</title>
-<meta name="description" content="FERRA — un jeu de survie et d'automatisation. Reconstruis un monde, protège ton feu, affronte une météorite. Un jeu d'Izacki.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛏️</text></svg>">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0C0D0F">
+<title data-i18n="ferra.meta.title">FERRA, jeu de survie et d'automatisation | Izacki</title>
+<meta name="description" content="FERRA est un jeu de survie et d'automatisation gratuit pour Windows : protège ton feu de camp, automatise ta production, prépare-toi à la météorite." data-i18n-content="ferra.meta.description">
+<link rel="canonical" href="https://izackiferra.com/games/ferra.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:site_name" content="Izacki">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://izackiferra.com/games/ferra.html">
+<meta property="og:title" content="FERRA, jeu de survie et d'automatisation | Izacki" data-i18n-content="ferra.meta.title">
+<meta property="og:description" content="FERRA est un jeu de survie et d'automatisation gratuit pour Windows : protège ton feu de camp, automatise ta production, prépare-toi à la météorite." data-i18n-content="ferra.meta.description">
+<meta property="og:image" content="https://izackiferra.com/assets/img/games/ferra-share-fr-1200.jpg" data-i18n-content="ferra.meta.shareImage">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FERRA, jeu de survie et d'automatisation&nbsp;: le titre et les mentions «&nbsp;Gratuit&nbsp;» et «&nbsp;Dans le Launcher Izacki&nbsp;» sur une capture du jeu." data-i18n-content="ferra.meta.imageAlt">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FERRA, jeu de survie et d'automatisation | Izacki" data-i18n-content="ferra.meta.title">
+<meta name="twitter:description" content="FERRA est un jeu de survie et d'automatisation gratuit pour Windows : protège ton feu de camp, automatise ta production, prépare-toi à la météorite." data-i18n-content="ferra.meta.description">
+<meta name="twitter:image" content="https://izackiferra.com/assets/img/games/ferra-share-fr-1200.jpg" data-i18n-content="ferra.meta.shareImage">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="preload" href="../assets/fonts/saira.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/jetbrains-mono.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/css/style.css">
+<script>(function(d){d.classList.add("js");var l="",q=/[?&]lang=(fr|en|es)(?:&|$)/.exec(location.search);if(q){l=q[1]}else{try{l=localStorage.getItem("ferra_lang")||""}catch(e){}}if(!/^(fr|en|es)$/.test(l)){var a=navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||"fr"];l="fr";for(var i=0;i<a.length;i++){var c=String(a[i]).slice(0,2).toLowerCase();if(/^(fr|en|es)$/.test(c)){l=c;break}}}d.lang=l;if(l!=="fr"){d.classList.add("i18n-pending");setTimeout(function(){d.classList.remove("i18n-pending")},3000)}})(document.documentElement)</script>
+<link rel="stylesheet" href="../assets/css/pages/games.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"VideoGame","name":"FERRA","description":"Un monde à reconstruire, un feu à protéger, une météorite à affronter.","genre":["Survie","Automatisation"],"gamePlatform":"Windows","operatingSystem":"Windows 10, Windows 11","applicationCategory":"Game","inLanguage":"fr","image":"https://izackiferra.com/assets/img/games/ferra-share-fr-1200.jpg","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"publisher":{"@type":"Organization","name":"Izacki","url":"https://izackiferra.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://izackiferra.com/"},{"@type":"ListItem","position":2,"name":"FERRA","item":"https://izackiferra.com/games/ferra.html"}]}]}</script>
 </head>
-<body>
-
-<header class="site-header">
-  <nav class="site-nav">
-    <a href="../index.html" class="brand">FER<span>RA</span></a>
-    <div class="nav-links">
-      <a href="../index.html" class="nav-link" data-i18n="nav.home">Accueil</a>
-      <a href="ferra-infos.html" class="nav-link" data-i18n="nav.infosChangelog">Infos &amp; Changelog</a>
-      <a href="../launcher.html" class="nav-link active" data-i18n="nav.launcher">Launcher</a>
-      <a href="../forum/index.html" class="nav-link" data-i18n="nav.forum">Forum</a>
-      <a href="../contact.html" class="nav-link" data-i18n="nav.contact">Contact</a>
-      <a href="../launcher.html" class="nav-cta" data-i18n="nav.download">⬇ Télécharger</a>
-      <span id="navAuth" class="nav-auth"></span>
+<body data-page="ferra" data-with="releases">
+<a class="skip" href="#contenu" data-i18n="shell.skip">Aller au contenu</a>
+<header class="site-header" data-shell="header">
+<div class="wrap header-row">
+  <a class="brand" href="../index.html" aria-label="Izacki, accueil" data-i18n-attr="aria-label:shell.brand.home"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"/><rect class="brand__sq" x="12" y="12" width="10" height="10"/></svg><span class="brand__word">Izacki</span></a>
+  <a class="btn btn--primary btn--sm btn--nowrap header-dl" href="../launcher.html#telecharger"><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#download"/></svg><span class="header-dl__t" data-i18n="shell.download">Télécharger</span></a>
+  <button class="btn btn--outline btn--sm btn--icon menu-btn" type="button" aria-expanded="false" aria-controls="nav-panel" aria-label="Ouvrir le menu" data-i18n-attr="aria-label:shell.menu.open"><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#menu"/></svg></button>
+  <div class="nav-panel" id="nav-panel">
+    <nav aria-label="Navigation principale" data-i18n-attr="aria-label:shell.nav.label">
+      <ul class="nav">
+        <li><a href="../launcher.html"><span data-i18n="shell.nav.launcher">Launcher</span></a></li>
+        <li><a href="../index.html#jeux" aria-current="true"><span data-i18n="shell.nav.games">Jeux</span><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#chevron-down"/></svg></a>
+          <div class="nav-sub"><a href="../games/ferra.html" aria-current="page">FERRA<small data-i18n="shell.nav.ferraSub">Survie / automatisation</small></a><a href="../games/tower-defense.html">Tower Défense Infini<small data-i18n="shell.nav.tdSub">Tower defense</small></a></div></li>
+        <li><a href="../launcher.html#createurs"><span data-i18n="shell.nav.creators">Créateurs</span></a></li>
+        <li><a href="../forum/index.html"><span data-i18n="shell.nav.community">Communauté</span><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#chevron-down"/></svg></a>
+          <div class="nav-sub"><a href="../forum/index.html"><span data-i18n="shell.nav.forum">Forum</span><small data-i18n="shell.nav.forumSub">Sujets et réponses</small></a><a href="https://discord.gg/bv2w8spATk" target="_blank" rel="noopener noreferrer">Discord<svg class="icon icon--fill" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#discord"/></svg><span class="sr-only" data-i18n="shell.newTab">(s'ouvre dans un nouvel onglet)</span><small data-i18n="shell.nav.discordSub">Le serveur d'Izacki</small></a></div></li>
+        <li><a href="../faq.html"><span data-i18n="shell.nav.help">Aide</span><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#chevron-down"/></svg></a>
+          <div class="nav-sub"><a href="../faq.html"><span data-i18n="shell.nav.faq">Questions fréquentes</span><small data-i18n="shell.nav.faqSub">Installation, compte, crédits</small></a><a href="../contact.html"><span data-i18n="shell.nav.contact">Contact</span><small data-i18n="shell.nav.contactSub">Écrire à l'équipe</small></a></div></li>
+      </ul>
+    </nav>
+    <div class="tools">
+      <span id="navAuth" class="auth" data-state="loading"></span>
+      <div class="lang" role="group" aria-label="Langue du site" data-i18n-attr="aria-label:shell.lang.label"><button type="button" lang="fr" data-lang="fr" aria-label="Français" aria-pressed="true">FR</button><button type="button" lang="en" data-lang="en" aria-label="English" aria-pressed="false">EN</button><button type="button" lang="es" data-lang="es" aria-label="Español" aria-pressed="false">ES</button></div>
+      <a class="btn btn--primary btn--sm btn--nowrap" href="../launcher.html#telecharger"><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#download"/></svg><span data-i18n="shell.download">Télécharger</span></a>
     </div>
-  </nav>
+  </div>
+</div>
 </header>
+<main id="contenu" tabindex="-1">
 
-<section style="padding-top:30px;">
-  <div class="container">
-    <div class="game-banner">
-      <img src="../assets/img/screenshot-gameplay.png" alt="FERRA — campement avec feu de camp, arbres, lac et fusée">
-      <div class="game-banner-body">
-        <span class="game-banner-tag" data-i18n="ferraPage.tag">⛏️ Survie / Automatisation</span>
-        <h1 class="game-banner-title">FERRA</h1>
-        <p class="game-banner-tagline" data-i18n="ferraPage.tagline">Un monde à reconstruire, un feu à protéger, une météorite à affronter. Mine, automatise, défends ton campement — et prépare-toi pour la nuit.</p>
-        <div class="game-banner-actions">
-          <a href="../launcher.html" class="btn btn-primary" data-i18n="ferraPage.installCta">🚀 Installer via le Launcher — gratuit</a>
+<section class="hero hero--page section--flush" aria-labelledby="h1">
+  <div class="wrap">
+    <nav class="hero__crumbs" aria-label="Fil d'Ariane" data-i18n-attr="aria-label:common.crumbs"><ol class="crumbs"><li><a href="../index.html" data-i18n="common.home">Accueil</a></li><li><a href="../index.html#jeux" data-i18n="shell.nav.games">Jeux</a></li><li aria-current="page">FERRA</li></ol></nav>
+    <div class="hero__kicker"><p class="label label--mark" data-i18n="common.genre.ferra">Survie / automatisation</p></div>
+    <h1 id="h1" class="t-display">FERRA</h1>
+    <div class="hero__grid">
+      <div class="hero__text">
+        <p class="t-lead" data-i18n="ferra.hero.lead">Un monde à reconstruire, un feu à protéger, une météorite à affronter. Mine, automatise, défends ton campement, et prépare-toi pour la nuit.</p>
+        <div class="actions"><a class="btn btn--primary btn--lg" href="../launcher.html#telecharger"><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#download"/></svg><span data-i18n="common.cta.install">Installer avec le Launcher</span></a></div>
+        <p class="via"><span data-i18n="common.via">S'installe et se met à jour avec</span> <a class="lockup" href="../launcher.html"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"/><rect class="brand__sq" x="12" y="12" width="10" height="10"/></svg><span class="lockup__name">Izacki</span> <span class="lockup__sub">Launcher</span></a></p>
+      </div>
+      <figure class="plate plate--16-9 hero__plate">
+        <span class="plate__marks" aria-hidden="true"></span>
+        <div class="plate__frame">
+          <picture>
+            <source type="image/webp" srcset="../assets/img/games/ferra-hero-fr-640.webp 640w, ../assets/img/games/ferra-hero-fr-1280.webp 1280w, ../assets/img/games/ferra-hero-fr-1920.webp 1920w" sizes="(min-width:62rem) 55vw, 100vw" data-i18n-attr="srcset:ferra.hero.srcset">
+            <img class="plate__img" src="../assets/img/games/ferra-hero-fr-1280.png" width="1280" height="720" alt="Bannière de FERRA, jeu de survie et d'automatisation&nbsp;: «&nbsp;Un monde à reconstruire, un feu à protéger, une météorite à affronter.&nbsp;», avec les mentions «&nbsp;Gratuit&nbsp;» et «&nbsp;Dans le Launcher Izacki&nbsp;», sur une capture du jeu." data-i18n-attr="src:ferra.hero.src;alt:ferra.hero.plateAlt" fetchpriority="high" decoding="async">
+          </picture>
+        </div>
+        <figcaption>
+          <dl class="cart cart--5"><div><dt data-i18n="common.version">Version</dt><dd class="num" data-game-version="ferra">1.0.17</dd></div><div><dt data-i18n="common.plate.updated">Mise à jour</dt><dd class="num"><time datetime="2026-10-05" data-game-date="ferra">5 octobre 2026</time></dd></div><div><dt data-i18n="common.plate.size">Taille</dt><dd data-i18n="common.size.ferra">Environ 5&nbsp;Mo</dd></div><div><dt data-i18n="common.plate.price">Prix</dt><dd data-i18n="common.free">Gratuit</dd></div><div><dt data-i18n="common.plate.platform">Plateforme</dt><dd data-i18n="common.windows">Windows 10/11</dd></div></dl>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="presentation" aria-labelledby="pres-t">
+  <div class="wrap">
+    <div class="split">
+      <div class="rail">
+        <p class="label label--mark" data-i18n="ferra.presentation.label">Présentation</p>
+        <p class="rail__meta meta" data-i18n="ferra.presentation.meta">Un jeu de survie</p>
+      </div>
+      <div class="main">
+        <div class="section-head">
+          <h2 id="pres-t" class="t-h2" data-i18n="ferra.presentation.title">Construire case par case.</h2>
+        </div>
+        <div class="hero__grid">
+          <div class="prose">
+            <p data-i18n="ferra.presentation.p1">Chaque partie de FERRA se construit case par case. Protège ton feu de camp, récolte fer, bois, pierre et cuivre, puis automatise tout avec des foreuses, classiques ou électriques, alimentées par un réseau électrique.</p>
+            <p data-i18n="ferra.presentation.p2">Le jour, on récolte et on construit. La nuit, les monstres rôdent. Au loin, une météorite approche&nbsp;: bunker ou évacuation, à toi de choisir.</p>
+          </div>
+          <figure class="plate plate--wide hero__plate">
+            <span class="plate__marks" aria-hidden="true"></span>
+            <div class="plate__frame">
+              <picture>
+                <source type="image/webp" srcset="../assets/img/cover-ferra-640.webp 640w, ../assets/img/cover-ferra-1000.webp 1000w, ../assets/img/cover-ferra-1600.webp 1600w" sizes="(min-width:62rem) 45vw, 100vw">
+                <img class="plate__img" src="../assets/img/cover-ferra.png" width="1983" height="793" alt="Illustration de FERRA : le titre sur une plaque métallique, devant une usine de tuyaux, de foreuses et de tapis roulants, avec une éolienne et des arbres à l'arrière-plan." data-i18n-attr="alt:ferra.presentation.coverAlt" loading="lazy" decoding="async">
+              </picture>
+            </div>
+            <figcaption class="plate__note" data-i18n="ferra.presentation.coverNote">Illustration · La jaquette du jeu.</figcaption>
+          </figure>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section style="padding-top:10px;">
-  <div class="container">
-    <div class="grid grid-2" style="gap:40px;align-items:start;">
-      <div>
-        <div class="section-tag" style="text-align:left;" data-i18n="ferraPage.about.tag">À propos de ce jeu</div>
-        <h2 class="section-title" style="text-align:left;font-size:26px;" data-i18n="ferraPage.about.title">Un jeu de survie qui ne s'arrête jamais</h2>
-        <p style="color:var(--text-dim);line-height:1.75;font-size:14.5px;" data-i18n="ferraPage.about.p1">
-          De la pioche en main aux foreuses électriques, de l'arbre de compétences aux métiers, chaque partie de FERRA se
-          construit case par case. Protège ton feu de camp, récolte fer, bois, pierre et cuivre, puis automatise tout avec
-          des foreuses — classiques ou électriques, alimentées par un vrai réseau (panneaux solaires, éoliennes,
-          générateurs, centrale nucléaire, batteries).
-        </p>
-        <p style="color:var(--text-dim);line-height:1.75;font-size:14.5px;margin-top:14px;" data-i18n="ferraPage.about.p2">
-          Le jour, on récolte et on construit. La nuit, les monstres rôdent. Et au loin, une météorite approche —
-          construis ton bunker ou mise sur l'évacuation, chaque choix a de vraies conséquences.
-        </p>
+<section class="section" id="galerie" aria-labelledby="gal-t">
+  <div class="wrap">
+    <div class="split">
+      <div class="rail">
+        <p class="label label--mark" data-i18n="ferra.gallery.label">Captures</p>
+        <p class="rail__meta meta" data-i18n="ferra.gallery.meta">Sept captures du jeu</p>
       </div>
-      <div>
-        <div class="section-tag" style="text-align:left;" data-i18n="ferraPage.features.tag">Fonctionnalités</div>
-        <ul class="feature-list">
-          <li data-i18n="ferraPage.features.f1">Récolte et automatisation complètes — du minage à la main aux foreuses électriques</li>
-          <li data-i18n="ferraPage.features.f2">Réseau électrique complet : solaire, éolien, générateur, nucléaire, batteries</li>
-          <li data-i18n="ferraPage.features.f3">Arbre de compétences et système de Métiers avec de vraies récompenses</li>
-          <li data-i18n="ferraPage.features.f4">Cycle jour/nuit — tourelles, casernes et torche pour survivre à la nuit</li>
-          <li data-i18n="ferraPage.features.f5">Bunker Tycoon ou Évacuation face à la météorite, avec une vraie suite narrative</li>
-          <li data-i18n="ferraPage.features.f6">Forum communautaire et compte joueur unifié</li>
-        </ul>
-        <p style="margin-top:18px;"><a href="ferra-infos.html" style="color:var(--copper-glow);font-weight:600;" data-i18n="ferraPage.features.moreLink">📖 Voir toutes les infos &amp; le changelog complet →</a></p>
+      <div class="main">
+        <div class="section-head">
+          <h2 id="gal-t" class="t-h2" data-i18n="ferra.gallery.title">Le camp en images.</h2>
+        </div>
+      </div>
+    </div>
+    <div class="gallery gallery--feature">
+      <figure class="plate">
+        <span class="plate__marks" aria-hidden="true"></span>
+        <div class="plate__frame">
+          <picture>
+            <source type="image/webp" srcset="../assets/img/games/ferra-large-jour-terrain-640.webp 640w, ../assets/img/games/ferra-large-jour-terrain-1280.webp 1280w, ../assets/img/games/ferra-large-jour-terrain-1920.webp 1920w, ../assets/img/games/ferra-large-jour-terrain-2560.webp 2560w" sizes="(min-width:100rem) 1500px, 100vw">
+            <img class="plate__img" src="../assets/img/games/ferra-large-jour-terrain-960.png" width="960" height="405" alt="Capture de FERRA&nbsp;: vue large du camp en plein jour, de la zone de foreuses au point d'eau." data-i18n-attr="alt:ferra.gallery.wide.alt" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <figcaption class="plate__note" data-i18n="ferra.gallery.wide.cap">Vue large du camp en plein jour, de la zone de foreuses au point d'eau.</figcaption>
+      </figure>
+      <figure class="plate">
+        <span class="plate__marks" aria-hidden="true"></span>
+        <div class="plate__frame">
+          <picture>
+            <source type="image/webp" srcset="../assets/img/games/ferra-foreuses-terrain-640.webp 640w, ../assets/img/games/ferra-foreuses-terrain-1280.webp 1280w, ../assets/img/games/ferra-foreuses-terrain-1920.webp 1920w" sizes="(min-width:72rem) 30vw, (min-width:40rem) 46vw, 100vw">
+            <img class="plate__img" src="../assets/img/games/ferra-foreuses-terrain-960.png" width="960" height="540" alt="Capture de FERRA&nbsp;: des foreuses électriques sur des gisements, avec batteries, générateur, éolienne et panneaux solaires." data-i18n-attr="alt:ferra.gallery.drills.alt" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <figcaption class="plate__note" data-i18n="ferra.gallery.drills.cap">Des foreuses électriques sur des gisements, avec batteries, générateur, éolienne et panneaux solaires.</figcaption>
+      </figure>
+      <figure class="plate">
+        <span class="plate__marks" aria-hidden="true"></span>
+        <div class="plate__frame">
+          <picture>
+            <source type="image/webp" srcset="../assets/img/games/ferra-fournaises-terrain-640.webp 640w, ../assets/img/games/ferra-fournaises-terrain-1280.webp 1280w, ../assets/img/games/ferra-fournaises-terrain-1920.webp 1920w" sizes="(min-width:72rem) 30vw, (min-width:40rem) 46vw, 100vw">
+            <img class="plate__img" src="../assets/img/games/ferra-fournaises-terrain-960.png" width="960" height="540" alt="Capture de FERRA&nbsp;: deux fourneaux fumants au bord d'un bassin, avec la maison et des maisons d'ouvriers à proximité." data-i18n-attr="alt:ferra.gallery.furnaces.alt" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <figcaption class="plate__note" data-i18n="ferra.gallery.furnaces.cap">Deux fourneaux fumants au bord d'un bassin, avec la maison et des maisons d'ouvriers à proximité.</figcaption>
+      </figure>
+      <figure class="plate">
+        <span class="plate__marks" aria-hidden="true"></span>
+        <div class="plate__frame">
+          <picture>
+            <source type="image/webp" srcset="../assets/img/games/ferra-lac-terrain-640.webp 640w, ../assets/img/games/ferra-lac-terrain-1280.webp 1280w, ../assets/img/games/ferra-lac-terrain-1920.webp 1920w" sizes="(min-width:72rem) 30vw, (min-width:40rem) 46vw, 100vw">
+            <img class="plate__img" src="../assets/img/games/ferra-lac-terrain-960.png" width="960" height="540" alt="Capture de FERRA&nbsp;: des cabanes de pêche sur un point d'eau, parmi les foreuses et les lampadaires du camp." data-i18n-attr="alt:ferra.gallery.lake.alt" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <figcaption class="plate__note" data-i18n="ferra.gallery.lake.cap">Des cabanes de pêche sur un point d'eau, parmi les foreuses et les lampadaires du camp.</figcaption>
+      </figure>
+      <figure class="plate">
+        <span class="plate__marks" aria-hidden="true"></span>
+        <div class="plate__frame">
+          <picture>
+            <source type="image/webp" srcset="../assets/img/games/ferra-crepuscule-terrain-640.webp 640w, ../assets/img/games/ferra-crepuscule-terrain-1280.webp 1280w, ../assets/img/games/ferra-crepuscule-terrain-1920.webp 1920w" sizes="(min-width:72rem) 30vw, (min-width:40rem) 46vw, 100vw">
+            <img class="plate__img" src="../assets/img/games/ferra-crepuscule-terrain-960.png" width="960" height="540" alt="Capture de FERRA&nbsp;: le camp à la tombée de la nuit, lampadaires allumés, tourelles en place et créatures aux yeux luisants aux abords." data-i18n-attr="alt:ferra.gallery.dusk.alt" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <figcaption class="plate__note" data-i18n="ferra.gallery.dusk.cap">Le camp à la tombée de la nuit, lampadaires allumés, tourelles en place et créatures aux yeux luisants aux abords.</figcaption>
+      </figure>
+      <figure class="plate">
+        <span class="plate__marks" aria-hidden="true"></span>
+        <div class="plate__frame">
+          <picture>
+            <source type="image/webp" srcset="../assets/img/games/ferra-meteorite-terrain-640.webp 640w, ../assets/img/games/ferra-meteorite-terrain-1280.webp 1280w, ../assets/img/games/ferra-meteorite-terrain-1920.webp 1920w" sizes="(min-width:72rem) 30vw, (min-width:40rem) 46vw, 100vw">
+            <img class="plate__img" src="../assets/img/games/ferra-meteorite-terrain-960.png" width="960" height="540" alt="Capture de FERRA&nbsp;: une météorite traverse le ciel au-dessus du camp, à la tombée du soir." data-i18n-attr="alt:ferra.gallery.meteor.alt" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <figcaption class="plate__note" data-i18n="ferra.gallery.meteor.cap">Une météorite traverse le ciel au-dessus du camp, à la tombée du soir.</figcaption>
+      </figure>
+      <figure class="plate">
+        <span class="plate__marks" aria-hidden="true"></span>
+        <div class="plate__frame">
+          <picture>
+            <source type="image/webp" srcset="../assets/img/games/ferra-nuit-monstres-terrain-640.webp 640w, ../assets/img/games/ferra-nuit-monstres-terrain-1280.webp 1280w, ../assets/img/games/ferra-nuit-monstres-terrain-1920.webp 1920w" sizes="(min-width:72rem) 30vw, (min-width:40rem) 46vw, 100vw">
+            <img class="plate__img" src="../assets/img/games/ferra-nuit-monstres-terrain-960.png" width="960" height="540" alt="Capture de FERRA&nbsp;: la base à la tombée du jour&nbsp;: des monstres rôdent à la lisière de la lumière pendant que les tourelles veillent." data-i18n-attr="alt:ferra.gallery.monsters.alt" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <figcaption class="plate__note" data-i18n="ferra.gallery.monsters.cap">La base à la tombée du jour&nbsp;: des monstres rôdent à la lisière de la lumière pendant que les tourelles veillent.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="fonctions" aria-labelledby="fn-t">
+  <div class="wrap">
+    <div class="split">
+      <div class="rail">
+        <p class="label label--mark" data-i18n="ferra.features.label">Dans le jeu</p>
+        <p class="rail__meta meta" data-i18n="ferra.features.meta">Sept éléments</p>
+      </div>
+      <div class="main">
+        <div class="section-head">
+          <h2 id="fn-t" class="t-h2" data-i18n="ferra.features.title">Ce que contient FERRA.</h2>
+        </div>
+        <div class="rows">
+          <div class="row"><h3 data-i18n="ferra.features.harvest.title">Récolte et automatisation</h3><p data-i18n="ferra.features.harvest.text">Récolte de bois, de pierre, de fer et de cuivre, puis foreuses classiques ou électriques pour automatiser la production.</p></div>
+          <div class="row"><h3 data-i18n="ferra.features.power.title">Réseau électrique</h3><p data-i18n="ferra.features.power.text">Panneaux solaires, éoliennes, générateurs, centrale nucléaire, batteries et Central alimentent tes machines.</p></div>
+          <div class="row"><h3 data-i18n="ferra.features.skills.title">Compétences et métiers</h3><p data-i18n="ferra.features.skills.text">Un arbre de compétences (Combat, Mineur, Bûcheron, Transport, Confort) et cinq métiers&nbsp;: Bûcheron, Mineur, Pêcheur, Fermier, Ingénieur.</p></div>
+          <div class="row"><h3 data-i18n="ferra.features.daynight.title">Jour, nuit et météo</h3><p data-i18n="ferra.features.daynight.text">Le cycle jour/nuit amène des monstres nocturnes. La météo change&nbsp;: pluie, vent fort, neige légère, blizzard, orage, brouillard, éclipse.</p></div>
+          <div class="row"><h3 data-i18n="ferra.features.defense.title">Défense</h3><p data-i18n="ferra.features.defense.text">Tourelles, casernes et torche pour tenir jusqu'au matin.</p></div>
+          <div class="row"><h3 data-i18n="ferra.features.meteor.title">La météorite</h3><p data-i18n="ferra.features.meteor.text">Une météorite menace le monde. À toi de choisir entre Bunker Tycoon, un bunker isométrique à aménager, et l'Évacuation.</p></div>
+          <div class="row"><h3 data-i18n="ferra.features.achievements.title">Succès</h3><p data-i18n="ferra.features.achievements.text">Des succès répartis en sept catégories, avec des paliers Bronze, Argent, Or et Platine.</p></div>
+        </div>
+        <p class="meta not-fr games-note" data-i18n="ferra.features.note">Les noms des bâtiments, des compétences et des modes sont ceux du jeu, qui est en français.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section>
-  <div class="container">
-    <div class="section-tag" data-i18n="game.screenshots.tag">Captures d'écran</div>
-    <h2 class="section-title" data-i18n="game.screenshots.title">En jeu</h2>
-    <div class="shot-gallery">
-      <div class="shot-frame"><img src="../assets/img/screenshot-gameplay.png" alt="Campement FERRA avec feu de camp et fusée"></div>
-      <div class="shot-frame placeholder"><span class="ph-icon">🏚️</span><span data-i18n="ferraPage.shot2">Bunker &amp; météorite</span></div>
-      <div class="shot-frame placeholder"><span class="ph-icon">🏅</span><span data-i18n="ferraPage.shot3">Métiers &amp; succès</span></div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="container-narrow">
-    <div class="section-tag" data-i18n="game.reqs.tag">Configuration requise</div>
-    <h2 class="section-title" style="margin-bottom:26px;" data-i18n="game.reqs.title">Config minimale</h2>
-    <div class="reqs-grid">
-      <div class="reqs-col">
-        <h4 data-i18n="game.reqs.system">Système</h4>
-        <dl>
-          <dt>OS</dt><dd>Windows 10/11</dd>
-          <dt data-i18n="game.reqs.space">Espace</dt><dd>~5 Mo</dd>
-          <dt data-i18n="game.reqs.account">Compte</dt><dd data-i18n="game.reqs.accountVal">Compte Izacki (gratuit)</dd>
-        </dl>
+<section class="section" id="config" aria-labelledby="cfg-t">
+  <div class="wrap">
+    <div class="split">
+      <div class="rail">
+        <p class="label label--mark" data-i18n="ferra.config.label">Configuration</p>
+        <p class="rail__meta meta" data-i18n="ferra.config.meta">Requise et conseillée</p>
       </div>
-      <div class="reqs-col">
-        <h4 data-i18n="game.reqs.recommended">Recommandé</h4>
-        <dl>
-          <dt data-i18n="game.reqs.screen">Écran</dt><dd>1920×1080</dd>
-          <dt data-i18n="game.reqs.keyboard">Clavier</dt><dd data-i18n="ferraPage.controls">ZQSD/Flèches + souris</dd>
-        </dl>
+      <div class="main">
+        <div class="section-head">
+          <h2 id="cfg-t" class="t-h2" data-i18n="ferra.config.title">Configuration.</h2>
+        </div>
+        <div class="two-col">
+          <div>
+            <h3 class="t-h3 col-title" data-i18n="ferra.config.required">Requise</h3>
+            <dl class="kv"><dt data-i18n="ferra.config.system">Système</dt><dd data-i18n="common.windows">Windows 10/11</dd><dt data-i18n="ferra.config.space">Espace</dt><dd data-i18n="common.size.ferra">Environ 5&nbsp;Mo</dd><dt data-i18n="ferra.config.account">Compte</dt><dd data-i18n="ferra.config.accountValue">Compte Izacki gratuit, pour le Launcher</dd><dt data-i18n="ferra.config.language">Langue</dt><dd data-i18n="common.language.french">Français</dd></dl>
+          </div>
+          <div>
+            <h3 class="t-h3 col-title" data-i18n="ferra.config.recommended">Conseillée</h3>
+            <dl class="kv"><dt data-i18n="ferra.config.screen">Écran</dt><dd>1920×1080</dd><dt data-i18n="ferra.config.controls">Commandes</dt><dd data-i18n="ferra.config.controlsValue">ZQSD (AZERTY) ou WASD (QWERTY), ou flèches, et souris</dd></dl>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<footer class="site-footer">
-  <div class="container footer-row">
-    <div class="footer-note" data-i18n="footer.note">FERRA — projet indépendant, développé avec passion. © 2026 Vincent Dubois, Ferra.Izacki. Tous droits réservés.</div>
-    <div class="footer-links">
-      <a href="../index.html" data-i18n="nav.home">Accueil</a>
-      <a href="../launcher.html" data-i18n="nav.launcher">Launcher</a>
-      <a href="ferra-infos.html" data-i18n="ferraPage.footerInfos">Infos FERRA</a>
-      <a href="../forum/index.html" data-i18n="nav.forum">Forum</a>
-      <a href="../contact.html" data-i18n="nav.contact">Contact</a>
+<section class="section" id="nouveautes" aria-labelledby="nv-t">
+  <div class="wrap">
+    <div class="split">
+      <div class="rail">
+        <p class="label label--mark" data-i18n="ferra.news.label">Nouveautés</p>
+        <p class="rail__meta meta" data-i18n="ferra.news.meta">Notes de version</p>
+      </div>
+      <div class="main">
+        <div class="section-head">
+          <h2 id="nv-t" class="t-h2" data-i18n="ferra.news.title">Dernières versions.</h2>
+        </div>
+        <div class="acc" data-changelog="ferra" data-limit="7">
+          <details open><summary><span class="acc__sum"><span class="badge badge--plain">v1.0.17</span><span>Une seule fenêtre à la fois</span></span><span class="acc__right"><span class="meta"><time datetime="2026-10-05">5 octobre 2026</time></span><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#plus"/></svg></span></summary><div class="acc__body"><ul class="prose"><li>Le jeu ne s'ouvre plus qu'une seule fois : relancer l'exécutable ramène la fenêtre déjà ouverte au premier plan.</li></ul></div></details>
+          <details><summary><span class="acc__sum"><span class="badge badge--plain">v1.0.16</span><span>Popup de succès façon Steam</span></span><span class="acc__right"><span class="meta"><time datetime="2026-10-03">3 octobre 2026</time></span><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#plus"/></svg></span></summary><div class="acc__body"><ul class="prose"><li>Quand tu débloques un succès, une carte noire glisse en haut à droite de l'écran avec le médaillon, le nom et la description, pendant environ 5 secondes, avec le petit accord habituel.</li><li>Si plusieurs succès tombent en même temps, les cartes s'affichent l'une après l'autre.</li><li>Les succès débloqués apparaissent aussi en direct dans le Launcher.</li></ul></div></details>
+          <details><summary><span class="acc__sum"><span class="badge badge--plain">v1.0.15</span><span>Bulle de quête translucide et visite des menus plus claire</span></span><span class="acc__right"><span class="meta"><time datetime="2026-10-03">3 octobre 2026</time></span><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#plus"/></svg></span></summary><div class="acc__body"><ul class="prose"><li>La bulle de quête est maintenant translucide : tu vois le décor à travers.</li><li>Nouveau bouton « Ranger » pour mettre la bulle de quête sur le côté d'un clic. Une pastille « Quête » reste au bord de l'écran pour la rouvrir, et ton choix est mémorisé.</li><li>Visite guidée des menus : le bouton « Passer la visite » ne recouvre plus jamais les bulles d'explication.</li></ul></div></details>
+          <details><summary><span class="acc__sum"><span class="badge badge--plain">v1.0.14</span><span>Hôtel de Ville, prêts de ressources et refonte des ruines</span></span><span class="acc__right"><span class="meta"><time datetime="2026-09-28">28 septembre 2026</time></span><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#plus"/></svg></span></summary><div class="acc__body"><ul class="prose"><li>Nouveau bâtiment : l'Hôtel de Ville (un seul par partie), qui pose une muraille automatique de 7 cases autour de ton camp, avec une porte.</li><li>Prêts de ressources au Comptoir de Cuivre : bois, pierre et fer, remboursés en 10 jours avec 10 % d'intérêt.</li><li>Fiche des dettes (touche K) : le suivi de tes prêts et de ta dette à la banque en un coup d'œil.</li><li>Carrière entièrement redessinée.</li><li>Ruines : brume colorée, reprise d'une exploration interrompue et interface dédiée.</li><li>Carnet de notes de la capsule, récapitulatif de vente défilant et laser des tourelles retouché.</li></ul></div></details>
+          <details><summary><span class="acc__sum"><span class="badge badge--plain">v1.0.13</span><span>Cinématique de fin du Sort Divin refaite</span></span><span class="acc__right"><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#plus"/></svg></span></summary><div class="acc__body"><ul class="prose"><li>La fin du jeu utilise maintenant le même moteur de cinématique que l'intro.</li><li>Correction : l'interface et l'invite d'interaction restaient affichées pendant la cinématique.</li></ul></div></details>
+          <details><summary><span class="acc__sum"><span class="badge badge--plain">v1.0.11</span><span>Difficulté des ruines selon la distance</span></span><span class="acc__right"><span class="meta"><time datetime="2026-09-14">14 septembre 2026</time></span><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#plus"/></svg></span></summary><div class="acc__body"><ul class="prose"><li>La difficulté des ruines dépend maintenant de leur distance à ton camp : plus elles sont loin, plus elles sont dures.</li></ul></div></details>
+          <details><summary><span class="acc__sum"><span class="badge badge--plain">v1.0.10</span><span>Fourneau, feux de camp et corrections d'interface</span></span><span class="acc__right"><span class="meta"><time datetime="2026-09-14">14 septembre 2026</time></span><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#plus"/></svg></span></summary><div class="acc__body"><ul class="prose"><li>Nouveau bâtiment : le Fourneau.</li><li>Nouveaux paliers pour le feu de camp.</li><li>Barre de ressources réorganisée, avec correction d'une coupure d'affichage.</li><li>Corrections du glisser-déposer et du menu contextuel (clic droit).</li></ul></div></details>
+        </div>
+        <p class="meta not-fr games-note" data-i18n="common.notesFrench">Les notes de version sont publiées en français.</p>
+      </div>
     </div>
   </div>
+</section>
+
+<section class="band" aria-labelledby="band-t">
+  <div class="wrap band__grid">
+    <div class="stack stack--md"><p class="band__label" data-i18n="common.band.label">Télécharger</p><h2 id="band-t" class="t-h2 band__title" data-i18n="ferra.band.title">Installe le Launcher, puis lance FERRA.</h2></div>
+    <div class="stack stack--sm"><a class="btn btn--on-accent btn--lg" href="../launcher.html#telecharger"><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#download"/></svg><span data-i18n="common.cta.download">Télécharger le Launcher</span></a><p class="band__note" data-i18n="common.band.note">Windows 10/11 · moins de 3&nbsp;Mo<br>Gratuit, avec un compte Izacki gratuit</p></div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer" data-shell="footer">
+<div class="wrap">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="../index.html" aria-label="Izacki, accueil" data-i18n-attr="aria-label:shell.brand.home"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"/><rect class="brand__sq" x="12" y="12" width="10" height="10"/></svg><span class="brand__word">Izacki</span></a>
+      <p data-i18n="shell.footer.blurb">Studio de jeux indépendant. Deux jeux gratuits, le Launcher pour les installer, un forum et un Discord pour en parler.</p>
+    </div>
+    <nav aria-labelledby="f-izacki"><h2 id="f-izacki" data-i18n="shell.footer.izacki">Izacki</h2><ul><li><a href="../index.html" data-i18n="shell.footer.home">Accueil</a></li><li><a href="../launcher.html" data-i18n="shell.footer.launcher">Launcher</a></li><li><a href="../launcher.html#createurs" data-i18n="shell.footer.publish">Publier un jeu</a></li></ul></nav>
+    <nav aria-labelledby="f-jeux"><h2 id="f-jeux" data-i18n="shell.footer.games">Jeux</h2><ul><li><a href="../games/ferra.html">FERRA</a></li><li><a href="../games/tower-defense.html">Tower Défense Infini</a></li></ul></nav>
+    <nav aria-labelledby="f-aide"><h2 id="f-aide" data-i18n="shell.footer.help">Aide et communauté</h2><ul><li><a href="../faq.html" data-i18n="shell.footer.faq">Questions fréquentes</a></li><li><a href="../contact.html" data-i18n="shell.footer.contact">Contact</a></li><li><a href="../forum/index.html" data-i18n="shell.footer.forum">Forum</a></li><li><a href="https://discord.gg/bv2w8spATk" target="_blank" rel="noopener noreferrer">Discord<span class="sr-only" data-i18n="shell.newTab">(s'ouvre dans un nouvel onglet)</span></a></li></ul></nav>
+  </div>
+  <div class="footer-base">
+    <p data-i18n="shell.footer.copyright">© 2026 Vincent Dubois, Ferra.Izacki. Tous droits réservés.</p>
+    <nav aria-label="Informations légales" class="footer-legal" data-i18n-attr="aria-label:shell.footer.legalNav"><a href="../conditions.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#list"/></svg><span data-i18n="shell.footer.terms">Conditions &amp; Confidentialité</span></a><a href="../licence.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/img/icons.svg#file"/></svg><span data-i18n="shell.footer.licence">Licence du Launcher</span></a></nav>
+    <div class="lang" role="group" aria-label="Langue du site" data-i18n-attr="aria-label:shell.lang.label"><button type="button" lang="fr" data-lang="fr" aria-label="Français" aria-pressed="true">FR</button><button type="button" lang="en" data-lang="en" aria-label="English" aria-pressed="false">EN</button><button type="button" lang="es" data-lang="es" aria-label="Español" aria-pressed="false">ES</button></div>
+  </div>
+</div>
 </footer>
-
-<a href="../faq.html" class="faq-bubble" title="Questions fréquentes"><span class="faq-bubble-icon">❓</span><span>FAQ</span></a>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../assets/js/vendor/supabase.js"></script>
 <script src="../assets/js/config.js"></script>
 <script src="../assets/js/supabase-client.js"></script>
 <script src="../assets/js/auth.js"></script>
 <script src="../assets/js/i18n.js"></script>
+<script src="../assets/js/shell.js"></script>
+<script src="../assets/js/releases.js"></script>
 <script>
 (async function () {
   await ferraI18nInit('../');

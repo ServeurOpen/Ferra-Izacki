@@ -1,0 +1,365 @@
+{
+  "panel": {
+    "meta": {
+      "title": "Panel d'administration | Izacki",
+      "description": "Panel d'administration d'Izacki."
+    },
+    "side": {
+      "label": "Menu du panel",
+      "title": "Administration",
+      "overview": "Vue d'ensemble",
+      "actions": "Actions",
+      "moderation": "Modération",
+      "finance": "Finance",
+      "support": "Assistance",
+      "accounts": "Comptes"
+    },
+    "crumb": "Administration",
+    "title": "Panel d'administration",
+    "lead": "Visites, téléchargements du Launcher et comptes joueurs.",
+    "refresh": "Rafraîchir",
+    "check": "Vérification de l'accès…",
+    "access": {
+      "title": "Accès réservé"
+    },
+    "visits": {
+      "title": "Visites du site, 14 derniers jours",
+      "hint": "Chaque chargement de page compte comme une visite, visiteurs anonymes compris.",
+      "chart": "Visites par jour, sur les 14 derniers jours"
+    },
+    "downloads": {
+      "title": "Téléchargements du Launcher, 14 derniers jours",
+      "hint": "Un clic sur le bouton de téléchargement compte pour un téléchargement\u00a0: cela ne confirme pas que le téléchargement est terminé.",
+      "chart": "Téléchargements du Launcher par jour, sur les 14 derniers jours"
+    },
+    "actions": {
+      "title": "Actions",
+      "hint": "Les mêmes actions que dans le panel du Launcher, pour agir sans ouvrir l'application."
+    },
+    "field": {
+      "player": "Joueur",
+      "amount": "Montant",
+      "reason": "Raison",
+      "scope": "Portée",
+      "duration": "Durée",
+      "required": "obligatoire"
+    },
+    "grant": {
+      "title": "Créditer un joueur",
+      "hint": "Par exemple, le gagnant d'un concours",
+      "btn": "Créditer",
+      "badAmount": "Montant invalide.",
+      "thisPlayer": "ce joueur",
+      "action": "Créditer {player} de {n} crédits",
+      "defaultReason": "Concours",
+      "done": "+{n} crédits envoyés. Nouveau solde\u00a0: {balance}."
+    },
+    "all": {
+      "title": "Créditer tout le monde",
+      "hint": "Affiche une notification chez chaque joueur",
+      "btn": "Offrir à tous",
+      "confirm": "Offrir {n} crédits à TOUS les joueurs\u00a0? Chacun verra un pop up.",
+      "action": "Offrir {n} crédits à TOUS les joueurs",
+      "defaultReason": "Cadeau du créateur",
+      "done": "+{n} crédits envoyés à {count} joueur(s)."
+    },
+    "ban": {
+      "title": "Bannir un joueur",
+      "hint": "Depuis le site, tu choisis la portée",
+      "reasonPh": "Raison du bannissement",
+      "btn": "Bannir",
+      "reasonRequired": "La raison est obligatoire.",
+      "forever": "définitivement",
+      "for": "pour {d}",
+      "confirm": "Bannir {label} {duration} (portée\u00a0: {scope})\u00a0?",
+      "action": "Bannir {label}",
+      "done": "Joueur banni."
+    },
+    "bans": {
+      "title": "Joueurs actuellement bannis",
+      "region": "Joueurs bannis",
+      "none": "Aucun joueur banni."
+    },
+    "col": {
+      "email": "Email",
+      "reason": "Raison",
+      "scope": "Portée",
+      "end": "Fin",
+      "action": "Action",
+      "username": "Pseudo",
+      "created": "Créé le",
+      "lastLogin": "Dernière connexion"
+    },
+    "mod": {
+      "title": "Jeux en attente de modération",
+      "hint": "Jeux proposés depuis «\u00a0Sortir mon jeu\u00a0»",
+      "none": "Aucun jeu en attente.",
+      "underReview": "En examen",
+      "shotAlt": "Capture d'écran du jeu",
+      "download": "Télécharger le fichier",
+      "accept": "Accepter",
+      "examine": "Mettre en examen"
+    },
+    "fin": {
+      "title": "Finance",
+      "hint": "Retraits et remboursements"
+    },
+    "wd": {
+      "title": "Demandes de retrait",
+      "closed": "Afficher aussi les retraits terminés (payés ou refusés)",
+      "hint": "Portail créateurs",
+      "payAll": "Approuver tout (sans alerte)",
+      "status": {
+        "pending": "En attente de validation",
+        "approved": "Approuvé, en attente de versement",
+        "processing": "Virement en cours",
+        "failed": "Virement en échec",
+        "paid": "Payé",
+        "rejected": "Refusé"
+      },
+      "statusUnknown": "statut inconnu",
+      "account": {
+        "not_configured": "non configuré",
+        "incomplete": "informations manquantes",
+        "pending_verification": "en vérification",
+        "active": "actif",
+        "restricted": "restreint"
+      },
+      "level": {
+        "none": "Aucune alerte",
+        "attention": "À vérifier",
+        "high": "Risque élevé"
+      },
+      "chip": {
+        "single": "Un seul acheteur\u00a0: {pct}\u00a0% des gains",
+        "few": "Peu d'acheteurs\u00a0: {n}",
+        "newDays": "{pct}\u00a0% des gains viennent de comptes de moins de {days} jours",
+        "newRecent": "{pct}\u00a0% des gains viennent de comptes récents",
+        "refundedBuyers": "Acheteurs avec remboursement ou litige Stripe\u00a0: {pct}\u00a0% des gains",
+        "newCreator": "Compte créateur de {n} {unit}",
+        "prevFailed": "Un virement précédent a échoué",
+        "prevRejected": "Retrait précédent refusé",
+        "banned": "Compte du créateur banni\u00a0: aucun virement ne partira",
+        "deleted": "Compte du créateur supprimé\u00a0: aucun virement ne partira"
+      },
+      "lastError": {
+        "insufficient_stripe_balance": "Solde Stripe disponible insuffisant\u00a0: le retrait reste approuvé, réessaie quand les fonds seront disponibles.",
+        "insufficient_platform_funds": "Garde-fou\u00a0: l'argent encaissé net ne couvre pas ce retrait.",
+        "account_not_ready": "Le compte de paiement du créateur n'est pas prêt.",
+        "attempt": "{base} (tentative {n})"
+      },
+      "err": {
+        "insufficient_stripe_balance": "Solde Stripe disponible insuffisant ({available} disponibles, {needed} nécessaires). Le retrait reste approuvé\u00a0: réessaie quand les fonds seront disponibles.",
+        "account_not_ready": "Le compte de paiement du créateur n'est pas prêt ({status}).",
+        "transfer_mismatch": "Stripe a renvoyé un virement qui ne correspond pas à la demande (montant ou destination)\u00a0: il n'est PAS marqué payé. Contrôle le virement dans Stripe, puis clique sur «\u00a0Vérifier chez Stripe\u00a0».",
+        "stripe_uncertain": "Stripe a répondu d'une façon qui ne permet pas de conclure{code}\u00a0: le résultat du virement est incertain. Clique sur «\u00a0Vérifier chez Stripe\u00a0» avant tout nouvel essai.",
+        "stripe_failed": "Stripe a refusé le virement{code}. Retrait en échec réessayable, aucun débit en double.",
+        "stripe_noanswer": "Stripe n'a pas répondu{code}\u00a0: rien n'a été refusé ni payé, le retrait reste approuvé. Réessaie dans quelques minutes.",
+        "account_disabled": "Le compte du créateur est {why}\u00a0: le virement n'a pas été envoyé. Si tu refuses la demande, ses crédits lui sont rendus.",
+        "country_not_allowed": "Le pays du compte de paiement{country} n'est plus dans la liste des pays acceptés\u00a0: le virement n'a pas été envoyé. Ajoute-le de nouveau aux pays acceptés dans les réglages de la plateforme, ou refuse la demande.",
+        "stripe_unreachable": "Stripe n'a pas répondu\u00a0: résultat incertain. Clique sur «\u00a0Vérifier chez Stripe\u00a0» avant tout nouvel essai.",
+        "paid_but_db_update_failed": "Le virement est parti ({id}) mais l'enregistrement a échoué\u00a0: clique sur «\u00a0Vérifier chez Stripe\u00a0», ne refuse pas.",
+        "in_progress": "Un traitement est déjà en cours pour ce retrait.",
+        "request_rejected": "Cette demande a déjà été refusée.",
+        "legacy_request": "Ancienne demande (avant Stripe)\u00a0: refuse-la, les crédits sont rendus au créateur.",
+        "withdrawals_disabled": "Les retraits sont suspendus\u00a0: ils sont désactivés dans les réglages de la plateforme.",
+        "invalid_state": "Cette demande n'est plus dans un état qui permet cette action. La liste va être actualisée.",
+        "forbidden": "Action réservée à l'administrateur.",
+        "session": "Session expirée\u00a0: reconnecte-toi puis réessaie.",
+        "stripe_not_configured": "Les paiements ne sont pas encore configurés\u00a0: la clé secrète Stripe du service de retrait est absente.",
+        "service_unavailable": "Le service de paiement est momentanément indisponible. Aucun virement n'a été envoyé par cet appel\u00a0: réessaie dans quelques minutes.",
+        "not_found": "Demande introuvable\u00a0: la liste va être actualisée.",
+        "internal_error": "Erreur interne du service de retrait\u00a0: réessaie, puis consulte les journaux du serveur si cela continue.",
+        "network": "Connexion impossible. Vérifie ta connexion internet puis réessaie."
+      },
+      "why": {
+        "banned": "banni",
+        "deleted": "supprimé",
+        "suspended": "suspendu"
+      },
+      "idUnknown": "identifiant inconnu",
+      "btn": {
+        "approve": "Approuver et verser",
+        "retry": "Réessayer le virement",
+        "check": "Vérifier chez Stripe",
+        "resume": "Reprendre le virement"
+      },
+      "resume": {
+        "since": "depuis plus de {n} {unit}",
+        "moment": "depuis un moment",
+        "hint": "À utiliser seulement si le virement reste «\u00a0en cours\u00a0» {wait}\u00a0: avant ce délai le serveur refuse la reprise, un autre traitement peut encore être en train de verser."
+      },
+      "check": {
+        "anomaly": "ANOMALIE\u00a0: un virement Stripe{transfer} existe pour cette demande alors qu'elle est «\u00a0{label}\u00a0». Le créateur a reçu l'argent ET garde ses crédits. Rien n'a été modifié\u00a0: annule le virement dans le tableau de bord Stripe ou retire-lui les crédits, puis contrôle son compte.",
+        "found": "Virement retrouvé chez Stripe\u00a0: le retrait est marqué payé, aucun second virement n'a été créé.",
+        "none": "Aucun virement chez Stripe pour ce retrait\u00a0: tu peux relancer le virement sans risque de doublon.",
+        "pending": "Aucun virement trouvé chez Stripe pour l'instant (statut\u00a0: {label}). Si le retrait reste «\u00a0en cours\u00a0», attends quelques minutes puis utilise «\u00a0Reprendre le virement\u00a0»."
+      },
+      "platform": "Portail créateurs · Disponible pour les retraits\u00a0: {available}{inflight}. Le solde Stripe disponible est vérifié au moment du virement.",
+      "inFlight": " (dont {amount} en cours de virement)",
+      "payAllN": "Approuver tout (sans alerte) — {n} {unit}, {total}",
+      "none": "Aucune demande en attente.",
+      "accountLine": "Compte de paiement\u00a0: {status}{country}",
+      "accountNone": "Compte de paiement\u00a0: aucun",
+      "fact": {
+        "creator": "Compte créateur\u00a0: {n} {unit}",
+        "top": "Plus gros acheteur\u00a0: {pct}\u00a0% des gains",
+        "recent": "Comptes récents\u00a0: {pct}\u00a0% des gains",
+        "refunds": "Remboursements ou litiges\u00a0: {pct}\u00a0% des gains · {n} {unit}",
+        "prev": "Retraits précédents\u00a0: {paid} {paidUnit}{amount}, {rejected} {rejectedUnit}, {failed} {failedUnit}"
+      },
+      "feeWith": "{gross} brut − {fee} de frais de traitement = {net} net",
+      "feeNone": "{gross} brut, sans frais de traitement = {net} net",
+      "hold": " · crédits vendus depuis au moins {n} {unit}",
+      "firstWithdrawal": " (premier retrait)",
+      "requestedOn": "demandé le {date}",
+      "uncertain": "Résultat du virement incertain\u00a0: vérifie chez Stripe avant tout nouvel essai.",
+      "stripeId": "Virement Stripe\u00a0: {id}",
+      "payAllConfirm": "Approuver et verser {n} {unit} sans alerte, pour un total de {total}\u00a0?",
+      "payAllProgress": "Virement en cours… ({i}/{n})",
+      "approveConfirm": "Approuver ce retrait\u00a0? {amount} seront virés sur le compte Stripe de {email}.",
+      "adopted": "Un virement existait déjà chez Stripe pour ce retrait\u00a0: il a été rattaché, aucun second virement n'a été créé.",
+      "uncertainReject": "Le résultat du virement est incertain\u00a0: clique d'abord sur «\u00a0Vérifier chez Stripe\u00a0».",
+      "alreadyDone": "Cette demande a déjà été traitée. La liste va être actualisée."
+    },
+    "rf": {
+      "title": "Demandes de remboursement",
+      "none": "Aucune demande en attente.",
+      "seller": "Vendeur\u00a0: {email}",
+      "played": "Joué {time} · Possédé depuis {days} j",
+      "meets": "Respecte la règle (≤1h / ≤7j)\u00a0: accepter recommandé",
+      "outside": "Hors règle\u00a0: refuser recommandé",
+      "msg": "Message de l'acheteur\u00a0: «\u00a0{msg}\u00a0»",
+      "btn": "Rembourser",
+      "confirm": "Confirmer le remboursement\u00a0? Les crédits seront rendus à l'acheteur et repris au vendeur."
+    },
+    "support": {
+      "title": "Tickets d'assistance"
+    },
+    "accounts": {
+      "title": "Comptes joueurs",
+      "hint": "Un lien de réinitialisation envoie le même e-mail sécurisé que «\u00a0Mot de passe oublié\u00a0»\u00a0: le mot de passe réel n'est jamais visible ni récupérable, même ici.",
+      "search": "Rechercher un joueur",
+      "searchPh": "Rechercher un joueur (pseudo ou email)…",
+      "region": "Comptes joueurs"
+    },
+    "pass": {
+      "title": "Mot de passe de passage requis",
+      "input": "Mot de passe de passage",
+      "ph": "Colle le mot de passe de passage…",
+      "cancel": "Annuler",
+      "confirm": "Confirmer",
+      "protected": "Cette action est protégée.",
+      "wrong": "Mot de passe incorrect\u00a0: réessaie.",
+      "locked": "Trop de tentatives\u00a0: réessaie dans quelques minutes."
+    },
+    "ticket": {
+      "messages": "Messages du ticket",
+      "refundNote": "Remboursement lié\u00a0: accepte ou refuse dans «\u00a0Demandes de remboursement\u00a0» ci-dessus, le ticket se ferme et répond tout seul.",
+      "closedNote": "Ce ticket est fermé.",
+      "reply": "Réponse",
+      "replyPh": "Écris une réponse…",
+      "send": "Envoyer",
+      "closeTicket": "Fermer le ticket",
+      "cat": {
+        "question": "Question",
+        "bug": "Bug",
+        "refund": "Remboursement",
+        "other": "Autre"
+      },
+      "status": {
+        "open": "Ouvert",
+        "closed": "Fermé"
+      },
+      "openCount": "{n} ouvert(s)",
+      "none": "Aucun ticket pour l'instant.",
+      "noneOpen": "Aucun ticket ouvert pour l'instant.",
+      "open": "Ouvrir le ticket",
+      "closedGroup": "Tickets fermés",
+      "closeConfirm": "Fermer ce ticket\u00a0?"
+    },
+    "gate": {
+      "login": "Connecte-toi pour accéder à cette page.",
+      "admin": "Cette page est réservée à l'administrateur."
+    },
+    "delta": {
+      "none": "— vs hier",
+      "new": "nouveau vs hier",
+      "same": "= vs hier",
+      "pct": "{sign}{pct}\u00a0% vs hier"
+    },
+    "kpi": {
+      "loading": "Chargement",
+      "error": "Impossible de charger les statistiques",
+      "visits": "Visites totales",
+      "downloads": "Téléchargements Launcher",
+      "accounts": "Comptes créés",
+      "online": "Joueurs en ligne",
+      "onlineSub": "Maintenant, dans le Launcher",
+      "split": "Connectés vs visiteurs sans compte",
+      "anon": "{pct}\u00a0% anonymes",
+      "splitSub": "{logged} connectés · {anon} anonymes"
+    },
+    "never": "jamais",
+    "unknown": "inconnu",
+    "err": {
+      "line": "Erreur\u00a0: {msg}",
+      "unknown": "inconnue",
+      "word": "erreur",
+      "noReason": "erreur inconnue"
+    },
+    "fail": "Échec\u00a0: {reason}",
+    "players": {
+      "none": "Aucun joueur ne correspond à «\u00a0{query}\u00a0».",
+      "reset": "Lien de réinitialisation"
+    },
+    "btn": {
+      "sending": "Envoi…",
+      "sent": "Envoyé",
+      "failed": "Échec",
+      "unban": "Débannir",
+      "checking": "Vérification…"
+    },
+    "credits": "crédit|crédits",
+    "free": "Gratuit",
+    "unit": {
+      "mb": "Mo"
+    },
+    "reject": {
+      "label": "Raison du refus",
+      "ph": "Raison du refus (obligatoire)",
+      "btn": "Refuser",
+      "need": "Indique une raison de refus."
+    },
+    "pl": {
+      "day": "jour|jours",
+      "minute": "minute|minutes",
+      "refundedSale": "vente remboursée|ventes remboursées",
+      "sale": "vente|ventes",
+      "buyerDistinct": "acheteur distinct|acheteurs distincts",
+      "gamePublished": "jeu publié|jeux publiés",
+      "paid": "payé|payés",
+      "rejected": "refusé|refusés",
+      "failure": "échec|échecs",
+      "request": "demande|demandes",
+      "transferSent": "virement envoyé|virements envoyés",
+      "skipped": "demande non traitée, restée en attente|demandes non traitées, restées en attente"
+    },
+    "scope": {
+      "site": "Site",
+      "both": "Site + Launcher"
+    },
+    "scopeOpt": {
+      "site": "Site seulement",
+      "launcher": "Launcher seulement"
+    },
+    "dur": {
+      "h1": "1 heure",
+      "h24": "24 heures",
+      "d7": "7 jours",
+      "d30": "30 jours",
+      "perm": "Définitif"
+    },
+    "pickPlayer": "Choisis un joueur."
+  }
+}

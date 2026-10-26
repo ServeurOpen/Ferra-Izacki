@@ -1,0 +1,24 @@
+{
+  "forumLogin": {
+    "meta": {
+      "title": "Iniciar sesión | Izacki",
+      "description": "Inicia sesión en tu cuenta Izacki, la misma en el sitio, en el foro y en el Launcher."
+    },
+    "crumb": "Iniciar sesión",
+    "title": "Iniciar sesión",
+    "lead": "Nos alegra verte de nuevo. La misma cuenta sirve en el sitio, en el foro y en el Launcher.",
+    "rail": {
+      "label": "Cuenta Izacki",
+      "meta": "Una sola cuenta para el sitio, el foro y el Launcher"
+    },
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "submit": "Iniciar sesión",
+    "forgot": "¿Olvidaste tu contraseña?",
+    "noAccount": "¿Todavía no tienes cuenta?",
+    "signupLink": "Regístrate",
+    "errEmailNotConfirmed": "Esta cuenta aún no ha confirmado su correo electrónico. Revisa tu bandeja de entrada (y la carpeta de spam) o escríbenos desde la página de Contacto si el mensaje nunca llegó.",
+    "errRateLimit": "Demasiados intentos recientes. Inténtalo de nuevo en unos minutos.",
+    "errInvalid": "Correo electrónico o contraseña incorrectos."
+  }
+}

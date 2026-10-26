@@ -1,110 +1,193 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Licence du Launcher — Izacki</title>
-<meta name="description" content="Licence d'utilisation du Launcher Izacki : ce que tu peux faire, ce qui est interdit, et à qui appartiennent les contenus.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📄</text></svg>">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0C0D0F">
+<title data-i18n="licence.meta.title">Licence du Launcher | Izacki</title>
+<meta name="description" content="Licence d'utilisation du Launcher Izacki : ce que tu peux faire, ce qui est interdit, et à qui appartiennent les contenus." data-i18n-content="licence.meta.description">
+<link rel="canonical" href="https://izackiferra.com/licence.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:site_name" content="Izacki">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://izackiferra.com/licence.html">
+<meta property="og:title" content="Licence du Launcher | Izacki" data-i18n-content="licence.meta.title">
+<meta property="og:description" content="Licence d'utilisation du Launcher Izacki : ce que tu peux faire, ce qui est interdit, et à qui appartiennent les contenus." data-i18n-content="licence.meta.description">
+<meta property="og:image" content="https://izackiferra.com/assets/img/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Izacki, studio de jeux indépendant : le Launcher, FERRA et Tower Défense Infini." data-i18n-content="shell.ogAlt">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Licence du Launcher | Izacki" data-i18n-content="licence.meta.title">
+<meta name="twitter:description" content="Licence d'utilisation du Launcher Izacki : ce que tu peux faire, ce qui est interdit, et à qui appartiennent les contenus." data-i18n-content="licence.meta.description">
+<meta name="twitter:image" content="https://izackiferra.com/assets/img/og-default.png">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preload" href="assets/fonts/saira.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/jetbrains-mono.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/pages/legal.css">
+<script>(function(d){d.classList.add("js");var l="",q=/[?&]lang=(fr|en|es)(?:&|$)/.exec(location.search);if(q){l=q[1]}else{try{l=localStorage.getItem("ferra_lang")||""}catch(e){}}if(!/^(fr|en|es)$/.test(l)){var a=navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||"fr"];l="fr";for(var i=0;i<a.length;i++){var c=String(a[i]).slice(0,2).toLowerCase();if(/^(fr|en|es)$/.test(c)){l=c;break}}}d.lang=l;if(l!=="fr"){d.classList.add("i18n-pending");setTimeout(function(){d.classList.remove("i18n-pending")},3000)}})(document.documentElement)</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://izackiferra.com/"},{"@type":"ListItem","position":2,"name":"Licence du Launcher","item":"https://izackiferra.com/licence.html"}]}</script>
 </head>
-<body>
-
-<header class="site-header">
-  <nav class="site-nav">
-    <a href="index.html" class="brand">FER<span>RA</span></a>
-    <div class="nav-links">
-      <a href="index.html" class="nav-link">Accueil</a>
-      <a href="launcher.html" class="nav-link">Launcher</a>
-      <a href="forum/index.html" class="nav-link">Forum</a>
-      <a href="contact.html" class="nav-link">Contact</a>
-      <a href="launcher.html" class="nav-cta">⬇ Télécharger</a>
+<body data-page="licence" data-profile="lite">
+<a class="skip" href="#contenu" data-ui data-i18n="shell.skip">Aller au contenu</a>
+<header class="site-header" data-shell="header">
+<div class="wrap header-row">
+  <a class="brand" href="index.html" aria-label="Izacki, accueil" data-i18n-attr="aria-label:shell.brand.home"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"/><rect class="brand__sq" x="12" y="12" width="10" height="10"/></svg><span class="brand__word">Izacki</span></a>
+  <a class="btn btn--primary btn--sm btn--nowrap header-dl" href="launcher.html#telecharger"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#download"/></svg><span class="header-dl__t" data-i18n="shell.download">Télécharger</span></a>
+  <button class="btn btn--outline btn--sm btn--icon menu-btn" type="button" aria-expanded="false" aria-controls="nav-panel" aria-label="Ouvrir le menu" data-i18n-attr="aria-label:shell.menu.open"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#menu"/></svg></button>
+  <div class="nav-panel" id="nav-panel">
+    <nav aria-label="Navigation principale" data-i18n-attr="aria-label:shell.nav.label">
+      <ul class="nav">
+        <li><a href="launcher.html"><span data-i18n="shell.nav.launcher">Launcher</span></a></li>
+        <li><a href="index.html#jeux"><span data-i18n="shell.nav.games">Jeux</span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#chevron-down"/></svg></a>
+          <div class="nav-sub"><a href="games/ferra.html">FERRA<small data-i18n="shell.nav.ferraSub">Survie / automatisation</small></a><a href="games/tower-defense.html">Tower Défense Infini<small data-i18n="shell.nav.tdSub">Tower defense</small></a></div></li>
+        <li><a href="launcher.html#createurs"><span data-i18n="shell.nav.creators">Créateurs</span></a></li>
+        <li><a href="forum/index.html"><span data-i18n="shell.nav.community">Communauté</span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#chevron-down"/></svg></a>
+          <div class="nav-sub"><a href="forum/index.html"><span data-i18n="shell.nav.forum">Forum</span><small data-i18n="shell.nav.forumSub">Sujets et réponses</small></a><a href="https://discord.gg/bv2w8spATk" target="_blank" rel="noopener noreferrer">Discord<svg class="icon icon--fill" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#discord"/></svg><span class="sr-only" data-i18n="shell.newTab">(s'ouvre dans un nouvel onglet)</span><small data-i18n="shell.nav.discordSub">Le serveur d'Izacki</small></a></div></li>
+        <li><a href="faq.html"><span data-i18n="shell.nav.help">Aide</span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#chevron-down"/></svg></a>
+          <div class="nav-sub"><a href="faq.html"><span data-i18n="shell.nav.faq">Questions fréquentes</span><small data-i18n="shell.nav.faqSub">Installation, compte, crédits</small></a><a href="contact.html"><span data-i18n="shell.nav.contact">Contact</span><small data-i18n="shell.nav.contactSub">Écrire à l'équipe</small></a></div></li>
+      </ul>
+    </nav>
+    <div class="tools">
+      <div class="lang" role="group" aria-label="Langue du site" data-i18n-attr="aria-label:shell.lang.label"><button type="button" lang="fr" data-lang="fr" aria-label="Français" aria-pressed="true">FR</button><button type="button" lang="en" data-lang="en" aria-label="English" aria-pressed="false">EN</button><button type="button" lang="es" data-lang="es" aria-label="Español" aria-pressed="false">ES</button></div>
+      <a class="btn btn--primary btn--sm btn--nowrap" href="launcher.html#telecharger"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#download"/></svg><span data-i18n="shell.download">Télécharger</span></a>
     </div>
-  </nav>
-</header>
-
-<div class="page-header">
-  <div class="container-narrow">
-    <h1>📄 Licence d'utilisation du Launcher Izacki</h1>
-    <p>Dernière mise à jour : 15 octobre 2026.</p>
   </div>
 </div>
+</header>
+<main id="contenu" tabindex="-1">
 
-<section style="padding-top:10px;">
-  <div class="container-narrow">
-    <div class="legal-block">
-      <h3>1. Qui t'accorde cette licence</h3>
-      <p>Cette licence est accordée par <b>Ferra.Izacki</b>, entreprise individuelle (micro-entrepreneur) exploitée par <b>Vincent Dubois</b>, SIREN 130 071 525, 16 rue Descartes, 02100 Saint-Quentin, France. Contact : <b>ferra.izacki@gmail.com</b>.</p>
-      <p>En installant ou en utilisant le Launcher Izacki (le « Launcher ») et les jeux officiels (FERRA, Tower Défense Infini...), tu acceptes cette licence.</p>
-    </div>
+<section class="hero hero--page section--flush" aria-labelledby="h1">
+  <div class="wrap">
+    <nav class="hero__crumbs" aria-label="Fil d'Ariane" data-ui data-i18n-attr="aria-label:common.crumbs">
+      <ol class="crumbs"><li><a href="index.html" data-i18n="common.home">Accueil</a></li><li aria-current="page" data-i18n="licence.crumb">Licence du Launcher</li></ol>
+    </nav>
+    <h1 id="h1" class="t-title t-title--narrow" lang="fr"><span class="emo" aria-hidden="true">📄 </span>Licence d'utilisation du Launcher Izacki</h1>
+    <p class="meta hero__lead" lang="fr">Dernière mise à jour : 15 octobre 2026.</p>
+    <p class="callout not-fr" data-ui data-i18n="licence.frenchNote">Les documents juridiques sont rédigés en français.</p>
+  </div>
+</section>
 
-    <div class="legal-block">
-      <h3>2. Ce que tu peux faire</h3>
-      <p>Tu reçois un droit d'utilisation <b>personnel, non exclusif, non transférable et révocable</b> du Launcher et des jeux officiels, pour ton usage privé, sur tes propres appareils. Le Launcher est gratuit ; les achats éventuels (crédits, jeux) suivent les conditions de vente.</p>
-    </div>
-
-    <div class="legal-block">
-      <h3>3. Ce que tu ne peux pas faire</h3>
-      <p>Sauf accord écrit préalable, et sans préjudice des exceptions que la loi t'accorde expressément (par exemple la copie de sauvegarde ou l'interopérabilité), tu t'interdis de :</p>
-      <ul>
-        <li>copier, redistribuer, publier, vendre, louer, prêter ou sous-licencier le Launcher ou les jeux officiels, en tout ou en partie ;</li>
-        <li>décompiler, désassembler, effectuer de l'ingénierie inverse, ou extraire le code, les graphismes, les sons ou les textes du Launcher ou des jeux officiels ;</li>
-        <li>modifier les fichiers installés, ou contourner ou désactiver les protections (vérification d'intégrité des jeux, mises à jour signées, système de crédits, limites d'achat ou de retrait) ;</li>
-        <li>tricher, automatiser les achats ou les retraits, créer plusieurs comptes pour contourner une limite, ou détourner le fonctionnement de la plateforme ;</li>
-        <li>utiliser le nom, les logos ou les marques « Izacki » et « FERRA » d'une manière qui suggère un lien ou un accord avec nous ;</li>
-        <li>utiliser le Launcher pour diffuser un contenu illicite ou portant atteinte aux droits d'autrui.</li>
-      </ul>
-    </div>
-
-    <div class="legal-block">
-      <h3>4. À qui appartiennent les contenus</h3>
-      <p>Le Launcher et les jeux officiels (code, graphismes, sons, textes, interface) ainsi que les marques « Izacki » et « FERRA » appartiennent à Vincent Dubois (Ferra.Izacki). © 2026 Vincent Dubois, Ferra.Izacki. Tous droits réservés. Aucun droit de propriété ne t'est transféré.</p>
-      <p>Les jeux publiés par des créateurs restent la propriété de leurs auteurs : tu les utilises dans la limite des droits que l'auteur accorde par la plateforme.</p>
-    </div>
-
-    <div class="legal-block">
-      <h3>5. Mises à jour</h3>
-      <p>Le Launcher se met à jour automatiquement, avec des mises à jour signées. Izacki peut modifier, suspendre ou retirer une fonction ou un jeu officiel, et t'informe lorsque le changement est important.</p>
-    </div>
-
-    <div class="legal-block">
-      <h3>6. Compte, crédits et paiements</h3>
-      <p>Ton compte est personnel : garde ton mot de passe secret. Les règles sur les crédits, les achats, les remboursements et les retraits sont celles des <a href="conditions.html">conditions de vente et de confidentialité</a>.</p>
-    </div>
-
-    <div class="legal-block">
-      <h3>7. Garanties et responsabilité</h3>
-      <p>Le Launcher est fourni « en l'état », sans garantie d'absence d'erreur ou d'interruption. Dans les limites autorisées par la loi, Izacki n'est pas responsable des dommages indirects. Cette licence ne limite pas les droits que la loi reconnaît aux consommateurs.</p>
-    </div>
-
-    <div class="legal-block">
-      <h3>8. Données personnelles</h3>
-      <p>Le traitement de tes données est décrit dans la <a href="conditions.html#confidentialite">politique de confidentialité</a>.</p>
-    </div>
-
-    <div class="legal-block">
-      <h3>9. Fin de la licence</h3>
-      <p>Tu peux arrêter à tout moment en désinstallant le Launcher. Izacki peut suspendre ou mettre fin à ta licence en cas de manquement grave à ces règles. Dans ce cas, tu cesses d'utiliser le Launcher et tu supprimes les copies que tu détiens.</p>
-    </div>
-
-    <div class="legal-block">
-      <h3>10. Droit applicable et litiges</h3>
-      <p>Cette licence est soumise au droit français. En cas de difficulté, contacte-nous d'abord à l'adresse ci-dessus. Les coordonnées du médiateur de la consommation figurent dans les <a href="conditions.html">conditions de vente</a>. Les règles légales de compétence qui protègent le consommateur restent applicables.</p>
+<section class="section">
+  <div class="wrap">
+    <div class="legal">
+      <aside class="rail" aria-label="Sommaire" data-i18n-attr="aria-label:licence.toc.label">
+        <p class="label label--mark" data-ui data-i18n="licence.toc.label">Sommaire</p>
+        <details class="toc-details" open>
+          <summary data-ui><span data-i18n="licence.toc.label">Sommaire</span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#chevron-down"/></svg></summary>
+          <nav class="toc" aria-label="Articles de la licence" data-ui data-i18n-attr="aria-label:licence.toc.nav">
+            <a href="#article-1" lang="fr">1. Qui t'accorde cette licence</a>
+            <a href="#article-2" lang="fr">2. Ce que tu peux faire</a>
+            <a href="#article-3" lang="fr">3. Ce que tu ne peux pas faire</a>
+            <a href="#article-4" lang="fr">4. À qui appartiennent les contenus</a>
+            <a href="#article-5" lang="fr">5. Mises à jour</a>
+            <a href="#article-6" lang="fr">6. Compte, crédits et paiements</a>
+            <a href="#article-7" lang="fr">7. Garanties et responsabilité</a>
+            <a href="#article-8" lang="fr">8. Données personnelles</a>
+            <a href="#article-9" lang="fr">9. Fin de la licence</a>
+            <a href="#article-10" lang="fr">10. Droit applicable et litiges</a>
+          </nav>
+        </details>
+      </aside>
+      <div class="prose doc-articles" lang="fr">
+        <section id="article-1" aria-labelledby="article-1-t">
+          <h2 id="article-1-t">1. Qui t'accorde cette licence</h2>
+          <p>Cette licence est accordée par <b>Ferra.Izacki</b>, entreprise individuelle (micro-entrepreneur) exploitée par <b>Vincent Dubois</b>, SIREN 130 071 525, 16 rue Descartes, 02100 Saint-Quentin, France. Contact : <b>ferra.izacki@gmail.com</b>.</p>
+          <p>En installant ou en utilisant le Launcher Izacki (le « Launcher ») et les jeux officiels (FERRA, Tower Défense Infini...), tu acceptes cette licence.</p>
+          <p class="doc-top" data-ui lang="fr" data-i18n-attr="lang:licence.langCode"><a class="link" href="#contenu"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#arrow-right"/></svg><span data-i18n="licence.top">Retour en haut</span></a></p>
+        </section>
+        <section id="article-2" aria-labelledby="article-2-t">
+          <h2 id="article-2-t">2. Ce que tu peux faire</h2>
+          <p>Tu reçois un droit d'utilisation <b>personnel, non exclusif, non transférable et révocable</b> du Launcher et des jeux officiels, pour ton usage privé, sur tes propres appareils. Le Launcher est gratuit ; les achats éventuels (crédits, jeux) suivent les conditions de vente.</p>
+          <p class="doc-top" data-ui lang="fr" data-i18n-attr="lang:licence.langCode"><a class="link" href="#contenu"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#arrow-right"/></svg><span data-i18n="licence.top">Retour en haut</span></a></p>
+        </section>
+        <section id="article-3" aria-labelledby="article-3-t">
+          <h2 id="article-3-t">3. Ce que tu ne peux pas faire</h2>
+          <p>Sauf accord écrit préalable, et sans préjudice des exceptions que la loi t'accorde expressément (par exemple la copie de sauvegarde ou l'interopérabilité), tu t'interdis de :</p>
+          <ul>
+            <li>copier, redistribuer, publier, vendre, louer, prêter ou sous-licencier le Launcher ou les jeux officiels, en tout ou en partie ;</li>
+            <li>décompiler, désassembler, effectuer de l'ingénierie inverse, ou extraire le code, les graphismes, les sons ou les textes du Launcher ou des jeux officiels ;</li>
+            <li>modifier les fichiers installés, ou contourner ou désactiver les protections (vérification d'intégrité des jeux, mises à jour signées, système de crédits, limites d'achat ou de retrait) ;</li>
+            <li>tricher, automatiser les achats ou les retraits, créer plusieurs comptes pour contourner une limite, ou détourner le fonctionnement de la plateforme ;</li>
+            <li>utiliser le nom, les logos ou les marques « Izacki » et « FERRA » d'une manière qui suggère un lien ou un accord avec nous ;</li>
+            <li>utiliser le Launcher pour diffuser un contenu illicite ou portant atteinte aux droits d'autrui.</li>
+          </ul>
+          <p class="doc-top" data-ui lang="fr" data-i18n-attr="lang:licence.langCode"><a class="link" href="#contenu"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#arrow-right"/></svg><span data-i18n="licence.top">Retour en haut</span></a></p>
+        </section>
+        <section id="article-4" aria-labelledby="article-4-t">
+          <h2 id="article-4-t">4. À qui appartiennent les contenus</h2>
+          <p>Le Launcher et les jeux officiels (code, graphismes, sons, textes, interface) ainsi que les marques « Izacki » et « FERRA » appartiennent à Vincent Dubois (Ferra.Izacki). © 2026 Vincent Dubois, Ferra.Izacki. Tous droits réservés. Aucun droit de propriété ne t'est transféré.</p>
+          <p>Les jeux publiés par des créateurs restent la propriété de leurs auteurs : tu les utilises dans la limite des droits que l'auteur accorde par la plateforme.</p>
+          <p class="doc-top" data-ui lang="fr" data-i18n-attr="lang:licence.langCode"><a class="link" href="#contenu"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#arrow-right"/></svg><span data-i18n="licence.top">Retour en haut</span></a></p>
+        </section>
+        <section id="article-5" aria-labelledby="article-5-t">
+          <h2 id="article-5-t">5. Mises à jour</h2>
+          <p>Le Launcher se met à jour automatiquement, avec des mises à jour signées. Izacki peut modifier, suspendre ou retirer une fonction ou un jeu officiel, et t'informe lorsque le changement est important.</p>
+          <p class="doc-top" data-ui lang="fr" data-i18n-attr="lang:licence.langCode"><a class="link" href="#contenu"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#arrow-right"/></svg><span data-i18n="licence.top">Retour en haut</span></a></p>
+        </section>
+        <section id="article-6" aria-labelledby="article-6-t">
+          <h2 id="article-6-t">6. Compte, crédits et paiements</h2>
+          <p>Ton compte est personnel : garde ton mot de passe secret. Les règles sur les crédits, les achats, les remboursements et les retraits sont celles des <a href="conditions.html">conditions de vente et de confidentialité</a>.</p>
+          <p class="doc-top" data-ui lang="fr" data-i18n-attr="lang:licence.langCode"><a class="link" href="#contenu"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#arrow-right"/></svg><span data-i18n="licence.top">Retour en haut</span></a></p>
+        </section>
+        <section id="article-7" aria-labelledby="article-7-t">
+          <h2 id="article-7-t">7. Garanties et responsabilité</h2>
+          <p>Le Launcher est fourni « en l'état », sans garantie d'absence d'erreur ou d'interruption. Dans les limites autorisées par la loi, Izacki n'est pas responsable des dommages indirects. Cette licence ne limite pas les droits que la loi reconnaît aux consommateurs.</p>
+          <p class="doc-top" data-ui lang="fr" data-i18n-attr="lang:licence.langCode"><a class="link" href="#contenu"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#arrow-right"/></svg><span data-i18n="licence.top">Retour en haut</span></a></p>
+        </section>
+        <section id="article-8" aria-labelledby="article-8-t">
+          <h2 id="article-8-t">8. Données personnelles</h2>
+          <p>Le traitement de tes données est décrit dans la <a href="conditions.html#confidentialite">politique de confidentialité</a>.</p>
+          <p class="doc-top" data-ui lang="fr" data-i18n-attr="lang:licence.langCode"><a class="link" href="#contenu"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#arrow-right"/></svg><span data-i18n="licence.top">Retour en haut</span></a></p>
+        </section>
+        <section id="article-9" aria-labelledby="article-9-t">
+          <h2 id="article-9-t">9. Fin de la licence</h2>
+          <p>Tu peux arrêter à tout moment en désinstallant le Launcher. Izacki peut suspendre ou mettre fin à ta licence en cas de manquement grave à ces règles. Dans ce cas, tu cesses d'utiliser le Launcher et tu supprimes les copies que tu détiens.</p>
+          <p class="doc-top" data-ui lang="fr" data-i18n-attr="lang:licence.langCode"><a class="link" href="#contenu"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#arrow-right"/></svg><span data-i18n="licence.top">Retour en haut</span></a></p>
+        </section>
+        <section id="article-10" aria-labelledby="article-10-t">
+          <h2 id="article-10-t">10. Droit applicable et litiges</h2>
+          <p>Cette licence est soumise au droit français. En cas de difficulté, contacte-nous d'abord à l'adresse ci-dessus. Les coordonnées du médiateur de la consommation figurent dans les <a href="conditions.html">conditions de vente</a>. Les règles légales de compétence qui protègent le consommateur restent applicables.</p>
+          <p class="doc-top" data-ui lang="fr" data-i18n-attr="lang:licence.langCode"><a class="link" href="#contenu"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#arrow-right"/></svg><span data-i18n="licence.top">Retour en haut</span></a></p>
+        </section>
+      </div>
     </div>
   </div>
 </section>
 
-<footer class="site-footer">
-  <div class="container footer-row">
-    <div class="footer-note">© 2026 Vincent Dubois, Ferra.Izacki. Tous droits réservés.</div>
-    <div class="footer-links">
-      <a href="index.html">Accueil</a>
-      <a href="launcher.html">Launcher</a>
-      <a href="forum/index.html">Forum</a>
-      <a href="contact.html">Contact</a>
-      <a href="conditions.html">📜 Conditions &amp; Confidentialité</a>
+</main>
+<footer class="site-footer" data-shell="footer">
+<div class="wrap">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="index.html" aria-label="Izacki, accueil" data-i18n-attr="aria-label:shell.brand.home"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"/><rect class="brand__sq" x="12" y="12" width="10" height="10"/></svg><span class="brand__word">Izacki</span></a>
+      <p data-i18n="shell.footer.blurb">Studio de jeux indépendant. Deux jeux gratuits, le Launcher pour les installer, un forum et un Discord pour en parler.</p>
     </div>
+    <nav aria-labelledby="f-izacki"><h2 id="f-izacki" data-i18n="shell.footer.izacki">Izacki</h2><ul><li><a href="index.html" data-i18n="shell.footer.home">Accueil</a></li><li><a href="launcher.html" data-i18n="shell.footer.launcher">Launcher</a></li><li><a href="launcher.html#createurs" data-i18n="shell.footer.publish">Publier un jeu</a></li></ul></nav>
+    <nav aria-labelledby="f-jeux"><h2 id="f-jeux" data-i18n="shell.footer.games">Jeux</h2><ul><li><a href="games/ferra.html">FERRA</a></li><li><a href="games/tower-defense.html">Tower Défense Infini</a></li></ul></nav>
+    <nav aria-labelledby="f-aide"><h2 id="f-aide" data-i18n="shell.footer.help">Aide et communauté</h2><ul><li><a href="faq.html" data-i18n="shell.footer.faq">Questions fréquentes</a></li><li><a href="contact.html" data-i18n="shell.footer.contact">Contact</a></li><li><a href="forum/index.html" data-i18n="shell.footer.forum">Forum</a></li><li><a href="https://discord.gg/bv2w8spATk" target="_blank" rel="noopener noreferrer">Discord<span class="sr-only" data-i18n="shell.newTab">(s'ouvre dans un nouvel onglet)</span></a></li></ul></nav>
   </div>
+  <div class="footer-base">
+    <p data-i18n="shell.footer.copyright">© 2026 Vincent Dubois, Ferra.Izacki. Tous droits réservés.</p>
+    <nav aria-label="Informations légales" class="footer-legal" data-i18n-attr="aria-label:shell.footer.legalNav"><a href="conditions.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#list"/></svg><span data-i18n="shell.footer.terms">Conditions &amp; Confidentialité</span></a><a href="licence.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#file"/></svg><span data-i18n="shell.footer.licence">Licence du Launcher</span></a></nav>
+    <div class="lang" role="group" aria-label="Langue du site" data-i18n-attr="aria-label:shell.lang.label"><button type="button" lang="fr" data-lang="fr" aria-label="Français" aria-pressed="true">FR</button><button type="button" lang="en" data-lang="en" aria-label="English" aria-pressed="false">EN</button><button type="button" lang="es" data-lang="es" aria-label="Español" aria-pressed="false">ES</button></div>
+  </div>
+</div>
 </footer>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/shell.js"></script>
+<script>
+(async function () {
+  await ferraI18nInit('');
+  ferraI18nApply();
+})();
+</script>
 </body>
 </html>

@@ -1,0 +1,119 @@
+{
+  "launcher": {
+    "meta": {
+      "title": "Launcher de juegos para Windows, gratis | Izacki",
+      "description": "El Launcher de Izacki instala, ejecuta y actualiza FERRA y Tower Défense Infini. Gratis, para Windows 10 y 11, con una cuenta Izacki gratuita."
+    },
+    "crumb": "Launcher",
+    "hero": {
+      "title": "El Launcher para instalar y ejecutar los juegos de Izacki.",
+      "lead": "Una sola aplicación para encontrar un juego, instalarlo, ejecutarlo y mantenerlo al día. Es gratuita y se actualiza sola.",
+      "help": "Ayuda con la instalación",
+      "plateAlt": "La Tienda del Launcher de Izacki: el escaparate de FERRA, los dos juegos de Izacki debajo y los filtros Tout, Jeux Izacki, Communauté y Gratuits.",
+      "screen": "Tienda"
+    },
+    "dl": {
+      "label": "Descargar",
+      "meta": "Requisitos e instalación",
+      "title": "Lo que necesitas.",
+      "platformValue": "Windows 10/11 (64 bits)",
+      "releasedOn": "publicada el",
+      "account": "Cuenta",
+      "accountValue": "Una cuenta Izacki gratuita. Hay que confirmar la dirección de correo al registrarse.",
+      "language": "Idioma",
+      "languageValue": "Francés, como los juegos"
+    },
+    "smartscreen": {
+      "title": "Windows puede mostrar una advertencia la primera vez.",
+      "text": "La aplicación aún no está firmada por un editor certificado. Los pasos para continuar están en las preguntas frecuentes:",
+      "link": "Instalación y advertencia de Windows"
+    },
+    "spaces": {
+      "label": "En el Launcher",
+      "meta": "Cinco espacios",
+      "title": "Lo que contiene el Launcher.",
+      "store": {
+        "title": "Tienda (Boutique)",
+        "text": "Búsqueda y cuatro filtros: Tout (todo), Jeux Izacki, Communauté (comunidad) y Gratuits (gratis). Los juegos de Izacki son gratuitos. Los juegos de la comunidad tienen un precio en créditos, a veces cero."
+      },
+      "library": {
+        "title": "Biblioteca (Bibliothèque)",
+        "text": "Tus juegos instalados, con búsqueda y orden. Cada juego tiene cuatro pestañas: Aperçu (resumen), Succès (logros), Nouveautés (novedades) e Informations. Las actualizaciones y las instalaciones están en Téléchargements (descargas)."
+      },
+      "community": {
+        "title": "Comunidad (Communauté)",
+        "text": "Amigos y grupos con chat de grupo, clasificación y enlace al Discord. Para añadir a un amigo, usas su tag, con el formato Usuario#Número."
+      },
+      "creators": {
+        "title": "Creadores (Créateurs)",
+        "text": "Publicar un juego y seguir sus ventas y sus retiros. El equipo examina cada juego antes de publicarlo."
+      },
+      "support": {
+        "title": "Asistencia (Assistance)",
+        "text": "¿Una duda, un fallo, un reembolso? Abres un ticket, adjuntas una captura de pantalla si hace falta y la respuesta llega en el propio ticket."
+      },
+      "note": "El Launcher está en francés: los nombres entre paréntesis son los que verás en la aplicación."
+    },
+    "games": {
+      "label": "Juegos",
+      "meta": "Dos juegos, los dos gratuitos",
+      "title": "Dos juegos para instalar.",
+      "ferraText": "Un mundo por reconstruir, una hoguera que proteger, un meteorito al que hacer frente. Extrae, automatiza, defiende tu campamento y prepárate para la noche.",
+      "tdText": "Un tower defense contra oleadas de zombis sin fin: colocas torres a lo largo del camino y ves hasta dónde aguantas.",
+      "more": "Ver la ficha del juego"
+    },
+    "security": {
+      "label": "Seguridad",
+      "meta": "Actualizaciones y ajustes",
+      "title": "Al día, verificado, ajustable.",
+      "p1": "El Launcher se actualiza solo: comprueba al arrancar, descarga la actualización y se reinicia. Las actualizaciones están firmadas.",
+      "p2": "Antes de iniciar un juego oficial, comprueba su integridad: compara el ejecutable con la huella publicada y lo reinstala si está modificado o dañado.",
+      "p3": "Un juego oficial que no está al día no se inicia: el Launcher te envía a Téléchargements (descargas).",
+      "p4": "Las actualizaciones automáticas de los juegos son un ajuste, desactivado por defecto, propio de cada dispositivo.",
+      "plateAlt": "El ajuste Apariencia de los ajustes del Launcher: cinco colores de acento a elegir, Cuivre, Azur, Émeraude, Violet y Cramoisi, con una vista previa.",
+      "screen": "Ajustes",
+      "setting": "Ajuste",
+      "settingValue": "Apariencia",
+      "colors": "Colores",
+      "colorsValue": "5 a elegir"
+    },
+    "creators": {
+      "label": "Creadores",
+      "meta": "Publicar un juego",
+      "title": "Publicar un juego en Izacki.",
+      "lead": "En el espacio Créateurs (Creadores) del Launcher, la pantalla « Sortir mon jeu » te pide el archivo del juego, un nombre, un precio y material gráfico. El equipo examina cada juego antes de publicarlo.",
+      "file": "Archivo",
+      "fileValue": "Un archivo .zip que contenga index.html, o un .exe de Windows",
+      "priceValue": "En créditos; cero para un juego gratuito",
+      "description": "Descripción",
+      "descriptionValue": "Al menos 10 caracteres",
+      "visuals": "Imágenes",
+      "visualsValue": "Un banner opcional y de 3 a 5 capturas",
+      "review": "Revisión",
+      "reviewValue": "El equipo examina cada juego; recibes un correo y una notificación",
+      "rules": "Reglas",
+      "rulesLink": "Reglamento de publicación de juegos",
+      "withdrawals": "Retiros",
+      "withdrawalsText": "Los retiros de dinero real siguen las condiciones de la página Condiciones y privacidad.",
+      "withdrawalsLink": "Condiciones de reembolso y de retiro"
+    },
+    "help": {
+      "label": "Ayuda",
+      "meta": "Instalación y uso",
+      "title": "Ayuda con la instalación.",
+      "read": "Leer la respuesta",
+      "q1": {
+        "title": "Advertencia de Windows al iniciar",
+        "text": "Windows puede mostrar una advertencia antes de abrir el instalador, porque el Launcher aún no está firmado por un editor certificado."
+      },
+      "q2": {
+        "title": "Antivirus o navegador que bloquea el archivo",
+        "text": "Si tu antivirus o tu navegador retiene el archivo descargado, la respuesta está en las preguntas frecuentes."
+      },
+      "q3": {
+        "title": "Carpeta de instalación de los juegos",
+        "text": "Puedes cambiar la carpeta de instalación en Paramètres (ajustes) y luego en Téléchargements et stockage (descargas y almacenamiento). Los juegos ya instalados se mueven."
+      }
+    }
+  }
+}

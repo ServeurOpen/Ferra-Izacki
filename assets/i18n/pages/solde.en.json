@@ -1,0 +1,85 @@
+{
+  "solde": {
+    "meta": {
+      "title": "Top up my credits | Izacki",
+      "description": "Top up your Izacki credits balance by bank card."
+    },
+    "side": {
+      "label": "Account menu",
+      "account": "Account",
+      "credits": "Credits",
+      "settings": "Settings",
+      "help": "Help",
+      "faq": "FAQ",
+      "contact": "Contact"
+    },
+    "crumb": "Account",
+    "title": "Top up my credits",
+    "lead": "Credits pay for games and content in the Launcher. The bigger the pack, the less each credit costs.",
+    "login": {
+      "title": "Log in to top up your credits.",
+      "text": "Your credits belong to your Izacki account, the same one on the site and in the Launcher."
+    },
+    "packs": {
+      "title": "Choose a credit pack",
+      "meta": "Card payment, through Stripe",
+      "label": "Credit packs"
+    },
+    "pack": {
+      "credits": "credits",
+      "pay": "Pay by card",
+      "best": "Best value",
+      "q500": "500",
+      "q1000": "1,000",
+      "q2000": "2,000",
+      "q5000": "5,000",
+      "p500": "€3.99",
+      "p1000": "€6.49",
+      "p2000": "€11.99",
+      "p5000": "€26.99",
+      "per500": "€0.80 per 100 credits",
+      "per1000": "€0.65 per 100 credits",
+      "per2000": "€0.60 per 100 credits",
+      "per5000": "€0.54 per 100 credits"
+    },
+    "how": {
+      "title": "How it works",
+      "paymentLabel": "Payment",
+      "paymentText": "By card, on a Stripe payment page. 3-D Secure authentication may be requested.",
+      "returnLabel": "Return",
+      "returnText": "You come back to this page once the payment is complete.",
+      "balanceLabel": "Balance",
+      "balanceText": "It updates in the Launcher a few seconds after the payment.",
+      "useLabel": "Use",
+      "useText": "Credits only have value within the Izacki ecosystem: they are neither cash nor a cryptocurrency.",
+      "limitsLabel": "Limits",
+      "limitsText": "Daily and weekly purchase limits apply."
+    },
+    "legal": {
+      "lead": "Read before you pay:",
+      "terms": "Terms of sale",
+      "refunds": "Refunds"
+    },
+    "msg": {
+      "success": "Payment received. Your credits have been added; your balance updates in the Launcher within a few seconds.",
+      "canceled": "Payment canceled. Nothing has been charged."
+    },
+    "err": {
+      "salesPaused": "Credit purchases are temporarily suspended. Please come back a little later.",
+      "disabledUser": "Your account can't buy credits right now. Contact us if you think this is a mistake.",
+      "tooManyOpen": "You already have payments in progress. Complete them or wait for them to expire.",
+      "tooManyOpenRetry": "You already have payments in progress. Complete them or wait for them to expire, then try again in about",
+      "limit": "You have reached the credit purchase limit for this period. Try again later.",
+      "limitRetry": "You have reached the credit purchase limit for this period. Try again in about",
+      "purchaseLimit": "We couldn't start the payment. Contact us.",
+      "unavailable": "Service temporarily unavailable. Try again in a few minutes.",
+      "generic": "We couldn't start the payment. Try again in a moment."
+    },
+    "delay": {
+      "lessThanMinute": "a minute",
+      "min": "min",
+      "h": "h",
+      "d": "d"
+    }
+  }
+}

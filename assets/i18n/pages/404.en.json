@@ -1,0 +1,15 @@
+{
+  "error404": {
+    "meta": {
+      "title": "Page not found | Izacki",
+      "description": "This page does not exist or has been moved."
+    },
+    "title": "Page not found",
+    "text": "This page does not exist or has been moved. Here is where to go next.",
+    "home": "Back to the home page",
+    "games": "See the games",
+    "launcher": "The Launcher",
+    "forum": "The forum",
+    "help": "Help"
+  }
+}

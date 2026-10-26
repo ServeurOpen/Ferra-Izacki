@@ -1,0 +1,9 @@
+.games-note{margin-top:1.25rem;max-width:36rem}
+.split+.gallery{margin-top:var(--head-gap)}
+.section-head+.hero__grid{margin-top:var(--head-gap)}
+@media (min-width:62rem){.hero__grid>.prose{grid-column:1/span 5}}
+.gallery .plate{--ar:16/9}
+.gallery--feature>:first-child{grid-column:1/-1;--ar:2560/1080}
+@media (min-width:40rem){.gallery--feature>:last-child:nth-child(odd){grid-column:auto}}
+.hero__plate-wide .plate{--ar:16/9}
+@media (min-width:48rem){.hero__plate-wide .plate{--ar:2560/1080}}

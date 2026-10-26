@@ -1,0 +1,119 @@
+{
+  "launcher": {
+    "meta": {
+      "title": "Free game launcher for Windows | Izacki",
+      "description": "The Izacki Launcher installs, runs and updates FERRA and Tower Défense Infini. Free, for Windows 10 and 11, with a free Izacki account."
+    },
+    "crumb": "Launcher",
+    "hero": {
+      "title": "The Launcher to install and run Izacki games.",
+      "lead": "One app to find a game, install it, run it and keep it up to date. It is free and it updates itself.",
+      "help": "Installation help",
+      "plateAlt": "The Store of the Izacki Launcher: the FERRA showcase, the two Izacki games below it, and the filters Tout, Jeux Izacki, Communauté and Gratuits.",
+      "screen": "Store"
+    },
+    "dl": {
+      "label": "Download",
+      "meta": "Requirements and installation",
+      "title": "What you need.",
+      "platformValue": "Windows 10/11 (64-bit)",
+      "releasedOn": "released",
+      "account": "Account",
+      "accountValue": "A free Izacki account. Your email address has to be confirmed when you sign up.",
+      "language": "Language",
+      "languageValue": "French, like the games"
+    },
+    "smartscreen": {
+      "title": "Windows may show a warning the first time.",
+      "text": "The app is not yet signed by a certified publisher. The steps to carry on are in the FAQ:",
+      "link": "Installation and Windows warning"
+    },
+    "spaces": {
+      "label": "In the Launcher",
+      "meta": "Five spaces",
+      "title": "What the Launcher contains.",
+      "store": {
+        "title": "Store (Boutique)",
+        "text": "Search and four filters: Tout (all), Jeux Izacki, Communauté (community) and Gratuits (free). Izacki's games are free. Community games have a price in credits, sometimes zero."
+      },
+      "library": {
+        "title": "Library (Bibliothèque)",
+        "text": "Your installed games, with search and sorting. Each game has four tabs: Aperçu (overview), Succès (achievements), Nouveautés (what's new) and Informations. Updates and installs are in Téléchargements (downloads)."
+      },
+      "community": {
+        "title": "Community (Communauté)",
+        "text": "Friends and groups with group chat, a leaderboard, and a link to the Discord. To add a friend, you use their tag, in the form Username#Number."
+      },
+      "creators": {
+        "title": "Creators (Créateurs)",
+        "text": "Publish a game and follow its sales and withdrawals. The team reviews every game before it is published."
+      },
+      "support": {
+        "title": "Support (Assistance)",
+        "text": "A question, a bug, a refund? You open a ticket, attach a screenshot if needed, and the answer comes in the ticket."
+      },
+      "note": "The Launcher is in French: the names in brackets are the ones you will see in the app."
+    },
+    "games": {
+      "label": "Games",
+      "meta": "Two games, both free",
+      "title": "Two games to install.",
+      "ferraText": "A world to rebuild, a fire to protect, a meteorite to face. Mine, automate, defend your camp, and get ready for the night.",
+      "tdText": "A tower defense against endless waves of zombies: you place towers along the road and see how long you can hold.",
+      "more": "View the game page"
+    },
+    "security": {
+      "label": "Security",
+      "meta": "Updates and settings",
+      "title": "Up to date, checked, adjustable.",
+      "p1": "The Launcher updates itself: it checks at startup, downloads the update, then restarts. Updates are signed.",
+      "p2": "Before launching an official game, it runs an integrity check: it compares the executable with the published fingerprint, and reinstalls it if it was modified or damaged.",
+      "p3": "An official game that is not up to date does not start: the Launcher sends you to Téléchargements (downloads).",
+      "p4": "Automatic game updates are a setting, off by default, that applies to each device separately.",
+      "plateAlt": "The Appearance setting in the Launcher settings: five accent colors to choose from, Cuivre, Azur, Émeraude, Violet and Cramoisi, with a preview.",
+      "screen": "Settings",
+      "setting": "Setting",
+      "settingValue": "Appearance",
+      "colors": "Colors",
+      "colorsValue": "5 to choose from"
+    },
+    "creators": {
+      "label": "Creators",
+      "meta": "Publish a game",
+      "title": "Publish a game on Izacki.",
+      "lead": "In the Créateurs (Creators) space of the Launcher, the “Sortir mon jeu” screen asks for your game file, a name, a price and some visuals. The team reviews every game before publication.",
+      "file": "File",
+      "fileValue": "A .zip archive containing index.html, or a Windows .exe",
+      "priceValue": "In credits; zero for a free game",
+      "description": "Description",
+      "descriptionValue": "At least 10 characters",
+      "visuals": "Visuals",
+      "visualsValue": "An optional banner and 3 to 5 screenshots",
+      "review": "Review",
+      "reviewValue": "The team reviews every game; you receive an email and a notification",
+      "rules": "Rules",
+      "rulesLink": "Game publishing rules",
+      "withdrawals": "Withdrawals",
+      "withdrawalsText": "Withdrawals of real money follow the terms on the Terms &amp; Privacy page.",
+      "withdrawalsLink": "Refund and withdrawal terms"
+    },
+    "help": {
+      "label": "Help",
+      "meta": "Installation and use",
+      "title": "Installation help.",
+      "read": "Read the answer",
+      "q1": {
+        "title": "Windows warning at launch",
+        "text": "Windows may show a warning before opening the installer, because the Launcher is not yet signed by a certified publisher."
+      },
+      "q2": {
+        "title": "Antivirus or browser blocking the file",
+        "text": "If your antivirus or your browser holds back the downloaded file, the answer is in the FAQ."
+      },
+      "q3": {
+        "title": "Games installation folder",
+        "text": "You can change the installation folder in Paramètres (settings), then Téléchargements et stockage (downloads and storage). Games that are already installed are moved."
+      }
+    }
+  }
+}

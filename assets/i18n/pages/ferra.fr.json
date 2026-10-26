@@ -1,0 +1,115 @@
+{
+  "ferra": {
+    "meta": {
+      "title": "FERRA, jeu de survie et d'automatisation | Izacki",
+      "description": "FERRA est un jeu de survie et d'automatisation gratuit pour Windows\u00a0: protège ton feu de camp, automatise ta production, prépare-toi à la météorite.",
+      "imageAlt": "FERRA, jeu de survie et d'automatisation\u00a0: le titre et les mentions «\u00a0Gratuit\u00a0» et «\u00a0Dans le Launcher Izacki\u00a0» sur une capture du jeu.",
+      "shareImage": "https://izackiferra.com/assets/img/games/ferra-share-fr-1200.jpg"
+    },
+    "hero": {
+      "lead": "Un monde à reconstruire, un feu à protéger, une météorite à affronter. Mine, automatise, défends ton campement, et prépare-toi pour la nuit.",
+      "plateAlt": "Bannière de FERRA, jeu de survie et d'automatisation\u00a0: «\u00a0Un monde à reconstruire, un feu à protéger, une météorite à affronter.\u00a0», avec les mentions «\u00a0Gratuit\u00a0» et «\u00a0Dans le Launcher Izacki\u00a0», sur une capture du jeu.",
+      "srcset": "../assets/img/games/ferra-hero-fr-640.webp 640w, ../assets/img/games/ferra-hero-fr-1280.webp 1280w, ../assets/img/games/ferra-hero-fr-1920.webp 1920w",
+      "src": "../assets/img/games/ferra-hero-fr-1280.png"
+    },
+    "presentation": {
+      "label": "Présentation",
+      "meta": "Un jeu de survie",
+      "title": "Construire case par case.",
+      "p1": "Chaque partie de FERRA se construit case par case. Protège ton feu de camp, récolte fer, bois, pierre et cuivre, puis automatise tout avec des foreuses, classiques ou électriques, alimentées par un réseau électrique.",
+      "p2": "Le jour, on récolte et on construit. La nuit, les monstres rôdent. Au loin, une météorite approche\u00a0: bunker ou évacuation, à toi de choisir.",
+      "coverAlt": "Illustration de FERRA\u00a0: le titre sur une plaque métallique, devant une usine de tuyaux, de foreuses et de tapis roulants, avec une éolienne et des arbres à l'arrière-plan.",
+      "coverNote": "Illustration · La jaquette du jeu."
+    },
+    "gallery": {
+      "label": "Captures",
+      "meta": "Sept captures du jeu",
+      "title": "Le camp en images.",
+      "wide": {
+        "alt": "Capture de FERRA\u00a0: vue large du camp en plein jour, de la zone de foreuses au point d'eau.",
+        "cap": "Vue large du camp en plein jour, de la zone de foreuses au point d'eau."
+      },
+      "drills": {
+        "alt": "Capture de FERRA\u00a0: des foreuses électriques sur des gisements, avec batteries, générateur, éolienne et panneaux solaires.",
+        "cap": "Des foreuses électriques sur des gisements, avec batteries, générateur, éolienne et panneaux solaires."
+      },
+      "furnaces": {
+        "alt": "Capture de FERRA\u00a0: deux fourneaux fumants au bord d'un bassin, avec la maison et des maisons d'ouvriers à proximité.",
+        "cap": "Deux fourneaux fumants au bord d'un bassin, avec la maison et des maisons d'ouvriers à proximité."
+      },
+      "lake": {
+        "alt": "Capture de FERRA\u00a0: des cabanes de pêche sur un point d'eau, parmi les foreuses et les lampadaires du camp.",
+        "cap": "Des cabanes de pêche sur un point d'eau, parmi les foreuses et les lampadaires du camp."
+      },
+      "dusk": {
+        "alt": "Capture de FERRA\u00a0: le camp à la tombée de la nuit, lampadaires allumés, tourelles en place et créatures aux yeux luisants aux abords.",
+        "cap": "Le camp à la tombée de la nuit, lampadaires allumés, tourelles en place et créatures aux yeux luisants aux abords."
+      },
+      "meteor": {
+        "alt": "Capture de FERRA\u00a0: une météorite traverse le ciel au-dessus du camp, à la tombée du soir.",
+        "cap": "Une météorite traverse le ciel au-dessus du camp, à la tombée du soir."
+      },
+      "monsters": {
+        "alt": "Capture de FERRA\u00a0: la base à la tombée du jour\u00a0: des monstres rôdent à la lisière de la lumière pendant que les tourelles veillent.",
+        "cap": "La base à la tombée du jour\u00a0: des monstres rôdent à la lisière de la lumière pendant que les tourelles veillent."
+      }
+    },
+    "features": {
+      "label": "Dans le jeu",
+      "meta": "Sept éléments",
+      "title": "Ce que contient FERRA.",
+      "note": "Les noms des bâtiments, des compétences et des modes sont ceux du jeu, qui est en français.",
+      "harvest": {
+        "title": "Récolte et automatisation",
+        "text": "Récolte de bois, de pierre, de fer et de cuivre, puis foreuses classiques ou électriques pour automatiser la production."
+      },
+      "power": {
+        "title": "Réseau électrique",
+        "text": "Panneaux solaires, éoliennes, générateurs, centrale nucléaire, batteries et Central alimentent tes machines."
+      },
+      "skills": {
+        "title": "Compétences et métiers",
+        "text": "Un arbre de compétences (Combat, Mineur, Bûcheron, Transport, Confort) et cinq métiers\u00a0: Bûcheron, Mineur, Pêcheur, Fermier, Ingénieur."
+      },
+      "daynight": {
+        "title": "Jour, nuit et météo",
+        "text": "Le cycle jour/nuit amène des monstres nocturnes. La météo change\u00a0: pluie, vent fort, neige légère, blizzard, orage, brouillard, éclipse."
+      },
+      "defense": {
+        "title": "Défense",
+        "text": "Tourelles, casernes et torche pour tenir jusqu'au matin."
+      },
+      "meteor": {
+        "title": "La météorite",
+        "text": "Une météorite menace le monde. À toi de choisir entre Bunker Tycoon, un bunker isométrique à aménager, et l'Évacuation."
+      },
+      "achievements": {
+        "title": "Succès",
+        "text": "Des succès répartis en sept catégories, avec des paliers Bronze, Argent, Or et Platine."
+      }
+    },
+    "config": {
+      "label": "Configuration",
+      "meta": "Requise et conseillée",
+      "title": "Configuration.",
+      "required": "Requise",
+      "recommended": "Conseillée",
+      "system": "Système",
+      "space": "Espace",
+      "account": "Compte",
+      "accountValue": "Compte Izacki gratuit, pour le Launcher",
+      "language": "Langue",
+      "screen": "Écran",
+      "controls": "Commandes",
+      "controlsValue": "ZQSD (AZERTY) ou WASD (QWERTY), ou flèches, et souris"
+    },
+    "news": {
+      "label": "Nouveautés",
+      "meta": "Notes de version",
+      "title": "Dernières versions."
+    },
+    "band": {
+      "title": "Installe le Launcher, puis lance FERRA."
+    }
+  }
+}

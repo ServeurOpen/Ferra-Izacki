@@ -1,0 +1,39 @@
+{
+  "forumCategory": {
+    "meta": {
+      "title": "Foro | Izacki",
+      "description": "Los temas de una categoría del foro de Izacki."
+    },
+    "crumbForum": "Foro",
+    "title": "Categoría",
+    "newThread": "Nuevo tema",
+    "loading": "Cargando temas…",
+    "backToForum": "Volver al foro",
+    "notFound": "Categoría no encontrada.",
+    "noThreads": "Todavía no hay temas aquí. Sé el primero en abrir uno.",
+    "loadError": "No se ha podido cargar esta categoría.",
+    "reply": "respuesta",
+    "replies": "respuestas",
+    "by": "por",
+    "pinned": "Fijado",
+    "titleSuffix": "Foro de Izacki",
+    "cat": {
+      "annonces": {
+        "name": "Anuncios",
+        "desc": "Las novedades oficiales de Izacki."
+      },
+      "general": {
+        "name": "Discusión general",
+        "desc": "Habla de los juegos, comparte tus partidas, haz tus preguntas."
+      },
+      "support": {
+        "name": "Soporte y errores",
+        "desc": "¿Un problema al iniciar o en el juego? Descríbelo aquí."
+      },
+      "idees": {
+        "name": "Ideas y sugerencias",
+        "desc": "Propón lo que te gustaría ver en los juegos y en el Launcher."
+      }
+    }
+  }
+}

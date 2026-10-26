@@ -1,0 +1,115 @@
+{
+  "ferra": {
+    "meta": {
+      "title": "FERRA, juego de supervivencia y automatización | Izacki",
+      "description": "FERRA es un juego gratuito de supervivencia y automatización para Windows: protege tu hoguera, automatiza tu producción y prepárate para el meteorito.",
+      "imageAlt": "FERRA, juego de supervivencia y automatización: el título y las menciones «Gratis» y «En el Launcher Izacki» sobre una captura del juego.",
+      "shareImage": "https://izackiferra.com/assets/img/games/ferra-share-es-1200.jpg"
+    },
+    "hero": {
+      "lead": "Un mundo por reconstruir, una hoguera que proteger, un meteorito al que hacer frente. Extrae, automatiza, defiende tu campamento y prepárate para la noche.",
+      "plateAlt": "Banner de FERRA, juego de supervivencia y automatización: «Un mundo por reconstruir, una hoguera que proteger, un meteorito al que hacer frente.», con las menciones «Gratis» y «En el Launcher Izacki», sobre una captura del juego.",
+      "srcset": "../assets/img/games/ferra-hero-es-640.webp 640w, ../assets/img/games/ferra-hero-es-1280.webp 1280w, ../assets/img/games/ferra-hero-es-1920.webp 1920w",
+      "src": "../assets/img/games/ferra-hero-es-1280.png"
+    },
+    "presentation": {
+      "label": "Presentación",
+      "meta": "Un juego de supervivencia",
+      "title": "Construir casilla a casilla.",
+      "p1": "Cada partida de FERRA se construye casilla a casilla. Protege tu hoguera, recoge hierro, madera, piedra y cobre, y automatiza todo con perforadoras, clásicas o eléctricas, alimentadas por una red eléctrica.",
+      "p2": "De día se recolecta y se construye. De noche acechan los monstruos. A lo lejos se acerca un meteorito: búnker o evacuación, tú eliges.",
+      "coverAlt": "Ilustración de FERRA: el título sobre una placa metálica, delante de una fábrica de tuberías, perforadoras y cintas transportadoras, con un aerogenerador y árboles al fondo.",
+      "coverNote": "Ilustración · La carátula del juego."
+    },
+    "gallery": {
+      "label": "Capturas",
+      "meta": "Siete capturas del juego",
+      "title": "El campamento en imágenes.",
+      "wide": {
+        "alt": "Captura de FERRA: vista amplia del campamento de día, del campo de perforadoras al estanque.",
+        "cap": "Vista amplia del campamento de día, del campo de perforadoras al estanque."
+      },
+      "drills": {
+        "alt": "Captura de FERRA: perforadoras eléctricas sobre yacimientos, con baterías, generador, aerogenerador y paneles solares.",
+        "cap": "Perforadoras eléctricas sobre yacimientos, con baterías, generador, aerogenerador y paneles solares."
+      },
+      "furnaces": {
+        "alt": "Captura de FERRA: dos hornos humeantes junto a un estanque, con la casa y cabañas de obreros cerca.",
+        "cap": "Dos hornos humeantes junto a un estanque, con la casa y cabañas de obreros cerca."
+      },
+      "lake": {
+        "alt": "Captura de FERRA: cabañas de pesca en un estanque, entre las perforadoras y las farolas del campamento.",
+        "cap": "Cabañas de pesca en un estanque, entre las perforadoras y las farolas del campamento."
+      },
+      "dusk": {
+        "alt": "Captura de FERRA: el campamento al anochecer, con farolas encendidas, torretas en su sitio y criaturas de ojos brillantes en los alrededores.",
+        "cap": "El campamento al anochecer, con farolas encendidas, torretas en su sitio y criaturas de ojos brillantes en los alrededores."
+      },
+      "meteor": {
+        "alt": "Captura de FERRA: un meteorito cruza el cielo sobre el campamento al anochecer.",
+        "cap": "Un meteorito cruza el cielo sobre el campamento al anochecer."
+      },
+      "monsters": {
+        "alt": "Captura de FERRA: la base al caer la tarde: unos monstruos merodean al borde de la luz mientras las torretas vigilan.",
+        "cap": "La base al caer la tarde: unos monstruos merodean al borde de la luz mientras las torretas vigilan."
+      }
+    },
+    "features": {
+      "label": "En el juego",
+      "meta": "Siete elementos",
+      "title": "Qué contiene FERRA.",
+      "note": "Los nombres de los edificios, las habilidades y los modos son los del juego, que está en francés.",
+      "harvest": {
+        "title": "Recolección y automatización",
+        "text": "Recoge madera, piedra, hierro y cobre, y luego usa perforadoras clásicas o eléctricas para automatizar la producción."
+      },
+      "power": {
+        "title": "Red eléctrica",
+        "text": "Paneles solares, aerogeneradores, generadores, una central nuclear, baterías y un Central alimentan tus máquinas."
+      },
+      "skills": {
+        "title": "Habilidades y oficios",
+        "text": "Un árbol de habilidades (Combat, Mineur, Bûcheron, Transport, Confort) y cinco oficios: Bûcheron, Mineur, Pêcheur, Fermier, Ingénieur."
+      },
+      "daynight": {
+        "title": "Día, noche y clima",
+        "text": "El ciclo día/noche trae monstruos nocturnos. El clima cambia: lluvia, viento fuerte, nieve ligera, ventisca, tormenta, niebla, eclipse."
+      },
+      "defense": {
+        "title": "Defensa",
+        "text": "Torretas, cuarteles y antorcha para aguantar hasta la mañana."
+      },
+      "meteor": {
+        "title": "El meteorito",
+        "text": "Un meteorito amenaza el mundo. Eliges entre Bunker Tycoon, un búnker isométrico que acondicionar, y la Évacuation."
+      },
+      "achievements": {
+        "title": "Logros",
+        "text": "Logros repartidos en siete categorías, con niveles Bronce, Plata, Oro y Platino."
+      }
+    },
+    "config": {
+      "label": "Requisitos",
+      "meta": "Mínimos y recomendados",
+      "title": "Requisitos.",
+      "required": "Mínimos",
+      "recommended": "Recomendados",
+      "system": "Sistema",
+      "space": "Espacio",
+      "account": "Cuenta",
+      "accountValue": "Cuenta Izacki gratuita, para el Launcher",
+      "language": "Idioma",
+      "screen": "Pantalla",
+      "controls": "Controles",
+      "controlsValue": "WASD (ZQSD en un teclado AZERTY) o flechas, y ratón"
+    },
+    "news": {
+      "label": "Novedades",
+      "meta": "Notas de versión",
+      "title": "Últimas versiones."
+    },
+    "band": {
+      "title": "Instala el Launcher y lanza FERRA."
+    }
+  }
+}

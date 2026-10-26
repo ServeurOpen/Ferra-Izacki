@@ -1,0 +1,149 @@
+{
+  "faq": {
+    "meta": {
+      "title": "Questions fréquentes | Izacki",
+      "description": "Installation, avertissement Windows, compte, crédits, mises à jour : les réponses aux questions les plus posées sur le Launcher et les jeux Izacki."
+    },
+    "crumb": "Questions fréquentes",
+    "hero": {
+      "title": "Questions fréquentes",
+      "lead": "Installation, compte, crédits et jeux : les réponses aux questions les plus posées."
+    },
+    "rail": {
+      "label": "Aide",
+      "meta": "Recherche et rubriques"
+    },
+    "search": {
+      "title": "Recherche et questions",
+      "label": "Rechercher dans les questions",
+      "placeholder": "Mot-clé : antivirus, crédits, compte"
+    },
+    "noResults": "Aucune question ne correspond. Essaie un autre mot, ou écris-nous depuis la page <a href=\"contact.html\">Contact</a>.",
+    "nav": {
+      "label": "Rubriques"
+    },
+    "more": {
+      "title": "Autre question ?",
+      "text": "Pose ta question sur le <a href=\"forum/index.html\">forum</a> (catégorie « Support et bugs »), écris-nous depuis la page <a href=\"contact.html\">Contact</a>, ouvre un ticket depuis l'Assistance du Launcher ou rejoins le <a href=\"https://discord.gg/bv2w8spATk\" target=\"_blank\" rel=\"noopener noreferrer\">Discord<span class=\"sr-only\"> (s'ouvre dans un nouvel onglet)</span></a>. Nous répondons dès que nous pouvons.",
+      "cta": "Nous contacter"
+    },
+    "groups": {
+      "installation": "Installation et Windows",
+      "compte": "Compte et connexion",
+      "profil": "Profil",
+      "jeux": "Jeux et succès",
+      "misesAJour": "Mises à jour",
+      "credits": "Crédits et paiements",
+      "createurs": "Créateurs",
+      "donnees": "Compte et données"
+    },
+    "smartscreen": {
+      "q": "Windows affiche un avertissement au lancement de l'installateur. Est-ce normal ?",
+      "a": "<p>Le Launcher n'est pas encore signé par un éditeur certifié : Windows peut donc afficher un écran de protection la première fois que tu lances l'installateur. Pour continuer :</p><ol class=\"steps\"><li>Clique sur <b>« Informations complémentaires »</b>.</li><li>Puis clique sur <b>« Exécuter quand même »</b>.</li></ol><p>Cette autorisation ne vaut que pour ce fichier.</p>"
+    },
+    "pasDeLien": {
+      "q": "Je ne vois pas « Informations complémentaires », seulement un bouton OK.",
+      "a": "<p>Selon les réglages de Windows, le lien peut ne pas apparaître. C'est le cas, par exemple, sur un ordinateur géré par un établissement ou une entreprise, ou selon les réglages de Sécurité Windows (Contrôle des applications et du navigateur). Demande alors à l'administrateur du poste, ou <a href=\"contact.html\">écris-nous</a>.</p>"
+    },
+    "antivirus": {
+      "q": "Mon antivirus supprime le fichier ou le met en quarantaine.",
+      "a": "<p>Un antivirus peut se méfier d'un exécutable peu courant et non signé. Restaure le fichier depuis la quarantaine, ou ajoute une exception pour <code>IzackiLauncher-Setup.exe</code>, puis relance le téléchargement ou l'installation.</p>"
+    },
+    "navigateur": {
+      "q": "Le navigateur bloque le téléchargement.",
+      "a": "<p>Edge ou Chrome peuvent signaler un fichier peu courant. Ouvre le menu <b>…</b> du téléchargement, puis choisis <b>« Conserver »</b> (ou <b>« Conserver quand même »</b>).</p>"
+    },
+    "dossierInstallation": {
+      "q": "Où le Launcher installe-t-il les jeux ?",
+      "a": "<p>Par défaut, dans un dossier géré par l'application. Tu peux le changer dans <b>Paramètres</b>, puis <b>Téléchargements et stockage</b>, avec le bouton « Changer le dossier ». Les jeux déjà installés sont déplacés, et l'espace utilisé par chaque jeu y est affiché.</p>"
+    },
+    "configuration": {
+      "q": "Quelle configuration faut-il ?",
+      "a": "<p>Windows 10 ou 11 (64 bits), moins de 3 Mo pour le Launcher et un compte Izacki gratuit. Le Launcher et les jeux sont en français. Il n'existe pas de version pour macOS ni pour Linux.</p>"
+    },
+    "memeCompte": {
+      "q": "Le Launcher et le site utilisent-ils le même compte ?",
+      "a": "<p>Oui : un seul compte Izacki sert sur le site, sur le forum et dans le Launcher. Ton adresse e-mail doit être confirmée à l'inscription.</p>"
+    },
+    "motDePasse": {
+      "q": "J'ai oublié mon mot de passe.",
+      "a": "<p>Tu peux le réinitialiser depuis l'écran de connexion du Launcher ou depuis la <a href=\"forum/forgot-password.html\">page de récupération du site</a>. Le lien que tu reçois ouvre une page du site, et le nouveau mot de passe vaut partout.</p>"
+    },
+    "tag": {
+      "q": "C'est quoi mon tag (Pseudo#Numéro) ?",
+      "a": "<p>C'est ton identifiant unique : ton pseudo suivi d'un numéro. Il ne peut jamais être modifié, il est visible dans le Launcher, et c'est lui qui sert à t'ajouter en ami.</p>"
+    },
+    "avatar": {
+      "q": "Comment changer mon avatar ou ma bannière ?",
+      "a": "<p>Dans la <b>Boutique</b>, rubrique <b>Personnalisation du profil</b> : les avatars et les bannières s'obtiennent avec des jetons. Une fois débloqués, les visuels s'équipent gratuitement dans <b>Paramètres</b>, puis <b>Profil</b>. L'import d'une image personnelle n'existe plus.</p>"
+    },
+    "jetons": {
+      "q": "À quoi servent les jetons ?",
+      "a": "<p>Tu gagnes un jeton par minute jouée. Les jetons servent à débloquer des visuels de profil, avatars et bannières, dans la Boutique.</p>"
+    },
+    "nomAffichage": {
+      "q": "Mon nom d'affichage est différent de mon pseudo, est-ce normal ?",
+      "a": "<p>Oui. Ton tag reste ton identifiant. Ton nom d'affichage se change dans <b>Paramètres</b>, puis <b>Profil</b> ; s'il est vide, c'est ton tag qui s'affiche.</p>"
+    },
+    "profilPrive": {
+      "q": "À quoi sert le profil privé ?",
+      "a": "<p>Il masque ta bannière, tes succès et ton temps de jeu. Seul ton tag reste visible dans <b>Amis</b>.</p>"
+    },
+    "installerJeu": {
+      "q": "Comment installer un jeu ?",
+      "a": "<p>Ouvre la <b>Boutique</b>, puis la fiche du jeu, et clique sur <b>Installer</b>. Ensuite, retrouve-le dans <b>Bibliothèque</b>, puis <b>Mes jeux</b>, et clique sur <b>Jouer</b>.</p>"
+    },
+    "succes": {
+      "q": "Mes succès ne s'affichent pas.",
+      "a": "<p>Les succès se synchronisent quand le jeu est lancé depuis le Launcher, une fois connecté à ton compte.</p>"
+    },
+    "quitter": {
+      "q": "Comment quitter un jeu proprement ?",
+      "a": "<p>Appuie sur <b>Échap</b>, puis choisis <b>« Quitter le jeu »</b>. La sauvegarde est automatique, dans FERRA comme dans Tower Défense Infini.</p>"
+    },
+    "desinstaller": {
+      "q": "Comment désinstaller un jeu ?",
+      "a": "<p>Sur la fiche du jeu, clique sur <b>Désinstaller</b>, puis confirme en cliquant une seconde fois. L'espace utilisé par chaque jeu est visible dans <b>Paramètres</b>, puis <b>Téléchargements et stockage</b>.</p>"
+    },
+    "payants": {
+      "q": "Les jeux sont-ils payants ?",
+      "a": "<p>FERRA et Tower Défense Infini sont gratuits. Les jeux de la communauté ont un prix en crédits, parfois zéro.</p>"
+    },
+    "majJeu": {
+      "q": "Comment savoir si un jeu a une mise à jour ?",
+      "a": "<p>Un jeu officiel qui n'est pas à jour ne se lance pas : le Launcher t'envoie vers <b>Bibliothèque</b>, puis <b>Téléchargements</b>. Le réglage <b>« Mises à jour automatiques »</b> les installe sans clic ; il est désactivé par défaut et propre à chaque appareil.</p>"
+    },
+    "majLauncher": {
+      "q": "Le Launcher se met-il à jour tout seul ?",
+      "a": "<p>Oui. Il vérifie au démarrage, télécharge la mise à jour, puis redémarre. Les mises à jour sont signées. Si la mise à jour automatique échoue, un bandeau propose le téléchargement manuel.</p>"
+    },
+    "creditsQuoi": {
+      "q": "À quoi servent les crédits ?",
+      "a": "<p>Les crédits sont la monnaie interne d'Izacki : ce ne sont ni des espèces ni une cryptomonnaie. Ils paient des jeux de la communauté et des forfaits de succès pour les créateurs. Un bonus de bienvenue unique de +10 crédits est offert à la première connexion.</p>"
+    },
+    "creditsAcheter": {
+      "q": "Comment acheter des crédits ?",
+      "a": "<p>Depuis la page <a href=\"solde.html\">Recharger mes crédits</a>, par carte, sur une page de paiement Stripe (l'authentification 3-D Secure peut être demandée). Ton solde se met à jour dans le Launcher en quelques secondes. Des plafonds d'achat par jour et par semaine existent.</p>"
+    },
+    "remboursement": {
+      "q": "Puis-je me faire rembourser ?",
+      "a": "<p>Un jeu de la communauté se rembourse sur demande, depuis la page du jeu ou par un ticket de l'Assistance. L'équipe examine chaque demande à la main. Repères : une heure de jeu et sept jours. Le détail est dans les <a href=\"conditions.html#remboursements\">conditions de remboursement</a>.</p>"
+    },
+    "publier": {
+      "q": "Comment publier un jeu ?",
+      "a": "<p>Dans l'espace <b>Créateurs</b> du Launcher, clique sur <b>« Sortir mon jeu »</b> : fichier du jeu, nom, prix en crédits, description et captures. L'équipe examine chaque jeu avant publication. Plus d'informations sur la <a href=\"launcher.html#createurs\">page du Launcher</a>.</p>"
+    },
+    "retraits": {
+      "q": "Comment retirer l'argent gagné ?",
+      "a": "<p>Les retraits en argent réel se font par virement via Stripe, dans les conditions détaillées sur la page <a href=\"conditions.html#remboursements\">Conditions &amp; Confidentialité</a>.</p>"
+    },
+    "supprimerCompte": {
+      "q": "Comment supprimer mon compte ?",
+      "a": "<p>Dans le Launcher : <b>Paramètres</b>, puis <b>Compte</b> (ton mot de passe est redemandé). Ton pseudo, ton avatar, ta bannière et ton e-mail sont effacés, mais les jeux que tu as publiés restent en vente. L'action est irréversible. Tu peux aussi écrire à l'adresse indiquée sur la <a href=\"contact.html#autres\">page Contact</a>.</p>"
+    },
+    "langue": {
+      "q": "Dans quelles langues est le site ?",
+      "a": "<p>Le site existe en français, en anglais et en espagnol. Le Launcher et les jeux sont uniquement en français.</p>"
+    }
+  }
+}

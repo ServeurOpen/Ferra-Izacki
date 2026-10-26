@@ -1,0 +1,24 @@
+{
+  "forumLogin": {
+    "meta": {
+      "title": "Log in | Izacki",
+      "description": "Log in to your Izacki account, the same one on the site, on the forum and in the Launcher."
+    },
+    "crumb": "Log in",
+    "title": "Log in",
+    "lead": "Good to see you again. The same account works on the site, on the forum and in the Launcher.",
+    "rail": {
+      "label": "Izacki account",
+      "meta": "One account for the site, the forum and the Launcher"
+    },
+    "email": "Email",
+    "password": "Password",
+    "submit": "Log in",
+    "forgot": "Forgot your password?",
+    "noAccount": "No account yet?",
+    "signupLink": "Sign up",
+    "errEmailNotConfirmed": "This account has not confirmed its email address yet. Check your inbox (and your spam folder), or write to us from the Contact page if the message never arrived.",
+    "errRateLimit": "Too many recent attempts. Try again in a few minutes.",
+    "errInvalid": "Incorrect email or password."
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "forumSignup": {
+    "meta": {
+      "title": "Create an account | Izacki",
+      "description": "Create a free Izacki account: it works on the site, on the forum and in the Launcher."
+    },
+    "crumb": "Create an account",
+    "title": "Create an account",
+    "lead": "Join the Izacki community.",
+    "rail": {
+      "label": "New account",
+      "meta": "Free, email to confirm"
+    },
+    "username": "Username",
+    "usernameRules": "3 to 24 characters, letters, digits or underscores, no spaces or accents, with at least one capital letter.",
+    "displayName": "Display name (optional)",
+    "displayNameHint": "The name shown to other players. You can change it later; otherwise your username is used.",
+    "email": "Email",
+    "password": "Password",
+    "passwordHint": "At least 6 characters.",
+    "submit": "Create my account",
+    "legal": "The terms of use and the privacy policy are in",
+    "legalLink": "Terms &amp; Privacy",
+    "hasAccount": "Already have an account?",
+    "loginLink": "Log in",
+    "created": "Account created. Confirm your email address with the message we just sent you.",
+    "invalidUsername": "Invalid username: ",
+    "errEmailUsed": "This email is already in use.",
+    "errUsernameUsed": "This username is already taken.",
+    "errRateLimit": "Too many recent sign-ups (email sending limit). Try again in a few minutes.",
+    "errDisabled": "Sign-ups are temporarily closed. Try again later or contact us.",
+    "errGeneric": "The account could not be created. Try again.",
+    "okConnected": "Account created and logged in. You are being taken to the forum.",
+    "okNeedsConfirm": "Account created. Check your inbox (and your spam folder) to confirm your email address, then log in."
+  }
+}

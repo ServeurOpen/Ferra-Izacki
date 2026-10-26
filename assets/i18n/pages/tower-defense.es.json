@@ -1,0 +1,126 @@
+{
+  "towerDefense": {
+    "meta": {
+      "title": "Tower Défense Infini | Izacki",
+      "description": "Tower Défense Infini es un tower defense gratuito para Windows: oleadas de zombis sin fin, diez torres que combinar, seis mapas y un sistema de prestigio.",
+      "imageAlt": "Tower Défense Infini, tower defense gratuito: el título y las menciones «Gratis» y «En el Launcher Izacki» sobre una captura del juego.",
+      "shareImage": "https://izackiferra.com/assets/img/games/td-share-es-1200.jpg"
+    },
+    "hero": {
+      "plateAlt": "Banner de Tower Défense Infini: «Defiende el camino, oleada tras oleada.», con las menciones «Gratis» y «En el Launcher Izacki», sobre capturas del juego.",
+      "wideSrcset": "../assets/img/games/td-wide-es-1280.webp 1280w, ../assets/img/games/td-wide-es-1920.webp 1920w, ../assets/img/games/td-wide-es-2560.webp 2560w",
+      "srcset": "../assets/img/games/td-hero-es-640.webp 640w, ../assets/img/games/td-hero-es-1280.webp 1280w",
+      "src": "../assets/img/games/td-hero-es-1280.png"
+    },
+    "play": {
+      "label": "Lo básico",
+      "meta": "Cómo se juega",
+      "title": "Detener a los zombis antes de la base.",
+      "lead": "Un tower defense contra oleadas de zombis sin fin: colocas torres a lo largo del camino y ves hasta dónde aguantas.",
+      "text": "Los zombis llegan por el camino y tienes que pararlos antes de que alcancen tu base. Colocas torres a los lados, ganas oro por cada zombi que matas y lo gastas en torres nuevas o en mejoras (tres niveles por torre). Cada zombi que pasa te cuesta vidas: 20 en el mapa fácil, 3 en los mapas extremos. No hay una última oleada, simplemente se ponen más duras."
+    },
+    "towers": {
+      "label": "Torres",
+      "meta": "Diez torres, tres niveles cada una",
+      "title": "Las torres.",
+      "intro": "Diez torres. Nueve se desbloquean al subir de oleada y la décima, la Tour du Prestige (Torre del Prestigio), llega con el Prestigio. La barra de atajos solo tiene cinco huecos, así que hay que elegir. Las torres también se pueden combinar, con cinco sinergias ocultas. Por ejemplo, un zombi congelado que recibe un disparo de fuego sufre daño extra y pierde la congelación.",
+      "regionLabel": "Tabla de torres",
+      "caption": "Las diez torres y cuándo se desbloquean",
+      "colTower": "Torre",
+      "colUnlock": "Se desbloquea",
+      "colRole": "Función",
+      "wave": "Oleada",
+      "prestige": "Prestigio",
+      "names": "Los nombres de las torres, las oleadas, los mapas y los eventos son los del juego, que está en francés.",
+      "t1": "Disparo a un solo objetivo, sin debilidades particulares.",
+      "t2": "Flecha perforante que alcanza a todos los enemigos en línea, con más daño al final del alcance.",
+      "t3": "Ralentiza a su objetivo. +50 % de daño a los zombis de fuego, −50 % a los de hielo.",
+      "t4": "Quemadura continua. +50 % de daño a los zombis de hielo, −50 % a los de fuego.",
+      "t5": "Cuchillas de viento en cono que hacen sangrar a los enemigos.",
+      "t6": "Rayo que encadena hasta 3 enemigos y los aturde un instante.",
+      "t7": "Bola tóxica que estalla en una nube y envenena a todos los enemigos del círculo.",
+      "t8": "Cada 30 s, un vehículo (jeep, camión, tanque) recorre el camino arrollando zombis.",
+      "t9": "Pega y ralentiza a su objetivo. En el nivel 3, la bola salpica y ralentiza a todo el grupo.",
+      "t10": "Una a la vez. Salta por el mapa o se queda fija, y golpea en zona."
+    },
+    "long": {
+      "label": "Partida larga",
+      "meta": "Oleadas malditas, jefes, Prestigio",
+      "title": "Cuando la partida se alarga.",
+      "cursed": {
+        "title": "Oleadas malditas y jefes",
+        "text": "A partir de la oleada 15, algunas oleadas están malditas (Horde, Essaim, Vitesse Démoniaque, Enragés, Blindage Maudit) y cambian las reglas de la oleada en curso. Un minijefe aparece en las oleadas 5, 15, 25…, un jefe en las 10, 20, 30… (cinco jefes distintos, elegidos por una ruleta)."
+      },
+      "weather": {
+        "title": "Clima",
+        "text": "Desde la oleada 30, el clima puede intervenir durante minuto y medio más o menos: Neige, Canicule, Éclipse, Tempête de sable, Aurore Boréale, Pluie de Météores o Bonheur, que duplica el oro que sueltan los enemigos."
+      },
+      "prestige": {
+        "title": "Prestigio",
+        "text": "Cuando llegas a la oleada 200, puedes pasar a Prestigio. La partida vuelve a empezar (oleada, oro, torres), pero conservas tu perfil, tus estadísticas y tus logros, y cada nivel suma un 50 % de oro por zombi eliminado y 100 de oro inicial. Prestigio 1 desbloquea además la Tour du Prestige, la velocidad x3 y un sexto mapa, la Spirale du Prestige (cuatro portales, 3 vidas). Prestigio 2 añade una habilidad pasiva que anula una derrota por partida, con tiempo de recarga."
+      }
+    },
+    "info": {
+      "label": "Información",
+      "meta": "Requisitos y contenido",
+      "title": "En resumen.",
+      "config": "Requisitos",
+      "inGame": "En el juego",
+      "publisher": "Editor",
+      "publisherValue": "Izacki",
+      "account": "Cuenta",
+      "accountValue": "Cuenta Izacki gratuita, para el Launcher",
+      "language": "Idioma",
+      "controls": "Controles",
+      "controlsValue": "Ratón y atajos de teclado",
+      "towers": "Torres",
+      "towersValue": "10, con 3 niveles cada una",
+      "maps": "Mapas",
+      "mapsValue": "6, de 1 a 4 portales",
+      "achievements": "Logros",
+      "wiki": "Wiki",
+      "wikiValue": "Integrada en el juego",
+      "save": "Guardado",
+      "saveValue": "En tu ordenador; los logros y la clasificación están vinculados a tu cuenta Izacki",
+      "board": "Clasificación",
+      "boardValue": "Mejor oleada, consultable en el juego"
+    },
+    "gallery": {
+      "label": "Capturas",
+      "meta": "Seis capturas del juego",
+      "title": "En juego.",
+      "classic": {
+        "alt": "Captura de Tower Défense Infini, mapa «Sentier Paisible»: cañones, arqueros y torres de hielo y fuego frente a una oleada de zombis.",
+        "cap": "Mapa «Sentier Paisible»: cañones, arqueros y torres de hielo y fuego frente a una oleada de zombis."
+      },
+      "eclipse": {
+        "alt": "Captura de Tower Défense Infini, evento «Éclipse» en el mapa «Chaos Total»: el jefe «Roi des Enfers» avanza bajo su barra de vida.",
+        "cap": "Evento «Éclipse» en el mapa «Chaos Total»: el jefe «Roi des Enfers» avanza bajo su barra de vida."
+      },
+      "snow": {
+        "alt": "Captura de Tower Défense Infini, evento «Neige» en el mapa «La Spirale du Prestige»: un camino en espiral cubierto de nieve, defendido por torres variadas.",
+        "cap": "Evento «Neige» en el mapa «La Spirale du Prestige»: un camino en espiral cubierto de nieve, defendido por torres variadas."
+      },
+      "aurora": {
+        "alt": "Captura de Tower Défense Infini, evento meteorológico «Aurore Boréale» en el mapa «Ravin Tortueux»: cintas luminosas sobre el camino y las torres.",
+        "cap": "Evento meteorológico «Aurore Boréale» en el mapa «Ravin Tortueux»: cintas luminosas sobre el camino y las torres."
+      },
+      "heat": {
+        "alt": "Captura de Tower Défense Infini, evento «Canicule» en el mapa «Double Assaut»: un sol abrasador, un camino naranja y oleadas de zombis.",
+        "cap": "Evento «Canicule» en el mapa «Double Assaut»: un sol abrasador, un camino naranja y oleadas de zombis."
+      },
+      "meteors": {
+        "alt": "Captura de Tower Défense Infini, evento «Pluie de Météores» en el mapa «Double Assaut», donde los zombis llegan por dos caminos.",
+        "cap": "Evento «Pluie de Météores» en el mapa «Double Assaut», donde los zombis llegan por dos caminos."
+      }
+    },
+    "news": {
+      "label": "Novedades",
+      "meta": "Notas de versión",
+      "title": "Últimas versiones."
+    },
+    "band": {
+      "title": "Instala el Launcher y lanza Tower Défense Infini."
+    }
+  }
+}

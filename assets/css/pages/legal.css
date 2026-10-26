@@ -1,0 +1,50 @@
+.hero .callout{max-width:34rem;margin-top:1.75rem}
+
+.toc-details>summary .icon{flex:none;transition:transform var(--t) var(--ease)}
+.toc-details[open]>summary .icon{transform:rotate(180deg)}
+@media (max-width:61.99rem){
+  .legal>.rail>.label{display:none}
+  .legal>.rail{margin-bottom:.5rem}
+}
+@media (min-width:62rem) and (max-height:38rem){
+  .legal>.rail{position:static}
+}
+
+.legal .prose>section>h2:first-child{margin-top:0}
+.legal .prose h2{text-wrap:balance}
+.legal .prose>section+section{position:relative;margin-top:clamp(3rem,2rem + 4vw,5.5rem);padding-top:clamp(1.5rem,1.1rem + 1.4vw,2.25rem);border-top:1px solid var(--acier)}
+.legal .prose>section+section::before{content:"";position:absolute;inset-inline-start:0;top:-1px;width:3.25rem;height:2px;background:var(--signal)}
+.legal .prose .updated{margin-top:.6rem}
+
+.legal .prose.doc-articles h2{font-size:clamp(1.65rem,1.4rem + .9vw,2.2rem);line-height:1.08}
+.legal .prose.doc-articles>section+section{margin-top:clamp(2.25rem,1.6rem + 2.4vw,3.5rem);padding-top:clamp(1.25rem,1rem + 1vw,1.75rem)}
+.legal .prose.doc-articles>section+section::before{display:none}
+
+.prose .callout{padding:1.25rem 1.5rem}
+.prose .callout>h3:first-child{margin-top:0}
+.prose .callout--err>h3{color:var(--danger)}
+.prose .callout--err ul>li::before{border-color:var(--danger)}
+
+.prose .doc-facts{gap:0;border-top:1px solid var(--acier)}
+.prose .doc-facts>li{padding:.7rem 0;border-bottom:1px solid var(--acier);padding-inline-start:0}
+.prose .doc-facts>li::before{display:none}
+
+.prose .doc-top{margin-top:clamp(1.75rem,1.4rem + 1vw,2.5rem)}
+.doc-top .link .icon{transform:rotate(-90deg)}
+.doc-top .link:hover .icon{transform:rotate(-90deg) translateX(3px)}
+
+@media print{
+  .doc-top{display:none}
+  .t-title{max-width:none;font-size:24pt}
+  .t-lead{font-size:12pt}
+  .emo{filter:none}
+  .prose h2{margin-top:1.5em;font-size:15pt}
+  .prose h3{font-size:12pt;break-after:avoid}
+  .legal .prose>section+section{margin-top:1.5rem;padding-top:1rem;border-top:1px solid #000}
+  .legal .prose>section+section::before{display:none}
+  .prose .callout{background:none;border:1px solid #000;break-inside:avoid}
+  .prose .callout--err>h3{color:#000}
+  .prose .doc-facts>li{break-inside:avoid;border-bottom-color:#000}
+}
+
+.prose .doc-facts>li>a{display:inline-block;padding-block:.65rem;margin-block:-.65rem}

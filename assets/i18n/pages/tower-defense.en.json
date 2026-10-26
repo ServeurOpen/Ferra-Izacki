@@ -1,0 +1,126 @@
+{
+  "towerDefense": {
+    "meta": {
+      "title": "Tower Défense Infini | Izacki",
+      "description": "Tower Défense Infini is a free tower defense game for Windows: endless waves of zombies, ten towers to combine, six maps and a prestige system.",
+      "imageAlt": "Tower Défense Infini, a free tower defense: the title and the “Free” and “In the Izacki Launcher” mentions over a capture of the game.",
+      "shareImage": "https://izackiferra.com/assets/img/games/td-share-en-1200.jpg"
+    },
+    "hero": {
+      "plateAlt": "Tower Défense Infini banner: “Defend the road, wave after wave.”, with the “Free” and “In the Izacki Launcher” mentions, over captures of the game.",
+      "wideSrcset": "../assets/img/games/td-wide-en-1280.webp 1280w, ../assets/img/games/td-wide-en-1920.webp 1920w, ../assets/img/games/td-wide-en-2560.webp 2560w",
+      "srcset": "../assets/img/games/td-hero-en-640.webp 640w, ../assets/img/games/td-hero-en-1280.webp 1280w",
+      "src": "../assets/img/games/td-hero-en-1280.png"
+    },
+    "play": {
+      "label": "Basics",
+      "meta": "How it plays",
+      "title": "Stop the zombies before they reach the base.",
+      "lead": "A tower defense against endless waves of zombies: you place towers along the road and see how long you can hold.",
+      "text": "Zombies come down the road and you have to stop them before they reach your base. You place towers along the sides, earn gold for every zombie you kill, and spend it on new towers or upgrades (three levels per tower). Each zombie that gets through costs you lives: 20 on the easy map, 3 on the extreme ones. There is no last wave, they just get harder."
+    },
+    "towers": {
+      "label": "Towers",
+      "meta": "Ten towers, three levels each",
+      "title": "The towers.",
+      "intro": "Ten towers. Nine unlock as you climb the waves, and the tenth, the Tour du Prestige (Prestige Tower), comes with Prestige. The hotbar only has five slots, so you have to choose. Towers can also be combined, with five hidden synergies. For example, a frozen zombie that takes a fire shot takes bonus damage and loses its freeze.",
+      "regionLabel": "Table of towers",
+      "caption": "The ten towers and when they unlock",
+      "colTower": "Tower",
+      "colUnlock": "Unlocked",
+      "colRole": "Role",
+      "wave": "Wave",
+      "prestige": "Prestige",
+      "names": "The names of towers, waves, maps and events are those of the game, which is in French.",
+      "t1": "Single-target shots, no particular weakness.",
+      "t2": "Piercing arrow that hits every enemy in line, with more damage at the far end.",
+      "t3": "Slows its target. +50% damage to fire zombies, −50% to ice zombies.",
+      "t4": "Constant burn. +50% damage to ice zombies, −50% to fire zombies.",
+      "t5": "Cone of wind blades that make enemies bleed.",
+      "t6": "Lightning that chains up to 3 enemies and briefly stuns them.",
+      "t7": "Toxic ball that bursts into a cloud and poisons every enemy in the circle.",
+      "t8": "Every 30 s, a vehicle (jeep, truck, tank) drives along the road, ramming zombies.",
+      "t9": "Sticks to and slows its target. At level 3 the ball splashes and slows the whole group.",
+      "t10": "One at a time. It jumps around the map or stays put, and hits an area."
+    },
+    "long": {
+      "label": "Long runs",
+      "meta": "Cursed waves, bosses, Prestige",
+      "title": "When a run drags on.",
+      "cursed": {
+        "title": "Cursed waves and bosses",
+        "text": "From wave 15, some waves are cursed (Horde, Essaim, Vitesse Démoniaque, Enragés, Blindage Maudit) and change the rules for the wave in progress. A mini-boss shows up on waves 5, 15, 25…, a boss on waves 10, 20, 30… (five different bosses, picked by a roulette)."
+      },
+      "weather": {
+        "title": "Weather",
+        "text": "From wave 30, weather can kick in for about a minute and a half: Neige, Canicule, Éclipse, Tempête de sable, Aurore Boréale, Pluie de Météores, or Bonheur, which doubles the gold enemies drop."
+      },
+      "prestige": {
+        "title": "Prestige",
+        "text": "When you reach wave 200, you can go Prestige. The run starts over (wave, gold, towers), but your profile, stats and achievements stay, and each level adds 50% gold per kill and 100 starting gold. Prestige 1 also unlocks the Tour du Prestige, x3 speed and a sixth map, the Spirale du Prestige (four portals, 3 lives). Prestige 2 adds a passive skill that cancels one defeat per run, with a cooldown."
+      }
+    },
+    "info": {
+      "label": "Info",
+      "meta": "Requirements and content",
+      "title": "At a glance.",
+      "config": "Requirements",
+      "inGame": "In the game",
+      "publisher": "Publisher",
+      "publisherValue": "Izacki",
+      "account": "Account",
+      "accountValue": "Free Izacki account, for the Launcher",
+      "language": "Language",
+      "controls": "Controls",
+      "controlsValue": "Mouse and keyboard shortcuts",
+      "towers": "Towers",
+      "towersValue": "10, with 3 levels each",
+      "maps": "Maps",
+      "mapsValue": "6, with 1 to 4 portals",
+      "achievements": "Achievements",
+      "wiki": "Wiki",
+      "wikiValue": "Built into the game",
+      "save": "Saves",
+      "saveValue": "On your computer; achievements and leaderboard are tied to your Izacki account",
+      "board": "Leaderboard",
+      "boardValue": "Best wave, viewable in the game"
+    },
+    "gallery": {
+      "label": "Screenshots",
+      "meta": "Six screenshots of the game",
+      "title": "In play.",
+      "classic": {
+        "alt": "Tower Défense Infini screenshot, “Sentier Paisible” map: cannon, archer, frost and fire towers facing a wave of zombies.",
+        "cap": "“Sentier Paisible” map: cannon, archer, frost and fire towers facing a wave of zombies."
+      },
+      "eclipse": {
+        "alt": "Tower Défense Infini screenshot, “Éclipse” event on the “Chaos Total” map: the “Roi des Enfers” boss advances beneath its health bar.",
+        "cap": "“Éclipse” event on the “Chaos Total” map: the “Roi des Enfers” boss advances beneath its health bar."
+      },
+      "snow": {
+        "alt": "Tower Défense Infini screenshot, “Neige” event on the “La Spirale du Prestige” map: a snow-covered spiral road defended by a variety of towers.",
+        "cap": "“Neige” event on the “La Spirale du Prestige” map: a snow-covered spiral road defended by a variety of towers."
+      },
+      "aurora": {
+        "alt": "Tower Défense Infini screenshot, “Aurore Boréale” weather event on the “Ravin Tortueux” map: glowing ribbons above the road and the towers.",
+        "cap": "“Aurore Boréale” weather event on the “Ravin Tortueux” map: glowing ribbons above the road and the towers."
+      },
+      "heat": {
+        "alt": "Tower Défense Infini screenshot, “Canicule” event on the “Double Assaut” map: a blazing sun, an orange road and waves of zombies.",
+        "cap": "“Canicule” event on the “Double Assaut” map: a blazing sun, an orange road and waves of zombies."
+      },
+      "meteors": {
+        "alt": "Tower Défense Infini screenshot, “Pluie de Météores” event on the “Double Assaut” map, where zombies come down two roads.",
+        "cap": "“Pluie de Météores” event on the “Double Assaut” map, where zombies come down two roads."
+      }
+    },
+    "news": {
+      "label": "What's new",
+      "meta": "Release notes",
+      "title": "Latest versions."
+    },
+    "band": {
+      "title": "Install the Launcher, then play Tower Défense Infini."
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "ferraInfos": {
+    "meta": {
+      "title": "FERRA info and news | Izacki",
+      "description": "FERRA's information and release notes are on the game page."
+    },
+    "hero": {
+      "title": "FERRA's info is on the game page.",
+      "lead": "FERRA's release notes, requirements and features are all on the game page.",
+      "news": "See what's new in FERRA",
+      "page": "View the FERRA page"
+    }
+  }
+}

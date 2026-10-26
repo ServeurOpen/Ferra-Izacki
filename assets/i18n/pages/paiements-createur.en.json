@@ -1,0 +1,15 @@
+{
+  "paiementsCreateur": {
+    "meta": {
+      "title": "Creator payments | Izacki",
+      "description": "Return from Stripe after setting up the creator payout account."
+    },
+    "hero": {
+      "title": "Creator payments",
+      "lead": "Setting up your Stripe payout account."
+    },
+    "back": "Back from Stripe. You can close this page and return to the Launcher: your status updates on its own.",
+    "resume": "The Stripe link has expired. Go back to the Launcher and click “Reprendre l'inscription” (resume registration).",
+    "hint": "This page does not display any personal or banking information."
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "paiementsCreateur": {
+    "meta": {
+      "title": "Paiements créateurs | Izacki",
+      "description": "Retour de Stripe après la configuration du compte de paiement créateur."
+    },
+    "hero": {
+      "title": "Paiements créateurs",
+      "lead": "Configuration de ton compte de paiement Stripe."
+    },
+    "back": "Retour de Stripe. Tu peux fermer cette page et revenir dans le Launcher : ton statut s'actualise tout seul.",
+    "resume": "Le lien Stripe a expiré. Reviens dans le Launcher et clique sur « Reprendre l'inscription ».",
+    "hint": "Cette page n'affiche aucune information personnelle ni bancaire."
+  }
+}

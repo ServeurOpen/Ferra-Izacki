@@ -1,0 +1,36 @@
+{
+  "forumSignup": {
+    "meta": {
+      "title": "Crear una cuenta | Izacki",
+      "description": "Crea una cuenta Izacki gratuita: sirve en el sitio, en el foro y en el Launcher."
+    },
+    "crumb": "Crear una cuenta",
+    "title": "Crear una cuenta",
+    "lead": "Únete a la comunidad de Izacki.",
+    "rail": {
+      "label": "Cuenta nueva",
+      "meta": "Gratis, correo por confirmar"
+    },
+    "username": "Nombre de usuario",
+    "usernameRules": "De 3 a 24 caracteres, solo letras, números o guion bajo, sin espacios ni tildes, con al menos una mayúscula.",
+    "displayName": "Nombre para mostrar (opcional)",
+    "displayNameHint": "El nombre que ven los demás jugadores. Puedes cambiarlo más tarde; si no, se usa tu nombre de usuario.",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "passwordHint": "Mínimo 6 caracteres.",
+    "submit": "Crear mi cuenta",
+    "legal": "Los términos de uso y la política de privacidad están en",
+    "legalLink": "Condiciones y privacidad",
+    "hasAccount": "¿Ya tienes cuenta?",
+    "loginLink": "Inicia sesión",
+    "created": "Cuenta creada. Confirma tu correo electrónico con el mensaje que acabamos de enviarte.",
+    "invalidUsername": "Nombre de usuario no válido: ",
+    "errEmailUsed": "Este correo electrónico ya está en uso.",
+    "errUsernameUsed": "Este nombre de usuario ya está en uso.",
+    "errRateLimit": "Demasiados registros recientes (límite de envío de correos). Inténtalo de nuevo en unos minutos.",
+    "errDisabled": "Los registros están cerrados por el momento. Inténtalo más tarde o contáctanos.",
+    "errGeneric": "No se ha podido crear la cuenta. Inténtalo de nuevo.",
+    "okConnected": "Cuenta creada y sesión iniciada. Te llevamos al foro.",
+    "okNeedsConfirm": "Cuenta creada. Revisa tu bandeja de entrada (y la carpeta de spam) para confirmar tu correo electrónico y luego inicia sesión."
+  }
+}

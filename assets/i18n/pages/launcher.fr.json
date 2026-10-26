@@ -1,0 +1,119 @@
+{
+  "launcher": {
+    "meta": {
+      "title": "Launcher de jeux pour Windows, gratuit | Izacki",
+      "description": "Le Launcher Izacki installe, lance et met à jour FERRA et Tower Défense Infini. Gratuit, pour Windows 10 et 11, avec un compte Izacki gratuit."
+    },
+    "crumb": "Launcher",
+    "hero": {
+      "title": "Le Launcher pour installer et lancer les jeux Izacki.",
+      "lead": "Une seule application pour trouver un jeu, l'installer, le lancer et le garder à jour. Elle est gratuite et se met à jour toute seule.",
+      "help": "Aide à l'installation",
+      "plateAlt": "La Boutique du Launcher Izacki\u00a0: la vitrine de FERRA, les deux jeux Izacki en dessous, et les filtres Tout, Jeux Izacki, Communauté et Gratuits.",
+      "screen": "Boutique"
+    },
+    "dl": {
+      "label": "Télécharger",
+      "meta": "Configuration et installation",
+      "title": "Ce qu'il te faut.",
+      "platformValue": "Windows 10/11 (64 bits)",
+      "releasedOn": "publiée le",
+      "account": "Compte",
+      "accountValue": "Un compte Izacki gratuit. L'adresse e-mail doit être confirmée à l'inscription.",
+      "language": "Langue",
+      "languageValue": "Français, comme les jeux"
+    },
+    "smartscreen": {
+      "title": "Windows peut afficher un avertissement la première fois.",
+      "text": "L'application n'est pas encore signée par un éditeur certifié. Les étapes pour continuer sont dans la FAQ\u00a0:",
+      "link": "Installation et avertissement Windows"
+    },
+    "spaces": {
+      "label": "Dans le Launcher",
+      "meta": "Cinq espaces",
+      "title": "Ce que contient le Launcher.",
+      "store": {
+        "title": "Boutique",
+        "text": "Recherche et filtres\u00a0: Tout, Jeux Izacki, Communauté et Gratuits. Les jeux d'Izacki sont gratuits. Les jeux de la communauté ont un prix en crédits, parfois zéro."
+      },
+      "library": {
+        "title": "Bibliothèque",
+        "text": "Tes jeux installés, avec recherche et tri. Chaque jeu a quatre onglets\u00a0: Aperçu, Succès, Nouveautés et Informations. Les mises à jour et les installations sont dans Téléchargements."
+      },
+      "community": {
+        "title": "Communauté",
+        "text": "Amis et groupes avec discussion de groupe, classement, et lien vers le Discord. Pour ajouter un ami, tu utilises son tag, de la forme Pseudo#Numéro."
+      },
+      "creators": {
+        "title": "Créateurs",
+        "text": "Publier un jeu, suivre ses ventes et ses retraits. Chaque jeu est examiné par l'équipe avant d'être publié."
+      },
+      "support": {
+        "title": "Assistance",
+        "text": "Une question, un bug, un remboursement\u00a0? Tu ouvres un ticket, tu joins une capture d'écran si besoin, et la réponse arrive dans le ticket."
+      },
+      "note": "Les noms des espaces sont ceux du Launcher, qui est en français."
+    },
+    "games": {
+      "label": "Jeux",
+      "meta": "Deux jeux, tous deux gratuits",
+      "title": "Deux jeux à installer.",
+      "ferraText": "Un monde à reconstruire, un feu à protéger, une météorite à affronter. Mine, automatise, défends ton campement, et prépare-toi pour la nuit.",
+      "tdText": "Un tower defense contre des vagues de zombies sans fin : tu poses des tours le long de la route et tu vois jusqu'où tu tiens.",
+      "more": "Voir la fiche du jeu"
+    },
+    "security": {
+      "label": "Sécurité",
+      "meta": "Mises à jour et réglages",
+      "title": "À jour, vérifié, réglable.",
+      "p1": "Le Launcher se met à jour tout seul\u00a0: il vérifie au démarrage, télécharge la mise à jour, puis redémarre. Les mises à jour sont signées.",
+      "p2": "Avant de lancer un jeu officiel, il vérifie son intégrité\u00a0: il compare l'exécutable à l'empreinte publiée, et le réinstalle s'il est modifié ou abîmé.",
+      "p3": "Un jeu officiel qui n'est pas à jour ne se lance pas\u00a0: le Launcher t'envoie vers Téléchargements.",
+      "p4": "Les mises à jour automatiques des jeux sont un réglage, désactivé par défaut, propre à chaque appareil.",
+      "plateAlt": "Le réglage Apparence des paramètres du Launcher\u00a0: cinq couleurs d'accent au choix, Cuivre, Azur, Émeraude, Violet et Cramoisi, avec un aperçu.",
+      "screen": "Paramètres",
+      "setting": "Réglage",
+      "settingValue": "Apparence",
+      "colors": "Couleurs",
+      "colorsValue": "5 au choix"
+    },
+    "creators": {
+      "label": "Créateurs",
+      "meta": "Publier un jeu",
+      "title": "Publier un jeu sur Izacki.",
+      "lead": "Depuis l'espace Créateurs du Launcher, l'écran «\u00a0Sortir mon jeu\u00a0» te demande le fichier du jeu, un nom, un prix et des visuels. L'équipe examine chaque jeu avant publication.",
+      "file": "Fichier",
+      "fileValue": "Une archive .zip contenant index.html, ou un .exe Windows",
+      "priceValue": "En crédits\u00a0; zéro pour un jeu gratuit",
+      "description": "Description",
+      "descriptionValue": "Au moins 10 caractères",
+      "visuals": "Visuels",
+      "visualsValue": "Une bannière facultative et de 3 à 5 captures",
+      "review": "Examen",
+      "reviewValue": "Chaque jeu est examiné par l'équipe\u00a0; tu reçois un e-mail et une notification",
+      "rules": "Règles",
+      "rulesLink": "Règlement de publication des jeux",
+      "withdrawals": "Retraits",
+      "withdrawalsText": "Les retraits en argent réel suivent les conditions de la page Conditions &amp; Confidentialité.",
+      "withdrawalsLink": "Conditions de remboursement et de retrait"
+    },
+    "help": {
+      "label": "Aide",
+      "meta": "Installation et usage",
+      "title": "Aide à l'installation.",
+      "read": "Lire la réponse",
+      "q1": {
+        "title": "Avertissement Windows au lancement",
+        "text": "Windows peut afficher un avertissement avant d'ouvrir l'installateur, car le Launcher n'est pas encore signé par un éditeur certifié."
+      },
+      "q2": {
+        "title": "Antivirus ou navigateur qui bloque le fichier",
+        "text": "Si ton antivirus ou ton navigateur retient le fichier téléchargé, la réponse est dans la FAQ."
+      },
+      "q3": {
+        "title": "Dossier d'installation des jeux",
+        "text": "Tu peux changer le dossier d'installation dans Paramètres, puis Téléchargements et stockage. Les jeux déjà installés sont déplacés."
+      }
+    }
+  }
+}

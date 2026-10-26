@@ -1,0 +1,39 @@
+{
+  "forumNewThread": {
+    "meta": {
+      "title": "New thread | Izacki",
+      "description": "Start a thread on the Izacki forum: pick a clear title and describe your question or idea."
+    },
+    "crumbForum": "Forum",
+    "crumb": "New thread",
+    "title": "New thread",
+    "defaultCategory": "Category",
+    "loginTitle": "Log in to start a thread.",
+    "loginText": "A free Izacki account is all you need to post on the forum.",
+    "threadTitle": "Thread title",
+    "threadTitlePlaceholder": "A clear, short title",
+    "threadTitleHint": "140 characters at most.",
+    "message": "Message",
+    "messagePlaceholder": "Explain your topic in detail…",
+    "submit": "Post the thread",
+    "errRequired": "The title and the message are required.",
+    "errCreateFailed": "The thread could not be created. Try again.",
+    "backToForum": "Back to the forum",
+    "missingCategory": "Missing category.",
+    "loadError": "This category could not be loaded.",
+    "cat": {
+      "annonces": {
+        "name": "Announcements"
+      },
+      "general": {
+        "name": "General discussion"
+      },
+      "support": {
+        "name": "Support and bugs"
+      },
+      "idees": {
+        "name": "Ideas and suggestions"
+      }
+    }
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "towerDefense": {
+    "meta": {
+      "title": "Tower Défense Infini | Izacki",
+      "description": "Tower Défense Infini est un tower defense gratuit pour Windows\u00a0: des vagues de zombies sans fin, dix tours à combiner, six cartes et un prestige.",
+      "imageAlt": "Tower Défense Infini, tower defense gratuit\u00a0: le titre et les mentions «\u00a0Gratuit\u00a0» et «\u00a0Dans le Launcher Izacki\u00a0» sur une capture du jeu.",
+      "shareImage": "https://izackiferra.com/assets/img/games/td-share-fr-1200.jpg"
+    },
+    "hero": {
+      "plateAlt": "Bannière de Tower Défense Infini\u00a0: «\u00a0Défends la route, vague après vague.\u00a0», avec les mentions «\u00a0Gratuit\u00a0» et «\u00a0Dans le Launcher Izacki\u00a0», sur des captures du jeu.",
+      "wideSrcset": "../assets/img/games/td-wide-fr-1280.webp 1280w, ../assets/img/games/td-wide-fr-1920.webp 1920w, ../assets/img/games/td-wide-fr-2560.webp 2560w",
+      "srcset": "../assets/img/games/td-hero-fr-640.webp 640w, ../assets/img/games/td-hero-fr-1280.webp 1280w",
+      "src": "../assets/img/games/td-hero-fr-1280.png"
+    },
+    "play": {
+      "label": "Principe",
+      "meta": "Comment ça se joue",
+      "title": "Arrêter les zombies avant la base.",
+      "lead": "Un tower defense contre des vagues de zombies sans fin\u00a0: tu poses des tours le long de la route et tu vois jusqu'où tu tiens.",
+      "text": "Les zombies arrivent par la route et tu dois les arrêter avant qu'ils atteignent ta base. Tu poses des tours sur les côtés, tu gagnes de l'or à chaque zombie tué et tu le dépenses en nouvelles tours ou en améliorations (trois niveaux par tour). Chaque zombie qui passe te coûte des vies\u00a0: 20 sur la carte facile, 3 sur les cartes extrêmes. Il n'y a pas de dernière vague, elles deviennent juste plus dures."
+    },
+    "towers": {
+      "label": "Tours",
+      "meta": "Dix tours, trois niveaux chacune",
+      "title": "Les tours.",
+      "intro": "Dix tours. Neuf se débloquent au fil des vagues, la dixième, la Tour du Prestige, avec le Prestige. La barre de raccourcis n'a que cinq emplacements\u00a0: il faut choisir. Les tours peuvent aussi se combiner, avec cinq synergies cachées. Par exemple, un zombie gelé qui prend un tir de Feu encaisse des dégâts en plus et perd son gel.",
+      "regionLabel": "Tableau des tours",
+      "caption": "Les dix tours et leur déblocage",
+      "colTower": "Tour",
+      "colUnlock": "Débloquée",
+      "colRole": "Rôle",
+      "wave": "Vague",
+      "prestige": "Prestige",
+      "names": "Les noms des tours, des vagues, des cartes et des événements sont ceux du jeu, qui est en français.",
+      "t1": "Tir sur une seule cible, sans faiblesse particulière.",
+      "t2": "Flèche perçante qui touche tous les ennemis alignés, avec plus de dégâts en bout de ligne.",
+      "t3": "Ralentit sa cible. +50\u00a0% de dégâts sur les zombies de feu, −50\u00a0% sur ceux de glace.",
+      "t4": "Brûlure continue. +50\u00a0% de dégâts sur les zombies de glace, −50\u00a0% sur ceux de feu.",
+      "t5": "Lames de vent en cône qui font saigner les ennemis touchés.",
+      "t6": "Éclair qui enchaîne jusqu'à 3 ennemis et les immobilise un court instant.",
+      "t7": "Boule toxique qui explose en nuage et empoisonne tous les ennemis du cercle.",
+      "t8": "Toutes les 30 s, un véhicule (jeep, camion, tank) parcourt la route en percutant les zombies.",
+      "t9": "Englue et ralentit sa cible. Au niveau 3, la boule éclate en flaque et ralentit tout le groupe.",
+      "t10": "Un seul exemplaire à la fois. Elle saute d'un endroit à l'autre ou reste fixe, et frappe en zone."
+    },
+    "long": {
+      "label": "Longue partie",
+      "meta": "Vagues maudites, boss, Prestige",
+      "title": "Quand la partie dure.",
+      "cursed": {
+        "title": "Vagues maudites et boss",
+        "text": "Dès la vague 15, certaines vagues sont maudites (Horde, Essaim, Vitesse Démoniaque, Enragés, Blindage Maudit) et changent les règles de la vague en cours. Un mini-boss arrive aux vagues 5, 15, 25…, un boss aux vagues 10, 20, 30… (cinq boss différents, tirés à la roulette)."
+      },
+      "weather": {
+        "title": "Météo",
+        "text": "À partir de la vague 30, la météo peut s'en mêler pendant environ une minute et demie\u00a0: Neige, Canicule, Éclipse, Tempête de sable, Aurore Boréale, Pluie de Météores, ou Bonheur, qui double l'or lâché par les ennemis."
+      },
+      "prestige": {
+        "title": "Prestige",
+        "text": "Quand tu atteins la vague 200, tu peux passer Prestige. La partie repart de zéro (vague, or, tours), mais ton profil, tes stats et tes succès restent, et chaque niveau ajoute 50\u00a0% d'or par zombie tué et 100 d'or de départ. Prestige 1 débloque aussi la Tour du Prestige, la vitesse x3 et une sixième carte, la Spirale du Prestige (quatre portails, 3 vies). Prestige 2 ajoute une compétence passive qui annule une défaite par partie, avec un temps de recharge."
+      }
+    },
+    "info": {
+      "label": "Infos",
+      "meta": "Configuration et contenu",
+      "title": "En bref.",
+      "config": "Configuration",
+      "inGame": "Dans le jeu",
+      "publisher": "Éditeur",
+      "publisherValue": "Izacki",
+      "account": "Compte",
+      "accountValue": "Compte Izacki gratuit, pour le Launcher",
+      "language": "Langue",
+      "controls": "Commandes",
+      "controlsValue": "Souris et raccourcis clavier",
+      "towers": "Tours",
+      "towersValue": "10, avec 3 niveaux chacune",
+      "maps": "Cartes",
+      "mapsValue": "6, de 1 à 4 portails",
+      "achievements": "Succès",
+      "wiki": "Wiki",
+      "wikiValue": "Intégré au jeu",
+      "save": "Sauvegarde",
+      "saveValue": "Sur ton ordinateur\u00a0; succès et classement liés à ton compte Izacki",
+      "board": "Classement",
+      "boardValue": "Meilleure vague, consultable dans le jeu"
+    },
+    "gallery": {
+      "label": "Captures",
+      "meta": "Six captures du jeu",
+      "title": "En jeu.",
+      "classic": {
+        "alt": "Capture de Tower Défense Infini, carte «\u00a0Sentier Paisible\u00a0»\u00a0: canons, archers, tours de glace et de feu face à une vague de zombies.",
+        "cap": "Carte «\u00a0Sentier Paisible\u00a0»\u00a0: canons, archers, tours de glace et de feu face à une vague de zombies."
+      },
+      "eclipse": {
+        "alt": "Capture de Tower Défense Infini, événement «\u00a0Éclipse\u00a0» sur la carte «\u00a0Chaos Total\u00a0»\u00a0: le boss «\u00a0Roi des Enfers\u00a0» avance sous sa barre de vie.",
+        "cap": "Événement «\u00a0Éclipse\u00a0» sur la carte «\u00a0Chaos Total\u00a0»\u00a0: le boss «\u00a0Roi des Enfers\u00a0» avance sous sa barre de vie."
+      },
+      "snow": {
+        "alt": "Capture de Tower Défense Infini, événement «\u00a0Neige\u00a0» sur la carte «\u00a0La Spirale du Prestige\u00a0»\u00a0: une route en spirale couverte de neige, défendue par des tours variées.",
+        "cap": "Événement «\u00a0Neige\u00a0» sur la carte «\u00a0La Spirale du Prestige\u00a0»\u00a0: une route en spirale couverte de neige, défendue par des tours variées."
+      },
+      "aurora": {
+        "alt": "Capture de Tower Défense Infini, événement météo «\u00a0Aurore Boréale\u00a0» sur la carte «\u00a0Ravin Tortueux\u00a0»\u00a0: des rubans lumineux au-dessus du chemin et des tours.",
+        "cap": "Événement météo «\u00a0Aurore Boréale\u00a0» sur la carte «\u00a0Ravin Tortueux\u00a0»\u00a0: des rubans lumineux au-dessus du chemin et des tours."
+      },
+      "heat": {
+        "alt": "Capture de Tower Défense Infini, événement «\u00a0Canicule\u00a0» sur la carte «\u00a0Double Assaut\u00a0»\u00a0: un soleil brûlant, une route orange et des vagues de zombies.",
+        "cap": "Événement «\u00a0Canicule\u00a0» sur la carte «\u00a0Double Assaut\u00a0»\u00a0: un soleil brûlant, une route orange et des vagues de zombies."
+      },
+      "meteors": {
+        "alt": "Capture de Tower Défense Infini, événement «\u00a0Pluie de Météores\u00a0» sur la carte «\u00a0Double Assaut\u00a0», où les zombies arrivent par deux routes.",
+        "cap": "Événement «\u00a0Pluie de Météores\u00a0» sur la carte «\u00a0Double Assaut\u00a0», où les zombies arrivent par deux routes."
+      }
+    },
+    "news": {
+      "label": "Nouveautés",
+      "meta": "Notes de version",
+      "title": "Dernières versions."
+    },
+    "band": {
+      "title": "Installe le Launcher, puis lance Tower Défense Infini."
+    }
+  }
+}

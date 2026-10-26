@@ -1,0 +1,16 @@
+{
+  "licence": {
+    "meta": {
+      "title": "Licence du Launcher | Izacki",
+      "description": "Licence d'utilisation du Launcher Izacki : ce que tu peux faire, ce qui est interdit, et à qui appartiennent les contenus."
+    },
+    "crumb": "Licence du Launcher",
+    "frenchNote": "Les documents juridiques sont rédigés en français.",
+    "toc": {
+      "label": "Sommaire",
+      "nav": "Articles de la licence"
+    },
+    "top": "Retour en haut",
+    "langCode": "fr"
+  }
+}

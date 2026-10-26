@@ -1,0 +1,149 @@
+{
+  "faq": {
+    "meta": {
+      "title": "Frequently asked questions | Izacki",
+      "description": "Installation, Windows warning, account, credits, updates: answers to the most common questions about the Izacki Launcher and games."
+    },
+    "crumb": "Frequently asked questions",
+    "hero": {
+      "title": "Frequently asked questions",
+      "lead": "Installation, account, credits and games: answers to the most common questions."
+    },
+    "rail": {
+      "label": "Help",
+      "meta": "Search and categories"
+    },
+    "search": {
+      "title": "Search and questions",
+      "label": "Search the questions",
+      "placeholder": "Keyword: antivirus, credits, account"
+    },
+    "noResults": "No question matches. Try another word, or write to us from the <a href=\"contact.html\">Contact</a> page.",
+    "nav": {
+      "label": "Categories"
+    },
+    "more": {
+      "title": "Another question?",
+      "text": "Ask on the <a href=\"forum/index.html\">forum</a> (“Support and bugs” category), write to us from the <a href=\"contact.html\">Contact</a> page, open a ticket from the Launcher's Support area, or join the <a href=\"https://discord.gg/bv2w8spATk\" target=\"_blank\" rel=\"noopener noreferrer\">Discord<span class=\"sr-only\"> (opens in a new tab)</span></a>. We reply as soon as we can.",
+      "cta": "Contact us"
+    },
+    "groups": {
+      "installation": "Installation and Windows",
+      "compte": "Account and login",
+      "profil": "Profile",
+      "jeux": "Games and achievements",
+      "misesAJour": "Updates",
+      "credits": "Credits and payments",
+      "createurs": "Creators",
+      "donnees": "Account and data"
+    },
+    "smartscreen": {
+      "q": "Windows shows a warning when I run the installer. Is that normal?",
+      "a": "<p>The Launcher is not yet signed by a certified publisher, so Windows may show a protection screen the first time you run the installer. To continue:</p><ol class=\"steps\"><li>Click <b>“More info”</b>.</li><li>Then click <b>“Run anyway”</b>.</li></ol><p>This permission only applies to that file.</p>"
+    },
+    "pasDeLien": {
+      "q": "I do not see “More info”, only an OK button.",
+      "a": "<p>Depending on your Windows settings, the link may not appear. This is the case, for example, on a computer managed by a school or a company, or depending on the Windows Security settings (App &amp; browser control). Ask the computer's administrator, or <a href=\"contact.html\">write to us</a>.</p>"
+    },
+    "antivirus": {
+      "q": "My antivirus deletes the file or puts it in quarantine.",
+      "a": "<p>An antivirus may be wary of an uncommon, unsigned executable. Restore the file from quarantine, or add an exception for <code>IzackiLauncher-Setup.exe</code>, then download or install it again.</p>"
+    },
+    "navigateur": {
+      "q": "My browser blocks the download.",
+      "a": "<p>Edge or Chrome may flag an uncommon file. Open the <b>…</b> menu of the download, then choose <b>“Keep”</b> (or <b>“Keep anyway”</b>).</p>"
+    },
+    "dossierInstallation": {
+      "q": "Where does the Launcher install games?",
+      "a": "<p>By default, in a folder managed by the app. You can change it in <b>Paramètres</b> (settings), then <b>Téléchargements et stockage</b> (downloads and storage), with the “Changer le dossier” (change folder) button. Games that are already installed are moved, and the space used by each game is shown there.</p>"
+    },
+    "configuration": {
+      "q": "What do I need to run it?",
+      "a": "<p>Windows 10 or 11 (64-bit), under 3 MB for the Launcher and a free Izacki account. The Launcher and the games are in French. There is no macOS or Linux version.</p>"
+    },
+    "memeCompte": {
+      "q": "Do the Launcher and the website use the same account?",
+      "a": "<p>Yes: a single Izacki account works on the website, on the forum and in the Launcher. Your email address must be confirmed when you sign up.</p>"
+    },
+    "motDePasse": {
+      "q": "I forgot my password.",
+      "a": "<p>You can reset it from the Launcher log-in screen or from the website's <a href=\"forum/forgot-password.html\">password recovery page</a>. The link you receive opens a page on the website, and the new password works everywhere.</p>"
+    },
+    "tag": {
+      "q": "What is my tag (Username#Number)?",
+      "a": "<p>It is your unique identifier: your username followed by a number. It can never be changed, it is shown in the Launcher, and it is what friends use to add you.</p>"
+    },
+    "avatar": {
+      "q": "How do I change my avatar or banner?",
+      "a": "<p>In <b>Boutique</b> (the store), open <b>Personnalisation du profil</b> (profile customization): avatars and banners are obtained with tokens. Once unlocked, they can be equipped for free in <b>Paramètres</b> (settings), then <b>Profil</b>. Importing a personal image is no longer possible.</p>"
+    },
+    "jetons": {
+      "q": "What are tokens for?",
+      "a": "<p>You earn one token for each minute you play. Tokens are used to unlock profile visuals, avatars and banners, in the store.</p>"
+    },
+    "nomAffichage": {
+      "q": "My display name is different from my username. Is that normal?",
+      "a": "<p>Yes. Your tag remains your identifier. You can change your display name in <b>Paramètres</b> (settings), then <b>Profil</b>; if it is empty, your tag is shown instead.</p>"
+    },
+    "profilPrive": {
+      "q": "What is a private profile for?",
+      "a": "<p>It hides your banner, achievements and playtime. Only your tag stays visible in <b>Amis</b> (friends).</p>"
+    },
+    "installerJeu": {
+      "q": "How do I install a game?",
+      "a": "<p>Open <b>Boutique</b> (the store), then the game's page, and click <b>Installer</b> (install). After that, find it under <b>Bibliothèque</b> (library), then <b>Mes jeux</b> (my games), and click <b>Jouer</b> (play).</p>"
+    },
+    "succes": {
+      "q": "My achievements do not show up.",
+      "a": "<p>Achievements sync when the game is launched from the Launcher while you are logged in.</p>"
+    },
+    "quitter": {
+      "q": "How do I quit a game properly?",
+      "a": "<p>Press <b>Esc</b>, then choose <b>“Quitter le jeu”</b> (quit the game). Saving is automatic, in FERRA as in Tower Défense Infini.</p>"
+    },
+    "desinstaller": {
+      "q": "How do I uninstall a game?",
+      "a": "<p>On the game's page, click <b>Désinstaller</b> (uninstall), then confirm by clicking a second time. The space used by each game is shown in <b>Paramètres</b> (settings), then <b>Téléchargements et stockage</b> (downloads and storage).</p>"
+    },
+    "payants": {
+      "q": "Do the games cost money?",
+      "a": "<p>FERRA and Tower Défense Infini are free. Community games have a price in credits, sometimes zero.</p>"
+    },
+    "majJeu": {
+      "q": "How do I know whether a game has an update?",
+      "a": "<p>An official game that is out of date does not launch: the Launcher sends you to <b>Bibliothèque</b> (library), then <b>Téléchargements</b> (downloads). The <b>“Mises à jour automatiques”</b> (automatic updates) setting installs them without a click; it is off by default and specific to each device.</p>"
+    },
+    "majLauncher": {
+      "q": "Does the Launcher update itself?",
+      "a": "<p>Yes. It checks at startup, downloads the update, then restarts. Updates are signed. If the automatic update fails, a banner offers the manual download.</p>"
+    },
+    "creditsQuoi": {
+      "q": "What are credits for?",
+      "a": "<p>Credits are Izacki's internal currency: they are neither cash nor a cryptocurrency. They pay for community games and for achievement packs for creators. A one-time welcome bonus of +10 credits is given the first time you log in.</p>"
+    },
+    "creditsAcheter": {
+      "q": "How do I buy credits?",
+      "a": "<p>From the <a href=\"solde.html\">Top up my credits</a> page, by card, on a Stripe payment page (3-D Secure authentication may be requested). Your balance updates in the Launcher within a few seconds. Daily and weekly purchase limits apply.</p>"
+    },
+    "remboursement": {
+      "q": "Can I get a refund?",
+      "a": "<p>A community game can be refunded on request, from the game's page or through a support ticket. The team reviews each request by hand. Benchmarks: one hour of play and seven days. The details are in the <a href=\"conditions.html#remboursements\">refund conditions</a>.</p>"
+    },
+    "publier": {
+      "q": "How do I publish a game?",
+      "a": "<p>In the <b>Créateurs</b> (Creators) space of the Launcher, click <b>“Sortir mon jeu”</b> (release my game): game file, name, price in credits, description and screenshots. The team reviews every game before it is published. More on the <a href=\"launcher.html#createurs\">Launcher page</a>.</p>"
+    },
+    "retraits": {
+      "q": "How do I withdraw the money I earned?",
+      "a": "<p>Withdrawals in real money are made by bank transfer through Stripe, under the conditions set out on the <a href=\"conditions.html#remboursements\">Terms &amp; Privacy</a> page.</p>"
+    },
+    "supprimerCompte": {
+      "q": "How do I delete my account?",
+      "a": "<p>In the Launcher: <b>Paramètres</b> (settings), then <b>Compte</b> (account); your password is asked again. Your username, avatar, banner and email address are erased, but the games you published stay on sale. This cannot be undone. You can also write to the address shown on the <a href=\"contact.html#autres\">Contact page</a>.</p>"
+    },
+    "langue": {
+      "q": "Which languages is the website available in?",
+      "a": "<p>The website is available in French, English and Spanish. The Launcher and the games are in French only.</p>"
+    }
+  }
+}

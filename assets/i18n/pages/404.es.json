@@ -1,0 +1,15 @@
+{
+  "error404": {
+    "meta": {
+      "title": "Página no encontrada | Izacki",
+      "description": "Esta página no existe o se ha movido."
+    },
+    "title": "Página no encontrada",
+    "text": "Esta página no existe o se ha movido. Aquí tienes por dónde seguir.",
+    "home": "Volver al inicio",
+    "games": "Ver los juegos",
+    "launcher": "El Launcher",
+    "forum": "El foro",
+    "help": "Ayuda"
+  }
+}

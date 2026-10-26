@@ -1,144 +1,163 @@
-
 const FERRA_I18N_CACHE = {};
+const FERRA_I18N_LANGS = ['fr', 'en', 'es'];
+const FERRA_I18N_SELECTOR = '[data-i18n],[data-i18n-placeholder],[data-i18n-content],[data-i18n-attr]';
+let ferraI18nSeq = 0;
 
-async function ferraI18nLoadDict(lang, prefix) {
-  const cacheKey = lang;
-  if (FERRA_I18N_CACHE[cacheKey]) return FERRA_I18N_CACHE[cacheKey];
+function ferraI18nPage() {
+  return (document.body && document.body.getAttribute('data-page')) || '';
+}
+
+function ferraI18nIsText(value) {
+  return typeof value === 'string' || typeof value === 'number';
+}
+
+function ferraI18nUrlLang() {
+  if (ferraI18nPage() === 'forum-reset-password') return '';
+  const match = /[?&]lang=(fr|en|es)(?:&|$)/.exec(location.search);
+  return match ? match[1] : '';
+}
+
+function ferraI18nDetectLang() {
+  let lang = ferraI18nUrlLang();
+  if (!lang) {
+    try { lang = localStorage.getItem('ferra_lang') || ''; } catch (e) { lang = ''; }
+  }
+  if (FERRA_I18N_LANGS.indexOf(lang) < 0) {
+    const list = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'fr'];
+    lang = 'fr';
+    for (let i = 0; i < list.length; i++) {
+      const code = String(list[i]).slice(0, 2).toLowerCase();
+      if (FERRA_I18N_LANGS.indexOf(code) >= 0) { lang = code; break; }
+    }
+  }
+  return lang;
+}
+
+function ferraI18nMerge(target, source) {
+  Object.keys(source).forEach((key) => {
+    if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
+    const value = source[key];
+    if (value && typeof value === 'object' && !Array.isArray(value)) {
+      if (!target[key] || typeof target[key] !== 'object') target[key] = {};
+      ferraI18nMerge(target[key], value);
+    } else {
+      target[key] = value;
+    }
+  });
+  return target;
+}
+
+async function ferraI18nFetchJson(url, optional) {
   try {
-    const res = await fetch(`${prefix || ''}assets/i18n/${lang}.json`);
+    const res = await fetch(url);
+    if (!res.ok) {
+      if (!(optional && res.status === 404)) console.warn('Traductions indisponibles :', url);
+      return {};
+    }
     const data = await res.json();
-    FERRA_I18N_CACHE[cacheKey] = data;
-    return data;
+    return data && typeof data === 'object' ? data : {};
   } catch (err) {
-    console.error('[FERRA] i18n : échec de chargement de', lang, err);
+    console.warn('Traductions indisponibles :', url);
     return {};
   }
 }
 
-const FERRA_LANG_GATE_OPTIONS = [
-  { code: 'fr', flag: '🇫🇷', label: 'Français' },
-  { code: 'en', flag: '🇬🇧', label: 'English' },
-  { code: 'es', flag: '🇪🇸', label: 'Español' },
-];
-
-function ferraShowLanguageGate() {
-  return new Promise((resolve) => {
-    let selected = 'fr';
-    const overlay = document.createElement('div');
-    overlay.id = 'ferraLangGate';
-    overlay.innerHTML = `
-      <style>
-        #ferraLangGate{
-          position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;
-          background:
-            radial-gradient(ellipse 900px 500px at 15% -10%, rgba(242,164,90,0.10), transparent 60%),
-            radial-gradient(ellipse 800px 500px at 90% 10%, rgba(107,214,127,0.06), transparent 55%),
-            var(--bg-void, #0d0f13);
-          font-family:'Oswald',sans-serif;
-        }
-        #ferraLangGate .fg-brand{
-          position:absolute;top:40px;left:50%;transform:translateX(-50%);
-          font-family:'Rajdhani',sans-serif;font-weight:700;font-size:22px;letter-spacing:4px;color:var(--text,#e7e9ee);
-        }
-        #ferraLangGate .fg-brand span{color:var(--copper-glow,#f2a45a);}
-        #ferraLangGate .fg-card{max-width:540px;width:92vw;text-align:center;padding:20px;}
-        #ferraLangGate h1{
-          font-family:'Rajdhani',sans-serif;font-size:30px;font-weight:700;margin:0 0 10px;color:var(--text,#e7e9ee);
-        }
-        #ferraLangGate .fg-sub{color:var(--text-dim,#8890a0);font-size:13px;margin:0 0 38px;letter-spacing:0.3px;}
-        #ferraLangGate .fg-flags{display:flex;gap:16px;justify-content:center;margin-bottom:38px;flex-wrap:wrap;}
-        #ferraLangGate .fg-flag-btn{
-          display:flex;flex-direction:column;align-items:center;gap:10px;padding:22px 28px;border-radius:16px;
-          background:rgba(255,255,255,0.03);border:2px solid var(--panel-edge,#262b34);cursor:pointer;
-          transition:border-color .15s,background .15s,transform .15s;min-width:112px;font-family:inherit;
-        }
-        #ferraLangGate .fg-flag-btn:hover{transform:translateY(-2px);border-color:rgba(242,164,90,0.45);}
-        #ferraLangGate .fg-flag-btn.sel{border-color:var(--copper-glow,#f2a45a);background:rgba(242,164,90,0.10);}
-        #ferraLangGate .fg-flag-emoji{font-size:40px;line-height:1;}
-        #ferraLangGate .fg-flag-label{font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;color:var(--text,#e7e9ee);}
-        #ferraLangGate .fg-validate{
-          padding:14px 50px;border-radius:999px;border:none;font-family:'Rajdhani',sans-serif;
-          font-weight:700;font-size:15px;letter-spacing:0.4px;cursor:pointer;color:var(--bg-void,#0d0f13);
-          background:linear-gradient(135deg,var(--gold,#e8c15c),var(--copper-dark,#b5691f));
-          box-shadow:0 10px 28px rgba(242,164,90,0.28);transition:transform .12s,filter .15s;
-        }
-        #ferraLangGate .fg-validate:hover{filter:brightness(1.08);transform:translateY(-1px);}
-        @media (max-width:480px){
-          #ferraLangGate .fg-flag-btn{padding:16px 18px;min-width:88px;}
-          #ferraLangGate h1{font-size:24px;}
-        }
-      </style>
-      <div class="fg-brand">FER<span>RA</span></div>
-      <div class="fg-card">
-        <h1>Choisissez votre langue</h1>
-        <p class="fg-sub">Choose your language · Elige tu idioma</p>
-        <div class="fg-flags">
-          ${FERRA_LANG_GATE_OPTIONS.map((l) => `
-            <button type="button" class="fg-flag-btn${l.code === 'fr' ? ' sel' : ''}" data-lang="${l.code}">
-              <span class="fg-flag-emoji">${l.flag}</span><span class="fg-flag-label">${l.label}</span>
-            </button>`).join('')}
-        </div>
-        <button type="button" class="fg-validate" id="ferraLangGateValidate">Valider</button>
-      </div>
-    `;
-    document.body.appendChild(overlay);
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-
-    overlay.querySelectorAll('.fg-flag-btn').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        selected = btn.dataset.lang;
-        overlay.querySelectorAll('.fg-flag-btn').forEach((b) => b.classList.toggle('sel', b === btn));
-      });
-    });
-    overlay.querySelector('#ferraLangGateValidate').addEventListener('click', () => {
-      overlay.remove();
-      document.body.style.overflow = prevOverflow;
-      resolve(selected);
-    });
-  });
+async function ferraI18nLoadDict(lang, prefix) {
+  prefix = prefix || '';
+  const page = ferraI18nPage();
+  const cacheKey = lang + '|' + prefix + '|' + page;
+  if (FERRA_I18N_CACHE[cacheKey]) return FERRA_I18N_CACHE[cacheKey];
+  const jobs = [
+    ferraI18nFetchJson(prefix + 'assets/i18n/' + lang + '.json'),
+    ferraI18nFetchJson(prefix + 'assets/i18n/pages/shell.' + lang + '.json'),
+  ];
+  if (page && page !== 'shell') jobs.push(ferraI18nFetchJson(prefix + 'assets/i18n/pages/' + page + '.' + lang + '.json', true));
+  const parts = await Promise.all(jobs);
+  const dict = parts.reduce((merged, part) => ferraI18nMerge(merged, part), {});
+  if (Object.keys(dict).length) FERRA_I18N_CACHE[cacheKey] = dict;
+  return dict;
 }
 
 async function ferraI18nInit(prefix) {
-  prefix = prefix || '';
-  let saved = null;
-  try { saved = localStorage.getItem('ferra_lang'); } catch {}
-  if (!saved) {
-    saved = await ferraShowLanguageGate();
-    try { localStorage.setItem('ferra_lang', saved); } catch {}
+  prefix = prefix == null ? '' : String(prefix);
+  const lang = ferraI18nDetectLang();
+  if (ferraI18nUrlLang()) {
+    try { localStorage.setItem('ferra_lang', lang); } catch (e) {}
   }
-  window.FERRA_I18N = { lang: saved, prefix, dict: await ferraI18nLoadDict(saved, prefix) };
+  const seq = ++ferraI18nSeq;
+  const dict = await ferraI18nLoadDict(lang, prefix);
+  if (seq !== ferraI18nSeq) return;
+  window.FERRA_I18N = { lang, prefix, page: ferraI18nPage(), dict };
+  document.documentElement.lang = lang;
 }
 
 function ferraI18nCurrentLang() {
-  return (window.FERRA_I18N && window.FERRA_I18N.lang) || 'fr';
+  const lang = window.FERRA_I18N && window.FERRA_I18N.lang;
+  if (lang) return lang;
+  const attr = document.documentElement.lang;
+  return FERRA_I18N_LANGS.indexOf(attr) >= 0 ? attr : 'fr';
 }
 
 async function ferraI18nSetLang(lang) {
-  try { localStorage.setItem('ferra_lang', lang); } catch {}
+  if (FERRA_I18N_LANGS.indexOf(lang) < 0) return;
+  try { localStorage.setItem('ferra_lang', lang); } catch (e) {}
   const prefix = (window.FERRA_I18N && window.FERRA_I18N.prefix) || '';
-  window.FERRA_I18N = { lang, prefix, dict: await ferraI18nLoadDict(lang, prefix) };
+  const seq = ++ferraI18nSeq;
+  const dict = await ferraI18nLoadDict(lang, prefix);
+  if (seq !== ferraI18nSeq) return;
+  window.FERRA_I18N = { lang, prefix, page: ferraI18nPage(), dict };
 }
 
 function ferraI18nLookup(dict, key) {
-  return key.split('.').reduce((o, k) => (o && o[k] != null ? o[k] : undefined), dict);
+  if (!dict || typeof key !== 'string') return undefined;
+  return key.split('.').reduce((node, part) => (
+    node != null && typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, part) ? node[part] : undefined
+  ), dict);
 }
 
 function ferraT(key, fallback) {
   const dict = (window.FERRA_I18N && window.FERRA_I18N.dict) || {};
-  const val = ferraI18nLookup(dict, key);
-  return val != null ? val : fallback;
+  const value = ferraI18nLookup(dict, key);
+  return ferraI18nIsText(value) ? String(value) : fallback;
 }
 
-function ferraI18nApply() {
+function ferraI18nApply(root) {
   const dict = (window.FERRA_I18N && window.FERRA_I18N.dict) || {};
-  document.querySelectorAll('[data-i18n]').forEach((el) => {
-    const val = ferraI18nLookup(dict, el.dataset.i18n);
-    if (val != null) el.innerHTML = val;
+  const scope = root && root.querySelectorAll ? root : document;
+  const nodes = Array.prototype.slice.call(scope.querySelectorAll(FERRA_I18N_SELECTOR));
+  if (scope !== document && scope.matches && scope.matches(FERRA_I18N_SELECTOR)) nodes.unshift(scope);
+  nodes.forEach((el) => {
+    const key = el.getAttribute('data-i18n');
+    if (key) {
+      const value = ferraI18nLookup(dict, key);
+      if (ferraI18nIsText(value)) {
+        if (el.tagName === 'TITLE') el.textContent = value;
+        else el.innerHTML = value;
+      }
+    }
+    const placeholder = el.getAttribute('data-i18n-placeholder');
+    if (placeholder) {
+      const value = ferraI18nLookup(dict, placeholder);
+      if (ferraI18nIsText(value)) el.setAttribute('placeholder', value);
+    }
+    const content = el.getAttribute('data-i18n-content');
+    if (content) {
+      const value = ferraI18nLookup(dict, content);
+      if (ferraI18nIsText(value)) el.setAttribute('content', value);
+    }
+    const pairs = el.getAttribute('data-i18n-attr');
+    if (pairs) {
+      pairs.split(';').forEach((pair) => {
+        const cut = pair.indexOf(':');
+        if (cut < 1) return;
+        const value = ferraI18nLookup(dict, pair.slice(cut + 1).trim());
+        if (ferraI18nIsText(value)) el.setAttribute(pair.slice(0, cut).trim(), value);
+      });
+    }
   });
-  document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
-    const val = ferraI18nLookup(dict, el.dataset.i18nPlaceholder);
-    if (val != null) el.setAttribute('placeholder', val);
-  });
-  document.documentElement.lang = ferraI18nCurrentLang();
+  if (scope !== document) return;
+  const lang = ferraI18nCurrentLang();
+  document.documentElement.lang = lang;
+  document.documentElement.classList.remove('i18n-pending');
+  document.dispatchEvent(new CustomEvent('ferra:i18n', { detail: { lang } }));
 }

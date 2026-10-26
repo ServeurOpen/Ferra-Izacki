@@ -1,0 +1,50 @@
+{
+  "parametres": {
+    "meta": {
+      "title": "Paramètres | Izacki",
+      "description": "Langue du site et accès à tes crédits."
+    },
+    "side": {
+      "label": "Menu du compte",
+      "account": "Compte",
+      "credits": "Crédits",
+      "settings": "Paramètres",
+      "help": "Aide",
+      "faq": "Questions fréquentes",
+      "contact": "Contact"
+    },
+    "crumb": "Compte",
+    "title": "Paramètres",
+    "lead": "La langue du site et l'accès à tes crédits.",
+    "login": {
+      "title": "Connecte-toi pour accéder à tes paramètres.",
+      "text": "Un seul compte Izacki, gratuit, pour le site, le forum et le Launcher."
+    },
+    "language": {
+      "title": "Langue",
+      "label": "Langue du site",
+      "hint": "S'applique à tout le site, mémorisé pour tes prochaines visites."
+    },
+    "credits": {
+      "title": "Crédits",
+      "text": "Recharge ton solde de crédits par carte bancaire.",
+      "cta": "Recharger mes crédits"
+    },
+    "profile": {
+      "title": "Profil et compte",
+      "text": "Ton profil, la confidentialité et la suppression du compte se règlent dans le Launcher, dans Paramètres.",
+      "cta": "Lire l'aide"
+    },
+    "admin": {
+      "title": "Mode administrateur",
+      "hint": "Activé, il donne accès au Panel et colore le site en violet.",
+      "on": "Activé",
+      "off": "Désactivé",
+      "disable": "Désactiver",
+      "reenable": "Réactiver…",
+      "passwordLabel": "Mot de passe de réactivation",
+      "reactivate": "Réactiver",
+      "wrongPassword": "Mot de passe incorrect."
+    }
+  }
+}

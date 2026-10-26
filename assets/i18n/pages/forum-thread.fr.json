@@ -1,0 +1,38 @@
+{
+  "forumThread": {
+    "meta": {
+      "title": "Forum | Izacki",
+      "description": "Un sujet du forum d'Izacki et ses réponses."
+    },
+    "crumbForum": "Forum",
+    "title": "Sujet",
+    "loading": "Chargement du sujet…",
+    "backToForum": "Retour au forum",
+    "notFound": "Sujet introuvable.",
+    "loadError": "Impossible de charger ce sujet.",
+    "defaultCategory": "Catégorie",
+    "replyHeading": "Répondre",
+    "replyLabel": "Ton message",
+    "replyPlaceholder": "Écris ta réponse",
+    "replySubmit": "Envoyer la réponse",
+    "loginTitle": "Connecte-toi pour répondre.",
+    "loginText": "Un compte Izacki gratuit suffit pour écrire sur le forum.",
+    "errWriteFirst": "Écris un message avant d'envoyer.",
+    "errReplyFailed": "Impossible d'envoyer la réponse. Réessaie.",
+    "titleSuffix": "Forum Izacki",
+    "cat": {
+      "annonces": {
+        "name": "Annonces"
+      },
+      "general": {
+        "name": "Discussion générale"
+      },
+      "support": {
+        "name": "Support et bugs"
+      },
+      "idees": {
+        "name": "Idées et suggestions"
+      }
+    }
+  }
+}

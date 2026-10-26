@@ -1,0 +1,51 @@
+{
+  "contact": {
+    "meta": {
+      "title": "Contacter l'équipe : bug, idée ou question | Izacki",
+      "description": "Écris à l'équipe Izacki : un bug, une idée ou une question. Le formulaire demande un compte ; l'e-mail et le Discord sont ouverts à tous."
+    },
+    "crumb": "Contact",
+    "hero": {
+      "title": "Contact",
+      "lead": "Un bug, une idée ou une question : écris-nous."
+    },
+    "form": {
+      "label": "Formulaire",
+      "meta": "Réservé aux comptes Izacki",
+      "title": "Écrire à l'équipe.",
+      "category": "Catégorie",
+      "catBug": "Signalement de bug",
+      "catSuggestion": "Suggestion",
+      "catQuestion": "Question",
+      "catOther": "Autre",
+      "message": "Message",
+      "placeholder": "Décris ton problème, ton idée ou ta question.",
+      "hint": "Ton message part de ton compte Izacki : l'équipe reçoit ton pseudo, ton e-mail et ton texte, envoyés par un service d'envoi de messages.",
+      "success": "Message envoyé. Nous te répondrons dès que nous pourrons, si besoin directement par e-mail."
+    },
+    "needLogin": {
+      "title": "Connecte-toi pour écrire",
+      "text": "Le formulaire est réservé aux comptes Izacki : ton message part de ton compte, ce qui nous permet de te répondre. Sans compte, tu peux nous écrire par e-mail ou sur Discord : <a href=\"#autres\">voir les autres moyens</a>.",
+      "login": "Se connecter",
+      "signup": "Créer un compte"
+    },
+    "other": {
+      "label": "Autres moyens",
+      "meta": "Ouverts à tous",
+      "title": "Nous joindre autrement.",
+      "email": "E-mail",
+      "discord": "Discord",
+      "discordLink": "Rejoindre le serveur Izacki",
+      "support": "Assistance",
+      "supportText": "Dans le Launcher, l'Assistance fonctionne par tickets : question, bug, remboursement ou autre. Tu peux joindre une capture d'écran ; la réponse arrive dans le ticket.",
+      "delay": "Délai",
+      "delayText": "Nous répondons dès que nous pouvons."
+    },
+    "connectedAs": "Connecté en tant que",
+    "notConfigured": "Le formulaire de contact est momentanément indisponible. Réessaie dans quelques minutes ou écris-nous sur Discord.",
+    "writeFirst": "Écris un message avant d'envoyer.",
+    "sending": "Envoi en cours…",
+    "sendFailed": "Impossible d'envoyer le message. Réessaie dans un instant.",
+    "send": "Envoyer"
+  }
+}

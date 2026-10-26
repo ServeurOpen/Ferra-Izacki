@@ -1,0 +1,15 @@
+{
+  "error404": {
+    "meta": {
+      "title": "Page introuvable | Izacki",
+      "description": "Cette page n'existe pas ou a été déplacée."
+    },
+    "title": "Page introuvable",
+    "text": "Cette page n'existe pas ou a été déplacée. Voici où continuer.",
+    "home": "Retour à l'accueil",
+    "games": "Voir les jeux",
+    "launcher": "Le Launcher",
+    "forum": "Le forum",
+    "help": "Aide"
+  }
+}

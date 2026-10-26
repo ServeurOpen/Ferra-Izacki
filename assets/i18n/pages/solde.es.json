@@ -1,0 +1,85 @@
+{
+  "solde": {
+    "meta": {
+      "title": "Recargar mis créditos | Izacki",
+      "description": "Recarga tu saldo de créditos de Izacki con tarjeta bancaria."
+    },
+    "side": {
+      "label": "Menú de la cuenta",
+      "account": "Cuenta",
+      "credits": "Créditos",
+      "settings": "Ajustes",
+      "help": "Ayuda",
+      "faq": "Preguntas frecuentes",
+      "contact": "Contacto"
+    },
+    "crumb": "Cuenta",
+    "title": "Recargar mis créditos",
+    "lead": "Los créditos sirven para pagar juegos y contenido en el Launcher. Cuanto más grande es el paquete, menos cuesta cada crédito.",
+    "login": {
+      "title": "Inicia sesión para recargar tus créditos.",
+      "text": "Tus créditos están vinculados a tu cuenta Izacki, la misma en el sitio y en el Launcher."
+    },
+    "packs": {
+      "title": "Elige un paquete de créditos",
+      "meta": "Pago con tarjeta, a través de Stripe",
+      "label": "Paquetes de créditos"
+    },
+    "pack": {
+      "credits": "créditos",
+      "pay": "Pagar con tarjeta",
+      "best": "Mejor valor",
+      "q500": "500",
+      "q1000": "1000",
+      "q2000": "2000",
+      "q5000": "5000",
+      "p500": "3,99 €",
+      "p1000": "6,49 €",
+      "p2000": "11,99 €",
+      "p5000": "26,99 €",
+      "per500": "0,80 € por cada 100 créditos",
+      "per1000": "0,65 € por cada 100 créditos",
+      "per2000": "0,60 € por cada 100 créditos",
+      "per5000": "0,54 € por cada 100 créditos"
+    },
+    "how": {
+      "title": "Cómo funciona",
+      "paymentLabel": "Pago",
+      "paymentText": "Con tarjeta, en una página de pago de Stripe. Puede que se pida la autenticación 3-D Secure.",
+      "returnLabel": "Regreso",
+      "returnText": "Vuelves a esta página cuando el pago termina.",
+      "balanceLabel": "Saldo",
+      "balanceText": "Se actualiza en el Launcher unos segundos después del pago.",
+      "useLabel": "Uso",
+      "useText": "Los créditos solo tienen valor dentro del ecosistema Izacki: no son dinero en efectivo ni una criptomoneda.",
+      "limitsLabel": "Límites",
+      "limitsText": "Existen límites de compra por día y por semana."
+    },
+    "legal": {
+      "lead": "Léelo antes de pagar:",
+      "terms": "Condiciones de venta",
+      "refunds": "Reembolsos"
+    },
+    "msg": {
+      "success": "Pago recibido. Tus créditos se han añadido; tu saldo se actualiza en el Launcher en unos segundos.",
+      "canceled": "Pago cancelado. No se ha cobrado ningún importe."
+    },
+    "err": {
+      "salesPaused": "Las compras de créditos están suspendidas temporalmente. Vuelve un poco más tarde.",
+      "disabledUser": "Tu cuenta no puede comprar créditos por ahora. Contáctanos si crees que es un error.",
+      "tooManyOpen": "Ya tienes pagos en curso. Complétalos o espera a que caduquen.",
+      "tooManyOpenRetry": "Ya tienes pagos en curso. Complétalos o espera a que caduquen, y vuelve a intentarlo dentro de aproximadamente",
+      "limit": "Has alcanzado el límite de compras de créditos para este periodo. Inténtalo más tarde.",
+      "limitRetry": "Has alcanzado el límite de compras de créditos para este periodo. Inténtalo de nuevo dentro de aproximadamente",
+      "purchaseLimit": "No se ha podido iniciar el pago. Contáctanos.",
+      "unavailable": "Servicio no disponible por el momento. Inténtalo de nuevo en unos minutos.",
+      "generic": "No se ha podido iniciar el pago. Inténtalo de nuevo en un momento."
+    },
+    "delay": {
+      "lessThanMinute": "un minuto",
+      "min": "min",
+      "h": "h",
+      "d": "d"
+    }
+  }
+}

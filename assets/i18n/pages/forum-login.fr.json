@@ -1,0 +1,24 @@
+{
+  "forumLogin": {
+    "meta": {
+      "title": "Connexion | Izacki",
+      "description": "Connecte-toi à ton compte Izacki, le même sur le site, sur le forum et dans le Launcher."
+    },
+    "crumb": "Connexion",
+    "title": "Connexion",
+    "lead": "Content de te revoir. Le même compte sert sur le site, sur le forum et dans le Launcher.",
+    "rail": {
+      "label": "Compte Izacki",
+      "meta": "Un seul compte pour le site, le forum et le Launcher"
+    },
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "submit": "Se connecter",
+    "forgot": "Mot de passe oublié ?",
+    "noAccount": "Pas encore de compte ?",
+    "signupLink": "Inscris-toi",
+    "errEmailNotConfirmed": "Ce compte n'a pas encore confirmé son adresse e-mail. Vérifie ta boîte de réception (et les spams), ou écris-nous depuis la page Contact si le message n'est jamais arrivé.",
+    "errRateLimit": "Trop de tentatives récentes. Réessaie dans quelques minutes.",
+    "errInvalid": "E-mail ou mot de passe incorrect."
+  }
+}
