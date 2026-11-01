@@ -95,11 +95,11 @@
     },
     "succes": {
       "q": "Mes succès ne s'affichent pas.",
-      "a": "<p>Les succès se synchronisent quand le jeu est lancé depuis le Launcher, une fois connecté à ton compte.</p>"
+      "a": "<p>Les succès de FERRA et de Tower Défense Infini se synchronisent quand le jeu est lancé depuis le Launcher, une fois connecté à ton compte. Ceux de VIGIE restent sur ton ordinateur.</p>"
     },
     "quitter": {
       "q": "Comment quitter un jeu proprement ?",
-      "a": "<p>Appuie sur <b>Échap</b>, puis choisis <b>« Quitter le jeu »</b>. La sauvegarde est automatique, dans FERRA comme dans Tower Défense Infini.</p>"
+      "a": "<p>Appuie sur <b>Échap</b>, puis choisis <b>« Quitter le jeu »</b>. La sauvegarde est automatique, dans FERRA, Tower Défense Infini et VIGIE.</p>"
     },
     "desinstaller": {
       "q": "Comment désinstaller un jeu ?",
@@ -107,7 +107,7 @@
     },
     "payants": {
       "q": "Les jeux sont-ils payants ?",
-      "a": "<p>FERRA et Tower Défense Infini sont gratuits. Les jeux de la communauté ont un prix en crédits, parfois zéro.</p>"
+      "a": "<p>FERRA, Tower Défense Infini et VIGIE sont gratuits. Les jeux de la communauté ont un prix en crédits, parfois zéro.</p>"
     },
     "majJeu": {
       "q": "Comment savoir si un jeu a une mise à jour ?",

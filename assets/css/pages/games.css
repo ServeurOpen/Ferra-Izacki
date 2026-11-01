@@ -3,6 +3,7 @@
 .section-head+.hero__grid{margin-top:var(--head-gap)}
 @media (min-width:62rem){.hero__grid>.prose{grid-column:1/span 5}}
 .gallery .plate{--ar:16/9}
+@media (min-width:72rem){.gallery--four{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .gallery--feature>:first-child{grid-column:1/-1;--ar:2560/1080}
 @media (min-width:40rem){.gallery--feature>:last-child:nth-child(odd){grid-column:auto}}
 .hero__plate-wide .plate{--ar:16/9}

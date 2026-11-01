@@ -11,11 +11,12 @@
     },
     "next": {
       "label": "Después",
-      "meta": "Los dos juegos",
+      "meta": "Los tres juegos",
       "title": "Instala el Launcher y luego un juego.",
       "see": "Ver la ficha del juego",
       "ferra": "Un juego de supervivencia y automatización: protege tu hoguera, automatiza tu producción y prepárate para el meteorito.",
-      "td": "Un juego de tower defense: oleadas que se encadenan, diez torres que mejorar y combinar, y un sistema de prestigio."
+      "td": "Un juego de tower defense: oleadas que se encadenan, diez torres que mejorar y combinar, y un sistema de prestigio.",
+      "vigie": "Un roguelite de supervivencia: guardas un faro durante noches de siete minutos, orientas el haz y eliges tus reliquias."
     }
   }
 }

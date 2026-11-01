@@ -2,14 +2,14 @@
   "index": {
     "meta": {
       "title": "Izacki, estudio de juegos independiente",
-      "description": "Izacki es un estudio de juegos independiente. FERRA y Tower Défense Infini son gratuitos, y el Launcher los instala y los actualiza en Windows."
+      "description": "Izacki es un estudio de juegos independiente. FERRA, Tower Défense Infini y VIGIE son gratuitos, y el Launcher los instala y los actualiza en Windows."
     },
     "hero": {
       "kicker": "Estudio de juegos independiente",
       "l1": "Un estudio independiente.",
       "l2": "Un Launcher.",
-      "l3": "Dos juegos gratuitos.",
-      "lead": "Izacki es un estudio de juegos independiente. FERRA y Tower Défense Infini son gratuitos: los instalas, los lanzas y los actualizas desde el Launcher, en Windows.",
+      "l3": "Tres juegos gratuitos.",
+      "lead": "Izacki es un estudio de juegos independiente. FERRA, Tower Défense Infini y VIGIE son gratuitos: los instalas, los lanzas y los actualizas desde el Launcher, en Windows.",
       "ctaGames": "Ver los juegos",
       "plateAlt": "La pantalla Boutique (la tienda) del Launcher de Izacki: un juego destacado, luego FERRA y Tower Défense Infini, con filtros para todos los juegos, los de Izacki, los de la comunidad y los gratuitos.",
       "screen": "Boutique (Tienda)"
@@ -20,12 +20,14 @@
     },
     "games": {
       "label": "Juegos",
-      "meta": "Dos juegos, los dos gratuitos",
-      "title": "Dos juegos, dos géneros.",
+      "meta": "Tres juegos, todos gratuitos",
+      "title": "Tres juegos, tres géneros.",
       "ferraAlt": "Captura de FERRA: un campamento alrededor de la hoguera, con perforadoras, hornos, una casa y farolas.",
       "tdAlt": "Captura de Tower Défense Infini: el jefe «Roi des Enfers» avanza bajo su barra de vida durante el evento «Éclipse» en el mapa «Chaos Total».",
       "ferraText": "Un mundo por reconstruir, una hoguera que proteger, un meteorito al que hacer frente. Extrae, automatiza, defiende tu campamento y prepárate para la noche.",
       "tdText": "Un tower defense contra oleadas de zombis sin fin: colocas torres a lo largo del camino y ves hasta dónde aguantas.",
+      "vigieAlt": "Captura de VIGIE: una noche en curso, con el haz barriendo a las criaturas.",
+      "vigieText": "Un faro perdido en pleno mar, una lámpara, criaturas que salen de las olas: orienta el haz y aguanta hasta el amanecer.",
       "more": "Ver la ficha del juego"
     },
     "launcher": {
@@ -93,7 +95,7 @@
       }
     },
     "band": {
-      "title": "Instala el Launcher y lanza FERRA o Tower Défense Infini."
+      "title": "Instala el Launcher y lanza FERRA, Tower Défense Infini o VIGIE."
     }
   }
 }

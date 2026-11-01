@@ -68,7 +68,8 @@
     "size": {
       "launcher": "Under 3\u00a0MB",
       "ferra": "About 5\u00a0MB",
-      "td": "About 4\u00a0MB"
+      "td": "About 4\u00a0MB",
+      "vigie": "About 5\u00a0MB"
     },
     "account": {
       "free": "Free Izacki account"
@@ -78,7 +79,8 @@
     },
     "genre": {
       "ferra": "Survival / automation",
-      "td": "Tower defense"
+      "td": "Tower defense",
+      "vigie": "Roguelite / Survival"
     }
   }
 }

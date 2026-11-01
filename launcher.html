@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0C0D0F">
 <title data-i18n="launcher.meta.title">Launcher de jeux pour Windows, gratuit | Izacki</title>
-<meta name="description" content="Le Launcher Izacki installe, lance et met à jour FERRA et Tower Défense Infini. Gratuit, pour Windows 10 et 11, avec un compte Izacki gratuit." data-i18n-content="launcher.meta.description">
+<meta name="description" content="Le Launcher Izacki installe, lance et met à jour FERRA, Tower Défense Infini et VIGIE. Gratuit, pour Windows 10 et 11, avec un compte Izacki gratuit." data-i18n-content="launcher.meta.description">
 <link rel="canonical" href="https://izackiferra.com/launcher.html">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta property="og:site_name" content="Izacki">
@@ -14,14 +14,14 @@
 <meta property="og:locale" content="fr_FR">
 <meta property="og:url" content="https://izackiferra.com/launcher.html">
 <meta property="og:title" content="Launcher de jeux pour Windows, gratuit | Izacki" data-i18n-content="launcher.meta.title">
-<meta property="og:description" content="Le Launcher Izacki installe, lance et met à jour FERRA et Tower Défense Infini. Gratuit, pour Windows 10 et 11, avec un compte Izacki gratuit." data-i18n-content="launcher.meta.description">
+<meta property="og:description" content="Le Launcher Izacki installe, lance et met à jour FERRA, Tower Défense Infini et VIGIE. Gratuit, pour Windows 10 et 11, avec un compte Izacki gratuit." data-i18n-content="launcher.meta.description">
 <meta property="og:image" content="https://izackiferra.com/assets/img/og-default.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Izacki, studio de jeux indépendant : le Launcher, FERRA et Tower Défense Infini." data-i18n-content="shell.ogAlt">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Launcher de jeux pour Windows, gratuit | Izacki" data-i18n-content="launcher.meta.title">
-<meta name="twitter:description" content="Le Launcher Izacki installe, lance et met à jour FERRA et Tower Défense Infini. Gratuit, pour Windows 10 et 11, avec un compte Izacki gratuit." data-i18n-content="launcher.meta.description">
+<meta name="twitter:description" content="Le Launcher Izacki installe, lance et met à jour FERRA, Tower Défense Infini et VIGIE. Gratuit, pour Windows 10 et 11, avec un compte Izacki gratuit." data-i18n-content="launcher.meta.description">
 <meta name="twitter:image" content="https://izackiferra.com/assets/img/og-default.png">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" sizes="any">
 <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
@@ -47,7 +47,7 @@
       <ul class="nav">
         <li><a href="launcher.html" aria-current="page"><span data-i18n="shell.nav.launcher">Launcher</span></a></li>
         <li><a href="index.html#jeux"><span data-i18n="shell.nav.games">Jeux</span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#chevron-down"/></svg></a>
-          <div class="nav-sub"><a href="games/ferra.html">FERRA<small data-i18n="shell.nav.ferraSub">Survie / automatisation</small></a><a href="games/tower-defense.html">Tower Défense Infini<small data-i18n="shell.nav.tdSub">Tower defense</small></a></div></li>
+          <div class="nav-sub"><a href="games/ferra.html">FERRA<small data-i18n="shell.nav.ferraSub">Survie / automatisation</small></a><a href="games/tower-defense.html">Tower Défense Infini<small data-i18n="shell.nav.tdSub">Tower defense</small></a><a href="games/vigie.html">VIGIE<small data-i18n="shell.nav.vigieSub">Roguelite / Survie</small></a></div></li>
         <li><a href="launcher.html#createurs"><span data-i18n="shell.nav.creators">Créateurs</span></a></li>
         <li><a href="forum/index.html"><span data-i18n="shell.nav.community">Communauté</span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#chevron-down"/></svg></a>
           <div class="nav-sub"><a href="forum/index.html"><span data-i18n="shell.nav.forum">Forum</span><small data-i18n="shell.nav.forumSub">Sujets et réponses</small></a><a href="https://discord.gg/bv2w8spATk" target="_blank" rel="noopener noreferrer">Discord<svg class="icon icon--fill" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#discord"/></svg><span class="sr-only" data-i18n="shell.newTab">(s'ouvre dans un nouvel onglet)</span><small data-i18n="shell.nav.discordSub">Le serveur d'Izacki</small></a></div></li>
@@ -159,15 +159,16 @@
     <div class="split">
       <div class="rail">
         <p class="label label--mark" data-i18n="launcher.games.label">Jeux</p>
-        <p class="rail__meta meta" data-i18n="launcher.games.meta">Deux jeux, tous deux gratuits</p>
+        <p class="rail__meta meta" data-i18n="launcher.games.meta">Trois jeux, tous gratuits</p>
       </div>
       <div class="main">
         <div class="section-head">
-          <h2 id="jeux-t" class="t-h2" data-i18n="launcher.games.title">Deux jeux à installer.</h2>
+          <h2 id="jeux-t" class="t-h2" data-i18n="launcher.games.title">Trois jeux à installer.</h2>
         </div>
         <div class="rows">
           <div class="row row--3"><h3 id="jeux-1-t">FERRA</h3><p data-i18n="launcher.games.ferraText">Un monde à reconstruire, un feu à protéger, une météorite à affronter. Mine, automatise, défends ton campement, et prépare-toi pour la nuit.</p><div class="row__aside"><a class="link" href="games/ferra.html" aria-labelledby="jeux-1-l jeux-1-t"><span id="jeux-1-l" data-i18n="launcher.games.more">Voir la fiche du jeu</span><svg class="icon icon-arrow" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#arrow-right"/></svg></a></div></div>
           <div class="row row--3"><h3 id="jeux-2-t">Tower Défense Infini</h3><p data-i18n="launcher.games.tdText">Un tower defense contre des vagues de zombies sans fin&nbsp;: tu poses des tours le long de la route et tu vois jusqu'où tu tiens.</p><div class="row__aside"><a class="link" href="games/tower-defense.html" aria-labelledby="jeux-2-l jeux-2-t"><span id="jeux-2-l" data-i18n="launcher.games.more">Voir la fiche du jeu</span><svg class="icon icon-arrow" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#arrow-right"/></svg></a></div></div>
+          <div class="row row--3"><h3 id="jeux-3-t">VIGIE</h3><p data-i18n="launcher.games.vigieText">Un phare perdu en pleine mer, une lampe, des créatures qui sortent des vagues&nbsp;: oriente le faisceau et tiens jusqu'à l'aube.</p><div class="row__aside"><a class="link" href="games/vigie.html" aria-labelledby="jeux-3-l jeux-3-t"><span id="jeux-3-l" data-i18n="launcher.games.more">Voir la fiche du jeu</span><svg class="icon icon-arrow" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#arrow-right"/></svg></a></div></div>
         </div>
       </div>
     </div>
@@ -264,10 +265,10 @@
   <div class="footer-grid">
     <div class="footer-brand">
       <a class="brand" href="index.html" aria-label="Izacki, accueil" data-i18n-attr="aria-label:shell.brand.home"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"/><rect class="brand__sq" x="12" y="12" width="10" height="10"/></svg><span class="brand__word">Izacki</span></a>
-      <p data-i18n="shell.footer.blurb">Studio de jeux indépendant. Deux jeux gratuits, le Launcher pour les installer, un forum et un Discord pour en parler.</p>
+      <p data-i18n="shell.footer.blurb">Studio de jeux indépendant. Trois jeux gratuits, le Launcher pour les installer, un forum et un Discord pour en parler.</p>
     </div>
     <nav aria-labelledby="f-izacki"><h2 id="f-izacki" data-i18n="shell.footer.izacki">Izacki</h2><ul><li><a href="index.html" data-i18n="shell.footer.home">Accueil</a></li><li><a href="launcher.html" data-i18n="shell.footer.launcher">Launcher</a></li><li><a href="launcher.html#createurs" data-i18n="shell.footer.publish">Publier un jeu</a></li></ul></nav>
-    <nav aria-labelledby="f-jeux"><h2 id="f-jeux" data-i18n="shell.footer.games">Jeux</h2><ul><li><a href="games/ferra.html">FERRA</a></li><li><a href="games/tower-defense.html">Tower Défense Infini</a></li></ul></nav>
+    <nav aria-labelledby="f-jeux"><h2 id="f-jeux" data-i18n="shell.footer.games">Jeux</h2><ul><li><a href="games/ferra.html">FERRA</a></li><li><a href="games/tower-defense.html">Tower Défense Infini</a></li><li><a href="games/vigie.html">VIGIE</a></li></ul></nav>
     <nav aria-labelledby="f-aide"><h2 id="f-aide" data-i18n="shell.footer.help">Aide et communauté</h2><ul><li><a href="faq.html" data-i18n="shell.footer.faq">Questions fréquentes</a></li><li><a href="contact.html" data-i18n="shell.footer.contact">Contact</a></li><li><a href="forum/index.html" data-i18n="shell.footer.forum">Forum</a></li><li><a href="https://discord.gg/bv2w8spATk" target="_blank" rel="noopener noreferrer">Discord<span class="sr-only" data-i18n="shell.newTab">(s'ouvre dans un nouvel onglet)</span></a></li></ul></nav>
   </div>
   <div class="footer-base">

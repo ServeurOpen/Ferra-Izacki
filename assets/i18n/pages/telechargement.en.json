@@ -11,11 +11,12 @@
     },
     "next": {
       "label": "Next",
-      "meta": "The two games",
+      "meta": "The three games",
       "title": "Install the Launcher, then a game.",
       "see": "See the game page",
       "ferra": "A survival and automation game: protect your campfire, automate your production and get ready for the meteorite.",
-      "td": "A tower defense game: waves that keep coming, ten towers to upgrade and combine, and a prestige system."
+      "td": "A tower defense game: waves that keep coming, ten towers to upgrade and combine, and a prestige system.",
+      "vigie": "A survival roguelite: you keep a lighthouse through seven-minute nights, aim the beam and choose your relics."
     }
   }
 }

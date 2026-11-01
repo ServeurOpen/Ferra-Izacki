@@ -123,5 +123,17 @@
         "Clavier : Échap fonctionne aussi depuis les interrupteurs des Paramètres, et le curseur se place dans le nom de la partie."
       ]
     }
+  ],
+  "vigie": [
+    {
+      "version": "1.0.0",
+      "date": "2026-11-01",
+      "title": "Première version",
+      "notes": [
+        "Le jeu complet est disponible : nuits de sept minutes, 25 reliques, huit créatures et deux boss, quatre gardiens, neuf niveaux d'abysse, 12 améliorations du phare, un défi du jour, 16 succès et trois emplacements de sauvegarde.",
+        "Plein écran, avec un curseur aux couleurs du jeu à la place de celui du système.",
+        "Un bouton « Quitter » dans le menu principal et dans la pause."
+      ]
+    }
   ]
 }

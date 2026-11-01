@@ -1,0 +1,98 @@
+{
+  "vigiePage": {
+    "meta": {
+      "title": "VIGIE, roguelite de survie | Izacki",
+      "description": "VIGIE est un roguelite de survie gratuit pour Windows\u00a0: garde un phare, oriente le faisceau et choisis tes reliques, nuit après nuit.",
+      "imageAlt": "VIGIE, Garde la lumière\u00a0: le phare et son faisceau au milieu des créatures de la mer."
+    },
+    "hero": {
+      "lead": "Un phare perdu en pleine mer, une lampe, des créatures qui sortent des vagues\u00a0: oriente le faisceau et tiens jusqu'à l'aube."
+    },
+    "play": {
+      "label": "Principe",
+      "meta": "Comment ça se joue",
+      "title": "Garde la lumière.",
+      "p1": "Tu es le gardien d'un phare isolé. Chaque nuit dure sept minutes\u00a0: des créatures sortent de la mer et se jettent sur la lumière. Ton arme, c'est le faisceau de la lampe\u00a0: tu l'orientes à la souris, tu le concentres en maintenant le clic (il consomme de l'énergie) et tu lances une fusée éclairante pour dégager les alentours.",
+      "p2": "Chaque créature vaincue laisse une lueur. À chaque niveau, une révélation te propose trois reliques et tu n'en gardes qu'une. Il y en a 25, avec des synergies\u00a0: Prisme (deux puis trois faisceaux), Écho, Phare jumeau, Chaleur, Givre, Foudre, Phénix… Aucune nuit ne ressemble à la précédente.",
+      "p3": "Huit créatures, huit façons de te gêner\u00a0: le Rôdeur charge, le Voile fuit la lumière, la Méduse fige la lampe, la Sirène l'arrache, le Crabe de pierre s'accroche au phare, la Baudroie protège les autres. À l'aube, un boss\u00a0: le Léviathan en trois phases, et le Kraken à quatre tentacules à partir de l'Abysse I. Des événements ponctuent la nuit\u00a0: banc de poissons-lanternes, éclipse, pleine lune, épave à piller.",
+      "p4": "Entre deux nuits, les éclats gagnés améliorent ton phare pour de bon (12 améliorations). Quatre gardiens au style différent (Le Gardien, L'Horloger, L'Ermite, La Veuve), neuf niveaux d'abysse pour corser la mer, un défi du jour, 16 succès et trois emplacements de sauvegarde.",
+      "names": "Les noms des reliques, des créatures et des gardiens sont ceux du jeu, qui est en français."
+    },
+    "gallery": {
+      "label": "Captures",
+      "meta": "Quatre captures du jeu",
+      "title": "En jeu.",
+      "menu": {
+        "alt": "Capture de VIGIE\u00a0: le menu principal, avec le phare en arrière-plan.",
+        "cap": "Le menu principal, avec le phare en arrière-plan."
+      },
+      "night": {
+        "alt": "Capture de VIGIE\u00a0: une nuit en cours, avec le faisceau qui balaie les créatures.",
+        "cap": "Une nuit en cours\u00a0: le faisceau balaie les créatures."
+      },
+      "reveal": {
+        "alt": "Capture de VIGIE\u00a0: l'écran Révélation, avec trois reliques à choisir.",
+        "cap": "L'écran Révélation\u00a0: trois reliques à choisir."
+      },
+      "boss": {
+        "alt": "Capture de VIGIE\u00a0: le Léviathan, boss de fin de nuit.",
+        "cap": "Le Léviathan, boss de fin de nuit."
+      }
+    },
+    "controls": {
+      "label": "Commandes",
+      "meta": "Souris et clavier",
+      "title": "Les commandes.",
+      "regionLabel": "Tableau des commandes",
+      "caption": "Les commandes de VIGIE",
+      "colAction": "Action",
+      "colKeys": "Commande",
+      "aim": "Orienter le faisceau",
+      "aimKeys": "Souris, ou A/D ou flèches",
+      "focus": "Concentrer le faisceau",
+      "focusKeys": "Clic gauche maintenu, ou Maj",
+      "flare": "Lancer une fusée éclairante",
+      "flareKeys": "Espace ou clic droit",
+      "pick": "Choisir une relique",
+      "pickKeys": "1, 2 ou 3",
+      "reroll": "Relancer le choix de reliques",
+      "rerollKeys": "R",
+      "pause": "Mettre en pause",
+      "pauseKeys": "Échap ou P",
+      "mute": "Couper le son",
+      "muteKeys": "M",
+      "replay": "Rejouer",
+      "replayKeys": "Entrée"
+    },
+    "info": {
+      "label": "Infos",
+      "meta": "Configuration et contenu",
+      "title": "En bref.",
+      "config": "Configuration",
+      "inGame": "Dans le jeu",
+      "publisher": "Éditeur",
+      "publisherValue": "Izacki",
+      "language": "Langue",
+      "controls": "Commandes",
+      "controlsValue": "Souris et clavier",
+      "night": "Durée d'une nuit",
+      "nightValue": "7 minutes",
+      "guardians": "Gardiens",
+      "relics": "Reliques",
+      "creatures": "Créatures",
+      "creaturesValue": "8, plus 2 boss",
+      "abyss": "Niveaux d'abysse",
+      "achievements": "Succès",
+      "save": "Sauvegarde",
+      "saveValue": "3 emplacements, sur ton ordinateur"
+    },
+    "news": {
+      "label": "Nouveautés",
+      "meta": "Notes de version",
+      "title": "Dernières versions."
+    },
+    "band": {
+      "title": "Installe le Launcher, puis lance VIGIE."
+    }
+  }
+}

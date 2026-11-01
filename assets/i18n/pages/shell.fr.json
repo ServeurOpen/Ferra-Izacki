@@ -14,6 +14,7 @@
       "games": "Jeux",
       "ferraSub": "Survie / automatisation",
       "tdSub": "Tower defense",
+      "vigieSub": "Roguelite / Survie",
       "creators": "Créateurs",
       "community": "Communauté",
       "forum": "Forum",
@@ -32,7 +33,7 @@
     "newTab": "(s'ouvre dans un nouvel onglet)",
     "ogAlt": "Izacki, studio de jeux indépendant : le Launcher, FERRA et Tower Défense Infini.",
     "footer": {
-      "blurb": "Studio de jeux indépendant. Deux jeux gratuits, le Launcher pour les installer, un forum et un Discord pour en parler.",
+      "blurb": "Studio de jeux indépendant. Trois jeux gratuits, le Launcher pour les installer, un forum et un Discord pour en parler.",
       "izacki": "Izacki",
       "home": "Accueil",
       "launcher": "Launcher",

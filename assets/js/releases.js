@@ -9,7 +9,7 @@
   var own = script && script.getAttribute('src');
   var prefix = own && /assets\/js\/releases\.js/.test(own) ? own.replace(/assets\/js\/releases\.js.*$/, '') : '';
   var SVG = 'http://www.w3.org/2000/svg';
-  var NAMES = { ferra: 'FERRA', 'tower-defense': 'Tower Défense Infini' };
+  var NAMES = { ferra: 'FERRA', 'tower-defense': 'Tower Défense Infini', vigie: 'VIGIE' };
   var dates = [];
 
   function lang() {
@@ -145,7 +145,7 @@
     if (latest && latest.version) {
       rows.push(releaseRow('Launcher Izacki', 'launcher.html', latest.version, isoDate(latest.pub_date), '', typeof latest.notes === 'string' ? latest.notes : ''));
     }
-    [['tower-defense', 'games/tower-defense.html'], ['ferra', 'games/ferra.html']].forEach(function (game) {
+    [['vigie', 'games/vigie.html'], ['tower-defense', 'games/tower-defense.html'], ['ferra', 'games/ferra.html']].forEach(function (game) {
       var version = manifest && manifest[game[0]];
       if (!version) return;
       var entry = entryFor(changelog, manifest, game[0]);

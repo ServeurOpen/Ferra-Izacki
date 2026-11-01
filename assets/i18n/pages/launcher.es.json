@@ -2,7 +2,7 @@
   "launcher": {
     "meta": {
       "title": "Launcher de juegos para Windows, gratis | Izacki",
-      "description": "El Launcher de Izacki instala, ejecuta y actualiza FERRA y Tower Défense Infini. Gratis, para Windows 10 y 11, con una cuenta Izacki gratuita."
+      "description": "El Launcher de Izacki instala, ejecuta y actualiza FERRA, Tower Défense Infini y VIGIE. Gratis, para Windows 10 y 11, con una cuenta Izacki gratuita."
     },
     "crumb": "Launcher",
     "hero": {
@@ -56,10 +56,11 @@
     },
     "games": {
       "label": "Juegos",
-      "meta": "Dos juegos, los dos gratuitos",
-      "title": "Dos juegos para instalar.",
+      "meta": "Tres juegos, todos gratuitos",
+      "title": "Tres juegos para instalar.",
       "ferraText": "Un mundo por reconstruir, una hoguera que proteger, un meteorito al que hacer frente. Extrae, automatiza, defiende tu campamento y prepárate para la noche.",
       "tdText": "Un tower defense contra oleadas de zombis sin fin: colocas torres a lo largo del camino y ves hasta dónde aguantas.",
+      "vigieText": "Un faro perdido en pleno mar, una lámpara, criaturas que salen de las olas: orienta el haz y aguanta hasta el amanecer.",
       "more": "Ver la ficha del juego"
     },
     "security": {

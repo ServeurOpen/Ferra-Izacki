@@ -1,0 +1,98 @@
+{
+  "vigiePage": {
+    "meta": {
+      "title": "VIGIE, roguelite de supervivencia | Izacki",
+      "description": "VIGIE es un roguelite de supervivencia gratuito para Windows: guarda un faro, orienta el haz y elige tus reliquias, noche tras noche.",
+      "imageAlt": "VIGIE, «Garde la lumière» (Guarda la luz): el faro y su haz de luz entre las criaturas del mar."
+    },
+    "hero": {
+      "lead": "Un faro perdido en pleno mar, una lámpara, criaturas que salen de las olas: orienta el haz y aguanta hasta el amanecer."
+    },
+    "play": {
+      "label": "Lo básico",
+      "meta": "Cómo se juega",
+      "title": "Guarda la luz.",
+      "p1": "Eres el guardián de un faro aislado. Cada noche dura siete minutos: criaturas salen del mar y se lanzan contra la luz. Tu arma es el haz de la lámpara: lo orientas con el ratón, lo concentras manteniendo el clic (consume energía) y lanzas una bengala para despejar los alrededores.",
+      "p2": "Cada criatura derrotada deja un resplandor. En cada nivel, una revelación te ofrece tres reliquias y solo te quedas con una. Hay 25, con sinergias: Prisme (Prisma: dos y luego tres haces), Écho (Eco), Phare jumeau (Faro gemelo), Chaleur (Calor), Givre (Escarcha), Foudre (Rayo), Phénix (Fénix)… Ninguna noche se parece a la anterior.",
+      "p3": "Ocho criaturas, ocho maneras de molestarte: el Rôdeur (Merodeador) embiste, el Voile (Velo) huye de la luz, la Méduse (Medusa) paraliza la lámpara, la Sirène (Sirena) te la arranca, el Crabe de pierre (Cangrejo de piedra) se aferra al faro y la Baudroie (Rape) protege a las demás. Al amanecer, un jefe: el Léviathan (Leviatán) en tres fases y, a partir de Abysse I (Abismo I), el Kraken con cuatro tentáculos. Hay eventos que marcan la noche: un banco de peces linterna, un eclipse, una luna llena y un naufragio que saquear.",
+      "p4": "Entre noche y noche, las esquirlas ganadas mejoran tu faro para siempre (12 mejoras). Cuatro guardianes con estilos distintos: Le Gardien (el Guardián), L'Horloger (el Relojero), L'Ermite (el Ermitaño), La Veuve (la Viuda). Nueve niveles de abismo para endurecer el mar, un desafío diario, 16 logros y tres espacios de guardado.",
+      "names": "Los nombres de las reliquias, las criaturas y los guardianes son los del juego, que está en francés."
+    },
+    "gallery": {
+      "label": "Capturas",
+      "meta": "Cuatro capturas del juego",
+      "title": "En juego.",
+      "menu": {
+        "alt": "Captura de VIGIE: el menú principal, con el faro al fondo.",
+        "cap": "El menú principal, con el faro al fondo."
+      },
+      "night": {
+        "alt": "Captura de VIGIE: una noche en curso, con el haz barriendo a las criaturas.",
+        "cap": "Una noche en curso: el haz barre a las criaturas."
+      },
+      "reveal": {
+        "alt": "Captura de VIGIE: la pantalla Révélation (Revelación), con tres reliquias entre las que elegir.",
+        "cap": "La pantalla Révélation (Revelación): tres reliquias entre las que elegir."
+      },
+      "boss": {
+        "alt": "Captura de VIGIE: el Léviathan, el jefe del final de la noche.",
+        "cap": "El Léviathan, el jefe del final de la noche."
+      }
+    },
+    "controls": {
+      "label": "Controles",
+      "meta": "Ratón y teclado",
+      "title": "Los controles.",
+      "regionLabel": "Tabla de controles",
+      "caption": "Los controles de VIGIE",
+      "colAction": "Acción",
+      "colKeys": "Control",
+      "aim": "Orientar el haz",
+      "aimKeys": "Ratón, o A/D o flechas",
+      "focus": "Concentrar el haz",
+      "focusKeys": "Clic izquierdo mantenido, o Mayús",
+      "flare": "Lanzar una bengala",
+      "flareKeys": "Espacio o clic derecho",
+      "pick": "Elegir una reliquia",
+      "pickKeys": "1, 2 o 3",
+      "reroll": "Volver a sortear las reliquias",
+      "rerollKeys": "R",
+      "pause": "Poner en pausa",
+      "pauseKeys": "Esc o P",
+      "mute": "Silenciar el sonido",
+      "muteKeys": "M",
+      "replay": "Volver a jugar",
+      "replayKeys": "Intro"
+    },
+    "info": {
+      "label": "Información",
+      "meta": "Requisitos y contenido",
+      "title": "En resumen.",
+      "config": "Requisitos",
+      "inGame": "En el juego",
+      "publisher": "Editor",
+      "publisherValue": "Izacki",
+      "language": "Idioma",
+      "controls": "Controles",
+      "controlsValue": "Ratón y teclado",
+      "night": "Duración de una noche",
+      "nightValue": "7 minutos",
+      "guardians": "Guardianes",
+      "relics": "Reliquias",
+      "creatures": "Criaturas",
+      "creaturesValue": "8, más 2 jefes",
+      "abyss": "Niveles de abismo",
+      "achievements": "Logros",
+      "save": "Guardado",
+      "saveValue": "3 espacios, en tu ordenador"
+    },
+    "news": {
+      "label": "Novedades",
+      "meta": "Notas de versión",
+      "title": "Últimas versiones."
+    },
+    "band": {
+      "title": "Instala el Launcher y lanza VIGIE."
+    }
+  }
+}

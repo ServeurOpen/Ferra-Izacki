@@ -1,0 +1,98 @@
+{
+  "vigiePage": {
+    "meta": {
+      "title": "VIGIE, survival roguelite | Izacki",
+      "description": "VIGIE is a free survival roguelite for Windows: keep a lighthouse, aim the beam and choose your relics, night after night.",
+      "imageAlt": "VIGIE, “Garde la lumière” (Keep the light): the lighthouse and its beam among the creatures of the sea."
+    },
+    "hero": {
+      "lead": "A lighthouse lost in the middle of the sea, a lamp, creatures rising from the waves: aim the beam and hold out until dawn."
+    },
+    "play": {
+      "label": "Basics",
+      "meta": "How it plays",
+      "title": "Keep the light.",
+      "p1": "You are the keeper of a remote lighthouse. Every night lasts seven minutes: creatures rise from the sea and throw themselves at the light. Your weapon is the beam of the lamp: you aim it with the mouse, focus it by holding the click (it uses energy) and fire a flare to clear the surroundings.",
+      "p2": "Every defeated creature leaves a glimmer. At each level, a revelation offers you three relics and you keep only one. There are 25 of them, with synergies: Prisme (Prism: two, then three beams), Écho (Echo), Phare jumeau (Twin Lighthouse), Chaleur (Heat), Givre (Frost), Foudre (Lightning), Phénix (Phoenix)… No two nights are alike.",
+      "p3": "Eight creatures, eight ways to get in your way: the Rôdeur (Prowler) charges, the Voile (Veil) flees the light, the Méduse (Jellyfish) freezes the lamp, the Sirène (Siren) snatches it away, the Crabe de pierre (Stone Crab) clings to the lighthouse, the Baudroie (Anglerfish) protects the others. At dawn, a boss: the Léviathan (Leviathan) in three phases, and, from Abysse I (Abyss I) onwards, the Kraken with four tentacles. Events punctuate the night: a school of lanternfish, an eclipse, a full moon, a wreck to plunder.",
+      "p4": "Between nights, the shards you earn upgrade your lighthouse for good (12 upgrades). Four guardians, each with a different style: Le Gardien (the Keeper), L'Horloger (the Clockmaker), L'Ermite (the Hermit), La Veuve (the Widow). Nine abyss levels to toughen up the sea, a daily challenge, 16 achievements and three save slots.",
+      "names": "The names of relics, creatures and guardians are those of the game, which is in French."
+    },
+    "gallery": {
+      "label": "Screenshots",
+      "meta": "Four screenshots of the game",
+      "title": "In play.",
+      "menu": {
+        "alt": "VIGIE screenshot: the main menu, with the lighthouse in the background.",
+        "cap": "The main menu, with the lighthouse in the background."
+      },
+      "night": {
+        "alt": "VIGIE screenshot: a night in progress, with the beam sweeping across the creatures.",
+        "cap": "A night in progress: the beam sweeps across the creatures."
+      },
+      "reveal": {
+        "alt": "VIGIE screenshot: the Révélation (Revelation) screen, with three relics to choose from.",
+        "cap": "The Révélation (Revelation) screen: three relics to choose from."
+      },
+      "boss": {
+        "alt": "VIGIE screenshot: the Léviathan, the end-of-night boss.",
+        "cap": "The Léviathan, the end-of-night boss."
+      }
+    },
+    "controls": {
+      "label": "Controls",
+      "meta": "Mouse and keyboard",
+      "title": "The controls.",
+      "regionLabel": "Table of controls",
+      "caption": "VIGIE controls",
+      "colAction": "Action",
+      "colKeys": "Control",
+      "aim": "Aim the beam",
+      "aimKeys": "Mouse, or A/D or arrow keys",
+      "focus": "Focus the beam",
+      "focusKeys": "Hold left click, or Shift",
+      "flare": "Fire a flare",
+      "flareKeys": "Space or right click",
+      "pick": "Choose a relic",
+      "pickKeys": "1, 2 or 3",
+      "reroll": "Reroll the choice of relics",
+      "rerollKeys": "R",
+      "pause": "Pause",
+      "pauseKeys": "Esc or P",
+      "mute": "Mute the sound",
+      "muteKeys": "M",
+      "replay": "Play again",
+      "replayKeys": "Enter"
+    },
+    "info": {
+      "label": "Info",
+      "meta": "Requirements and content",
+      "title": "At a glance.",
+      "config": "Requirements",
+      "inGame": "In the game",
+      "publisher": "Publisher",
+      "publisherValue": "Izacki",
+      "language": "Language",
+      "controls": "Controls",
+      "controlsValue": "Mouse and keyboard",
+      "night": "Length of a night",
+      "nightValue": "7 minutes",
+      "guardians": "Guardians",
+      "relics": "Relics",
+      "creatures": "Creatures",
+      "creaturesValue": "8, plus 2 bosses",
+      "abyss": "Abyss levels",
+      "achievements": "Achievements",
+      "save": "Saves",
+      "saveValue": "3 slots, on your computer"
+    },
+    "news": {
+      "label": "What's new",
+      "meta": "Release notes",
+      "title": "Latest versions."
+    },
+    "band": {
+      "title": "Install the Launcher, then play VIGIE."
+    }
+  }
+}

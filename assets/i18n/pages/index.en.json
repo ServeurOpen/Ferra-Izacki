@@ -2,14 +2,14 @@
   "index": {
     "meta": {
       "title": "Izacki, independent game studio",
-      "description": "Izacki is an independent game studio. FERRA and Tower Défense Infini are free, and the Launcher installs and updates them on Windows."
+      "description": "Izacki is an independent game studio. FERRA, Tower Défense Infini and VIGIE are free, and the Launcher installs and updates them on Windows."
     },
     "hero": {
       "kicker": "Independent game studio",
       "l1": "An independent studio.",
       "l2": "One Launcher.",
-      "l3": "Two free games.",
-      "lead": "Izacki is an independent game studio. FERRA and Tower Défense Infini are free: you install, launch and update them from the Launcher, on Windows.",
+      "l3": "Three free games.",
+      "lead": "Izacki is an independent game studio. FERRA, Tower Défense Infini and VIGIE are free: you install, launch and update them from the Launcher, on Windows.",
       "ctaGames": "See the games",
       "plateAlt": "The Boutique (store) screen of the Izacki Launcher: a featured game, then FERRA and Tower Défense Infini, with filters for all games, Izacki games, community games and free games.",
       "screen": "Boutique (Store)"
@@ -20,12 +20,14 @@
     },
     "games": {
       "label": "Games",
-      "meta": "Two games, both free",
-      "title": "Two games, two genres.",
+      "meta": "Three games, all free",
+      "title": "Three games, three genres.",
       "ferraAlt": "FERRA screenshot: a camp around the fire, with drills, furnaces, a house and street lamps.",
       "tdAlt": "Tower Défense Infini screenshot: the “Roi des Enfers” boss advances beneath its health bar during the “Éclipse” event on the “Chaos Total” map.",
       "ferraText": "A world to rebuild, a fire to protect, a meteorite to face. Mine, automate, defend your camp, and get ready for the night.",
       "tdText": "A tower defense against endless waves of zombies: you place towers along the road and see how long you can hold.",
+      "vigieAlt": "VIGIE screenshot: a night in progress, with the beam sweeping across the creatures.",
+      "vigieText": "A lighthouse lost in the middle of the sea, a lamp, creatures rising from the waves: aim the beam and hold out until dawn.",
       "more": "View the game page"
     },
     "launcher": {
@@ -93,7 +95,7 @@
       }
     },
     "band": {
-      "title": "Install the Launcher, then launch FERRA or Tower Défense Infini."
+      "title": "Install the Launcher, then launch FERRA, Tower Défense Infini or VIGIE."
     }
   }
 }

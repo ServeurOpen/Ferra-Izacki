@@ -95,11 +95,11 @@
     },
     "succes": {
       "q": "Mis logros no aparecen.",
-      "a": "<p>Los logros se sincronizan cuando el juego se inicia desde el Launcher con la sesión iniciada.</p>"
+      "a": "<p>Los logros de FERRA y de Tower Défense Infini se sincronizan cuando el juego se inicia desde el Launcher con la sesión iniciada. Los de VIGIE se quedan en tu ordenador.</p>"
     },
     "quitter": {
       "q": "¿Cómo salgo de un juego correctamente?",
-      "a": "<p>Pulsa <b>Esc</b> y elige <b>«Quitter le jeu»</b> (salir del juego). El guardado es automático, tanto en FERRA como en Tower Défense Infini.</p>"
+      "a": "<p>Pulsa <b>Esc</b> y elige <b>«Quitter le jeu»</b> (salir del juego). El guardado es automático, en FERRA, Tower Défense Infini y VIGIE.</p>"
     },
     "desinstaller": {
       "q": "¿Cómo desinstalo un juego?",
@@ -107,7 +107,7 @@
     },
     "payants": {
       "q": "¿Los juegos son de pago?",
-      "a": "<p>FERRA y Tower Défense Infini son gratuitos. Los juegos de la comunidad tienen un precio en créditos, a veces cero.</p>"
+      "a": "<p>FERRA, Tower Défense Infini y VIGIE son gratuitos. Los juegos de la comunidad tienen un precio en créditos, a veces cero.</p>"
     },
     "majJeu": {
       "q": "¿Cómo sé si un juego tiene una actualización?",

@@ -11,11 +11,12 @@
     },
     "next": {
       "label": "Ensuite",
-      "meta": "Les deux jeux",
+      "meta": "Les trois jeux",
       "title": "Installe le Launcher, puis un jeu.",
       "see": "Voir la fiche du jeu",
       "ferra": "Un jeu de survie et d'automatisation\u00a0: protège ton feu de camp, automatise ta production et prépare-toi à la météorite.",
-      "td": "Un jeu de tower defense\u00a0: des vagues qui s'enchaînent, dix tours à améliorer et à combiner, et un système de prestige."
+      "td": "Un jeu de tower defense\u00a0: des vagues qui s'enchaînent, dix tours à améliorer et à combiner, et un système de prestige.",
+      "vigie": "Un roguelite de survie\u00a0: tu gardes un phare pendant des nuits de sept minutes, tu orientes le faisceau et tu choisis tes reliques."
     }
   }
 }
