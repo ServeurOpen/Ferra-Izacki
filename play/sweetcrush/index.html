@@ -17,7 +17,7 @@
   html, body { margin:0; position:fixed; inset:0; width:100%; height:100%; overflow:hidden; user-select:none; -webkit-user-select:none; -webkit-touch-callout:none; overscroll-behavior:none; touch-action:none;
     font-family:'Trebuchet MS','Segoe UI',Arial,sans-serif; color:#fff;
     background: radial-gradient(circle at 50% 0%, #ff8ad8 0%, #b04cff 45%, #3a1a7a 100%); }
-  #stage { position:absolute; left:50%; top:50%; width:640px; height:860px;
+  #stage { position:absolute; left:50%; top:50%; width:640px; height:900px;
     transform-origin:center center; }
   .screen { position:absolute; inset:0; display:none; flex-direction:column; align-items:center; }
   .screen.on { display:flex; }
@@ -38,29 +38,52 @@
   .panel { background:rgba(40,10,80,.55); border:3px solid rgba(255,255,255,.35); border-radius:22px;
     padding:14px 22px; backdrop-filter: blur(4px); }
   h2 { margin:26px 0 8px; font-size:44px; text-shadow:0 4px 0 #8a1450; }
-  #levelGrid { display:grid; grid-template-columns:repeat(5,92px); gap:14px; margin:14px 0; }
-  .lv { width:92px; height:100px; border-radius:20px; border:0; font:inherit; color:#fff; cursor:pointer;
+  #levelGrid { display:grid; grid-template-columns:repeat(5,100px); gap:10px; margin:14px 0; }
+  .lv { width:100px; height:108px; border-radius:20px; border:0; font:inherit; color:#fff; cursor:pointer;
     background:linear-gradient(#ff9bd8,#d6379a); box-shadow:0 5px 0 #86175c; font-size:30px; font-weight:800; position:relative; }
   .lv:hover { filter:brightness(1.12); }
   .lv.locked { background:linear-gradient(#8a7aa8,#5d4f78); box-shadow:0 5px 0 #3a2f50; cursor:default; opacity:.7; }
-  .lv .st { position:absolute; bottom:6px; left:0; right:0; font-size:15px; letter-spacing:1px; color:#ffe14d; text-shadow:0 1px 0 #7a4a00; }
+  .lv .st { position:absolute; bottom:2px; left:0; right:0; font-size:17px; letter-spacing:1px; color:#ffe14d; text-shadow:0 1px 0 #7a4a00; }
   .lv .st i { color:rgba(255,255,255,.35); font-style:normal; }
   #hud { width:600px; margin-top:16px; display:grid; grid-template-columns:1fr 1.4fr 1fr; gap:12px; align-items:stretch; }
   .hbox { text-align:center; padding:8px 6px; }
   .hbox .lab { font-size:14px; opacity:.85; letter-spacing:1px; text-transform:uppercase; }
   .hbox .val { font-size:36px; font-weight:900; text-shadow:0 3px 0 rgba(0,0,0,.35); line-height:1.1; }
-  #goalIcon { width:34px; height:34px; vertical-align:middle; margin-right:6px; }
-  #goalTxt { font-size:24px; font-weight:800; }
+  #goals { font-size:19px; line-height:1.25; font-weight:800; }
+  #goals .g { display:block; white-space:nowrap; }
+  #goals img { width:24px; height:24px; vertical-align:middle; margin-right:4px; }
   #barWrap { width:600px; margin:12px 0 4px; height:16px; border-radius:10px; background:rgba(0,0,0,.35); overflow:hidden; }
   #bar { height:100%; width:0%; background:linear-gradient(90deg,#ffe14d,#ff7ac6); transition:width .3s; }
   #starMarks { width:600px; position:relative; height:18px; font-size:15px; color:#ffe14d; }
-  #boardWrap { position:relative; width:576px; height:576px; margin-top:6px; border-radius:20px;
+  #boardWrap { position:relative; width:512px; height:512px; margin-top:6px; border-radius:20px;
     background:rgba(30,6,70,.55); box-shadow:0 0 0 6px rgba(255,255,255,.3), 0 14px 30px rgba(0,0,0,.45); }
-  #board { position:absolute; inset:0; width:576px; height:576px; touch-action:none; border-radius:20px; }
+  #board { position:absolute; inset:0; width:512px; height:512px; touch-action:none; border-radius:20px; }
   #msg { position:absolute; left:0; right:0; top:48%; text-align:center; font-size:54px; font-weight:900;
     text-shadow:0 5px 0 #8a1450, 0 10px 22px rgba(0,0,0,.5); pointer-events:none; opacity:0; transition:opacity .25s, transform .25s; transform:scale(.6); }
   #msg.on { opacity:1; transform:scale(1); }
   #gameBtns { margin-top:14px; display:flex; gap:10px; }
+  #logoImg { width:540px; margin:56px 0 0; filter:drop-shadow(0 10px 14px rgba(0,0,0,.35)); animation: floaty 3.2s ease-in-out infinite; z-index:2; }
+  @keyframes floaty { 50% { transform:translateY(-8px) rotate(-1deg); } }
+  #frameImg { display:none; position:absolute; left:-94px; top:-94px; width:700px; height:700px; pointer-events:none; z-index:3; }
+  body.sk-board-frame #frameImg { display:block; }
+  body.sk-board-frame #boardWrap { margin-top:98px; box-shadow:none; }
+  body.sk-board-frame #gameBtns { position:absolute; bottom:6px; left:0; right:0; justify-content:center; margin:0; }
+  body.sk-btn-pink .btn { background:url(assets/btn-pink.png) center/100% 100% no-repeat; box-shadow:none; border-radius:0; min-height:84px; text-shadow:0 3px 0 rgba(0,0,0,.4); }
+  body.sk-btn-blue .btn.alt { background:url(assets/btn-blue.png) center/100% 100% no-repeat; }
+  body.sk-btn-green .btn.green { background:url(assets/btn-green.png) center/100% 100% no-repeat; }
+  body.sk-btn-pink .btn:active { box-shadow:none; filter:brightness(.92); }
+  body.sk-btn-pink .btn.small { min-height:56px; padding:4px 22px; }
+  body.sk-panel .card { background:url(assets/panel.png) center/100% 100% no-repeat; border:0; box-shadow:none; width:540px; padding:64px 70px 58px; }
+  body.sk-level-btn .lv { background:url(assets/level-btn.png) center/100% 100% no-repeat; box-shadow:none; border-radius:0; text-shadow:0 2px 0 rgba(0,0,0,.35); }
+  body.sk-level-btn-locked .lv.locked { background:url(assets/level-btn-locked.png) center/100% 100% no-repeat; opacity:.9; }
+  .lv img.lk { width:40px; margin-top:6px; }
+  .ic { width:22px; height:22px; vertical-align:middle; margin-right:4px; }
+  .hbox .lab .ic { width:20px; height:20px; }
+  #msg.banner { left:50%; right:auto; width:480px; margin-left:-240px; top:40%; height:180px; line-height:160px; font-size:42px; background-size:contain; background-repeat:no-repeat; background-position:center; z-index:5; }
+  .badgewrap { position:relative; width:380px; height:190px; margin:-92px auto 0; }
+  .badgewrap img { width:100%; height:100%; display:block; }
+  .badgewrap h3 { position:absolute; left:0; right:0; top:50%; transform:translateY(-58%); margin:0; font-size:34px; color:#fff; text-shadow:0 3px 0 #a3125e, 0 0 10px rgba(163,18,94,.6); }
+  .stars img { width:84px; height:84px; margin:0 2px; }
   .modal { position:absolute; inset:0; background:rgba(20,4,50,.7); display:none; align-items:center; justify-content:center; z-index:10; }
   .modal.on { display:flex; }
   .card { width:480px; text-align:center; padding:26px 30px 22px; border-radius:30px;
@@ -84,13 +107,15 @@
 
   <!-- TITRE -->
   <div id="sTitle" class="screen on">
-    <canvas id="titleCanvas" width="640" height="860"></canvas>
-    <h1 class="logo">SWEET<small>CRUSH</small></h1>
+    <canvas id="titleCanvas" width="640" height="900"></canvas>
+    <img id="logoImg" src="assets/logo.png" alt="Sweet Crush" onerror="this.style.display='none';document.getElementById('logoTxt').style.display='block'">
+    <h1 class="logo" id="logoTxt" style="display:none">SWEET<small>CRUSH</small></h1>
     <div id="titleBtns">
       <button class="btn green" id="bPlay">Jouer</button>
       <button class="btn alt" id="bLevels">Niveaux</button>
       <button class="btn alt" id="bAch">Succès</button>
       <button class="btn" id="bOpt">Options</button>
+      <button class="btn alt small" id="bCred">Crédits</button>
     </div>
   </div>
 
@@ -106,12 +131,12 @@
   <div id="sGame" class="screen">
     <div id="hud">
       <div class="panel hbox"><div class="lab">Niveau</div><div class="val" id="hLevel">1</div></div>
-      <div class="panel hbox"><div class="lab">Objectif</div><div class="val"><img id="goalIcon" alt=""><span id="goalTxt"></span></div></div>
-      <div class="panel hbox"><div class="lab">Coups</div><div class="val" id="hMoves">0</div></div>
+      <div class="panel hbox"><div class="lab"><img class="ic" src="assets/icon-score.png" onerror="this.remove()">Objectif</div><div class="val" id="goals"></div></div>
+      <div class="panel hbox"><div class="lab"><img class="ic" src="assets/icon-moves.png" onerror="this.remove()">Coups</div><div class="val" id="hMoves">0</div></div>
     </div>
     <div id="barWrap"><div id="bar"></div></div>
     <div id="starMarks"></div>
-    <div id="boardWrap"><canvas id="board" width="576" height="576"></canvas><div id="msg"></div></div>
+    <div id="boardWrap"><canvas id="board" width="512" height="512"></canvas><img id="frameImg" src="assets/board-frame.png" alt=""><div id="msg"></div></div>
     <div id="gameBtns">
       <button class="btn small alt" id="bPause">⏸ Pause</button>
       <button class="btn small" id="bHint">💡 Indice</button>
@@ -125,7 +150,7 @@
     <button class="btn" id="pRetry">Recommencer</button><br>
     <button class="btn alt" id="pMenu">Niveaux</button></div></div>
 
-  <div id="mEnd" class="modal"><div class="card"><h3 id="eTitle"></h3>
+  <div id="mEnd" class="modal"><div class="card"><div class="badgewrap"><img id="eBadge" alt="" onerror="this.style.display='none'"><h3 id="eTitle"></h3></div>
     <div class="stars" id="eStars"></div>
     <p id="eText"></p>
     <button class="btn green" id="eNext">Niveau suivant</button><br>
@@ -137,6 +162,15 @@
     <div class="opt"><span>Effets de particules</span><button class="btn small" id="oFx"></button></div>
     <div class="opt"><span>Progression</span><button class="btn small alt" id="oReset">Réinitialiser</button></div>
     <button class="btn green" id="oClose">Fermer</button></div></div>
+
+  <div id="mCred" class="modal"><div class="card"><h3>Crédits</h3>
+    <p style="font-size:15px;letter-spacing:3px;text-transform:uppercase;color:#ffe14d">Un jeu Izacki</p>
+    <div style="text-align:left;font-size:18px;line-height:1.5">
+      <p><b>Création &amp; développement</b><br>Izacki</p>
+      <p><b>Assets (visuels)</b><br>Générés par l'entreprise Ferra</p>
+      <p><b>Sons</b><br>Synthétisés en direct par le jeu, sans fichier audio</p>
+    </div>
+    <button class="btn green" id="cClose" style="margin-top:10px">Fermer</button></div></div>
 
   <div id="mAch" class="modal"><div class="card"><h3>Succès</h3>
     <div id="achList"></div>
@@ -158,8 +192,9 @@ if (window.__TAURI__) { document.write('<script src="izacki-cloud.js"><' + '/scr
 const GAME_ID = "sweet-crush";
 const SAVE_KEY = "sweetcrush_save_v1";
 const N = 8;            // taille de la grille
-const CELL = 72;        // taille d'une case (px logiques)
-const LEVEL_COUNT = 40;
+const CELL = 64;        // taille d'une case (px logiques)
+const BOARD = N * CELL; // côté du plateau (px logiques)
+const LEVEL_COUNT = 60;
 
 /* ---------- Bonbons : couleurs et formes ---------- */
 const COLORS = [
@@ -174,7 +209,7 @@ const S_NONE = 0, S_ROW = 1, S_COL = 2, S_WRAP = 3, S_BOMB = 4;
 
 /* ---------- Sauvegarde ---------- */
 const defaultSave = () => ({ unlocked:1, stars:{}, best:{}, sound:true, fx:true,
-  stats:{ wins:0, cleared:0, specials:0, bombs:0, wraps:0, maxCombo:0, played:0 }, ach:{} });
+  stats:{ cherries:0, wins:0, cleared:0, specials:0, bombs:0, wraps:0, maxCombo:0, played:0 }, ach:{} });
 let save = defaultSave();
 function loadSave() {
   try {
@@ -198,7 +233,9 @@ const ACHIEVEMENTS = [
   { id:"three_stars", name:"Perfection",           description:"Obtiens 3 étoiles sur un niveau.", icon:"⭐", tier:"silver" },
   { id:"lvl10",       name:"Confiseur confirmé",   description:"Termine les 10 premiers niveaux.", icon:"🍰", tier:"silver" },
   { id:"lvl20",       name:"Maître pâtissier",     description:"Termine 20 niveaux.", icon:"🎂", tier:"gold" },
-  { id:"lvl40",       name:"Roi du sucre",         description:"Termine les 40 niveaux.", icon:"👑", tier:"platinum" },
+  { id:"lvl40",       name:"Grand confiseur",      description:"Termine 40 niveaux.", icon:"🧁", tier:"gold" },
+  { id:"lvl60",       name:"Roi du sucre",         description:"Termine les 60 niveaux.", icon:"👑", tier:"platinum" },
+  { id:"cherry",      name:"Cueilleur de cerises", description:"Fais descendre 20 cerises au total.", icon:"🍒", tier:"silver" },
 ];
 try { window.izackiRegisterCatalog && window.izackiRegisterCatalog(GAME_ID, ACHIEVEMENTS); } catch (e) {}
 function unlock(id) {
@@ -212,9 +249,11 @@ function unlock(id) {
 }
 
 /* ---------- Niveaux ---------- */
+/* Réglages calibrés par simulation (moves, target, count, s2, s3 par index de niveau) — voir LISEZ_MOI_IA.md */
+const TUNED = {"0":{"target":1000,"s2":5050,"s3":6500},"1":{"moves":17,"count":18,"s2":2450,"s3":3250},"2":{"moves":23,"s2":3050,"s3":3850},"3":{"moves":29,"count":2,"s2":4100,"s3":5600},"4":{"moves":17,"count":4,"s2":1950,"s3":2600},"5":{"moves":23,"target":1075,"s2":4200,"s3":6350},"6":{"target":3350,"s2":5200,"s3":7550},"7":{"moves":17,"count":22,"s2":2800,"s3":3350},"8":{"moves":32,"s2":4850,"s3":6000},"9":{"moves":28,"count":2,"s2":4200,"s3":6200},"10":{"moves":18,"count":6,"s2":2450,"s3":3000},"11":{"moves":32,"target":1285,"s2":5650,"s3":7450},"12":{"target":3150,"s2":4500,"s3":6500},"13":{"moves":18,"count":26,"s2":2750,"s3":3900},"14":{"moves":32,"s2":4950,"s3":6200},"15":{"moves":28,"count":2,"s2":4400,"s3":5500},"16":{"moves":18,"count":7,"s2":2850,"s3":3650},"17":{"moves":30,"target":1495,"s2":5000,"s3":7400},"18":{"target":3950,"s2":5050,"s3":6850},"19":{"moves":18,"count":26,"s2":2750,"s3":3300},"20":{"moves":28,"s2":4400,"s3":6850},"21":{"moves":28,"count":2,"s2":3800,"s3":5550},"22":{"moves":18,"count":8,"s2":2500,"s3":3550},"23":{"moves":27,"target":1705,"s2":5200,"s3":7900},"24":{"target":3100,"s2":4800,"s3":7350},"25":{"moves":17,"count":26,"s2":2750,"s3":3550},"26":{"moves":25,"s2":3950,"s3":4850},"27":{"moves":27,"count":3,"s2":4400,"s3":5650},"28":{"moves":17,"count":8,"s2":2850,"s3":3650},"29":{"moves":21,"target":1915,"s2":3950,"s3":4900},"30":{"target":3000,"s2":4200,"s3":6700},"31":{"moves":17,"count":26,"s2":2900,"s3":3900},"32":{"moves":27,"s2":4600,"s3":5700},"33":{"moves":27,"count":3,"s2":3700,"s3":6100},"34":{"moves":17,"count":8,"s2":2500,"s3":3500},"35":{"moves":27,"target":2125,"s2":3900,"s3":6450},"36":{"target":2850,"s2":4250,"s3":6100},"37":{"moves":18,"count":26,"s2":3000,"s3":3650},"38":{"moves":32,"s2":5450,"s3":6550},"39":{"moves":26,"count":3,"s2":3900,"s3":4700},"40":{"moves":18,"count":8,"s2":2900,"s3":3500},"41":{"moves":30,"target":2335,"s2":5350,"s3":8850},"42":{"target":3650,"s2":4450,"s3":6150},"43":{"moves":18,"count":26,"s2":2600,"s3":3450},"44":{"moves":18,"s2":2900,"s3":4150},"45":{"moves":26,"count":3,"s2":4100,"s3":5000},"46":{"moves":18,"count":8,"s2":2800,"s3":3400},"47":{"moves":18,"target":2545,"s2":3650,"s3":4900},"48":{"target":3350,"s2":4750,"s3":6900},"49":{"moves":18,"count":28,"s2":2550,"s3":3400},"50":{"moves":32,"s2":5300,"s3":7000},"51":{"moves":26,"count":3,"s2":4050,"s3":5900},"52":{"moves":17,"count":8,"s2":2500,"s3":3500},"53":{"moves":27,"target":2755,"s2":4700,"s3":5650},"54":{"target":2700,"s2":3550,"s3":6050},"55":{"moves":17,"count":30,"s2":2750,"s3":3850},"56":{"moves":31,"s2":5850,"s3":7850},"57":{"moves":27,"count":2,"s2":3850,"s3":4900},"58":{"moves":17,"count":8,"s2":2950,"s3":3700},"59":{"moves":25,"target":2965,"s2":6350,"s3":9000}};
+const CYCLE = ["score","collect","jelly","drop","special","mix"];
 function makeLevels() {
   const patterns = [
-    () => [],
     (r,c) => r>=2 && r<=5 && c>=2 && c<=5,
     (r,c) => r===0||r===N-1||c===0||c===N-1,
     (r,c) => (r+c)%2===0,
@@ -223,20 +262,21 @@ function makeLevels() {
     (r,c) => r%2===1,
     (r,c) => c<2 || c>5,
   ];
+  const jellyOf = (p, dbl) => { const a=[]; for (let r=0;r<N;r++) for (let c=0;c<N;c++) if (p(r,c)) a.push([r,c, dbl && (r+c)%3===0 ? 2 : 1]); return a; };
   const out = [];
   for (let i = 0; i < LEVEL_COUNT; i++) {
-    const kind = i === 0 ? "score" : ["score","jelly","collect"][i % 3];
-    const types = i < 2 ? 4 : (i < 22 ? 5 : 6);
-    const moves = Math.max(20, 28 - Math.floor(i * 0.2));
-    const L = { n:i+1, kind, types, moves };
-    if (kind === "score") { L.target = 1000 + i * 45; L.starScores = [L.target, Math.round(L.target*1.5), Math.round(L.target*2.1)]; }
-    if (kind === "jelly") {
-      const p = patterns[1 + (Math.floor(i/3) % (patterns.length-1))];
-      L.jelly = []; const dbl = i >= 15;
-      for (let r=0;r<N;r++) for (let c=0;c<N;c++) if (p(r,c)) L.jelly.push([r,c, dbl && (r+c)%3===0 ? 2 : 1]);
-      L.moves += 3;
-    }
-    if (kind === "collect") { L.ctype = (i*2) % types; L.count = Math.min(32, 12 + Math.floor(i/3)*2); L.moves += 2; }
+    const d = i / (LEVEL_COUNT - 1), kind = CYCLE[i % 6], T = TUNED[i] || {};
+    const types = 5;
+    const L = { n:i+1, kind, types, moves: Math.round(25 - d*4), goals:[] };
+    const pat = patterns[Math.floor(i/6) % patterns.length];
+    if (kind === "score") L.goals.push({ k:"score", target: T.target || (1000 + i*40) });
+    if (kind === "collect") { L.goals.push({ k:"collect", t:(i*2)%types, count: T.count || Math.min(30, 12 + Math.floor(i/6)*2) }); L.moves += 2; }
+    if (kind === "jelly") { L.goals.push({ k:"jelly" }); L.jelly = jellyOf(pat, i >= 42); L.moves += 4; }
+    if (kind === "drop") { const n = T.count || Math.min(6, 2 + Math.floor(i/12)); L.goals.push({ k:"drop", count:n }); L.dropMax = n; L.moves += 4; }
+    if (kind === "special") { L.goals.push({ k:"special", count: T.count || (3 + Math.floor(i/12)) }); }
+    if (kind === "mix") { L.goals.push({ k:"jelly" }); L.goals.push({ k:"score", target: T.target || (900 + i*35) }); L.jelly = jellyOf(pat, false); L.moves += 4; }
+    if (T.moves) L.moves = T.moves;
+    L.stars = [T.s2 || (1500 + i*60), T.s3 || (2400 + i*100)];
     out.push(L);
   }
   return out;
@@ -246,7 +286,7 @@ const LEVELS = makeLevels();
 /* ---------- Utilitaires ---------- */
 const $ = id => document.getElementById(id);
 let TS = 1; /* échelle de temps (1 = normal ; sert aux tests automatiques) */
-const sleep = ms => new Promise(r => setTimeout(r, ms / TS));
+const sleep = ms => SIM ? Promise.resolve() : new Promise(r => setTimeout(r, ms / TS));
 const rnd = n => Math.floor(Math.random() * n);
 const key = (r,c) => r*N + c;
 const inb = (r,c) => r>=0 && c>=0 && r<N && c<N;
@@ -281,18 +321,41 @@ function sfx(name, p) {
 /* ---------- Images optionnelles (assets/*.png) : si un fichier existe il remplace le dessin en code ---------- */
 const CNAMES = ["rouge","orange","jaune","vert","bleu","violet"];
 const IMG = {};
-function loadImg(name) { const i = new Image(); i.onload = () => { IMG[name] = i; if (name==="bg-menu") setBg(name); }; i.onerror = () => {}; i.src = "assets/" + name + ".png"; }
-function setBg(name) { document.body.style.background = "url(assets/"+name+".png) center/cover no-repeat, #3a1a7a"; }
-["bomb","tile-a","tile-b","jelly-1","jelly-2","bg-menu","bg-game-1","bg-game-2","bg-game-3"].forEach(loadImg);
+function loadImg(name) { const i = new Image(); i.onload = () => { IMG[name] = i; }; i.onerror = () => {}; i.src = "assets/" + name + ".png"; }
+function setBg(name) { if (BGURL[name]) document.body.style.background = "url(" + BGURL[name] + ") center/cover no-repeat, #3a1a7a"; }
+["bomb","cherry","tile-a","tile-b","jelly-1","jelly-2","sparkle","burst","fx-stripe-h","fx-stripe-v","fx-wrap","fx-bomb","fx-combo-1","fx-combo-2","fx-combo-3","fx-combo-4"].forEach(loadImg);
+["btn-pink","btn-blue","btn-green","panel","level-btn","level-btn-locked","board-frame"].forEach(n => { const i = new Image(); i.onload = () => document.body.classList.add("sk-" + n); i.src = "assets/" + n + ".png"; });
+const BGURL = {};
+function loadBg(name) {
+  const i = new Image();
+  i.onload = () => { BGURL[name] = i.src; IMG[name] = true; if (name === "bg-menu" && !$("sGame").classList.contains("on")) setBg(name); };
+  i.onerror = () => { if (!i.dataset.png) { i.dataset.png = 1; i.src = "assets/" + name + ".png"; } };
+  i.src = "assets/" + name + ".jpg";
+}
+["bg-menu","bg-game-1","bg-game-2","bg-game-3"].forEach(loadBg);
 CNAMES.forEach((c,i) => { loadImg("candy-"+i+"-"+c); loadImg("stripe-h-"+c); loadImg("stripe-v-"+c); loadImg("wrap-"+c); });
 function spriteFor(type, special) {
   if (special === S_BOMB) return IMG["bomb"];
+  if (type === -2) return IMG["cherry"];
   if (type < 0) return null;
   const c = CNAMES[type];
   if (special === S_ROW) return IMG["stripe-h-"+c];
   if (special === S_COL) return IMG["stripe-v-"+c];
   if (special === S_WRAP) return IMG["wrap-"+c];
   return IMG["candy-"+type+"-"+c];
+}
+
+function drawCherry(g, size) {
+  const r = size * .2;
+  g.lineCap = "round"; g.strokeStyle = "#3b8a2e"; g.lineWidth = 4;
+  g.beginPath(); g.moveTo(-r*1.1, r*.7); g.quadraticCurveTo(-r*.3, -r*2.2, r*.9, -r*2.5); g.stroke();
+  g.beginPath(); g.moveTo(r*1.1, r*.8); g.quadraticCurveTo(r*.9, -r*1.6, r*.9, -r*2.5); g.stroke();
+  g.fillStyle = "#4caf3c"; g.beginPath(); g.ellipse(r*1.5, -r*2.4, r*.9, r*.45, -.3, 0, Math.PI*2); g.fill();
+  for (const [x,y] of [[-r*1.1, r*.8],[r*1.1, r*.9]]) {
+    const gr = g.createRadialGradient(x-r*.3, y-r*.4, r*.1, x, y, r*1.15); gr.addColorStop(0,"#ff7b8f"); gr.addColorStop(1,"#c2002e");
+    g.fillStyle = gr; g.beginPath(); g.arc(x,y,r*1.15,0,Math.PI*2); g.fill(); g.lineWidth=3; g.strokeStyle="rgba(0,0,0,.3)"; g.stroke();
+    g.fillStyle="rgba(255,255,255,.6)"; g.beginPath(); g.ellipse(x-r*.4,y-r*.45,r*.3,r*.17,-.7,0,Math.PI*2); g.fill();
+  }
 }
 
 /* ---------- Dessin d'un bonbon ---------- */
@@ -313,6 +376,7 @@ function rr(g,x,y,w,h,r){ g.moveTo(x+r,y); g.arcTo(x+w,y,x+w,y+h,r); g.arcTo(x+w
 
 function drawCandy(g, cx, cy, size, type, special, scale=1, alpha=1, t=0) {
   g.save(); g.translate(cx, cy); g.scale(scale, scale); g.globalAlpha = alpha;
+  if (type === -2 && !IMG['cherry']) { drawCherry(g, size); g.restore(); return; }
   const spr = spriteFor(type, special);
   if (spr) { const d = size * .92; g.drawImage(spr, -d/2, -d/2, d, d); g.restore(); return; }
   const r = size * .38;
@@ -364,16 +428,22 @@ const cv = $("board"), ctx = cv.getContext("2d");
 let grid = [];            // grid[r][c] = candy | null
 let jelly = [];           // jelly[r][c] = 0..2
 let level = null, levelIdx = 0;
-let score = 0, moves = 0, collected = 0, jellyLeft = 0;
+let score = 0, moves = 0, collected = 0, jellyLeft = 0, dropped = 0, dropSpawned = 0, specialsMade = 0;
+let SIM = false; /* mode simulation (tests/calibrage) : aucune animation, aucune attente */
 let busy = false, paused = false, ended = false;
 let selected = null, hintCells = null, idleTimer = 0;
-let particles = [], floats = [], shake = 0, tAnim = 0;
+let particles = [], floats = [], effects = [], shake = 0, tAnim = 0;
 let moveStats = null;
 
 function newCandy(r, c, type, special=0, fromRow=null) {
   return { t:type, s:special, x:c, y: fromRow===null ? r : fromRow, vy:0, fall: fromRow!==null, pop:0 };
 }
 function randType() { return rnd(level.types); }
+function cherriesOnBoard() { let n=0; for (let r=0;r<N;r++) for (let c=0;c<N;c++) if (grid[r][c] && grid[r][c].t===-2) n++; return n; }
+function fillType() {
+  if (level.dropMax && dropSpawned < level.dropMax && cherriesOnBoard() < 3 && Math.random() < 0.1) { dropSpawned++; return -2; }
+  return randType();
+}
 
 function initBoard() {
   grid = []; jelly = [];
@@ -386,6 +456,7 @@ function initBoard() {
   }
   jellyLeft = 0;
   if (level.jelly) for (const [r,c,l] of level.jelly) { jelly[r][c] = l; jellyLeft++; }
+  if (level.dropMax) { const cols=[0,1,2,3,4,5,6,7].sort(()=>Math.random()-.5).slice(0, Math.min(3, level.dropMax)); for (const c of cols) { grid[3][c] = newCandy(3,c,-2); dropSpawned++; } }
   if (!findMove()) shuffleBoard(true);
 }
 
@@ -468,12 +539,12 @@ function effectCells(r, c, cd, ctxInfo) {
 /* ---------- Destruction d'un ensemble de cases ---------- */
 async function clearSet(initial, spawns, combo, ctxInfo) {
   const all = new Map(); const queue = [];
-  const add = (r,c) => { if(!inb(r,c)) return; const k=key(r,c); if(!all.has(k)) { all.set(k,[r,c]); if (grid[r][c] && grid[r][c].s>0) queue.push([r,c]); } };
+  const add = (r,c) => { if(!inb(r,c)) return; if (grid[r][c] && grid[r][c].t===-2) return; const k=key(r,c); if(!all.has(k)) { all.set(k,[r,c]); if (grid[r][c] && grid[r][c].s>0) queue.push([r,c]); } };
   for (const k of initial) add(Math.floor(k/N), k%N);
   let hadSpecial = false, hadBomb = false;
   while (queue.length) {
     const [r,c] = queue.shift(); const cd = grid[r][c]; if (!cd) continue;
-    hadSpecial = true; if (cd.s===S_BOMB) hadBomb = true;
+    hadSpecial = true; if (cd.s===S_BOMB) hadBomb = true; addFx(cd.s, r, c);
     const info = (ctxInfo && ctxInfo.forced && ctxInfo.forced.has(key(r,c))) ? ctxInfo.forced.get(key(r,c)) : null;
     for (const [y,x] of effectCells(r,c,cd,info || {})) add(y,x);
   }
@@ -486,7 +557,7 @@ async function clearSet(initial, spawns, combo, ctxInfo) {
   for (const [r,c] of all.values()) {
     const cd = grid[r][c];
     if (cd) {
-      if (cd.t >= 0 && level.kind==="collect" && cd.t===level.ctype) collected++;
+      if (cd.t >= 0) { const gc = level.goals.find(g=>g.k==="collect"); if (gc && cd.t===gc.t) collected++; }
       burst(c, r, cd);
       grid[r][c] = null; save.stats.cleared++;
     }
@@ -498,7 +569,7 @@ async function clearSet(initial, spawns, combo, ctxInfo) {
   await sleep(200);
   for (const sp of spawns || []) {
     const cd = newCandy(sp.r, sp.c, sp.s===S_BOMB ? -1 : sp.t, sp.s); cd.pop = 1; grid[sp.r][sp.c] = cd;
-    save.stats.specials++;
+    save.stats.specials++; specialsMade++; addFx(-1, sp.r, sp.c);
     if (sp.s===S_ROW||sp.s===S_COL) unlock("stripe");
     if (sp.s===S_WRAP) { unlock("wrapped"); save.stats.wraps++; }
     if (sp.s===S_BOMB) { unlock("bomb"); save.stats.bombs++; }
@@ -508,19 +579,28 @@ async function clearSet(initial, spawns, combo, ctxInfo) {
 
 /* ---------- Gravité & remplissage ---------- */
 async function gravity() {
-  for (let c=0;c<N;c++) {
-    let w = N-1;
-    for (let r=N-1;r>=0;r--) if (grid[r][c]) { const cd=grid[r][c]; if (w!==r){ grid[w][c]=cd; grid[r][c]=null; cd.fall=true; } w--; }
-    let k = 0;
-    for (let r=w;r>=0;r--) { grid[r][c] = newCandy(r,c,randType(), 0, -1 - k); k++; }
+  for (;;) {
+    for (let c=0;c<N;c++) {
+      let w = N-1;
+      for (let r=N-1;r>=0;r--) if (grid[r][c]) { const cd=grid[r][c]; if (w!==r){ grid[w][c]=cd; grid[r][c]=null; cd.fall=true; } w--; }
+      let k = 0;
+      for (let r=w;r>=0;r--) { grid[r][c] = newCandy(r,c,fillType(), 0, -1 - k); k++; }
+    }
+    await settle();
+    let got = 0;
+    for (let c=0;c<N;c++) { const d = grid[N-1][c]; if (d && d.t===-2) { burst(c, N-1, { t:0 }); grid[N-1][c] = null; dropped++; save.stats.cherries++; got++; } }
+    if (!got) break;
+    sfx("special"); if (save.stats.cherries >= 20) unlock("cherry"); updateHud(); await sleep(260);
   }
-  await settle();
 }
 function isSettled() {
   for (let r=0;r<N;r++) for (let c=0;c<N;c++) { const d=grid[r][c]; if (d && (Math.abs(d.x-c)>.002 || Math.abs(d.y-r)>.002)) return false; }
   return true;
 }
-function settle() { return new Promise(res => { const chk=()=>{ if (isSettled()) res(); else setTimeout(chk, 16); }; chk(); }); }
+function settle() {
+  if (SIM) { for (let r=0;r<N;r++) for (let c=0;c<N;c++) { const d=grid[r][c]; if (d) { d.x=c; d.y=r; d.fall=false; d.vy=0; } } return Promise.resolve(); }
+  return new Promise(res => { const chk=()=>{ if (isSettled()) res(); else setTimeout(chk, 16); }; chk(); });
+}
 
 /* ---------- Cascade complète ---------- */
 async function resolveBoard(pref) {
@@ -597,18 +677,26 @@ async function afterMove() {
   if (moveStats.combo >= 7) unlock("combo7");
   if (save.stats.cleared >= 500) unlock("clear500");
   if (save.stats.cleared >= 5000) unlock("clear5000");
-  if (moveStats.combo >= 4) { say(["","","","Délicieux !","Sucré !","Divin !","Incroyable !","Extraordinaire !"][Math.min(7,moveStats.combo)]); await sleep(700); say(""); }
+  if (moveStats.combo >= 4) { say(["","","","Délicieux !","Sucré !","Divin !","Incroyable !","Extraordinaire !"][Math.min(7,moveStats.combo)], Math.min(4, moveStats.combo - 3)); await sleep(700); say(""); }
   writeSave();
-  const goalDone = isGoalDone();
-  if (level.kind !== "score" && goalDone) return endLevel(true);
-  if (moves <= 0) return endLevel(level.kind==="score" ? score >= level.target : goalDone);
+  const done = allGoalsDone();
+  if (done && !hasScoreGoal()) return endLevel(true);
+  if (moves <= 0) return endLevel(done);
   if (!findMove()) await shuffleBoard(false);
   busy = false; resetIdle();
 }
-function isGoalDone() {
-  if (level.kind==="score") return score >= level.target;
-  if (level.kind==="jelly") return jellyLeft <= 0;
-  return collected >= level.count;
+function goalDone(g) {
+  switch (g.k) { case "score": return score >= g.target; case "jelly": return jellyLeft <= 0; case "collect": return collected >= g.count;
+    case "drop": return dropped >= g.count; case "special": return specialsMade >= g.count; }
+  return true;
+}
+function allGoalsDone() { return level.goals.every(goalDone); }
+function hasScoreGoal() { return level.goals.some(g => g.k === "score"); }
+function goalSentence(g) {
+  switch (g.k) { case "score": return "Atteins " + g.target + " points"; case "jelly": return "Détruis toutes les gelées";
+    case "collect": return "Récolte " + g.count + " bonbons"; case "drop": return "Fais descendre " + g.count + " cerise" + (g.count>1?"s":"");
+    case "special": return "Crée " + g.count + " bonbons spéciaux"; }
+  return "";
 }
 
 /* ---------- Fin de niveau ---------- */
@@ -618,10 +706,8 @@ async function endLevel(win) {
     sfx("win");
     // bonus : les coups restants se transforment en points
     const left = moves; let bonus = 0;
-    while (moves > 0) { moves--; score += 100; bonus += 100; sfx("pop", 3); updateHud(); await sleep(110); }
-    let stars = 1;
-    if (level.kind==="score") { stars = score>=level.starScores[2] ? 3 : score>=level.starScores[1] ? 2 : 1; }
-    else { const ratio = left / level.moves; stars = ratio>=.45 ? 3 : ratio>=.22 ? 2 : 1; }
+    while (moves > 0) { moves--; score += 100; bonus += 100; if (!SIM) sfx("pop", 3); updateHud(); await sleep(110); }
+    const stars = score >= level.stars[1] ? 3 : score >= level.stars[0] ? 2 : 1;
     const id = level.n;
     const prev = save.stars[id] || 0;
     if (stars > prev) save.stars[id] = stars;
@@ -631,7 +717,7 @@ async function endLevel(win) {
     writeSave();
     unlock("first_win"); if (stars===3) unlock("three_stars");
     const done = Object.keys(save.stars).length;
-    if (done>=10) unlock("lvl10"); if (done>=20) unlock("lvl20"); if (done>=LEVEL_COUNT) unlock("lvl40");
+    if (done>=10) unlock("lvl10"); if (done>=20) unlock("lvl20"); if (done>=40) unlock("lvl40"); if (done>=LEVEL_COUNT) unlock("lvl60");
     showEnd(true, stars, bonus);
   } else {
     sfx("lose"); writeSave();
@@ -640,33 +726,50 @@ async function endLevel(win) {
 }
 function showEnd(win, stars, bonus) {
   $("eTitle").textContent = win ? "Niveau réussi !" : "Raté…";
-  $("eStars").innerHTML = win ? "★".repeat(stars) + "<i>" + "★".repeat(3-stars) + "</i>" : "<i>★★★</i>";
+  $("eBadge").style.display = ""; $("eBadge").src = "assets/badge-" + (win ? "win" : "lose") + ".png";
+  const st = (on) => '<img src="assets/star-big-' + (on ? "on" : "off") + '.png" onerror="this.replaceWith(document.createTextNode(\'★\'))">';
+  $("eStars").innerHTML = (win ? st(1).repeat(stars) + st(0).repeat(3-stars) : st(0).repeat(3));
   $("eText").innerHTML = (win ? "Score : <b>"+score+"</b>" + (bonus ? " (dont bonus coups : "+bonus+")" : "") + "<br>Meilleur : "+save.best[level.n]
     : "Plus de coups ! Il te manquait : " + missingText());
   $("eNext").style.display = win && levelIdx < LEVEL_COUNT-1 ? "" : "none";
   $("mEnd").classList.add("on");
 }
 function missingText() {
-  if (level.kind==="score") return (level.target - score) + " points";
-  if (level.kind==="jelly") return jellyLeft + " gelée(s)";
-  return (level.count - collected) + " bonbon(s)";
+  const m = [];
+  for (const g of level.goals) if (!goalDone(g)) {
+    if (g.k==="score") m.push((g.target - score) + " points");
+    else if (g.k==="jelly") m.push(jellyLeft + " gelée(s)");
+    else if (g.k==="collect") m.push((g.count - collected) + " bonbon(s)");
+    else if (g.k==="drop") m.push((g.count - dropped) + " cerise(s)");
+    else m.push((g.count - specialsMade) + " spécial(aux)");
+  }
+  return m.join(", ");
 }
 
 /* ============================================================
    RENDU
    ============================================================ */
+function addFx(kind, r, c) {
+  if (SIM || !save.fx) return;
+  const name = kind===S_ROW ? "fx-stripe-h" : kind===S_COL ? "fx-stripe-v" : kind===S_WRAP ? "fx-wrap" : kind===S_BOMB ? "fx-bomb" : "burst";
+  if (!IMG[name]) return;
+  effects.push({ name, r, c, life:1, max: kind===S_BOMB ? .7 : .5 });
+}
 function burst(c, r, cd) {
   if (!save.fx) return;
   const col = cd.t>=0 ? COLORS[cd.t].a : "#8d5a3c";
   for (let i=0;i<7;i++) { const a=Math.random()*Math.PI*2, v=1.5+Math.random()*3.5;
     particles.push({ x:c+.5, y:r+.5, vx:Math.cos(a)*v, vy:Math.sin(a)*v-1.5, life:1, col, sz:3+Math.random()*5 }); }
 }
-function say(t) { const m=$("msg"); m.textContent=t; m.classList.toggle("on", !!t); }
+function say(t, tier) {
+  const m = $("msg"), b = tier && IMG["fx-combo-" + tier];
+  m.textContent = t; m.style.backgroundImage = b ? "url(assets/fx-combo-" + tier + ".png)" : ""; m.classList.toggle("banner", !!b); m.classList.toggle("on", !!t);
+}
 
 function drawBoard(dt) {
   dt *= TS; tAnim += dt;
   ctx.setTransform(1,0,0,1,0,0);
-  ctx.clearRect(0,0,576,576);
+  ctx.clearRect(0,0,BOARD,BOARD);
   if (shake > 0) { ctx.translate((Math.random()-.5)*shake, (Math.random()-.5)*shake); shake = Math.max(0, shake - 40*dt); }
   // fond en damier + gelées
   for (let r=0;r<N;r++) for (let c=0;c<N;c++) {
@@ -694,34 +797,44 @@ function drawBoard(dt) {
     if (d.y < -.5) continue;
     drawCandy(ctx, d.x*CELL+CELL/2, d.y*CELL+CELL/2, CELL, d.t, d.s, sc, 1, tAnim);
   }
+  for (let i=effects.length-1;i>=0;i--) { const f=effects[i]; f.life-=dt/f.max; if (f.life<=0){ effects.splice(i,1); continue; }
+    const im=IMG[f.name], pr=1-f.life, cx=f.c*CELL+CELL/2, cy=f.r*CELL+CELL/2; let w,h;
+    if (f.name==="fx-stripe-h") { w=BOARD; h=CELL*2; ctx.globalAlpha=Math.min(1,f.life*1.8); ctx.drawImage(im, 0, cy-h/2, w, h); }
+    else if (f.name==="fx-stripe-v") { w=CELL*2; h=BOARD; ctx.globalAlpha=Math.min(1,f.life*1.8); ctx.drawImage(im, cx-w/2, 0, w, h); }
+    else { const k = f.name==="fx-bomb" ? 4+pr*4 : f.name==="fx-wrap" ? 3+pr*1.5 : 1.4+pr*1.4; w=h=CELL*k; ctx.globalAlpha=Math.min(1,f.life*1.6); ctx.drawImage(im, cx-w/2, cy-h/2, w, h); }
+    ctx.globalAlpha=1; }
   for (let i=particles.length-1;i>=0;i--) { const p=particles[i]; p.life-=dt*1.6; if (p.life<=0){ particles.splice(i,1); continue; }
     p.vy += 9*dt; p.x += p.vx*dt; p.y += p.vy*dt; ctx.globalAlpha = p.life; ctx.fillStyle = p.col;
-    ctx.fillRect(p.x*CELL-p.sz/2, p.y*CELL-p.sz/2, p.sz, p.sz); ctx.globalAlpha = 1; }
+    if (IMG['sparkle']) { const z=p.sz*3.2; ctx.drawImage(IMG['sparkle'], p.x*CELL-z/2, p.y*CELL-z/2, z, z); } else ctx.fillRect(p.x*CELL-p.sz/2, p.y*CELL-p.sz/2, p.sz, p.sz); ctx.globalAlpha = 1; }
   for (let i=floats.length-1;i>=0;i--) { const f=floats[i]; f.life-=dt*1.1; if (f.life<=0){ floats.splice(i,1); continue; }
     ctx.globalAlpha=Math.min(1,f.life*1.6); ctx.font="900 30px Trebuchet MS"; ctx.textAlign="center"; ctx.lineWidth=5; ctx.strokeStyle="#7a1450";
     const fx=f.x*CELL+CELL/2, fy=f.y*CELL+CELL/2-(1-f.life)*50; ctx.strokeText(f.txt,fx,fy); ctx.fillStyle="#fff"; ctx.fillText(f.txt,fx,fy); ctx.globalAlpha=1; }
 }
 
 /* ---------- HUD ---------- */
+let lastGoalsHtml = "";
 function updateHud() {
+  if (SIM) return;
   $("hLevel").textContent = level.n;
   $("hMoves").textContent = moves;
   $("hScore").textContent = score;
-  const gi = $("goalIcon"), gt = $("goalTxt");
-  if (level.kind==="score") { gi.style.display="none"; gt.textContent = Math.min(score,level.target) + " / " + level.target; }
-  else if (level.kind==="jelly") { gi.style.display="none"; gt.textContent = "Gelées : " + Math.max(0,jellyLeft); }
-  else { gi.style.display="inline-block"; gi.src = candyIcon(level.ctype); gt.textContent = Math.min(collected,level.count) + " / " + level.count; }
-  let pct;
-  if (level.kind==="score") pct = score / level.starScores[2];
-  else if (level.kind==="jelly") pct = 1 - jellyLeft / level.jelly.length;
-  else pct = collected / level.count;
-  $("bar").style.width = Math.min(100, pct*100) + "%";
+  const gh = level.goals.map(g => {
+    if (g.k==="score") return '<span class="g">'+Math.min(score,g.target)+' / '+g.target+'</span>';
+    if (g.k==="jelly") return '<span class="g"><img class="ic" src="assets/icon-jelly.png" onerror="this.replaceWith(document.createTextNode(\'🧊 \'))">'+Math.max(0,jellyLeft)+' gelées</span>';
+    if (g.k==="collect") return '<span class="g"><img src="'+candyIcon(g.t)+'">'+Math.min(collected,g.count)+' / '+g.count+'</span>';
+    if (g.k==="drop") return '<span class="g"><img src="'+candyIcon(-2)+'">'+Math.min(dropped,g.count)+' / '+g.count+'</span>';
+    return '<span class="g"><img class="ic" src="assets/icon-special.png" onerror="this.replaceWith(document.createTextNode(\'✨ \'))">'+Math.min(specialsMade,g.count)+' / '+g.count+'</span>';
+  }).join("");
+  if (gh !== lastGoalsHtml) { $("goals").innerHTML = gh; lastGoalsHtml = gh; }
+  $("bar").style.width = Math.min(100, score / level.stars[1] * 100) + "%";
 }
 function buildStarMarks() {
   const el = $("starMarks"); el.innerHTML = "";
-  if (level.kind !== "score") return;
-  level.starScores.forEach((s,i) => { const sp=document.createElement("span"); sp.textContent = "★".repeat(i+1);
-    sp.style.cssText = "position:absolute;transform:translateX(-100%);left:"+Math.min(100,s/level.starScores[2]*100)+"%"; el.appendChild(sp); });
+  const sg = level.goals.find(g => g.k==="score");
+  const marks = [[2, level.stars[0]], [3, level.stars[1]]];
+  if (sg) marks.unshift([1, sg.target]);
+  marks.forEach(([n,sc]) => { const sp=document.createElement("span"); sp.textContent = "★".repeat(n);
+    sp.style.cssText = "position:absolute;transform:translateX(-100%);left:"+Math.min(100,sc/level.stars[1]*100)+"%"; el.appendChild(sp); });
 }
 
 /* ---------- Indice / inactivité ---------- */
@@ -735,7 +848,7 @@ function showHint(){ if (busy||ended||paused) return; hintCells = findMove(); }
 let down = null;
 function cellAt(ev) {
   const rect = cv.getBoundingClientRect();
-  const x = (ev.clientX - rect.left) / rect.width * 576, y = (ev.clientY - rect.top) / rect.height * 576;
+  const x = (ev.clientX - rect.left) / rect.width * BOARD, y = (ev.clientY - rect.top) / rect.height * BOARD;
   const c = Math.floor(x/CELL), r = Math.floor(y/CELL);
   return inb(r,c) ? [r,c] : null;
 }
@@ -752,7 +865,7 @@ cv.addEventListener("pointerdown", ev => {
 });
 cv.addEventListener("pointermove", ev => {
   if (!down || busy || paused || ended) return;
-  const rect = cv.getBoundingClientRect(), k = 576/rect.width;
+  const rect = cv.getBoundingClientRect(), k = BOARD/rect.width;
   const dx = (ev.clientX-down.x)*k, dy = (ev.clientY-down.y)*k;
   if (Math.max(Math.abs(dx),Math.abs(dy)) < CELL*.4) return;
   const [r,c] = down.cell; let t;
@@ -771,13 +884,13 @@ function modal(id, on) { $(id).classList.toggle("on", on); }
 
 function startLevel(i) {
   levelIdx = i; level = LEVELS[i];
-  score = 0; moves = level.moves; collected = 0; ended = false; busy = false; paused = false; selected = null;
-  particles = []; floats = []; moveStats = { combo:0 };
+  score = 0; moves = level.moves; collected = 0; dropped = 0; dropSpawned = 0; specialsMade = 0; ended = false; busy = false; paused = false; selected = null;
+  particles = []; floats = []; effects = []; moveStats = { combo:0 };
   initBoard(); buildStarMarks(); updateHud(); say("");
   modal("mEnd", false); modal("mPause", false);
   show("sGame"); resetIdle();
   { const bgs=["bg-game-1","bg-game-2","bg-game-3"].filter(n=>IMG[n]); if (bgs.length) setBg(bgs[levelIdx % bgs.length]); }
-  const goalTxt = level.kind==="score" ? "Atteins "+level.target+" points" : level.kind==="jelly" ? "Détruis toutes les gelées" : "Récolte "+level.count+" bonbons";
+  const goalTxt = level.goals.map(goalSentence).join(" + ");
   say("Niveau "+level.n); setTimeout(()=>{ say(goalTxt); setTimeout(()=>say(""),1400); }, 900);
 }
 function buildLevelMap() {
@@ -786,7 +899,7 @@ function buildLevelMap() {
     const b = document.createElement("button"); const st = save.stars[L.n]||0; total += st;
     const locked = L.n > save.unlocked;
     b.className = "lv" + (locked ? " locked" : "");
-    b.innerHTML = (locked ? "🔒" : L.n) + (locked ? "" : '<div class="st">'+"★".repeat(st)+"<i>"+"★".repeat(3-st)+"</i></div>");
+    b.innerHTML = (locked ? '<img class="lk" src="assets/lock.png" onerror="this.replaceWith(document.createTextNode(\'🔒\'))">' : L.n) + (locked ? "" : '<div class="st">'+"★".repeat(st)+"<i>"+"★".repeat(3-st)+"</i></div>");
     if (!locked) b.onclick = () => { sfx("click"); startLevel(i); };
     g.appendChild(b);
   });
@@ -803,6 +916,8 @@ function optLabels() { $("oSound").textContent = save.sound ? "Activés" : "Coup
 $("bPlay").onclick = () => { sfx("click"); startLevel(Math.min(save.unlocked, LEVEL_COUNT) - 1); };
 $("bLevels").onclick = () => { sfx("click"); openLevels(); };
 $("bLvBack").onclick = () => show("sTitle");
+$("bCred").onclick = () => { sfx("click"); modal("mCred", true); };
+$("cClose").onclick = () => modal("mCred", false);
 $("bAch").onclick = () => { buildAch(); modal("mAch", true); };
 $("aClose").onclick = () => modal("mAch", false);
 $("bOpt").onclick = () => { optLabels(); modal("mOpt", true); };
@@ -832,10 +947,10 @@ setInterval(() => { const n=performance.now(); if (n - lastDraw > 120) { const d
 
 /* ---------- Fond animé de l'écran titre ---------- */
 const tcv = $("titleCanvas"), tctx = tcv.getContext("2d");
-const floaters = Array.from({length:22}, (_,i)=>({ x:Math.random()*640, y:Math.random()*860, v:20+Math.random()*40, t:i%6, s:Math.random()<.2?1+rnd(3):0, sz:50+Math.random()*50, ph:Math.random()*6 }));
+const floaters = Array.from({length:22}, (_,i)=>({ x:Math.random()*640, y:Math.random()*900, v:20+Math.random()*40, t:i%6, s:Math.random()<.2?1+rnd(3):0, sz:50+Math.random()*50, ph:Math.random()*6 }));
 function drawTitle(dt) {
   if (!$("sTitle").classList.contains("on")) return;
-  tctx.clearRect(0,0,640,860);
+  tctx.clearRect(0,0,640,900);
   for (const f of floaters) { f.y -= f.v*dt; f.ph += dt; if (f.y < -80) { f.y = 940; f.x = Math.random()*640; }
     drawCandy(tctx, f.x + Math.sin(f.ph)*20, f.y, f.sz, f.t, f.s, 1, .55, f.ph); }
 }
@@ -843,7 +958,7 @@ function drawTitle(dt) {
 /* ---------- Mise à l'échelle de la scène ---------- */
 function fit() {
   const vv = window.visualViewport, w = vv ? vv.width : window.innerWidth, h = vv ? vv.height : window.innerHeight;
-  const s = Math.min(w/640, h/860);
+  const s = Math.min(w/640, h/900);
   $("stage").style.transform = "translate(-50%,-50%) scale(" + s + ")";
 }
 window.addEventListener("resize", fit); window.addEventListener("orientationchange", fit); fit();
