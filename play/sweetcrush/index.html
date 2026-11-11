@@ -357,7 +357,7 @@ function unlock(id) {
 
 /* ---------- Niveaux ---------- */
 /* Réglages calibrés par simulation (moves, target, count, s2, s3 par index de niveau) — voir LISEZ_MOI_IA.md */
-const TUNED = {"0":{"target":1000,"s2":2500,"s3":3200},"1":{"moves":17,"count":18,"s2":2450,"s3":3250},"2":{"moves":23,"s2":3050,"s3":3850},"3":{"moves":29,"count":2,"s2":4100,"s3":5600},"4":{"moves":17,"count":4,"s2":1950,"s3":2600},"5":{"moves":23,"target":1075,"s2":4200,"s3":6350},"6":{"target":3350,"s2":5200,"s3":7550},"7":{"moves":17,"count":22,"s2":2800,"s3":3350},"8":{"moves":32,"s2":4850,"s3":6000},"9":{"moves":28,"count":2,"s2":4200,"s3":6200},"10":{"moves":18,"count":6,"s2":2450,"s3":3000},"11":{"moves":32,"target":1285,"s2":5650,"s3":7450},"12":{"target":3150,"s2":4500,"s3":6500},"13":{"moves":18,"count":26,"s2":2750,"s3":3900},"14":{"moves":32,"s2":4950,"s3":6200},"15":{"moves":28,"count":2,"s2":4400,"s3":5500},"16":{"moves":18,"count":7,"s2":2850,"s3":3650},"17":{"moves":30,"target":1495,"s2":5000,"s3":7400},"18":{"target":3950,"s2":5050,"s3":6850},"19":{"moves":18,"count":26,"s2":2750,"s3":3300},"20":{"moves":28,"s2":4400,"s3":6850},"21":{"moves":28,"count":2,"s2":3800,"s3":5550},"22":{"moves":18,"count":8,"s2":2500,"s3":3550},"23":{"moves":27,"target":1705,"s2":5200,"s3":7900},"24":{"target":3100,"s2":4800,"s3":7350},"25":{"moves":17,"count":26,"s2":2750,"s3":3550},"26":{"moves":25,"s2":3950,"s3":4850},"27":{"moves":27,"count":3,"s2":4400,"s3":5650},"28":{"moves":17,"count":8,"s2":2850,"s3":3650},"29":{"moves":21,"target":1915,"s2":3950,"s3":4900},"30":{"target":3000,"s2":4200,"s3":6700},"31":{"moves":17,"count":26,"s2":2900,"s3":3900},"32":{"moves":27,"s2":4600,"s3":5700},"33":{"moves":27,"count":3,"s2":3700,"s3":6100},"34":{"moves":17,"count":8,"s2":2500,"s3":3500},"35":{"moves":27,"target":2125,"s2":3900,"s3":6450},"36":{"target":2850,"s2":4250,"s3":6100},"37":{"moves":18,"count":26,"s2":3000,"s3":3650},"38":{"moves":32,"s2":5450,"s3":6550},"39":{"moves":26,"count":3,"s2":3900,"s3":4700},"40":{"moves":18,"count":8,"s2":2900,"s3":3500},"41":{"moves":30,"target":2335,"s2":5350,"s3":8850},"42":{"target":3650,"s2":4450,"s3":6150},"43":{"moves":18,"count":26,"s2":2600,"s3":3450},"44":{"moves":18,"s2":2900,"s3":4150},"45":{"moves":26,"count":3,"s2":4100,"s3":5000},"46":{"moves":18,"count":8,"s2":2800,"s3":3400},"47":{"moves":18,"target":2545,"s2":3650,"s3":4900},"48":{"target":3350,"s2":4750,"s3":6900},"49":{"moves":18,"count":28,"s2":2550,"s3":3400},"50":{"moves":32,"s2":5300,"s3":7000},"51":{"moves":26,"count":3,"s2":4050,"s3":5900},"52":{"moves":17,"count":8,"s2":2500,"s3":3500},"53":{"moves":27,"target":2755,"s2":4700,"s3":5650},"54":{"target":2700,"s2":3550,"s3":6050},"55":{"moves":17,"count":30,"s2":2750,"s3":3850},"56":{"moves":31,"s2":5850,"s3":7850},"57":{"moves":27,"count":2,"s2":3850,"s3":4900},"58":{"moves":17,"count":8,"s2":2950,"s3":3700},"59":{"moves":25,"target":2965,"s2":6350,"s3":9000}};
+const TUNED = {"0":{"target":1000,"s2":2500,"s3":3200},"1":{"moves":17,"count":18,"s2":2350,"s3":3000},"2":{"moves":23,"s2":2800,"s3":3600},"3":{"moves":29,"count":2,"s2":4100,"s3":6000},"4":{"moves":17,"count":4,"s2":1850,"s3":2350},"5":{"moves":23,"target":1075,"s2":2950,"s3":4050},"6":{"target":3350,"s2":4300,"s3":5150},"7":{"moves":17,"count":22,"s2":2450,"s3":3200},"8":{"moves":32,"s2":4750,"s3":5800},"9":{"moves":28,"count":2,"s2":4100,"s3":5400},"10":{"moves":18,"count":6,"s2":2200,"s3":2850},"11":{"moves":32,"target":1285,"s2":4950,"s3":5950},"12":{"target":3150,"s2":4100,"s3":4900},"13":{"moves":18,"count":26,"s2":2450,"s3":3300},"14":{"moves":32,"s2":4900,"s3":6150},"15":{"moves":28,"count":3,"s2":3800,"s3":5650},"16":{"moves":18,"count":7,"s2":2650,"s3":3300},"17":{"moves":30,"target":1495,"s2":4700,"s3":6250},"18":{"target":3950,"s2":4650,"s3":5600},"19":{"moves":18,"count":26,"s2":2550,"s3":3250},"20":{"moves":28,"s2":3850,"s3":5500},"21":{"moves":28,"count":3,"s2":3700,"s3":4800},"22":{"moves":18,"count":8,"s2":2700,"s3":3500},"23":{"moves":27,"target":1705,"s2":3800,"s3":4950},"24":{"target":3100,"s2":4050,"s3":4850},"25":{"moves":17,"count":26,"s2":2500,"s3":3500},"26":{"moves":25,"s2":3600,"s3":4650},"27":{"moves":29,"count":2,"s2":3700,"s3":4750},"28":{"moves":17,"count":8,"s2":2750,"s3":3700},"29":{"moves":21,"target":1915,"s2":3450,"s3":4150},"30":{"target":3000,"s2":3950,"s3":4850},"31":{"moves":17,"count":26,"s2":2350,"s3":3800},"32":{"moves":27,"s2":4750,"s3":5800},"33":{"moves":29,"count":2,"s2":3800,"s3":4700},"34":{"moves":17,"count":8,"s2":2600,"s3":3550},"35":{"moves":27,"target":2125,"s2":3900,"s3":5700},"36":{"target":2850,"s2":3850,"s3":4600},"37":{"moves":18,"count":26,"s2":2550,"s3":3450},"38":{"moves":32,"s2":4550,"s3":6150},"39":{"moves":28,"count":2,"s2":4400,"s3":5800},"40":{"moves":18,"count":8,"s2":2750,"s3":3450},"41":{"moves":30,"target":2335,"s2":4550,"s3":5500},"42":{"target":3650,"s2":4550,"s3":5450},"43":{"moves":18,"count":26,"s2":2750,"s3":3450},"44":{"moves":18,"s2":2750,"s3":3700},"45":{"moves":28,"count":3,"s2":3900,"s3":5400},"46":{"moves":18,"count":8,"s2":2750,"s3":3750},"47":{"moves":18,"target":2545,"s2":3350,"s3":4000},"48":{"target":3350,"s2":4250,"s3":5200},"49":{"moves":18,"count":28,"s2":2900,"s3":3850},"50":{"moves":32,"s2":5100,"s3":7050},"51":{"moves":26,"count":2,"s2":3750,"s3":5500},"52":{"moves":17,"count":8,"s2":2650,"s3":3500},"53":{"moves":27,"target":2755,"s2":4600,"s3":5900},"54":{"target":2700,"s2":3500,"s3":4200},"55":{"moves":17,"count":30,"s2":2800,"s3":4050},"56":{"moves":31,"s2":5450,"s3":6550},"57":{"moves":29,"count":3,"s2":4100,"s3":6100},"58":{"moves":17,"count":8,"s2":2700,"s3":3450},"59":{"moves":25,"target":2965,"s2":4300,"s3":5800}};
 const CYCLE = ["score","collect","jelly","drop","special","mix"];
 function makeLevels() {
   const patterns = [
@@ -607,7 +607,9 @@ function analyseMatches(pref) {
 /* ---------- Coups possibles ---------- */
 function swapCells(a,b){ const t=grid[a[0]][a[1]]; grid[a[0]][a[1]]=grid[b[0]][b[1]]; grid[b[0]][b[1]]=t; }
 function isComboSwap(a,b){ const x=grid[a[0]][a[1]], y=grid[b[0]][b[1]]; if(!x||!y) return false; return x.s===S_BOMB || y.s===S_BOMB || (x.s>0 && y.s>0); }
+function isCherry(c){ const d=grid[c[0]][c[1]]; return !!d && d.t===-2; }
 function swapIsValid(a,b){
+  if (isCherry(a) || isCherry(b)) return false; /* les cerises ne se déplacent pas à la main : elles tombent seulement */
   if (isComboSwap(a,b)) return true;
   swapCells(a,b); const ok = runsOf().length>0; swapCells(a,b); return ok;
 }
@@ -727,6 +729,7 @@ async function resolveBoard(pref) {
 /* ---------- Tentative d'échange ---------- */
 async function trySwap(a, b) {
   if (busy || paused || ended) return;
+  if (isCherry(a) || isCherry(b)) { sfx("bad"); selected = null; return; }
   busy = true; clearHint(); selected = null;
   const A = grid[a[0]][a[1]], B = grid[b[0]][b[1]];
   swapCells(a,b); sfx("swap");
@@ -788,7 +791,7 @@ async function afterMove() {
   if (moveStats.combo >= 4) { say(["","","","Délicieux !","Sucré !","Divin !","Incroyable !","Extraordinaire !"][Math.min(7,moveStats.combo)], Math.min(4, moveStats.combo - 3)); await sleep(700); say(""); }
   writeSave();
   const done = allGoalsDone();
-  if (done && (!hasScoreGoal() || level.endOnGoal)) return endLevel(true);
+  if (done) return endLevel(true); /* objectif atteint : fin immédiate, coups restants convertis en points (donc en étoiles) */
   if (moves <= 0) return endLevel(done);
   if (!findMove()) await shuffleBoard(false);
   busy = false; resetIdle();
@@ -963,6 +966,7 @@ function cellAt(ev) {
 cv.addEventListener("pointerdown", ev => {
   if (busy || paused || ended) return;
   const cell = cellAt(ev); if (!cell) return;
+  if (isCherry(cell)) { sfx("bad"); selected = null; down = null; return; }
   try { cv.setPointerCapture(ev.pointerId); } catch(e){}
   down = { cell, x:ev.clientX, y:ev.clientY };
   if (selected) {
