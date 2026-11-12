@@ -143,6 +143,10 @@
   .node .nst img { width:34%; }
   .node.shake { animation:shakeN .35s; }
   @keyframes shakeN { 25% { transform:rotate(-6deg); } 75% { transform:rotate(6deg); } }
+  #flyLayer { position:absolute; inset:0; pointer-events:none; z-index:9; overflow:hidden; }
+  #flyLayer canvas { position:absolute; will-change:transform; filter:drop-shadow(0 3px 5px rgba(0,0,0,.4)); }
+  #barWrap.pulse { animation:barPulse .16s ease-out; }
+  @keyframes barPulse { 50% { transform:scaleY(1.9); box-shadow:0 0 14px 4px rgba(255,235,120,.9); } }
   .modal { position:absolute; inset:0; background:rgba(20,4,50,.7); display:none; align-items:center; justify-content:center; z-index:10; }
   .modal.on { display:flex; }
   .card { width:480px; text-align:center; padding:26px 30px 22px; border-radius:30px;
@@ -277,6 +281,7 @@
     <button class="btn green" id="rwClaim">Tout récupérer</button><br>
     <button class="btn alt small" id="rwLater">Plus tard</button></div></div>
 
+  <div id="flyLayer"></div>
   <div class="toast" id="toast"></div>
 </div>
 
@@ -553,13 +558,13 @@ function unlock(id) {
 
 /* ---------- Niveaux ---------- */
 /* Réglages calibrés par simulation (moves, target, count, s2, s3 par index de niveau) — voir LISEZ_MOI_IA.md */
-const TUNED = {"0":{"target":1000,"s2":2500,"s3":3200},"1":{"moves":17,"count":18,"s2":2350,"s3":3000},"2":{"moves":23,"s2":2800,"s3":3600},"3":{"moves":29,"count":2,"s2":4100,"s3":6000},"4":{"moves":17,"count":4,"s2":1850,"s3":2350},"5":{"moves":23,"target":1075,"s2":2950,"s3":4050},"6":{"target":3350,"s2":4300,"s3":5150},"7":{"moves":17,"count":22,"s2":2450,"s3":3200},"8":{"moves":32,"s2":4750,"s3":5800},"9":{"moves":28,"count":2,"s2":4100,"s3":5400},"10":{"moves":18,"count":6,"s2":2200,"s3":2850},"11":{"moves":32,"target":1285,"s2":4950,"s3":5950},"12":{"target":3150,"s2":4100,"s3":4900},"13":{"moves":18,"count":26,"s2":2450,"s3":3300},"14":{"moves":32,"s2":4900,"s3":6150},"15":{"moves":28,"count":3,"s2":3800,"s3":5650},"16":{"moves":18,"count":7,"s2":2650,"s3":3300},"17":{"moves":30,"target":1495,"s2":4700,"s3":6250},"18":{"target":3950,"s2":4650,"s3":5600},"19":{"moves":18,"count":26,"s2":2550,"s3":3250},"20":{"moves":28,"s2":3850,"s3":5500},"21":{"moves":28,"count":3,"s2":3700,"s3":4800},"22":{"moves":18,"count":8,"s2":2700,"s3":3500},"23":{"moves":27,"target":1705,"s2":3800,"s3":4950},"24":{"target":3100,"s2":4050,"s3":4850},"25":{"moves":17,"count":26,"s2":2500,"s3":3500},"26":{"moves":25,"s2":3600,"s3":4650},"27":{"moves":29,"count":2,"s2":3700,"s3":4750},"28":{"moves":17,"count":8,"s2":2750,"s3":3700},"29":{"moves":21,"target":1915,"s2":3450,"s3":4150},"30":{"target":3000,"s2":3950,"s3":4850},"31":{"moves":17,"count":26,"s2":2350,"s3":3800},"32":{"moves":27,"s2":4750,"s3":5800},"33":{"moves":29,"count":2,"s2":3800,"s3":4700},"34":{"moves":17,"count":8,"s2":2600,"s3":3550},"35":{"moves":27,"target":2125,"s2":3900,"s3":5700},"36":{"target":2850,"s2":3850,"s3":4600},"37":{"moves":18,"count":26,"s2":2550,"s3":3450},"38":{"moves":32,"s2":4550,"s3":6150},"39":{"moves":28,"count":2,"s2":4400,"s3":5800},"40":{"moves":18,"count":8,"s2":2750,"s3":3450},"41":{"moves":30,"target":2335,"s2":4550,"s3":5500},"42":{"target":3650,"s2":4550,"s3":5450},"43":{"moves":18,"count":26,"s2":2750,"s3":3450},"44":{"moves":18,"s2":2750,"s3":3700},"45":{"moves":28,"count":3,"s2":3900,"s3":5400},"46":{"moves":18,"count":8,"s2":2750,"s3":3750},"47":{"moves":18,"target":2545,"s2":3350,"s3":4000},"48":{"target":3350,"s2":4250,"s3":5200},"49":{"moves":18,"count":28,"s2":2900,"s3":3850},"50":{"moves":32,"s2":5100,"s3":7050},"51":{"moves":26,"count":2,"s2":3750,"s3":5500},"52":{"moves":17,"count":8,"s2":2650,"s3":3500},"53":{"moves":27,"target":2755,"s2":4600,"s3":5900},"54":{"target":2700,"s2":3500,"s3":4200},"55":{"moves":17,"count":30,"s2":2800,"s3":4050},"56":{"moves":31,"s2":5450,"s3":6550},"57":{"moves":29,"count":3,"s2":4100,"s3":6100},"58":{"moves":17,"count":8,"s2":2700,"s3":3450},"59":{"moves":25,"target":2965,"s2":4300,"s3":5800},"60":{"target":3350,"s2":4150,"s3":5000},"61":{"moves":17,"count":32,"s2":3200,"s3":4050},"62":{"moves":25,"s2":4050,"s3":5750},"63":{"moves":28,"count":2,"s2":4900,"s3":5900},"64":{"moves":17,"count":8,"s2":2700,"s3":3400},"65":{"moves":25,"target":3175,"s2":4250,"s3":5100},"66":{"target":3350,"s2":4100,"s3":4900},"67":{"moves":17,"count":34,"s2":3150,"s3":4100},"68":{"moves":21,"s2":4000,"s3":6200},"69":{"moves":28,"count":4,"s2":4150,"s3":6350},"70":{"moves":17,"count":8,"s2":2550,"s3":3050},"71":{"moves":25,"target":3385,"s2":4550,"s3":5450},"72":{"target":3700,"s2":4400,"s3":5300},"73":{"moves":17,"count":36,"s2":3350,"s3":4000},"74":{"moves":27,"s2":5000,"s3":6050},"75":{"moves":28,"count":4,"s2":4800,"s3":6350},"76":{"moves":17,"count":9,"s2":2750,"s3":3700},"77":{"moves":25,"target":3595,"s2":4550,"s3":5450},"78":{"target":3600,"s2":4400,"s3":5300},"79":{"moves":17,"count":38,"s2":3150,"s3":3950},"80":{"moves":32,"s2":5200,"s3":6750},"81":{"moves":28,"count":3,"s2":3600,"s3":5550},"82":{"moves":17,"count":9,"s2":2900,"s3":3500},"83":{"moves":27,"target":3600,"s2":5000,"s3":6650},"84":{"target":3700,"s2":4550,"s3":5450},"85":{"moves":17,"count":38,"s2":3500,"s3":4200},"86":{"moves":17,"s2":2650,"s3":3550},"87":{"moves":26,"count":2,"s2":3800,"s3":5000},"88":{"moves":19,"count":10,"s2":3050,"s3":4500},"89":{"moves":23,"target":3600,"s2":4500,"s3":5400},"90":{"target":3900,"s2":4600,"s3":5500},"91":{"moves":17,"count":38,"s2":3200,"s3":4250},"92":{"moves":32,"s2":4500,"s3":6600},"93":{"moves":26,"count":2,"s2":3700,"s3":4550},"94":{"moves":19,"count":10,"s2":3350,"s3":4600},"95":{"moves":29,"target":3600,"s2":4600,"s3":5900},"96":{"target":3550,"s2":4450,"s3":5350},"97":{"moves":17,"count":38,"s2":3150,"s3":4050},"98":{"moves":31,"s2":5650,"s3":7350},"99":{"moves":28,"count":3,"s2":3800,"s3":5500},"100":{"moves":21,"count":11,"s2":3450,"s3":4150},"101":{"moves":27,"target":3600,"s2":4900,"s3":6050},"102":{"target":3800,"s2":4550,"s3":5450},"103":{"moves":17,"count":38,"s2":3300,"s3":4700},"104":{"moves":25,"s2":4300,"s3":6200},"105":{"moves":28,"count":3,"s2":4300,"s3":5150},"106":{"moves":17,"count":11,"s2":3300,"s3":4250},"107":{"moves":25,"target":3600,"s2":4600,"s3":6000},"108":{"target":3650,"s2":4300,"s3":5150},"109":{"moves":19,"count":38,"s2":3350,"s3":4400},"110":{"moves":21,"s2":3400,"s3":4400},"111":{"moves":28,"count":4,"s2":4500,"s3":6150},"112":{"moves":19,"count":12,"s2":3950,"s3":4750},"113":{"moves":21,"target":3600,"s2":4200,"s3":5050},"114":{"target":3650,"s2":4100,"s3":4900},"115":{"moves":17,"count":38,"s2":2950,"s3":3600},"116":{"moves":27,"s2":4750,"s3":6350},"117":{"moves":28,"count":3,"s2":3550,"s3":4950},"118":{"moves":21,"count":12,"s2":3900,"s3":4700},"119":{"moves":27,"target":3600,"s2":4450,"s3":5750},"120":{"target":3400,"s2":4100,"s3":4950},"121":{"moves":15,"count":38,"s2":3100,"s3":4150},"122":{"moves":26,"s2":4200,"s3":5900,"light":true},"123":{"moves":26,"count":4,"s2":4300,"s3":6750},"124":{"moves":21,"count":12,"s2":3900,"s3":4700},"125":{"moves":27,"target":3600,"s2":4600,"s3":5850},"126":{"target":3950,"s2":4250,"s3":5150},"127":{"moves":17,"count":38,"s2":3600,"s3":5050},"128":{"moves":15,"s2":2500,"s3":3800},"129":{"moves":28,"count":4,"s2":4050,"s3":5500},"130":{"moves":19,"count":12,"s2":3700,"s3":4450},"131":{"moves":21,"target":3600,"s2":4400,"s3":5300},"132":{"target":3650,"s2":4200,"s3":5050},"133":{"moves":17,"count":38,"s2":2900,"s3":3800},"134":{"moves":29,"s2":5300,"s3":6750},"135":{"moves":28,"count":4,"s2":3850,"s3":4700},"136":{"moves":21,"count":12,"s2":3350,"s3":4000},"137":{"moves":27,"target":3600,"s2":4850,"s3":5800},"138":{"target":3750,"s2":4400,"s3":5300},"139":{"moves":17,"count":38,"s2":3400,"s3":4650},"140":{"moves":27,"s2":5250,"s3":6600},"141":{"moves":28,"count":4,"s2":4950,"s3":6150},"142":{"moves":21,"count":12,"s2":3600,"s3":5100},"143":{"moves":27,"target":3600,"s2":4650,"s3":6000},"144":{"target":3450,"s2":4000,"s3":4800},"145":{"moves":17,"count":38,"s2":3250,"s3":3900},"146":{"moves":21,"s2":3500,"s3":4500},"147":{"moves":28,"count":3,"s2":4550,"s3":6300},"148":{"moves":19,"count":12,"s2":3650,"s3":4400},"149":{"moves":23,"target":3600,"s2":4550,"s3":5450},"150":{"target":3250,"s2":4350,"s3":5200},"151":{"moves":17,"count":38,"s2":3550,"s3":4250},"152":{"moves":21,"s2":3450,"s3":4200},"153":{"moves":28,"count":4,"s2":3900,"s3":5200},"154":{"moves":21,"count":12,"s2":3950,"s3":4750},"155":{"moves":21,"target":3600,"s2":4500,"s3":5400},"156":{"target":3600,"s2":4350,"s3":5200},"157":{"moves":17,"count":38,"s2":3200,"s3":4000},"158":{"moves":25,"s2":4500,"s3":6200},"159":{"moves":28,"count":4,"s2":4600,"s3":6350},"160":{"moves":21,"count":12,"s2":3600,"s3":4900},"161":{"moves":25,"target":3600,"s2":4450,"s3":5350},"162":{"target":3650,"s2":4200,"s3":5050},"163":{"moves":17,"count":38,"s2":3350,"s3":4000},"164":{"moves":29,"s2":4350,"s3":7000},"165":{"moves":24,"count":3,"s2":3450,"s3":4650},"166":{"moves":19,"count":12,"s2":3650,"s3":4400},"167":{"moves":29,"target":3600,"s2":4800,"s3":6350},"168":{"target":4250,"s2":4700,"s3":5650},"169":{"moves":15,"count":38,"s2":2650,"s3":3450},"170":{"moves":15,"s2":2450,"s3":3500},"171":{"moves":26,"count":3,"s2":4100,"s3":5800},"172":{"moves":19,"count":12,"s2":3800,"s3":5400},"173":{"moves":19,"target":3600,"s2":4100,"s3":4900},"174":{"target":3100,"s2":3900,"s3":4700},"175":{"moves":15,"count":38,"s2":3100,"s3":3950},"176":{"moves":30,"s2":5200,"s3":6250},"177":{"moves":28,"count":4,"s2":4350,"s3":6700},"178":{"moves":19,"count":12,"s2":3350,"s3":4550},"179":{"moves":25,"target":3600,"s2":4200,"s3":5800}};
+const TUNED = {"0":{"target":1000,"s2":2750,"s3":3300},"1":{"moves":27,"count":12,"s2":3100,"s3":3700},"2":{"moves":29,"s2":3600,"s3":4700},"3":{"moves":29,"count":2,"s2":4000,"s3":5300},"4":{"moves":25,"count":3,"s2":2550,"s3":3200},"5":{"moves":29,"target":1075,"s2":3900,"s3":5000},"6":{"target":3050,"s2":3950,"s3":5100},"7":{"moves":27,"count":14,"s2":3000,"s3":3600},"8":{"moves":32,"s2":5800,"s3":7800,"light":true},"9":{"moves":28,"count":2,"s2":3700,"s3":6000},"10":{"moves":24,"count":3,"s2":2550,"s3":3050},"11":{"moves":32,"target":600,"s2":5900,"s3":7100},"12":{"target":2850,"s2":3750,"s3":4700},"13":{"moves":26,"count":16,"s2":3000,"s3":3750},"14":{"moves":32,"s2":4850,"s3":5850},"15":{"moves":28,"count":2,"s2":4100,"s3":5300},"16":{"moves":24,"count":4,"s2":2550,"s3":3200},"17":{"moves":32,"target":1495,"s2":4600,"s3":6250},"18":{"target":2950,"s2":4200,"s3":5050},"19":{"moves":26,"count":18,"s2":3200,"s3":3950},"20":{"moves":32,"s2":6150,"s3":7400,"light":true},"21":{"moves":28,"count":2,"s2":4450,"s3":6200},"22":{"moves":24,"count":4,"s2":2450,"s3":3100},"23":{"moves":32,"target":600,"s2":5150,"s3":6650},"24":{"target":2500,"s2":3500,"s3":4200},"25":{"moves":17,"count":20,"s2":2100,"s3":3000},"26":{"moves":32,"s2":4000,"s3":5500,"light":true},"27":{"moves":28,"count":2,"s2":3700,"s3":4550},"28":{"moves":17,"count":5,"s2":2000,"s3":2750},"29":{"moves":32,"target":1915,"s2":4450,"s3":5500},"30":{"target":3900,"s2":4700,"s3":5650},"31":{"moves":17,"count":22,"s2":2150,"s3":3150},"32":{"moves":32,"s2":5250,"s3":7300,"light":true},"33":{"moves":28,"count":2,"s2":3850,"s3":5250},"34":{"moves":19,"count":5,"s2":2300,"s3":3150},"35":{"moves":32,"target":1525,"s2":4750,"s3":6000},"36":{"target":2900,"s2":3650,"s3":4550},"37":{"moves":16,"count":24,"s2":2550,"s3":3150},"38":{"moves":32,"s2":5800,"s3":7750,"light":true},"39":{"moves":28,"count":2,"s2":3700,"s3":4650},"40":{"moves":16,"count":6,"s2":2150,"s3":2800},"41":{"moves":32,"target":985,"s2":6250,"s3":7500},"42":{"target":3350,"s2":4150,"s3":5000},"43":{"moves":18,"count":26,"s2":2500,"s3":3400},"44":{"moves":26,"s2":3550,"s3":4600},"45":{"moves":28,"count":2,"s2":4250,"s3":5300},"46":{"moves":18,"count":6,"s2":2600,"s3":3100},"47":{"moves":24,"target":2545,"s2":3550,"s3":4250},"48":{"target":2700,"s2":3600,"s3":4350},"49":{"moves":20,"count":28,"s2":2850,"s3":3900},"50":{"moves":32,"s2":5350,"s3":6950,"light":true},"51":{"moves":28,"count":2,"s2":4300,"s3":7450},"52":{"moves":17,"count":7,"s2":2300,"s3":2950},"53":{"moves":32,"target":1555,"s2":5250,"s3":6650},"54":{"target":2500,"s2":3550,"s3":4250},"55":{"moves":21,"count":30,"s2":3100,"s3":3950},"56":{"moves":32,"s2":5050,"s3":6050,"light":true},"57":{"moves":28,"count":2,"s2":4150,"s3":6050},"58":{"moves":21,"count":7,"s2":2850,"s3":3450},"59":{"moves":31,"target":2965,"s2":4800,"s3":5750},"60":{"target":2450,"s2":3550,"s3":4250},"61":{"moves":21,"count":32,"s2":2900,"s3":3850},"62":{"moves":32,"s2":4700,"s3":6350,"light":true},"63":{"moves":28,"count":2,"s2":4350,"s3":5350},"64":{"moves":21,"count":8,"s2":2750,"s3":3750},"65":{"moves":31,"target":3175,"s2":4700,"s3":6250},"66":{"target":3250,"s2":4000,"s3":5100},"67":{"moves":19,"count":34,"s2":3350,"s3":4350},"68":{"moves":32,"s2":4000,"s3":6450,"light":true},"69":{"moves":28,"count":3,"s2":4050,"s3":5600},"70":{"moves":19,"count":8,"s2":2850,"s3":3500},"71":{"moves":25,"target":3385,"s2":4350,"s3":5750},"72":{"target":2850,"s2":3900,"s3":4700},"73":{"moves":21,"count":36,"s2":3150,"s3":4000},"74":{"moves":32,"s2":4450,"s3":6100,"light":true},"75":{"moves":28,"count":2,"s2":3800,"s3":5950},"76":{"moves":19,"count":9,"s2":2750,"s3":4100},"77":{"moves":31,"target":3595,"s2":4900,"s3":5900},"78":{"target":2700,"s2":3350,"s3":4300},"79":{"moves":21,"count":38,"s2":3100,"s3":4000},"80":{"moves":32,"s2":5400,"s3":7300,"light":true},"81":{"moves":28,"count":2,"s2":4400,"s3":5450},"82":{"moves":17,"count":9,"s2":3150,"s3":3800},"83":{"moves":32,"target":2400,"s2":5500,"s3":6700},"84":{"target":3200,"s2":3800,"s3":4700},"85":{"moves":23,"count":38,"s2":3600,"s3":4450},"86":{"moves":23,"s2":3250,"s3":4350},"87":{"moves":28,"count":2,"s2":4300,"s3":5850},"88":{"moves":21,"count":10,"s2":3850,"s3":4700},"89":{"moves":25,"target":3600,"s2":4400,"s3":5300},"90":{"target":2350,"s2":3500,"s3":4200},"91":{"moves":23,"count":38,"s2":3800,"s3":4550},"92":{"moves":32,"s2":5000,"s3":6800,"light":true},"93":{"moves":28,"count":2,"s2":3950,"s3":5700},"94":{"moves":21,"count":10,"s2":3550,"s3":4450},"95":{"moves":32,"target":2550,"s2":5550,"s3":7300},"96":{"target":3300,"s2":3900,"s3":4700},"97":{"moves":19,"count":38,"s2":3250,"s3":3900},"98":{"moves":30,"s2":4600,"s3":5750,"light":true},"99":{"moves":28,"count":3,"s2":3850,"s3":4900},"100":{"moves":21,"count":11,"s2":3450,"s3":4250},"101":{"moves":31,"target":3600,"s2":4800,"s3":5950},"102":{"target":3350,"s2":4150,"s3":5400},"103":{"moves":19,"count":38,"s2":3350,"s3":4450},"104":{"moves":32,"s2":5150,"s3":7100,"light":true},"105":{"moves":28,"count":2,"s2":4050,"s3":4900},"106":{"moves":21,"count":11,"s2":3750,"s3":4550},"107":{"moves":31,"target":3600,"s2":5350,"s3":6400},"108":{"target":2900,"s2":3550,"s3":4300},"109":{"moves":19,"count":38,"s2":3200,"s3":4100},"110":{"moves":31,"s2":4850,"s3":5800},"111":{"moves":28,"count":3,"s2":4050,"s3":6850},"112":{"moves":21,"count":12,"s2":3700,"s3":4900},"113":{"moves":31,"target":3600,"s2":4750,"s3":5950},"114":{"target":3300,"s2":4100,"s3":4900},"115":{"moves":19,"count":38,"s2":3450,"s3":4150},"116":{"moves":32,"s2":5250,"s3":6300,"light":true},"117":{"moves":28,"count":3,"s2":4350,"s3":5900},"118":{"moves":21,"count":12,"s2":3450,"s3":4400},"119":{"moves":32,"target":3300,"s2":5000,"s3":6750},"120":{"target":2850,"s2":3650,"s3":4450},"121":{"moves":19,"count":38,"s2":3250,"s3":3900},"122":{"moves":32,"s2":4750,"s3":6300,"light":true},"123":{"moves":26,"count":2,"s2":3400,"s3":6100},"124":{"moves":21,"count":12,"s2":3750,"s3":4650},"125":{"moves":32,"target":2400,"s2":5850,"s3":7950,"light":true},"126":{"target":3700,"s2":4250,"s3":5150},"127":{"moves":19,"count":38,"s2":3500,"s3":4500},"128":{"moves":25,"s2":3450,"s3":4150},"129":{"moves":28,"count":3,"s2":4250,"s3":5100},"130":{"moves":23,"count":12,"s2":3800,"s3":4600},"131":{"moves":25,"target":3600,"s2":4650,"s3":5600},"132":{"target":3600,"s2":4150,"s3":5000},"133":{"moves":19,"count":38,"s2":3650,"s3":4400},"134":{"moves":32,"s2":5850,"s3":7400,"light":true},"135":{"moves":28,"count":3,"s2":3950,"s3":5200},"136":{"moves":21,"count":12,"s2":3600,"s3":4500},"137":{"moves":32,"target":3600,"s2":5150,"s3":6350},"138":{"target":3050,"s2":3750,"s3":4500},"139":{"moves":21,"count":38,"s2":3450,"s3":4400},"140":{"moves":30,"s2":4750,"s3":5900,"light":true},"141":{"moves":28,"count":2,"s2":3850,"s3":5150},"142":{"moves":21,"count":12,"s2":4000,"s3":4800},"143":{"moves":27,"target":3600,"s2":5100,"s3":6100},"144":{"target":3500,"s2":4200,"s3":5050},"145":{"moves":19,"count":38,"s2":3650,"s3":4500},"146":{"moves":32,"s2":5050,"s3":6200,"light":true},"147":{"moves":28,"count":2,"s2":4100,"s3":5200},"148":{"moves":19,"count":12,"s2":3500,"s3":4200},"149":{"moves":27,"target":3600,"s2":5050,"s3":6150},"150":{"target":3550,"s2":4300,"s3":5150},"151":{"moves":19,"count":38,"s2":3650,"s3":4400},"152":{"moves":31,"s2":4850,"s3":6100},"153":{"moves":28,"count":2,"s2":4250,"s3":5550},"154":{"moves":21,"count":12,"s2":4050,"s3":5050},"155":{"moves":25,"target":3600,"s2":4200,"s3":5300},"156":{"target":3550,"s2":4150,"s3":5000},"157":{"moves":19,"count":38,"s2":3100,"s3":4450},"158":{"moves":32,"s2":4800,"s3":6200,"light":true},"159":{"moves":28,"count":2,"s2":3400,"s3":5200},"160":{"moves":21,"count":12,"s2":3500,"s3":4500},"161":{"moves":32,"target":3600,"s2":5250,"s3":6300},"162":{"target":3350,"s2":4100,"s3":4950},"163":{"moves":17,"count":38,"s2":3250,"s3":3900},"164":{"moves":30,"s2":5150,"s3":7050,"light":true},"165":{"moves":26,"count":2,"s2":3850,"s3":4900},"166":{"moves":21,"count":12,"s2":4000,"s3":5000},"167":{"moves":32,"target":3600,"s2":5750,"s3":7650},"168":{"target":3350,"s2":4250,"s3":5100},"169":{"moves":19,"count":38,"s2":3450,"s3":4900},"170":{"moves":23,"s2":3450,"s3":4550},"171":{"moves":28,"count":3,"s2":4550,"s3":5850},"172":{"moves":21,"count":12,"s2":3800,"s3":5000},"173":{"moves":25,"target":3600,"s2":4550,"s3":6200},"174":{"target":3250,"s2":4100,"s3":4900},"175":{"moves":17,"count":38,"s2":3350,"s3":4200},"176":{"moves":32,"s2":5950,"s3":7300,"light":true},"177":{"moves":28,"count":3,"s2":4250,"s3":5650},"178":{"moves":21,"count":12,"s2":3500,"s3":4700},"179":{"moves":32,"target":3450,"s2":5350,"s3":6450}};
 const CYCLE = ["score","collect","jelly","drop","special","mix"];
 function makeLevels() {
   const patterns = [
     (r,c) => r>=2 && r<=5 && c>=2 && c<=5,
     (r,c) => r===0||r===N-1||c===0||c===N-1,
-    (r,c) => (r+c)%2===0,
+    (r,c) => (r+c)%3===0,   /* diagonales : chaque bonbon gelé garde des voisins libres */
     (r,c) => r>=5,
     (r,c) => r===3||r===4||c===3||c===4,
     (r,c) => r%2===1,
@@ -577,7 +582,7 @@ function makeLevels() {
     if (kind === "jelly") { L.goals.push({ k:"jelly" }); L.jelly = jellyOf(pat, i >= 42 && !T.light); L.moves += 4; }
     if (kind === "drop") { const n = T.count || Math.min(8, 2 + Math.floor(i/12)); L.goals.push({ k:"drop", count:n }); L.dropMax = n; L.moves += 4; }
     if (kind === "special") { L.goals.push({ k:"special", count: T.count || Math.min(12, 3 + Math.floor(i/12)) }); }
-    if (kind === "mix") { L.goals.push({ k:"jelly" }); L.goals.push({ k:"score", target: T.target || Math.min(3600, 900 + i*35) }); L.jelly = jellyOf(pat, false); L.moves += 4; }
+    if (kind === "mix") { L.goals.push({ k:"jelly" }); L.goals.push({ k:"score", target: T.target || Math.min(3600, 900 + i*35) }); L.jelly = jellyOf(pat, false); if (T.light) L.jelly = L.jelly.filter((_, k) => k % 2 === 0); L.moves += 4; }
     if (T.moves) L.moves = T.moves;
     if (i === 0) L.endOnGoal = true; /* niveau 1 : la partie s'arrête dès l'objectif atteint, coups restants convertis en points */
     L.stars = [T.s2 || (1500 + i*60), T.s3 || (2400 + i*100)];
@@ -619,6 +624,7 @@ function sfx(name, p) {
     else if (name === "bad") { tone(220, .14, "square", .07, 0, 140); }
     else if (name === "pop") { const b = 520 * Math.pow(1.0595, Math.min(12, (p||1)*2)); tone(b, .16, "sine", .13); tone(b*1.5, .12, "triangle", .06, .03); }
     else if (name === "special") { tone(300, .35, "sawtooth", .07, 0, 900); tone(600, .3, "sine", .1, .05, 1200); }
+    else if (name === "ping") { const f = 620 * Math.pow(1.055, Math.min(p || 0, 26)); tone(f, .11, "triangle", .1); tone(f * 2, .08, "sine", .04, .02); }
     else if (name === "boom") { tone(140, .4, "sawtooth", .12, 0, 40); tone(900, .25, "square", .05, 0, 200); }
     else if (name === "win") [523,659,784,1047].forEach((f,i)=>tone(f,.3,"triangle",.13,i*.12));
     else if (name === "lose") [392,330,262].forEach((f,i)=>tone(f,.35,"sine",.12,i*.18));
@@ -822,8 +828,13 @@ function analyseMatches(pref) {
 function swapCells(a,b){ const t=grid[a[0]][a[1]]; grid[a[0]][a[1]]=grid[b[0]][b[1]]; grid[b[0]][b[1]]=t; }
 function isComboSwap(a,b){ const x=grid[a[0]][a[1]], y=grid[b[0]][b[1]]; if(!x||!y) return false; return x.s===S_BOMB || y.s===S_BOMB || (x.s>0 && y.s>0); }
 function isCherry(c){ const d=grid[c[0]][c[1]]; return !!d && d.t===-2; }
+/* bonbon pris dans la gelée : impossible de le déplacer à la main, mais on peut le casser en alignant ses voisins */
+function isFrozen(c){ return !!grid[c[0]][c[1]] && jelly[c[0]][c[1]] > 0; }
+function isLocked(c){ return isCherry(c) || isFrozen(c); }
+let frozenTipAt = 0;
+function frozenTip() { sfx("bad"); if (Date.now() - frozenTipAt > 6000) { frozenTipAt = Date.now(); say("Bonbon gelé : aligne ses voisins pour le casser"); setTimeout(() => say(""), 1800); } }
 function swapIsValid(a,b){
-  if (isCherry(a) || isCherry(b)) return false; /* les cerises ne se déplacent pas à la main : elles tombent seulement */
+  if (isLocked(a) || isLocked(b)) return false; /* cerises et bonbons gelés ne se déplacent pas à la main */
   if (isComboSwap(a,b)) return true;
   swapCells(a,b); const ok = runsOf().length>0; swapCells(a,b); return ok;
 }
@@ -865,17 +876,22 @@ async function clearSet(initial, spawns, combo, ctxInfo) {
   const all = new Map(); const queue = [];
   const add = (r,c) => { if(!inb(r,c)) return; if (grid[r][c] && grid[r][c].t===-2) return; const k=key(r,c); if(!all.has(k)) { all.set(k,[r,c]); if (grid[r][c] && grid[r][c].s>0) queue.push([r,c]); } };
   for (const k of initial) add(Math.floor(k/N), k%N);
-  let hadSpecial = false, hadBomb = false;
+  let hadSpecial = false, hadBomb = false, bombFly = null;
   while (queue.length) {
     const [r,c] = queue.shift(); const cd = grid[r][c]; if (!cd) continue;
     hadSpecial = true; if (cd.s===S_BOMB) hadBomb = true; addFx(cd.s, r, c);
     const info = (ctxInfo && ctxInfo.forced && ctxInfo.forced.has(key(r,c))) ? ctxInfo.forced.get(key(r,c)) : null;
-    for (const [y,x] of effectCells(r,c,cd,info || {})) add(y,x);
+    const eff = effectCells(r,c,cd,info || {});
+    if (cd.s === S_BOMB && !bombFly) bombFly = eff.filter(([y,x]) => inb(y,x) && grid[y][x] && grid[y][x].t >= 0).map(([y,x]) => ({ r:y, c:x, t:grid[y][x].t, s:grid[y][x].s }));
+    for (const [y,x] of eff) add(y,x);
   }
   if (hadSpecial) { sfx(hadBomb ? "boom" : "special"); shake = Math.max(shake, hadBomb ? 14 : 8); }
   const n = all.size;
   const pts = Math.round(n * 10 * (1 + (Math.max(1, combo) - 1) * 0.5)) + (hadSpecial ? 100 : 0);
-  score += pts;
+  /* bombe sur une couleur : les bonbons s'envolent un à un vers la barre d'étoiles (animation visuelle, points répartis à l'arrivée) */
+  const flyers = (bombFly && bombFly.length >= 3 && bombFly.length < n && bombFly.every(f => f.s === 0) && !SIM && save.fx) ? bombFly : null;
+  const bombPart = flyers ? Math.round(pts * flyers.length / n) : 0;
+  score += pts - bombPart;
   sfx("pop", combo);
   let sx=0, sy=0;
   for (const [r,c] of all.values()) {
@@ -889,6 +905,7 @@ async function clearSet(initial, spawns, combo, ctxInfo) {
     sx+=c; sy+=r;
   }
   floats.push({ x:sx/n, y:sy/n, txt:"+"+pts, life:1 });
+  const flight = flyers ? flyToBar(flyers, bombPart) : null;     /* les bonbons restent visibles (superposés) jusqu'à leur envol */
   updateHud();
   await sleep(200);
   for (const sp of spawns || []) {
@@ -899,6 +916,44 @@ async function clearSet(initial, spawns, combo, ctxInfo) {
     if (sp.s===S_BOMB) { unlock("bomb"); save.stats.bombs++; }
     sfx("special");
   }
+  if (flight) await flight;
+}
+
+/* ---------- Bombe : les bonbons de la couleur sortent de leur case et filent dans la barre d'étoiles ---------- */
+function flyToBar(list, totalPts) {
+  return new Promise(resolve => {
+    const layer = $("flyLayer"), stRect = $("stage").getBoundingClientRect(), k = stRect.width / STAGE_W;
+    const cr = cv.getBoundingClientRect(), cs = cr.width / BOARD, sz = Math.round(CELL * cs / k * 0.95), bw = $("barWrap").getBoundingClientRect();
+    const sx = x => (x - stRect.left) / k, sy = y => (y - stRect.top) / k;
+    const pct = Math.min(1, Math.max(0.04, score / level.stars[1]));
+    const tx = sx(bw.left + bw.width * pct) - sz / 2 * 0.45, ty = sy(bw.top + bw.height / 2) - sz / 2 * 0.45;
+    list.sort((a, b) => (a.r * 11 + a.c * 3) % 17 - (b.r * 11 + b.c * 3) % 17);          /* ordre varié */
+    let t0 = 0; const fl = list.map((o, i) => {
+      const cv2 = document.createElement("canvas"); cv2.width = cv2.height = 96; cv2.style.width = cv2.style.height = sz + "px";
+      drawCandy(cv2.getContext("2d"), 48, 48, 96, o.t, 0);
+      const x0 = sx(cr.left + (o.c + .5) * CELL * cs) - sz / 2, y0 = sy(cr.top + (o.r + .5) * CELL * cs) - sz / 2;
+      cv2.style.left = x0 + "px"; cv2.style.top = y0 + "px"; layer.appendChild(cv2);
+      const start = t0; t0 += Math.max(34, 170 * Math.pow(0.86, i));                       /* de plus en plus vite */
+      return { el: cv2, x0, y0, cx: (x0 + tx) / 2 + (i % 2 ? 70 : -70), cy: Math.min(y0, ty) - 60, start, dur: 430, done: false, i };
+    });
+    let arrived = 0; const share = Math.floor(totalPts / list.length), tStart = performance.now();
+    const arrive = f => {
+      f.done = true; f.el.remove(); arrived++; sfx("ping", f.i);
+      score += (arrived === list.length) ? totalPts - share * (list.length - 1) : share; updateHud();
+      const b = $("barWrap"); b.classList.remove("pulse"); void b.offsetWidth; b.classList.add("pulse");
+      if (arrived === list.length) { clearInterval(timer); layer.innerHTML = ""; resolve(); }
+    };
+    const timer = setInterval(() => {
+      const now = performance.now() - tStart;
+      for (const f of fl) {
+        if (f.done) continue; const u = (now - f.start) / f.dur; if (u < 0) { f.el.style.transform = "translateY(" + (Math.sin(now / 70 + f.i) * 3) + "px)"; continue; }
+        if (u >= 1) { arrive(f); continue; }
+        const e = u * u * (1.6 - 0.6 * u);                                                  /* accélération */
+        const x = (1 - e) * (1 - e) * f.x0 + 2 * (1 - e) * e * f.cx + e * e * tx, y = (1 - e) * (1 - e) * f.y0 + 2 * (1 - e) * e * f.cy + e * e * ty;
+        f.el.style.transform = "translate(" + (x - f.x0) + "px," + (y - f.y0) + "px) scale(" + (1 - 0.55 * e) + ") rotate(" + (e * 360) + "deg)";
+      }
+    }, 16);
+  });
 }
 
 /* ---------- Gravité & remplissage ---------- */
@@ -943,7 +998,7 @@ async function resolveBoard(pref) {
 /* ---------- Tentative d'échange ---------- */
 async function trySwap(a, b) {
   if (busy || paused || ended) return;
-  if (isCherry(a) || isCherry(b)) { sfx("bad"); selected = null; return; }
+  if (isLocked(a) || isLocked(b)) { if (isFrozen(a) || isFrozen(b)) frozenTip(); else sfx("bad"); selected = null; return; }
   busy = true; clearHint(); selected = null;
   const A = grid[a[0]][a[1]], B = grid[b[0]][b[1]];
   swapCells(a,b); sfx("swap");
@@ -1124,6 +1179,14 @@ function drawBoard(dt) {
     if (selected && selected[0]===r && selected[1]===c) sc += .08;
     if (d.y < -.5) continue;
     drawCandy(ctx, d.x*CELL+CELL/2, d.y*CELL+CELL/2, CELL, d.t, d.s, sc, 1, tAnim);
+    if (jelly[r][c] > 0 && d.t !== -2) {
+      const ix = d.x*CELL + 6, iy = d.y*CELL + 6, is = CELL - 12;
+      ctx.save(); ctx.beginPath(); ctx.roundRect(ix, iy, is, is, 14);
+      const gr = ctx.createLinearGradient(ix, iy, ix + is, iy + is); gr.addColorStop(0, "rgba(235,252,255,.55)"); gr.addColorStop(1, "rgba(140,215,255,.30)");
+      ctx.fillStyle = gr; ctx.fill(); ctx.lineWidth = 3; ctx.strokeStyle = "rgba(255,255,255,.9)"; ctx.stroke();
+      ctx.strokeStyle = "rgba(255,255,255,.75)"; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(ix + 10, iy + 12); ctx.lineTo(ix + 22, iy + 12); ctx.moveTo(ix + 10, iy + 12); ctx.lineTo(ix + 10, iy + 24); ctx.stroke();
+      ctx.restore();
+    }
   }
   for (let i=effects.length-1;i>=0;i--) { const f=effects[i]; f.life-=dt/f.max; if (f.life<=0){ effects.splice(i,1); continue; }
     const im=IMG[f.name], pr=1-f.life, cx=f.c*CELL+CELL/2, cy=f.r*CELL+CELL/2; let w,h;
@@ -1184,7 +1247,7 @@ cv.addEventListener("pointerdown", ev => {
   if (busy || paused || ended) return;
   const cell = cellAt(ev); if (!cell) return;
   if (hammerOn) { if (!isCherry(cell) && grid[cell[0]][cell[1]]) useHammer(cell); else sfx("bad"); return; }
-  if (isCherry(cell)) { sfx("bad"); selected = null; down = null; return; }
+  if (isLocked(cell)) { if (isFrozen(cell)) frozenTip(); else sfx("bad"); selected = null; down = null; return; }
   try { cv.setPointerCapture(ev.pointerId); } catch(e){}
   down = { cell, x:ev.clientX, y:ev.clientY };
   if (selected) {
