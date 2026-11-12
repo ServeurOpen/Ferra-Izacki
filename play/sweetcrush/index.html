@@ -651,7 +651,7 @@ function applyZoneSkin(n) {                      /* fond + cadre propres à la z
   pk.style.width = (F * k.w) + "px"; pk.style.height = (F * k.h) + "px"; pk.style.left = (size / 2 - F * k.w / 2) + "px"; pk.style.top = (size / 2 - F * k.h / 2) + "px";
 }
 function setBg(name) { if (BGURL[name]) document.body.style.background = "url(" + BGURL[name] + ") center/cover no-repeat, #3a1a7a"; }
-["bomb","cherry","tile-a","tile-b","jelly-1","jelly-2","sparkle","burst","fx-stripe-h","fx-stripe-v","fx-wrap","fx-bomb","fx-combo-1","fx-combo-2","fx-combo-3","fx-combo-4"].forEach(loadImg);
+["jelly/jelly-1-overlay","jelly/jelly-2-overlay","bomb","cherry","tile-a","tile-b","jelly-1","jelly-2","sparkle","burst","fx-stripe-h","fx-stripe-v","fx-wrap","fx-bomb","fx-combo-1","fx-combo-2","fx-combo-3","fx-combo-4"].forEach(loadImg);
 ["btn-pink","btn-blue","btn-green","panel","level-btn","level-btn-locked","board-frame"].forEach(n => { const i = new Image(); i.onload = () => document.body.classList.add("sk-" + n); i.src = "assets/" + n + ".png"; });
 const BGURL = {};
 function loadBg(name) {
@@ -661,7 +661,7 @@ function loadBg(name) {
   i.src = "assets/" + name + ".jpg";
 }
 ["bg-menu","bg-game-1","bg-game-2","bg-game-3"].forEach(loadBg);
-CNAMES.forEach((c,i) => { loadImg("candy-"+i+"-"+c); loadImg("stripe-h-"+c); loadImg("stripe-v-"+c); loadImg("wrap-"+c); });
+CNAMES.forEach((c,i) => { loadImg("jelly/jelly-1-candy-"+c); loadImg("jelly/jelly-2-candy-"+c); loadImg("candy-"+i+"-"+c); loadImg("stripe-h-"+c); loadImg("stripe-v-"+c); loadImg("wrap-"+c); });
 function spriteFor(type, special) {
   if (special === S_BOMB) return IMG["bomb"];
   if (type === -2) return IMG["cherry"];
@@ -1158,8 +1158,10 @@ function drawBoard(dt) {
     const tile = IMG[(r+c)%2 ? "tile-b" : "tile-a"];
     if (tile) ctx.drawImage(tile, c*CELL, r*CELL, CELL, CELL);
     else { ctx.fillStyle = (r+c)%2 ? "rgba(255,255,255,.08)" : "rgba(255,255,255,.17)"; ctx.fillRect(c*CELL, r*CELL, CELL, CELL); }
-    if (jelly[r] && jelly[r][c] > 0 && IMG["jelly-"+jelly[r][c]]) ctx.drawImage(IMG["jelly-"+jelly[r][c]], c*CELL, r*CELL, CELL, CELL);
-    else if (jelly[r] && jelly[r][c] > 0) {
+    const JL = jelly[r] ? jelly[r][c] : 0, JOV = JL > 0 ? IMG["jelly/jelly-" + JL + "-overlay"] : null;
+    if (JOV) { if (!grid[r][c]) ctx.drawImage(JOV, c*CELL - 3, r*CELL - 3, CELL + 6, CELL + 6); }       /* case vide : la gelée reste visible */
+    else if (JL > 0 && IMG["jelly-"+JL]) ctx.drawImage(IMG["jelly-"+JL], c*CELL, r*CELL, CELL, CELL);
+    else if (JL > 0) {
       ctx.fillStyle = jelly[r][c]>1 ? "rgba(120,235,255,.75)" : "rgba(160,245,255,.5)";
       ctx.fillRect(c*CELL+3, r*CELL+3, CELL-6, CELL-6);
       ctx.strokeStyle = "rgba(255,255,255,.9)"; ctx.lineWidth = jelly[r][c]>1 ? 4 : 2; ctx.strokeRect(c*CELL+4, r*CELL+4, CELL-8, CELL-8);
@@ -1178,8 +1180,11 @@ function drawBoard(dt) {
     if (hintCells && hintCells.some(h=>h[0]===r&&h[1]===c)) sc += Math.sin(tAnim*10)*.09;
     if (selected && selected[0]===r && selected[1]===c) sc += .08;
     if (d.y < -.5) continue;
+    const JLv = jelly[r][c], jcomb = (JLv > 0 && d.s === 0 && d.t >= 0) ? IMG["jelly/jelly-" + JLv + "-candy-" + CNAMES[d.t]] : null, jov = JLv > 0 ? IMG["jelly/jelly-" + JLv + "-overlay"] : null;
+    if (jcomb) { const z = CELL * 1.15 * sc, cx0 = d.x*CELL + CELL/2, cy0 = d.y*CELL + CELL/2; ctx.drawImage(jcomb, cx0 - z/2, cy0 - z/2, z, z); continue; }
     drawCandy(ctx, d.x*CELL+CELL/2, d.y*CELL+CELL/2, CELL, d.t, d.s, sc, 1, tAnim);
-    if (jelly[r][c] > 0 && d.t !== -2) {
+    if (jov && d.t !== -2) { const z = CELL * 1.12 * sc, cx0 = d.x*CELL + CELL/2, cy0 = d.y*CELL + CELL/2; ctx.drawImage(jov, cx0 - z/2, cy0 - z/2, z, z); continue; }
+    if (JLv > 0 && d.t !== -2) {
       const ix = d.x*CELL + 6, iy = d.y*CELL + 6, is = CELL - 12;
       ctx.save(); ctx.beginPath(); ctx.roundRect(ix, iy, is, is, 14);
       const gr = ctx.createLinearGradient(ix, iy, ix + is, iy + is); gr.addColorStop(0, "rgba(235,252,255,.55)"); gr.addColorStop(1, "rgba(140,215,255,.30)");
