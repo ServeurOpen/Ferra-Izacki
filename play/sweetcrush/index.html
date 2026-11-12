@@ -34,40 +34,44 @@
   .btn.green { background:linear-gradient(#8bec6a,#2faa2a); box-shadow:0 6px 0 #166a14, 0 10px 18px rgba(0,0,0,.35); }
   .btn.small { font-size:18px; padding:8px 20px; min-width:0; }
   #titleCanvas { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
-  #titleBtns { margin-top:80px; display:flex; flex-direction:column; align-items:center; z-index:2; }
+  #sTitle { justify-content:center; }
+  #titleBtns { margin-top:36px; display:flex; flex-direction:column; align-items:center; z-index:2; }
   .panel { background:rgba(40,10,80,.55); border:3px solid rgba(255,255,255,.35); border-radius:22px;
     padding:14px 22px; backdrop-filter: blur(4px); }
   h2 { margin:26px 0 8px; font-size:44px; text-shadow:0 4px 0 #8a1450; }
-  #levelGrid { display:grid; grid-template-columns:repeat(5,100px); gap:10px; margin:14px 0; }
+  #levelGrid { display:grid; grid-template-columns:repeat(5,100px); gap:10px; margin:14px 0; flex:1 1 0; min-height:0; overflow-y:auto; align-content:start; }
+  #sLevels { padding-bottom:26px; }
+  #sLevels h2 { margin-top:104px; }
+  .sp { flex:1 1 0; min-height:14px; }
+  body.sk-board-frame .sp { min-height:104px; }
   .lv { width:100px; height:108px; border-radius:20px; border:0; font:inherit; color:#fff; cursor:pointer;
     background:linear-gradient(#ff9bd8,#d6379a); box-shadow:0 5px 0 #86175c; font-size:30px; font-weight:800; position:relative; }
   .lv:hover { filter:brightness(1.12); }
   .lv.locked { background:linear-gradient(#8a7aa8,#5d4f78); box-shadow:0 5px 0 #3a2f50; cursor:default; opacity:.7; }
   .lv .st { position:absolute; bottom:2px; left:0; right:0; font-size:17px; letter-spacing:1px; color:#ffe14d; text-shadow:0 1px 0 #7a4a00; }
   .lv .st i { color:rgba(255,255,255,.35); font-style:normal; }
-  #hud { width:600px; margin-top:16px; display:grid; grid-template-columns:1fr 1.4fr 1fr; gap:12px; align-items:stretch; }
+  #hud { width:600px; margin-top:22px; display:grid; grid-template-columns:1fr 1.4fr 1fr; gap:12px; align-items:stretch; }
   .hbox { text-align:center; padding:8px 6px; }
   .hbox .lab { font-size:14px; opacity:.85; letter-spacing:1px; text-transform:uppercase; }
-  .hbox .val { font-size:36px; font-weight:900; text-shadow:0 3px 0 rgba(0,0,0,.35); line-height:1.1; }
+  .hbox .val { font-size:40px; font-weight:900; text-shadow:0 3px 0 rgba(0,0,0,.35); line-height:1.1; }
   #goals { font-size:19px; line-height:1.25; font-weight:800; }
   #goals .g { display:block; white-space:nowrap; }
   #goals img { width:24px; height:24px; vertical-align:middle; margin-right:4px; }
   #barWrap { width:600px; margin:12px 0 4px; height:16px; border-radius:10px; background:rgba(0,0,0,.35); overflow:hidden; }
   #bar { height:100%; width:0%; background:linear-gradient(90deg,#ffe14d,#ff7ac6); transition:width .3s; }
   #starMarks { width:600px; position:relative; height:18px; font-size:15px; color:#ffe14d; }
-  #boardWrap { position:relative; width:512px; height:512px; margin-top:6px; border-radius:20px;
+  #boardWrap { position:relative; width:512px; height:512px; margin:0; border-radius:20px;
     background:rgba(30,6,70,.55); box-shadow:0 0 0 6px rgba(255,255,255,.3), 0 14px 30px rgba(0,0,0,.45); }
   #board { position:absolute; inset:0; width:512px; height:512px; touch-action:none; border-radius:20px; }
   #msg { position:absolute; left:0; right:0; top:48%; text-align:center; font-size:54px; font-weight:900;
     text-shadow:0 5px 0 #8a1450, 0 10px 22px rgba(0,0,0,.5); pointer-events:none; opacity:0; transition:opacity .25s, transform .25s; transform:scale(.6); }
   #msg.on { opacity:1; transform:scale(1); }
-  #gameBtns { margin-top:14px; display:flex; gap:10px; }
-  #logoImg { width:540px; margin:56px 0 0; filter:drop-shadow(0 10px 14px rgba(0,0,0,.35)); animation: floaty 3.2s ease-in-out infinite; z-index:2; }
+  #gameBtns { margin:0 0 26px; display:flex; gap:10px; }
+  #logoImg { width:560px; margin:0; filter:drop-shadow(0 10px 14px rgba(0,0,0,.35)); animation: floaty 3.2s ease-in-out infinite; z-index:2; }
   @keyframes floaty { 50% { transform:translateY(-8px) rotate(-1deg); } }
   #frameImg { display:none; position:absolute; left:-94px; top:-94px; width:700px; height:700px; pointer-events:none; z-index:3; }
   body.sk-board-frame #frameImg { display:block; }
-  body.sk-board-frame #boardWrap { margin-top:98px; box-shadow:none; }
-  body.sk-board-frame #gameBtns { position:absolute; bottom:6px; left:0; right:0; justify-content:center; margin:0; }
+  body.sk-board-frame #boardWrap { box-shadow:none; }
   body.sk-btn-pink .btn { background:url(assets/btn-pink.png) center/100% 100% no-repeat; box-shadow:none; border-radius:0; min-height:84px; text-shadow:0 3px 0 rgba(0,0,0,.4); }
   body.sk-btn-blue .btn.alt { background:url(assets/btn-blue.png) center/100% 100% no-repeat; }
   body.sk-btn-green .btn.green { background:url(assets/btn-green.png) center/100% 100% no-repeat; }
@@ -85,8 +89,13 @@
   .badgewrap h3 { position:absolute; left:0; right:0; top:50%; transform:translateY(-58%); margin:0; font-size:34px; color:#fff; text-shadow:0 3px 0 #a3125e, 0 0 10px rgba(163,18,94,.6); }
   .stars img { width:84px; height:84px; margin:0 2px; }
   .card input { display:block; width:100%; margin:8px 0; padding:12px 16px; font:inherit; font-size:20px; border:0; border-radius:16px; background:#fff; color:#3a1a7a; -webkit-user-select:text; user-select:text; touch-action:auto; }
+  .pw { position:relative; display:flow-root; }
+  .pw input { padding-right:64px; }
+  #lEye { position:absolute; right:10px; top:50%; transform:translateY(-50%); border:0; background:none; font-size:28px; line-height:1; cursor:pointer; padding:6px 8px; filter:grayscale(.2); }
   #cloudBadge { position:absolute; bottom:12px; left:0; right:0; text-align:center; font-size:15px; text-shadow:0 2px 4px rgba(0,0,0,.45); z-index:3; }
-  #mLogin .card { padding-top:84px; }
+  #mLogin .card { padding:100px 70px 96px; }
+  #mLogin .card h3 { margin-bottom:14px; }
+  #mLogin .card p { margin:4px 0; text-shadow:0 2px 3px rgba(40,10,90,.9); }
   #mailBtn { position:absolute; top:12px; right:12px; z-index:8; border:0; background:none; padding:0; cursor:pointer; filter:drop-shadow(0 6px 8px rgba(0,0,0,.4)); transition:transform .12s; }
   #mailBtn:hover { transform:scale(1.08) rotate(-3deg); }
   #mailBtn svg { display:block; width:122px; height:100px; }
@@ -162,7 +171,9 @@
     </div>
     <div id="barWrap"><div id="bar"></div></div>
     <div id="starMarks"></div>
+    <div class="sp"></div>
     <div id="boardWrap"><canvas id="board" width="512" height="512"></canvas><img id="frameImg" src="assets/board-frame.png" alt=""><div id="msg"></div></div>
+    <div class="sp"></div>
     <div id="gameBtns">
       <button class="btn small alt icon" id="bPause" title="Pause">⏸</button>
       <button class="btn small icon" id="bHint" title="Indice">💡</button>
@@ -196,7 +207,7 @@
   <div id="mLogin" class="modal"><div class="card"><h3>Compte Izacki</h3>
     <p style="font-size:16px">Connecte-toi pour <b>sauvegarder ta progression automatiquement</b> et la retrouver sur tous tes appareils.</p>
     <input id="lEmail" type="email" placeholder="E-mail" autocomplete="username" autocapitalize="none">
-    <input id="lPass" type="password" placeholder="Mot de passe" autocomplete="current-password">
+    <div class="pw"><input id="lPass" type="password" placeholder="Mot de passe" autocomplete="current-password"><button type="button" id="lEye" aria-label="Afficher le mot de passe" title="Afficher / masquer le mot de passe">👁️</button></div>
     <p id="lErr" style="color:#ffd0d0;min-height:22px;font-size:15px;margin:4px 0"></p>
     <button class="btn green" id="lGo">Se connecter</button><br>
     <button class="btn alt small" id="lCancel">Annuler</button>
@@ -645,7 +656,7 @@ function drawCandy(g, cx, cy, size, type, special, scale=1, alpha=1, t=0) {
   g.save(); g.translate(cx, cy); g.scale(scale, scale); g.globalAlpha = alpha;
   if (type === -2 && !IMG['cherry']) { drawCherry(g, size); g.restore(); return; }
   const spr = spriteFor(type, special);
-  if (spr) { const d = size * .92; g.drawImage(spr, -d/2, -d/2, d, d); g.restore(); return; }
+  if (spr) { const d = size * .98; g.drawImage(spr, -d/2, -d/2, d, d); g.restore(); return; }
   const r = size * .38;
   if (special === S_BOMB) {
     const gr = g.createRadialGradient(-r*.3,-r*.35,r*.1,0,0,r*1.15);
@@ -1180,7 +1191,7 @@ function buildLevelMap() {
   });
   $("totalStars").textContent = "★ " + total + " / " + (LEVEL_COUNT*3);
   // le contenu défile s'il dépasse
-  g.style.maxHeight = "620px"; g.style.overflowY = "auto"; g.style.padding = "6px";
+  g.style.padding = "6px";
 }
 function openLevels() { if (IMG["bg-menu"]) setBg("bg-menu"); buildLevelMap(); show("sLevels"); }
 function buildAch() {
@@ -1211,8 +1222,9 @@ $("oFx").onclick = () => { save.fx = !save.fx; writeSave(); optLabels(); };
 $("oAccount").onclick = () => {
   if (cloudSession && cloudSource === "web") { cloudLogout(); return; }
   if (cloudSession) return;
-  $("lErr").textContent = ""; modal("mOpt", false); modal("mLogin", true);
+  $("lErr").textContent = ""; modal("mOpt", false); modal("mLogin", true); $("lPass").type = "password"; $("lEye").textContent = "👁️";
 };
+$("lEye").onclick = () => { const i = $("lPass"), show = i.type === "password"; i.type = show ? "text" : "password"; $("lEye").textContent = show ? "🙈" : "👁️"; };
 $("lCancel").onclick = () => { modal("mLogin", false); modal("mOpt", true); };
 $("lGo").onclick = async () => {
   const email = $("lEmail").value.trim(), pass = $("lPass").value;
@@ -1247,16 +1259,20 @@ const tcv = $("titleCanvas"), tctx = tcv.getContext("2d");
 const floaters = Array.from({length:22}, (_,i)=>({ x:Math.random()*640, y:Math.random()*900, v:20+Math.random()*40, t:i%6, s:Math.random()<.2?1+rnd(3):0, sz:50+Math.random()*50, ph:Math.random()*6 }));
 function drawTitle(dt) {
   if (!$("sTitle").classList.contains("on")) return;
-  tctx.clearRect(0,0,640,900);
-  for (const f of floaters) { f.y -= f.v*dt; f.ph += dt; if (f.y < -80) { f.y = 940; f.x = Math.random()*640; }
+  tctx.clearRect(0,0,tcv.width,tcv.height);
+  for (const f of floaters) { f.y -= f.v*dt; f.ph += dt; if (f.y < -80) { f.y = STAGE_H + 40; f.x = Math.random()*STAGE_W; }
     drawCandy(tctx, f.x + Math.sin(f.ph)*20, f.y, f.sz, f.t, f.s, 1, .55, f.ph); }
 }
 
 /* ---------- Mise à l'échelle de la scène ---------- */
+let STAGE_W = 640, STAGE_H = 900;
 function fit() {
   const vv = window.visualViewport, w = vv ? vv.width : window.innerWidth, h = vv ? vv.height : window.innerHeight;
-  const s = Math.min(w/640, h/900);
-  $("stage").style.transform = "translate(-50%,-50%) scale(" + s + ")";
+  const s = Math.min(w / 596, h / 900);               /* 596 px de large mini, 900 de haut mini */
+  STAGE_W = w / s; STAGE_H = h / s;                   /* la scène prend tout l'écran : on ajoute de l'espace, pas des bandes */
+  const st = $("stage"); st.style.width = STAGE_W + "px"; st.style.height = STAGE_H + "px";
+  st.style.transform = "translate(-50%,-50%) scale(" + s + ")";
+  if (typeof tcv !== "undefined") { tcv.width = Math.round(STAGE_W); tcv.height = Math.round(STAGE_H); }
 }
 window.addEventListener("resize", fit); window.addEventListener("orientationchange", fit); fit();
 document.addEventListener("contextmenu", e => e.preventDefault());
