@@ -63,7 +63,7 @@
   #starMarks { width:560px; position:relative; height:18px; font-size:15px; color:#ffe14d; }
   #boardWrap { position:relative; width:512px; height:512px; margin:0; border-radius:20px;
     background:rgba(30,6,70,.55); box-shadow:0 0 0 6px rgba(255,255,255,.3), 0 14px 30px rgba(0,0,0,.45); }
-  #board { position:absolute; inset:0; width:512px; height:512px; touch-action:none; border-radius:20px; }
+  #board { position:absolute; inset:0; width:100%; height:100%; touch-action:none; border-radius:20px; }
   #msg { position:absolute; left:0; right:0; top:48%; text-align:center; font-size:54px; font-weight:900;
     text-shadow:0 5px 0 #8a1450, 0 10px 22px rgba(0,0,0,.5); pointer-events:none; opacity:0; transition:opacity .25s, transform .25s; transform:scale(.6); }
   #msg.on { opacity:1; transform:scale(1); }
@@ -71,6 +71,8 @@
   #logoImg { width:560px; margin:0; filter:drop-shadow(0 10px 14px rgba(0,0,0,.35)); animation: floaty 3.2s ease-in-out infinite; z-index:2; }
   @keyframes floaty { 50% { transform:translateY(-8px) rotate(-1deg); } }
   #frameImg { display:none; position:absolute; left:-94px; top:-94px; width:700px; height:700px; pointer-events:none; z-index:3; }
+  #pocket { position:absolute; background:rgba(30,6,70,.5); border-radius:16px; z-index:0; pointer-events:none; }
+  #board { z-index:1; }
   body.sk-board-frame #frameImg { display:block; }
   body.sk-board-frame #boardWrap { box-shadow:none; }
   body.sk-btn-pink .btn { background:url(assets/btn-pink.png) center/100% 100% no-repeat; box-shadow:none; border-radius:0; min-height:84px; text-shadow:0 3px 0 rgba(0,0,0,.4); }
@@ -194,7 +196,7 @@
     <div id="barWrap"><div id="bar"></div></div>
     <div id="starMarks"></div>
     <div class="sp"></div>
-    <div id="boardWrap"><canvas id="board" width="512" height="512"></canvas><img id="frameImg" src="assets/board-frame.png" alt=""><div id="msg"></div></div>
+    <div id="boardWrap"><div id="pocket"></div><canvas id="board" width="512" height="512"></canvas><img id="frameImg" src="assets/board-frame.png" alt=""><div id="msg"></div></div>
     <div class="sp"></div>
     <div id="gameBtns">
       <button class="btn small alt icon" id="bPause" title="Pause">⏸</button>
@@ -586,6 +588,8 @@ function makeLevels() {
 const MAPS = [{"z":1,"a":1,"b":10,"r":0.5335,"p":[[0.381,0.853],[0.674,0.746],[0.292,0.659],[0.696,0.557],[0.277,0.478],[0.68,0.402],[0.3,0.32],[0.684,0.251],[0.302,0.177],[0.553,0.1]],"d":[0.203,0.199,0.195,0.191,0.187,0.183,0.178,0.174,0.17,0.166]},{"z":2,"a":11,"b":20,"r":0.5335,"p":[[0.462,0.898],[0.64,0.792],[0.346,0.7],[0.64,0.604],[0.335,0.517],[0.604,0.426],[0.335,0.339],[0.602,0.254],[0.352,0.18],[0.51,0.091]],"d":[0.181,0.178,0.175,0.172,0.169,0.166,0.162,0.159,0.156,0.153]},{"z":3,"a":21,"b":30,"r":0.5335,"p":[[0.467,0.871],[0.64,0.765],[0.34,0.675],[0.611,0.594],[0.327,0.503],[0.632,0.427],[0.359,0.347],[0.623,0.265],[0.307,0.191],[0.51,0.104]],"d":[0.17,0.168,0.166,0.164,0.162,0.16,0.158,0.156,0.154,0.152]},{"z":4,"a":31,"b":40,"r":0.5335,"p":[[0.453,0.873],[0.651,0.769],[0.316,0.686],[0.627,0.596],[0.294,0.507],[0.629,0.427],[0.345,0.337],[0.64,0.255],[0.335,0.18],[0.506,0.092]],"d":[0.189,0.187,0.184,0.182,0.179,0.177,0.174,0.172,0.169,0.167]},{"z":5,"a":41,"b":50,"r":0.5335,"p":[[0.436,0.871],[0.645,0.759],[0.281,0.663],[0.652,0.576],[0.315,0.494],[0.633,0.413],[0.318,0.333],[0.613,0.253],[0.334,0.175],[0.523,0.088]],"d":[0.178,0.175,0.172,0.169,0.166,0.163,0.16,0.156,0.153,0.15]},{"z":6,"a":51,"b":60,"r":0.5335,"p":[[0.44,0.886],[0.638,0.772],[0.336,0.679],[0.657,0.596],[0.344,0.515],[0.618,0.434],[0.334,0.361],[0.631,0.284],[0.338,0.217],[0.499,0.132]],"d":[0.2,0.195,0.189,0.184,0.179,0.174,0.168,0.163,0.158,0.153]},{"z":7,"a":61,"b":70,"r":0.5334,"p":[[0.496,0.922],[0.319,0.796],[0.631,0.701],[0.332,0.607],[0.612,0.516],[0.319,0.43],[0.609,0.342],[0.349,0.25],[0.601,0.164],[0.499,0.066]],"d":[0.173,0.17,0.168,0.165,0.162,0.16,0.157,0.155,0.152,0.149]},{"z":8,"a":71,"b":80,"r":0.5334,"p":[[0.434,0.902],[0.67,0.771],[0.294,0.682],[0.673,0.595],[0.303,0.506],[0.659,0.416],[0.291,0.328],[0.633,0.235],[0.322,0.162],[0.525,0.066]],"d":[0.173,0.169,0.164,0.16,0.156,0.151,0.147,0.143,0.138,0.134]},{"z":9,"a":81,"b":90,"r":0.5334,"p":[[0.425,0.929],[0.633,0.793],[0.255,0.706],[0.596,0.619],[0.31,0.524],[0.637,0.43],[0.376,0.34],[0.641,0.249],[0.36,0.165],[0.521,0.071]],"d":[0.186,0.181,0.176,0.171,0.166,0.16,0.155,0.15,0.145,0.14]},{"z":10,"a":91,"b":100,"r":0.5334,"p":[[0.442,0.897],[0.666,0.778],[0.298,0.693],[0.644,0.6],[0.303,0.511],[0.657,0.42],[0.289,0.33],[0.622,0.238],[0.302,0.149],[0.502,0.07]],"d":[0.17,0.167,0.164,0.16,0.157,0.154,0.151,0.148,0.144,0.141]},{"z":11,"a":101,"b":120,"r":0.3333,"p":[[0.432,0.932],[0.669,0.881],[0.311,0.833],[0.672,0.784],[0.321,0.741],[0.664,0.694],[0.284,0.651],[0.654,0.606],[0.3,0.562],[0.682,0.516],[0.336,0.472],[0.667,0.426],[0.325,0.384],[0.674,0.335],[0.336,0.291],[0.655,0.243],[0.331,0.204],[0.628,0.155],[0.287,0.11],[0.449,0.061]],"d":[0.164,0.163,0.162,0.161,0.161,0.16,0.159,0.158,0.157,0.157,0.156,0.155,0.154,0.153,0.153,0.152,0.151,0.15,0.149,0.148]},{"z":12,"a":121,"b":140,"r":0.3333,"p":[[0.511,0.941],[0.343,0.877],[0.654,0.826],[0.328,0.783],[0.626,0.736],[0.347,0.691],[0.661,0.644],[0.359,0.599],[0.644,0.554],[0.319,0.511],[0.626,0.46],[0.383,0.414],[0.648,0.367],[0.368,0.322],[0.649,0.277],[0.39,0.23],[0.624,0.184],[0.391,0.138],[0.654,0.092],[0.459,0.052]],"d":[0.164,0.163,0.162,0.161,0.159,0.158,0.157,0.156,0.155,0.153,0.152,0.151,0.15,0.148,0.147,0.146,0.145,0.143,0.142,0.141]},{"z":13,"a":141,"b":160,"r":0.3333,"p":[[0.504,0.949],[0.325,0.89],[0.67,0.842],[0.302,0.792],[0.669,0.754],[0.325,0.707],[0.685,0.662],[0.309,0.613],[0.68,0.572],[0.334,0.525],[0.683,0.479],[0.342,0.431],[0.671,0.383],[0.307,0.334],[0.644,0.293],[0.334,0.243],[0.601,0.192],[0.323,0.142],[0.664,0.101],[0.496,0.048]],"d":[0.158,0.157,0.157,0.156,0.156,0.155,0.154,0.154,0.153,0.153,0.152,0.152,0.151,0.151,0.15,0.149,0.149,0.148,0.148,0.147]},{"z":14,"a":161,"b":180,"r":0.3333,"p":[[0.465,0.942],[0.653,0.884],[0.319,0.836],[0.664,0.794],[0.314,0.75],[0.653,0.707],[0.305,0.661],[0.667,0.617],[0.337,0.574],[0.681,0.532],[0.312,0.489],[0.64,0.447],[0.336,0.404],[0.673,0.363],[0.351,0.324],[0.616,0.281],[0.336,0.24],[0.635,0.201],[0.351,0.169],[0.51,0.134]],"d":[0.161,0.16,0.159,0.157,0.156,0.155,0.154,0.153,0.152,0.151,0.15,0.149,0.148,0.147,0.146,0.145,0.143,0.142,0.141,0.14]}];
 /* couleurs moyennes du haut / du bas de chaque carte : servent à fondre la jonction entre deux zones */
 const SEAM = {"1":["193,162,230","214,130,109"],"2":["102,216,153","123,163,74"],"3":["195,158,183","165,82,36"],"4":["226,169,238","245,171,214"],"5":["150,115,240","158,134,201"],"6":["225,142,191","188,131,120"],"7":["92,202,186","155,164,96"],"8":["206,129,224","171,104,130"],"9":["149,165,186","223,179,121"],"10":["227,141,149","197,123,42"],"11":["63,226,244","223,148,151"],"12":["92,187,220","219,203,49"],"13":["70,49,170","146,42,134"],"14":["146,169,245","191,151,78"]};
+const ZF = {"1":{"cx":0.4975,"cy":0.5015,"w":0.745,"h":0.725},"2":{"cx":0.4985,"cy":0.508,"w":0.755,"h":0.684},"3":{"cx":0.4975,"cy":0.498,"w":0.733,"h":0.69},"4":{"cx":0.497,"cy":0.5125,"w":0.756,"h":0.719},"5":{"cx":0.4925,"cy":0.4945,"w":0.725,"h":0.713},"6":{"cx":0.498,"cy":0.513,"w":0.794,"h":0.734},"7":{"cx":0.494,"cy":0.5145,"w":0.746,"h":0.723},"8":{"cx":0.4975,"cy":0.507,"w":0.735,"h":0.738},"9":{"cx":0.499,"cy":0.495,"w":0.746,"h":0.742},"10":{"cx":0.494,"cy":0.493,"w":0.746,"h":0.716},"11":{"cx":0.496,"cy":0.502,"w":0.75,"h":0.718},"12":{"cx":0.4895,"cy":0.507,"w":0.729,"h":0.736},"13":{"cx":0.4985,"cy":0.4875,"w":0.727,"h":0.705},"14":{"cx":0.4985,"cy":0.4975,"w":0.725,"h":0.709}};
+function zoneOf(n) { return n <= 100 ? Math.ceil(n / 10) : 11 + Math.floor((n - 101) / 20); }
 const LEVELS = makeLevels();
 
 /* ---------- Utilitaires ---------- */
@@ -627,6 +631,19 @@ function sfx(name, p) {
 const CNAMES = ["rouge","orange","jaune","vert","bleu","violet"];
 const IMG = {};
 function loadImg(name) { const i = new Image(); i.onload = () => { IMG[name] = i; }; i.onerror = () => {}; i.src = "assets/" + name + ".png"; }
+function setBgUrl(url) { document.body.style.background = "url(" + url + ") center/cover no-repeat, #3a1a7a"; }
+function applyZoneSkin(n) {                      /* fond + cadre propres à la zone du niveau (voir carte des niveaux) */
+  const z = zoneOf(n), zz = String(z).padStart(2, "0"), k = ZF[z], F = 700;
+  const bg = new Image(); bg.onload = () => { if ($("sGame").classList.contains("on")) setBgUrl(bg.src); }; bg.onerror = () => { const b2 = new Image(); b2.onload = () => setBgUrl(b2.src); b2.src = "assets/zones/bg-game-zone-" + zz + ".png"; }; bg.src = "assets/zones/bg-game-zone-" + zz + ".jpg";
+  const wrap = $("boardWrap"), fr = $("frameImg"), pk = $("pocket");
+  if (!k) return;
+  const size = Math.min(BOARD, F * Math.min(k.w, k.h) * 0.995);
+  wrap.style.width = wrap.style.height = size + "px";
+  fr.onerror = () => { fr.onerror = null; fr.src = "assets/board-frame.png"; fr.style.left = fr.style.top = -((F - size) / 2) + "px"; };
+  fr.src = "assets/zones/board-frame-zone-" + zz + ".png"; fr.style.width = fr.style.height = F + "px";
+  fr.style.left = (size / 2 - F * k.cx) + "px"; fr.style.top = (size / 2 - F * k.cy) + "px";
+  pk.style.width = (F * k.w) + "px"; pk.style.height = (F * k.h) + "px"; pk.style.left = (size / 2 - F * k.w / 2) + "px"; pk.style.top = (size / 2 - F * k.h / 2) + "px";
+}
 function setBg(name) { if (BGURL[name]) document.body.style.background = "url(" + BGURL[name] + ") center/cover no-repeat, #3a1a7a"; }
 ["bomb","cherry","tile-a","tile-b","jelly-1","jelly-2","sparkle","burst","fx-stripe-h","fx-stripe-v","fx-wrap","fx-bomb","fx-combo-1","fx-combo-2","fx-combo-3","fx-combo-4"].forEach(loadImg);
 ["btn-pink","btn-blue","btn-green","panel","level-btn","level-btn-locked","board-frame"].forEach(n => { const i = new Image(); i.onload = () => document.body.classList.add("sk-" + n); i.src = "assets/" + n + ".png"; });
@@ -1192,7 +1209,7 @@ cv.addEventListener("pointercancel", () => { down = null; });
 /* ============================================================
    ÉCRANS & FLUX
    ============================================================ */
-function show(id) { for (const s of document.querySelectorAll(".screen")) s.classList.remove("on"); $(id).classList.add("on"); $("mailBtn").style.display = (id === "sTitle" || id === "sLevels") ? "block" : "none"; if (id !== "sGame") hammerOn = false; else updateBoosterUi(); }
+function show(id) { for (const s of document.querySelectorAll(".screen")) s.classList.remove("on"); $(id).classList.add("on"); $("mailBtn").style.display = (id === "sTitle" || id === "sLevels") ? "block" : "none"; if (id === "sTitle") setBg("bg-menu"); if (id !== "sGame") hammerOn = false; else updateBoosterUi(); }
 function modal(id, on) { $(id).classList.toggle("on", on); }
 
 function startLevel(i) {
@@ -1202,7 +1219,7 @@ function startLevel(i) {
   initBoard(); buildStarMarks(); updateHud(); say("");
   modal("mEnd", false); modal("mPause", false);
   show("sGame"); resetIdle();
-  { const bgs=["bg-game-1","bg-game-2","bg-game-3"].filter(n=>IMG[n]); if (bgs.length) setBg(bgs[levelIdx % bgs.length]); }
+  applyZoneSkin(level.n);
   const goalTxt = level.goals.map(goalSentence).join(" + ");
   say("Niveau "+level.n); setTimeout(()=>{ say(goalTxt); setTimeout(()=>say(""),1400); }, 900);
 }
