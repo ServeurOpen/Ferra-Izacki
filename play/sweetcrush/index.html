@@ -50,23 +50,24 @@
   .lv.locked { background:linear-gradient(#8a7aa8,#5d4f78); box-shadow:0 5px 0 #3a2f50; cursor:default; opacity:.7; }
   .lv .st { position:absolute; bottom:2px; left:0; right:0; font-size:17px; letter-spacing:1px; color:#ffe14d; text-shadow:0 1px 0 #7a4a00; }
   .lv .st i { color:rgba(255,255,255,.35); font-style:normal; }
-  #hud { width:600px; margin-top:22px; display:grid; grid-template-columns:1fr 1.4fr 1fr; gap:12px; align-items:stretch; }
+  .spt { flex:1 1 0; min-height:14px; max-height:100px; }
+  #hud { width:560px; margin-top:0; display:grid; grid-template-columns:1fr 1.4fr 1fr; gap:12px; align-items:stretch; }
   .hbox { text-align:center; padding:8px 6px; }
   .hbox .lab { font-size:14px; opacity:.85; letter-spacing:1px; text-transform:uppercase; }
   .hbox .val { font-size:40px; font-weight:900; text-shadow:0 3px 0 rgba(0,0,0,.35); line-height:1.1; }
   #goals { font-size:19px; line-height:1.25; font-weight:800; }
   #goals .g { display:block; white-space:nowrap; }
   #goals img { width:24px; height:24px; vertical-align:middle; margin-right:4px; }
-  #barWrap { width:600px; margin:12px 0 4px; height:16px; border-radius:10px; background:rgba(0,0,0,.35); overflow:hidden; }
+  #barWrap { width:560px; margin:12px 0 4px; height:16px; border-radius:10px; background:rgba(0,0,0,.35); overflow:hidden; }
   #bar { height:100%; width:0%; background:linear-gradient(90deg,#ffe14d,#ff7ac6); transition:width .3s; }
-  #starMarks { width:600px; position:relative; height:18px; font-size:15px; color:#ffe14d; }
+  #starMarks { width:560px; position:relative; height:18px; font-size:15px; color:#ffe14d; }
   #boardWrap { position:relative; width:512px; height:512px; margin:0; border-radius:20px;
     background:rgba(30,6,70,.55); box-shadow:0 0 0 6px rgba(255,255,255,.3), 0 14px 30px rgba(0,0,0,.45); }
   #board { position:absolute; inset:0; width:512px; height:512px; touch-action:none; border-radius:20px; }
   #msg { position:absolute; left:0; right:0; top:48%; text-align:center; font-size:54px; font-weight:900;
     text-shadow:0 5px 0 #8a1450, 0 10px 22px rgba(0,0,0,.5); pointer-events:none; opacity:0; transition:opacity .25s, transform .25s; transform:scale(.6); }
   #msg.on { opacity:1; transform:scale(1); }
-  #gameBtns { margin:0 0 26px; display:flex; gap:10px; }
+  #gameBtns { margin:0 0 44px; display:flex; gap:10px; }
   #logoImg { width:560px; margin:0; filter:drop-shadow(0 10px 14px rgba(0,0,0,.35)); animation: floaty 3.2s ease-in-out infinite; z-index:2; }
   @keyframes floaty { 50% { transform:translateY(-8px) rotate(-1deg); } }
   #frameImg { display:none; position:absolute; left:-94px; top:-94px; width:700px; height:700px; pointer-events:none; z-index:3; }
@@ -96,12 +97,12 @@
   #mLogin .card { padding:100px 70px 96px; }
   #mLogin .card h3 { margin-bottom:14px; }
   #mLogin .card p { margin:4px 0; text-shadow:0 2px 3px rgba(40,10,90,.9); }
-  #mailBtn { position:absolute; top:12px; right:12px; z-index:8; border:0; background:none; padding:0; cursor:pointer; filter:drop-shadow(0 6px 8px rgba(0,0,0,.4)); transition:transform .12s; }
+  #mailBtn { position:absolute; top:70px; right:20px; z-index:8; border:0; background:none; padding:0; cursor:pointer; filter:drop-shadow(0 6px 8px rgba(0,0,0,.4)); transition:transform .12s; }
   #mailBtn:hover { transform:scale(1.08) rotate(-3deg); }
-  #mailBtn svg { display:block; width:122px; height:100px; }
+  #mailBtn svg { display:block; width:96px; height:79px; }
   #mailBtn.new svg { animation:wiggle 2.4s ease-in-out infinite; transform-origin:50% 90%; }
   @keyframes wiggle { 0%,86%,100% { transform:rotate(0); } 90% { transform:rotate(-7deg); } 94% { transform:rotate(7deg); } 97% { transform:rotate(-4deg); } }
-  #mailBadge { position:absolute; top:-6px; right:-4px; width:44px; height:44px; border-radius:50%; background:radial-gradient(circle at 35% 30%,#ff8a8a,#e5102f 70%); border:3px solid #fff; color:#fff; font-size:30px; font-weight:900; line-height:38px; text-align:center; box-shadow:0 3px 8px rgba(0,0,0,.45); animation:pulse 1.4s ease-in-out infinite; }
+  #mailBadge { position:absolute; top:-8px; right:-8px; width:38px; height:38px; border-radius:50%; background:radial-gradient(circle at 35% 30%,#ff8a8a,#e5102f 70%); border:3px solid #fff; color:#fff; font-size:26px; font-weight:900; line-height:32px; text-align:center; box-shadow:0 3px 8px rgba(0,0,0,.45); animation:pulse 1.4s ease-in-out infinite; }
   @keyframes pulse { 50% { transform:scale(1.18); } }
   #inboxList { max-height:340px; overflow-y:auto; margin:6px 0 10px; text-align:left; }
   .msg { background:rgba(255,255,255,.14); border-radius:16px; padding:10px 12px; margin:8px 0; position:relative; }
@@ -164,6 +165,7 @@
 
   <!-- JEU -->
   <div id="sGame" class="screen">
+    <div class="spt"></div>
     <div id="hud">
       <div class="panel hbox"><div class="lab">Niveau</div><div class="val" id="hLevel">1</div></div>
       <div class="panel hbox"><div class="lab"><img class="ic" src="assets/icon-score.png" onerror="this.remove()">Objectif</div><div class="val" id="goals"></div></div>
