@@ -73,7 +73,9 @@
   #board { position:absolute; inset:0; width:100%; height:100%; touch-action:none; border-radius:20px; }
   #msg { position:absolute; left:0; right:0; top:48%; text-align:center; font-size:54px; font-weight:900;
     text-shadow:0 5px 0 #8a1450, 0 10px 22px rgba(0,0,0,.5); pointer-events:none; opacity:0; transition:opacity .25s, transform .25s; transform:scale(.6); }
+  #msg { z-index:8; }
   #msg.on { opacity:1; transform:scale(1); }
+  #msg.long { font-size:26px; line-height:1.25; padding:12px 18px; left:7%; right:7%; top:42%; background:rgba(60,10,110,.86); border:3px solid #fff; border-radius:20px; text-shadow:0 2px 3px rgba(0,0,0,.6); }
   #gameBtns { margin:0 0 44px; display:flex; gap:10px; }
   #logoImg { width:560px; margin:0; filter:drop-shadow(0 10px 14px rgba(0,0,0,.35)); animation: floaty 3.2s ease-in-out infinite; z-index:2; }
   @keyframes floaty { 50% { transform:translateY(-8px) rotate(-1deg); } }
@@ -1169,7 +1171,7 @@ function burst(c, r, cd) {
 }
 function say(t, tier) {
   const m = $("msg"), b = tier && IMG["fx-combo-" + tier];
-  m.textContent = t; m.style.backgroundImage = b ? "url(assets/fx-combo-" + tier + ".png)" : ""; m.classList.toggle("banner", !!b); m.classList.toggle("on", !!t);
+  m.textContent = t; m.style.backgroundImage = b ? "url(assets/fx-combo-" + tier + ".png)" : ""; m.classList.toggle("banner", !!b); m.classList.toggle("long", !b && !!t && t.length > 14); m.classList.toggle("on", !!t);
 }
 
 function drawBoard(dt) {
