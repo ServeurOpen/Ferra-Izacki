@@ -119,6 +119,27 @@
   .bst.off { filter:grayscale(.85) opacity(.75); }
   .bst.armed { outline:4px solid #fff; border-radius:18px; }
   .btn.icon { min-width:0 !important; padding:4px 16px !important; font-size:24px !important; }
+  #sLevels { padding:0; }
+  #mapScroll { position:absolute; inset:0; overflow-y:auto; overflow-x:hidden; touch-action:pan-y; -webkit-overflow-scrolling:touch; overscroll-behavior:contain; }
+  #mapInner { width:100%; max-width:720px; margin:0 auto; }
+  #mapTop { position:absolute; top:0; left:0; right:0; padding:62px 16px 26px; display:flex; align-items:center; gap:14px; z-index:6; pointer-events:none; background:linear-gradient(rgba(70,12,120,.78), rgba(70,12,120,0)); }
+  #mapTop > * { pointer-events:auto; }
+  #totalStars { font-size:22px; font-weight:900; text-shadow:0 2px 4px rgba(0,0,0,.6); }
+  .zone { position:relative; width:100%; background:#7a3cb8; }
+  .zone > img { display:block; width:100%; height:100%; object-fit:cover; }
+  .seam { position:absolute; left:0; right:0; top:0; height:110px; transform:translateY(-50%); z-index:2; pointer-events:none; }
+  .node { position:absolute; transform:translate(-50%,-50%); aspect-ratio:1; border:0; padding:0; border-radius:50%; background:transparent; cursor:pointer; }
+  .node.locked { cursor:default; }
+  .node .veil { position:absolute; inset:2%; border-radius:50%; background:rgba(95,95,112,.42); -webkit-backdrop-filter:grayscale(1) brightness(.92); backdrop-filter:grayscale(1) brightness(.92); pointer-events:none; }
+  .node .chain { position:absolute; width:128%; left:50%; top:50%; transform:translate(-49.5%,-45.5%); pointer-events:none; filter:drop-shadow(0 3px 3px rgba(0,0,0,.35)); }
+  .node .ring { position:absolute; inset:-9%; border-radius:50%; box-shadow:0 0 0 4px #fff, 0 0 24px 10px rgba(255,255,130,.95); animation:pulseRing 1.3s ease-in-out infinite; pointer-events:none; }
+  @keyframes pulseRing { 50% { transform:scale(1.1); opacity:.75; } }
+  .node .here { position:absolute; left:50%; top:-40%; transform:translateX(-50%); background:linear-gradient(#fff27a,#ffb800); color:#8a3a00; font-size:16px; font-weight:900; padding:3px 14px; border-radius:16px; border:3px solid #fff; white-space:nowrap; box-shadow:0 3px 6px rgba(0,0,0,.4); animation:bob .9s ease-in-out infinite; pointer-events:none; }
+  @keyframes bob { 50% { transform:translateX(-50%) translateY(-6px); } }
+  .node .nst { position:absolute; left:50%; top:80%; transform:translateX(-50%); display:flex; justify-content:center; width:96%; pointer-events:none; filter:drop-shadow(0 2px 2px rgba(0,0,0,.45)); }
+  .node .nst img { width:34%; }
+  .node.shake { animation:shakeN .35s; }
+  @keyframes shakeN { 25% { transform:translate(-50%,-50%) rotate(-6deg); } 75% { transform:translate(-50%,-50%) rotate(6deg); } }
   .modal { position:absolute; inset:0; background:rgba(20,4,50,.7); display:none; align-items:center; justify-content:center; z-index:10; }
   .modal.on { display:flex; }
   .card { width:480px; text-align:center; padding:26px 30px 22px; border-radius:30px;
@@ -157,10 +178,8 @@
 
   <!-- CARTE DES NIVEAUX -->
   <div id="sLevels" class="screen">
-    <h2>Choisis un niveau</h2>
-    <div id="levelGrid"></div>
-    <div id="totalStars" style="font-size:22px;margin:4px"></div>
-    <button class="btn alt small" id="bLvBack">← Retour</button>
+    <div id="mapScroll"><div id="mapInner"></div></div>
+    <div id="mapTop"><button class="btn alt small" id="bLvBack">← Retour</button><div id="totalStars"></div></div>
   </div>
 
   <!-- JEU -->
@@ -273,7 +292,7 @@ const SAVE_KEY = "sweetcrush_save_v1";
 const N = 8;            // taille de la grille
 const CELL = 64;        // taille d'une case (px logiques)
 const BOARD = N * CELL; // côté du plateau (px logiques)
-const LEVEL_COUNT = 60;
+const LEVEL_COUNT = 180;
 
 /* ---------- Bonbons : couleurs et formes ---------- */
 const COLORS = [
@@ -403,8 +422,8 @@ function levelsCleared() { return Object.keys(save.stars).filter(k => save.stars
 function totalStars() { return Object.values(save.stars).reduce((a, b) => a + b, 0); }
 const MILESTONES = (() => {
   const a = [{ key:"welcome", title:"Cadeau de bienvenue", body:"Merci de jouer à Sweet Crush ! Voici de quoi bien démarrer.", rewards:{ hammer:3, moves:3, shuffle:2 }, test:() => true }];
-  [10, 20, 30, 40, 50, 60].forEach((n, i) => a.push({ key:"lvl_" + n, title:n + " niveaux terminés !", body:"Bravo, tu as terminé " + n + " niveaux.", rewards:{ hammer:2 + (i > 2 ? 1 : 0), moves:2, shuffle:1 }, test:() => levelsCleared() >= n }));
-  [30, 60, 90, 120, 150, 180].forEach((n, i) => a.push({ key:"stars_" + n, title:n + " étoiles récoltées !", body:"Tu as récolté " + n + " étoiles. Continue comme ça !", rewards:{ hammer:1, moves:3, shuffle:1 + (i > 2 ? 1 : 0) }, test:() => totalStars() >= n }));
+  [10, 20, 30, 40, 50, 60, 80, 100, 120, 140, 160, 180].forEach((n, i) => a.push({ key:"lvl_" + n, title:n + " niveaux terminés !", body:"Bravo, tu as terminé " + n + " niveaux.", rewards:{ hammer:2 + (i > 2 ? 1 : 0) + (i > 7 ? 1 : 0), moves:2 + (i > 5 ? 1 : 0), shuffle:1 + (i > 7 ? 1 : 0) }, test:() => levelsCleared() >= n }));
+  [30, 60, 90, 120, 150, 180, 240, 300, 360, 420, 480, 540].forEach((n, i) => a.push({ key:"stars_" + n, title:n + " étoiles récoltées !", body:"Tu as récolté " + n + " étoiles. Continue comme ça !", rewards:{ hammer:1 + (i > 5 ? 1 : 0), moves:3, shuffle:1 + (i > 2 ? 1 : 0) + (i > 8 ? 1 : 0) }, test:() => totalStars() >= n }));
   return a;
 })();
 function toastMsg(t) { const d = document.createElement("div"); d.textContent = t; $("toast").appendChild(d); setTimeout(() => d.remove(), 4200); }
@@ -513,7 +532,9 @@ const ACHIEVEMENTS = [
   { id:"lvl10",       name:"Confiseur confirmé",   description:"Termine les 10 premiers niveaux.", icon:"🍰", tier:"silver" },
   { id:"lvl20",       name:"Maître pâtissier",     description:"Termine 20 niveaux.", icon:"🎂", tier:"gold" },
   { id:"lvl40",       name:"Grand confiseur",      description:"Termine 40 niveaux.", icon:"🧁", tier:"gold" },
-  { id:"lvl60",       name:"Roi du sucre",         description:"Termine les 60 niveaux.", icon:"👑", tier:"platinum" },
+  { id:"lvl60",       name:"Roi du sucre",         description:"Termine 60 niveaux.", icon:"👑", tier:"gold" },
+  { id:"lvl100",      name:"Légende gourmande",    description:"Termine 100 niveaux.", icon:"🏆", tier:"gold" },
+  { id:"lvl180",      name:"Empereur du sucre",    description:"Termine les 180 niveaux.", icon:"💎", tier:"platinum" },
   { id:"cherry",      name:"Cueilleur de cerises", description:"Fais descendre 20 cerises au total.", icon:"🍒", tier:"silver" },
 ];
 try { window.izackiRegisterCatalog && window.izackiRegisterCatalog(GAME_ID, ACHIEVEMENTS); } catch (e) {}
@@ -529,7 +550,7 @@ function unlock(id) {
 
 /* ---------- Niveaux ---------- */
 /* Réglages calibrés par simulation (moves, target, count, s2, s3 par index de niveau) — voir LISEZ_MOI_IA.md */
-const TUNED = {"0":{"target":1000,"s2":2500,"s3":3200},"1":{"moves":17,"count":18,"s2":2350,"s3":3000},"2":{"moves":23,"s2":2800,"s3":3600},"3":{"moves":29,"count":2,"s2":4100,"s3":6000},"4":{"moves":17,"count":4,"s2":1850,"s3":2350},"5":{"moves":23,"target":1075,"s2":2950,"s3":4050},"6":{"target":3350,"s2":4300,"s3":5150},"7":{"moves":17,"count":22,"s2":2450,"s3":3200},"8":{"moves":32,"s2":4750,"s3":5800},"9":{"moves":28,"count":2,"s2":4100,"s3":5400},"10":{"moves":18,"count":6,"s2":2200,"s3":2850},"11":{"moves":32,"target":1285,"s2":4950,"s3":5950},"12":{"target":3150,"s2":4100,"s3":4900},"13":{"moves":18,"count":26,"s2":2450,"s3":3300},"14":{"moves":32,"s2":4900,"s3":6150},"15":{"moves":28,"count":3,"s2":3800,"s3":5650},"16":{"moves":18,"count":7,"s2":2650,"s3":3300},"17":{"moves":30,"target":1495,"s2":4700,"s3":6250},"18":{"target":3950,"s2":4650,"s3":5600},"19":{"moves":18,"count":26,"s2":2550,"s3":3250},"20":{"moves":28,"s2":3850,"s3":5500},"21":{"moves":28,"count":3,"s2":3700,"s3":4800},"22":{"moves":18,"count":8,"s2":2700,"s3":3500},"23":{"moves":27,"target":1705,"s2":3800,"s3":4950},"24":{"target":3100,"s2":4050,"s3":4850},"25":{"moves":17,"count":26,"s2":2500,"s3":3500},"26":{"moves":25,"s2":3600,"s3":4650},"27":{"moves":29,"count":2,"s2":3700,"s3":4750},"28":{"moves":17,"count":8,"s2":2750,"s3":3700},"29":{"moves":21,"target":1915,"s2":3450,"s3":4150},"30":{"target":3000,"s2":3950,"s3":4850},"31":{"moves":17,"count":26,"s2":2350,"s3":3800},"32":{"moves":27,"s2":4750,"s3":5800},"33":{"moves":29,"count":2,"s2":3800,"s3":4700},"34":{"moves":17,"count":8,"s2":2600,"s3":3550},"35":{"moves":27,"target":2125,"s2":3900,"s3":5700},"36":{"target":2850,"s2":3850,"s3":4600},"37":{"moves":18,"count":26,"s2":2550,"s3":3450},"38":{"moves":32,"s2":4550,"s3":6150},"39":{"moves":28,"count":2,"s2":4400,"s3":5800},"40":{"moves":18,"count":8,"s2":2750,"s3":3450},"41":{"moves":30,"target":2335,"s2":4550,"s3":5500},"42":{"target":3650,"s2":4550,"s3":5450},"43":{"moves":18,"count":26,"s2":2750,"s3":3450},"44":{"moves":18,"s2":2750,"s3":3700},"45":{"moves":28,"count":3,"s2":3900,"s3":5400},"46":{"moves":18,"count":8,"s2":2750,"s3":3750},"47":{"moves":18,"target":2545,"s2":3350,"s3":4000},"48":{"target":3350,"s2":4250,"s3":5200},"49":{"moves":18,"count":28,"s2":2900,"s3":3850},"50":{"moves":32,"s2":5100,"s3":7050},"51":{"moves":26,"count":2,"s2":3750,"s3":5500},"52":{"moves":17,"count":8,"s2":2650,"s3":3500},"53":{"moves":27,"target":2755,"s2":4600,"s3":5900},"54":{"target":2700,"s2":3500,"s3":4200},"55":{"moves":17,"count":30,"s2":2800,"s3":4050},"56":{"moves":31,"s2":5450,"s3":6550},"57":{"moves":29,"count":3,"s2":4100,"s3":6100},"58":{"moves":17,"count":8,"s2":2700,"s3":3450},"59":{"moves":25,"target":2965,"s2":4300,"s3":5800}};
+const TUNED = {"0":{"target":1000,"s2":2500,"s3":3200},"1":{"moves":17,"count":18,"s2":2350,"s3":3000},"2":{"moves":23,"s2":2800,"s3":3600},"3":{"moves":29,"count":2,"s2":4100,"s3":6000},"4":{"moves":17,"count":4,"s2":1850,"s3":2350},"5":{"moves":23,"target":1075,"s2":2950,"s3":4050},"6":{"target":3350,"s2":4300,"s3":5150},"7":{"moves":17,"count":22,"s2":2450,"s3":3200},"8":{"moves":32,"s2":4750,"s3":5800},"9":{"moves":28,"count":2,"s2":4100,"s3":5400},"10":{"moves":18,"count":6,"s2":2200,"s3":2850},"11":{"moves":32,"target":1285,"s2":4950,"s3":5950},"12":{"target":3150,"s2":4100,"s3":4900},"13":{"moves":18,"count":26,"s2":2450,"s3":3300},"14":{"moves":32,"s2":4900,"s3":6150},"15":{"moves":28,"count":3,"s2":3800,"s3":5650},"16":{"moves":18,"count":7,"s2":2650,"s3":3300},"17":{"moves":30,"target":1495,"s2":4700,"s3":6250},"18":{"target":3950,"s2":4650,"s3":5600},"19":{"moves":18,"count":26,"s2":2550,"s3":3250},"20":{"moves":28,"s2":3850,"s3":5500},"21":{"moves":28,"count":3,"s2":3700,"s3":4800},"22":{"moves":18,"count":8,"s2":2700,"s3":3500},"23":{"moves":27,"target":1705,"s2":3800,"s3":4950},"24":{"target":3100,"s2":4050,"s3":4850},"25":{"moves":17,"count":26,"s2":2500,"s3":3500},"26":{"moves":25,"s2":3600,"s3":4650},"27":{"moves":29,"count":2,"s2":3700,"s3":4750},"28":{"moves":17,"count":8,"s2":2750,"s3":3700},"29":{"moves":21,"target":1915,"s2":3450,"s3":4150},"30":{"target":3000,"s2":3950,"s3":4850},"31":{"moves":17,"count":26,"s2":2350,"s3":3800},"32":{"moves":27,"s2":4750,"s3":5800},"33":{"moves":29,"count":2,"s2":3800,"s3":4700},"34":{"moves":17,"count":8,"s2":2600,"s3":3550},"35":{"moves":27,"target":2125,"s2":3900,"s3":5700},"36":{"target":2850,"s2":3850,"s3":4600},"37":{"moves":18,"count":26,"s2":2550,"s3":3450},"38":{"moves":32,"s2":4550,"s3":6150},"39":{"moves":28,"count":2,"s2":4400,"s3":5800},"40":{"moves":18,"count":8,"s2":2750,"s3":3450},"41":{"moves":30,"target":2335,"s2":4550,"s3":5500},"42":{"target":3650,"s2":4550,"s3":5450},"43":{"moves":18,"count":26,"s2":2750,"s3":3450},"44":{"moves":18,"s2":2750,"s3":3700},"45":{"moves":28,"count":3,"s2":3900,"s3":5400},"46":{"moves":18,"count":8,"s2":2750,"s3":3750},"47":{"moves":18,"target":2545,"s2":3350,"s3":4000},"48":{"target":3350,"s2":4250,"s3":5200},"49":{"moves":18,"count":28,"s2":2900,"s3":3850},"50":{"moves":32,"s2":5100,"s3":7050},"51":{"moves":26,"count":2,"s2":3750,"s3":5500},"52":{"moves":17,"count":8,"s2":2650,"s3":3500},"53":{"moves":27,"target":2755,"s2":4600,"s3":5900},"54":{"target":2700,"s2":3500,"s3":4200},"55":{"moves":17,"count":30,"s2":2800,"s3":4050},"56":{"moves":31,"s2":5450,"s3":6550},"57":{"moves":29,"count":3,"s2":4100,"s3":6100},"58":{"moves":17,"count":8,"s2":2700,"s3":3450},"59":{"moves":25,"target":2965,"s2":4300,"s3":5800},"60":{"target":3350,"s2":4150,"s3":5000},"61":{"moves":17,"count":32,"s2":3200,"s3":4050},"62":{"moves":25,"s2":4050,"s3":5750},"63":{"moves":28,"count":2,"s2":4900,"s3":5900},"64":{"moves":17,"count":8,"s2":2700,"s3":3400},"65":{"moves":25,"target":3175,"s2":4250,"s3":5100},"66":{"target":3350,"s2":4100,"s3":4900},"67":{"moves":17,"count":34,"s2":3150,"s3":4100},"68":{"moves":21,"s2":4000,"s3":6200},"69":{"moves":28,"count":4,"s2":4150,"s3":6350},"70":{"moves":17,"count":8,"s2":2550,"s3":3050},"71":{"moves":25,"target":3385,"s2":4550,"s3":5450},"72":{"target":3700,"s2":4400,"s3":5300},"73":{"moves":17,"count":36,"s2":3350,"s3":4000},"74":{"moves":27,"s2":5000,"s3":6050},"75":{"moves":28,"count":4,"s2":4800,"s3":6350},"76":{"moves":17,"count":9,"s2":2750,"s3":3700},"77":{"moves":25,"target":3595,"s2":4550,"s3":5450},"78":{"target":3600,"s2":4400,"s3":5300},"79":{"moves":17,"count":38,"s2":3150,"s3":3950},"80":{"moves":32,"s2":5200,"s3":6750},"81":{"moves":28,"count":3,"s2":3600,"s3":5550},"82":{"moves":17,"count":9,"s2":2900,"s3":3500},"83":{"moves":27,"target":3600,"s2":5000,"s3":6650},"84":{"target":3700,"s2":4550,"s3":5450},"85":{"moves":17,"count":38,"s2":3500,"s3":4200},"86":{"moves":17,"s2":2650,"s3":3550},"87":{"moves":26,"count":2,"s2":3800,"s3":5000},"88":{"moves":19,"count":10,"s2":3050,"s3":4500},"89":{"moves":23,"target":3600,"s2":4500,"s3":5400},"90":{"target":3900,"s2":4600,"s3":5500},"91":{"moves":17,"count":38,"s2":3200,"s3":4250},"92":{"moves":32,"s2":4500,"s3":6600},"93":{"moves":26,"count":2,"s2":3700,"s3":4550},"94":{"moves":19,"count":10,"s2":3350,"s3":4600},"95":{"moves":29,"target":3600,"s2":4600,"s3":5900},"96":{"target":3550,"s2":4450,"s3":5350},"97":{"moves":17,"count":38,"s2":3150,"s3":4050},"98":{"moves":31,"s2":5650,"s3":7350},"99":{"moves":28,"count":3,"s2":3800,"s3":5500},"100":{"moves":21,"count":11,"s2":3450,"s3":4150},"101":{"moves":27,"target":3600,"s2":4900,"s3":6050},"102":{"target":3800,"s2":4550,"s3":5450},"103":{"moves":17,"count":38,"s2":3300,"s3":4700},"104":{"moves":25,"s2":4300,"s3":6200},"105":{"moves":28,"count":3,"s2":4300,"s3":5150},"106":{"moves":17,"count":11,"s2":3300,"s3":4250},"107":{"moves":25,"target":3600,"s2":4600,"s3":6000},"108":{"target":3650,"s2":4300,"s3":5150},"109":{"moves":19,"count":38,"s2":3350,"s3":4400},"110":{"moves":21,"s2":3400,"s3":4400},"111":{"moves":28,"count":4,"s2":4500,"s3":6150},"112":{"moves":19,"count":12,"s2":3950,"s3":4750},"113":{"moves":21,"target":3600,"s2":4200,"s3":5050},"114":{"target":3650,"s2":4100,"s3":4900},"115":{"moves":17,"count":38,"s2":2950,"s3":3600},"116":{"moves":27,"s2":4750,"s3":6350},"117":{"moves":28,"count":3,"s2":3550,"s3":4950},"118":{"moves":21,"count":12,"s2":3900,"s3":4700},"119":{"moves":27,"target":3600,"s2":4450,"s3":5750},"120":{"target":3400,"s2":4100,"s3":4950},"121":{"moves":15,"count":38,"s2":3100,"s3":4150},"122":{"moves":26,"s2":4200,"s3":5900,"light":true},"123":{"moves":26,"count":4,"s2":4300,"s3":6750},"124":{"moves":21,"count":12,"s2":3900,"s3":4700},"125":{"moves":27,"target":3600,"s2":4600,"s3":5850},"126":{"target":3950,"s2":4250,"s3":5150},"127":{"moves":17,"count":38,"s2":3600,"s3":5050},"128":{"moves":15,"s2":2500,"s3":3800},"129":{"moves":28,"count":4,"s2":4050,"s3":5500},"130":{"moves":19,"count":12,"s2":3700,"s3":4450},"131":{"moves":21,"target":3600,"s2":4400,"s3":5300},"132":{"target":3650,"s2":4200,"s3":5050},"133":{"moves":17,"count":38,"s2":2900,"s3":3800},"134":{"moves":29,"s2":5300,"s3":6750},"135":{"moves":28,"count":4,"s2":3850,"s3":4700},"136":{"moves":21,"count":12,"s2":3350,"s3":4000},"137":{"moves":27,"target":3600,"s2":4850,"s3":5800},"138":{"target":3750,"s2":4400,"s3":5300},"139":{"moves":17,"count":38,"s2":3400,"s3":4650},"140":{"moves":27,"s2":5250,"s3":6600},"141":{"moves":28,"count":4,"s2":4950,"s3":6150},"142":{"moves":21,"count":12,"s2":3600,"s3":5100},"143":{"moves":27,"target":3600,"s2":4650,"s3":6000},"144":{"target":3450,"s2":4000,"s3":4800},"145":{"moves":17,"count":38,"s2":3250,"s3":3900},"146":{"moves":21,"s2":3500,"s3":4500},"147":{"moves":28,"count":3,"s2":4550,"s3":6300},"148":{"moves":19,"count":12,"s2":3650,"s3":4400},"149":{"moves":23,"target":3600,"s2":4550,"s3":5450},"150":{"target":3250,"s2":4350,"s3":5200},"151":{"moves":17,"count":38,"s2":3550,"s3":4250},"152":{"moves":21,"s2":3450,"s3":4200},"153":{"moves":28,"count":4,"s2":3900,"s3":5200},"154":{"moves":21,"count":12,"s2":3950,"s3":4750},"155":{"moves":21,"target":3600,"s2":4500,"s3":5400},"156":{"target":3600,"s2":4350,"s3":5200},"157":{"moves":17,"count":38,"s2":3200,"s3":4000},"158":{"moves":25,"s2":4500,"s3":6200},"159":{"moves":28,"count":4,"s2":4600,"s3":6350},"160":{"moves":21,"count":12,"s2":3600,"s3":4900},"161":{"moves":25,"target":3600,"s2":4450,"s3":5350},"162":{"target":3650,"s2":4200,"s3":5050},"163":{"moves":17,"count":38,"s2":3350,"s3":4000},"164":{"moves":29,"s2":4350,"s3":7000},"165":{"moves":24,"count":3,"s2":3450,"s3":4650},"166":{"moves":19,"count":12,"s2":3650,"s3":4400},"167":{"moves":29,"target":3600,"s2":4800,"s3":6350},"168":{"target":4250,"s2":4700,"s3":5650},"169":{"moves":15,"count":38,"s2":2650,"s3":3450},"170":{"moves":15,"s2":2450,"s3":3500},"171":{"moves":26,"count":3,"s2":4100,"s3":5800},"172":{"moves":19,"count":12,"s2":3800,"s3":5400},"173":{"moves":19,"target":3600,"s2":4100,"s3":4900},"174":{"target":3100,"s2":3900,"s3":4700},"175":{"moves":15,"count":38,"s2":3100,"s3":3950},"176":{"moves":30,"s2":5200,"s3":6250},"177":{"moves":28,"count":4,"s2":4350,"s3":6700},"178":{"moves":19,"count":12,"s2":3350,"s3":4550},"179":{"moves":25,"target":3600,"s2":4200,"s3":5800}};
 const CYCLE = ["score","collect","jelly","drop","special","mix"];
 function makeLevels() {
   const patterns = [
@@ -544,16 +565,16 @@ function makeLevels() {
   const jellyOf = (p, dbl) => { const a=[]; for (let r=0;r<N;r++) for (let c=0;c<N;c++) if (p(r,c)) a.push([r,c, dbl && (r+c)%3===0 ? 2 : 1]); return a; };
   const out = [];
   for (let i = 0; i < LEVEL_COUNT; i++) {
-    const d = i / (LEVEL_COUNT - 1), kind = CYCLE[i % 6], T = TUNED[i] || {};
+    const d = Math.min(1, i / 59), kind = CYCLE[i % 6], T = TUNED[i] || {};
     const types = 5;
     const L = { n:i+1, kind, types, moves: Math.round(25 - d*4), goals:[] };
     const pat = patterns[Math.floor(i/6) % patterns.length];
     if (kind === "score") L.goals.push({ k:"score", target: T.target || (1000 + i*40) });
-    if (kind === "collect") { L.goals.push({ k:"collect", t:(i*2)%types, count: T.count || Math.min(30, 12 + Math.floor(i/6)*2) }); L.moves += 2; }
-    if (kind === "jelly") { L.goals.push({ k:"jelly" }); L.jelly = jellyOf(pat, i >= 42); L.moves += 4; }
-    if (kind === "drop") { const n = T.count || Math.min(6, 2 + Math.floor(i/12)); L.goals.push({ k:"drop", count:n }); L.dropMax = n; L.moves += 4; }
-    if (kind === "special") { L.goals.push({ k:"special", count: T.count || (3 + Math.floor(i/12)) }); }
-    if (kind === "mix") { L.goals.push({ k:"jelly" }); L.goals.push({ k:"score", target: T.target || (900 + i*35) }); L.jelly = jellyOf(pat, false); L.moves += 4; }
+    if (kind === "collect") { L.goals.push({ k:"collect", t:(i*2)%types, count: T.count || Math.min(38, 12 + Math.floor(i/6)*2) }); L.moves += 2; }
+    if (kind === "jelly") { L.goals.push({ k:"jelly" }); L.jelly = jellyOf(pat, i >= 42 && !T.light); L.moves += 4; }
+    if (kind === "drop") { const n = T.count || Math.min(8, 2 + Math.floor(i/12)); L.goals.push({ k:"drop", count:n }); L.dropMax = n; L.moves += 4; }
+    if (kind === "special") { L.goals.push({ k:"special", count: T.count || Math.min(12, 3 + Math.floor(i/12)) }); }
+    if (kind === "mix") { L.goals.push({ k:"jelly" }); L.goals.push({ k:"score", target: T.target || Math.min(3600, 900 + i*35) }); L.jelly = jellyOf(pat, false); L.moves += 4; }
     if (T.moves) L.moves = T.moves;
     if (i === 0) L.endOnGoal = true; /* niveau 1 : la partie s'arrête dès l'objectif atteint, coups restants convertis en points */
     L.stars = [T.s2 || (1500 + i*60), T.s3 || (2400 + i*100)];
@@ -561,6 +582,9 @@ function makeLevels() {
   }
   return out;
 }
+const MAPS = [{"z":1,"a":1,"b":10,"r":0.5335,"p":[[0.381,0.853],[0.674,0.746],[0.292,0.659],[0.696,0.557],[0.277,0.478],[0.68,0.402],[0.3,0.32],[0.684,0.251],[0.302,0.177],[0.553,0.1]]},{"z":2,"a":11,"b":20,"r":0.5335,"p":[[0.462,0.898],[0.64,0.792],[0.346,0.7],[0.64,0.604],[0.335,0.517],[0.604,0.426],[0.335,0.339],[0.602,0.254],[0.352,0.18],[0.51,0.091]]},{"z":3,"a":21,"b":30,"r":0.5335,"p":[[0.467,0.871],[0.64,0.765],[0.34,0.675],[0.611,0.594],[0.327,0.503],[0.632,0.427],[0.359,0.347],[0.623,0.265],[0.307,0.191],[0.51,0.104]]},{"z":4,"a":31,"b":40,"r":0.5335,"p":[[0.453,0.873],[0.651,0.769],[0.316,0.686],[0.627,0.596],[0.294,0.507],[0.629,0.427],[0.345,0.337],[0.64,0.255],[0.335,0.18],[0.506,0.092]]},{"z":5,"a":41,"b":50,"r":0.5335,"p":[[0.436,0.871],[0.645,0.759],[0.281,0.663],[0.652,0.576],[0.315,0.494],[0.633,0.413],[0.318,0.333],[0.613,0.253],[0.334,0.175],[0.523,0.088]]},{"z":6,"a":51,"b":60,"r":0.5335,"p":[[0.44,0.886],[0.638,0.772],[0.336,0.679],[0.657,0.596],[0.344,0.515],[0.618,0.434],[0.334,0.361],[0.631,0.284],[0.338,0.217],[0.499,0.132]]},{"z":7,"a":61,"b":70,"r":0.5334,"p":[[0.496,0.922],[0.319,0.796],[0.631,0.701],[0.332,0.607],[0.612,0.516],[0.319,0.43],[0.609,0.342],[0.349,0.25],[0.601,0.164],[0.499,0.066]]},{"z":8,"a":71,"b":80,"r":0.5334,"p":[[0.434,0.902],[0.67,0.771],[0.294,0.682],[0.673,0.595],[0.303,0.506],[0.659,0.416],[0.291,0.328],[0.633,0.235],[0.322,0.162],[0.525,0.066]]},{"z":9,"a":81,"b":90,"r":0.5334,"p":[[0.425,0.929],[0.633,0.793],[0.255,0.706],[0.596,0.619],[0.31,0.524],[0.637,0.43],[0.376,0.34],[0.641,0.249],[0.36,0.165],[0.521,0.071]]},{"z":10,"a":91,"b":100,"r":0.5334,"p":[[0.442,0.897],[0.666,0.778],[0.298,0.693],[0.644,0.6],[0.303,0.511],[0.657,0.42],[0.289,0.33],[0.622,0.238],[0.302,0.149],[0.502,0.07]]},{"z":11,"a":101,"b":120,"r":0.3333,"p":[[0.432,0.932],[0.669,0.881],[0.311,0.833],[0.672,0.784],[0.321,0.741],[0.664,0.694],[0.284,0.651],[0.654,0.606],[0.3,0.562],[0.682,0.516],[0.336,0.472],[0.667,0.426],[0.325,0.384],[0.674,0.335],[0.336,0.291],[0.655,0.243],[0.331,0.204],[0.628,0.155],[0.287,0.11],[0.449,0.061]]},{"z":12,"a":121,"b":140,"r":0.3333,"p":[[0.511,0.941],[0.343,0.877],[0.654,0.826],[0.328,0.783],[0.626,0.736],[0.347,0.691],[0.661,0.644],[0.359,0.599],[0.644,0.554],[0.319,0.511],[0.626,0.46],[0.383,0.414],[0.648,0.367],[0.368,0.322],[0.649,0.277],[0.39,0.23],[0.624,0.184],[0.391,0.138],[0.654,0.092],[0.459,0.052]]},{"z":13,"a":141,"b":160,"r":0.3333,"p":[[0.501,0.947],[0.323,0.888],[0.669,0.839],[0.299,0.79],[0.66,0.759],[0.324,0.705],[0.68,0.668],[0.307,0.611],[0.677,0.568],[0.333,0.522],[0.677,0.477],[0.34,0.431],[0.668,0.39],[0.305,0.333],[0.648,0.288],[0.331,0.241],[0.597,0.201],[0.32,0.14],[0.661,0.098],[0.495,0.047]]},{"z":14,"a":161,"b":180,"r":0.3333,"p":[[0.465,0.942],[0.653,0.884],[0.319,0.836],[0.664,0.794],[0.314,0.75],[0.653,0.707],[0.305,0.661],[0.667,0.617],[0.337,0.574],[0.681,0.532],[0.312,0.489],[0.64,0.447],[0.336,0.404],[0.673,0.363],[0.351,0.324],[0.616,0.281],[0.336,0.24],[0.635,0.201],[0.351,0.169],[0.51,0.134]]}];
+/* couleurs moyennes du haut / du bas de chaque carte : servent à fondre la jonction entre deux zones */
+const SEAM = {"1":["193,162,230","214,130,109"],"2":["102,216,153","123,163,74"],"3":["195,158,183","165,82,36"],"4":["226,169,238","245,171,214"],"5":["150,115,240","158,134,201"],"6":["225,142,191","188,131,120"],"7":["92,202,186","155,164,96"],"8":["206,129,224","171,104,130"],"9":["149,165,186","223,179,121"],"10":["227,141,149","197,123,42"],"11":["63,226,244","223,148,151"],"12":["92,187,220","219,203,49"],"13":["70,49,170","146,42,134"],"14":["146,169,245","191,151,78"]};
 const LEVELS = makeLevels();
 
 /* ---------- Utilitaires ---------- */
@@ -1001,7 +1025,7 @@ async function endLevel(win) {
     unlock("first_win"); if (stars===3) unlock("three_stars");
     if (cloudSession) checkMilestones().then(() => maybeRewardPopup());
     const done = Object.keys(save.stars).length;
-    if (done>=10) unlock("lvl10"); if (done>=20) unlock("lvl20"); if (done>=40) unlock("lvl40"); if (done>=LEVEL_COUNT) unlock("lvl60");
+    if (done>=10) unlock("lvl10"); if (done>=20) unlock("lvl20"); if (done>=40) unlock("lvl40"); if (done>=60) unlock("lvl60"); if (done>=100) unlock("lvl100"); if (done>=LEVEL_COUNT) unlock("lvl180");
     showEnd(true, stars, bonus);
   } else {
     sfx("lose"); writeSave();
@@ -1181,21 +1205,41 @@ function startLevel(i) {
   const goalTxt = level.goals.map(goalSentence).join(" + ");
   say("Niveau "+level.n); setTimeout(()=>{ say(goalTxt); setTimeout(()=>say(""),1400); }, 900);
 }
-function buildLevelMap() {
-  const g = $("levelGrid"); g.innerHTML = ""; let total = 0;
-  LEVELS.forEach((L,i) => {
-    const b = document.createElement("button"); const st = save.stars[L.n]||0; total += st;
-    const locked = L.n > save.unlocked;
-    b.className = "lv" + (locked ? " locked" : "");
-    b.innerHTML = (locked ? '<img class="lk" src="assets/lock.png" onerror="this.replaceWith(document.createTextNode(\'🔒\'))">' : L.n) + (locked ? "" : '<div class="st">'+"★".repeat(st)+"<i>"+"★".repeat(3-st)+"</i></div>");
-    if (!locked) b.onclick = () => { sfx("click"); startLevel(i); };
-    g.appendChild(b);
-  });
-  $("totalStars").textContent = "★ " + total + " / " + (LEVEL_COUNT*3);
-  // le contenu défile s'il dépasse
-  g.style.padding = "6px";
+function seamHtml(z) {      /* petite transition douce avec la zone du dessus */
+  const up = SEAM[z + 1], me = SEAM[z]; if (!up || !me) return "";
+  return '<i class="seam" style="background:linear-gradient(rgba(' + up[1] + ',0), rgba(' + up[1] + ',.92) 40%, rgba(' + me[0] + ',.92) 60%, rgba(' + me[0] + ',0))"></i>';
 }
-function openLevels() { if (IMG["bg-menu"]) setBg("bg-menu"); buildLevelMap(); show("sLevels"); }
+function buildLevelMap() {
+  const cur = Math.min(save.unlocked, LEVEL_COUNT); let total = 0, html = "";
+  for (const m of MAPS.slice().reverse()) {          /* zone la plus haute en haut, zone 1 tout en bas */
+    const d = (m.b - m.a + 1) > 10 ? 16 : 16.8;       /* diamètre d'une bulle en % de la largeur de la zone */
+    html += '<div class="zone" style="aspect-ratio:' + m.r + '"><img loading="lazy" decoding="async" alt="" src="assets/maps/map-zone-' + String(m.z).padStart(2, "0") + '.jpg">' + seamHtml(m.z);
+    m.p.forEach(([x, y], i) => {
+      const n = m.a + i, st = save.stars[n] || 0; total += st;
+      const locked = n > save.unlocked || n > LEVEL_COUNT, isCur = !locked && n === cur && !st;
+      html += '<button class="node' + (locked ? " locked" : "") + '" data-n="' + n + '" aria-label="Niveau ' + n + '" style="left:' + x * 100 + '%;top:' + y * 100 + '%;width:' + d + '%">';
+      if (locked) html += '<i class="veil"></i><img class="chain" src="assets/level-lock-overlay.png" alt="">';
+      else if (isCur) html += '<i class="ring"></i><b class="here">JOUER</b>';
+      if (st) html += '<span class="nst">' + [1, 2, 3].map(k => '<img src="assets/star-' + (k <= st ? "on" : "off") + '.png" alt="">').join("") + '</span>';
+      html += '</button>';
+    });
+    html += '</div>';
+  }
+  $("mapInner").innerHTML = html;
+  $("totalStars").textContent = "★ " + total + " / " + (LEVEL_COUNT * 3);
+}
+function scrollMapToCurrent() {
+  const sc = $("mapScroll"), n = Math.min(save.unlocked, LEVEL_COUNT), node = $("mapInner").querySelector('[data-n="' + n + '"]');
+  if (!node) return;
+  const zone = node.parentElement; sc.scrollTop = zone.offsetTop + node.offsetTop - sc.clientHeight * 0.55;
+}
+$("mapInner").addEventListener("click", ev => {
+  const b = ev.target.closest(".node"); if (!b) return;
+  const n = +b.dataset.n;
+  if (b.classList.contains("locked")) { sfx("bad"); b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake"); return; }
+  sfx("click"); startLevel(n - 1);
+});
+function openLevels() { buildLevelMap(); show("sLevels"); scrollMapToCurrent(); }
 function buildAch() {
   $("achList").innerHTML = ACHIEVEMENTS.map(a => '<div class="'+(save.ach[a.id]?"":"no")+'">'+a.icon+" <b>"+a.name+"</b> — "+a.description+(save.ach[a.id]?" ✅":"")+"</div>").join("");
 }
