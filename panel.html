@@ -164,6 +164,32 @@
                     </div>
                   </div>
                 </details>
+                <details class="fold" id="scoreReview">
+                  <summary><span>Scores suspects &amp; meilleurs scores <span id="scoreFlagCount"></span></span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/img/icons.svg#plus"/></svg></summary>
+                  <div>
+                    <div class="field"><label for="scoreGameSel">Jeu</label>
+                      <select class="select" id="scoreGameSel">
+                        <option value="sweet-crush|total_stars">Sweet Crush — étoiles totales</option>
+                        <option value="tower-defense|best_wave">Tower Défense — meilleure vague</option>
+                      </select>
+                    </div>
+                    <p class="hint">Parties refusées par le serveur (trop rapides, score irréaliste…). Supprimer un score ne bannit pas : pour bannir, utilise « Bannir » (il pré-remplit le formulaire plus haut).</p>
+                    <div class="table-wrap" role="region" aria-label="Parties suspectes" tabindex="0">
+                      <table class="table table--compact">
+                        <caption class="sr-only">Parties suspectes</caption>
+                        <thead><tr><th scope="col">Email</th><th scope="col">Niveau</th><th scope="col">Score</th><th scope="col">Raison</th><th scope="col">Quand</th><th scope="col"><span class="sr-only">Action</span></th></tr></thead>
+                        <tbody id="scoreFlagBody"><tr><td colspan="6" class="pn-cell-note">Chargement…</td></tr></tbody>
+                      </table>
+                    </div>
+                    <div class="table-wrap" role="region" aria-label="Meilleurs scores" tabindex="0">
+                      <table class="table table--compact">
+                        <caption class="sr-only">Meilleurs scores</caption>
+                        <thead><tr><th scope="col">Email</th><th scope="col">Pseudo</th><th scope="col">Valeur</th><th scope="col"><span class="sr-only">Action</span></th></tr></thead>
+                        <tbody id="scoreTopBody"><tr><td colspan="4" class="pn-cell-note">Chargement…</td></tr></tbody>
+                      </table>
+                    </div>
+                  </div>
+                </details>
               </div>
             </section>
 
@@ -611,7 +637,7 @@
     document.getElementById('actionGrantPlayerSelect').innerHTML = playerOptions;
     document.getElementById('actionBanPlayerSelect').innerHTML = playerOptions;
 
-    loadActionBans();
+    loadActionBans(); loadScoreReview();
     loadAdminPendingGames();
     loadAdminWithdrawals();
     loadAdminRefunds();
@@ -1093,6 +1119,40 @@
       </tr>
     `).join('');
   }
+
+  const escH = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  async function loadScoreReview() {
+    const [game, metric] = document.getElementById('scoreGameSel').value.split('|');
+    const flagBody = document.getElementById('scoreFlagBody'), topBody = document.getElementById('scoreTopBody');
+    const [fl, top] = await Promise.all([
+      window.supabaseClient.rpc('admin_flagged_runs', { p_limit: 100 }),
+      window.supabaseClient.rpc('admin_top_scores', { p_game_id: game, p_metric: metric, p_limit: 30 }),
+    ]);
+    const act = (u, g, m) => `<button type="button" class="btn btn--outline btn--sm score-del" data-u="${escH(u)}" data-g="${escH(g)}" data-m="${escH(m)}">Supprimer</button> <button type="button" class="btn btn--outline btn--sm score-ban" data-u="${escH(u)}">Bannir</button>`;
+    if (fl.error) flagBody.innerHTML = `<tr><td colspan="6" class="pn-cell-note is-err">${escH(fl.error.message)} (migration 70 exécutée ?)</td></tr>`;
+    else {
+      const rows = fl.data || [];
+      document.getElementById('scoreFlagCount').textContent = rows.length ? `(${rows.length})` : '';
+      flagBody.innerHTML = rows.length ? rows.map((r) => `<tr><th scope="row">${escH(r.email)}</th><td>${escH(r.game_id)} ${r.level}</td><td class="num">${r.score ?? ''}</td><td>${escH(r.flag)}</td><td class="date">${formatDateTime(r.finished_at)}</td><td class="num">${act(r.user_id, r.game_id, 'lvl_' + r.level)}</td></tr>`).join('')
+        : '<tr><td colspan="6" class="pn-cell-note">Aucune partie suspecte.</td></tr>';
+    }
+    if (top.error) topBody.innerHTML = `<tr><td colspan="4" class="pn-cell-note is-err">${escH(top.error.message)}</td></tr>`;
+    else topBody.innerHTML = (top.data || []).map((r) => `<tr><th scope="row">${escH(r.email)}</th><td>${escH(r.display_name)}</td><td class="num">${r.best_value}</td><td class="num">${act(r.user_id, game, metric)}</td></tr>`).join('') || '<tr><td colspan="4" class="pn-cell-note">Aucun score.</td></tr>';
+  }
+  document.getElementById('scoreGameSel').addEventListener('change', loadScoreReview);
+  document.getElementById('scoreReview').addEventListener('click', async (e) => {
+    const del = e.target.closest('.score-del'), ban = e.target.closest('.score-ban');
+    if (ban) {
+      const sel = document.getElementById('actionBanPlayerSelect');
+      if (![...sel.options].some((o) => o.value === ban.dataset.u)) { alert('Joueur introuvable dans la liste de bannissement (recharge le panneau).'); return; }
+      sel.value = ban.dataset.u; document.getElementById('actionBanReason').value = 'Triche suspectée (score)';
+      sel.scrollIntoView({ block: 'center' }); return;
+    }
+    if (!del || del.disabled || !confirm('Supprimer ce score ? (les étoiles totales Sweet Crush sont recalculées)')) return;
+    del.disabled = true;
+    const { data, error } = await window.supabaseClient.rpc('admin_delete_score', { p_user_id: del.dataset.u, p_game_id: del.dataset.g, p_metric: del.dataset.m });
+    if (!error && data && data.ok) loadScoreReview(); else { del.disabled = false; alert(error ? error.message : 'Échec'); }
+  });
 
   function showAdminPassphraseError(msg) {
     const el = document.getElementById('adminPassphraseError');

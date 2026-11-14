@@ -158,6 +158,19 @@
   #flyLayer { position:absolute; inset:0; pointer-events:none; z-index:9; overflow:hidden; }
   #flyLayer canvas { position:absolute; will-change:transform; filter:drop-shadow(0 3px 5px rgba(0,0,0,.4)); }
   @keyframes barPulse { 50% { transform:scaleY(1.9); box-shadow:0 0 14px 4px rgba(255,235,120,.9); } }
+  #tipLayer { position:absolute; inset:0; pointer-events:none; z-index:9; }
+  #tipBox { position:absolute; left:50%; transform:translateX(-50%); width:470px; max-width:92%; background:rgba(60,10,110,.94); border:3px solid #fff; border-radius:22px; padding:14px 20px 12px; font-size:22px; line-height:1.3; text-align:center; pointer-events:auto; box-shadow:0 8px 22px rgba(0,0,0,.5); text-shadow:0 2px 3px rgba(0,0,0,.5); }
+  #tipBox small { display:block; margin-top:6px; font-size:15px; opacity:.8; }
+  #tipHand { position:absolute; width:84px; height:84px; pointer-events:none; filter:drop-shadow(0 4px 4px rgba(0,0,0,.45)); transition:left .7s ease-in-out, top .7s ease-in-out; }
+  #tipHand.bob { animation:handBob .8s ease-in-out infinite; }
+  @keyframes handBob { 50% { transform:translate(8px,10px); } }
+  #rankList { max-height:340px; overflow-y:auto; margin:6px 0 8px; }
+  .rk { display:flex; align-items:center; gap:10px; padding:6px 10px; margin:5px 0; background:rgba(255,255,255,.14); border-radius:14px; font-size:20px; text-align:left; }
+  .rk.me { background:rgba(255,225,77,.35); outline:2px solid #ffe14d; }
+  .rk .pos { width:44px; text-align:center; font-weight:900; flex:none; }
+  .rk .pos img { width:40px; height:40px; vertical-align:middle; }
+  .rk .nm { flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .rk b { flex:none; }
   .modal { position:absolute; inset:0; background:rgba(20,4,50,.7); display:none; align-items:center; justify-content:center; z-index:10; }
   .modal.on { display:flex; }
   .card { width:480px; text-align:center; padding:26px 30px 22px; border-radius:30px;
@@ -189,6 +202,7 @@
       <button class="btn green" id="bPlay">Jouer</button>
       <button class="btn alt" id="bLevels">Niveaux</button>
       <button class="btn alt" id="bAch">Succès</button>
+      <button class="btn alt" id="bRank">Classement</button>
       <button class="btn" id="bOpt">Options</button>
       <button class="btn alt small" id="bCred">Crédits</button>
     </div>
@@ -262,6 +276,12 @@
     </div>
     <button class="btn green" id="cClose" style="margin-top:10px">Fermer</button></div></div>
 
+  <div id="mRank" class="modal"><div class="card"><h3><img src="assets/trophy.png" alt="" style="width:56px;height:56px;vertical-align:middle;margin-right:6px" onerror="this.remove()">Classement</h3>
+    <div style="display:flex;gap:8px;justify-content:center;margin-bottom:6px"><button class="btn small alt" id="rkStars">★ Étoiles</button><button class="btn small" id="rkLevel">Par niveau</button></div>
+    <div id="rkLvBox" style="display:none;margin:4px 0;font-size:20px"><button class="btn small" id="rkPrev">◀</button> Niveau <b id="rkLvNum">1</b> <button class="btn small" id="rkNext">▶</button></div>
+    <div id="rankList"></div><p id="rankNote" style="font-size:14px;opacity:.85;margin:2px 0 8px"></p>
+    <button class="btn green small" id="rkClose">Fermer</button></div></div>
+
   <div id="mAch" class="modal"><div class="card"><h3>Succès</h3>
     <div id="achList"></div>
     <button class="btn green" id="aClose" style="margin-top:12px">Fermer</button></div></div>
@@ -294,6 +314,7 @@
     <button class="btn alt small" id="rwLater">Plus tard</button></div></div>
 
   <div id="flyLayer"></div>
+  <div id="tipLayer"><div id="tipBox" style="display:none"></div><img id="tipHand" src="assets/hand-tip.png" alt="" style="display:none"></div>
   <div class="toast" id="toast"></div>
 </div>
 
@@ -328,7 +349,7 @@ const S_NONE = 0, S_ROW = 1, S_COL = 2, S_WRAP = 3, S_BOMB = 4;
 /* ---------- Sauvegarde ---------- */
 const defaultSave = () => ({ unlocked:1, stars:{}, best:{}, sound:true, fx:true,
   stats:{ cherries:0, wins:0, cleared:0, specials:0, bombs:0, wraps:0, maxCombo:0, played:0 }, ach:{},
-  invG:{}, invS:{}, granted:{} });   /* inventaire = gagné - dépensé : deux compteurs qui ne font que monter, donc sans perte à la fusion */
+  invG:{}, invS:{}, granted:{}, tips:{} });   /* inventaire = gagné - dépensé : deux compteurs qui ne font que monter, donc sans perte à la fusion */
 let save = defaultSave();
 function loadSave() {
   try {
@@ -358,6 +379,7 @@ function mergeSaves(a, b) {
   o.stats = o.stats || {}; for (const [k, v] of Object.entries(b.stats || {})) o.stats[k] = Math.max(o.stats[k] || 0, v || 0);
   o.ach = o.ach || {}; for (const [k, v] of Object.entries(b.ach || {})) if (!o.ach[k] || v < o.ach[k]) o.ach[k] = v;
   o.granted = o.granted || {}; for (const k of Object.keys(b.granted || {})) o.granted[k] = 1;
+  o.tips = o.tips || {}; for (const k of Object.keys(b.tips || {})) o.tips[k] = 1;
   for (const f of ["invG", "invS"]) { o[f] = o[f] || {}; for (const [k, v] of Object.entries(b[f] || {})) o[f][k] = Math.max(o[f][k] || 0, v || 0); }
   if (b.inv && !b.invG) for (const [k, v] of Object.entries(b.inv)) o.invG[k] = Math.max(o.invG[k] || 0, v || 0);   /* ancienne sauvegarde cloud */
   return o;
@@ -515,6 +537,69 @@ function openInbox() {
 }
 setInterval(() => { if (cloudSession && !document.hidden) inboxRefresh(); }, 60000);
 
+/* ---------- Mini-tutoriel : une astuce affichée une seule fois, avec une main qui montre du doigt ---------- */
+const firstCell = fn => { for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) if (grid[r][c] && fn([r, c])) return [[r, c]]; return null; };
+const TIPS = [
+  { key:"swap",    when: L => L.n === 1,                              text:"Glisse un bonbon vers son voisin pour aligner 3 bonbons identiques.", target: () => findMove() },
+  { key:"jelly",   when: L => L.goals.some(g => g.k === "jelly"),    text:"Les bonbons pris dans la gelée sont gelés : ils ne bougent pas. Aligne leurs voisins pour les casser.", target: () => firstCell(isFrozen) },
+  { key:"cherry",  when: L => L.goals.some(g => g.k === "drop"),     text:"Fais descendre les cerises en détruisant les bonbons dessous. Elles ne se déplacent pas à la main.", target: () => firstCell(isCherry) },
+  { key:"special", when: L => L.goals.some(g => g.k === "special"),  text:"Aligne 4 bonbons pour créer un bonbon rayé, 5 pour une bombe chocolat !" },
+  { key:"boost",   when: L => L.n >= 2 && ["hammer", "moves", "shuffle"].some(k => invCount(k) > 0), text:"Tes bonus sont en bas : le marteau détruit un bonbon, +3 ajoute des coups, le mélange remue le plateau." },
+];
+let tipCur = null, tipTimer = 0;
+function stageXY(r, c) { const st = $("stage").getBoundingClientRect(), k = st.width / STAGE_W, cr = cv.getBoundingClientRect(), cs = cr.width / BOARD; return [(cr.left + (c + .5) * CELL * cs - st.left) / k, (cr.top + (r + .5) * CELL * cs - st.top) / k]; }
+function hideTip(done) {
+  if (!tipCur) return; clearInterval(tipTimer);
+  if (done) { save.tips = save.tips || {}; save.tips[tipCur.key] = 1; writeSave(); }
+  $("tipBox").style.display = "none"; $("tipHand").style.display = "none"; tipCur = null;
+}
+function maybeTip() {
+  if (SIM || tipCur || ended || paused || !$("sGame").classList.contains("on")) return;
+  const t = TIPS.find(x => !(save.tips || {})[x.key] && x.when(level)); if (!t) return;
+  tipCur = t; const box = $("tipBox"), hand = $("tipHand");
+  box.innerHTML = t.text + "<small>Touche pour fermer</small>"; box.style.display = "block"; box.onclick = () => hideTip(true);
+  const st = $("stage").getBoundingClientRect(), k = st.width / STAGE_W, cr = cv.getBoundingClientRect();
+  box.style.top = Math.max(8, (cr.top - st.top) / k - box.offsetHeight - 14) + "px";
+  const tg = t.target && t.target(); if (!tg) return;
+  const tipAt = ([r, c]) => { const [x, y] = stageXY(r, c); hand.style.left = (x - 22) + "px"; hand.style.top = (y - 8) + "px"; };
+  hand.style.display = "block"; hand.classList.toggle("bob", tg.length === 1);
+  if (tg.length === 1) tipAt(tg[0]);
+  else { let i = 0; tipAt(tg[0]); tipTimer = setInterval(() => { i ^= 1; tipAt(tg[i]); }, 900); }   /* la main montre le geste : aller-retour */
+}
+
+/* ---------- Classement (réutilise get_leaderboard / submit_leaderboard_score de la migration 8) ---------- */
+let rankMode = "stars", rankLevel = 1;
+const myUserId = () => { try { return JSON.parse(atob(cloudSession.access_token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))).sub; } catch (e) { return null; } };
+async function lbFetch(metric) {
+  const call = async tok => fetch(CLOUD_URL + "/rest/v1/rpc/get_leaderboard", { method:"POST", headers:{ apikey:CLOUD_KEY, Authorization:"Bearer " + tok, "Content-Type":"application/json" }, body:JSON.stringify({ p_game_id:GAME_ID, p_metric:metric, p_limit:20 }) });
+  try { let r = await call(cloudSession ? cloudSession.access_token : CLOUD_KEY); if (r.status === 401) r = await call(CLOUD_KEY); return r.ok ? await r.json() : null; } catch (e) { return null; }
+}
+async function renderRank() {
+  $("rkStars").classList.toggle("alt", rankMode === "stars"); $("rkLevel").classList.toggle("alt", rankMode === "level");
+  $("rkLvBox").style.display = rankMode === "level" ? "block" : "none"; $("rkLvNum").textContent = rankLevel;
+  const el = $("rankList"); el.innerHTML = "<p>Chargement…</p>";
+  const rows = await lbFetch(rankMode === "stars" ? "total_stars" : "lvl_" + rankLevel), me = myUserId();
+  if (rows === null) el.innerHTML = "<p>Classement indisponible pour le moment.</p>";
+  else if (!rows.length) el.innerHTML = "<p>Personne n'est encore classé : sois le premier !</p>";
+  else el.innerHTML = rows.map(r => '<div class="rk' + (r.user_id === me ? " me" : "") + '"><span class="pos">' + (r.rank <= 3 ? '<img src="assets/rank-' + r.rank + '.png" alt="' + r.rank + '">' : r.rank) + '</span><span class="nm">' + esc(r.display_name || "Joueur") + '</span><b>' + (rankMode === "stars" ? "★ " : "") + r.best_value + '</b></div>').join("");
+  $("rankNote").textContent = cloudSession ? "" : "Connecte-toi (Options) pour apparaître dans le classement.";
+}
+function openRank() { sfx("click"); rankLevel = Math.max(1, Math.min(LEVEL_COUNT, save.unlocked)); modal("mRank", true); renderRank(); }
+/* Anti-triche (migration 70) : jeton de partie délivré par le serveur au lancement du niveau, rendu avec le score à la victoire.
+   Le serveur vérifie durée / coups / score plausibles et recalcule lui-même les étoiles totales. */
+let runId = null, runMoves = 0;
+async function startRun(n) {
+  runId = null; runMoves = 0;
+  if (!cloudSession || SIM) return;
+  const r = await cloudRpc("start_game_run", { p_game_id:GAME_ID, p_level:n });
+  if (r.ok && n === level.n) runId = r.data;
+}
+function submitRun() {
+  if (!runId || !cloudSession) return;
+  const id = runId; runId = null;
+  cloudRpc("submit_game_run", { p_run:id, p_score:score, p_moves_used:runMoves });
+}
+
 /* ---------- Boosters (obtenus dans la boîte de réception) ---------- */
 let hammerOn = false;
 function updateBoosterUi() {
@@ -526,6 +611,7 @@ function updateBoosterUi() {
 }
 async function useBooster(kind) {
   if (busy || paused || ended) return;
+  hideTip(true);
   if (invCount(kind) <= 0) { sfx("bad"); say("Plus de " + REWARD_META[kind].name + " ! Cherche des cadeaux dans ta boîte de réception"); setTimeout(() => say(""), 1800); return; }
   if (kind === "hammer") { hammerOn = !hammerOn; selected = null; say(hammerOn ? "Touche un bonbon à détruire" : ""); updateBoosterUi(); return; }
   spendInv(kind);
@@ -1020,7 +1106,7 @@ async function resolveBoard(pref) {
 async function trySwap(a, b) {
   if (busy || paused || ended) return;
   if (isLocked(a) || isLocked(b)) { if (isFrozen(a) || isFrozen(b)) frozenTip(); else sfx("bad"); selected = null; return; }
-  busy = true; clearHint(); selected = null;
+  hideTip(true); busy = true; clearHint(); selected = null;
   const A = grid[a[0]][a[1]], B = grid[b[0]][b[1]];
   swapCells(a,b); sfx("swap");
   await settle();
@@ -1029,7 +1115,7 @@ async function trySwap(a, b) {
   if (!combo && !matches) {
     swapCells(a,b); sfx("bad"); await settle(); busy=false; resetIdle(); return;
   }
-  moves--; save.stats.played++; moveStats = { combo:0 };
+  moves--; runMoves++; save.stats.played++; moveStats = { combo:0 };
   updateHud();
   if (combo) {
     const forced = new Map(); const set = new Set([key(a[0],a[1]), key(b[0],b[1])]);
@@ -1116,7 +1202,7 @@ async function endLevel(win) {
     if (!prev) save.stats.wins++;
     save.unlocked = Math.max(save.unlocked, Math.min(LEVEL_COUNT, id+1));
     writeSave();
-    unlock("first_win"); if (stars===3) unlock("three_stars");
+    unlock("first_win"); if (stars===3) unlock("three_stars"); submitRun();
     if (cloudSession) checkMilestones().then(() => maybeRewardPopup());
     const done = Object.keys(save.stars).length;
     if (done>=10) unlock("lvl10"); if (done>=20) unlock("lvl20"); if (done>=40) unlock("lvl40"); if (done>=60) unlock("lvl60"); if (done>=100) unlock("lvl100"); if (done>=LEVEL_COUNT) unlock("lvl180");
@@ -1275,6 +1361,7 @@ function cellAt(ev) {
 cv.addEventListener("pointerdown", ev => {
   if (busy || paused || ended) return;
   const cell = cellAt(ev); if (!cell) return;
+  hideTip(true);
   if (hammerOn) { if (!isCherry(cell) && grid[cell[0]][cell[1]]) useHammer(cell); else sfx("bad"); return; }
   if (isLocked(cell)) { if (isFrozen(cell)) frozenTip(); else sfx("bad"); selected = null; down = null; return; }
   try { cv.setPointerCapture(ev.pointerId); } catch(e){}
@@ -1314,6 +1401,7 @@ function startLevel(i) {
   applyZoneSkin(level.n);
   const goalTxt = level.goals.map(goalSentence).join(" + ");
   say("Niveau "+level.n); setTimeout(()=>{ say(goalTxt); setTimeout(()=>say(""),1400); }, 900);
+  hideTip(false); setTimeout(maybeTip, 2600); startRun(level.n);
 }
 function seamHtml(z) {      /* petite transition douce avec la zone du dessus */
   const up = SEAM[z + 1], me = SEAM[z]; if (!up || !me) return "";
@@ -1369,6 +1457,12 @@ $("bShuffle").onclick = () => useBooster("shuffle");
 $("lSignup").onclick = (e) => { const o = window.__TAURI__ && window.__TAURI__.opener; if (o && o.openUrl) { e.preventDefault(); o.openUrl("https://izackiferra.com/forum/signup.html"); } };
 $("bCred").onclick = () => { sfx("click"); modal("mCred", true); };
 $("cClose").onclick = () => modal("mCred", false);
+$("bRank").onclick = openRank;
+$("rkClose").onclick = () => modal("mRank", false);
+$("rkStars").onclick = () => { rankMode = "stars"; renderRank(); };
+$("rkLevel").onclick = () => { rankMode = "level"; renderRank(); };
+$("rkPrev").onclick = () => { rankLevel = Math.max(1, rankLevel - 1); renderRank(); };
+$("rkNext").onclick = () => { rankLevel = Math.min(LEVEL_COUNT, rankLevel + 1); renderRank(); };
 $("bAch").onclick = () => { buildAch(); modal("mAch", true); };
 $("aClose").onclick = () => modal("mAch", false);
 $("bOpt").onclick = () => { optLabels(); modal("mOpt", true); };
