@@ -126,6 +126,36 @@
   body.sk-boost .bst .bi { display:flex; align-items:center; justify-content:center; width:100%; height:100%; }
   body.sk-boost .bst .bi img { width:62px; height:62px; vertical-align:middle; margin:0; filter:drop-shadow(0 2px 2px rgba(0,0,0,.35)); }
   .bst .adtag { display:none; position:absolute; left:50%; bottom:-14px; transform:translateX(-50%); color:#fff; font:900 13px/1 inherit; pointer-events:none; }
+  #adBat { position:absolute; left:50%; bottom:8px; transform:translateX(-50%); display:none; align-items:center; gap:10px; z-index:4; pointer-events:none; font-weight:800; font-size:17px; color:#fff; text-shadow:0 2px 3px rgba(60,10,110,.9); white-space:nowrap; }
+  body.ads #adBat { display:flex; }
+  .bat { display:inline-flex; gap:3px; padding:4px 9px 4px 5px; border:3px solid #fff; border-radius:10px; position:relative; vertical-align:middle;
+    background:url(assets/adbat-frame.png) center/100% 100% no-repeat, rgba(40,8,80,.65); }
+  .bat::after { content:""; position:absolute; right:-8px; top:28%; width:5px; height:44%; background:#fff; border-radius:0 3px 3px 0; }
+  .bat i { width:14px; height:20px; border-radius:4px; background:url(assets/adbat-cell-off.png) center/100% 100% no-repeat, rgba(255,255,255,.16); }
+  .bat i.on { background:url(assets/adbat-cell-on.png) center/100% 100% no-repeat, linear-gradient(#a8ff7a, #26b84a); box-shadow:0 0 6px rgba(120,255,120,.8); }
+  .bat.big { gap:6px; padding:8px 16px 8px 8px; border-width:4px; border-radius:16px; }
+  .bat.big::after { right:-12px; width:8px; }
+  .bat.big i { width:34px; height:48px; border-radius:8px; }
+  .bat i.drain { animation:batDrain 1s ease-in forwards; }
+  /* avec les images (batterie dessinée) : cadre = image, crans posés dans l'intérieur violet */
+  body.sk-adbat .bat { border:0; border-radius:0; background:url(assets/adbat-frame.png) center/100% 100% no-repeat; width:118px; height:37px; padding:7px 15px 7px 8px; gap:2px; }
+  body.sk-adbat .bat::after { display:none; }
+  body.sk-adbat .bat i { flex:1; width:auto; height:auto; border-radius:3px; box-shadow:none; }
+  body.sk-adbat .bat i.on { box-shadow:0 0 6px rgba(120,255,120,.55); }
+  body.sk-adbat .bat.big { width:300px; height:94px; padding:18px 37px 18px 20px; gap:5px; }
+  body.sk-adbat .bat.big i { border-radius:6px; }
+  .bat i { position:relative; }
+  .bat i.drain::after { content:""; position:absolute; left:50%; top:50%; width:260%; aspect-ratio:1; transform:translate(-50%,-50%) scale(.3); background:url(assets/adbat-drain.png) center/contain no-repeat; opacity:0; animation:batBurst 1s ease-out .3s forwards; pointer-events:none; }
+  @keyframes batBurst { 0% { opacity:1; transform:translate(-50%,-50%) scale(.3); } 100% { opacity:0; transform:translate(-50%,-80%) scale(1.3); } }
+  #adBat img.rc { height:20px; vertical-align:middle; margin-right:2px; }
+  @keyframes batDrain { 0% { transform:scale(1.18); filter:brightness(1.8); } 35% { transform:scale(1.18); filter:brightness(1.8); } 100% { transform:scale(.82); filter:brightness(.4) saturate(0); opacity:.45; box-shadow:none; } }
+  #adRwBat { margin:4px 0 10px; } #adRwBat small { display:block; font-size:18px; margin-top:6px; opacity:.9; }
+  /* téléphone tourné à l'horizontale : le jeu reste en portrait, on demande de retourner le téléphone */
+  #rotate { display:none; position:fixed; inset:0; z-index:9999; background:linear-gradient(#7a2cd6,#3a1a7a); color:#fff; flex-direction:column; align-items:center; justify-content:center; gap:18px; text-align:center; font-family:'Trebuchet MS',Arial,sans-serif; font-weight:800; font-size:22px; padding:20px; }
+  #rotate .ph { width:54px; height:92px; border:5px solid #fff; border-radius:12px; position:relative; animation:rotPh 2s ease-in-out infinite; }
+  #rotate .ph::after { content:''; position:absolute; left:50%; bottom:6px; width:12px; height:4px; margin-left:-6px; background:#fff; border-radius:2px; }
+  @keyframes rotPh { 0%, 30% { transform:rotate(-90deg); } 60%, 100% { transform:rotate(0deg); } }
+  @media (orientation:landscape) and (max-height:540px) and (pointer:coarse) { #rotate { display:flex; } }
   a.btn { display:inline-flex !important; align-items:center; justify-content:center; padding-top:0; padding-bottom:0; }   /* lien en forme de bouton (Découvrir le Launcher, Créer mon compte) : texte centré dans le fond rose */
   #adRwIcon img { width:130px; height:130px; filter:drop-shadow(0 4px 6px rgba(0,0,0,.4)); }
   .bst .adtag img { width:42px; height:42px; filter:drop-shadow(0 2px 3px rgba(0,0,0,.5)); }
@@ -232,6 +262,7 @@
     <div class="sp"></div>
     <div id="boardWrap"><div id="pocket"></div><canvas id="board" width="512" height="512"></canvas><img id="frameImg" src="assets/board-frame.png" alt=""><div id="msg"></div></div>
     <div class="sp"></div>
+    <div id="adBat" aria-label="Pubs disponibles"></div>
     <div id="gameBtns">
       <button class="btn small alt icon" id="bPause" title="Pause">⏸</button>
       <button class="btn small icon" id="bHint" title="Indice">💡</button>
@@ -317,11 +348,11 @@
 
   <div id="mAd" class="modal" style="background:#000;z-index:30"><div style="position:relative;height:100%;aspect-ratio:9/16;max-width:100%;background:#000">
     <iframe id="adFrame" title="Publicité" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="autoplay"></iframe>
-    <div style="position:absolute;left:0;right:0;top:0;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,0));font-weight:800;font-size:17px;color:#fff;pointer-events:none"><span>Publicité</span><span>+1 bonus dans <b id="adCount">15</b> s</span></div>
+    <div style="position:absolute;left:50%;top:calc(70px + env(safe-area-inset-top, 0px));transform:translateX(-50%);padding:8px 20px;display:flex;gap:18px;align-items:center;white-space:nowrap;background:rgba(0,0,0,.6);border:2px solid rgba(255,255,255,.35);border-radius:99px;font-weight:800;font-size:19px;color:#fff;pointer-events:none;z-index:2"><span>Publicité</span><span>+1 bonus dans <b id="adCount">15</b> s</span></div>
     <a id="adLink" href="https://izackiferra.com/launcher.html" target="_blank" rel="noopener" class="btn small" style="position:absolute;left:50%;bottom:16px;transform:translateX(-50%);text-decoration:none;white-space:nowrap">Découvrir le Launcher</a></div></div>
 
   <div id="mAdRw" class="modal" style="z-index:31"><div class="card"><h3>Merci d'avoir regardé !</h3>
-    <div id="adRwIcon" style="margin:6px 0"></div><p id="adRwText" style="font-size:30px;font-weight:900;margin:4px 0 14px"></p>
+    <div id="adRwIcon" style="margin:6px 0"></div><p id="adRwText" style="font-size:30px;font-weight:900;margin:4px 0 6px"></p><div id="adRwBat"></div>
     <button class="btn green" id="adRwOk">OK</button></div></div>
 
   <div id="mReward" class="modal"><div class="card"><h3><img src="assets/icon-gift.png" alt="" style="width:54px;height:54px;vertical-align:middle;margin-right:6px" onerror="this.replaceWith(document.createTextNode('🎁 '))">Cadeau !</h3>
@@ -656,10 +687,27 @@ const ADS_ENABLED = true;
 if (ADS_ENABLED) document.body.classList.add("ads");
 /* Pubs maison : animations canvas (dossier Factory2D/Pubs → pub/ dans le jeu). Une est tirée au hasard dans pub/catalogue.json (15 s ou 30 s), jouée en entier dans une iframe, puis pop-up « +1 … » + OK.
    Aucune limite de nombre (demandé le 15/11). Une pub ne se répète pas deux fois de suite. */
+const BAT_MAX = 5, BAT_REGEN = 5 * 60 * 1000;
+function batGet() {
+  let b = null; try { b = JSON.parse(localStorage.getItem("sc_adbat") || "null"); } catch (e) {}
+  if (!b || typeof b.n !== "number") b = { n:BAT_MAX, t:Date.now() };
+  if (b.n < BAT_MAX) { const k = Math.floor((Date.now() - b.t) / BAT_REGEN); if (k > 0) { b.n = Math.min(BAT_MAX, b.n + k); b.t += k * BAT_REGEN; } }
+  if (b.n >= BAT_MAX) b.n = BAT_MAX;
+  return b;
+}
+function batSave(b) { try { localStorage.setItem("sc_adbat", JSON.stringify(b)); } catch (e) {} }
+function batUse() { const b = batGet(); if (b.n <= 0) return false; if (b.n === BAT_MAX) b.t = Date.now(); b.n--; batSave(b); batUi(); return true; }
+const batLeft = b => b.n >= BAT_MAX ? 0 : Math.max(0, BAT_REGEN - (Date.now() - b.t));
+const mmss = ms => { const x = Math.ceil(ms / 1000); return Math.floor(x / 60) + ":" + String(x % 60).padStart(2, "0"); };
+const batHtml = (n, big, drainIdx) => '<span class="bat' + (big ? " big" : "") + '">' + [0, 1, 2, 3, 4].map(i => '<i class="' + (i < n ? "on" : "") + (i === drainIdx ? " drain" : "") + '"></i>').join("") + "</span>";
+function batUi() { const el = $("adBat"); if (!el || !ADS_ENABLED) return; const b = batGet(); el.innerHTML = batHtml(b.n) + "<span>" + (b.n >= BAT_MAX ? "Pubs 5/5" : '<img class="rc" src="assets/icon-recharge.png" alt="" onerror="this.remove()">+1 dans ' + mmss(batLeft(b))) + "</span>"; }
+{ const im = new Image(); im.onload = () => document.body.classList.add("sk-adbat"); im.src = "assets/adbat-frame.png"; }
+setInterval(() => { if (ADS_ENABLED && $("sGame").classList.contains("on")) batUi(); }, 1000);
 window.scShowRewardedAd = async () => {
   let st; try { st = JSON.parse(localStorage.getItem("sc_ads") || "{}"); } catch (e) { st = {}; }
   const day = new Date().toISOString().slice(0, 10); if (st.day !== day) st = { day, n:0, last:0, lastId:st.lastId };
   const warn = m => { say(m); setTimeout(() => say(""), 2200); return false; };
+  { const b = batGet(); if (b.n <= 0) return warn("Plus de pub dispo : la prochaine dans " + mmss(batLeft(b))); }
   let cat = []; try { cat = (await (await fetch("pub/catalogue.json", { cache:"no-cache" })).json()).filter(p => p && p.actif !== false && p.fichier && p.duree > 0); } catch (e) {}
   if (!cat.length) return warn("Pub indisponible pour le moment");
   const pool = cat.length > 1 ? cat.filter(p => p.id !== st.lastId) : cat, ad = pool[Math.floor(Math.random() * pool.length)];
@@ -669,7 +717,7 @@ window.scShowRewardedAd = async () => {
     const tick = setInterval(() => { left = Math.max(0, left - 1); $("adCount").textContent = left; }, 1000);
     const finish = ok => {
       clearInterval(tick); clearTimeout(safety); removeEventListener("message", onMsg); modal("mAd", false); fr.onload = null; fr.src = "about:blank";
-      if (ok) { st.n++; st.last = Date.now(); st.lastId = ad.id; try { localStorage.setItem("sc_ads", JSON.stringify(st)); } catch (e) {} } res(ok);
+      if (ok) { batUse(); st.lastId = ad.id; try { localStorage.setItem("sc_ads", JSON.stringify(st)); } catch (e) {} } res(ok);
     };
     const onMsg = e => { if (e.data && e.data.ad === "done") finish(loaded); };
     addEventListener("message", onMsg); const safety = setTimeout(() => finish(loaded), (ad.duree + 3) * 1000);
@@ -681,6 +729,7 @@ async function watchAdFor(kind) {
   if (ok) {
     addInv({ [kind]: 1 }); sfx("ach");
     $("adRwIcon").innerHTML = rwIcon(kind); $("adRwText").textContent = "+1 " + REWARD_META[kind].name + " !";
+    { const n = batGet().n; $("adRwBat").innerHTML = batHtml(n + 1, true) + "<small>Pubs restantes : " + n + " / 5</small>"; setTimeout(() => { $("adRwBat").innerHTML = batHtml(n + 1, true, n) + "<small>Pubs restantes : " + n + " / 5" + (n < 5 ? " · +1 toutes les 5 min" : "") + "</small>"; }, 450); }
     await new Promise(r => { $("adRwOk").onclick = () => { modal("mAdRw", false); r(); }; modal("mAdRw", true); });
   }
   return ok;
@@ -1503,7 +1552,7 @@ function modal(id, on) { $(id).classList.toggle("on", on); }
 function startLevel(i) {
   levelIdx = i; level = LEVELS[i];
   score = 0; moves = level.moves; collected = 0; dropped = 0; dropSpawned = 0; specialsMade = 0; ended = false; busy = false; paused = false; selected = null;
-  hammerOn = false; bonusBomb = !SIM && Math.random() < 0.4 ? 1 : 0; particles = []; floats = []; effects = []; moveStats = { combo:0 };
+  hammerOn = false; batUi(); bonusBomb = !SIM && Math.random() < 0.4 ? 1 : 0; particles = []; floats = []; effects = []; moveStats = { combo:0 };
   initBoard(); buildStarMarks(); updateHud(); say("");
   modal("mEnd", false); modal("mPause", false);
   show("sGame"); resetIdle();
@@ -1646,5 +1695,7 @@ cloudInit();
 /* ---------- Lancement direct en test : ?level=N ---------- */
 (function(){ const m = /[?&]level=(\d+)/.exec(location.search); if (m) { save.unlocked = LEVEL_COUNT; startLevel(Math.max(0, Math.min(LEVEL_COUNT-1, +m[1]-1))); } })();
 </script>
+<div id="rotate" role="alert"><div class="ph"></div><div>Tourne ton téléphone<br>pour jouer à la verticale</div></div>
+<script>/* verrouille en portrait quand le navigateur le permet (Android, appli installée) ; sinon l'écran #rotate s'affiche */ addEventListener("pointerdown", () => { try { if (screen.orientation && screen.orientation.lock) screen.orientation.lock("portrait").catch(() => {}); } catch (e) {} }, { once:true });</script>
 </body>
 </html>

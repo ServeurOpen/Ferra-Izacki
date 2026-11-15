@@ -4,11 +4,11 @@
 <title>Pub — Créateurs (27 s)</title>
 <style>html,body{margin:0;height:100%;background:#0c0d0f;overflow:hidden}canvas{position:absolute;inset:0;margin:auto;max-width:100%;max-height:100%;aspect-ratio:9/16;height:100%}</style></head><body>
 <canvas id="c" width="1080" height="1920"></canvas>
-<script src="../_commun/ad-kit.js"></script>
+<script src="../commun/ad-kit.js"></script>
 <script>
 /* Pub 30 s « Créateurs » : une maquette du Launcher (écran « Sortir mon jeu » + ventes) filmée par une caméra qui zoome sur l'endroit dont parle la voix.
    Les secondes de chaque phrase sont dans T : à recaler sur la voix enregistrée (voir voix/). ?mute = sans son. */
-const I = "../_commun/img/";
+const I = "../commun/img/";
 const IMAGES = { sF1:I + "screenshot-gameplay-1000.webp", sT1:I + "screenshot-towerdefense-1-1000.webp", sV2:I + "screenshot-vigie-2-1000.webp", cF:I + "cover-ferra-1000.webp", cT:I + "cover-tower-defense-1000.webp", cV:I + "cover-vigie-1000.webp", k0:I + "candy-0-rouge.png", k4:I + "candy-4-bleu.png" };
 const bar = (x, y, w, col, h = 14, a = 1) => { g.globalAlpha = a; g.fillStyle = col || "rgba(236,238,241,.22)"; rr(x, y, Math.max(w, 0), h, h / 2); g.fill(); g.globalAlpha = 1; };
 const GREEN = "#6bcf8e", AMBER = "#ffb84a", VIOLET = "#8b8cff";

@@ -21,7 +21,7 @@ const eOut = k => 1 - Math.pow(1 - k, 3), eIO = k => k < .5 ? 4 * k * k * k : 1 
 const eBack = k => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(k - 1, 3) + c1 * Math.pow(k - 1, 2); };
 function prng(seed) { let s = seed >>> 0; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296); }
 /* images */
-const IMG = {}, SRC = { ferra:"../_commun/img/cover-ferra-1000.webp", td:"../_commun/img/cover-tower-defense-1000.webp", vigie:"../_commun/img/cover-vigie-1000.webp", shop:"../_commun/img/boutique-960.webp" };
+const IMG = {}, SRC = { ferra:"../commun/img/cover-ferra-1000.webp", td:"../commun/img/cover-tower-defense-1000.webp", vigie:"../commun/img/cover-vigie-1000.webp", shop:"../commun/img/boutique-960.webp" };
 let loaded = 0; const need = Object.keys(SRC).length;
 for (const k in SRC) { const i = new Image(); i.onload = i.onerror = () => { if (++loaded === need) { Ad.ready = true; start(); } }; i.src = SRC[k]; IMG[k] = i; }
 const ok = k => IMG[k] && IMG[k].complete && IMG[k].naturalWidth;
