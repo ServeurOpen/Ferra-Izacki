@@ -384,10 +384,10 @@ if (window.__TAURI__) { document.write('<script src="izacki-cloud.js"><' + '/scr
    ============================================================ */
 const GAME_ID = "sweet-crush";
 const SAVE_KEY = "sweetcrush_save_v1";
-const N = 8;            // taille de la grille
+let N = 8;              // taille de la grille (8, ou 10 dans les zones 15 et plus)
 const CELL = 64;        // taille d'une case (px logiques)
-const BOARD = N * CELL; // côté du plateau (px logiques)
-const LEVEL_COUNT = 180;
+let BOARD = N * CELL;   // côté du plateau (px logiques)
+const LEVEL_COUNT = 240;   /* 16/11 : zones 15-17 ouvertes (niveaux 181-240, plateau 10x10) */
 
 /* ---------- Bonbons : couleurs et formes ---------- */
 const COLORS = [
@@ -833,7 +833,7 @@ function makeLevels() {
   ];
   const jellyOf = (p, dbl) => { const a=[]; for (let r=0;r<N;r++) for (let c=0;c<N;c++) if (p(r,c)) a.push([r,c, dbl && (r+c)%3===0 ? 2 : 1]); return a; };
   const out = [];
-  for (let i = 0; i < LEVEL_COUNT; i++) {
+  for (let i = 0; i < 180; i++) {          /* niveaux 1-180 ; 181-240 viennent de makeLevelsExt() */
     const d = Math.min(1, i / 59), kind = CYCLE[i % 6], T = TUNED[i] || {};
     const types = 5;
     const L = { n:i+1, kind, types, moves: Math.round(25 - d*4), goals:[] };
@@ -855,12 +855,56 @@ function makeLevels() {
   }
   return out;
 }
-const MAPS = [{"z":1,"a":1,"b":10,"r":0.5335,"p":[[0.381,0.853],[0.674,0.746],[0.292,0.659],[0.696,0.557],[0.277,0.478],[0.68,0.402],[0.302,0.3243],[0.6777,0.2446],[0.302,0.177],[0.5562,0.1016]],"d":[0.2132,0.209,0.2048,0.2006,0.1963,0.1922,0.1797,0.1905,0.1785,0.1641]},{"z":2,"a":11,"b":20,"r":0.5335,"p":[[0.4663,0.8942],[0.6368,0.7903],[0.3467,0.6945],[0.6436,0.6022],[0.3303,0.5111],[0.5997,0.4214],[0.3325,0.3373],[0.6003,0.2531],[0.3505,0.1777],[0.5062,0.0882]],"d":[0.1906,0.1873,0.1841,0.1808,0.1775,0.1742,0.1709,0.1676,0.1644,0.1611]},{"z":3,"a":21,"b":30,"r":0.5335,"p":[[0.4667,0.8691],[0.639,0.7616],[0.3376,0.6734],[0.6116,0.5925],[0.3409,0.5035],[0.6272,0.4246],[0.3578,0.3438],[0.6182,0.263],[0.3068,0.1884],[0.5075,0.1014]],"d":[0.178,0.1762,0.1745,0.1728,0.1711,0.1693,0.1676,0.1659,0.1642,0.1624]},{"z":4,"a":31,"b":40,"r":0.5335,"p":[[0.4543,0.8731],[0.6518,0.7719],[0.3172,0.6883],[0.6259,0.5986],[0.2978,0.5105],[0.6276,0.4287],[0.346,0.3402],[0.6368,0.257],[0.3337,0.1815],[0.5073,0.0916]],"d":[0.1974,0.1947,0.192,0.1893,0.1866,0.1839,0.1812,0.1786,0.1759,0.1732]},{"z":5,"a":41,"b":50,"r":0.5335,"p":[[0.4348,0.8665],[0.6417,0.752],[0.2794,0.6602],[0.6507,0.5736],[0.3111,0.4899],[0.6287,0.4095],[0.3189,0.3293],[0.6107,0.2496],[0.3309,0.1722],[0.5196,0.0849]],"d":[0.1908,0.1875,0.1842,0.1808,0.1775,0.1742,0.1709,0.1676,0.1643,0.1609]},{"z":6,"a":51,"b":60,"r":0.5335,"p":[[0.44,0.886],[0.638,0.772],[0.3408,0.6746],[0.6508,0.5841],[0.3449,0.506],[0.618,0.434],[0.3247,0.3589],[0.627,0.2836],[0.3396,0.2172],[0.5016,0.1326]],"d":[0.1905,0.1878,0.1851,0.1824,0.1797,0.1769,0.1742,0.1715,0.1688,0.1661]},{"z":7,"a":61,"b":70,"r":0.5334,"p":[[0.4935,0.917],[0.3175,0.7912],[0.6298,0.698],[0.3318,0.6024],[0.6111,0.5117],[0.3185,0.4249],[0.6076,0.3375],[0.3472,0.247],[0.5997,0.1607],[0.498,0.0618]],"d":[0.1785,0.1753,0.172,0.1688,0.1656,0.1623,0.1591,0.1559,0.1526,0.1494]},{"z":8,"a":71,"b":80,"r":0.5334,"p":[[0.4356,0.9004],[0.6711,0.7684],[0.2941,0.6795],[0.6769,0.5935],[0.3028,0.5037],[0.6597,0.4128],[0.2911,0.3256],[0.6331,0.2333],[0.3227,0.1593],[0.5248,0.0641]],"d":[0.1818,0.178,0.1743,0.1705,0.1668,0.163,0.1593,0.1555,0.1518,0.148]},{"z":9,"a":81,"b":90,"r":0.5334,"p":[[0.4245,0.9271],[0.6321,0.7914],[0.2545,0.7048],[0.5958,0.6169],[0.3097,0.5225],[0.636,0.4291],[0.376,0.338],[0.6398,0.2482],[0.3603,0.1652],[0.5206,0.0695]],"d":[0.1726,0.1703,0.1681,0.1658,0.1635,0.1613,0.159,0.1568,0.1545,0.1522]},{"z":10,"a":91,"b":100,"r":0.5334,"p":[[0.4393,0.8919],[0.6649,0.7736],[0.2987,0.69],[0.6431,0.5953],[0.302,0.5084],[0.6565,0.4175],[0.2905,0.325],[0.6213,0.2349],[0.2988,0.1452],[0.5022,0.063]],"d":[0.1776,0.175,0.1725,0.17,0.1675,0.1649,0.1624,0.1599,0.1574,0.1548]},{"z":11,"a":101,"b":120,"r":0.3333,"p":[[0.4302,0.9313],[0.6665,0.8808],[0.3134,0.8332],[0.6692,0.7837],[0.3222,0.7412],[0.6622,0.693],[0.2866,0.6502],[0.652,0.6062],[0.3011,0.5609],[0.6797,0.516],[0.3381,0.4722],[0.6645,0.4255],[0.328,0.3842],[0.672,0.3354],[0.3389,0.2914],[0.6527,0.2427],[0.3319,0.2029],[0.6279,0.1553],[0.2884,0.1097],[0.448,0.0592]],"d":[0.1685,0.168,0.1675,0.167,0.1665,0.166,0.1655,0.165,0.1645,0.164,0.1635,0.163,0.1625,0.162,0.1615,0.161,0.1605,0.16,0.1595,0.159]},{"z":12,"a":121,"b":140,"r":0.3333,"p":[[0.5116,0.9394],[0.3433,0.8751],[0.6553,0.8245],[0.328,0.7815],[0.6272,0.7344],[0.3492,0.6887],[0.6618,0.6428],[0.3585,0.5974],[0.6438,0.5515],[0.3189,0.5086],[0.6263,0.4585],[0.3833,0.4119],[0.6471,0.3656],[0.3678,0.3198],[0.6492,0.2759],[0.3912,0.228],[0.6236,0.1828],[0.3921,0.1361],[0.6546,0.0906],[0.4584,0.051]],"d":[0.167,0.1656,0.1643,0.163,0.1616,0.1603,0.159,0.1576,0.1563,0.155,0.1537,0.1523,0.151,0.1497,0.1483,0.147,0.1457,0.1443,0.143,0.1417]},{"z":13,"a":141,"b":160,"r":0.3333,"p":[[0.5025,0.9483],[0.3253,0.8884],[0.6756,0.8404],[0.3001,0.7913],[0.6682,0.7507],[0.327,0.7057],[0.687,0.6591],[0.309,0.6117],[0.6784,0.5696],[0.336,0.5228],[0.6786,0.476],[0.3429,0.4292],[0.6679,0.3811],[0.307,0.3335],[0.6443,0.2889],[0.3331,0.242],[0.6013,0.1902],[0.3197,0.1405],[0.6598,0.0974],[0.4953,0.0477]],"d":[0.1776,0.1771,0.1766,0.1761,0.1756,0.1751,0.1746,0.1741,0.1736,0.1731,0.1726,0.1721,0.1716,0.1711,0.1706,0.1701,0.1696,0.1691,0.1686,0.1681]},{"z":14,"a":161,"b":180,"r":0.3333,"p":[[0.4676,0.9427],[0.6525,0.8736],[0.317,0.8298],[0.6708,0.7809],[0.3164,0.7398],[0.6664,0.6946],[0.3117,0.6532],[0.6613,0.611],[0.3407,0.565],[0.6671,0.5217],[0.3088,0.4804],[0.6405,0.4402],[0.3359,0.3952],[0.673,0.363],[0.3588,0.3222],[0.6274,0.266],[0.3349,0.2296],[0.635,0.201],[0.3446,0.169],[0.5093,0.1348]],"d":[0.1956,0.1938,0.192,0.1902,0.1885,0.1867,0.1849,0.1832,0.1814,0.1796,0.1778,0.1761,0.1743,0.1725,0.1708,0.169,0.1672,0.1655,0.1637,0.1619]}];
+const MAPS = [{"z":1,"a":1,"b":10,"r":0.5335,"p":[[0.381,0.853],[0.674,0.746],[0.292,0.659],[0.696,0.557],[0.277,0.478],[0.68,0.402],[0.302,0.3243],[0.6777,0.2446],[0.302,0.177],[0.5562,0.1016]],"d":[0.2132,0.209,0.2048,0.2006,0.1963,0.1922,0.1797,0.1905,0.1785,0.1641]},{"z":2,"a":11,"b":20,"r":0.5335,"p":[[0.4663,0.8942],[0.6368,0.7903],[0.3467,0.6945],[0.6436,0.6022],[0.3303,0.5111],[0.5997,0.4214],[0.3325,0.3373],[0.6003,0.2531],[0.3505,0.1777],[0.5062,0.0882]],"d":[0.1906,0.1873,0.1841,0.1808,0.1775,0.1742,0.1709,0.1676,0.1644,0.1611]},{"z":3,"a":21,"b":30,"r":0.5335,"p":[[0.4667,0.8691],[0.639,0.7616],[0.3376,0.6734],[0.6116,0.5925],[0.3409,0.5035],[0.6272,0.4246],[0.3578,0.3438],[0.6182,0.263],[0.3068,0.1884],[0.5075,0.1014]],"d":[0.178,0.1762,0.1745,0.1728,0.1711,0.1693,0.1676,0.1659,0.1642,0.1624]},{"z":4,"a":31,"b":40,"r":0.5335,"p":[[0.4543,0.8731],[0.6518,0.7719],[0.3172,0.6883],[0.6259,0.5986],[0.2978,0.5105],[0.6276,0.4287],[0.346,0.3402],[0.6368,0.257],[0.3337,0.1815],[0.5073,0.0916]],"d":[0.1974,0.1947,0.192,0.1893,0.1866,0.1839,0.1812,0.1786,0.1759,0.1732]},{"z":5,"a":41,"b":50,"r":0.5335,"p":[[0.4348,0.8665],[0.6417,0.752],[0.2794,0.6602],[0.6507,0.5736],[0.3111,0.4899],[0.6287,0.4095],[0.3189,0.3293],[0.6107,0.2496],[0.3309,0.1722],[0.5196,0.0849]],"d":[0.1908,0.1875,0.1842,0.1808,0.1775,0.1742,0.1709,0.1676,0.1643,0.1609]},{"z":6,"a":51,"b":60,"r":0.5335,"p":[[0.44,0.886],[0.638,0.772],[0.3408,0.6746],[0.6508,0.5841],[0.3449,0.506],[0.618,0.434],[0.3247,0.3589],[0.627,0.2836],[0.3396,0.2172],[0.5016,0.1326]],"d":[0.1905,0.1878,0.1851,0.1824,0.1797,0.1769,0.1742,0.1715,0.1688,0.1661]},{"z":7,"a":61,"b":70,"r":0.5334,"p":[[0.4935,0.917],[0.3175,0.7912],[0.6298,0.698],[0.3318,0.6024],[0.6111,0.5117],[0.3185,0.4249],[0.6076,0.3375],[0.3472,0.247],[0.5997,0.1607],[0.498,0.0618]],"d":[0.1785,0.1753,0.172,0.1688,0.1656,0.1623,0.1591,0.1559,0.1526,0.1494]},{"z":8,"a":71,"b":80,"r":0.5334,"p":[[0.4356,0.9004],[0.6711,0.7684],[0.2941,0.6795],[0.6769,0.5935],[0.3028,0.5037],[0.6597,0.4128],[0.2911,0.3256],[0.6331,0.2333],[0.3227,0.1593],[0.5248,0.0641]],"d":[0.1818,0.178,0.1743,0.1705,0.1668,0.163,0.1593,0.1555,0.1518,0.148]},{"z":9,"a":81,"b":90,"r":0.5334,"p":[[0.4245,0.9271],[0.6321,0.7914],[0.2545,0.7048],[0.5958,0.6169],[0.3097,0.5225],[0.636,0.4291],[0.376,0.338],[0.6398,0.2482],[0.3603,0.1652],[0.5206,0.0695]],"d":[0.1726,0.1703,0.1681,0.1658,0.1635,0.1613,0.159,0.1568,0.1545,0.1522]},{"z":10,"a":91,"b":100,"r":0.5334,"p":[[0.4393,0.8919],[0.6649,0.7736],[0.2987,0.69],[0.6431,0.5953],[0.302,0.5084],[0.6565,0.4175],[0.2905,0.325],[0.6213,0.2349],[0.2988,0.1452],[0.5022,0.063]],"d":[0.1776,0.175,0.1725,0.17,0.1675,0.1649,0.1624,0.1599,0.1574,0.1548]},{"z":11,"a":101,"b":120,"r":0.3333,"p":[[0.4302,0.9313],[0.6665,0.8808],[0.3134,0.8332],[0.6692,0.7837],[0.3222,0.7412],[0.6622,0.693],[0.2866,0.6502],[0.652,0.6062],[0.3011,0.5609],[0.6797,0.516],[0.3381,0.4722],[0.6645,0.4255],[0.328,0.3842],[0.672,0.3354],[0.3389,0.2914],[0.6527,0.2427],[0.3319,0.2029],[0.6279,0.1553],[0.2884,0.1097],[0.448,0.0592]],"d":[0.1685,0.168,0.1675,0.167,0.1665,0.166,0.1655,0.165,0.1645,0.164,0.1635,0.163,0.1625,0.162,0.1615,0.161,0.1605,0.16,0.1595,0.159]},{"z":12,"a":121,"b":140,"r":0.3333,"p":[[0.5116,0.9394],[0.3433,0.8751],[0.6553,0.8245],[0.328,0.7815],[0.6272,0.7344],[0.3492,0.6887],[0.6618,0.6428],[0.3585,0.5974],[0.6438,0.5515],[0.3189,0.5086],[0.6263,0.4585],[0.3833,0.4119],[0.6471,0.3656],[0.3678,0.3198],[0.6492,0.2759],[0.3912,0.228],[0.6236,0.1828],[0.3921,0.1361],[0.6546,0.0906],[0.4584,0.051]],"d":[0.167,0.1656,0.1643,0.163,0.1616,0.1603,0.159,0.1576,0.1563,0.155,0.1537,0.1523,0.151,0.1497,0.1483,0.147,0.1457,0.1443,0.143,0.1417]},{"z":13,"a":141,"b":160,"r":0.3333,"p":[[0.5025,0.9483],[0.3253,0.8884],[0.6756,0.8404],[0.3001,0.7913],[0.6682,0.7507],[0.327,0.7057],[0.687,0.6591],[0.309,0.6117],[0.6784,0.5696],[0.336,0.5228],[0.6786,0.476],[0.3429,0.4292],[0.6679,0.3811],[0.307,0.3335],[0.6443,0.2889],[0.3331,0.242],[0.6013,0.1902],[0.3197,0.1405],[0.6598,0.0974],[0.4953,0.0477]],"d":[0.1776,0.1771,0.1766,0.1761,0.1756,0.1751,0.1746,0.1741,0.1736,0.1731,0.1726,0.1721,0.1716,0.1711,0.1706,0.1701,0.1696,0.1691,0.1686,0.1681]},{"z":14,"a":161,"b":180,"r":0.3333,"p":[[0.4676,0.9427],[0.6525,0.8736],[0.317,0.8298],[0.6708,0.7809],[0.3164,0.7398],[0.6664,0.6946],[0.3117,0.6532],[0.6613,0.611],[0.3407,0.565],[0.6671,0.5217],[0.3088,0.4804],[0.6405,0.4402],[0.3359,0.3952],[0.673,0.363],[0.3588,0.3222],[0.6274,0.266],[0.3349,0.2296],[0.635,0.201],[0.3446,0.169],[0.5093,0.1348]],"d":[0.1956,0.1938,0.192,0.1902,0.1885,0.1867,0.1849,0.1832,0.1814,0.1796,0.1778,0.1761,0.1743,0.1725,0.1708,0.169,0.1672,0.1655,0.1637,0.1619]},{"z":15,"a":181,"b":200,"r":0.3333,"p":[[0.3075,0.9694],[0.6875,0.9319],[0.3056,0.8827],[0.6875,0.8358],[0.3056,0.7863],[0.6875,0.7394],[0.3056,0.6904],[0.6869,0.6431],[0.305,0.5948],[0.6875,0.5469],[0.305,0.4981],[0.6875,0.4502],[0.3056,0.4027],[0.6875,0.3552],[0.305,0.3067],[0.6875,0.2594],[0.3056,0.2112],[0.6863,0.1635],[0.305,0.1156],[0.705,0.0683]],"d":[0.1503,0.1503,0.1509,0.1509,0.1516,0.1503,0.1516,0.1496,0.1503,0.1503,0.1516,0.1503,0.1509,0.1503,0.1509,0.1503,0.1516,0.1503,0.1503,0.1509]},{"z":16,"a":201,"b":220,"r":0.3333,"p":[[0.345,0.88],[0.655,0.8377],[0.345,0.7942],[0.655,0.7523],[0.345,0.7104],[0.655,0.6685],[0.345,0.6262],[0.655,0.5844],[0.345,0.5425],[0.6538,0.5006],[0.345,0.459],[0.655,0.4171],[0.345,0.3752],[0.655,0.3331],[0.345,0.2915],[0.6538,0.2496],[0.345,0.2077],[0.6544,0.1663],[0.345,0.124],[0.655,0.0821]],"d":[0.1431,0.1411,0.1418,0.1424,0.1418,0.1424,0.1418,0.1411,0.1418,0.1411,0.1411,0.1418,0.1424,0.1411,0.1411,0.1418,0.1424,0.1411,0.1424,0.1418]},{"z":17,"a":221,"b":240,"r":0.3333,"p":[[0.6581,0.9256],[0.3094,0.9029],[0.6887,0.8525],[0.31,0.8042],[0.6887,0.7544],[0.31,0.7069],[0.6887,0.6575],[0.31,0.6094],[0.6887,0.5602],[0.31,0.5135],[0.6887,0.4646],[0.31,0.4169],[0.6887,0.3669],[0.31,0.3198],[0.6887,0.2702],[0.31,0.2225],[0.6887,0.1735],[0.31,0.1256],[0.6887,0.0762],[0.3031,0.035]],"d":[0.147,0.149,0.1483,0.1483,0.1477,0.1477,0.1483,0.1477,0.1477,0.1477,0.147,0.1477,0.1477,0.1463,0.1477,0.147,0.1477,0.1463,0.147,0.1411]}];
 /* couleurs moyennes du haut / du bas de chaque carte : servent à fondre la jonction entre deux zones */
-const SEAM = {"1":["193,162,230","214,130,109"],"2":["102,216,153","123,163,74"],"3":["195,158,183","165,82,36"],"4":["226,169,238","245,171,214"],"5":["150,115,240","158,134,201"],"6":["225,142,191","188,131,120"],"7":["92,202,186","155,164,96"],"8":["206,129,224","171,104,130"],"9":["149,165,186","223,179,121"],"10":["227,141,149","197,123,42"],"11":["63,226,244","223,148,151"],"12":["92,187,220","219,203,49"],"13":["70,49,170","146,42,134"],"14":["146,169,245","191,151,78"]};
-const ZF = {"1":{"cx":0.4975,"cy":0.5015,"w":0.745,"h":0.725},"2":{"cx":0.4985,"cy":0.508,"w":0.755,"h":0.684},"3":{"cx":0.4975,"cy":0.498,"w":0.733,"h":0.69},"4":{"cx":0.497,"cy":0.5125,"w":0.756,"h":0.719},"5":{"cx":0.4925,"cy":0.4945,"w":0.725,"h":0.713},"6":{"cx":0.498,"cy":0.513,"w":0.794,"h":0.734},"7":{"cx":0.494,"cy":0.5145,"w":0.746,"h":0.723},"8":{"cx":0.4975,"cy":0.507,"w":0.735,"h":0.738},"9":{"cx":0.499,"cy":0.495,"w":0.746,"h":0.742},"10":{"cx":0.494,"cy":0.493,"w":0.746,"h":0.716},"11":{"cx":0.496,"cy":0.502,"w":0.75,"h":0.718},"12":{"cx":0.4895,"cy":0.507,"w":0.729,"h":0.736},"13":{"cx":0.4985,"cy":0.4875,"w":0.727,"h":0.705},"14":{"cx":0.4985,"cy":0.4975,"w":0.725,"h":0.709}};
+const SEAM = {"1":["193,162,230","214,130,109"],"2":["102,216,153","123,163,74"],"3":["195,158,183","165,82,36"],"4":["226,169,238","245,171,214"],"5":["150,115,240","158,134,201"],"6":["225,142,191","188,131,120"],"7":["92,202,186","155,164,96"],"8":["206,129,224","171,104,130"],"9":["149,165,186","223,179,121"],"10":["227,141,149","197,123,42"],"11":["63,226,244","223,148,151"],"12":["92,187,220","219,203,49"],"13":["70,49,170","146,42,134"],"14":["146,169,245","191,151,78"],"15":["91,181,250","159,127,187"],"16":["95,40,164","137,63,104"],"17":["186,119,128","177,55,34"]};
+const ZF = {"1":{"cx":0.4975,"cy":0.5015,"w":0.745,"h":0.725},"2":{"cx":0.4985,"cy":0.508,"w":0.755,"h":0.684},"3":{"cx":0.4975,"cy":0.498,"w":0.733,"h":0.69},"4":{"cx":0.497,"cy":0.5125,"w":0.756,"h":0.719},"5":{"cx":0.4925,"cy":0.4945,"w":0.725,"h":0.713},"6":{"cx":0.498,"cy":0.513,"w":0.794,"h":0.734},"7":{"cx":0.494,"cy":0.5145,"w":0.746,"h":0.723},"8":{"cx":0.4975,"cy":0.507,"w":0.735,"h":0.738},"9":{"cx":0.499,"cy":0.495,"w":0.746,"h":0.742},"10":{"cx":0.494,"cy":0.493,"w":0.746,"h":0.716},"11":{"cx":0.496,"cy":0.502,"w":0.75,"h":0.718},"12":{"cx":0.4895,"cy":0.507,"w":0.729,"h":0.736},"13":{"cx":0.4985,"cy":0.4875,"w":0.727,"h":0.705},"14":{"cx":0.4985,"cy":0.4975,"w":0.725,"h":0.709},"15":{"cx":0.5,"cy":0.5,"w":0.72,"h":0.72},"16":{"cx":0.5,"cy":0.5,"w":0.72,"h":0.72},"17":{"cx":0.5,"cy":0.5,"w":0.72,"h":0.72}};
 function zoneOf(n) { return n <= 100 ? Math.ceil(n / 10) : 11 + Math.floor((n - 101) / 20); }
-const LEVELS = makeLevels();
+/* Calibrage des niveaux 181-240 (simulation, outil _outils_calibrage) : n → [coups, seuil 2★, seuil 3★, cible score] */
+const TUNED_EXT = {"181":[12,1900,2450],"182":[18,3250,4200],"183":[20,4650,6550],"184":[18,4450,6200],"185":[14,2700,3600],"186":[14,2300,3200],"187":[22,4050,5800],"188":[18,3650,4750],"189":[26,6100,8150],"190":[16,4050,4650],"191":[32,8000,9900],"192":[20,4800,5350],"193":[20,3350,5100],"194":[36,9850,12800],"195":[28,5950,6800],"196":[16,3600,4750],"197":[26,5100,6600],"198":[24,4650,6100],"199":[32,9200,12450],"200":[20,4800,5850],"201":[12,2200,3300],"202":[12,2100,3350],"203":[12,2500,2900],"204":[20,4200,6200],"205":[14,2500,4300],"206":[12,2100,3050],"207":[12,2700,3800],"208":[16,4000,5200],"209":[24,6450,7900],"210":[14,2750,4250],"211":[16,3250,4350],"212":[14,3200,5150],"213":[16,3400,5050],"214":[34,8150,10200],"215":[20,4500,4900],"216":[16,3000,3800],"217":[20,5100,6100],"218":[18,5100,6600],"219":[32,7850,10300],"220":[14,4100,4500],"221":[14,1850,2600],"222":[12,2500,2900],"223":[12,1750,2600],"224":[12,2000,2400],"225":[12,1650,2100],"226":[12,2700,3250],"227":[12,1850,3000],"228":[12,2200,2600],"229":[18,3650,4900],"230":[18,3700,5000],"231":[14,2850,3750],"232":[14,3250,3900],"233":[16,3400,5350],"234":[16,3800,4700],"235":[14,2950,3350],"236":[24,4800,6900],"237":[28,8850,10050],"238":[22,4100,5500],"239":[18,3900,4700],"240":[20,4100,5400]};   /* calibré le 16/11 : coups mini pour que le bot gagne 88 % en début de zone → 62 % en fin de zone */
+function makeLevelsExt() {
+  const M = 10, out = [];
+  const PAT = [
+    (r,c) => (r===3||r===6) && c>=3 && c<=6 || (c===3||c===6) && r>=3 && r<=6,      /* anneau central */
+    (r,c) => (r===4||r===5) && c>=1 && c<=8,                                            /* deux lignes */
+    (r,c) => (r===c || r+c===9) && r>=1 && r<=8,                                        /* croix */
+    (r,c) => (r<=1||r>=8) && (c<=1||c>=8) || (r===4||r===5) && (c===4||c===5),          /* coins + centre */
+    (r,c) => (c===2||c===7) && r>=2 && r<=7,                                            /* deux murs */
+  ];
+  const cellsOf = (p, frac) => { const a = []; for (let r = 0; r < M; r++) for (let c = 0; c < M; c++) if (p(r,c)) a.push([r,c]); const keep = Math.max(3, Math.round(a.length * frac)); const step = a.length / keep; return Array.from({ length:keep }, (_, k) => a[Math.floor(k * step)]); };
+  const jellyPat = [(r,c) => r>=3 && r<=6 && c>=3 && c<=6, (r,c) => r===1||r===8||c===1||c===8, (r,c) => (r+c)%3===0 && r>0 && r<9 && c>0 && c<9];
+  for (let i = 0; i < 60; i++) {
+    const z = Math.floor(i / 20), j = i % 20, p = j / 19, n = 181 + i, T = TUNED_EXT[n] || [];
+    const L = { n, size:M, types:5, goals:[], blocks:[], kind:["ice","gift","choco"][z] };
+    const frac = .45 + .55 * p, pat = PAT[j % 5];
+    if (z === 0) {                                   /* zone 15 : glace, 1 puis 2 couches */
+      L.blocks = cellsOf(pat, frac).map(([r,c], k) => [r, c, -3, j < 6 ? 1 : j < 13 ? 1 + (k % 2) : 2]);
+      L.goals.push({ k:"ice" });
+      if (j % 4 === 1) L.goals.push({ k:"collect", t:(i*2) % 5, count:18 + j });
+      if (j % 4 === 2) { const jp = jellyPat[j % 3], used = new Set(L.blocks.map(([r,c]) => r*M+c)); L.jelly = []; for (let r = 0; r < M; r++) for (let c = 0; c < M; c++) if (jp(r,c) && !used.has(r*M+c)) L.jelly.push([r, c, 1]); L.goals.push({ k:"jelly" }); }
+    } else if (z === 1) {                            /* zone 16 : boîtes cadeaux 1 à 3 couches */
+      const maxHp = 1 + Math.min(2, Math.floor(p * 3));
+      L.blocks = cellsOf(pat, frac * .8).map(([r,c], k) => [r, c, -4, 1 + (k % maxHp)]);
+      L.goals.push({ k:"gift" });
+      if (j % 4 === 1) L.goals.push({ k:"special", count:4 + Math.floor(j / 4) });
+      if (j % 4 === 2) L.goals.push({ k:"collect", t:(i*3) % 5, count:20 + j });
+    } else {                                         /* zone 17 : chocolat qui coule (+ glace / cadeaux en fin de zone) */
+      const nCh = 2 + Math.floor(p * 6), core = [[4,4],[5,5],[4,5],[5,4],[3,4],[6,5],[4,3],[5,6]];
+      L.blocks = core.slice(0, nCh).map(([r,c]) => [r, c, -5, 1]); L.choco = true;
+      if (j >= 8) { const used = new Set(L.blocks.map(([r,c]) => r*M+c)); for (const [r,c] of cellsOf(PAT[(j+2) % 5], .3 + .3 * p)) if (!used.has(r*M+c)) L.blocks.push([r, c, j % 2 ? -3 : -4, 1 + (j >= 15 ? 1 : 0)]); }
+      L.goals.push({ k:"choco" });
+      if (j >= 8 && L.blocks.some(b => b[2] === -3)) L.goals.push({ k:"ice" });
+      if (j >= 8 && L.blocks.some(b => b[2] === -4)) L.goals.push({ k:"gift" });
+      if (j % 4 === 1) L.goals.push({ k:"collect", t:(i*2) % 5, count:20 + j });
+    }
+    L.moves = T[0] || (22 + Math.round(L.blocks.length * .45) + (L.jelly ? 4 : 0));
+    L.stars = [T[1] || (3200 + i * 40), T[2] || (4600 + i * 55)];
+    if (T[3]) L.goals.push({ k:"score", target:T[3] });
+    out.push(L);
+  }
+  return out;
+}
+const LEVELS = makeLevels().concat(makeLevelsExt());
 
 /* ---------- Utilitaires ---------- */
 const $ = id => document.getElementById(id);
@@ -911,7 +955,7 @@ function scoreBarSkin(n) {                      /* barre de score propre à chaq
 }
 function applyZoneSkin(n) {                      /* fond + cadre propres à la zone du niveau (voir carte des niveaux) */
   const z = zoneOf(n), zz = String(z).padStart(2, "0"), k = ZF[z], F = 700;
-  const bg = new Image(); bg.onload = () => { if ($("sGame").classList.contains("on")) setBgUrl(bg.src); }; bg.onerror = () => { const b2 = new Image(); b2.onload = () => setBgUrl(b2.src); b2.src = "assets/zones/bg-game-zone-" + zz + ".png"; }; bg.src = "assets/zones/bg-game-zone-" + zz + ".jpg";
+  const bg = new Image(); bg.onload = () => { if ($("sGame").classList.contains("on") && zoneOf(level.n) === z) setBgUrl(bg.src); };   /* ignore une image arrivée en retard d'un niveau précédent */ bg.onerror = () => { const b2 = new Image(); b2.onload = () => setBgUrl(b2.src); b2.src = "assets/zones/bg-game-zone-" + zz + ".png"; }; bg.src = "assets/zones/bg-game-zone-" + zz + ".jpg";
   const wrap = $("boardWrap"), fr = $("frameImg"), pk = $("pocket");
   if (!k) return;
   const size = Math.min(BOARD, F * Math.min(k.w, k.h) * 0.995);
@@ -922,7 +966,7 @@ function applyZoneSkin(n) {                      /* fond + cadre propres à la z
   pk.style.width = (F * k.w) + "px"; pk.style.height = (F * k.h) + "px"; pk.style.left = (size / 2 - F * k.w / 2) + "px"; pk.style.top = (size / 2 - F * k.h / 2) + "px";
 }
 function setBg(name) { if (BGURL[name]) document.body.style.background = "url(" + BGURL[name] + ") center/cover no-repeat, #3a1a7a"; }
-["aura-bomb","jelly/jelly-1-overlay","jelly/jelly-2-overlay","bomb","cherry","tile-a","tile-b","jelly-1","jelly-2","sparkle","burst","fx-stripe-h","fx-stripe-v","fx-wrap","fx-bomb","fx-combo-1","fx-combo-2","fx-combo-3","fx-combo-4"].forEach(loadImg);
+["ice-block","ice-crack","ice-shatter","gift-box-1","gift-box-2","gift-box-3","gift-box-open","choco-blob","choco-splash","aura-bomb","jelly/jelly-1-overlay","jelly/jelly-2-overlay","bomb","cherry","tile-a","tile-b","jelly-1","jelly-2","sparkle","burst","fx-stripe-h","fx-stripe-v","fx-wrap","fx-bomb","fx-combo-1","fx-combo-2","fx-combo-3","fx-combo-4"].forEach(loadImg);
 ["btn-pink","btn-blue","btn-green","panel","board-frame","hud-panel","btn-booster","badge-count","inbox-card","btn-claim"].forEach(n => { const i = new Image(); i.onload = () => document.body.classList.add("sk-" + ({ "hud-panel":"hud", "btn-booster":"boost", "badge-count":"badge", "inbox-card":"card", "btn-claim":"claim" }[n] || n)); i.src = "assets/" + n + ".png"; });
 const BGURL = {};
 function loadBg(name) {
@@ -973,6 +1017,20 @@ function shapePath(g, shape, r) {
 }
 function rr(g,x,y,w,h,r){ g.moveTo(x+r,y); g.arcTo(x+w,y,x+w,y+h,r); g.arcTo(x+w,y+h,x,y+h,r); g.arcTo(x,y+h,x,y,r); g.arcTo(x,y,x+w,y,r); g.closePath(); }
 
+function drawBlock(g, cx, cy, d, sc) {
+  const name = d.t === BLK.ice ? (d.hp >= 2 ? "ice-block" : "ice-crack") : d.t === BLK.gift ? "gift-box-" + Math.min(3, d.hp) : "choco-blob";
+  const z = CELL * (d.t === BLK.choco ? 1.04 : .96) * sc;
+  g.save(); g.translate(cx, cy);
+  if (IMG[name]) g.drawImage(IMG[name], -z/2, -z/2, z, z);
+  else {                                          /* dessin de secours si l'image manque */
+    const col = d.t === BLK.ice ? ["rgba(200,240,255,.95)", "rgba(120,190,255,.95)"] : d.t === BLK.gift ? ["#ff7ab6", "#c2185b"] : ["#7b4a2a", "#3e2112"];
+    const gr = g.createLinearGradient(0, -z/2, 0, z/2); gr.addColorStop(0, col[0]); gr.addColorStop(1, col[1]);
+    g.fillStyle = gr; g.beginPath(); g.roundRect(-z*.44, -z*.44, z*.88, z*.88, z*.18); g.fill(); g.lineWidth = 3; g.strokeStyle = "rgba(255,255,255,.7)"; g.stroke();
+    if (d.t === BLK.gift) { g.fillStyle = "#ffe14d"; g.fillRect(-z*.07, -z*.44, z*.14, z*.88); g.fillRect(-z*.44, -z*.07, z*.88, z*.14); }
+    if (d.hp > 1) { g.fillStyle = "#fff"; g.font = "900 " + Math.round(z*.3) + "px sans-serif"; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText(d.hp, 0, 2); }
+  }
+  g.restore();
+}
 function drawCandy(g, cx, cy, size, type, special, scale=1, alpha=1, t=0) {
   g.save(); g.translate(cx, cy); g.scale(scale, scale); g.globalAlpha = alpha;
   if (type === -2 && !IMG['cherry']) { drawCherry(g, size); g.restore(); return; }
@@ -1056,7 +1114,8 @@ function initBoard() {
   }
   jellyLeft = 0;
   if (level.jelly) for (const [r,c,l] of level.jelly) { jelly[r][c] = l; jellyLeft++; }
-  if (level.dropMax) { const cols=[0,1,2,3,4,5,6,7].sort(()=>Math.random()-.5).slice(0, Math.min(3, level.dropMax)); for (const c of cols) { grid[3][c] = newCandy(3,c,-2); dropSpawned++; } }
+  if (level.blocks) for (const [r,c,code,hp] of level.blocks) grid[r][c] = newBlock(r, c, code, hp);
+  if (level.dropMax) { const cols=Array.from({ length:N }, (_, k) => k).sort(()=>Math.random()-.5).slice(0, Math.min(3, level.dropMax)); for (const c of cols) { grid[3][c] = newCandy(3,c,-2); dropSpawned++; } }
   if (!findMove()) shuffleBoard(true);
 }
 
@@ -1099,13 +1158,33 @@ function analyseMatches(pref) {
 /* ---------- Coups possibles ---------- */
 function swapCells(a,b){ const t=grid[a[0]][a[1]]; grid[a[0]][a[1]]=grid[b[0]][b[1]]; grid[b[0]][b[1]]=t; }
 function isComboSwap(a,b){ const x=grid[a[0]][a[1]], y=grid[b[0]][b[1]]; if(!x||!y) return false; return x.s===S_BOMB || y.s===S_BOMB || (x.s>0 && y.s>0); }
+const BLK = { ice:-3, gift:-4, choco:-5 }, BLK_NAME = { "-3":"ice", "-4":"gift", "-5":"choco" };
+const isBlkCd = cd => !!cd && cd.t <= -3;
+function isBlk(c) { return isBlkCd(grid[c[0]][c[1]]); }
+function newBlock(r, c, code, hp) { return { t:code, s:0, hp, x:c, y:r, vy:0, fall:false, pop:0 }; }
+function blocksLeft(code) { let n = 0; for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) { const q = grid[r][c]; if (q && q.t === code) n++; } return n; }
+let chocoHit = false;
+function hitBlock(r, c) {                         /* une couche en moins ; à 0 le bloc disparaît */
+  const cd = grid[r][c]; if (!isBlkCd(cd)) return;
+  cd.hp--; cd.pop = .6; score += 20; if (cd.t === BLK.choco) chocoHit = true;
+  if (!SIM && save.fx) effects.push({ name: cd.t === BLK.ice ? "ice-shatter" : cd.t === BLK.gift ? "gift-box-open" : "choco-splash", r, c, life:1, max:.5 });
+  if (cd.hp <= 0) { grid[r][c] = null; burst(c, r, { t:0 }); sfx("pop", 2); }
+}
+function spreadChoco() {                          /* le chocolat avance d'une case si aucun n'a été détruit pendant le coup */
+  const cand = [];
+  for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) if (grid[r][c] && grid[r][c].t === BLK.choco)
+    for (const [y, x] of [[r-1,c],[r+1,c],[r,c-1],[r,c+1]]) if (inb(y,x) && grid[y][x] && grid[y][x].t >= 0 && grid[y][x].s === 0 && !jelly[y][x]) cand.push([y,x]);
+  if (!cand.length) return false;
+  const [y, x] = cand[rnd(cand.length)]; grid[y][x] = newBlock(y, x, BLK.choco, 1); grid[y][x].pop = 1; sfx("bad"); return true;
+}
 function isCherry(c){ const d=grid[c[0]][c[1]]; return !!d && d.t===-2; }
 /* bonbon pris dans la gelée : impossible de le déplacer à la main, mais on peut le casser en alignant ses voisins */
 function isFrozen(c){ return !!grid[c[0]][c[1]] && jelly[c[0]][c[1]] > 0; }
-function isLocked(c){ return isCherry(c) || isFrozen(c); }
+function isLocked(c){ return isCherry(c) || isFrozen(c) || isBlk(c); }
 let frozenTipAt = 0;
 function frozenTip() { sfx("bad"); if (Date.now() - frozenTipAt > 6000) { frozenTipAt = Date.now(); say("Bonbon gelé : aligne ses voisins pour le casser"); setTimeout(() => say(""), 1800); } }
 function swapIsValid(a,b){
+  if (isBlk(a) || isBlk(b)) return false;
   if (isLocked(a) || isLocked(b)) return false; /* cerises et bonbons gelés ne se déplacent pas à la main */
   if (isComboSwap(a,b)) return true;
   swapCells(a,b); const ok = runsOf().length>0; swapCells(a,b); return ok;
@@ -1120,9 +1199,9 @@ function findMove() {
 async function shuffleBoard(silent) {
   let guard = 0;
   do {
-    const all = []; for (let r=0;r<N;r++) for (let c=0;c<N;c++) all.push(grid[r][c]);
+    const all = [], pos = []; for (let r=0;r<N;r++) for (let c=0;c<N;c++) if (grid[r][c] && !isBlkCd(grid[r][c])) { all.push(grid[r][c]); pos.push([r,c]); }
     for (let i=all.length-1;i>0;i--){ const j=rnd(i+1); [all[i],all[j]]=[all[j],all[i]]; }
-    let i=0; for (let r=0;r<N;r++) for (let c=0;c<N;c++){ const cd=all[i++]; cd.x=c; cd.y=r; cd.fall=false; grid[r][c]=cd; }
+    pos.forEach(([r,c], i) => { const cd=all[i]; cd.x=c; cd.y=r; cd.fall=false; grid[r][c]=cd; });
     guard++;
   } while (guard<200 && (runsOf().length>0 || !findMove()));
   if (!silent) { say("Mélange !"); sfx("special"); await sleep(700); say(""); }
@@ -1166,8 +1245,11 @@ async function clearSet(initial, spawns, combo, ctxInfo) {
   score += pts - bombPart;
   sfx("pop", combo);
   let sx=0, sy=0;
+  const hitNow = new Set(), freed = [];
   for (const [r,c] of all.values()) {
     const cd = grid[r][c];
+    if (isBlkCd(cd)) { if (!hitNow.has(key(r,c))) { hitNow.add(key(r,c)); hitBlock(r,c); } sx+=c; sy+=r; continue; }
+    if (cd) freed.push([r,c]);
     if (cd) {
       if (cd.t >= 0) { const gc = level.goals.find(g=>g.k==="collect"); if (gc && cd.t===gc.t) collected++; }
       burst(c, r, cd);
@@ -1176,6 +1258,7 @@ async function clearSet(initial, spawns, combo, ctxInfo) {
     if (jelly[r][c] > 0) { jelly[r][c]--; if (jelly[r][c]===0) jellyLeft--; }
     sx+=c; sy+=r;
   }
+  for (const [r,c] of freed) for (const [y,x] of [[r-1,c],[r+1,c],[r,c-1],[r,c+1]]) if (inb(y,x) && isBlkCd(grid[y][x]) && !hitNow.has(key(y,x))) { hitNow.add(key(y,x)); hitBlock(y,x); }
   floats.push({ x:sx/n, y:sy/n, txt:"+"+pts, life:1 });
   const flight = flyers ? flyToBar(flyers, bombPart) : null;     /* les bonbons restent visibles (superposés) jusqu'à leur envol */
   updateHud();
@@ -1237,13 +1320,22 @@ function flyToBar(list, totalPts) {
 async function gravity() {
   for (;;) {
     for (let c=0;c<N;c++) {
-      let w = N-1;
-      for (let r=N-1;r>=0;r--) if (grid[r][c]) { const cd=grid[r][c]; if (w!==r){ grid[w][c]=cd; grid[r][c]=null; cd.fall=true; } w--; }
-      let k = 0;
-      for (let r=w;r>=0;r--) {
-        if (bonusBomb && Math.random() < 0.03) { bonusBomb = 0; grid[r][c] = newCandy(r,c,-1,S_BOMB, -1 - k); grid[r][c].gift = true; }
-        else grid[r][c] = newCandy(r,c,fillType(), 0, -1 - k);
-        k++;
+      let bottom = N-1;
+      while (bottom >= 0) {
+        while (bottom >= 0 && isBlkCd(grid[bottom][c])) bottom--;
+        if (bottom < 0) break;
+        let top = bottom; while (top-1 >= 0 && !isBlkCd(grid[top-1][c])) top--;
+        let w = bottom;
+        for (let r=bottom; r>=top; r--) if (grid[r][c]) { const cd=grid[r][c]; if (w!==r){ grid[w][c]=cd; grid[r][c]=null; cd.fall=true; } w--; }
+        let k = 0;
+        for (let r=w; r>=top; r--) {
+          const from = top === 0 ? -1 - k : top - .4;
+          if (bonusBomb && top === 0 && Math.random() < 0.03) { bonusBomb = 0; grid[r][c] = newCandy(r,c,-1,S_BOMB, from); grid[r][c].gift = true; }
+          else grid[r][c] = newCandy(r,c,fillType(), 0, from);
+          if (top !== 0) grid[r][c].pop = .5;
+          k++;
+        }
+        bottom = top - 1;
       }
     }
     await settle();
@@ -1337,6 +1429,8 @@ async function trySwap(a, b) {
 }
 
 async function afterMove() {
+  if (level.choco && !chocoHit && !ended) spreadChoco();
+  chocoHit = false;
   save.stats.maxCombo = Math.max(save.stats.maxCombo, moveStats.combo);
   if (moveStats.combo >= 4) unlock("combo4");
   if (moveStats.combo >= 7) unlock("combo7");
@@ -1352,7 +1446,8 @@ async function afterMove() {
 }
 function goalDone(g) {
   switch (g.k) { case "score": return score >= g.target; case "jelly": return jellyLeft <= 0; case "collect": return collected >= g.count;
-    case "drop": return dropped >= g.count; case "special": return specialsMade >= g.count; }
+    case "drop": return dropped >= g.count; case "special": return specialsMade >= g.count;
+    case "ice": return blocksLeft(BLK.ice) === 0; case "gift": return blocksLeft(BLK.gift) === 0; case "choco": return blocksLeft(BLK.choco) === 0; }
   return true;
 }
 function allGoalsDone() { return level.goals.every(goalDone); }
@@ -1360,7 +1455,8 @@ function hasScoreGoal() { return level.goals.some(g => g.k === "score"); }
 function goalSentence(g) {
   switch (g.k) { case "score": return "Atteins " + g.target + " points"; case "jelly": return "Détruis toutes les gelées";
     case "collect": return "Récolte " + g.count + " bonbons"; case "drop": return "Fais descendre " + g.count + " cerise" + (g.count>1?"s":"");
-    case "special": return "Crée " + g.count + " bonbons spéciaux"; }
+    case "special": return "Crée " + g.count + " bonbons spéciaux";
+    case "ice": return "Casse toute la glace"; case "gift": return "Ouvre tous les cadeaux"; case "choco": return "Fais disparaître tout le chocolat"; }
   return "";
 }
 
@@ -1385,7 +1481,7 @@ async function endLevel(win) {
     unlock("first_win"); if (stars===3) unlock("three_stars"); submitRun();
     if (cloudSession) checkMilestones().then(() => maybeRewardPopup());
     const done = Object.keys(save.stars).length;
-    if (done>=10) unlock("lvl10"); if (done>=20) unlock("lvl20"); if (done>=40) unlock("lvl40"); if (done>=60) unlock("lvl60"); if (done>=100) unlock("lvl100"); if (done>=LEVEL_COUNT) unlock("lvl180");
+    if (done>=10) unlock("lvl10"); if (done>=20) unlock("lvl20"); if (done>=40) unlock("lvl40"); if (done>=60) unlock("lvl60"); if (done>=100) unlock("lvl100"); if (done>=180) unlock("lvl180");
     showEnd(true, stars, bonus);
   } else {
     sfx("lose"); save.streak = 0; writeSave();
@@ -1410,6 +1506,9 @@ function missingText() {
     else if (g.k==="jelly") m.push(jellyLeft + " gelée(s)");
     else if (g.k==="collect") m.push((g.count - collected) + " bonbon(s)");
     else if (g.k==="drop") m.push((g.count - dropped) + " cerise(s)");
+    else if (g.k==="ice") m.push(blocksLeft(BLK.ice) + " bloc(s) de glace");
+    else if (g.k==="gift") m.push(blocksLeft(BLK.gift) + " cadeau(x)");
+    else if (g.k==="choco") m.push(blocksLeft(BLK.choco) + " chocolat(s)");
     else m.push((g.count - specialsMade) + " spécial(aux)");
   }
   return m.join(", ");
@@ -1475,6 +1574,7 @@ function drawBoard(dt) {
     if (d.y < -.5) continue;
     const JLv = jelly[r][c], jcomb = (JLv > 0 && d.s === 0 && d.t >= 0) ? IMG["jelly/jelly-" + JLv + "-candy-" + CNAMES[d.t]] : null, jov = JLv > 0 ? IMG["jelly/jelly-" + JLv + "-overlay"] : null;
     if (jcomb) { const z = CELL * 1.15 * sc, cx0 = d.x*CELL + CELL/2, cy0 = d.y*CELL + CELL/2; ctx.drawImage(jcomb, cx0 - z/2, cy0 - z/2, z, z); continue; }
+    if (d.t <= -3) { drawBlock(ctx, d.x*CELL+CELL/2, d.y*CELL+CELL/2, d, sc); continue; }
     drawCandy(ctx, d.x*CELL+CELL/2, d.y*CELL+CELL/2, CELL, d.t, d.s, sc, 1, tAnim);
     if (jov && d.t !== -2) { const z = CELL * 1.12 * sc, cx0 = d.x*CELL + CELL/2, cy0 = d.y*CELL + CELL/2; ctx.drawImage(jov, cx0 - z/2, cy0 - z/2, z, z); continue; }
     if (JLv > 0 && d.t !== -2) {
@@ -1512,6 +1612,7 @@ function updateHud() {
     if (g.k==="jelly") return '<span class="g"><img class="ic" src="assets/icon-jelly.png" onerror="this.replaceWith(document.createTextNode(\'🧊 \'))">'+Math.max(0,jellyLeft)+' gelées</span>';
     if (g.k==="collect") return '<span class="g"><img src="'+candyIcon(g.t)+'">'+Math.min(collected,g.count)+' / '+g.count+'</span>';
     if (g.k==="drop") return '<span class="g"><img src="'+candyIcon(-2)+'">'+Math.min(dropped,g.count)+' / '+g.count+'</span>';
+    if (g.k==="ice" || g.k==="gift" || g.k==="choco") { const ic = { ice:['icon-ice','🧊'], gift:['icon-gift-box','🎁'], choco:['icon-choco','🍫'] }[g.k]; return '<span class="g"><img class="ic" src="assets/' + ic[0] + '.png" onerror="this.replaceWith(document.createTextNode(\'' + ic[1] + ' \'))">' + blocksLeft(BLK[g.k]) + '</span>'; }
     return '<span class="g"><img class="ic" src="assets/icon-special.png" onerror="this.replaceWith(document.createTextNode(\'✨ \'))">'+Math.min(specialsMade,g.count)+' / '+g.count+'</span>';
   }).join("");
   if (gh !== lastGoalsHtml) { $("goals").innerHTML = gh; lastGoalsHtml = gh; }
@@ -1592,6 +1693,8 @@ function modal(id, on) { $(id).classList.toggle("on", on); }
 
 function startLevel(i) {
   levelIdx = i; level = LEVELS[i];
+  N = level.size || 8; BOARD = N * CELL; if (cv.width !== BOARD) { cv.width = cv.height = BOARD; }
+  chocoHit = false;
   score = 0; moves = level.moves; collected = 0; dropped = 0; dropSpawned = 0; specialsMade = 0; ended = false; busy = false; paused = false; selected = null;
   hammerOn = false; discoOn = false; swapFrom = null; batUi(); scoreBarSkin(level.n); bonusBomb = !SIM && Math.random() < 0.4 ? 1 : 0; particles = []; floats = []; effects = []; moveStats = { combo:0 };
   initBoard(); buildStarMarks(); updateHud(); say("");
@@ -1734,6 +1837,7 @@ if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
 
 updateBoosterUi(); updateMailBadge(); $("mailBtn").style.display = "block";
 cloudInit();
+{ const nv = +new URLSearchParams(location.search).get("niveau"); if (nv >= 1 && nv <= LEVELS.length) setTimeout(() => { modal("mLogin", false); startLevel(nv - 1); }, 600); }   /* test : ?niveau=200 ouvre directement ce niveau */
 
 /* ---------- Lancement direct en test : ?level=N ---------- */
 (function(){ const m = /[?&]level=(\d+)/.exec(location.search); if (m) { save.unlocked = LEVEL_COUNT; startLevel(Math.max(0, Math.min(LEVEL_COUNT-1, +m[1]-1))); } })();
