@@ -70,6 +70,12 @@
   #msg.on { opacity:1; transform:scale(1); }
   #msg.long { font-size:26px; line-height:1.25; padding:12px 18px; left:7%; right:7%; top:42%; background:rgba(60,10,110,.86); border:3px solid #fff; border-radius:20px; text-shadow:0 2px 3px rgba(0,0,0,.6); }
   #gameBtns { margin:0 0 44px; display:flex; gap:10px; }
+  #scoreBar { width:520px; height:62px; margin:0 0 10px; display:flex; align-items:center; justify-content:center; gap:14px; flex-shrink:0;
+    background:var(--sbar, none) center/100% 100% no-repeat, linear-gradient(#ff8fd0, #b04ae0); border-radius:31px; box-shadow:0 4px 10px rgba(60,10,110,.35), inset 0 0 0 3px rgba(255,255,255,.7);
+    color:#fff; font-weight:900; text-shadow:0 2px 3px rgba(60,10,110,.85); }
+  body.sk-sbar #scoreBar { border-radius:0; box-shadow:none; background:var(--sbar) center/100% 100% no-repeat; }
+  #scoreBar span { font-size:20px; letter-spacing:2px; opacity:.9; } #scoreBar b { font-size:34px; min-width:110px; text-align:left; }
+  .bst.armed { outline:4px solid #ffe14d; outline-offset:2px; border-radius:18px; }
   #logoImg { width:560px; margin:0; filter:drop-shadow(0 10px 14px rgba(0,0,0,.35)); animation: floaty 3.2s ease-in-out infinite; z-index:2; }
   @keyframes floaty { 50% { transform:translateY(-8px) rotate(-1deg); } }
   #frameImg { display:none; position:absolute; left:-94px; top:-94px; width:700px; height:700px; pointer-events:none; z-index:3; }
@@ -263,13 +269,14 @@
     <div id="boardWrap"><div id="pocket"></div><canvas id="board" width="512" height="512"></canvas><img id="frameImg" src="assets/board-frame.png" alt=""><div id="msg"></div></div>
     <div class="sp"></div>
     <div id="adBat" aria-label="Pubs disponibles"></div>
+    <div id="scoreBar"><span>SCORE</span><b id="hScore">0</b></div>
     <div id="gameBtns">
       <button class="btn small alt icon" id="bPause" title="Pause">⏸</button>
       <button class="btn small icon" id="bHint" title="Indice">💡</button>
-      <button class="btn small green icon bst" id="bHammer" title="Marteau : détruit un bonbon"><span class="bi">🔨</span><i class="bc" id="cHammer">0</i></button>
+      <button class="btn small green icon bst" id="bHammer" title="Échange : inverse deux bonbons"><span class="bi">🔄</span><i class="bc" id="cHammer">0</i></button>
       <button class="btn small green icon bst" id="bMoves" title="+3 coups"><span class="bi">＋3</span><i class="bc" id="cMoves">0</i></button>
       <button class="btn small green icon bst" id="bShuffle" title="Mélanger le plateau"><span class="bi">🔀</span><i class="bc" id="cShuffle">0</i></button>
-      <div class="panel" style="padding:6px 14px;font-size:19px;">Score <b id="hScore">0</b></div>
+      <button class="btn small green icon bst" id="bDisco" title="Boule à facette : transforme un bonbon"><span class="bi">🪩</span><i class="bc" id="cDisco">0</i></button>
     </div>
   </div>
 
@@ -350,7 +357,7 @@
     <button id="adSnd" type="button" aria-label="Couper ou activer le son de la pub" style="position:absolute;left:14px;top:calc(60px + env(safe-area-inset-top, 0px));z-index:3;width:60px;height:60px;border-radius:50%;border:2px solid rgba(255,255,255,.45);background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0"></button>
     <iframe id="adFrame" title="Publicité" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="autoplay"></iframe>
     <div style="position:absolute;left:50%;top:calc(70px + env(safe-area-inset-top, 0px));transform:translateX(-50%);padding:8px 20px;display:flex;gap:18px;align-items:center;white-space:nowrap;background:rgba(0,0,0,.6);border:2px solid rgba(255,255,255,.35);border-radius:99px;font-weight:800;font-size:19px;color:#fff;pointer-events:none;z-index:2"><span>Publicité</span><span>+1 bonus dans <b id="adCount">15</b> s</span></div>
-    <a id="adLink" href="https://izackiferra.com/launcher.html" target="_blank" rel="noopener" class="btn small" style="position:absolute;left:50%;bottom:16px;transform:translateX(-50%);text-decoration:none;white-space:nowrap">Découvrir le Launcher</a></div></div>
+    <a id="adLink" style="opacity:0;pointer-events:none;transition:opacity .5s" href="https://izackiferra.com/launcher.html" target="_blank" rel="noopener" class="btn small" style="position:absolute;left:50%;bottom:16px;transform:translateX(-50%);text-decoration:none;white-space:nowrap">Découvrir le Launcher</a></div></div>
 
   <div id="mAdRw" class="modal" style="z-index:31"><div class="card"><h3>Merci d'avoir regardé !</h3>
     <div id="adRwIcon" style="margin:6px 0"></div><p id="adRwText" style="font-size:30px;font-weight:900;margin:4px 0 6px"></p><div id="adRwBat"></div>
@@ -530,7 +537,7 @@ async function cloudInit() {
   updateCloudUi(); if (cloudSession) cloudSync(); else requireLogin();
 }
 /* ---------- Boîte de réception & récompenses ---------- */
-const REWARD_META = { hammer:{ emoji:"🔨", name:"Marteau", icon:"icon-hammer" }, moves:{ emoji:"＋3", name:"+3 coups", icon:"icon-moves3" }, shuffle:{ emoji:"🔀", name:"Mélange", icon:"icon-shuffle" } };
+const REWARD_META = { hammer:{ emoji:"🔄", name:"Échange", icon:"icon-swap" }, disco:{ emoji:"🪩", name:"Boule à facette", icon:"icon-disco" }, moves:{ emoji:"＋3", name:"+3 coups", icon:"icon-moves3" }, shuffle:{ emoji:"🔀", name:"Mélange", icon:"icon-shuffle" } };
 function rwIcon(k) { const m = REWARD_META[k]; return '<img src="assets/' + m.icon + '.png" onerror="this.replaceWith(document.createTextNode(\'' + m.emoji + ' \'))">'; }
 function hasRewards(r) { return !!r && Object.entries(r).some(([k, v]) => REWARD_META[k] && v > 0); }
 function rwChips(r) { return Object.entries(r || {}).filter(([k, v]) => REWARD_META[k] && v > 0).map(([k, v]) => '<span class="chip">' + rwIcon(k) + ' ×' + v + '</span>').join(""); }
@@ -554,7 +561,7 @@ async function checkMilestones() {
   }
   for (let k = 1; k <= (save.streakN || 0); k++) {   /* série de 5 victoires d'affilée */
     const key = "streak_" + k; if (save.granted[key]) continue;
-    const r = await cloudRpc("grant_game_reward", { p_game_id: GAME_ID, p_key: key, p_title: "Série de 5 victoires !", p_body: "5 niveaux gagnés d'affilée : bravo !", p_rewards: { hammer:1, moves:2, shuffle:1 } });
+    const r = await cloudRpc("grant_game_reward", { p_game_id: GAME_ID, p_key: key, p_title: "Série de 5 victoires !", p_body: "5 niveaux gagnés d'affilée : bravo !", p_rewards: { hammer:1, moves:2, shuffle:1, disco:1 } });
     if (r.ok) { save.granted[key] = 1; n++; } else break;
   }
   if (n) { writeSave(); await inboxRefresh(); }
@@ -625,7 +632,7 @@ const TIPS = [
   { key:"jelly",   when: L => L.goals.some(g => g.k === "jelly"),    text:"Les bonbons pris dans la gelée sont gelés : ils ne bougent pas. Aligne leurs voisins pour les casser.", target: () => firstCell(isFrozen) },
   { key:"cherry",  when: L => L.goals.some(g => g.k === "drop"),     text:"Fais descendre les cerises en détruisant les bonbons dessous. Elles ne se déplacent pas à la main.", target: () => firstCell(isCherry) },
   { key:"special", when: L => L.goals.some(g => g.k === "special"),  text:"Aligne 4 bonbons pour créer un bonbon rayé, 5 pour une bombe chocolat !" },
-  { key:"boost",   when: L => L.n >= 2 && ["hammer", "moves", "shuffle"].some(k => invCount(k) > 0), text:"Tes bonus sont en bas : le marteau détruit un bonbon, +3 ajoute des coups, le mélange remue le plateau." },
+  { key:"boost",   when: L => L.n >= 2 && ["hammer", "moves", "shuffle", "disco"].some(k => invCount(k) > 0), text:"Tes bonus sont en bas : Échange inverse deux bonbons, +3 ajoute des coups, le mélange remue le plateau, la boule à facette transforme un bonbon." },
 ];
 let tipCur = null, tipTimer = 0;
 function stageXY(r, c) { const st = $("stage").getBoundingClientRect(), k = st.width / STAGE_W, cr = cv.getBoundingClientRect(), cs = cr.width / BOARD; return [(cr.left + (c + .5) * CELL * cs - st.left) / k, (cr.top + (r + .5) * CELL * cs - st.top) / k]; }
@@ -682,7 +689,7 @@ function submitRun() {
 }
 
 /* ---------- Boosters (obtenus dans la boîte de réception) ---------- */
-let hammerOn = false;
+let hammerOn = false, discoOn = false, swapFrom = null;   /* hammerOn = mode « Échange » (clé « hammer » gardée pour l’inventaire et les cadeaux déjà reçus) */
 /* Pub récompensée : désactivée tant qu'aucun réseau de pub n'est branché. Pour l'activer : ADS_ENABLED = true et définir window.scShowRewardedAd() (retourne une promesse → true si la pub a été regardée en entier). */
 const ADS_ENABLED = true;
 if (ADS_ENABLED) document.body.classList.add("ads");
@@ -722,7 +729,8 @@ window.scShowRewardedAd = async () => {
     const fr = $("adFrame"); let loaded = false, left = Math.round(ad.duree); fr.onload = () => { loaded = true; };
     $("adCount").textContent = left; $("adLink").href = ad.lien || "https://izackiferra.com/"; adSoundOn = (() => { try { return localStorage.getItem("sc_adsound") !== "0"; } catch (e) { return true; } })(); adSndUi();
     fr.src = "pub/" + ad.fichier + "?once" + (adSoundOn ? "" : "&mute"); modal("mAd", true);
-    const tick = setInterval(() => { left = Math.max(0, left - 1); $("adCount").textContent = left; }, 1000);
+    $("adLink").style.opacity = 0; $("adLink").style.pointerEvents = "none";
+    const tick = setInterval(() => { left = Math.max(0, left - 1); $("adCount").textContent = left; if (left <= 5) { $("adLink").style.opacity = 1; $("adLink").style.pointerEvents = "auto"; } }, 1000);
     const finish = ok => {
       clearInterval(tick); clearTimeout(safety); removeEventListener("message", onMsg); modal("mAd", false); fr.onload = null; fr.src = "about:blank";
       if (ok) { batUse(); st.lastId = ad.id; try { localStorage.setItem("sc_ads", JSON.stringify(st)); } catch (e) {} } res(ok);
@@ -743,27 +751,37 @@ async function watchAdFor(kind) {
   return ok;
 }
 function updateBoosterUi() {
-  for (const [id, k] of [["Hammer", "hammer"], ["Moves", "moves"], ["Shuffle", "shuffle"]]) {
+  for (const [id, k] of [["Hammer", "hammer"], ["Moves", "moves"], ["Shuffle", "shuffle"], ["Disco", "disco"]]) {
     const n = invCount(k); $("c" + id).textContent = n; $("b" + id).classList.toggle("off", n <= 0);
     const bi = $("b" + id).querySelector(".bi"); if (!bi.dataset.done) { bi.dataset.done = 1; bi.innerHTML = rwIcon(k); $("b" + id).insertAdjacentHTML("beforeend", '<i class="adtag"><img src="assets/icon-ad.png" alt="PUB"></i>'); }
   }
-  $("bHammer").classList.toggle("armed", hammerOn);
+  $("bHammer").classList.toggle("armed", hammerOn); $("bDisco").classList.toggle("armed", discoOn);
 }
 async function useBooster(kind) {
   if (busy || paused || ended) return;
   hideTip(true);
   if (invCount(kind) <= 0 && ADS_ENABLED) { busy = true; await watchAdFor(kind); busy = false; return; }
   if (invCount(kind) <= 0) { sfx("bad"); say("Plus de " + REWARD_META[kind].name + " ! Cherche des cadeaux dans ta boîte de réception"); setTimeout(() => say(""), 1800); return; }
-  if (kind === "hammer") { hammerOn = !hammerOn; selected = null; say(hammerOn ? "Touche un bonbon à détruire" : ""); updateBoosterUi(); return; }
+  if (kind === "hammer") { hammerOn = !hammerOn; discoOn = false; swapFrom = null; selected = null; say(hammerOn ? "Touche 2 bonbons à échanger" : ""); updateBoosterUi(); return; }
+  if (kind === "disco") {
+    const ok = []; for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) { const q = grid[r][c]; if (q && q.t >= 0 && q.s === S_NONE && !isLocked([r, c])) ok.push([r, c]); }
+    if (!ok.length) { sfx("bad"); return; }
+    hammerOn = false; swapFrom = null; selected = null; useDisco(ok[rnd(ok.length)]); return;
+  }
   spendInv(kind);
   if (kind === "moves") { moves += 3; updateHud(); sfx("special"); say("+3 coups !"); setTimeout(() => say(""), 900); return; }
   if (kind === "shuffle") { busy = true; clearHint(); await shuffleBoard(false); busy = false; resetIdle(); }
 }
-async function useHammer(cell) {
-  busy = true; clearHint(); selected = null; hammerOn = false; say("");
-  spendInv("hammer");
-  moveStats = { combo:0 }; sfx("boom"); shake = Math.max(shake, 8);
-  await clearSet(new Set([key(cell[0], cell[1])]), [], 1); await gravity(); await resolveBoard(null); await afterMove();
+/* Échange : inverse deux bonbons au choix (pas les cerises ni les bonbons gelés), sans coûter de coup */
+async function useSwap(a, b) {
+  busy = true; clearHint(); selected = null; hammerOn = false; swapFrom = null; say(""); updateBoosterUi();
+  spendInv("hammer"); moveStats = { combo:0 }; sfx("swap");
+  swapCells(a, b); await settle(); await resolveBoard(null); await afterMove();
+}
+/* Boule à facette : transforme le bonbon touché en boule à facette (à utiliser ensuite comme d'habitude) */
+async function useDisco(cell) {
+  discoOn = false; say(""); spendInv("disco"); updateBoosterUi();
+  const cd = newCandy(cell[0], cell[1], -1, S_BOMB); cd.pop = 1; grid[cell[0]][cell[1]] = cd; sfx("special"); addFx(S_BOMB, cell[0], cell[1]); resetIdle();
 }
 
 addEventListener("pagehide", () => { if (cloudSession) cloudPush(true); });
@@ -885,6 +903,12 @@ const CNAMES = ["rouge","orange","jaune","vert","bleu","violet"];
 const IMG = {};
 function loadImg(name) { const i = new Image(); i.onload = () => { IMG[name] = i; }; i.onerror = () => {}; i.src = "assets/" + name + ".png"; }
 function setBgUrl(url) { document.body.style.background = "url(" + url + ") center/cover no-repeat, #3a1a7a"; }
+function scoreBarSkin(n) {                      /* barre de score propre à chaque zone (assets/score/score-bar-zone-XX.png) */
+  const url = "assets/score/score-bar-zone-" + String(zoneOf(n)).padStart(2, "0") + ".png", im = new Image();
+  im.onload = () => { $("scoreBar").style.setProperty("--sbar", "url(" + url + ")"); document.body.classList.add("sk-sbar"); };
+  im.onerror = () => { $("scoreBar").style.removeProperty("--sbar"); document.body.classList.remove("sk-sbar"); };
+  im.src = url;
+}
 function applyZoneSkin(n) {                      /* fond + cadre propres à la zone du niveau (voir carte des niveaux) */
   const z = zoneOf(n), zz = String(z).padStart(2, "0"), k = ZF[z], F = 700;
   const bg = new Image(); bg.onload = () => { if ($("sGame").classList.contains("on")) setBgUrl(bg.src); }; bg.onerror = () => { const b2 = new Image(); b2.onload = () => setBgUrl(b2.src); b2.src = "assets/zones/bg-game-zone-" + zz + ".png"; }; bg.src = "assets/zones/bg-game-zone-" + zz + ".jpg";
@@ -1277,7 +1301,11 @@ async function trySwap(a, b) {
       const other = bomb===x ? y : x;
       const color = other.t;
       if (other.s>0) { // la bombe transforme tous les bonbons de la couleur en spéciaux
-        for (let r=0;r<N;r++) for (let c=0;c<N;c++) { const q=grid[r][c]; if (q && q.t===color) { q.s = other.s===S_WRAP ? S_WRAP : (rnd(2)?S_ROW:S_COL); set.add(key(r,c)); } }
+        const same = []; for (let r=0;r<N;r++) for (let c=0;c<N;c++) { const q=grid[r][c]; if (q && q.t===color && q !== other) same.push([r,c]); }
+        for (let i = same.length - 1; i > 0; i--) { const j = rnd(i + 1); [same[i], same[j]] = [same[j], same[i]]; }
+        const pick = same.slice(0, 5); pick.push(b[0]===bp[0] && b[1]===bp[1] ? a : b);   /* 5 bonbons au hasard + celui échangé = 6 au maximum */
+        for (const [r,c] of pick) { const q=grid[r][c]; if (!q) continue; q.s = other.s===S_WRAP ? S_WRAP : (rnd(2)?S_ROW:S_COL); set.add(key(r,c)); }
+        specialsMade += pick.length; save.stats.specials += pick.length; updateHud();
         await sleep(300);
       } else { for (let r=0;r<N;r++) for (let c=0;c<N;c++) if (grid[r][c] && grid[r][c].t===color) set.add(key(r,c)); }
       forced.set(key(bp[0],bp[1]), { color });
@@ -1528,7 +1556,12 @@ cv.addEventListener("pointerdown", ev => {
   if (busy || paused || ended) return;
   const cell = cellAt(ev); if (!cell) return;
   hideTip(true);
-  if (hammerOn) { if (!isCherry(cell) && grid[cell[0]][cell[1]]) useHammer(cell); else sfx("bad"); return; }
+  if (hammerOn) {
+    if (!grid[cell[0]][cell[1]] || isLocked(cell)) { sfx("bad"); return; }
+    if (!swapFrom) { swapFrom = cell; selected = cell; sfx("click"); say("Touche le 2e bonbon"); return; }
+    if (swapFrom[0] === cell[0] && swapFrom[1] === cell[1]) { swapFrom = null; selected = null; say("Touche 2 bonbons à échanger"); return; }
+    useSwap(swapFrom, cell); return;
+  }
   if (isLocked(cell)) { if (isFrozen(cell)) frozenTip(); else sfx("bad"); selected = null; down = null; return; }
   try { cv.setPointerCapture(ev.pointerId); } catch(e){}
   down = { cell, x:ev.clientX, y:ev.clientY };
@@ -1560,7 +1593,7 @@ function modal(id, on) { $(id).classList.toggle("on", on); }
 function startLevel(i) {
   levelIdx = i; level = LEVELS[i];
   score = 0; moves = level.moves; collected = 0; dropped = 0; dropSpawned = 0; specialsMade = 0; ended = false; busy = false; paused = false; selected = null;
-  hammerOn = false; batUi(); bonusBomb = !SIM && Math.random() < 0.4 ? 1 : 0; particles = []; floats = []; effects = []; moveStats = { combo:0 };
+  hammerOn = false; discoOn = false; swapFrom = null; batUi(); scoreBarSkin(level.n); bonusBomb = !SIM && Math.random() < 0.4 ? 1 : 0; particles = []; floats = []; effects = []; moveStats = { combo:0 };
   initBoard(); buildStarMarks(); updateHud(); say("");
   modal("mEnd", false); modal("mPause", false);
   show("sGame"); resetIdle();
@@ -1620,6 +1653,7 @@ $("adSnd").onclick = () => adSndSet(!adSoundOn, true);
 $("bHammer").onclick = () => useBooster("hammer");
 $("bMoves").onclick = () => useBooster("moves");
 $("bShuffle").onclick = () => useBooster("shuffle");
+$("bDisco").onclick = () => useBooster("disco");
 $("lSignup").onclick = (e) => { const o = window.__TAURI__ && window.__TAURI__.opener; if (o && o.openUrl) { e.preventDefault(); o.openUrl("https://izackiferra.com/forum/signup.html?return=/play/sweetcrush/"); } };
 $("bCred").onclick = () => { sfx("click"); modal("mCred", true); };
 $("cClose").onclick = () => modal("mCred", false);
@@ -1683,8 +1717,8 @@ function drawTitle(dt) {
 /* ---------- Mise à l'échelle de la scène ---------- */
 let STAGE_W = 640, STAGE_H = 900;
 function fit() {
-  const w = document.documentElement.clientWidth || window.innerWidth, h = window.innerHeight;   /* la scène couvre exactement tout l'écran (aucune bande) */
-  const s = Math.min(w / 596, h / 1060);              /* 596 px de large mini, 1060 de haut mini (hauteur réelle du contenu : sinon les bandes se chevauchent sur tablette / écran large) */
+  const w = document.documentElement.clientWidth || window.innerWidth, h = (navigator.standalone === true && screen.height > window.innerHeight && screen.height < window.innerHeight + 120) ? screen.height : window.innerHeight;   /* iPhone, appli installée : innerHeight oublie la bande du bas → on prend la hauteur de l'écran */   /* la scène couvre exactement tout l'écran (aucune bande) */
+  const s = Math.min(w / 596, h / 1130);              /* 596 px de large mini, 1060 de haut mini (hauteur réelle du contenu : sinon les bandes se chevauchent sur tablette / écran large) */
   STAGE_W = w / s; STAGE_H = h / s;                   /* la scène prend tout l'écran : on ajoute de l'espace, pas des bandes */
   const st = $("stage"); st.style.width = STAGE_W + "px"; st.style.height = STAGE_H + "px";
   st.style.transform = "scale(" + s + ")";
