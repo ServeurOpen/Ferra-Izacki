@@ -126,6 +126,7 @@
   body.sk-boost .bst .bi { display:flex; align-items:center; justify-content:center; width:100%; height:100%; }
   body.sk-boost .bst .bi img { width:62px; height:62px; vertical-align:middle; margin:0; filter:drop-shadow(0 2px 2px rgba(0,0,0,.35)); }
   .bst .adtag { display:none; position:absolute; left:50%; bottom:-14px; transform:translateX(-50%); color:#fff; font:900 13px/1 inherit; pointer-events:none; }
+  #adRwIcon img { width:130px; height:130px; filter:drop-shadow(0 4px 6px rgba(0,0,0,.4)); }
   .bst .adtag img { width:42px; height:42px; filter:drop-shadow(0 2px 3px rgba(0,0,0,.5)); }
   body.ads .bst.off .adtag { display:block; }
   body.sk-boost .bst.off .bi img { filter:grayscale(1) drop-shadow(0 2px 2px rgba(0,0,0,.3)); opacity:.7; }
@@ -314,9 +315,13 @@
     <button class="btn alt small" id="inClose">Fermer</button></div></div>
 
   <div id="mAd" class="modal" style="background:#000;z-index:30"><div style="position:relative;height:100%;aspect-ratio:9/16;max-width:100%;background:#000">
-    <iframe id="adFrame" title="Publicité" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow=""></iframe>
+    <iframe id="adFrame" title="Publicité" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="autoplay"></iframe>
     <div style="position:absolute;left:0;right:0;top:0;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,0));font-weight:800;font-size:17px;color:#fff;pointer-events:none"><span>Publicité</span><span>+1 bonus dans <b id="adCount">15</b> s</span></div>
-    <a href="https://izackiferra.com/launcher.html" target="_blank" rel="noopener" class="btn small" style="position:absolute;left:50%;bottom:16px;transform:translateX(-50%);text-decoration:none;white-space:nowrap">Découvrir le Launcher</a></div></div>
+    <a id="adLink" href="https://izackiferra.com/launcher.html" target="_blank" rel="noopener" class="btn small" style="position:absolute;left:50%;bottom:16px;transform:translateX(-50%);text-decoration:none;white-space:nowrap">Découvrir le Launcher</a></div></div>
+
+  <div id="mAdRw" class="modal" style="z-index:31"><div class="card"><h3>Merci d'avoir regardé !</h3>
+    <div id="adRwIcon" style="margin:6px 0"></div><p id="adRwText" style="font-size:30px;font-weight:900;margin:4px 0 14px"></p>
+    <button class="btn green" id="adRwOk">OK</button></div></div>
 
   <div id="mReward" class="modal"><div class="card"><h3><img src="assets/icon-gift.png" alt="" style="width:54px;height:54px;vertical-align:middle;margin-right:6px" onerror="this.replaceWith(document.createTextNode('🎁 '))">Cadeau !</h3>
     <p id="rwText"></p><div id="rwList" style="margin:8px 0 12px"></div>
@@ -648,27 +653,37 @@ let hammerOn = false;
 /* Pub récompensée : désactivée tant qu'aucun réseau de pub n'est branché. Pour l'activer : ADS_ENABLED = true et définir window.scShowRewardedAd() (retourne une promesse → true si la pub a été regardée en entier). */
 const ADS_ENABLED = true;
 if (ADS_ENABLED) document.body.classList.add("ads");
-/* Pub maison : vidéo canvas de 15 s pour le Launcher (pub/pub-launcher.html), jouée dans une iframe ; limites : 1 pub / 45 s, 6 / jour. */
-window.scShowRewardedAd = () => new Promise(res => {
+/* Pubs maison : animations canvas (dossier Factory2D/Pubs → pub/ dans le jeu). Une est tirée au hasard dans pub/catalogue.json (15 s ou 30 s), jouée en entier dans une iframe, puis pop-up « +1 … » + OK.
+   Limites : 1 pub / 45 s, 6 / jour. Une pub ne se répète pas deux fois de suite. */
+window.scShowRewardedAd = async () => {
   let st; try { st = JSON.parse(localStorage.getItem("sc_ads") || "{}"); } catch (e) { st = {}; }
-  const day = new Date().toISOString().slice(0, 10); if (st.day !== day) st = { day, n:0, last:0 };
-  const warn = m => { say(m); setTimeout(() => say(""), 2200); res(false); };
+  const day = new Date().toISOString().slice(0, 10); if (st.day !== day) st = { day, n:0, last:0, lastId:st.lastId };
+  const warn = m => { say(m); setTimeout(() => say(""), 2200); return false; };
   if (Date.now() - st.last < 45000) return warn("Patiente un peu avant la prochaine pub");
   if (st.n >= 6) return warn("Plus de pub aujourd'hui : reviens demain !");
-  const fr = $("adFrame"); let loaded = false, left = 15; fr.onload = () => { loaded = true; };
-  $("adCount").textContent = left; fr.src = "pub/pub-launcher.html?play&once"; modal("mAd", true);
-  const tick = setInterval(() => { left = Math.max(0, left - 1); $("adCount").textContent = left; }, 1000);
-  const finish = ok => {
-    clearInterval(tick); clearTimeout(safety); removeEventListener("message", onMsg); modal("mAd", false); fr.onload = null; fr.src = "about:blank";
-    if (ok) { st.n++; st.last = Date.now(); try { localStorage.setItem("sc_ads", JSON.stringify(st)); } catch (e) {} } res(ok);
-  };
-  const onMsg = e => { if (e.data && e.data.ad === "done") finish(loaded); };
-  addEventListener("message", onMsg); const safety = setTimeout(() => finish(loaded), 17500);
-});
+  let cat = []; try { cat = (await (await fetch("pub/catalogue.json", { cache:"no-cache" })).json()).filter(p => p && p.actif !== false && p.fichier && p.duree > 0); } catch (e) {}
+  if (!cat.length) return warn("Pub indisponible pour le moment");
+  const pool = cat.length > 1 ? cat.filter(p => p.id !== st.lastId) : cat, ad = pool[Math.floor(Math.random() * pool.length)];
+  return new Promise(res => {
+    const fr = $("adFrame"); let loaded = false, left = Math.round(ad.duree); fr.onload = () => { loaded = true; };
+    $("adCount").textContent = left; $("adLink").href = ad.lien || "https://izackiferra.com/"; fr.src = "pub/" + ad.fichier + "?once" + (save.sound ? "" : "&mute"); modal("mAd", true);
+    const tick = setInterval(() => { left = Math.max(0, left - 1); $("adCount").textContent = left; }, 1000);
+    const finish = ok => {
+      clearInterval(tick); clearTimeout(safety); removeEventListener("message", onMsg); modal("mAd", false); fr.onload = null; fr.src = "about:blank";
+      if (ok) { st.n++; st.last = Date.now(); st.lastId = ad.id; try { localStorage.setItem("sc_ads", JSON.stringify(st)); } catch (e) {} } res(ok);
+    };
+    const onMsg = e => { if (e.data && e.data.ad === "done") finish(loaded); };
+    addEventListener("message", onMsg); const safety = setTimeout(() => finish(loaded), (ad.duree + 3) * 1000);
+  });
+};
 async function watchAdFor(kind) {
   if (!ADS_ENABLED || typeof window.scShowRewardedAd !== "function") return false;
   let ok = false; try { ok = await window.scShowRewardedAd(); } catch (e) {}
-  if (ok) { addInv({ [kind]: 1 }); sfx("ach"); say("+1 " + REWARD_META[kind].name + " !"); setTimeout(() => say(""), 1400); }
+  if (ok) {
+    addInv({ [kind]: 1 }); sfx("ach");
+    $("adRwIcon").innerHTML = rwIcon(kind); $("adRwText").textContent = "+1 " + REWARD_META[kind].name + " !";
+    await new Promise(r => { $("adRwOk").onclick = () => { modal("mAdRw", false); r(); }; modal("mAdRw", true); });
+  }
   return ok;
 }
 function updateBoosterUi() {

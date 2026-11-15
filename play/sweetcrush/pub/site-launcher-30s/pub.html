@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Pub — Site, Launcher, communauté (30 s)</title>
+<style>html,body{margin:0;height:100%;background:#0c0d0f;overflow:hidden}canvas{position:absolute;inset:0;margin:auto;max-width:100%;max-height:100%;aspect-ratio:9/16;height:100%}</style></head><body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script src="../_commun/ad-kit.js"></script>
+<script>
+/* Pub 30 s « Un site, un Launcher, une communauté » : visite guidée en maquettes animées → site, Launcher (installation en 1 clic), forum, succès & classement, créateurs, appel à l'action. */
+const I = "../_commun/img/";
+const IMAGES = { cF:I + "cover-ferra-1000.webp", cT:I + "cover-tower-defense-1000.webp", cV:I + "cover-vigie-1000.webp", shop:I + "boutique-960.webp", sF:I + "screenshot-gameplay-1000.webp" };
+const GREEN = "#6bcf8e", VIOLET = "#8b8cff", GOLD = "#ffd24a";
+function title(big, small, col, tl, y = 250) {
+  txt(big, W / 2, y, 118, C.text, { maxW:950, sp:14, stag:.07, stagT:(tl - .05) * 1.5, shadow:col, blur:44 });
+  txt(small, W / 2, y + 110, 46, col, { sp:6, weight:700, alpha:eOut(seg(tl, .6, 1.1)) });
+}
+const bar = (x, y, w, col, h = 14, a = 1) => { g.globalAlpha = a; g.fillStyle = col || "rgba(236,238,241,.22)"; rr(x, y, w, h, h / 2); g.fill(); g.globalAlpha = 1; };
+function avatar(x, y, r, col, ch) { g.fillStyle = col; g.beginPath(); g.arc(x, y, r, 0, 7); g.fill(); txt(ch, x, y + 3, r * 1.1, "#101215", { weight:800 }); }
+function cursor(x, y, press) { g.save(); g.translate(x, y); g.scale(1 + press * -.12, 1 + press * -.12); g.shadowColor = "rgba(0,0,0,.6)"; g.shadowBlur = 14; g.fillStyle = "#fff"; g.strokeStyle = "#111"; g.lineWidth = 4; g.beginPath(); g.moveTo(0, 0); g.lineTo(0, 54); g.lineTo(15, 41); g.lineTo(27, 66); g.lineTo(39, 60); g.lineTo(27, 36); g.lineTo(46, 35); g.closePath(); g.fill(); g.stroke(); g.restore(); }
+/* 1 — le site (navigateur qui défile) */
+function siteScene(tl, t) {
+  bgDark(t, [[.2, .2, 800, "79,216,203", .5], [.85, .7, 900, "245,165,90", .4]], { pc:C.teal });
+  title("UN SITE", "Jeux, actus, forum, tout est là", C.teal, tl);
+  const e = eOut(seg(tl, .2, .9)), x = 70, w = 940, y = 560 + (1 - e) * 900, h = 1000;
+  g.save(); g.globalAlpha = e; g.shadowColor = "rgba(79,216,203,.4)"; g.shadowBlur = 70; g.shadowOffsetY = 24; rr(x, y, w, h, 30); g.fillStyle = "#14161a"; g.fill(); g.shadowColor = "transparent";
+  g.fillStyle = "#1b1e21"; g.save(); rr(x, y, w, h, 30); g.clip(); g.fillRect(x, y, w, 78);
+  [["#ff5f57", 40], ["#febc2e", 80], ["#28c840", 120]].forEach(([c, dx]) => { g.fillStyle = c; g.beginPath(); g.arc(x + dx, y + 39, 11, 0, 7); g.fill(); });
+  rr(x + 190, y + 18, 560, 44, 22); g.fillStyle = "#0c0d0f"; g.fill(); txt("izackiferra.com", x + 470, y + 41, 28, C.dim, { weight:600 });
+  // page : défile toute seule
+  const vh = h - 78, ph = 1900, sy = eIO(seg(tl, .9, 5.2)) * (ph - vh); g.save(); g.beginPath(); g.rect(x, y + 78, w, vh); g.clip(); g.translate(x, y + 78 - sy);
+  g.fillStyle = "#101215"; g.fillRect(0, 0, w, ph);
+  mark(60, 50, .17, t, 1); txt("IZACKI", 100, 50, 34, C.text, { align:"left", sp:6 }); ["Jeux", "Forum", "Aide"].forEach((s, i) => txt(s, 470 + i * 110, 50, 28, C.dim, { weight:600 })); rr(w - 230, 22, 200, 56, 28); g.fillStyle = C.orange; g.fill(); txt("Télécharger", w - 130, 50, 28, "#1f1206");
+  cover("cF", 40, 120, w - 80, 380, 26, 1.0); const hg = g.createLinearGradient(0, 120, 0, 500); hg.addColorStop(.5, "rgba(16,18,21,0)"); hg.addColorStop(1, "rgba(16,18,21,.9)"); g.fillStyle = hg; rr(40, 120, w - 80, 380, 26); g.fill();
+  txt("JEUX IZACKI", 50, 590, 46, C.teal, { align:"left", sp:8 }); bar(50, 640, 520, undefined, 14); bar(50, 668, 380, undefined, 14);
+  cover("cT", 40, 730, w - 80, 360, 26); cover("cV", 40, 1130, w - 80, 360, 26);
+  txt("COMMUNAUTÉ", 50, 1570, 46, C.teal, { align:"left", sp:8 }); for (let i = 0; i < 3; i++) { rr(40, 1620 + i * 90, w - 80, 74, 18); g.fillStyle = "#1b1e21"; g.fill(); avatar(86, 1657 + i * 90, 22, [C.orange, C.teal, VIOLET][i], "ZAK"[i]); bar(130, 1646 + i * 90, 360 - i * 60, "rgba(236,238,241,.35)", 16); }
+  g.restore(); g.restore();
+  const k = seg(tl, 3.6, 5.3); cursor(lerp(x + 120, x + w - 130, eIO(k)) , lerp(y + 400, y + 150, eIO(k)), k > .9 ? 1 : 0);
+  g.restore();
+}
+/* 2 — le Launcher : installation en 1 clic */
+function launcherScene(tl, t) {
+  bgDark(t, [[.2, .25, 800, "245,165,90", .5], [.85, .65, 900, "245,165,90", .35]], { pc:C.orange });
+  title("UN LAUNCHER", "Installe et joue en un clic", C.orange, tl);
+  const e = eOut(seg(tl, .2, .9)), x = 90, w = 900, hh = w * 568 / 960;
+  g.save(); g.globalAlpha = e; g.translate(0, (1 - e) * 700); g.shadowColor = "rgba(245,165,90,.4)"; g.shadowBlur = 70; g.shadowOffsetY = 24; rr(x, 520, w, hh, 28); g.fillStyle = "#0c0d0f"; g.fill(); g.shadowColor = "transparent"; if (ok("shop")) { g.save(); rr(x, 520, w, hh, 28); g.clip(); g.drawImage(IMG.shop, x, 520, w, hh); g.restore(); } g.lineWidth = 4; g.strokeStyle = "rgba(236,238,241,.25)"; rr(x, 520, w, hh, 28); g.stroke(); g.restore();
+  // carte d'installation
+  const cy = 520 + hh + 60, ce = eBack(seg(tl, .9, 1.5)); g.save(); g.translate(W / 2, cy + 180); g.scale(ce, ce); g.translate(-W / 2, -(cy + 180));
+  rr(90, cy, 900, 360, 34); g.fillStyle = "#1b1e21"; g.fill(); g.lineWidth = 3; g.strokeStyle = "rgba(245,165,90,.5)"; g.stroke(); cover("cF", 120, cy + 30, 360, 144, 18); txt("FERRA", 520, cy + 62, 58, C.text, { align:"left", sp:6 }); txt("Gratuit · Survie / Automatisation", 520, cy + 118, 30, C.dim, { align:"left", weight:600 });
+  const p = clamp((tl - 2.0) / 2.2), done = tl > 4.2;
+  if (tl < 2.0 || done) { const bc = done ? GREEN : C.orange; rr(120, cy + 215, 840, 100, 26); g.fillStyle = bc; g.shadowColor = bc; g.shadowBlur = 30 + Math.sin(t * 6) * 12; g.fill(); g.shadowColor = "transparent"; txt(done ? "▶  JOUER" : "INSTALLER", W / 2, cy + 268, 56, "#10170f", { sp:8 }); }
+  else { rr(120, cy + 225, 840, 80, 40); g.fillStyle = "#0c0d0f"; g.fill(); const pg = g.createLinearGradient(120, 0, 960, 0); pg.addColorStop(0, C.orange); pg.addColorStop(1, C.orangeHi); g.save(); rr(120, cy + 225, 840, 80, 40); g.clip(); g.fillStyle = pg; g.fillRect(120, cy + 225, 840 * eIO(p), 80); g.restore(); txt(Math.round(eIO(p) * 100) + " %", W / 2, cy + 266, 40, "#fff", { sp:4 }); }
+  g.restore();
+  if (done) { const k = seg(tl, 4.2, 4.9); for (let i = 0; i < 14; i++) { const a = i / 14 * 6.283, d = eOut(k) * (160 + (i % 3) * 60); g.globalAlpha = 1 - k; g.fillStyle = i % 2 ? GREEN : C.orangeHi; g.beginPath(); g.arc(W / 2 + Math.cos(a) * d, cy + 268 + Math.sin(a) * d * .5, 9, 0, 7); g.fill(); } g.globalAlpha = 1; }
+  pill("Mises à jour automatiques", W / 2, 1745, seg(tl, 3.3, 3.9), t, { color:C.orange, w:860, h:100, size:42 });
+  if (tl < 2.0) cursor(lerp(W - 200, W / 2 + 40, eIO(seg(tl, .9, 1.9))), lerp(cy + 460, cy + 300, eIO(seg(tl, .9, 1.9))), tl > 1.85 ? 1 : 0);
+}
+/* 3 — la communauté (forum + discussion) */
+function communityScene(tl, t) {
+  bgDark(t, [[.2, .25, 800, "139,140,255", .5], [.85, .7, 900, "79,216,203", .4]], { pc:VIOLET });
+  title("UNE COMMUNAUTÉ", "Forum, entraide et bons plans", VIOLET, tl);
+  const threads = [["Astuce : bien démarrer sur FERRA", "12 réponses · il y a 2 h", C.orange, "F"], ["Quelle tour pour la vague 40 ?", "27 réponses · il y a 5 h", "#7f9bff", "T"], ["VIGIE : ma meilleure relique", "9 réponses · hier", C.teal, "V"], ["Bienvenue sur Izacki !", "48 réponses · épinglé", GOLD, "I"]];
+  threads.forEach(([ti, me, col, ch], i) => {
+    const k = eOut(seg(tl, .5 + i * .4, 1.2 + i * .4)), dir = i % 2 ? 1 : -1, y = 520 + i * 200;
+    g.save(); g.globalAlpha = clamp(k * 1.5); g.translate(dir * (1 - k) * 900, y + Math.sin(t * 1.6 + i) * 5); g.shadowColor = "rgba(0,0,0,.5)"; g.shadowBlur = 30; g.shadowOffsetY = 12; rr(70, 0, 940, 170, 30); g.fillStyle = "#1b1e21"; g.fill(); g.shadowColor = "transparent"; g.lineWidth = 3; g.strokeStyle = col; g.globalAlpha *= .6; g.stroke(); g.globalAlpha = clamp(k * 1.5);
+    avatar(150, 85, 46, col, ch); txt(ti, 225, 62, 44, C.text, { align:"left" }); txt(me, 225, 118, 32, C.dim, { align:"left", weight:600 }); g.restore();
+  });
+  // bulles de discussion
+  const bub = [["Bienvenue ! On fait une partie ?", 1, "#2f6df0"], ["Carrément, j'arrive 🔥", 0, "#2b3036"], ["GG pour le classement !", 1, "#2f6df0"]];
+  bub.forEach(([s, me, col], i) => { const k = eBack(seg(tl, 2.6 + i * .7, 3.2 + i * .7)); if (k <= 0) return; g.save(); const y = 1400 + i * 120, bw = 620; g.translate(me ? W - 90 - bw / 2 : 90 + bw / 2, y); g.scale(k, k); rr(-bw / 2, -46, bw, 92, 40); g.fillStyle = col; g.fill(); txt(s, 0, 4, 38, "#fff", { weight:600 }); g.restore(); });
+  const dk = eBack(seg(tl, 4.6, 5.2)); if (dk > 0) { g.save(); g.translate(W / 2, 1800); g.scale(dk, dk); rr(-340, -52, 680, 104, 52); g.fillStyle = "#5865f2"; g.shadowColor = "#5865f2"; g.shadowBlur = 40; g.fill(); g.shadowColor = "transparent"; txt("REJOINS LE DISCORD", 0, 4, 46, "#fff", { sp:4 }); g.restore(); }
+}
+/* 4 — succès & classement */
+function achScene(tl, t) {
+  bgDark(t, [[.2, .25, 800, "255,210,74", .5], [.85, .7, 900, "245,165,90", .4]], { pc:GOLD });
+  title("DES SUCCÈS", "Débloque tout, grimpe au classement", GOLD, tl);
+  const tiers = [["#cd7f32", "#8a4f16"], ["#d9dee6", "#7c8696"], [GOLD, "#b86b00"]];
+  for (let i = 0; i < 6; i++) {
+    const k = eBack(seg(tl, .5 + i * .22, 1.0 + i * .22)); if (k <= 0) continue; const cx = 190 + (i % 3) * 350, cy = 620 + Math.floor(i / 3) * 280, [c1, c2] = tiers[i % 3];
+    g.save(); g.translate(cx, cy + Math.sin(t * 2 + i) * 6); g.scale(k, k); g.shadowColor = c1; g.shadowBlur = 36; const gr = g.createLinearGradient(-90, -90, 90, 90); gr.addColorStop(0, "#fff7c8"); gr.addColorStop(.35, c1); gr.addColorStop(1, c2); g.fillStyle = gr; g.beginPath(); g.arc(0, 0, 100, 0, 7); g.fill(); g.shadowColor = "transparent";
+    g.lineWidth = 8; g.strokeStyle = "rgba(255,255,255,.55)"; g.beginPath(); g.arc(0, 0, 80, 0, 7); g.stroke(); g.fillStyle = "#fff"; g.strokeStyle = c2; g.lineWidth = 5; g.beginPath(); for (let j = 0; j < 10; j++) { const a = -Math.PI / 2 + j * Math.PI / 5, r = j % 2 ? 24 : 54; g.lineTo(Math.cos(a) * r, Math.sin(a) * r + 3); } g.closePath(); g.fill(); g.stroke(); g.restore();
+  }
+  const tk = eOut(seg(tl, 2.0, 2.6)); g.save(); g.globalAlpha = tk; g.translate(W / 2, 1230 - (1 - tk) * 60); rr(-360, -48, 720, 96, 30); g.fillStyle = "#1b1e21"; g.fill(); g.lineWidth = 3; g.strokeStyle = GOLD; g.stroke(); txt("★  SUCCÈS DÉBLOQUÉ  +1", 0, 4, 42, GOLD, { sp:4 }); g.restore();
+  // classement : « TOI » grimpe de la 5e à la 2e place
+  const climb = eIO(seg(tl, 3.0, 4.8)), me = lerp(4, 1, climb);
+  const slotY = p => 1330 + p * 100;
+  const order2 = [{ n:"Astra", c:C.orange }, { n:"Nimbus", c:C.teal }, { n:"Kobold", c:VIOLET }, { n:"Zéphyr", c:"#7f9bff" }];
+  const ek = eOut(seg(tl, 2.6, 3.2)); g.globalAlpha = ek;
+  order2.forEach((o, i) => { const y = slotY(me <= i + .5 ? i + 1 : i); g.save(); g.translate(0, y); rr(90, 0, 900, 84, 24); g.fillStyle = "#1b1e21"; g.fill(); txt((me <= i + .5 ? i + 2 : i + 1) + "", 150, 42, 40, C.dim, { weight:800 }); avatar(225, 42, 26, o.c, o.n[0]); txt(o.n, 275, 42, 40, C.text, { align:"left" }); bar(640, 36, 280 - i * 40, "rgba(236,238,241,.25)", 12); g.restore(); });
+  { const y = slotY(me); g.save(); g.translate(0, y); g.shadowColor = GOLD; g.shadowBlur = 36; rr(80, -4, 920, 92, 26); const gr = g.createLinearGradient(80, 0, 1000, 0); gr.addColorStop(0, "#5a4510"); gr.addColorStop(1, "#8a6a14"); g.fillStyle = gr; g.fill(); g.shadowColor = "transparent"; g.lineWidth = 4; g.strokeStyle = GOLD; g.stroke(); txt("#" + (Math.round(me) + 1), 150, 42, 44, GOLD, { weight:800 }); avatar(225, 42, 26, GOLD, "T"); txt("TOI", 275, 42, 42, "#fff", { align:"left" }); bar(640, 36, 300, GOLD, 12); g.restore(); }
+  g.globalAlpha = 1;
+}
+/* 5 — créateurs */
+function creatorScene(tl, t) {
+  bgDark(t, [[.2, .25, 800, "255,95,168", .5], [.85, .7, 900, "139,92,255", .4]], { pc:C.pink });
+  title("CRÉE. PUBLIE.", "Sors ton jeu sur le Launcher", C.pink, tl);
+  // fenêtre de code
+  const e = eOut(seg(tl, .3, .9)); g.save(); g.globalAlpha = e; g.translate(-(1 - e) * 600, 0); rr(70, 560, 940, 420, 28); g.fillStyle = "#14161a"; g.fill(); g.lineWidth = 3; g.strokeStyle = "rgba(255,95,168,.5)"; g.stroke();
+  const cols = [C.pink, C.teal, C.orange, VIOLET, C.text]; const R = prng(9); for (let i = 0; i < 9; i++) { let xx = 110 + (i % 3) * 30; const n = 2 + Math.floor(R() * 3); for (let j = 0; j < n; j++) { const ww = 70 + R() * 150, k = clamp((tl - .8 - i * .12 - j * .05) / .25); bar(xx, 600 + i * 40, ww * k, cols[(i + j) % 5], 16, .85); xx += ww + 16; } }
+  g.restore();
+  // la boutique, puis « TON JEU » y glisse depuis la fenêtre de code
+  const sk = eOut(seg(tl, 1.8, 2.4)); g.save(); g.globalAlpha = sk; rr(70, 1160, 940, 560, 30); g.fillStyle = '#14161a'; g.fill(); g.lineWidth = 3; g.strokeStyle = 'rgba(236,238,241,.2)'; g.stroke(); ['cF', 'cT', 'cV'].forEach((k, i) => { cover(k, 100 + (i % 2) * 450, 1190 + Math.floor(i / 2) * 190, 430, 172, 18); }); rr(550, 1380, 430, 172, 18); g.fillStyle = '#1b1e21'; g.fill(); g.restore();
+  const fk = eIO(seg(tl, 2.4, 3.6)), cx = lerp(540, 765, fk), cy = lerp(1010, 1466, fk), cw = lerp(400, 430, fk), ch = lerp(160, 172, fk);
+  g.save(); g.globalAlpha = eOut(seg(tl, 2.0, 2.4)); g.translate(cx, cy + (1 - fk) * Math.sin(t * 3) * 8); g.rotate((1 - fk) * Math.sin(t * 2) * .03); g.shadowColor = C.pink; g.shadowBlur = 40; rr(-cw / 2, -ch / 2, cw, ch, 24); const gr = g.createLinearGradient(-cw / 2, 0, cw / 2, 0); gr.addColorStop(0, '#ff5fa8'); gr.addColorStop(1, '#8b5cff'); g.fillStyle = gr; g.fill(); g.shadowColor = 'transparent'; txt('TON JEU', 0, 4, 56, '#fff', { sp:8 }); g.restore();
+  if (tl > 3.5) { const k = seg(tl, 3.5, 4.1); for (let i = 0; i < 12; i++) { const a = i / 12 * 6.283, d = eOut(k) * 200; g.globalAlpha = 1 - k; g.fillStyle = i % 2 ? C.pink : GOLD; g.beginPath(); g.arc(765 + Math.cos(a) * d, 1466 + Math.sin(a) * d * .8, 9, 0, 7); g.fill(); } g.globalAlpha = 1;
+    const nk = eBack(seg(tl, 3.7, 4.2)); g.save(); g.translate(900, 1396); g.scale(nk, nk); rr(-80, -26, 160, 52, 26); g.fillStyle = GREEN; g.fill(); txt('NOUVEAU', 0, 2, 28, '#10170f', { sp:2 }); g.restore(); }
+}
+/* 6 — appel à l'action */
+function ctaScene(tl, t) {
+  bgDark(t); mark(W / 2, 470, 1.4, t, 1);
+  txt("SITE · LAUNCHER · JEUX", W / 2, 790, 82, C.text, { sp:8, shadow:C.orange, blur:40, alpha:eOut(seg(tl, 0, .5)) });
+  txt("TOUT IZACKI, GRATUIT.", W / 2, 910, 56, C.orange, { sp:6, weight:700, alpha:eOut(seg(tl, .3, .8)) });
+  ctaButton("izackiferra.com", W / 2, 1130, seg(tl, .3, 1), t);
+  txt("TÉLÉCHARGE LE LAUNCHER · WINDOWS", W / 2, 1320, 40, C.dim, { sp:5, weight:600, alpha:eOut(seg(tl, .9, 1.4)) });
+  marquee(["cF", "cT", "cV"], t, 1480, 290, eOut(seg(tl, .5, 1.2)));
+}
+const SC = [0, 5.5, 11, 16.5, 22, 26, 30];
+function draw(t) {
+  if (t < SC[1]) siteScene(t - SC[0], t); else if (t < SC[2]) launcherScene(t - SC[1], t); else if (t < SC[3]) communityScene(t - SC[2], t);
+  else if (t < SC[4]) achScene(t - SC[3], t); else if (t < SC[5]) creatorScene(t - SC[4], t); else ctaScene(t - SC[5], t);
+  wipe(t, SC[1], C.teal, "#2fb3a7"); wipe(t, SC[2], C.orange, "#ff7a2a"); wipe(t, SC[3], VIOLET, "#5865f2"); wipe(t, SC[4], GOLD, "#ff9a2a"); wipe(t, SC[5], C.pink, "#8b5cff");
+  const f = 1 - seg(t, 0, .3); if (f) { g.fillStyle = "rgba(8,9,10," + f + ")"; g.fillRect(0, 0, W, H); }
+}
+runAd(draw, 30, IMAGES);
+</script></body></html>

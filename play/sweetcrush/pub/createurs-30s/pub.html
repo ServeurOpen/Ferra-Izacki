@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Pub — Créateurs (27 s)</title>
+<style>html,body{margin:0;height:100%;background:#0c0d0f;overflow:hidden}canvas{position:absolute;inset:0;margin:auto;max-width:100%;max-height:100%;aspect-ratio:9/16;height:100%}</style></head><body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script src="../_commun/ad-kit.js"></script>
+<script>
+/* Pub 30 s « Créateurs » : une maquette du Launcher (écran « Sortir mon jeu » + ventes) filmée par une caméra qui zoome sur l'endroit dont parle la voix.
+   Les secondes de chaque phrase sont dans T : à recaler sur la voix enregistrée (voir voix/). ?mute = sans son. */
+const I = "../_commun/img/";
+const IMAGES = { sF1:I + "screenshot-gameplay-1000.webp", sT1:I + "screenshot-towerdefense-1-1000.webp", sV2:I + "screenshot-vigie-2-1000.webp", cF:I + "cover-ferra-1000.webp", cT:I + "cover-tower-defense-1000.webp", cV:I + "cover-vigie-1000.webp", k0:I + "candy-0-rouge.png", k4:I + "candy-4-bleu.png" };
+const bar = (x, y, w, col, h = 14, a = 1) => { g.globalAlpha = a; g.fillStyle = col || "rgba(236,238,241,.22)"; rr(x, y, Math.max(w, 0), h, h / 2); g.fill(); g.globalAlpha = 1; };
+const GREEN = "#6bcf8e", AMBER = "#ffb84a", VIOLET = "#8b8cff";
+/* début de chaque phrase (s) — [1 accroche, 2 Launcher, 3 déposer/captures/prix, 4 équipe, 5 ventes/retraits, 6 appel à l'action] + fin */
+/* recalé sur la voix (prise 6, démarre directement sur la voix) */
+/* Calage sur la voix finale, blocs confirmés : 0,9 « Tu es un petit développeur indépendant » · 4,0 « et tu as créé un jeu » · 5,9 « mais tu ne sais pas où le publier » · 8,0 « Le Launcher Izacki est là pour vous » · 10,1 « Dépose ton jeu » · 11,0 « ajoute tes captures » · 12,3 « fixe ton prix » · 13,8 « gratuit ou payant, c'est toi qui décides » · 15,05 « Notre équipe le vérifie… devant tous les joueurs » · 17,4 « Tu suis tes ventes… » · 21,0 « Télécharge… » */
+const T = { s1:[.9, 5.9], s2:[5.9, 7.85], st:[7.85, 8.55, 9.95, 13.5], s4:[13.5, 17.2], s5:[17.2, 20.6], s6:[20.6, 27] };   /* v4 : blocs de voix (re)identifiés — 0,94 « Tu es un petit développeur indépendant et tu as créé un jeu » · 4,0 « mais tu ne sais pas où le publier » · 5,9 « Le Launcher Izacki… » · 8,0 « Dépose ton jeu, ajoute tes captures » · 10,1 « fixe ton prix » · 11,0 « gratuit ou payant, c'est toi qui décides » · 13,8 « Notre équipe… » · 17,4 ventes · 21,0 « Télécharge… » */   // = blocs de la voix, avancés de ~0,3 s pour que le titre soit lisible AVANT le mot T.s3 = [T.st[0], T.st[3]];
+T.s3 = [T.st[0], T.st[3]];
+const within = (t, r) => t >= r[0] && t < r[1], prog = (t, r) => seg(t, r[0], r[1]);
+/* ---------- la maquette du Launcher (monde 1600 × 1000) ---------- */
+function field(label, x, y, w, h, val, o = {}) { txt(label, x, y - 18, 26, C.dim, { align:"left", weight:600 }); rr(x, y, w, h, 14); g.fillStyle = "#0c0d0f"; g.fill(); g.lineWidth = 2; g.strokeStyle = o.hi ? C.orange : C.line; g.stroke(); if (val) txt(val, x + 22, y + h / 2 + 2, o.size || 32, o.color || C.text, { align:"left", weight:700 }); }
+function world(S, t) {
+  rr(0, 0, 1600, 1000, 26); g.fillStyle = "#0c0d0f"; g.fill(); g.lineWidth = 3; g.strokeStyle = "rgba(236,238,241,.22)"; g.stroke();
+  g.save(); rr(0, 0, 1600, 1000, 26); g.clip();
+  g.fillStyle = "#14161a"; g.fillRect(0, 0, 1600, 100); g.fillStyle = C.line; g.fillRect(0, 100, 1600, 2);
+  mark(60, 52, .2, 0, 1); txt("IZACKI", 100, 40, 28, C.text, { align:"left", sp:5 }); txt("LAUNCHER", 100, 70, 22, C.orange, { align:"left", sp:5 });
+  [["BOUTIQUE", 470], ["BIBLIOTHÈQUE", 690], ["COMMUNAUTÉ", 930], ["CRÉATEURS", 1160], ["ASSISTANCE", 1390]].forEach(([s, x], i) => { const on = i === 3; txt(s, x, 54, 26, on ? C.orange : C.dim, { sp:3, weight:700 }); if (on) { g.fillStyle = C.orange; g.fillRect(x - 70, 92, 140, 6); } });
+  // --- formulaire « Sortir mon jeu »
+  rr(40, 140, 820, 820, 24); g.fillStyle = "#14161a"; g.fill(); g.lineWidth = 2; g.strokeStyle = C.line; g.stroke(); txt("Sortir mon jeu", 80, 195, 46, C.text, { align:"left" });
+  // fichier
+  txt("Fichier du jeu (.exe Windows ou .zip)", 80, 252, 26, C.dim, { align:"left", weight:600 });
+  rr(80, 272, 740, 120, 18); g.fillStyle = "#0c0d0f"; g.fill(); g.setLineDash([14, 10]); g.lineWidth = 3; g.strokeStyle = S.hiFile ? C.orange : "#3b424a"; g.stroke(); g.setLineDash([]);
+  if (S.file < 1) txt("Dépose ton jeu ici", 450, 332, 34, C.dim, { weight:600, alpha:1 - S.file });
+  if (S.file > 0) { const k = eBack(S.file), y = lerp(180, 332, eOut(S.file)); g.save(); g.globalAlpha = clamp(S.file * 2); g.translate(450, y); g.scale(k, k); rr(-250, -40, 500, 80, 16); g.fillStyle = "#1f2430"; g.fill(); g.lineWidth = 3; g.strokeStyle = GREEN; g.stroke(); g.fillStyle = C.orange; rr(-232, -26, 52, 52, 10); g.fill(); txt("EXE", -206, 2, 22, "#1f1206"); txt("MonJeu.exe  ·  48 Mo", -160, 2, 30, C.text, { align:"left" }); txt("✔", 215, 2, 40, GREEN); g.restore(); }
+  field("Nom du jeu", 80, 450, 380, 70, S.name ? "Mon super jeu" : "", { hi:S.hiName });
+  // prix
+  txt("Prix (en crédits)", 500, 432, 26, C.dim, { align:"left", weight:600 });
+  const pay = S.price > .5; rr(500, 450, 320, 70, 14); g.fillStyle = "#0c0d0f"; g.fill(); g.lineWidth = 3; g.strokeStyle = S.hiPrice ? C.orange : C.line; g.stroke(); txt(pay ? "250 crédits" : "0  ·  Gratuit", 530, 487, 32, pay ? C.gold : GREEN, { align:"left", weight:800 });
+  if (S.hiPrice) { [["Gratuit", 80], ["Payant", 250]].forEach(([l, w], i) => { const on = (i === 1) === pay; rr(500 + i * 170, 534, 150, 44, 22); g.fillStyle = on ? C.orange : "#1f2430"; g.fill(); txt(l, 575 + i * 170, 557, 24, on ? "#1f1206" : C.dim, { weight:800 }); }); }
+  txt("Description", 80, 600, 26, C.dim, { align:"left", weight:600 }); rr(80, 614, 740, 90, 14); g.fillStyle = "#0c0d0f"; g.fill(); g.lineWidth = 2; g.strokeStyle = C.line; g.stroke(); bar(100, 640, 520 * S.name, "rgba(236,238,241,.35)", 14); bar(100, 670, 380 * S.name, "rgba(236,238,241,.25)", 14);
+  txt("Captures (3 à 5)", 80, 748, 26, C.dim, { align:"left", weight:600 });
+  ["sF1", "sT1", "sV2"].forEach((k, i) => { const x = 80 + i * 250, a = clamp(S.caps - i), e = eBack(a); rr(x, 768, 230, 130, 14); g.fillStyle = "#0c0d0f"; g.fill(); g.lineWidth = 2; g.setLineDash([8, 8]); g.strokeStyle = S.hiCaps ? C.orange : "#3b424a"; g.stroke(); g.setLineDash([]); if (a > 0) { g.save(); g.translate(x + 115, 833); g.scale(e, e); g.globalAlpha = clamp(a * 2); cover(k, -115, -65, 230, 130, 14); g.restore(); } });
+  rr(580, 768, 240, 130, 14); g.fillStyle = "#14161a"; g.fill(); txt("+ ajouter", 700, 833, 28, C.dim, { weight:700 });
+  rr(80, 910, 740, 40, 14); g.fillStyle = C.orange; g.fill(); txt("ENVOYER POUR EXAMEN", 450, 931, 24, "#1f1206", { sp:4 });
+  // --- aperçu boutique + statut
+  rr(900, 140, 660, 380, 24); g.fillStyle = "#14161a"; g.fill(); g.lineWidth = 2; g.strokeStyle = C.line; g.stroke(); txt("Aperçu sur la boutique", 940, 190, 34, C.text, { align:"left" });
+  const pub = S.review > .55; g.save(); g.translate(1230, 335); const sc = 1 + (pub ? Math.sin(clamp((S.review - .55) / .3) * Math.PI) * .06 : 0); g.scale(sc, sc);
+  rr(-190, -100, 380, 200, 18); const gr = g.createLinearGradient(-190, 0, 190, 0); gr.addColorStop(0, "#ff5fa8"); gr.addColorStop(1, "#8b5cff"); g.fillStyle = gr; g.fill(); txt("MON SUPER JEU", 0, -20, 40, "#fff", { sp:4, maxW:340 }); txt(pay ? "250 crédits" : "Gratuit", 0, 40, 28, "#fff", { weight:700 }); g.restore();
+  const st = S.review <= 0 ? ["BROUILLON", C.dim] : pub ? ["✔ PUBLIÉ", GREEN] : ["EN EXAMEN…", AMBER]; rr(1330, 160, 210, 40, 20); g.fillStyle = st[1]; g.globalAlpha = .22; g.fill(); g.globalAlpha = 1; g.lineWidth = 2; g.strokeStyle = st[1]; g.stroke(); txt(st[0], 1435, 181, 24, st[1], { sp:2 });
+  if (S.review > .15) txt("Examiné par l'équipe Izacki", 940, 490, 22, C.dim, { align:"left", weight:600, alpha:clamp((S.review - .15) * 4) });
+  // --- ventes
+  rr(900, 550, 660, 410, 24); g.fillStyle = "#14161a"; g.fill(); g.lineWidth = 2; g.strokeStyle = C.line; g.stroke(); txt("Mes ventes", 940, 600, 34, C.text, { align:"left" });
+  txt(Math.round(S.sales * 128) + " ventes", 940, 670, 64, C.gold, { align:"left" }); txt(Math.round(S.sales * 1840) + " crédits gagnés", 940, 724, 28, C.dim, { align:"left", weight:600 });
+  for (let i = 0; i < 9; i++) { const h = (30 + ((i * 53) % 90)) * clamp(S.sales * 1.4 - i * .06); rr(1240 + i * 36, 780 - h * 1.5 + 100, 24, h * 1.5 + 4, 6); g.fillStyle = i === 8 ? C.orange : "#3a4150"; g.fill(); }
+  rr(940, 800, 250, 70, 16); g.fillStyle = S.press ? C.orangeHi : GREEN; g.fill(); txt("RETIRER", 1065, 836, 32, "#10170f", { sp:4 }); txt("Retraits sous conditions", 940, 915, 22, C.dim, { align:"left", weight:600 });
+  g.restore();
+}
+function spot(x, y, w, h, a, t) { if (a <= 0) return; g.save(); g.globalAlpha = a; g.lineWidth = 6; g.strokeStyle = C.orangeHi; g.shadowColor = C.orange; g.shadowBlur = 24 + Math.sin(t * 6) * 8; rr(x - 8, y - 8, w + 16, h + 16, 22); g.stroke(); g.restore(); }
+/* caméra : (centre monde x, y, zoom) interpolés entre points de passage */
+const VW = 1020, VH = 960, VX = 30, VY = 420, FIT = VW / 1600;
+function camera(t) {
+  const [a, b, c, d] = [T.s3[0], T.s3[1], T.s4, T.s5], st = T.st;
+  const K = [[T.s2[0], 800, 500, FIT], [T.s2[1] - .4, 800, 500, FIT * 1.05], [st[0], 450, 335, 1.45], [st[1], 450, 780, 1.45], [st[2], 640, 500, 1.8], [b - .3, 640, 500, 1.8], [b + .5, 1230, 335, 1.35], [c[0] + .6, 1230, 330, 1.45], [c[1] - .3, 1230, 330, 1.45], [d[0] + .4, 1230, 750, 1.4], [d[1], 1230, 750, 1.5]];
+  if (t <= K[0][0]) return { x:K[0][1], y:K[0][2], z:K[0][3] };
+  for (let i = 0; i < K.length - 1; i++) if (t < K[i + 1][0]) { const k = eIO(seg(t, K[i][0], K[i + 1][0])); return { x:lerp(K[i][1], K[i + 1][1], k), y:lerp(K[i][2], K[i + 1][2], k), z:lerp(K[i][3], K[i + 1][3], k) }; }
+  const L = K[K.length - 1]; return { x:L[1], y:L[2], z:L[3] };
+}
+function head(big, small, col, a, y = 190) { txt(big, W / 2, y, 92, C.text, { sp:10, alpha:a, shadow:col, blur:36, maxW:980 }); txt(small, W / 2, y + 100, 44, col, { sp:4, weight:700, alpha:a, maxW:980 }); }
+/* ---------- scènes ---------- */
+function pre(t) {
+  bgDark(t, [[.3, .3, 800, "245,165,90", .5], [.8, .7, 900, "255,95,168", .4]], { pc:C.orange }); mark(W / 2, 700, 1.7, t, seg(t, 0, 1.4));
+  txt("IZACKI LAUNCHER", W / 2, 1010, 84, C.text, { sp:10, shadow:C.orange, blur:40, alpha:eOut(seg(t, .8, 1.5)) }); txt("SPÉCIAL CRÉATEURS", W / 2, 1130, 64, C.orange, { sp:12, weight:700, alpha:eOut(seg(t, 1.5, 2.2)), shadow:C.orange, blur:30, maxW:980 });
+}
+/* texte calé sur la voix : chaque mot arrive (appear) ou s'allume (light) à la seconde où il est prononcé — secondes mesurées sur l'enregistrement */
+function wordsLine(list, times, cy, size, col, t, o = {}) {
+  const sp = o.sp == null ? 6 : o.sp; const meas = (s) => { g.save(); g.font = '800 ' + s + 'px ' + FONT; const wl = (w) => [...w].reduce((a, ch) => a + g.measureText(ch).width, 0) + sp * (w.length - 1), gap = g.measureText(' ').width * 1.25 + sp, ws = list.map(wl), tot = ws.reduce((a, b) => a + b, 0) + gap * (list.length - 1); g.restore(); return { ws, gap, tot }; };
+  let m = meas(size); if (m.tot > 980) { size = Math.floor(size * 980 / m.tot); m = meas(size); }
+  let x = W / 2 - m.tot / 2; const vis = o.vis == null ? 1 : o.vis;
+  list.forEach((w, i) => { const k = eOut(seg(t, times[i] - .1, times[i] + .12)), lit = o.mode === 'light'; const a = (lit ? .35 + .65 * k : k) * vis; if (a > .01) txt(w, x, cy + (lit ? 0 : (1 - k) * 18), size * (lit ? 1 : .9 + .1 * k), (lit && k > .5) ? (o.litCol || col) : col, { align:'left', sp, alpha:a, shadow:o.shadow || col, blur:36, maxW:1200 }); x += m.ws[i] + m.gap; });
+}
+function hook(t) {
+  bgDark(t, [[.3, .3, 800, "255,95,168", .5], [.8, .7, 900, "139,92,255", .4]], { pc:C.pink });
+  // trois temps, calés sur la voix : « Tu es un petit développeur indépendant » · « et tu as créé un jeu » · « mais tu ne sais pas où le publier ? »
+  const B = [[0, 2.72], [2.72, 3.98], [3.98, 99]], beat = (i) => { const [s, e] = B[i]; return eOut(seg(t, s, s + .35)) * (1 - (i < 2 ? seg(t, e - .25, e) : 0)); };
+  const b0 = beat(0), b1 = beat(1), b2 = beat(2);
+  const v0 = 1 - seg(t, B[0][1] - .25, B[0][1]), v1 = 1 - seg(t, B[1][1] - .25, B[1][1]);
+  wordsLine(['TU', 'ES', 'UN', 'PETIT'], [1.0, 1.12, 1.24, 1.36], 290, 96, C.text, t, { vis:v0, shadow:C.pink }); wordsLine(['DÉVELOPPEUR', 'INDÉPENDANT'], [1.6, 2.08], 400, 80, C.pink, t, { vis:v0 });
+  wordsLine(['ET', 'TU', 'AS', 'CRÉÉ', 'UN', 'JEU'], [2.8, 2.93, 3.06, 3.2, 3.46, 3.6], 345, 90, C.text, t, { vis:v1, shadow:C.pink });
+  wordsLine(['MAIS', 'TU', 'NE', 'SAIS', 'PAS'], [4.07, 4.2, 4.34, 4.42, 4.66], 290, 88, C.text, t, { shadow:C.pink }); wordsLine(['OÙ', 'LE', 'PUBLIER', '?'], [4.8, 5.0, 5.24, 5.5], 405, 96, C.orange, t, {});
+  const pop = eBack(seg(t, .15, .8)) , bounce = 1 + (b1 > 0 ? Math.sin(clamp((t - B[1][0]) / .5) * Math.PI) * .12 : 0);
+  g.save(); g.translate(W / 2, 880 + Math.sin(t * 1.6) * 14); g.rotate(Math.sin(t * 1.1) * .04); g.scale(pop * bounce, pop * bounce);
+  g.shadowColor = C.pink; g.shadowBlur = 60; rr(-210, -250, 420, 500, 40); g.fillStyle = "#1b1e21"; g.fill(); g.shadowColor = "transparent"; g.lineWidth = 5; g.strokeStyle = C.pink; g.stroke();
+  g.fillStyle = C.orange; rr(-150, -190, 300, 220, 30); g.fill(); txt("EXE", 0, -80, 110, "#1f1206", { sp:6 }); txt("MonJeu.exe", 0, 110, 56, C.text); txt("48 Mo", 0, 175, 36, C.dim, { weight:600 }); g.restore();
+  [[150, 760, 150], [940, 700, 170], [250, 1010, 120], [850, 1050, 140], [120, 1260, 130], [960, 1290, 110]].forEach(([qx, qy, qs], i) => { const k = eBack(seg(t, 4.75 + i * .12, 5.2 + i * .12)); if (k <= 0) return; txt('?', qx + Math.sin(t * 1.7 + i) * 14, qy + Math.cos(t * 1.3 + i * 2) * 16, qs * k, C.pink, { alpha:.8 * Math.min(1, k), shadow:C.pink, blur:30 }); });
+}
+function main(t) {
+  bgDark(t, [[.2, .25, 800, "245,165,90", .5], [.85, .7, 900, "79,216,203", .4]], { pc:C.orange });
+  const c = camera(t), in2 = eOut(seg(t, T.s2[0], T.s2[0] + .7));
+  // état animé de la maquette
+  const st = T.st, q3 = t < st[0] ? 0 : t >= st[3] ? 3 : (t < st[1] ? seg(t, st[0], st[1]) : t < st[2] ? 1 + seg(t, st[1], st[2]) : 2 + seg(t, st[2], st[3])), S = {
+    file:eOut(clamp(q3 * 1.6)), name:clamp(q3 * 3) > .5 ? 1 : 0, caps:clamp((q3 - 1) * 3.2), price:t < 11.5 ? 0 : 1, hiFile:q3 < 1 && t >= T.s3[0], hiName:false, hiCaps:q3 >= 1 && q3 < 2, hiPrice:q3 >= 2 && q3 < 3.3,
+    review:t < T.s4[0] ? 0 : prog(t, [14.0, 16.0]) , sales:t < T.s5[0] ? 0 : eOut(prog(t, [T.s5[0] + .3, T.s5[1] - .4])), press:t > T.s5[1] - 1.2 && t < T.s5[1] - .6 };
+  if (t > T.s3[1]) { S.file = 1; S.name = 1; S.caps = 3; S.price = 1; }
+  g.save(); g.globalAlpha = in2; g.translate(0, (1 - in2) * 300); rr(VX, VY, VW, VH, 30); g.clip(); g.fillStyle = "#08090a"; g.fillRect(VX, VY, VW, VH);
+  g.translate(VX + VW / 2, VY + VH / 2); g.scale(c.z, c.z); g.translate(-c.x, -c.y);
+  world(S, t);
+  { const tp = 15.1, dt = t - tp; if (dt > 0 && dt < 1.8) { const R = prng(77); for (let i = 0; i < 46; i++) { const a = R() * 6.283, v = 160 + R() * 320, x = 1230 + Math.cos(a) * v * dt, y = 335 + Math.sin(a) * v * dt + 260 * dt * dt, sz = 8 + R() * 9; g.save(); g.globalAlpha = 1 - dt / 1.8; g.translate(x, y); g.rotate(R() * 6 + dt * 6); g.fillStyle = [C.orange, C.pink, C.teal, C.gold, "#8b8cff"][i % 5]; g.fillRect(-sz / 2, -sz / 4, sz, sz / 2); g.restore(); } } }
+  if (q3 < 1 && t > T.s3[0]) spot(80, 272, 740, 120, .9, t); if (q3 >= 1 && q3 < 2) spot(80, 768, 740, 130, .9, t); if (q3 >= 2 && q3 < 3.3 && t < T.s3[1]) spot(500, 450, 320, 128, .9, t);
+  if (t >= T.s4[0] && t < T.s4[1]) spot(900, 140, 660, 380, .8, t); if (t >= T.s5[0]) spot(900, 550, 660, 410, .8, t);
+  g.restore();
+  g.save(); g.globalAlpha = in2; rr(VX, VY, VW, VH, 30); g.lineWidth = 4; g.strokeStyle = "rgba(236,238,241,.28)"; g.stroke(); g.restore();
+  // titres de chaque étape
+  const hd = (r, big, small, col) => { if (t >= r[0] - .1 && t < r[1]) head(big, small, col, eOut(seg(t, r[0], r[0] + .45)) * (1 - seg(t, r[1] - .35, r[1]))); };
+  if (t >= T.s2[0] - .1 && t < T.st[0] - .1) { const va = eOut(seg(t, T.s2[0], T.s2[0] + .45)) * (1 - seg(t, T.st[0] - .45, T.st[0] - .1)); txt("POUR LES CRÉATEURS", W / 2, 190, 92, C.text, { sp:10, alpha:va, shadow:C.orange, blur:36, maxW:980 }); wordsLine(["LE", "LAUNCHER", "IZACKI", "EST LÀ", "POUR VOUS"], [5.98, 6.08, 6.5, 7.08, 7.4], 290, 46, C.dim, t, { mode:"light", litCol:C.orange, vis:va, sp:4 }); }
+    hd([T.st[0], T.st[1]], "1 · DÉPOSE TON JEU", "un .exe Windows ou une version web", C.orange); hd([T.st[1], T.st[2]], "2 · AJOUTE TES CAPTURES", "de 3 à 5 images", C.teal); hd([T.st[2], T.st[3]], "3 · FIXE TON PRIX", "gratuit ou payant, tu décides", C.gold);
+  hd(T.s4, "VÉRIFIÉ PAR L'ÉQUIPE", "puis publié devant tous les joueurs", GREEN); hd(T.s5, "SUIS TES VENTES", "et retire tes gains en argent réel", C.gold);
+  if (t >= T.s2[0] && t < T.s6[0]) marquee(["cF", "cT", "cV"], t, 1500, 250, in2 * .75 * (1 - seg(t, T.s6[0] - .5, T.s6[0])), 120);
+  if (t >= T.s5[0] && t < T.s6[0]) txt("Retraits sous conditions · détails sur izackiferra.com", W / 2, 1810, 32, C.dim, { weight:600, alpha:eOut(seg(t, T.s5[0] + 1, T.s5[0] + 1.6)), maxW:980 });
+}
+function cta(t) {
+  const tl = t - T.s6[0]; bgDark(t); mark(W / 2, 440, 1.3, t, 1);
+  txt("IZACKI LAUNCHER", W / 2, 740, 84, C.text, { sp:10, shadow:C.orange, blur:40, alpha:eOut(seg(tl, 0, .5)) });
+  txt("PUBLIE TON JEU. TOUCHE TOUS LES JOUEURS.", W / 2, 850, 44, C.orange, { sp:4, weight:700, alpha:eOut(seg(tl, .3, .8)), maxW:980 });
+  ctaButton("izackiferra.com", W / 2, 1090, seg(tl, .3, 1), t);
+  txt("TÉLÉCHARGE LE LAUNCHER · WINDOWS · GRATUIT", W / 2, 1280, 38, C.dim, { sp:4, weight:600, alpha:eOut(seg(tl, .9, 1.4)), maxW:980 });
+  marquee(["cF", "cT", "cV"], t, 1440, 290, eOut(seg(tl, .5, 1.2)));
+}
+function draw(t) {
+  if (t < T.s2[0] - .2) hook(t); else if (t < T.s6[0]) main(t); else cta(t);
+  wipe(t, T.s2[0] - .2, C.pink, "#8b5cff"); wipe(t, T.s6[0], C.orange, "#ff7a2a");
+  const f = 1 - seg(t, 0, .15); if (f) { g.fillStyle = "rgba(8,9,10," + f + ")"; g.fillRect(0, 0, W, H); }
+}
+/* Son (voix + musique + bruitages : voix/mix.wav). L'IMAGE SUIT LE SON : tant que le son joue, le temps de l'animation = position du son,
+   donc le texte ne peut plus se décaler (chargement lent, onglet en pause…). ?mute = sans son · ?debug = chrono à l'écran. */
+let voice = null, blocked = false, pendingSince = 0;
+const SOUND = !Q.has("mute") && !Q.has("static");
+function voiceStart(at = 0) {
+  if (!SOUND) return; const src = (window.__IMGDATA && window.__IMGDATA["mix.wav"]) || "voix/mix.wav";
+  try {
+    if (!voice) { voice = new Audio(src); voice.preload = "auto"; }
+    voice.currentTime = at; pendingSince = performance.now(); const pr = voice.play();
+    if (pr && pr.catch) pr.then(() => { blocked = false; }).catch(() => { blocked = true; pendingSince = 0; const go = () => { blocked = false; try { voice.currentTime = Math.min(window.Ad ? Ad.t : 0, 26.5); voice.play(); } catch (err) {} }; addEventListener("pointerdown", go, { once:true }); addEventListener("keydown", go, { once:true }); });
+  } catch (err) {}
+}
+function clock() {
+  if (!SOUND || !voice || blocked) return null;
+  if (!voice.paused && !voice.ended && voice.currentTime > 0) { pendingSince = 0; return voice.currentTime; }
+  if (pendingSince && performance.now() - pendingSince < 900) return 0;      // le son se prépare : l'image attend (au plus 0,9 s)
+  return null;
+}
+runAd(draw, 27, IMAGES, { clock, onStart: () => voiceStart(0), onLoop: () => voiceStart(0), overlay: () => { if (blocked) { g.save(); rr(240, 1790, 600, 80, 40); g.fillStyle = "rgba(0,0,0,.65)"; g.fill(); txt("🔊  Touche pour activer le son", W / 2, 1832, 38, "#fff", { weight:700 }); g.restore(); } } });
+</script></body></html>

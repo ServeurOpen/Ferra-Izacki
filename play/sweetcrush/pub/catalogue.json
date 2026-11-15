@@ -1,0 +1,34 @@
+[
+  {
+    "id": "launcher-15s",
+    "fichier": "launcher-15s/pub.html",
+    "duree": 15,
+    "titre": "Izacki Launcher — 15 s",
+    "lien": "https://izackiferra.com/launcher.html",
+    "actif": true
+  },
+  {
+    "id": "jeux-30s",
+    "fichier": "jeux-30s/pub.html",
+    "duree": 30,
+    "titre": "Les jeux Izacki — 30 s",
+    "lien": "https://izackiferra.com/",
+    "actif": true
+  },
+  {
+    "id": "site-launcher-30s",
+    "fichier": "site-launcher-30s/pub.html",
+    "duree": 30,
+    "titre": "Site, Launcher, communauté — 30 s",
+    "lien": "https://izackiferra.com/launcher.html",
+    "actif": true
+  },
+  {
+    "id": "createurs-30s",
+    "fichier": "createurs-30s/pub.html",
+    "duree": 27,
+    "titre": "Créateurs — 27 s",
+    "lien": "https://izackiferra.com/launcher.html#createurs",
+    "actif": true
+  }
+]

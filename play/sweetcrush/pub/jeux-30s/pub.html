@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Pub — Les jeux Izacki (30 s)</title>
+<style>html,body{margin:0;height:100%;background:#0c0d0f;overflow:hidden}canvas{position:absolute;inset:0;margin:auto;max-width:100%;max-height:100%;aspect-ratio:9/16;height:100%}</style></head><body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script src="../_commun/ad-kit.js"></script>
+<script>
+/* Pub 30 s « Les jeux Izacki » : mots-chocs → FERRA → Tower Défense Infini → VIGIE → Sweet Crush → appel à l'action. */
+const I = "../_commun/img/";
+const IMAGES = { sF1:I + "screenshot-gameplay-1000.webp", sF2:I + "ferra-nuit-monstres-terrain-1280.webp", sF3:I + "ferra-foreuses-terrain-1280.webp", sT1:I + "screenshot-towerdefense-1-1000.webp", sT3:I + "screenshot-towerdefense-3-1000.webp",
+  sV1:I + "screenshot-vigie-1-1000.webp", sV2:I + "screenshot-vigie-2-1000.webp", sV4:I + "screenshot-vigie-4-1000.webp", cF:I + "cover-ferra-1000.webp", cT:I + "cover-tower-defense-1000.webp", cV:I + "cover-vigie-1000.webp",
+  k0:I + "candy-0-rouge.png", k1:I + "candy-1-orange.png", k2:I + "candy-2-jaune.png", k3:I + "candy-3-vert.png", k4:I + "candy-4-bleu.png", k5:I + "candy-5-violet.png", star:I + "star-on.png" };
+const CANDY = ["k0", "k1", "k2", "k3", "k4", "k5"];
+/* ---- effets par jeu, dessinés DANS le cadre de capture ---- */
+function fxEmbers(x, y, w, h, t) { const R = prng(3); for (let i = 0; i < 40; i++) { const px = x + R() * w, sp = 60 + R() * 120, py = y + h - (((t * sp + R() * h) % (h + 40))), s = 3 + R() * 6; g.globalAlpha = .75; g.fillStyle = R() < .5 ? "#ffb15a" : "#ff7a2a"; g.shadowColor = "#ff8a3a"; g.shadowBlur = 18; g.beginPath(); g.arc(px + Math.sin(t * 2 + i) * 20, py, s, 0, 7); g.fill(); } g.shadowBlur = 0; g.globalAlpha = 1; }
+/* effets posés sur des détails PRÉCIS des captures (positions mesurées en fraction de l'image) : tourelles de Tower Défense qui tirent sur les ennemis du chemin ; halo pulsant autour du phare de VIGIE */
+const TD_FX = { sT1:{ shots:[[[.125, .297], [.193, .206]], [[.262, .503], [.193, .404]]], idle:[[.45, .495], [.125, .713]] } };
+function fxTower(F) {
+  const d = TD_FX[F.key]; if (!d) return; const { M, t } = F, u = M.dw / 1000; g.lineCap = 'round';
+  d.idle.forEach(([a, b], i) => { const [X, Y] = M.at(a, b), k = (t * .6 + i * .5) % 1; g.strokeStyle = 'rgba(140,170,255,' + (1 - k) * .45 + ')'; g.lineWidth = 3 * u; g.beginPath(); g.arc(X, Y, (24 + k * 60) * u, 0, 7); g.stroke(); });
+  d.shots.forEach(([from, to], i) => {
+    const [fx, fy] = M.at(from[0], from[1]), [ex, ey] = M.at(to[0], to[1]), k = (t * 1.5 + i * .45) % 1, [cx, cy] = [fx, fy], rk = (t * .8 + i * .3) % 1;
+    g.strokeStyle = 'rgba(140,170,255,' + (1 - rk) * .6 + ')'; g.lineWidth = 3 * u; g.beginPath(); g.arc(cx, cy, (26 + rk * 70) * u, 0, 7); g.stroke();
+    const p1 = Math.min(1, k * 1.6), p0 = Math.max(0, p1 - .25), bx = lerp(fx, ex, p1), by = lerp(fy, ey, p1);
+    g.strokeStyle = '#cfe0ff'; g.shadowColor = '#8fb0ff'; g.shadowBlur = 18; g.lineWidth = 5 * u; g.beginPath(); g.moveTo(lerp(fx, ex, p0), lerp(fy, ey, p0)); g.lineTo(bx, by); g.stroke(); g.fillStyle = '#fff'; g.beginPath(); g.arc(bx, by, 6 * u, 0, 7); g.fill(); g.shadowBlur = 0;
+    if (k > .62) { const f = (k - .62) / .38; g.strokeStyle = 'rgba(255,255,255,' + (1 - f) + ')'; g.lineWidth = 4 * u; g.beginPath(); g.arc(ex, ey, (10 + f * 34) * u, 0, 7); g.stroke(); }
+  });
+}
+const PANX = { sV1:-.85 };   // menu de VIGIE : on cadre la partie droite (le phare), pas le titre
+const LIGHT = { sV2:[.498, .503], sV4:[.503, .483], sV1:[.765, .547] };
+function fxBeam(F) {
+  const p = LIGHT[F.key]; if (!p) return; const { M, t } = F, u = M.dw / 1000, [X, Y] = M.at(p[0], p[1]), pulse = .75 + .25 * Math.sin(t * 3);
+  g.save(); g.globalCompositeOperation = 'lighter'; const r = g.createRadialGradient(X, Y, 0, X, Y, 150 * u); r.addColorStop(0, 'rgba(255,225,150,' + .55 * pulse + ')'); r.addColorStop(.35, 'rgba(120,255,240,' + .22 * pulse + ')'); r.addColorStop(1, 'rgba(120,255,240,0)'); g.fillStyle = r; g.beginPath(); g.arc(X, Y, 150 * u, 0, 7); g.fill();
+  for (let i = 0; i < 3; i++) { const k = (t * .55 + i / 3) % 1; g.strokeStyle = 'rgba(255,230,160,' + (1 - k) * .5 + ')'; g.lineWidth = 3 * u; g.beginPath(); g.arc(X, Y, (60 + k * 170) * u, 0, 7); g.stroke(); }
+  g.restore();
+}
+const GAMES = [
+  { name:["FERRA"], tag:"SURVIE · AUTOMATISATION", lines:["Mine. Construis. Automatise.", "Défends ton campement la nuit", "Une météorite change tout"], imgs:["sF1", "sF2", "sF3"], cover:"cF", color:C.orange, rgb:"245,165,90", rgb2:"255,110,60", top:"#17110b", bot:"#08090a", fx:fxEmbers },
+  { name:["TOWER DÉFENSE", "INFINI"], tag:"DES VAGUES SANS FIN", lines:["Pose tes tourelles", "Débloque des succès", "Grimpe au classement"], imgs:["sT1", "sT3", "sT1"], cover:"cT", color:"#7f9bff", rgb:"110,130,255", rgb2:"150,80,255", top:"#0b0f1d", bot:"#07080f", fx:fxTower },
+  { name:["VIGIE"], tag:"GARDE LA LUMIÈRE", lines:["Dirige le faisceau", "Affronte les créatures des profondeurs", "Choisis tes reliques"], imgs:["sV2", "sV4", "sV1"], cover:"cV", color:C.teal, rgb:"79,216,203", rgb2:"60,140,255", top:"#071416", bot:"#050a0b", fx:fxBeam },
+];
+function gameScene(tl, S, t) {
+  bgDark(t, [[.2, .2, 800, S.rgb, .5], [.85, .75, 900, S.rgb2, .4]], { top:S.top, bot:S.bot, pc:S.color });
+  const a = eOut(seg(tl, .15, .6)), n = S.name.length;
+  S.name.forEach((ln, i) => txt(ln, W / 2, 250 + i * (n > 1 ? 105 : 0) + (n > 1 ? -10 : 40), n > 1 ? 112 : 190, C.text, { sp:n > 1 ? 14 : 30, stag:.07, stagT:(tl - .1) * 1.4, shadow:S.color, blur:40 }));
+  txt(S.tag, W / 2, n > 1 ? 420 : 400, 44, S.color, { sp:10, weight:700, alpha:eOut(seg(tl, .7, 1.2)) });
+  // capture : défile d'une image à l'autre, zoom lent
+  const x = 60, y = 520, w = 960, h = 760, enter = eOut(seg(tl, .15, .85)), idx = Math.min(2, Math.floor(tl / 2));
+  g.save(); g.translate(W / 2 + (1 - enter) * 1100, y + h / 2); g.rotate((1 - enter) * .12 + Math.sin(t * .9) * .008); g.translate(-W / 2, -(y + h / 2));
+  g.shadowColor = "rgba(" + S.rgb + ",.5)"; g.shadowBlur = 80; g.shadowOffsetY = 26; rr(x, y, w, h, 34); g.fillStyle = "#000"; g.fill(); g.shadowColor = "transparent";
+  S.imgs.forEach((k, i) => { const ka = i === idx ? 1 : 0; if (i === idx || i === idx - 1) { g.globalAlpha = i === idx ? clamp(seg(tl, i * 2, i * 2 + .4) + (i === 0 ? 1 : 0)) : 1; cover(k, x, y, w, h, 34, 1.12 + (tl - i * 2) * .035, PANX[k] != null ? PANX[k] : Math.sin(t * .5 + i), Math.cos(t * .4 + i) * .6); } });
+  g.globalAlpha = 1; g.save(); rr(x, y, w, h, 34); g.clip(); { const kk = S.imgs[idx], zm = 1.12 + (tl - idx * 2) * .035, pxx = PANX[kk] != null ? PANX[kk] : Math.sin(t * .5 + idx), pyy = Math.cos(t * .4 + idx) * .6; if (S.fx === fxEmbers) fxEmbers(x, y, w, h, t); else S.fx({ key:kk, M:coverMap(kk, x, y, w, h, zm, pxx, pyy), t }); } g.restore();
+  g.lineWidth = 6; g.strokeStyle = S.color; g.globalAlpha = .85; rr(x, y, w, h, 34); g.stroke(); g.globalAlpha = 1;
+  // jaquette qui jaillit
+  const ck = eBack(seg(tl, 1.0, 1.6)); if (ck > 0 && ok(S.cover)) { g.save(); g.translate(x + 250, y + h + 6); g.rotate(-.05 + Math.sin(t * 1.4) * .012); g.scale(ck, ck); g.shadowColor = "rgba(0,0,0,.7)"; g.shadowBlur = 40; g.shadowOffsetY = 16; rr(-250, -100, 500, 200, 24); g.fillStyle = C.panel; g.fill(); g.shadowColor = "transparent"; cover(S.cover, -250, -100, 500, 200, 24); g.lineWidth = 4; g.strokeStyle = "rgba(255,255,255,.4)"; rr(-250, -100, 500, 200, 24); g.stroke(); g.restore(); }
+  g.restore();
+  S.lines.forEach((s, i) => pill(s, W / 2, 1450 + i * 135, seg(tl, 1.4 + i * .45, 2.0 + i * .45), t, { color:S.color, w:960, h:108, size:S.lines[i].length > 30 ? 38 : 46 }));
+  txt("GRATUIT · SUR WINDOWS AVEC LE LAUNCHER", W / 2, 1865, 34, C.dim, { sp:4, weight:600, alpha:eOut(seg(tl, 3, 3.6)) });
+}
+/* ---- mots-chocs ---- */
+const WORDS = [["JOUE", "sF2", C.orange], ["CRAFTE", "sF3", "#ff8a3a"], ["DÉFENDS", "sT3", "#7f9bff"], ["SURVIS", "sV4", C.teal]];
+function wordsScene(t) {
+  bgDark(t, [[.5, .5, 1100, "245,165,90", .6]], { pc:C.orange });
+  const i = clamp(Math.floor((t - .2) / 1.1), 0, 3), tl = (t - .2) - i * 1.1, [word, img, col] = WORDS[i];
+  if (t > .2 && t < 4.7) { g.save(); g.globalAlpha = .38 * eOut(seg(tl, 0, .3)); cover(img, 0, 0, W, H, 0, 1.15 + tl * .12, Math.sin(t) * .8, 0); const vg = g.createLinearGradient(0, 0, 0, H); vg.addColorStop(0, "rgba(8,9,10,.9)"); vg.addColorStop(.5, "rgba(8,9,10,0)"); vg.addColorStop(1, "rgba(8,9,10,.9)"); g.globalAlpha = 1; g.fillStyle = vg; g.fillRect(0, 0, W, H); g.restore(); }
+  if (t > .2 && t < 4.7) {
+    const k = eBack(seg(tl, 0, .28)), sc = lerp(1.9, 1, k), sh = (1 - seg(tl, 0, .35)) * 14;
+    g.save(); g.translate(W / 2 + Math.sin(tl * 90) * sh, 900 + Math.cos(tl * 80) * sh); g.scale(sc, sc); g.translate(-W / 2, -900); maskText(word, img, W / 2, 900, 330, t, col); g.restore();
+    g.fillStyle = "rgba(255,255,255," + (1 - seg(tl, 0, .22)) * .55 + ")"; g.fillRect(0, 0, W, H);
+    txt("0" + (i + 1) + " / 04", W / 2, 640, 44, col, { sp:10, weight:700 }); g.fillStyle = col; g.fillRect(W / 2 - 200, 1130, 400 * seg(tl, .1, .9), 8);
+  }
+  if (t >= 4.7) { const k = eOut(seg(t, 4.7, 5.3)); txt("TOUS GRATUITS.", W / 2, 860, 112, C.text, { sp:8, alpha:k, shadow:C.orange, blur:50, stag:.05, stagT:(t - 4.7) * 2 }); txt("TOUS ICI.", W / 2, 1010, 112, C.orange, { sp:16, alpha:eOut(seg(t, 5.0, 5.6)), shadow:C.orange, blur:50 }); }
+  mark(W / 2, 300, .8, t, 1);
+}
+/* ---- Sweet Crush ---- */
+function crushScene(tl, t) {
+  const gr = g.createLinearGradient(0, 0, 0, H); gr.addColorStop(0, "#ff7ac0"); gr.addColorStop(1, "#7a3bd6"); g.fillStyle = gr; g.fillRect(0, 0, W, H);
+  const R = prng(5); for (let i = 0; i < 26; i++) { const k = CANDY[i % 6], sz = 90 + R() * 90, x = R() * W, y = ((R() * H + t * (80 + R() * 140)) % (H + 300)) - 150; if (ok(k)) { g.save(); g.globalAlpha = .55; g.translate(x, y); g.rotate(t * (R() - .5) * 2 + i); g.drawImage(IMG[k], -sz / 2, -sz / 2, sz, sz); g.restore(); } }
+  txt("SWEET CRUSH", W / 2, 260, 128, "#fff", { sp:8, stroke:"#8a1f78", strokeW:16, shadow:"#ff5fa8", blur:50, alpha:eOut(seg(tl, .1, .6)) });
+  txt("LE JEU DE BONBONS GRATUIT", W / 2, 400, 52, "#fff", { sp:8, weight:700, stroke:"#7a2a9a", strokeW:8, alpha:eOut(seg(tl, .5, 1)) });
+  // grille 6x6 qui s'anime
+  const gx = 140, gy = 520, cs = 133, k0 = eBack(seg(tl, .2, .9));
+  g.save(); g.translate(W / 2, gy + cs * 3); g.scale(k0, k0); g.translate(-W / 2, -(gy + cs * 3)); rr(gx - 24, gy - 24, cs * 6 + 48, cs * 6 + 48, 40); g.fillStyle = "rgba(60,20,110,.72)"; g.fill(); g.lineWidth = 8; g.strokeStyle = "#fff"; g.stroke();
+  const cycle = Math.floor(tl / .9), RR = prng(cycle * 7 + 2), mr = Math.floor(RR() * 6), mc = Math.floor(RR() * 4), mp = (tl % .9) / .9;
+  for (let r = 0; r < 6; r++) for (let c = 0; c < 6; c++) {
+    const hit = r === mr && c >= mc && c < mc + 3, kk = CANDY[(r * 7 + c * 3 + (hit ? 0 : 0)) % 6], key = hit ? CANDY[(cycle + 1) % 6] : kk;
+    if (!ok(key)) continue; let s = 1 + Math.sin(t * 3 + r + c) * .03, al = 1; if (hit) { s = mp < .5 ? 1 + mp * .6 : 1.3 * (1 - (mp - .5) * 2); al = mp < .5 ? 1 : 1 - (mp - .5) * 2; }
+    g.save(); g.globalAlpha = al; g.translate(gx + c * cs + cs / 2, gy + r * cs + cs / 2); g.scale(s, s); g.drawImage(IMG[key], -cs * .46, -cs * .46, cs * .92, cs * .92); g.restore();
+    if (hit && mp > .45 && ok("star")) { g.save(); g.globalAlpha = 1 - mp; g.translate(gx + c * cs + cs / 2, gy + r * cs + cs / 2 - (mp - .45) * 160); g.rotate(mp * 6); g.drawImage(IMG.star, -34, -34, 68, 68); g.restore(); }
+  }
+  g.restore();
+  ["180 niveaux", "Classement + cadeaux", "Joue sur ton téléphone"].forEach((s, i) => pill(s, W / 2, 1500 + i * 130, seg(tl, 1.0 + i * .4, 1.6 + i * .4), t, { color:"#ff5fa8", w:900, h:104, size:46 }));
+}
+/* ---- appel à l'action ---- */
+function ctaScene(tl, t) {
+  bgDark(t); mark(W / 2, 520, 1.5, t, 1);
+  txt("IZACKI LAUNCHER", W / 2, 840, 84, C.text, { sp:10, shadow:C.orange, blur:40, alpha:eOut(seg(tl, 0, .5)) });
+  txt("TOUS LES JEUX. UN SEUL ENDROIT.", W / 2, 950, 42, C.orange, { sp:4, weight:700, alpha:eOut(seg(tl, .3, .8)) });
+  ctaButton("izackiferra.com", W / 2, 1180, seg(tl, .3, 1), t);
+  txt("100 % GRATUIT · WINDOWS · PC", W / 2, 1370, 44, C.dim, { sp:6, weight:600, alpha:eOut(seg(tl, .9, 1.4)) });
+  marquee(["cF", "cT", "cV"], t, 1520, 290, eOut(seg(tl, .5, 1.2)));
+}
+const SC = [0, 5.5, 11.5, 17.5, 23.5, 27.5, 30];
+function draw(t) {
+  if (t < SC[1]) wordsScene(t);
+  else if (t < SC[2]) gameScene(t - SC[1], GAMES[0], t);
+  else if (t < SC[3]) gameScene(t - SC[2], GAMES[1], t);
+  else if (t < SC[4]) gameScene(t - SC[3], GAMES[2], t);
+  else if (t < SC[5]) crushScene(t - SC[4], t);
+  else ctaScene(t - SC[5], t);
+  wipe(t, SC[1], C.orange, "#ff7a2a"); wipe(t, SC[2], "#7f9bff", "#9a5bff"); wipe(t, SC[3], C.teal, "#3fa8ff"); wipe(t, SC[4], "#ff5fa8", "#ffd24a"); wipe(t, SC[5], "#14161a", C.orange);
+  const f = 1 - seg(t, 0, .3); if (f) { g.fillStyle = "rgba(8,9,10," + f + ")"; g.fillRect(0, 0, W, H); }
+}
+runAd(draw, 30, IMAGES);
+</script></body></html>

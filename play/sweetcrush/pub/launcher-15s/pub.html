@@ -21,7 +21,7 @@ const eOut = k => 1 - Math.pow(1 - k, 3), eIO = k => k < .5 ? 4 * k * k * k : 1 
 const eBack = k => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(k - 1, 3) + c1 * Math.pow(k - 1, 2); };
 function prng(seed) { let s = seed >>> 0; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296); }
 /* images */
-const IMG = {}, SRC = { ferra:"img/cover-ferra-1000.webp", td:"img/cover-tower-defense-1000.webp", vigie:"img/cover-vigie-1000.webp", shop:"img/boutique-960.webp" };
+const IMG = {}, SRC = { ferra:"../_commun/img/cover-ferra-1000.webp", td:"../_commun/img/cover-tower-defense-1000.webp", vigie:"../_commun/img/cover-vigie-1000.webp", shop:"../_commun/img/boutique-960.webp" };
 let loaded = 0; const need = Object.keys(SRC).length;
 for (const k in SRC) { const i = new Image(); i.onload = i.onerror = () => { if (++loaded === need) { Ad.ready = true; start(); } }; i.src = SRC[k]; IMG[k] = i; }
 const ok = k => IMG[k] && IMG[k].complete && IMG[k].naturalWidth;
@@ -95,27 +95,27 @@ function pill(label, x, y, k, t) {
 function draw(t) {
   g.clearRect(0, 0, W, H); bg(t);
   // 0 - 3,4 s : le logo apparaît, puis monte en en-tête
-  const intro = seg(t, 0, 1.6), dock = eIO(seg(t, 3.0, 4.0));
+  const intro = seg(t, 0, 1.6), dock = eIO(seg(t, 1.9, 2.7));
   const mx = lerp(W / 2, 128, dock), my = lerp(610, 150, dock), ms = lerp(1.9, .55, dock);
   mark(mx, my, ms, t, intro);
   const word = lerp(0, 1, seg(t, .9, 2.0));
   if (dock < 1) {
     const a = 1 - dock; txt("IZACKI", W / 2, 950 - dock * 600, 140, C.text, { sp:34, alpha:a, stag:.1, stagT:word * 1.2 - 0 , shadow:"rgba(245,165,90,.45)" });
     txt("LAUNCHER", W / 2, 1085 - dock * 600, 96, C.orange, { sp:30, alpha:a * clamp((t - 1.3) / .5), shadow:"rgba(245,165,90,.55)" });
-    txt("Tes jeux. Installés. À jour.", W / 2, 1210 - dock * 560, 60, C.dim, { weight:600, alpha:a * clamp((t - 2.0) / .5) });
+    txt("TU AIMES JOUER ?", W / 2, 1210 - dock * 560, 72, C.text, { sp:8, weight:700, alpha:a * clamp((t - .8) / .35) });
   }
   if (dock > 0) { txt("IZACKI", 235, 150, 76, C.text, { sp:16, align:"left", alpha:dock }); txt("LAUNCHER", 235, 232, 46, C.orange, { sp:14, align:"left", alpha:dock }); }
   // 3,4 - 8,8 s : le Launcher + les jeux qui défilent
-  const sIn = eOut(seg(t, 3.3, 4.4)), sOut = eIO(seg(t, 8.4, 9.6));
-  const cardA = sIn, cy = lerp(1130, 640, sOut), wdh = lerp(960, 640, sOut);
-  shopCard(t, W / 2, lerp(2300, cy, sIn), wdh, cardA, lerp(.08, -.025, sIn));
-  if (t > 3.5 && t < 9) { const k = seg(t, 3.7, 4.4) * (1 - seg(t, 8.2, 8.7)); txt("TOUS TES JEUX", W / 2, 380, 78, C.text, { sp:10, alpha:k, shadow:"rgba(0,0,0,.6)" }); txt("AU MÊME ENDROIT", W / 2, 465, 78, C.orange, { sp:10, alpha:k, shadow:"rgba(0,0,0,.6)" }); txt("FERRA · Tower Défense Infini · VIGIE", W / 2, 545, 44, C.orange, { weight:700, alpha:k }); }
-  marquee(t, 1560, 300, eOut(seg(t, 3.8, 4.8)) * (1 - seg(t, 12.3, 13.0) * .55));
+  const sIn = eOut(seg(t, 4.3, 5.2)), sOut = 1;
+  const cardA = sIn, cy = 640, wdh = 640;
+  shopCard(t, W / 2, lerp(-320, cy, sIn), wdh, cardA, lerp(-.08, -.025, sIn));
+  if (t > 2.0 && t < 4.7) { const k = seg(t, 2.2, 2.8) * (1 - seg(t, 4.3, 4.7)); txt("PLEIN DE JEUX", W / 2, 380, 84, C.text, { sp:10, alpha:k, shadow:"rgba(0,0,0,.6)" }); txt("TOUS GRATUITS", W / 2, 475, 84, C.orange, { sp:10, alpha:k, shadow:"rgba(0,0,0,.6)" }); txt("FERRA · Tower Défense Infini · VIGIE", W / 2, 555, 44, C.orangeHi, { weight:700, alpha:k }); }
+  marquee(t, 1560, 300, eOut(seg(t, 2.1, 3.0)) * (1 - seg(t, 9.4, 10.2) * .55));
   // 8,6 - 12,6 s : les avantages
-  const items = ["100 % GRATUIT", "INSTALLATION EN 1 CLIC", "MISES À JOUR AUTOMATIQUES", "SUCCÈS & CLASSEMENTS"];
-  items.forEach((s, i) => pill(s, W / 2, 960 + i * 140, seg(t, 9.0 + i * .5, 9.7 + i * .5) * (1 - seg(t, 12.2, 12.8)), t));
+  const items = ["100 % GRATUIT", "INSTALLATION EN 1 CLIC", "MISES À JOUR AUTOMATIQUES"], starts = [3.6, 5.4, 7.7];
+  items.forEach((s, i) => pill(s, W / 2, 960 + i * 140, seg(t, starts[i], starts[i] + .6) * (1 - seg(t, 9.2, 9.8)), t));
   // 12,4 - 15 s : appel à l'action
-  const cta = seg(t, 12.4, 13.3), pulse = 1 + Math.sin(t * 6) * .035;
+  const cta = seg(t, 9.4, 10.2), pulse = 1 + Math.sin(t * 6) * .035;
   if (cta > 0) {
     g.save(); g.globalAlpha = clamp(cta * 1.4);
     txt("TÉLÉCHARGE-LE", W / 2, 900, 100, C.text, { sp:12, shadow:"rgba(245,165,90,.5)" }); txt("GRATUITEMENT", W / 2, 1010, 100, C.orange, { sp:12, shadow:"rgba(245,165,90,.6)" });
@@ -123,7 +123,7 @@ function draw(t) {
     g.shadowColor = "rgba(245,165,90,.75)"; g.shadowBlur = 60 + Math.sin(t * 6) * 20; rr(-410, -85, 820, 170, 40); const bgr = g.createLinearGradient(0, -85, 0, 85); bgr.addColorStop(0, C.orangeHi); bgr.addColorStop(1, C.orange); g.fillStyle = bgr; g.fill(); g.shadowColor = "transparent";
     txt("izackiferra.com", 0, 6, 92, "#1f1206", { weight:800 });
     g.restore();
-    txt("Windows · gratuit · sans inscription obligatoire", W / 2, 1400, 44, C.dim, { weight:600, alpha:clamp((t - 13.0) / .5) });
+    txt("Windows · gratuit · sans inscription obligatoire", W / 2, 1400, 44, C.dim, { weight:600, alpha:clamp((t - 10.4) / .5) });
     // anneau lumineux qui balaie le bouton
     g.save(); g.translate(W / 2, 1230); g.globalAlpha = .5 * cta; g.strokeStyle = C.orangeHi; g.lineWidth = 5; const r2 = (t * 1.2) % 1; rr(-410 - r2 * 120, -85 - r2 * 70, 820 + r2 * 240, 170 + r2 * 140, 40 + r2 * 40); g.globalAlpha = .5 * cta * (1 - r2); g.stroke(); g.restore();
   }
@@ -132,15 +132,28 @@ function draw(t) {
 }
 const Ad = { dur:DUR, FPS:30, ready:false, seek(t) { draw(clamp(t, 0, DUR)); } };
 window.Ad = Ad;
+/* voix off (voix/voix-15s.wav) : démarre avec l'animation ; ?mute = sans son (réglage « Sons » du jeu) ; muette en mode image fixe */
+const VOICE_SRC = (window.__IMGDATA && window.__IMGDATA["voix-15s.wav"]) || "voix/voix-15s.wav"; let voice = null;
+let voiceBlocked = false, loopMs = 0;
+function voiceStart() {
+  loopMs = performance.now(); if (Q.has("mute") || Q.has("static")) return;
+  try {
+    if (!voice) voice = new Audio(VOICE_SRC); voice.currentTime = 0; const pr = voice.play();
+    if (pr && pr.catch) pr.catch(() => {   // navigateur : son bloqué tant que l'utilisateur n'a pas touché la page → on attend un clic et on rattrape la position
+      voiceBlocked = true; const go = () => { voiceBlocked = false; try { voice.currentTime = Math.min((performance.now() - loopMs) / 1000, 14); voice.play(); } catch (e) {} };
+      addEventListener("pointerdown", go, { once:true }); addEventListener("keydown", go, { once:true });
+    });
+  } catch (e) {}
+}
 let t0 = 0, done = false;
 function start() {
   if (Q.has("static")) { Ad.seek(+Q.get("t") || 0); return; }
   const loop = ts => {
-    if (!t0) t0 = ts; let t = (ts - t0) / 1000;
-    if (t >= DUR) { if (!done) { done = true; try { parent.postMessage({ ad:"done" }, "*"); } catch (e) {} } if (Q.has("once")) { draw(DUR); return; } t0 = ts; done = false; t = 0; }
-    draw(t); requestAnimationFrame(loop);
+    if (!t0) t0 = ts; let t = (ts - t0) / 1000; if (voice && !voiceBlocked && !voice.paused && !voice.ended && voice.currentTime > 0) { t = voice.currentTime; t0 = ts - t * 1000; }   // l'image suit le son
+    if (t >= DUR) { if (!done) { done = true; try { parent.postMessage({ ad:"done" }, "*"); } catch (e) {} } if (Q.has("once")) { draw(DUR); return; } t0 = ts; done = false; t = 0; voiceStart(); }
+    draw(t); if (voiceBlocked) { g.save(); rr(240, 1790, 600, 80, 40); g.fillStyle = "rgba(0,0,0,.65)"; g.fill(); txt("🔊  Touche pour activer le son", W / 2, 1832, 38, "#fff", { weight:700 }); g.restore(); } requestAnimationFrame(loop);
   };
-  requestAnimationFrame(loop);
+  voiceStart(); requestAnimationFrame(loop);
 }
 draw(0);
 </script></body></html>
