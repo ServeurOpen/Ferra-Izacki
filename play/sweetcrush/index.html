@@ -125,6 +125,9 @@
   body.sk-boost .bst.off { background-image:url(assets/btn-booster-off.png) !important; filter:none; opacity:.9; }
   body.sk-boost .bst .bi { display:flex; align-items:center; justify-content:center; width:100%; height:100%; }
   body.sk-boost .bst .bi img { width:62px; height:62px; vertical-align:middle; margin:0; filter:drop-shadow(0 2px 2px rgba(0,0,0,.35)); }
+  .bst .adtag { display:none; position:absolute; left:50%; bottom:-14px; transform:translateX(-50%); color:#fff; font:900 13px/1 inherit; pointer-events:none; }
+  .bst .adtag img { width:42px; height:42px; filter:drop-shadow(0 2px 3px rgba(0,0,0,.5)); }
+  body.ads .bst.off .adtag { display:block; }
   body.sk-boost .bst.off .bi img { filter:grayscale(1) drop-shadow(0 2px 2px rgba(0,0,0,.3)); opacity:.7; }
   body.sk-boost .bst.armed { outline:none; filter:drop-shadow(0 0 8px #fff) drop-shadow(0 0 4px #ff6); }
   body.sk-badge .bst .bc { background:url(assets/badge-count.png) center/100% 100% no-repeat; border:0; min-width:30px; width:30px; height:30px; line-height:28px; top:-8px; right:-8px; font-size:15px; padding:0; text-shadow:0 1px 2px rgba(0,0,0,.5); }
@@ -245,6 +248,7 @@
 
   <div id="mEnd" class="modal"><div class="card"><div class="badgewrap"><img id="eBadge" alt="" onerror="this.style.display='none'"><h3 id="eTitle"></h3></div>
     <div class="stars" id="eStars"></div>
+    <div id="eStreak" style="display:none;position:relative;width:250px;height:94px;margin:0 auto"><img src="assets/badge-streak.png" alt="" style="width:100%;height:100%" onerror="this.style.display='none'"><span id="eStreakTxt" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:21px;color:#fff;text-shadow:0 0 4px #8a3a00,0 2px 3px #8a3a00"></span></div>
     <p id="eText"></p>
     <button class="btn green" id="eNext">Niveau suivant</button><br>
     <button class="btn" id="eRetry">Rejouer</button><br>
@@ -259,13 +263,14 @@
 
   <div id="mLogin" class="modal"><div class="card"><h3>Compte Izacki</h3>
     <p style="font-size:16px">Connecte-toi pour <b>sauvegarder ta progression automatiquement</b> et la retrouver sur tous tes appareils.</p>
+    <p id="lWhy" style="display:none;font-size:15px;color:#ffe9a8"><b>Un compte gratuit est nécessaire pour jouer</b> : il garde ta progression et te place dans le classement.</p>
     <input id="lEmail" type="email" placeholder="E-mail" autocomplete="username" autocapitalize="none">
     <div class="pw"><input id="lPass" type="password" placeholder="Mot de passe" autocomplete="current-password"><button type="button" id="lEye" aria-label="Afficher le mot de passe" title="Afficher / masquer le mot de passe">👁️</button></div>
     <p id="lErr" style="color:#ffd0d0;min-height:22px;font-size:15px;margin:4px 0"></p>
     <button class="btn green" id="lGo">Se connecter</button><br>
     <button class="btn alt small" id="lCancel">Annuler</button>
     <p style="font-size:15px;margin:10px 0 4px">Pas encore de compte ?</p>
-    <a class="btn small" id="lSignup" href="https://izackiferra.com/forum/signup.html" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none">✨ Créer mon compte gratuit</a></div></div>
+    <a class="btn small" id="lSignup" href="https://izackiferra.com/forum/signup.html?return=/play/sweetcrush/" style="display:inline-block;text-decoration:none">✨ Créer mon compte gratuit</a></div></div>
 
   <div id="mCred" class="modal"><div class="card"><h3>Crédits</h3>
     <p style="font-size:15px;letter-spacing:3px;text-transform:uppercase;color:#ffe14d">Un jeu Izacki</p>
@@ -308,10 +313,14 @@
     <button class="btn green small" id="inClaimAll">Tout récupérer</button>
     <button class="btn alt small" id="inClose">Fermer</button></div></div>
 
+  <div id="mAd" class="modal" style="background:#000;z-index:30"><div style="position:relative;height:100%;aspect-ratio:9/16;max-width:100%;background:#000">
+    <iframe id="adFrame" title="Publicité" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow=""></iframe>
+    <div style="position:absolute;left:0;right:0;top:0;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,0));font-weight:800;font-size:17px;color:#fff;pointer-events:none"><span>Publicité</span><span>+1 bonus dans <b id="adCount">15</b> s</span></div>
+    <a href="https://izackiferra.com/launcher.html" target="_blank" rel="noopener" class="btn small" style="position:absolute;left:50%;bottom:16px;transform:translateX(-50%);text-decoration:none;white-space:nowrap">Découvrir le Launcher</a></div></div>
+
   <div id="mReward" class="modal"><div class="card"><h3><img src="assets/icon-gift.png" alt="" style="width:54px;height:54px;vertical-align:middle;margin-right:6px" onerror="this.replaceWith(document.createTextNode('🎁 '))">Cadeau !</h3>
     <p id="rwText"></p><div id="rwList" style="margin:8px 0 12px"></div>
-    <button class="btn green" id="rwClaim">Tout récupérer</button><br>
-    <button class="btn alt small" id="rwLater">Plus tard</button></div></div>
+    <button class="btn green" id="rwClaim">Super !</button></div></div>
 
   <div id="flyLayer"></div>
   <div id="tipLayer"><div id="tipBox" style="display:none"></div><img id="tipHand" src="assets/hand-tip.png" alt="" style="display:none"></div>
@@ -378,6 +387,7 @@ function mergeSaves(a, b) {
   for (const f of ["stars", "best"]) { o[f] = o[f] || {}; for (const [k, v] of Object.entries(b[f] || {})) o[f][k] = Math.max(o[f][k] || 0, v || 0); }
   o.stats = o.stats || {}; for (const [k, v] of Object.entries(b.stats || {})) o.stats[k] = Math.max(o.stats[k] || 0, v || 0);
   o.ach = o.ach || {}; for (const [k, v] of Object.entries(b.ach || {})) if (!o.ach[k] || v < o.ach[k]) o.ach[k] = v;
+  o.streakN = Math.max(a.streakN || 0, b.streakN || 0); o.streak = Math.max(a.streak || 0, b.streak || 0); if (a.imported || b.imported) o.imported = 1;
   o.granted = o.granted || {}; for (const k of Object.keys(b.granted || {})) o.granted[k] = 1;
   o.tips = o.tips || {}; for (const k of Object.keys(b.tips || {})) o.tips[k] = 1;
   for (const f of ["invG", "invS"]) { o[f] = o[f] || {}; for (const [k, v] of Object.entries(b[f] || {})) o[f][k] = Math.max(o[f][k] || 0, v || 0); }
@@ -409,7 +419,7 @@ async function cloudRpc(fn, body, retried, keep) {
 function cloudStatus(msg) { cloudMsg = msg; updateCloudUi(); }
 function hhmm() { const d = new Date(); return String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0"); }
 function cloudFail(r) {
-  if (r.expired) { cloudSession = null; cloudStore(); cloudStatus("Session expirée : reconnecte-toi"); }
+  if (r.expired) { cloudSession = null; cloudStore(); cloudStatus("Session expirée : reconnecte-toi"); requireLogin(); }
   else if (r.offline) cloudStatus("Hors ligne : sauvegardé sur l'appareil, envoi plus tard");
   else cloudStatus("Erreur de synchronisation (" + (r.status || "?") + ")");
 }
@@ -431,7 +441,16 @@ async function cloudSync() {
   if (cloudSource === "web" && !cloudAchSent) { cloudAchSent = true; for (const id of Object.keys(save.ach)) { const a = ACHIEVEMENTS.find(x => x.id === id); if (a) cloudRpc("unlock_achievement", { p_game_id: GAME_ID, p_achievement_id: id, p_name: a.name, p_description: a.description, p_icon: a.icon, p_tier: a.tier }); } }
   if ($("sLevels").classList.contains("on")) buildLevelMap();
   updateBoosterUi();
-  await checkMilestones(); await inboxRefresh(); maybeRewardPopup();
+  await importProgress(); await checkMilestones(); await inboxRefresh(); maybeRewardPopup();
+}
+/* Progression jouée avant d'avoir un compte : envoyée UNE fois au classement (le serveur plafonne chaque score, migration 71) */
+async function importProgress() {
+  if (save.imported || !cloudSession) return;
+  const best = {};
+  for (const L of LEVELS) { const st = save.stars[L.n] || 0; if (st > 0) best[L.n] = save.best[L.n] || (st === 3 ? L.stars[1] : st === 2 ? L.stars[0] : 1); }
+  if (!Object.keys(best).length) { save.imported = 1; writeSave(); return; }
+  const r = await cloudRpc("import_game_progress", { p_game_id: GAME_ID, p_best: best });
+  if (r.ok) { save.imported = 1; writeSave(); }
 }
 async function cloudLogin(email, pass) {
   try {
@@ -443,24 +462,41 @@ async function cloudLogin(email, pass) {
     return { ok: true };
   } catch (e) { return { ok: false, msg: "Pas de connexion internet" }; }
 }
-function cloudLogout() { cloudSession = null; cloudSource = null; cloudStore(); inbox = []; cloudStatus(""); updateMailBadge(); }
+function cloudLogout() { cloudSession = null; cloudSource = null; cloudStore(); inbox = []; cloudStatus(""); updateMailBadge(); requireLogin(); }
+/* Compte obligatoire : sans session, l'écran de connexion reste affiché (pas de bouton Annuler) */
+function requireLogin() {
+  if (cloudSession) return;
+  loginForced = true; $("lErr").textContent = ""; $("lCancel").style.display = "none"; $("lWhy").style.display = "block";
+  $("lPass").type = "password"; $("lEye").textContent = "👁️"; modal("mOpt", false); modal("mLogin", true);
+}
 function updateCloudUi() {
   const on = !!cloudSession;
   const b = $("cloudBadge"); if (b) b.textContent = on ? "☁ Sauvegarde automatique activée" : "Connecte-toi (Options) pour sauvegarder dans le cloud";
   const a = $("oAccount"); if (a) a.textContent = on ? (cloudSource === "launcher" ? "Compte du Launcher" : "Se déconnecter") : "Se connecter";
   const st = $("cloudStatus"); if (st) st.textContent = on ? ((cloudSession.email ? cloudSession.email + " · " : "") + cloudMsg) : cloudMsg;
 }
+/* Même domaine que le site : si le joueur vient de créer son compte / de se connecter sur izackiferra.com, on reprend sa session (connexion automatique) */
+function adoptSiteSession() {
+  try {
+    const t = JSON.parse(localStorage.getItem("sb-wesfskxcvfidltnmnrsg-auth-token") || "null");
+    if (!t || !t.access_token || !t.refresh_token) return false;
+    cloudSession = { access_token: t.access_token, refresh_token: t.refresh_token, email: (t.user && t.user.email) || "" }; cloudSource = "web"; cloudStore();
+    cloudRpc("register_achievement_catalog", { p_game_id: GAME_ID, p_items: ACHIEVEMENTS.map(a => ({ id: a.id, name: a.name, description: a.description, icon: a.icon, tier: a.tier })) });
+    return true;
+  } catch (e) { return false; }
+}
 async function cloudInit() {
   try { const raw = localStorage.getItem(CLOUD_SESSION_KEY); if (raw) { cloudSession = JSON.parse(raw); cloudSource = "web"; } } catch (e) {}
+  if (!cloudSession && !window.__TAURI__) adoptSiteSession();
   if (window.__TAURI__) { try { const t = await window.__TAURI__.core.invoke("get_izacki_session"); if (t) { cloudSession = { access_token: t.access_token, refresh_token: t.refresh_token, email: "" }; cloudSource = "launcher"; } } catch (e) {} }
-  updateCloudUi(); if (cloudSession) cloudSync();
+  updateCloudUi(); if (cloudSession) cloudSync(); else requireLogin();
 }
 /* ---------- Boîte de réception & récompenses ---------- */
 const REWARD_META = { hammer:{ emoji:"🔨", name:"Marteau", icon:"icon-hammer" }, moves:{ emoji:"＋3", name:"+3 coups", icon:"icon-moves3" }, shuffle:{ emoji:"🔀", name:"Mélange", icon:"icon-shuffle" } };
 function rwIcon(k) { const m = REWARD_META[k]; return '<img src="assets/' + m.icon + '.png" onerror="this.replaceWith(document.createTextNode(\'' + m.emoji + ' \'))">'; }
 function hasRewards(r) { return !!r && Object.entries(r).some(([k, v]) => REWARD_META[k] && v > 0); }
 function rwChips(r) { return Object.entries(r || {}).filter(([k, v]) => REWARD_META[k] && v > 0).map(([k, v]) => '<span class="chip">' + rwIcon(k) + ' ×' + v + '</span>').join(""); }
-let inbox = [], rewardPopupDone = false;
+let inbox = [], rewardBusy = false, loginForced = false;
 const esc = t => String(t).replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
 function levelsCleared() { return Object.keys(save.stars).filter(k => save.stars[k] > 0).length; }
 function totalStars() { return Object.values(save.stars).reduce((a, b) => a + b, 0); }
@@ -470,7 +506,7 @@ const MILESTONES = (() => {
   [30, 60, 90, 120, 150, 180, 240, 300, 360, 420, 480, 540].forEach((n, i) => a.push({ key:"stars_" + n, title:n + " étoiles récoltées !", body:"Tu as récolté " + n + " étoiles. Continue comme ça !", rewards:{ hammer:1 + (i > 5 ? 1 : 0), moves:3, shuffle:1 + (i > 2 ? 1 : 0) + (i > 8 ? 1 : 0) }, test:() => totalStars() >= n }));
   return a;
 })();
-function toastMsg(t) { const d = document.createElement("div"); d.textContent = t; $("toast").appendChild(d); setTimeout(() => d.remove(), 4200); }
+function toastMsg(t, icon) { const d = document.createElement("div"); if (icon) d.innerHTML = '<img src="assets/' + icon + '.png" style="height:30px;vertical-align:middle;margin-right:6px" onerror="this.remove()">'; d.appendChild(document.createTextNode(t)); $("toast").appendChild(d); setTimeout(() => d.remove(), 4200); }
 async function checkMilestones() {
   if (!cloudSession) return 0; let n = 0;
   for (const m of MILESTONES) {
@@ -478,10 +514,14 @@ async function checkMilestones() {
     const r = await cloudRpc("grant_game_reward", { p_game_id: GAME_ID, p_key: m.key, p_title: m.title, p_body: m.body, p_rewards: m.rewards });
     if (r.ok) { save.granted[m.key] = 1; n++; } else break;
   }
-  if (n) { writeSave(); await inboxRefresh(); if (rewardPopupDone && m_toastOk()) toastMsg("🎁 Nouveau cadeau dans ta boîte de réception !"); }
+  for (let k = 1; k <= (save.streakN || 0); k++) {   /* série de 5 victoires d'affilée */
+    const key = "streak_" + k; if (save.granted[key]) continue;
+    const r = await cloudRpc("grant_game_reward", { p_game_id: GAME_ID, p_key: key, p_title: "Série de 5 victoires !", p_body: "5 niveaux gagnés d'affilée : bravo !", p_rewards: { hammer:1, moves:2, shuffle:1 } });
+    if (r.ok) { save.granted[key] = 1; n++; } else break;
+  }
+  if (n) { writeSave(); await inboxRefresh(); }
   return n;
 }
-function m_toastOk() { return !$("mReward").classList.contains("on"); }
 async function inboxRefresh() {
   if (!cloudSession) { inbox = []; updateMailBadge(); return; }
   const r = await cloudRpc("list_game_inbox", { p_game_id: GAME_ID });
@@ -493,13 +533,16 @@ function updateMailBadge() {
   const n = cloudSession ? pendingCount() : 1; /* hors connexion : un cadeau de bienvenue attend toujours */
   $("mailBadge").style.display = n > 0 ? "block" : "none"; $("mailBtn").classList.toggle("new", n > 0);
 }
-function maybeRewardPopup() {
-  if (rewardPopupDone || !cloudSession) return;
-  const list = inbox.filter(m => !m.claimed && hasRewards(m.rewards)); if (!list.length) return;
+/* Les cadeaux sont ajoutés tout seuls à l'inventaire ; la fenêtre dit simplement ce qui vient d'être gagné (après la fin du niveau). */
+async function maybeRewardPopup() {
+  if (rewardBusy || !cloudSession) return;
   if ($("sGame").classList.contains("on") && !ended) return;
-  rewardPopupDone = true;
-  $("rwText").textContent = list.length === 1 ? "Tu as reçu un cadeau !" : "Tu as reçu " + list.length + " cadeaux !";
-  $("rwList").innerHTML = list.slice(0, 4).map(m => '<div class="msg"><b>' + esc(m.title) + '</b><div class="rw" style="margin-top:6px">' + rwChips(m.rewards) + '</div></div>').join("") + (list.length > 4 ? '<p>… et ' + (list.length - 4) + ' autre(s)</p>' : "");
+  const list = inbox.filter(m => !m.claimed && hasRewards(m.rewards)); if (!list.length) return;
+  rewardBusy = true; const got = [];
+  for (const m of list) { if (await claimMsg(m.id)) got.push(m); }
+  rewardBusy = false; updateMailBadge(); if (!got.length) return;
+  $("rwText").textContent = got.length === 1 ? "Tu as gagné un cadeau ! Il est déjà dans ton inventaire." : "Tu as gagné " + got.length + " cadeaux ! Ils sont déjà dans ton inventaire.";
+  $("rwList").innerHTML = got.slice(0, 4).map(m => '<div class="msg"><b>' + esc(m.title) + '</b><div class="rw" style="margin-top:6px">' + rwChips(m.rewards) + '</div></div>').join("") + (got.length > 4 ? '<p>… et ' + (got.length - 4) + ' autre(s)</p>' : "");
   modal("mReward", true); sfx("ach");
 }
 const invCount = k => ((save.invG || {})[k] || 0) - ((save.invS || {})[k] || 0);
@@ -602,16 +645,43 @@ function submitRun() {
 
 /* ---------- Boosters (obtenus dans la boîte de réception) ---------- */
 let hammerOn = false;
+/* Pub récompensée : désactivée tant qu'aucun réseau de pub n'est branché. Pour l'activer : ADS_ENABLED = true et définir window.scShowRewardedAd() (retourne une promesse → true si la pub a été regardée en entier). */
+const ADS_ENABLED = true;
+if (ADS_ENABLED) document.body.classList.add("ads");
+/* Pub maison : vidéo canvas de 15 s pour le Launcher (pub/pub-launcher.html), jouée dans une iframe ; limites : 1 pub / 45 s, 6 / jour. */
+window.scShowRewardedAd = () => new Promise(res => {
+  let st; try { st = JSON.parse(localStorage.getItem("sc_ads") || "{}"); } catch (e) { st = {}; }
+  const day = new Date().toISOString().slice(0, 10); if (st.day !== day) st = { day, n:0, last:0 };
+  const warn = m => { say(m); setTimeout(() => say(""), 2200); res(false); };
+  if (Date.now() - st.last < 45000) return warn("Patiente un peu avant la prochaine pub");
+  if (st.n >= 6) return warn("Plus de pub aujourd'hui : reviens demain !");
+  const fr = $("adFrame"); let loaded = false, left = 15; fr.onload = () => { loaded = true; };
+  $("adCount").textContent = left; fr.src = "pub/pub-launcher.html?play&once"; modal("mAd", true);
+  const tick = setInterval(() => { left = Math.max(0, left - 1); $("adCount").textContent = left; }, 1000);
+  const finish = ok => {
+    clearInterval(tick); clearTimeout(safety); removeEventListener("message", onMsg); modal("mAd", false); fr.onload = null; fr.src = "about:blank";
+    if (ok) { st.n++; st.last = Date.now(); try { localStorage.setItem("sc_ads", JSON.stringify(st)); } catch (e) {} } res(ok);
+  };
+  const onMsg = e => { if (e.data && e.data.ad === "done") finish(loaded); };
+  addEventListener("message", onMsg); const safety = setTimeout(() => finish(loaded), 17500);
+});
+async function watchAdFor(kind) {
+  if (!ADS_ENABLED || typeof window.scShowRewardedAd !== "function") return false;
+  let ok = false; try { ok = await window.scShowRewardedAd(); } catch (e) {}
+  if (ok) { addInv({ [kind]: 1 }); sfx("ach"); say("+1 " + REWARD_META[kind].name + " !"); setTimeout(() => say(""), 1400); }
+  return ok;
+}
 function updateBoosterUi() {
   for (const [id, k] of [["Hammer", "hammer"], ["Moves", "moves"], ["Shuffle", "shuffle"]]) {
     const n = invCount(k); $("c" + id).textContent = n; $("b" + id).classList.toggle("off", n <= 0);
-    const bi = $("b" + id).querySelector(".bi"); if (!bi.dataset.done) { bi.dataset.done = 1; bi.innerHTML = rwIcon(k); }
+    const bi = $("b" + id).querySelector(".bi"); if (!bi.dataset.done) { bi.dataset.done = 1; bi.innerHTML = rwIcon(k); $("b" + id).insertAdjacentHTML("beforeend", '<i class="adtag"><img src="assets/icon-ad.png" alt="PUB"></i>'); }
   }
   $("bHammer").classList.toggle("armed", hammerOn);
 }
 async function useBooster(kind) {
   if (busy || paused || ended) return;
   hideTip(true);
+  if (invCount(kind) <= 0 && ADS_ENABLED) { busy = true; await watchAdFor(kind); busy = false; return; }
   if (invCount(kind) <= 0) { sfx("bad"); say("Plus de " + REWARD_META[kind].name + " ! Cherche des cadeaux dans ta boîte de réception"); setTimeout(() => say(""), 1800); return; }
   if (kind === "hammer") { hammerOn = !hammerOn; selected = null; say(hammerOn ? "Touche un bonbon à détruire" : ""); updateBoosterUi(); return; }
   spendInv(kind);
@@ -686,8 +756,12 @@ function makeLevels() {
     if (kind === "special") { L.goals.push({ k:"special", count: T.count || Math.min(12, 3 + Math.floor(i/12)) }); }
     if (kind === "mix") { L.goals.push({ k:"jelly" }); L.goals.push({ k:"score", target: T.target || Math.min(3600, 900 + i*35) }); L.jelly = jellyOf(pat, false); if (T.light) L.jelly = L.jelly.filter((_, k) => k % 2 === 0); L.moves += 4; }
     if (T.moves) L.moves = T.moves;
+    /* 15/11 : trop facile (86 niveaux gagnés / 2 perdus) → moins de coups : -24 % vers le niveau 50, puis -12 % dès le niveau 90 (la difficulté naturelle monte déjà) */
+    const HARD = 1 - (i < 50 ? Math.max(0, (i - 5) * 0.0053) : i < 90 ? 0.24 - (i - 50) * 0.003 : 0.12);
+    if (i > 0) L.moves = Math.max(12, Math.round(L.moves * HARD));
     if (i === 0) L.endOnGoal = true; /* niveau 1 : la partie s'arrête dès l'objectif atteint, coups restants convertis en points */
     L.stars = [T.s2 || (1500 + i*60), T.s3 || (2400 + i*100)];
+    if (i > 0) L.stars = L.stars.map(v => Math.round(v * HARD * 0.87 / 50) * 50);   /* étoiles plus faciles : seuils suivent la baisse de coups, -13 % en plus */
     out.push(L);
   }
   return out;
@@ -753,7 +827,7 @@ function applyZoneSkin(n) {                      /* fond + cadre propres à la z
   pk.style.width = (F * k.w) + "px"; pk.style.height = (F * k.h) + "px"; pk.style.left = (size / 2 - F * k.w / 2) + "px"; pk.style.top = (size / 2 - F * k.h / 2) + "px";
 }
 function setBg(name) { if (BGURL[name]) document.body.style.background = "url(" + BGURL[name] + ") center/cover no-repeat, #3a1a7a"; }
-["jelly/jelly-1-overlay","jelly/jelly-2-overlay","bomb","cherry","tile-a","tile-b","jelly-1","jelly-2","sparkle","burst","fx-stripe-h","fx-stripe-v","fx-wrap","fx-bomb","fx-combo-1","fx-combo-2","fx-combo-3","fx-combo-4"].forEach(loadImg);
+["aura-bomb","jelly/jelly-1-overlay","jelly/jelly-2-overlay","bomb","cherry","tile-a","tile-b","jelly-1","jelly-2","sparkle","burst","fx-stripe-h","fx-stripe-v","fx-wrap","fx-bomb","fx-combo-1","fx-combo-2","fx-combo-3","fx-combo-4"].forEach(loadImg);
 ["btn-pink","btn-blue","btn-green","panel","board-frame","hud-panel","btn-booster","badge-count","inbox-card","btn-claim"].forEach(n => { const i = new Image(); i.onload = () => document.body.classList.add("sk-" + ({ "hud-panel":"hud", "btn-booster":"boost", "badge-count":"badge", "inbox-card":"card", "btn-claim":"claim" }[n] || n)); i.src = "assets/" + n + ".png"; });
 const BGURL = {};
 function loadBg(name) {
@@ -864,6 +938,7 @@ let busy = false, paused = false, ended = false;
 let selected = null, hintCells = null, idleTimer = 0;
 let particles = [], floats = [], effects = [], shake = 0, tAnim = 0;
 let moveStats = null;
+let bonusBomb = 0;          /* boule à facette cadeau : au plus UNE par niveau, sur ~40 % des niveaux, apparaît au hasard dans les nouveaux bonbons (jamais en simulation) */
 
 function newCandy(r, c, type, special=0, fromRow=null) {
   return { t:type, s:special, x:c, y: fromRow===null ? r : fromRow, vy:0, fall: fromRow!==null, pop:0 };
@@ -1070,7 +1145,11 @@ async function gravity() {
       let w = N-1;
       for (let r=N-1;r>=0;r--) if (grid[r][c]) { const cd=grid[r][c]; if (w!==r){ grid[w][c]=cd; grid[r][c]=null; cd.fall=true; } w--; }
       let k = 0;
-      for (let r=w;r>=0;r--) { grid[r][c] = newCandy(r,c,fillType(), 0, -1 - k); k++; }
+      for (let r=w;r>=0;r--) {
+        if (bonusBomb && Math.random() < 0.03) { bonusBomb = 0; grid[r][c] = newCandy(r,c,-1,S_BOMB, -1 - k); grid[r][c].gift = true; }
+        else grid[r][c] = newCandy(r,c,fillType(), 0, -1 - k);
+        k++;
+      }
     }
     await settle();
     let got = 0;
@@ -1200,6 +1279,8 @@ async function endLevel(win) {
     if (stars > prev) save.stars[id] = stars;
     save.best[id] = Math.max(save.best[id]||0, score);
     if (!prev) save.stats.wins++;
+    save.streak = (save.streak || 0) + 1; if (save.streak % 5 === 0) save.streakN = (save.streakN || 0) + 1;
+    else if (save.streak % 5 >= 2) toastMsg((save.streak % 5) + " victoires d'affilée ! Encore " + (5 - save.streak % 5) + " pour un cadeau", "icon-streak");
     save.unlocked = Math.max(save.unlocked, Math.min(LEVEL_COUNT, id+1));
     writeSave();
     unlock("first_win"); if (stars===3) unlock("three_stars"); submitRun();
@@ -1208,7 +1289,7 @@ async function endLevel(win) {
     if (done>=10) unlock("lvl10"); if (done>=20) unlock("lvl20"); if (done>=40) unlock("lvl40"); if (done>=60) unlock("lvl60"); if (done>=100) unlock("lvl100"); if (done>=LEVEL_COUNT) unlock("lvl180");
     showEnd(true, stars, bonus);
   } else {
-    sfx("lose"); writeSave();
+    sfx("lose"); save.streak = 0; writeSave();
     showEnd(false, 0, 0);
   }
 }
@@ -1219,6 +1300,7 @@ function showEnd(win, stars, bonus) {
   $("eStars").innerHTML = (win ? st(1).repeat(stars) + st(0).repeat(3-stars) : st(0).repeat(3));
   $("eText").innerHTML = (win ? "Score : <b>"+score+"</b>" + (bonus ? " (dont bonus coups : "+bonus+")" : "") + "<br>Meilleur : "+save.best[level.n]
     : "Plus de coups ! Il te manquait : " + missingText());
+  const sk = save.streak || 0; $("eStreak").style.display = win && sk >= 2 ? "block" : "none"; $("eStreakTxt").textContent = sk % 5 === 0 ? "Série de 5 ! Cadeau !" : "Série : " + (sk % 5) + " / 5";
   $("eNext").style.display = win && levelIdx < LEVEL_COUNT-1 ? "" : "none";
   $("mEnd").classList.add("on");
 }
@@ -1276,6 +1358,11 @@ function drawBoard(dt) {
   }
   if (hm) { ctx.strokeStyle = "rgba(255,80,80,.95)"; ctx.lineWidth = 6; ctx.strokeRect(3, 3, BOARD - 6, BOARD - 6); }
   if (selected) { ctx.strokeStyle="#fff"; ctx.lineWidth=5; ctx.strokeRect(selected[1]*CELL+3, selected[0]*CELL+3, CELL-6, CELL-6); }
+  for (let r=0;r<N;r++) for (let c=0;c<N;c++) {      /* aura scintillante derrière la boule à facette cadeau (dessinée avant tous les bonbons) */
+    const d = grid[r][c]; if (!d || !d.gift || !IMG["aura-bomb"] || d.y < -.5) continue;
+    const z = CELL * 2.2 * (1 + .07 * Math.sin(tAnim * 4)); ctx.globalAlpha = .8 + .2 * Math.sin(tAnim * 3);
+    ctx.drawImage(IMG["aura-bomb"], d.x * CELL + CELL / 2 - z / 2, d.y * CELL + CELL / 2 - z / 2, z, z); ctx.globalAlpha = 1;
+  }
   for (let r=0;r<N;r++) for (let c=0;c<N;c++) {
     const d = grid[r][c]; if (!d) continue;
     // animation
@@ -1344,9 +1431,17 @@ function buildStarMarks() {
 }
 
 /* ---------- Indice / inactivité ---------- */
-function clearHint(){ hintCells = null; clearTimeout(idleTimer); }
+function clearHint(){ hintCells = null; clearTimeout(idleTimer); clearInterval(hintTimer); if (!tipCur) $("tipHand").style.display = "none"; }
 function resetIdle(){ clearHint(); idleTimer = setTimeout(showHint, 6000); }
-function showHint(){ if (busy||ended||paused) return; hintCells = findMove(); }
+/* Indice : les deux bonbons à inverser clignotent ET la main fait l'aller-retour de l'un à l'autre */
+let hintTimer = 0;
+function showHint(){
+  if (busy||ended||paused) return; hintCells = findMove(); clearInterval(hintTimer);
+  if (!hintCells || hintCells.length < 2 || tipCur) return;
+  const hand = $("tipHand"), at = ([r, c]) => { const [x, y] = stageXY(r, c); hand.style.left = (x - 22) + "px"; hand.style.top = (y - 8) + "px"; };
+  let i = 0; hand.classList.remove("bob"); hand.style.display = "block"; at(hintCells[0]);
+  hintTimer = setInterval(() => { i ^= 1; at(hintCells[i]); }, 900);
+}
 
 /* ============================================================
    ENTRÉES
@@ -1394,7 +1489,7 @@ function modal(id, on) { $(id).classList.toggle("on", on); }
 function startLevel(i) {
   levelIdx = i; level = LEVELS[i];
   score = 0; moves = level.moves; collected = 0; dropped = 0; dropSpawned = 0; specialsMade = 0; ended = false; busy = false; paused = false; selected = null;
-  hammerOn = false; particles = []; floats = []; effects = []; moveStats = { combo:0 };
+  hammerOn = false; bonusBomb = !SIM && Math.random() < 0.4 ? 1 : 0; particles = []; floats = []; effects = []; moveStats = { combo:0 };
   initBoard(); buildStarMarks(); updateHud(); say("");
   modal("mEnd", false); modal("mPause", false);
   show("sGame"); resetIdle();
@@ -1449,12 +1544,11 @@ $("bLvBack").onclick = () => show("sTitle");
 $("mailBtn").onclick = openInbox;
 $("inClose").onclick = () => modal("mInbox", false);
 $("inClaimAll").onclick = claimAll;
-$("rwLater").onclick = () => modal("mReward", false);
-$("rwClaim").onclick = async () => { $("rwClaim").disabled = true; await claimAll(); $("rwClaim").disabled = false; modal("mReward", false); };
+$("rwClaim").onclick = () => modal("mReward", false);
 $("bHammer").onclick = () => useBooster("hammer");
 $("bMoves").onclick = () => useBooster("moves");
 $("bShuffle").onclick = () => useBooster("shuffle");
-$("lSignup").onclick = (e) => { const o = window.__TAURI__ && window.__TAURI__.opener; if (o && o.openUrl) { e.preventDefault(); o.openUrl("https://izackiferra.com/forum/signup.html"); } };
+$("lSignup").onclick = (e) => { const o = window.__TAURI__ && window.__TAURI__.opener; if (o && o.openUrl) { e.preventDefault(); o.openUrl("https://izackiferra.com/forum/signup.html?return=/play/sweetcrush/"); } };
 $("bCred").onclick = () => { sfx("click"); modal("mCred", true); };
 $("cClose").onclick = () => modal("mCred", false);
 $("bRank").onclick = openRank;
@@ -1475,20 +1569,20 @@ $("oAccount").onclick = () => {
   $("lErr").textContent = ""; modal("mOpt", false); modal("mLogin", true); $("lPass").type = "password"; $("lEye").textContent = "👁️";
 };
 $("lEye").onclick = () => { const i = $("lPass"), show = i.type === "password"; i.type = show ? "text" : "password"; $("lEye").textContent = show ? "🙈" : "👁️"; };
-$("lCancel").onclick = () => { modal("mLogin", false); modal("mOpt", true); };
+$("lCancel").onclick = () => { if (loginForced) return; modal("mLogin", false); modal("mOpt", true); };
 $("lGo").onclick = async () => {
   const email = $("lEmail").value.trim(), pass = $("lPass").value;
   if (!email || !pass) { $("lErr").textContent = "Renseigne ton e-mail et ton mot de passe"; return; }
   $("lErr").textContent = "Connexion…"; $("lGo").disabled = true;
   const r = await cloudLogin(email, pass); $("lGo").disabled = false;
   if (!r.ok) { $("lErr").textContent = r.msg; return; }
-  $("lPass").value = ""; modal("mLogin", false); modal("mOpt", true); rewardPopupDone = false; updateCloudUi(); cloudSync();
+  $("lPass").value = ""; modal("mLogin", false); if (!loginForced) modal("mOpt", true); loginForced = false; $("lCancel").style.display = ""; $("lWhy").style.display = "none"; updateCloudUi(); cloudSync();
 };
 $("bPause").onclick = () => { if (ended) return; paused = true; modal("mPause", true); };
 $("pResume").onclick = () => { paused = false; modal("mPause", false); resetIdle(); };
 $("pRetry").onclick = () => startLevel(levelIdx);
 $("pMenu").onclick = () => { paused = false; modal("mPause", false); openLevels(); };
-$("bHint").onclick = () => { if (!busy && !ended && !paused) hintCells = findMove(); };
+$("bHint").onclick = showHint;
 $("eNext").onclick = () => startLevel(levelIdx+1);
 $("eRetry").onclick = () => startLevel(levelIdx);
 $("eMenu").onclick = () => { modal("mEnd", false); openLevels(); };
@@ -1518,7 +1612,7 @@ function drawTitle(dt) {
 let STAGE_W = 640, STAGE_H = 900;
 function fit() {
   const w = document.documentElement.clientWidth || window.innerWidth, h = window.innerHeight;   /* la scène couvre exactement tout l'écran (aucune bande) */
-  const s = Math.min(w / 596, h / 900);               /* 596 px de large mini, 900 de haut mini */
+  const s = Math.min(w / 596, h / 1060);              /* 596 px de large mini, 1060 de haut mini (hauteur réelle du contenu : sinon les bandes se chevauchent sur tablette / écran large) */
   STAGE_W = w / s; STAGE_H = h / s;                   /* la scène prend tout l'écran : on ajoute de l'espace, pas des bandes */
   const st = $("stage"); st.style.width = STAGE_W + "px"; st.style.height = STAGE_H + "px";
   st.style.transform = "scale(" + s + ")";

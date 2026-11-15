@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Pub — Izacki Launcher (15 s)</title>
+<style>
+  html,body{margin:0;height:100%;background:#0c0d0f;overflow:hidden}
+  canvas{position:absolute;inset:0;margin:auto;max-width:100%;max-height:100%;aspect-ratio:9/16;height:100%}
+</style></head><body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script>
+/* Pub animée 15 s pour l'Izacki Launcher — 100 % canvas, déterministe : Ad.seek(t) dessine l'image à l'instant t (sert au rendu MP4 ET à la lecture en direct).
+   ?play  → lecture en temps réel (en boucle sauf ?once) ; envoie postMessage({ad:"done"}) au parent à la fin.  ?static → pas de lecture auto (export vidéo). */
+const W = 1080, H = 1920, DUR = 15;
+const cv = document.getElementById("c"), g = cv.getContext("2d");
+const Q = new URLSearchParams(location.search);
+const C = { bg:"#0c0d0f", bg2:"#141618", panel:"#1b1e21", line:"#2b3036", text:"#eceef1", dim:"#a4acb7", orange:"#f5a55a", orangeHi:"#ffc17f", teal:"#4fd8cb" };
+const FONT = '"Barlow Condensed","Bahnschrift","Arial Narrow","Roboto Condensed",Impact,sans-serif';
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x)), lerp = (a, b, k) => a + (b - a) * k;
+const seg = (t, a, b) => clamp((t - a) / (b - a));
+const eOut = k => 1 - Math.pow(1 - k, 3), eIO = k => k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+const eBack = k => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(k - 1, 3) + c1 * Math.pow(k - 1, 2); };
+function prng(seed) { let s = seed >>> 0; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296); }
+/* images */
+const IMG = {}, SRC = { ferra:"img/cover-ferra-1000.webp", td:"img/cover-tower-defense-1000.webp", vigie:"img/cover-vigie-1000.webp", shop:"img/boutique-960.webp" };
+let loaded = 0; const need = Object.keys(SRC).length;
+for (const k in SRC) { const i = new Image(); i.onload = i.onerror = () => { if (++loaded === need) { Ad.ready = true; start(); } }; i.src = SRC[k]; IMG[k] = i; }
+const ok = k => IMG[k] && IMG[k].complete && IMG[k].naturalWidth;
+function rr(x, y, w, h, r) { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
+function txt(s, x, y, size, color, o = {}) {
+  g.save(); g.font = (o.weight || 800) + " " + size + "px " + FONT; g.textAlign = o.align || "center"; g.textBaseline = o.base || "middle"; g.fillStyle = color;
+  if (o.shadow) { g.shadowColor = o.shadow; g.shadowBlur = o.blur || 20; }
+  if (o.sp) { /* espacement des lettres (le canvas de Safari ne sait pas le faire) */
+    const ws = [...s].map(ch => g.measureText(ch).width), tot = ws.reduce((a, b) => a + b, 0) + o.sp * (ws.length - 1); let px = x - (o.align === "left" ? 0 : o.align === "right" ? tot : tot / 2);
+    g.textAlign = "left"; [...s].forEach((ch, i) => { g.globalAlpha = (o.alpha == null ? 1 : o.alpha) * (o.stag ? clamp((o.stagT - i * o.stag) / .25) : 1); g.fillText(ch, px, y); px += ws[i] + o.sp; });
+  } else { g.globalAlpha = o.alpha == null ? 1 : o.alpha; g.fillText(s, x, y); }
+  g.restore();
+}
+/* ---------- fond toujours en mouvement ---------- */
+const PR = prng(7), PARTS = Array.from({ length: 90 }, () => ({ x:PR() * W, y:PR() * H, r:2 + PR() * 5, v:30 + PR() * 90, ph:PR() * 6.28, a:.15 + PR() * .5, o:PR() < .35 }));
+function bg(t) {
+  const gr = g.createLinearGradient(0, 0, 0, H); gr.addColorStop(0, "#101215"); gr.addColorStop(1, "#08090a"); g.fillStyle = gr; g.fillRect(0, 0, W, H);
+  // lueurs orange / turquoise qui dérivent
+  for (const [cx, cy, rad, col, sp] of [[.2, .25, 700, "245,165,90", .5], [.85, .6, 800, "245,165,90", .35], [.4, .95, 650, "79,216,203", .45]]) {
+    const x = (cx + Math.sin(t * sp + cx * 9) * .12) * W, y = (cy + Math.cos(t * sp * .8 + cy * 7) * .08) * H, r = g.createRadialGradient(x, y, 0, x, y, rad);
+    r.addColorStop(0, "rgba(" + col + ",.20)"); r.addColorStop(1, "rgba(" + col + ",0)"); g.fillStyle = r; g.fillRect(0, 0, W, H);
+  }
+  // grille en perspective qui défile
+  g.save(); g.strokeStyle = "rgba(236,238,241,.055)"; g.lineWidth = 2;
+  const off = (t * 60) % 120; for (let y = -120 + off; y < H; y += 120) { g.beginPath(); g.moveTo(0, y); g.lineTo(W, y); g.stroke(); }
+  for (let x = -((t * 25) % 120); x < W; x += 120) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x, H); g.stroke(); }
+  g.restore();
+  // particules
+  for (const p of PARTS) { const y = ((p.y - t * p.v) % (H + 40) + H + 40) % (H + 40) - 20, x = p.x + Math.sin(t * .9 + p.ph) * 40; g.globalAlpha = p.a * (.6 + .4 * Math.sin(t * 2 + p.ph)); g.fillStyle = p.o ? C.orange : C.text; g.beginPath(); g.arc(x, y, p.r, 0, 7); g.fill(); }
+  g.globalAlpha = 1;
+}
+/* ---------- logo Izacki : carré cerclé + carré orange ---------- */
+function mark(cx, cy, s, t, prog) {
+  g.save(); g.translate(cx, cy); g.rotate(Math.sin(t * 1.1) * .03); g.scale(s, s);
+  g.lineWidth = 12; g.lineJoin = "miter"; g.strokeStyle = C.text; g.shadowColor = "rgba(245,165,90,.5)"; g.shadowBlur = 30 * prog;
+  const S = 110, per = 8 * S; g.setLineDash([per * eOut(clamp(prog * 1.5)), per]); g.strokeRect(-S, -S, 2 * S, 2 * S); g.setLineDash([]);
+  const k = eBack(clamp((prog - .35) / .5)); g.fillStyle = C.orange; g.shadowBlur = 40 * clamp(k); g.fillRect(0 + S * (1 - k) * .5, 0 + S * (1 - k) * .5, S * k, S * k);
+  g.restore();
+}
+/* ---------- cartes de jeux qui défilent sans fin ---------- */
+function marquee(t, y, h, alpha) {
+  const list = ["ferra", "td", "vigie"], w = h * 2.5, gap = 36, tot = list.length * (w + gap), off = (t * 150) % tot;
+  g.save(); g.globalAlpha = alpha; g.beginPath(); g.rect(0, y - 20, W, h + 40); g.clip();
+  for (let i = -1; i < 7; i++) {
+    const k = ((i % 3) + 3) % 3, x = i * (w + gap) - off - gap, c = x + w / 2, d = Math.abs(c - W / 2) / W, sc = 1 - d * .22;
+    g.save(); g.translate(c, y + h / 2); g.scale(sc, sc); g.shadowColor = "rgba(0,0,0,.6)"; g.shadowBlur = 30; g.shadowOffsetY = 14;
+    rr(-w / 2, -h / 2, w, h, 26); g.fillStyle = C.panel; g.fill(); g.shadowColor = "transparent"; g.save(); rr(-w / 2, -h / 2, w, h, 26); g.clip(); if (ok(list[k])) g.drawImage(IMG[list[k]], -w / 2, -h / 2, w, h); g.restore();
+    g.lineWidth = 4; g.strokeStyle = "rgba(236,238,241,.18)"; rr(-w / 2, -h / 2, w, h, 26); g.stroke(); g.restore();
+  }
+  g.restore();
+}
+/* ---------- capture du Launcher en carte flottante ---------- */
+function shopCard(t, cx, cy, wd, a, tilt) {
+  if (!ok("shop") || a <= 0) return; const hh = wd * 568 / 960;
+  g.save(); g.globalAlpha = a; g.translate(cx, cy + Math.sin(t * 1.3) * 14); g.rotate(tilt + Math.sin(t * .8) * .012); g.scale(1 + Math.sin(t * .9) * .012, 1 + Math.sin(t * .9) * .012);
+  g.shadowColor = "rgba(245,165,90,.35)"; g.shadowBlur = 90; g.shadowOffsetY = 30; rr(-wd / 2, -hh / 2, wd, hh, 28); g.fillStyle = "#0c0d0f"; g.fill(); g.shadowColor = "transparent";
+  g.save(); rr(-wd / 2, -hh / 2, wd, hh, 28); g.clip(); g.drawImage(IMG.shop, -wd / 2, -hh / 2, wd, hh);
+  const sw = ((t * .45) % 1.6 - .3) * wd * 1.6 - wd; const gr = g.createLinearGradient(sw, -hh, sw + 240, hh); gr.addColorStop(0, "rgba(255,255,255,0)"); gr.addColorStop(.5, "rgba(255,255,255,.16)"); gr.addColorStop(1, "rgba(255,255,255,0)"); g.fillStyle = gr; g.fillRect(-wd / 2, -hh / 2, wd, hh); g.restore();
+  g.lineWidth = 5; g.strokeStyle = "rgba(236,238,241,.28)"; rr(-wd / 2, -hh / 2, wd, hh, 28); g.stroke(); g.restore();
+}
+function pill(label, x, y, k, t) {
+  if (k <= 0) return; const s = eBack(clamp(k)), w = 900, h = 112;
+  g.save(); g.translate(x, y + Math.sin(t * 2 + y) * 5); g.scale(s, s); g.globalAlpha = clamp(k * 2);
+  g.shadowColor = "rgba(0,0,0,.5)"; g.shadowBlur = 30; g.shadowOffsetY = 10; rr(-w / 2, -h / 2, w, h, 30); g.fillStyle = C.panel; g.fill(); g.shadowColor = "transparent";
+  g.lineWidth = 3; g.strokeStyle = "rgba(245,165,90,.55)"; rr(-w / 2, -h / 2, w, h, 30); g.stroke();
+  g.fillStyle = C.orange; g.beginPath(); g.arc(-w / 2 + 70, 0, 34, 0, 7); g.fill();
+  g.strokeStyle = "#241405"; g.lineWidth = 9; g.lineCap = "round"; g.lineJoin = "round"; g.beginPath(); g.moveTo(-w / 2 + 54, 2); g.lineTo(-w / 2 + 66, 15); g.lineTo(-w / 2 + 90, -14); g.stroke();
+  txt(label, -w / 2 + 130, 4, 46, C.text, { align:"left", weight:800 }); g.restore();
+}
+/* ---------- la scène à l'instant t ---------- */
+function draw(t) {
+  g.clearRect(0, 0, W, H); bg(t);
+  // 0 - 3,4 s : le logo apparaît, puis monte en en-tête
+  const intro = seg(t, 0, 1.6), dock = eIO(seg(t, 3.0, 4.0));
+  const mx = lerp(W / 2, 128, dock), my = lerp(610, 150, dock), ms = lerp(1.9, .55, dock);
+  mark(mx, my, ms, t, intro);
+  const word = lerp(0, 1, seg(t, .9, 2.0));
+  if (dock < 1) {
+    const a = 1 - dock; txt("IZACKI", W / 2, 950 - dock * 600, 140, C.text, { sp:34, alpha:a, stag:.1, stagT:word * 1.2 - 0 , shadow:"rgba(245,165,90,.45)" });
+    txt("LAUNCHER", W / 2, 1085 - dock * 600, 96, C.orange, { sp:30, alpha:a * clamp((t - 1.3) / .5), shadow:"rgba(245,165,90,.55)" });
+    txt("Tes jeux. Installés. À jour.", W / 2, 1210 - dock * 560, 60, C.dim, { weight:600, alpha:a * clamp((t - 2.0) / .5) });
+  }
+  if (dock > 0) { txt("IZACKI", 235, 150, 76, C.text, { sp:16, align:"left", alpha:dock }); txt("LAUNCHER", 235, 232, 46, C.orange, { sp:14, align:"left", alpha:dock }); }
+  // 3,4 - 8,8 s : le Launcher + les jeux qui défilent
+  const sIn = eOut(seg(t, 3.3, 4.4)), sOut = eIO(seg(t, 8.4, 9.6));
+  const cardA = sIn, cy = lerp(1130, 640, sOut), wdh = lerp(960, 640, sOut);
+  shopCard(t, W / 2, lerp(2300, cy, sIn), wdh, cardA, lerp(.08, -.025, sIn));
+  if (t > 3.5 && t < 9) { const k = seg(t, 3.7, 4.4) * (1 - seg(t, 8.2, 8.7)); txt("TOUS TES JEUX", W / 2, 380, 78, C.text, { sp:10, alpha:k, shadow:"rgba(0,0,0,.6)" }); txt("AU MÊME ENDROIT", W / 2, 465, 78, C.orange, { sp:10, alpha:k, shadow:"rgba(0,0,0,.6)" }); txt("FERRA · Tower Défense Infini · VIGIE", W / 2, 545, 44, C.orange, { weight:700, alpha:k }); }
+  marquee(t, 1560, 300, eOut(seg(t, 3.8, 4.8)) * (1 - seg(t, 12.3, 13.0) * .55));
+  // 8,6 - 12,6 s : les avantages
+  const items = ["100 % GRATUIT", "INSTALLATION EN 1 CLIC", "MISES À JOUR AUTOMATIQUES", "SUCCÈS & CLASSEMENTS"];
+  items.forEach((s, i) => pill(s, W / 2, 960 + i * 140, seg(t, 9.0 + i * .5, 9.7 + i * .5) * (1 - seg(t, 12.2, 12.8)), t));
+  // 12,4 - 15 s : appel à l'action
+  const cta = seg(t, 12.4, 13.3), pulse = 1 + Math.sin(t * 6) * .035;
+  if (cta > 0) {
+    g.save(); g.globalAlpha = clamp(cta * 1.4);
+    txt("TÉLÉCHARGE-LE", W / 2, 900, 100, C.text, { sp:12, shadow:"rgba(245,165,90,.5)" }); txt("GRATUITEMENT", W / 2, 1010, 100, C.orange, { sp:12, shadow:"rgba(245,165,90,.6)" });
+    g.translate(W / 2, 1230); g.scale(eBack(clamp(cta)) * pulse, eBack(clamp(cta)) * pulse);
+    g.shadowColor = "rgba(245,165,90,.75)"; g.shadowBlur = 60 + Math.sin(t * 6) * 20; rr(-410, -85, 820, 170, 40); const bgr = g.createLinearGradient(0, -85, 0, 85); bgr.addColorStop(0, C.orangeHi); bgr.addColorStop(1, C.orange); g.fillStyle = bgr; g.fill(); g.shadowColor = "transparent";
+    txt("izackiferra.com", 0, 6, 92, "#1f1206", { weight:800 });
+    g.restore();
+    txt("Windows · gratuit · sans inscription obligatoire", W / 2, 1400, 44, C.dim, { weight:600, alpha:clamp((t - 13.0) / .5) });
+    // anneau lumineux qui balaie le bouton
+    g.save(); g.translate(W / 2, 1230); g.globalAlpha = .5 * cta; g.strokeStyle = C.orangeHi; g.lineWidth = 5; const r2 = (t * 1.2) % 1; rr(-410 - r2 * 120, -85 - r2 * 70, 820 + r2 * 240, 170 + r2 * 140, 40 + r2 * 40); g.globalAlpha = .5 * cta * (1 - r2); g.stroke(); g.restore();
+  }
+  // fondu d'entrée / de sortie
+  const fade = Math.max(1 - seg(t, 0, .3), 0); if (fade) { g.fillStyle = "rgba(8,9,10," + fade + ")"; g.fillRect(0, 0, W, H); }
+}
+const Ad = { dur:DUR, FPS:30, ready:false, seek(t) { draw(clamp(t, 0, DUR)); } };
+window.Ad = Ad;
+let t0 = 0, done = false;
+function start() {
+  if (Q.has("static")) { Ad.seek(+Q.get("t") || 0); return; }
+  const loop = ts => {
+    if (!t0) t0 = ts; let t = (ts - t0) / 1000;
+    if (t >= DUR) { if (!done) { done = true; try { parent.postMessage({ ad:"done" }, "*"); } catch (e) {} } if (Q.has("once")) { draw(DUR); return; } t0 = ts; done = false; t = 0; }
+    draw(t); requestAnimationFrame(loop);
+  };
+  requestAnimationFrame(loop);
+}
+draw(0);
+</script></body></html>

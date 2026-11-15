@@ -125,6 +125,7 @@
   await ferraI18nInit('../');
   ferraI18nApply();
 })();
+const ferraReturnTo = (() => { const r = new URLSearchParams(location.search).get('return'); return r && /^\/play\/[a-z0-9_\/-]*$/i.test(r) ? r : null; })();  // retour vers un jeu (chemin interne /play/... uniquement)
 const signupInputs = document.querySelectorAll('#signupForm .input');
 signupInputs.forEach((input) => input.addEventListener('input', () => input.removeAttribute('aria-invalid')));
 function signupClearInvalid() {
@@ -173,7 +174,7 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
     okEl.textContent = ferraT('forumSignup.okConnected', 'Compte créé et connecté. Tu es redirigé vers le forum.');
     okEl.classList.add('show');
     okEl.focus();
-    setTimeout(() => { window.location.href = 'index.html'; }, 1200);
+    setTimeout(() => { window.location.href = ferraReturnTo || 'index.html'; }, 1200);
   } else {
     okEl.textContent = ferraT('forumSignup.okNeedsConfirm', 'Compte créé. Vérifie ta boîte de réception (et les spams) pour confirmer ton adresse e-mail, puis connecte-toi.');
     okEl.classList.add('show');

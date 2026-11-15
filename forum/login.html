@@ -109,6 +109,7 @@
 <script src="../assets/js/i18n.js"></script>
 <script src="../assets/js/shell.js"></script>
 <script>
+const ferraReturnTo = (() => { const r = new URLSearchParams(location.search).get('return'); return r && /^\/play\/[a-z0-9_\/-]*$/i.test(r) ? r : null; })();  // retour vers un jeu (chemin interne /play/... uniquement)
 (async function () {
   await ferraI18nInit('../');
   ferraI18nApply();
@@ -130,7 +131,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     errEl.classList.add('show');
     return;
   }
-  window.location.href = 'index.html';
+  window.location.href = ferraReturnTo || 'index.html';
 });
 </script>
 </body>
