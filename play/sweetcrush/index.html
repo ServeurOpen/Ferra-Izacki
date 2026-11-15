@@ -347,6 +347,7 @@
     <button class="btn alt small" id="inClose">Fermer</button></div></div>
 
   <div id="mAd" class="modal" style="background:#000;z-index:30"><div style="position:relative;height:100%;aspect-ratio:9/16;max-width:100%;background:#000">
+    <button id="adSnd" type="button" aria-label="Couper ou activer le son de la pub" style="position:absolute;left:14px;top:calc(60px + env(safe-area-inset-top, 0px));z-index:3;width:60px;height:60px;border-radius:50%;border:2px solid rgba(255,255,255,.45);background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0"></button>
     <iframe id="adFrame" title="Publicité" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="autoplay"></iframe>
     <div style="position:absolute;left:50%;top:calc(70px + env(safe-area-inset-top, 0px));transform:translateX(-50%);padding:8px 20px;display:flex;gap:18px;align-items:center;white-space:nowrap;background:rgba(0,0,0,.6);border:2px solid rgba(255,255,255,.35);border-radius:99px;font-weight:800;font-size:19px;color:#fff;pointer-events:none;z-index:2"><span>Publicité</span><span>+1 bonus dans <b id="adCount">15</b> s</span></div>
     <a id="adLink" href="https://izackiferra.com/launcher.html" target="_blank" rel="noopener" class="btn small" style="position:absolute;left:50%;bottom:16px;transform:translateX(-50%);text-decoration:none;white-space:nowrap">Découvrir le Launcher</a></div></div>
@@ -703,6 +704,12 @@ const batHtml = (n, big, drainIdx) => '<span class="bat' + (big ? " big" : "") +
 function batUi() { const el = $("adBat"); if (!el || !ADS_ENABLED) return; const b = batGet(); el.innerHTML = batHtml(b.n) + "<span>" + (b.n >= BAT_MAX ? "Pubs 5/5" : '<img class="rc" src="assets/icon-recharge.png" alt="" onerror="this.remove()">+1 dans ' + mmss(batLeft(b))) + "</span>"; }
 { const im = new Image(); im.onload = () => document.body.classList.add("sk-adbat"); im.src = "assets/adbat-frame.png"; }
 setInterval(() => { if (ADS_ENABLED && $("sGame").classList.contains("on")) batUi(); }, 1000);
+/* son des pubs : activé par défaut, mémorisé sur l'appareil ; bouton haut-parleur en haut à gauche */
+let adSoundOn = (() => { try { return localStorage.getItem("sc_adsound") !== "0"; } catch (e) { return true; } })();
+const SPK = on => '<svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="#fff"/>' + (on ? '<path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/>' : '<path d="M17 9l5 6M22 9l-5 6"/>') + '</svg>';
+function adSndUi() { const b = $("adSnd"); if (b) { b.innerHTML = SPK(adSoundOn); b.setAttribute("aria-pressed", adSoundOn ? "true" : "false"); } }
+function adSndSet(on, keep) { adSoundOn = on; if (keep) { try { localStorage.setItem("sc_adsound", on ? "1" : "0"); } catch (e) {} } adSndUi(); try { $("adFrame").contentWindow.postMessage({ adSound:on }, "*"); } catch (e) {} }
+addEventListener("message", e => { if (e.data && e.data.adSound === false && e.data.bloque) { adSoundOn = false; adSndUi(); } });
 window.scShowRewardedAd = async () => {
   let st; try { st = JSON.parse(localStorage.getItem("sc_ads") || "{}"); } catch (e) { st = {}; }
   const day = new Date().toISOString().slice(0, 10); if (st.day !== day) st = { day, n:0, last:0, lastId:st.lastId };
@@ -713,7 +720,8 @@ window.scShowRewardedAd = async () => {
   const pool = cat.length > 1 ? cat.filter(p => p.id !== st.lastId) : cat, ad = pool[Math.floor(Math.random() * pool.length)];
   return new Promise(res => {
     const fr = $("adFrame"); let loaded = false, left = Math.round(ad.duree); fr.onload = () => { loaded = true; };
-    $("adCount").textContent = left; $("adLink").href = ad.lien || "https://izackiferra.com/"; fr.src = "pub/" + ad.fichier + "?once" + (save.sound ? "" : "&mute"); modal("mAd", true);
+    $("adCount").textContent = left; $("adLink").href = ad.lien || "https://izackiferra.com/"; adSoundOn = (() => { try { return localStorage.getItem("sc_adsound") !== "0"; } catch (e) { return true; } })(); adSndUi();
+    fr.src = "pub/" + ad.fichier + "?once" + (adSoundOn ? "" : "&mute"); modal("mAd", true);
     const tick = setInterval(() => { left = Math.max(0, left - 1); $("adCount").textContent = left; }, 1000);
     const finish = ok => {
       clearInterval(tick); clearTimeout(safety); removeEventListener("message", onMsg); modal("mAd", false); fr.onload = null; fr.src = "about:blank";
@@ -1608,6 +1616,7 @@ $("mailBtn").onclick = openInbox;
 $("inClose").onclick = () => modal("mInbox", false);
 $("inClaimAll").onclick = claimAll;
 $("rwClaim").onclick = () => modal("mReward", false);
+$("adSnd").onclick = () => adSndSet(!adSoundOn, true);
 $("bHammer").onclick = () => useBooster("hammer");
 $("bMoves").onclick = () => useBooster("moves");
 $("bShuffle").onclick = () => useBooster("shuffle");

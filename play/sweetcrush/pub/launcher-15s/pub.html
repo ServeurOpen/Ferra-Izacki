@@ -132,26 +132,27 @@ function draw(t) {
 }
 const Ad = { dur:DUR, FPS:30, ready:false, seek(t) { draw(clamp(t, 0, DUR)); } };
 window.Ad = Ad;
-/* voix off (voix/voix-15s.wav) : démarre avec l'animation ; ?mute = sans son (réglage « Sons » du jeu) ; muette en mode image fixe */
-const VOICE_SRC = (window.__IMGDATA && window.__IMGDATA["voix-15s.wav"]) || "voix/voix-15s.wav"; let voice = null;
-let voiceBlocked = false, loopMs = 0;
-function voiceStart() {
-  loopMs = performance.now(); if (Q.has("mute") || Q.has("static")) return;
+
+/* Son : activé par défaut, volume modéré (55 %). Le jeu envoie {adSound:true|false} (bouton haut-parleur en haut à gauche) ; ?mute = démarre coupé.
+   Si le navigateur refuse le son, la pub continue SANS son (muette) et prévient le jeu, qui affiche le haut-parleur barré. */
+let voice = null; const VOL = .55, ALONE = window.parent === window;
+function voiceStart(at = 0) {
+  if (Q.has("static")) return;
   try {
-    if (!voice) voice = new Audio(VOICE_SRC); voice.currentTime = 0; const pr = voice.play();
-    if (pr && pr.catch) pr.catch(() => {   // navigateur : son bloqué tant que l'utilisateur n'a pas touché la page → on attend un clic et on rattrape la position
-      voiceBlocked = true; const go = () => { voiceBlocked = false; try { voice.currentTime = Math.min((performance.now() - loopMs) / 1000, 14); voice.play(); } catch (e) {} };
-      addEventListener("pointerdown", go, { once:true }); addEventListener("keydown", go, { once:true });
-    });
+    if (!voice) { voice = new Audio((window.__IMGDATA && window.__IMGDATA["voix-15s.wav"]) || "voix/voix-15s.wav"); voice.preload = "auto"; voice.volume = VOL; voice.muted = Q.has("mute"); }
+    voice.currentTime = at; const pr = voice.play();
+    if (pr && pr.catch) pr.catch(() => { voice.muted = true; try { parent.postMessage({ adSound:false, bloque:true }, "*"); } catch (e) {} voice.play().catch(() => {});
+      if (ALONE) { const go = () => { voice.muted = false; voice.play().catch(() => {}); }; addEventListener("pointerdown", go, { once:true }); addEventListener("keydown", go, { once:true }); } });
   } catch (e) {}
 }
+addEventListener("message", e => { if (!e.data || typeof e.data.adSound !== "boolean" || !voice) return; voice.muted = !e.data.adSound; if (!voice.muted && voice.paused) { try { voice.currentTime = Math.min(window.Ad && Ad.t || 0, 14); } catch (err) {} voice.play().catch(() => {}); } });
 let t0 = 0, done = false;
 function start() {
   if (Q.has("static")) { Ad.seek(+Q.get("t") || 0); return; }
   const loop = ts => {
-    if (!t0) t0 = ts; let t = (ts - t0) / 1000; if (voice && !voiceBlocked && !voice.paused && !voice.ended && voice.currentTime > 0) { t = voice.currentTime; t0 = ts - t * 1000; }   // l'image suit le son
+    if (!t0) t0 = ts; let t = (ts - t0) / 1000; if (voice && !voice.paused && !voice.ended && voice.currentTime > 0) { t = voice.currentTime; t0 = ts - t * 1000; }   // l'image suit le son
     if (t >= DUR) { if (!done) { done = true; try { parent.postMessage({ ad:"done" }, "*"); } catch (e) {} } if (Q.has("once")) { draw(DUR); return; } t0 = ts; done = false; t = 0; voiceStart(); }
-    draw(t); if (voiceBlocked) { g.save(); rr(240, 1790, 600, 80, 40); g.fillStyle = "rgba(0,0,0,.65)"; g.fill(); txt("🔊  Touche pour activer le son", W / 2, 1832, 38, "#fff", { weight:700 }); g.restore(); } requestAnimationFrame(loop);
+    draw(t); requestAnimationFrame(loop);
   };
   voiceStart(); requestAnimationFrame(loop);
 }

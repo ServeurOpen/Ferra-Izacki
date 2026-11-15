@@ -133,21 +133,26 @@ function draw(t) {
 }
 /* Son (voix + musique + bruitages : voix/mix.wav). L'IMAGE SUIT LE SON : tant que le son joue, le temps de l'animation = position du son,
    donc le texte ne peut plus se décaler (chargement lent, onglet en pause…). ?mute = sans son · ?debug = chrono à l'écran. */
-let voice = null, blocked = false, pendingSince = 0;
-const SOUND = !Q.has("mute") && !Q.has("static");
+
+/* Son : activé par défaut, volume modéré (55 %). Le jeu envoie {adSound:true|false} (bouton haut-parleur en haut à gauche) ; ?mute = démarre coupé.
+   Si le navigateur refuse le son, la pub continue SANS son (muette) et prévient le jeu, qui affiche le haut-parleur barré. */
+let voice = null; const VOL = .55, ALONE = window.parent === window;
 function voiceStart(at = 0) {
-  if (!SOUND) return; const src = (window.__IMGDATA && window.__IMGDATA["mix.wav"]) || "voix/mix.wav";
+  if (Q.has("static")) return;
   try {
-    if (!voice) { voice = new Audio(src); voice.preload = "auto"; }
-    voice.currentTime = at; pendingSince = performance.now(); const pr = voice.play();
-    if (pr && pr.catch) pr.then(() => { blocked = false; }).catch(() => { blocked = true; pendingSince = 0; const go = () => { blocked = false; try { voice.currentTime = Math.min(window.Ad ? Ad.t : 0, 26.5); voice.play(); } catch (err) {} }; addEventListener("pointerdown", go, { once:true }); addEventListener("keydown", go, { once:true }); });
-  } catch (err) {}
+    if (!voice) { voice = new Audio((window.__IMGDATA && window.__IMGDATA["mix.wav"]) || "voix/mix.wav"); voice.preload = "auto"; voice.volume = VOL; voice.muted = Q.has("mute"); }
+    voice.currentTime = at; const pr = voice.play();
+    if (pr && pr.catch) pr.catch(() => { voice.muted = true; try { parent.postMessage({ adSound:false, bloque:true }, "*"); } catch (e) {} voice.play().catch(() => {});
+      if (ALONE) { const go = () => { voice.muted = false; voice.play().catch(() => {}); }; addEventListener("pointerdown", go, { once:true }); addEventListener("keydown", go, { once:true }); } });
+  } catch (e) {}
 }
+addEventListener("message", e => { if (!e.data || typeof e.data.adSound !== "boolean" || !voice) return; voice.muted = !e.data.adSound; if (!voice.muted && voice.paused) { try { voice.currentTime = Math.min(window.Ad && Ad.t || 0, 26.5); } catch (err) {} voice.play().catch(() => {}); } });
+let pendingSince = 0; const _vs = voiceStart; voiceStart = (at = 0) => { pendingSince = performance.now(); _vs(at); };
 function clock() {
-  if (!SOUND || !voice || blocked) return null;
+  if (Q.has("static") || !voice) return null;
   if (!voice.paused && !voice.ended && voice.currentTime > 0) { pendingSince = 0; return voice.currentTime; }
   if (pendingSince && performance.now() - pendingSince < 900) return 0;      // le son se prépare : l'image attend (au plus 0,9 s)
   return null;
 }
-runAd(draw, 27, IMAGES, { clock, onStart: () => voiceStart(0), onLoop: () => voiceStart(0), overlay: () => { if (blocked) { g.save(); rr(240, 1790, 600, 80, 40); g.fillStyle = "rgba(0,0,0,.65)"; g.fill(); txt("🔊  Touche pour activer le son", W / 2, 1832, 38, "#fff", { weight:700 }); g.restore(); } } });
+runAd(draw, 27, IMAGES, { clock, onStart: () => voiceStart(0), onLoop: () => voiceStart(0) });
 </script></body></html>
