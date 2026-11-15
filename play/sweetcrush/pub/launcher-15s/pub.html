@@ -133,9 +133,9 @@ function draw(t) {
 const Ad = { dur:DUR, FPS:30, ready:false, seek(t) { draw(clamp(t, 0, DUR)); } };
 window.Ad = Ad;
 
-/* Son : activé par défaut, volume modéré (55 %). Le jeu envoie {adSound:true|false} (bouton haut-parleur en haut à gauche) ; ?mute = démarre coupé.
+/* Son : activé par défaut, volume modéré (27,5 %). Le jeu envoie {adSound:true|false} (bouton haut-parleur en haut à gauche) ; ?mute = démarre coupé.
    Si le navigateur refuse le son, la pub continue SANS son (muette) et prévient le jeu, qui affiche le haut-parleur barré. */
-let voice = null; const VOL = .55, ALONE = window.parent === window;
+let voice = null; const VOL = .275, ALONE = window.parent === window;
 function voiceStart(at = 0) {
   if (Q.has("static")) return;
   try {

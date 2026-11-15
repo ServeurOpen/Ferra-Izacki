@@ -134,9 +134,9 @@ function draw(t) {
 /* Son (voix + musique + bruitages : voix/mix.wav). L'IMAGE SUIT LE SON : tant que le son joue, le temps de l'animation = position du son,
    donc le texte ne peut plus se décaler (chargement lent, onglet en pause…). ?mute = sans son · ?debug = chrono à l'écran. */
 
-/* Son : activé par défaut, volume modéré (55 %). Le jeu envoie {adSound:true|false} (bouton haut-parleur en haut à gauche) ; ?mute = démarre coupé.
+/* Son : activé par défaut, volume modéré (27,5 %). Le jeu envoie {adSound:true|false} (bouton haut-parleur en haut à gauche) ; ?mute = démarre coupé.
    Si le navigateur refuse le son, la pub continue SANS son (muette) et prévient le jeu, qui affiche le haut-parleur barré. */
-let voice = null; const VOL = .55, ALONE = window.parent === window;
+let voice = null; const VOL = .275, ALONE = window.parent === window;
 function voiceStart(at = 0) {
   if (Q.has("static")) return;
   try {
