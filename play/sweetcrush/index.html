@@ -547,8 +547,8 @@ function levelsCleared() { return Object.keys(save.stars).filter(k => save.stars
 function totalStars() { return Object.values(save.stars).reduce((a, b) => a + b, 0); }
 const MILESTONES = (() => {
   const a = [{ key:"welcome", title:"Cadeau de bienvenue", body:"Merci de jouer à Sweet Crush ! Voici de quoi bien démarrer.", rewards:{ hammer:3, moves:3, shuffle:2 }, test:() => true }];
-  [10, 20, 30, 40, 50, 60, 80, 100, 120, 140, 160, 180].forEach((n, i) => a.push({ key:"lvl_" + n, title:n + " niveaux terminés !", body:"Bravo, tu as terminé " + n + " niveaux.", rewards:{ hammer:2 + (i > 2 ? 1 : 0) + (i > 7 ? 1 : 0), moves:2 + (i > 5 ? 1 : 0), shuffle:1 + (i > 7 ? 1 : 0) }, test:() => levelsCleared() >= n }));
-  [30, 60, 90, 120, 150, 180, 240, 300, 360, 420, 480, 540].forEach((n, i) => a.push({ key:"stars_" + n, title:n + " étoiles récoltées !", body:"Tu as récolté " + n + " étoiles. Continue comme ça !", rewards:{ hammer:1 + (i > 5 ? 1 : 0), moves:3, shuffle:1 + (i > 2 ? 1 : 0) + (i > 8 ? 1 : 0) }, test:() => totalStars() >= n }));
+  [10, 20, 30, 40, 50, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240].forEach((n, i) => a.push({ key:"lvl_" + n, title:n + " niveaux terminés !", body:"Bravo, tu as terminé " + n + " niveaux.", rewards:{ hammer:2 + (i > 2 ? 1 : 0) + (i > 7 ? 1 : 0), moves:2 + (i > 5 ? 1 : 0), shuffle:1 + (i > 7 ? 1 : 0) }, test:() => levelsCleared() >= n }));
+  [30, 60, 90, 120, 150, 180, 240, 300, 360, 420, 480, 540, 600, 660, 720].forEach((n, i) => a.push({ key:"stars_" + n, title:n + " étoiles récoltées !", body:"Tu as récolté " + n + " étoiles. Continue comme ça !", rewards:{ hammer:1 + (i > 5 ? 1 : 0), moves:3, shuffle:1 + (i > 2 ? 1 : 0) + (i > 8 ? 1 : 0) }, test:() => totalStars() >= n }));
   return a;
 })();
 function toastMsg(t, icon) { const d = document.createElement("div"); if (icon) d.innerHTML = '<img src="assets/' + icon + '.png" style="height:30px;vertical-align:middle;margin-right:6px" onerror="this.remove()">'; d.appendChild(document.createTextNode(t)); $("toast").appendChild(d); setTimeout(() => d.remove(), 4200); }
@@ -632,6 +632,9 @@ const TIPS = [
   { key:"jelly",   when: L => L.goals.some(g => g.k === "jelly"),    text:"Les bonbons pris dans la gelée sont gelés : ils ne bougent pas. Aligne leurs voisins pour les casser.", target: () => firstCell(isFrozen) },
   { key:"cherry",  when: L => L.goals.some(g => g.k === "drop"),     text:"Fais descendre les cerises en détruisant les bonbons dessous. Elles ne se déplacent pas à la main.", target: () => firstCell(isCherry) },
   { key:"special", when: L => L.goals.some(g => g.k === "special"),  text:"Aligne 4 bonbons pour créer un bonbon rayé, 5 pour une bombe chocolat !" },
+  { key:"ice",     when: L => L.goals.some(g => g.k === "ice"),      text:"La glace bloque la case. Aligne des bonbons juste à côté pour la fissurer, puis la briser.", target: () => firstCell(c => isBlkCd(grid[c[0]][c[1]]) && grid[c[0]][c[1]].t === BLK.ice) },
+  { key:"gift",    when: L => L.goals.some(g => g.k === "gift"),     text:"Les boîtes cadeaux s'ouvrent couche par couche : aligne des bonbons juste à côté.", target: () => firstCell(c => isBlkCd(grid[c[0]][c[1]]) && grid[c[0]][c[1]].t === BLK.gift) },
+  { key:"choco",   when: L => L.goals.some(g => g.k === "choco"),    text:"Le chocolat s'étend d'une case à chaque coup où tu n'en détruis pas. Aligne des bonbons à côté pour l'enlever !", target: () => firstCell(c => isBlkCd(grid[c[0]][c[1]]) && grid[c[0]][c[1]].t === BLK.choco) },
   { key:"boost",   when: L => L.n >= 2 && ["hammer", "moves", "shuffle", "disco"].some(k => invCount(k) > 0), text:"Tes bonus sont en bas : Échange inverse deux bonbons, +3 ajoute des coups, le mélange remue le plateau, la boule à facette transforme un bonbon." },
 ];
 let tipCur = null, tipTimer = 0;
@@ -803,7 +806,8 @@ const ACHIEVEMENTS = [
   { id:"lvl40",       name:"Grand confiseur",      description:"Termine 40 niveaux.", icon:"🧁", tier:"gold" },
   { id:"lvl60",       name:"Roi du sucre",         description:"Termine 60 niveaux.", icon:"👑", tier:"gold" },
   { id:"lvl100",      name:"Légende gourmande",    description:"Termine 100 niveaux.", icon:"🏆", tier:"gold" },
-  { id:"lvl180",      name:"Empereur du sucre",    description:"Termine les 180 niveaux.", icon:"💎", tier:"platinum" },
+  { id:"lvl180",      name:"Empereur du sucre",    description:"Termine 180 niveaux.", icon:"💎", tier:"platinum" },
+  { id:"lvl240",      name:"Dieu de la gourmandise", description:"Termine les 240 niveaux.", icon:"🌋", tier:"platinum" },
   { id:"cherry",      name:"Cueilleur de cerises", description:"Fais descendre 20 cerises au total.", icon:"🍒", tier:"silver" },
 ];
 try { window.izackiRegisterCatalog && window.izackiRegisterCatalog(GAME_ID, ACHIEVEMENTS); } catch (e) {}
@@ -904,7 +908,9 @@ function makeLevelsExt() {
   }
   return out;
 }
+const IS_LOCAL = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
 const LEVELS = makeLevels().concat(makeLevelsExt());
+[42, 67, 78, 84, 84, 161].forEach(n => { LEVELS[n - 1].moves += 3; });   /* 84 compté deux fois : +6 */
 
 /* ---------- Utilitaires ---------- */
 const $ = id => document.getElementById(id);
@@ -1481,7 +1487,7 @@ async function endLevel(win) {
     unlock("first_win"); if (stars===3) unlock("three_stars"); submitRun();
     if (cloudSession) checkMilestones().then(() => maybeRewardPopup());
     const done = Object.keys(save.stars).length;
-    if (done>=10) unlock("lvl10"); if (done>=20) unlock("lvl20"); if (done>=40) unlock("lvl40"); if (done>=60) unlock("lvl60"); if (done>=100) unlock("lvl100"); if (done>=180) unlock("lvl180");
+    if (done>=10) unlock("lvl10"); if (done>=20) unlock("lvl20"); if (done>=40) unlock("lvl40"); if (done>=60) unlock("lvl60"); if (done>=100) unlock("lvl100"); if (done>=180) unlock("lvl180"); if (done>=240) unlock("lvl240");
     showEnd(true, stars, bonus);
   } else {
     sfx("lose"); save.streak = 0; writeSave();
@@ -1837,10 +1843,10 @@ if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
 
 updateBoosterUi(); updateMailBadge(); $("mailBtn").style.display = "block";
 cloudInit();
-{ const nv = +new URLSearchParams(location.search).get("niveau"); if (nv >= 1 && nv <= LEVELS.length) setTimeout(() => { modal("mLogin", false); startLevel(nv - 1); }, 600); }   /* test : ?niveau=200 ouvre directement ce niveau */
+{ const nv = IS_LOCAL ? +new URLSearchParams(location.search).get("niveau") : 0; if (nv >= 1 && nv <= LEVELS.length) setTimeout(() => { modal("mLogin", false); startLevel(nv - 1); }, 600); }   /* test : ?niveau=200 ouvre directement ce niveau */
 
 /* ---------- Lancement direct en test : ?level=N ---------- */
-(function(){ const m = /[?&]level=(\d+)/.exec(location.search); if (m) { save.unlocked = LEVEL_COUNT; startLevel(Math.max(0, Math.min(LEVEL_COUNT-1, +m[1]-1))); } })();
+(function(){ const m = IS_LOCAL && /[?&]level=(\d+)/.exec(location.search); if (m) { save.unlocked = LEVEL_COUNT; startLevel(Math.max(0, Math.min(LEVEL_COUNT-1, +m[1]-1))); } })();
 </script>
 <div id="rotate" role="alert"><div class="ph"></div><div>Tourne ton téléphone<br>pour jouer à la verticale</div></div>
 <script>/* verrouille en portrait quand le navigateur le permet (Android, appli installée) ; sinon l'écran #rotate s'affiche */ addEventListener("pointerdown", () => { try { if (screen.orientation && screen.orientation.lock) screen.orientation.lock("portrait").catch(() => {}); } catch (e) {} }, { once:true });</script>

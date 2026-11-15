@@ -90,7 +90,7 @@ function crushScene(tl, t) {
     if (hit && mp > .45 && ok("star")) { g.save(); g.globalAlpha = 1 - mp; g.translate(gx + c * cs + cs / 2, gy + r * cs + cs / 2 - (mp - .45) * 160); g.rotate(mp * 6); g.drawImage(IMG.star, -34, -34, 68, 68); g.restore(); }
   }
   g.restore();
-  ["180 niveaux", "Classement + cadeaux", "Joue sur ton téléphone"].forEach((s, i) => pill(s, W / 2, 1500 + i * 130, seg(tl, 1.0 + i * .4, 1.6 + i * .4), t, { color:"#ff5fa8", w:900, h:104, size:46 }));
+  ["240 niveaux", "Classement + cadeaux", "Joue sur ton téléphone"].forEach((s, i) => pill(s, W / 2, 1500 + i * 130, seg(tl, 1.0 + i * .4, 1.6 + i * .4), t, { color:"#ff5fa8", w:900, h:104, size:46 }));
 }
 /* ---- appel à l'action ---- */
 function ctaScene(tl, t) {
