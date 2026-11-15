@@ -184,6 +184,7 @@
   .seam { position:absolute; left:0; right:0; top:0; height:110px; transform:translateY(-50%); z-index:2; pointer-events:none; }
   .node { position:absolute; aspect-ratio:1; border:0; padding:0; border-radius:50%; background:transparent; cursor:pointer; }
   .node.locked { cursor:default; }
+  .node .adm { position:absolute; right:-14%; top:-14%; width:42%; aspect-ratio:1; border-radius:50%; background:rgba(30,20,50,.88); border:2px solid #ffd76a; font-size:24px; line-height:1; display:flex; align-items:center; justify-content:center; z-index:4; }
   .node .veil { position:absolute; inset:-2%; border-radius:50%; background:#8a8a96; mix-blend-mode:saturation; pointer-events:none; }
   .node .veil2 { position:absolute; inset:-2%; border-radius:50%; background:radial-gradient(circle, rgba(60,60,80,.10) 0%, rgba(60,60,80,.34) 100%); pointer-events:none; }
   .node .chain { position:absolute; width:128%; left:50%; top:50%; transform:translate(-49.5%,-45.5%); pointer-events:none; filter:drop-shadow(0 3px 3px rgba(0,0,0,.35)); }
@@ -591,7 +592,7 @@ async function maybeRewardPopup() {
   modal("mReward", true); sfx("ach");
 }
 const invCount = k => ((save.invG || {})[k] || 0) - ((save.invS || {})[k] || 0);
-function spendInv(k) { save.invS = save.invS || {}; save.invS[k] = (save.invS[k] || 0) + 1; writeSave(); updateBoosterUi(); }
+function spendInv(k) { if (adminTest) { updateBoosterUi(); return; } save.invS = save.invS || {}; save.invS[k] = (save.invS[k] || 0) + 1; writeSave(); updateBoosterUi(); }
 function addInv(rw) { save.invG = save.invG || {}; for (const k of Object.keys(REWARD_META)) save.invG[k] = (save.invG[k] || 0) + (+rw[k] || 0); writeSave(); updateBoosterUi(); }
 async function claimMsg(id) {
   const r = await cloudRpc("claim_game_inbox", { p_message_id: id });
@@ -679,9 +680,11 @@ function openRank() { sfx("click"); rankLevel = Math.max(1, Math.min(LEVEL_COUNT
 /* Anti-triche (migration 70) : jeton de partie délivré par le serveur au lancement du niveau, rendu avec le score à la victoire.
    Le serveur vérifie durée / coups / score plausibles et recalcule lui-même les étoiles totales. */
 let runId = null, runMoves = 0;
+let adminTest = false, adminStats = "";
+const isAdmin = () => !!cloudSession && String(cloudSession.email || "").toLowerCase() === "ferra.izacki@gmail.com";
 async function startRun(n) {
   runId = null; runMoves = 0;
-  if (!cloudSession || SIM) return;
+  if (!cloudSession || SIM || adminTest) return;   /* test admin : pas de partie déclarée au serveur, donc pas de classement */
   const r = await cloudRpc("start_game_run", { p_game_id:GAME_ID, p_level:n });
   if (r.ok && n === level.n) runId = r.data;
 }
@@ -812,7 +815,7 @@ const ACHIEVEMENTS = [
 ];
 try { window.izackiRegisterCatalog && window.izackiRegisterCatalog(GAME_ID, ACHIEVEMENTS); } catch (e) {}
 function unlock(id) {
-  if (save.ach[id]) return;
+  if (adminTest || save.ach[id]) return;
   const a = ACHIEVEMENTS.find(x => x.id === id); if (!a) return;
   save.ach[id] = Date.now(); writeSave();
   try { if (window.izackiUnlockAchievement) window.izackiUnlockAchievement(GAME_ID, id, a); else if (cloudSource === "web") cloudRpc("unlock_achievement", { p_game_id: GAME_ID, p_achievement_id: id, p_name: a.name, p_description: a.description, p_icon: a.icon, p_tier: a.tier }); } catch (e) {}
@@ -1475,6 +1478,7 @@ async function endLevel(win) {
     const left = moves; let bonus = 0;
     while (moves > 0) { moves--; score += 100; bonus += 100; if (!SIM) sfx("pop", 3); updateHud(); await sleep(110); }
     const stars = score >= level.stars[1] ? 3 : score >= level.stars[0] ? 2 : 1;
+    if (adminTest) { showEnd(true, stars, bonus); return; }
     const id = level.n;
     const prev = save.stars[id] || 0;
     if (stars > prev) save.stars[id] = stars;
@@ -1490,7 +1494,7 @@ async function endLevel(win) {
     if (done>=10) unlock("lvl10"); if (done>=20) unlock("lvl20"); if (done>=40) unlock("lvl40"); if (done>=60) unlock("lvl60"); if (done>=100) unlock("lvl100"); if (done>=180) unlock("lvl180"); if (done>=240) unlock("lvl240");
     showEnd(true, stars, bonus);
   } else {
-    sfx("lose"); save.streak = 0; writeSave();
+    sfx("lose"); if (!adminTest) { save.streak = 0; writeSave(); }
     showEnd(false, 0, 0);
   }
 }
@@ -1499,9 +1503,9 @@ function showEnd(win, stars, bonus) {
   $("eBadge").style.display = ""; $("eBadge").src = "assets/badge-" + (win ? "win" : "lose") + ".png";
   const st = (on) => '<img src="assets/star-big-' + (on ? "on" : "off") + '.png" onerror="this.replaceWith(document.createTextNode(\'★\'))">';
   $("eStars").innerHTML = (win ? st(1).repeat(stars) + st(0).repeat(3-stars) : st(0).repeat(3));
-  $("eText").innerHTML = (win ? "Score : <b>"+score+"</b>" + (bonus ? " (dont bonus coups : "+bonus+")" : "") + "<br>Meilleur : "+save.best[level.n]
+  $("eText").innerHTML = (win ? "Score : <b>"+score+"</b>" + (bonus ? " (dont bonus coups : "+bonus+")" : "") + (adminTest ? "<br><i>Test admin : rien n'est enregistré</i>" : "<br>Meilleur : "+save.best[level.n])
     : "Plus de coups ! Il te manquait : " + missingText());
-  const sk = save.streak || 0; $("eStreak").style.display = win && sk >= 2 ? "block" : "none"; $("eStreakTxt").textContent = sk % 5 === 0 ? "Série de 5 ! Cadeau !" : "Série : " + (sk % 5) + " / 5";
+  const sk = adminTest ? 0 : save.streak || 0; $("eStreak").style.display = win && sk >= 2 ? "block" : "none"; $("eStreakTxt").textContent = sk % 5 === 0 ? "Série de 5 ! Cadeau !" : "Série : " + (sk % 5) + " / 5";
   $("eNext").style.display = win && levelIdx < LEVEL_COUNT-1 ? "" : "none";
   $("mEnd").classList.add("on");
 }
@@ -1610,7 +1614,7 @@ function drawBoard(dt) {
 let lastGoalsHtml = "";
 function updateHud() {
   if (SIM) return;
-  $("hLevel").textContent = level.n;
+  $("hLevel").textContent = level.n + (adminTest ? " 🔧" : "");
   $("hMoves").textContent = moves;
   $("hScore").textContent = score;
   const gh = level.goals.map(g => {
@@ -1694,10 +1698,11 @@ cv.addEventListener("pointercancel", () => { down = null; });
 /* ============================================================
    ÉCRANS & FLUX
    ============================================================ */
-function show(id) { for (const s of document.querySelectorAll(".screen")) s.classList.remove("on"); $(id).classList.add("on"); $("mailBtn").style.display = (id === "sTitle" || id === "sLevels") ? "block" : "none"; if (id === "sTitle") setBg("bg-menu"); if (id !== "sGame") hammerOn = false; else updateBoosterUi(); }
+function show(id) { if (id !== "sGame") { if (adminTest && adminStats) { save.stats = JSON.parse(adminStats); writeSave(); } adminTest = false; } for (const s of document.querySelectorAll(".screen")) s.classList.remove("on"); $(id).classList.add("on"); $("mailBtn").style.display = (id === "sTitle" || id === "sLevels") ? "block" : "none"; if (id === "sTitle") setBg("bg-menu"); if (id !== "sGame") hammerOn = false; else updateBoosterUi(); }
 function modal(id, on) { $(id).classList.toggle("on", on); }
 
-function startLevel(i) {
+function startLevel(i, test) {
+  if (test !== undefined) { adminTest = !!test && isAdmin(); adminStats = adminTest ? JSON.stringify(save.stats) : ""; }   /* « Rejouer » / « Niveau suivant » gardent le mode en cours */
   levelIdx = i; level = LEVELS[i];
   N = level.size || 8; BOARD = N * CELL; if (cv.width !== BOARD) { cv.width = cv.height = BOARD; }
   chocoHit = false;
@@ -1716,7 +1721,7 @@ function seamHtml(z) {      /* petite transition douce avec la zone du dessus */
   return '<i class="seam" style="background:linear-gradient(rgba(' + up[1] + ',0), rgba(' + up[1] + ',.92) 40%, rgba(' + me[0] + ',.92) 60%, rgba(' + me[0] + ',0))"></i>';
 }
 function buildLevelMap() {
-  const cur = Math.min(save.unlocked, LEVEL_COUNT); let total = 0, html = "";
+  const cur = Math.min(save.unlocked, LEVEL_COUNT), adm = isAdmin(); let total = 0, html = "";
   for (const m of MAPS.slice().reverse()) {          /* zone la plus haute en haut, zone 1 tout en bas */
     html += '<div class="zone" style="aspect-ratio:' + m.r + '"><img loading="lazy" decoding="async" alt="" src="assets/maps/map-zone-' + String(m.z).padStart(2, "0") + '.jpg">' + seamHtml(m.z);
     m.p.forEach(([x, y], i) => {
@@ -1727,6 +1732,7 @@ function buildLevelMap() {
       if (locked) html += '<i class="veil"></i><i class="veil2"></i><img class="chain" src="assets/level-lock-overlay.png" alt="">';
       else if (isCur) html += '<img class="ring" src="assets/level-ring.png" alt=""><b class="here">JOUER</b>';
       if (st) html += '<span class="nst">' + [1, 2, 3].map(k => '<img src="assets/star-' + (k <= st ? "on" : "off") + '.png" alt="">').join("") + '</span>';
+      if (adm) html += '<span class="adm" title="Tester (admin)">🔒</span>';
       html += '</button>';
     });
     html += '</div>';
@@ -1742,8 +1748,9 @@ function scrollMapToCurrent() {
 $("mapInner").addEventListener("click", ev => {
   const b = ev.target.closest(".node"); if (!b) return;
   const n = +b.dataset.n;
+  if (ev.target.closest(".adm") && isAdmin()) { sfx("click"); startLevel(n - 1, true); return; }
   if (b.classList.contains("locked")) { sfx("bad"); b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake"); return; }
-  sfx("click"); startLevel(n - 1);
+  sfx("click"); startLevel(n - 1, false);
 });
 function openLevels() { buildLevelMap(); show("sLevels"); scrollMapToCurrent(); }
 function buildAch() {
@@ -1827,7 +1834,10 @@ function drawTitle(dt) {
 let STAGE_W = 640, STAGE_H = 900;
 function fit() {
   const w = document.documentElement.clientWidth || window.innerWidth, h = (navigator.standalone === true && screen.height > window.innerHeight && screen.height < window.innerHeight + 120) ? screen.height : window.innerHeight;   /* iPhone, appli installée : innerHeight oublie la bande du bas → on prend la hauteur de l'écran */   /* la scène couvre exactement tout l'écran (aucune bande) */
-  const s = Math.min(w / 596, h / 1130);              /* 596 px de large mini, 1060 de haut mini (hauteur réelle du contenu : sinon les bandes se chevauchent sur tablette / écran large) */
+  let sab = 0; { const p = document.createElement("div"); p.style.cssText = "position:fixed;left:0;bottom:0;width:1px;height:env(safe-area-inset-bottom,0px);visibility:hidden"; document.body.appendChild(p); sab = p.offsetHeight; p.remove(); }
+  const ios = navigator.standalone === true, pad = Math.max(sab, h - window.innerHeight) + (ios ? 14 : 0);   /* bande du bas de l'iPhone (barre d'accueil) : on n'y met aucun bouton */
+  const s = Math.min(w / 596, (h - pad) / 1130);
+  $("sGame").style.paddingBottom = (pad / s) + "px";              /* 596 px de large mini, 1060 de haut mini (hauteur réelle du contenu : sinon les bandes se chevauchent sur tablette / écran large) */
   STAGE_W = w / s; STAGE_H = h / s;                   /* la scène prend tout l'écran : on ajoute de l'espace, pas des bandes */
   const st = $("stage"); st.style.width = STAGE_W + "px"; st.style.height = STAGE_H + "px";
   st.style.transform = "scale(" + s + ")";
