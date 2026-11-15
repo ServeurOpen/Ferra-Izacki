@@ -126,6 +126,7 @@
   body.sk-boost .bst .bi { display:flex; align-items:center; justify-content:center; width:100%; height:100%; }
   body.sk-boost .bst .bi img { width:62px; height:62px; vertical-align:middle; margin:0; filter:drop-shadow(0 2px 2px rgba(0,0,0,.35)); }
   .bst .adtag { display:none; position:absolute; left:50%; bottom:-14px; transform:translateX(-50%); color:#fff; font:900 13px/1 inherit; pointer-events:none; }
+  a.btn { display:inline-flex !important; align-items:center; justify-content:center; padding-top:0; padding-bottom:0; }   /* lien en forme de bouton (Découvrir le Launcher, Créer mon compte) : texte centré dans le fond rose */
   #adRwIcon img { width:130px; height:130px; filter:drop-shadow(0 4px 6px rgba(0,0,0,.4)); }
   .bst .adtag img { width:42px; height:42px; filter:drop-shadow(0 2px 3px rgba(0,0,0,.5)); }
   body.ads .bst.off .adtag { display:block; }
@@ -654,13 +655,11 @@ let hammerOn = false;
 const ADS_ENABLED = true;
 if (ADS_ENABLED) document.body.classList.add("ads");
 /* Pubs maison : animations canvas (dossier Factory2D/Pubs → pub/ dans le jeu). Une est tirée au hasard dans pub/catalogue.json (15 s ou 30 s), jouée en entier dans une iframe, puis pop-up « +1 … » + OK.
-   Limites : 1 pub / 45 s, 6 / jour. Une pub ne se répète pas deux fois de suite. */
+   Aucune limite de nombre (demandé le 15/11). Une pub ne se répète pas deux fois de suite. */
 window.scShowRewardedAd = async () => {
   let st; try { st = JSON.parse(localStorage.getItem("sc_ads") || "{}"); } catch (e) { st = {}; }
   const day = new Date().toISOString().slice(0, 10); if (st.day !== day) st = { day, n:0, last:0, lastId:st.lastId };
   const warn = m => { say(m); setTimeout(() => say(""), 2200); return false; };
-  if (Date.now() - st.last < 45000) return warn("Patiente un peu avant la prochaine pub");
-  if (st.n >= 6) return warn("Plus de pub aujourd'hui : reviens demain !");
   let cat = []; try { cat = (await (await fetch("pub/catalogue.json", { cache:"no-cache" })).json()).filter(p => p && p.actif !== false && p.fichier && p.duree > 0); } catch (e) {}
   if (!cat.length) return warn("Pub indisponible pour le moment");
   const pool = cat.length > 1 ? cat.filter(p => p.id !== st.lastId) : cat, ad = pool[Math.floor(Math.random() * pool.length)];
