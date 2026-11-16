@@ -175,7 +175,8 @@
   .btn.icon { min-width:0 !important; padding:4px 16px !important; font-size:24px !important; }
   #sLevels { padding:0; }
   #mapScroll { position:absolute; inset:0; overflow-y:auto; overflow-x:hidden; touch-action:pan-y; -webkit-overflow-scrolling:touch; overscroll-behavior:contain; }
-  #mapInner { width:100%; max-width:720px; margin:0 auto; }
+  #mapInner { width:100%; max-width:720px; margin:0 auto; container-type:inline-size; }
+  .node .num { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:900; line-height:1; -webkit-text-stroke:.14em #a0124f; paint-order:stroke fill; text-shadow:0 .06em .1em rgba(0,0,0,.35); pointer-events:none; }
   #mapTop { position:absolute; top:0; left:0; right:0; padding:62px 16px 26px; display:flex; align-items:center; gap:14px; z-index:6; pointer-events:none; background:linear-gradient(rgba(70,12,120,.78), rgba(70,12,120,0)); }
   #mapTop > * { pointer-events:auto; }
   #totalStars { font-size:22px; font-weight:900; text-shadow:0 2px 4px rgba(0,0,0,.6); }
