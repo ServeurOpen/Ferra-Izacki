@@ -106,6 +106,38 @@
   #mLogin .card p { margin:4px 0; text-shadow:0 2px 3px rgba(40,10,90,.9); }
   #mailBtn { position:absolute; top:70px; right:20px; z-index:8; border:0; background:none; padding:0; cursor:pointer; filter:drop-shadow(0 6px 8px rgba(0,0,0,.4)); transition:transform .12s; }
   #mailBtn:hover { transform:scale(1.08) rotate(-3deg); }
+  #giftBtn { position:absolute; top:62px; left:20px; z-index:8; border:0; background:none; padding:0; cursor:pointer; filter:drop-shadow(0 6px 8px rgba(0,0,0,.4)); transition:transform .12s; display:none; }
+  #giftBtn:hover { transform:scale(1.08) rotate(3deg); }
+  #giftBtn img { display:block; width:96px; height:96px; }
+  #giftBtn .fb { display:none; width:92px; height:92px; border-radius:50%; background:radial-gradient(circle at 35% 30%,#c58bff,#7a2be2 75%); border:4px solid #ffd76a; font-size:52px; line-height:84px; text-align:center; }
+  #giftBtn.new { animation:wiggle 2.4s ease-in-out infinite; transform-origin:50% 90%; }
+  #giftBadge { position:absolute; top:-6px; right:-6px; width:38px; height:38px; border-radius:50%; background:radial-gradient(circle at 35% 30%,#ff8a8a,#e5102f 70%); border:3px solid #fff; color:#fff; font-size:26px; font-weight:900; line-height:32px; text-align:center; box-shadow:0 3px 8px rgba(0,0,0,.45); animation:pulse 1.4s ease-in-out infinite; display:none; }
+  #gfGrid { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:8px 0 10px; }
+  .gday { position:relative; width:124px; height:155px; border-radius:18px; background:linear-gradient(#fff3e6,#ffc9de); border:3px solid #ffd76a; color:#7a1e5a; box-sizing:border-box; }
+  .gday.d7 { width:256px; background:linear-gradient(#b98cff,#6a2bd0); color:#fff; }
+  .gday.today { background:linear-gradient(#fff27a,#ffa31a); box-shadow:0 0 16px 4px rgba(255,235,120,.9); animation:pulse 1.6s ease-in-out infinite; }
+  body.sk-daily-day .gday { background:url(assets/daily-day.png) center/100% 100% no-repeat; border:0; }
+  body.sk-daily-day .gday.d7 { background-image:url(assets/daily-day-7.png); }
+  body.sk-daily-day .gday.today { background-image:url(assets/daily-day-today.png); box-shadow:none; }
+  body.sk-daily-day .gday.d7.today { background-image:url(assets/daily-day-7.png); filter:drop-shadow(0 0 10px #ffe97a); }
+  body.sk-daily-day .gday .gn { top:10%; font-size:15px; }
+  body.sk-daily-day .gday .gr { top:30%; bottom:24%; }
+  body.sk-daily-day .gday.d7 .gn { top:15%; font-size:14px; }
+  body.sk-daily-day .gday.d7 .gr { top:33%; bottom:17%; left:10%; right:9%; gap:3px; }
+  body.sk-daily-day .gday.d7 .gr .chip { font-size:13px; padding:1px 5px; }
+  body.sk-daily-day .gday.d7 .gbig { width:56px; height:56px; }
+  .gday .gn { position:absolute; top:7%; left:0; right:0; font-size:17px; font-weight:900; }
+  .gday .gr { position:absolute; top:26%; bottom:8%; left:6%; right:6%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; }
+  .gday.d7 .gr { flex-direction:row; flex-wrap:wrap; gap:4px; }
+  .gday .gr .chip { font-size:15px; padding:2px 7px; }
+  .gday .gbig { width:74px; height:74px; }
+  .gday.done { filter:grayscale(1) brightness(.72); animation:none; box-shadow:none; }
+  .gcell { position:relative; }
+  .gcell .gck { position:absolute; right:-6px; top:-6px; width:44px; height:44px; display:none; }
+  .gcell.isdone .gck { display:block; }
+  .gcell .gck.fb { border-radius:50%; background:#fff; border:3px solid #2aa84a; color:#2aa84a; font-size:28px; font-weight:900; line-height:38px; box-sizing:border-box; }
+  #gfStreak, #gfNext { font-size:19px; margin:4px 0; font-weight:800; }
+  #gfStreak img, #gfNext img { width:30px; height:30px; vertical-align:middle; margin-right:4px; }
   #mailBtn svg, #mailBtn img.mailimg { display:block; width:96px; height:79px; }
   #mailBtn.new svg { animation:wiggle 2.4s ease-in-out infinite; transform-origin:50% 90%; }
   @keyframes wiggle { 0%,86%,100% { transform:rotate(0); } 90% { transform:rotate(-7deg); } 94% { transform:rotate(7deg); } 97% { transform:rotate(-4deg); } }
@@ -331,6 +363,13 @@
     <div id="rankList"></div><p id="rankNote" style="font-size:14px;opacity:.85;margin:2px 0 8px"></p>
     <button class="btn green small" id="rkClose">Fermer</button></div></div>
 
+  <div id="mGift" class="modal"><div class="card"><h3>Cadeau quotidien</h3>
+    <p id="gfStreak"></p>
+    <div id="gfGrid"></div>
+    <p id="gfNext"></p>
+    <button class="btn green" id="gfClaim" style="display:none">Récupérer</button><br>
+    <button class="btn alt small" id="gfClose">Fermer</button></div></div>
+
   <div id="mDaily" class="modal"><div class="card"><h3><img src="assets/trophy.png" alt="" style="width:56px;height:56px;vertical-align:middle;margin-right:6px" onerror="this.remove()">Défi du jour</h3>
     <p id="dyInfo" style="font-size:19px"></p>
     <div id="dyList" style="max-height:300px;overflow-y:auto;margin:6px 0 8px"></div>
@@ -341,6 +380,7 @@
     <div id="achList"></div>
     <button class="btn green" id="aClose" style="margin-top:12px">Fermer</button></div></div>
 
+  <button id="giftBtn" aria-label="Cadeau quotidien" title="Cadeau quotidien"><img src="assets/daily-btn.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="fb">🎁</span><span id="giftBadge">!</span></button>
   <button id="mailBtn" aria-label="Boîte de réception" title="Boîte de réception">
     <img class="mailimg" src="assets/mail-icon.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" onload="this.nextElementSibling.style.display='none'">
     <svg viewBox="0 0 100 82" xmlns="http://www.w3.org/2000/svg">
@@ -496,7 +536,7 @@ async function cloudSync() {
   if (cloudSource === "web" && !cloudAchSent) { cloudAchSent = true; for (const id of Object.keys(save.ach)) { const a = ACHIEVEMENTS.find(x => x.id === id); if (a) cloudRpc("unlock_achievement", { p_game_id: GAME_ID, p_achievement_id: id, p_name: a.name, p_description: a.description, p_icon: a.icon, p_tier: a.tier }); } }
   if ($("sLevels").classList.contains("on")) buildLevelMap();
   updateBoosterUi();
-  await importProgress(); await dailyLogin(); await checkMilestones(); await inboxRefresh(); maybeRewardPopup(); claimFinish();
+  await importProgress(); await checkMilestones(); await inboxRefresh(); maybeRewardPopup(); claimFinish(); giftRefresh();
 }
 /* Progression jouée avant d'avoir un compte : envoyée UNE fois au classement (le serveur plafonne chaque score, migration 71) */
 async function importProgress() {
@@ -727,13 +767,53 @@ async function openDaily() {
   const rows = await lbFetch(String(daily.metric)), me = myUserId();
   $("dyList").innerHTML = rows === null ? "" : !rows.length ? "<p>Personne n'est encore classé aujourd'hui : sois le premier !</p>" : rankRows(rows, me, false);
 }
-/* ---------- Cadeau de connexion : le serveur dépose un cadeau par jour dans la boîte de réception (plus gros le 7e jour d'affilée) ---------- */
-async function dailyLogin() {
-  if (!cloudSession) return; const tag = new Date().toDateString() + "|" + (myUserId() || "");
-  try { if (localStorage.getItem("sc_login_day") === tag) return; } catch (e) {}
-  const r = await cloudRpc("claim_daily_login", { p_game_id:GAME_ID });
-  if (r.ok && r.data && r.data.ok) { try { localStorage.setItem("sc_login_day", tag); } catch (e) {} }
+/* ---------- Cadeau quotidien (migrations 75-76) : 7 cases, un cadeau par jour (minuit heure de Paris), à récupérer à la main ; un jour manqué brise la série ---------- */
+const DAILY_RW = [{ moves:1 }, { shuffle:1 }, { hammer:1 }, { moves:2 }, { hammer:1, shuffle:1 }, { moves:2, hammer:1 }, { hammer:2, moves:3, shuffle:2, disco:1 }];   /* identique au serveur (claim_daily_login) */
+let gift = null, giftAt = 0, giftBusy = false;
+const giftSecs = () => gift ? Math.max(0, gift.secs - Math.floor((Date.now() - giftAt) / 1000)) : 0;
+const hms = x => String(Math.floor(x / 3600)).padStart(2, "0") + ":" + String(Math.floor(x / 60) % 60).padStart(2, "0") + ":" + String(x % 60).padStart(2, "0");
+const icoOr = (name, emoji) => '<img src="assets/' + name + '.png" alt="" onerror="this.replaceWith(document.createTextNode(\'' + emoji + ' \'))">';
+function giftBadgeUi() { const on = !!cloudSession && !!gift && gift.can; $("giftBadge").style.display = on ? "block" : "none"; $("giftBtn").classList.toggle("new", on); }
+async function giftRefresh() {
+  if (!cloudSession) { gift = null; giftBadgeUi(); return false; }
+  const r = await cloudRpc("get_daily_login", { p_game_id:GAME_ID });
+  if (r.ok && r.data) { gift = { done:Math.max(0, Math.min(7, +r.data.done || 0)), can:!!r.data.can, secs:+r.data.secs || 0 }; giftAt = Date.now(); }
+  giftBadgeUi(); if ($("mGift").classList.contains("on")) renderGift();
+  return r.ok && !!r.data;
 }
+function renderGift() {
+  if (!gift) { $("gfStreak").textContent = ""; $("gfGrid").innerHTML = ""; $("gfNext").textContent = "Cadeau indisponible pour le moment. Vérifie ta connexion et réessaie."; $("gfClaim").style.display = "none"; return; }
+  $("gfStreak").innerHTML = icoOr("daily-streak", "🔥") + (gift.done ? "Série : " + gift.done + " jour" + (gift.done > 1 ? "s" : "") + " sur 7" : "Nouvelle série : récupère ton 1er cadeau");
+  $("gfGrid").innerHTML = DAILY_RW.map((rw, i) => {
+    const d = i + 1, done = d <= gift.done, today = gift.can && d === gift.done + 1;
+    return '<div class="gcell' + (done ? " isdone" : "") + '"><div class="gday' + (d === 7 ? " d7" : "") + (done ? " done" : "") + (today ? " today" : "") + '"><span class="gn">Jour ' + d + '</span><div class="gr">' +
+      (d === 7 ? '<img class="gbig" src="assets/daily-gift-big.png" alt="" onerror="this.replaceWith(document.createTextNode(\'🎁\'))">' : "") + rwChips(rw) +
+      '</div></div><img class="gck" src="assets/daily-check.png" alt="" onerror="const e=document.createElement(\'span\');e.className=\'gck fb\';e.textContent=\'✓\';this.replaceWith(e)"></div>';
+  }).join("");
+  $("gfClaim").style.display = gift.can ? "" : "none"; $("gfClaim").disabled = giftBusy;
+  giftTick();
+}
+function giftTick() {
+  if (!gift || !$("mGift").classList.contains("on")) return;
+  const x = giftSecs();
+  $("gfNext").innerHTML = gift.can ? icoOr("daily-clock", "⏰") + "À récupérer avant minuit (encore " + hms(x) + "), sinon la série repart à zéro"
+    : icoOr("daily-clock", "⏰") + "Prochain cadeau dans " + hms(x);
+  if (x <= 0 && !giftBusy) giftRefresh();           /* minuit est passé : on relit l'état */
+}
+setInterval(() => { if ($("mGift").classList.contains("on")) giftTick(); }, 1000);
+async function openGift() { sfx("click"); modal("mGift", true); renderGift(); await giftRefresh(); renderGift(); }
+async function claimGift() {
+  if (giftBusy || !gift || !gift.can) return; giftBusy = true; $("gfClaim").disabled = true;
+  const r = await cloudRpc("claim_daily_login", { p_game_id:GAME_ID });
+  giftBusy = false;
+  if (!r.ok || !r.data || !r.data.ok) { $("gfClaim").disabled = false; toastMsg("Cadeau indisponible pour le moment, réessaie"); return; }
+  if (!r.data.already) { const rw = DAILY_RW[Math.max(1, Math.min(7, +r.data.day || 1)) - 1]; sfx("win"); toastMsg("🎁 Cadeau du jour récupéré !"); void rw; }
+  await giftRefresh();
+  await inboxRefresh();                               /* le cadeau est un message de la boîte de réception : on l'encaisse tout de suite */
+  for (const m of inbox.filter(x => !x.claimed && hasRewards(x.rewards) && /^(Cadeau du jour|Gros cadeau)/.test(x.title || ""))) await claimMsg(m.id);
+  updateMailBadge();
+}
+
 /* ---------- Tous les niveaux terminés : le serveur donne le rang du joueur (pour le nombre de niveaux actuel) ---------- */
 const finText = () => save.fin && save.fin.lv === LEVEL_COUNT ? "Bravo ! Tu es le joueur n° " + save.fin.n + " à avoir terminé tous les niveaux avant la prochaine mise à jour." : "";
 async function claimFinish() {
@@ -1099,7 +1179,7 @@ function applyZoneSkin(n) {                      /* fond + cadre propres à la z
 }
 function setBg(name) { if (BGURL[name]) document.body.style.background = "url(" + BGURL[name] + ") center/cover no-repeat, #3a1a7a"; }
 ["fish-candy","fish-trail","bubble-1","bubble-2","bubble-3","bubble-pop","star-badge","star-burst","chest-closed","chest-open","jam-tile","jam-splash","fuse-overlay","fuse-explode","conveyor-tile","conveyor-end","portal-in","portal-out","portal-flash","mystery-candy","mystery-open","ice-block","ice-crack","ice-shatter","gift-box-1","gift-box-2","gift-box-3","gift-box-open","choco-blob","choco-splash","aura-bomb","jelly/jelly-1-overlay","jelly/jelly-2-overlay","bomb","cherry","tile-a","tile-b","jelly-1","jelly-2","sparkle","burst","fx-stripe-h","fx-stripe-v","fx-wrap","fx-bomb","fx-combo-1","fx-combo-2","fx-combo-3","fx-combo-4"].forEach(loadImg);
-["btn-pink","btn-blue","btn-green","panel","board-frame","hud-panel","btn-booster","badge-count","inbox-card","btn-claim"].forEach(n => { const i = new Image(); i.onload = () => document.body.classList.add("sk-" + ({ "hud-panel":"hud", "btn-booster":"boost", "badge-count":"badge", "inbox-card":"card", "btn-claim":"claim" }[n] || n)); i.src = "assets/" + n + ".png"; });
+["btn-pink","btn-blue","btn-green","panel","board-frame","hud-panel","btn-booster","badge-count","inbox-card","btn-claim","daily-day"].forEach(n => { const i = new Image(); i.onload = () => document.body.classList.add("sk-" + ({ "hud-panel":"hud", "btn-booster":"boost", "badge-count":"badge", "inbox-card":"card", "btn-claim":"claim" }[n] || n)); i.src = "assets/" + n + ".png"; });
 const BGURL = {};
 function loadBg(name) {
   const i = new Image();
@@ -1942,7 +2022,7 @@ cv.addEventListener("pointercancel", () => { down = null; });
 /* ============================================================
    ÉCRANS & FLUX
    ============================================================ */
-function show(id) { if (id !== "sGame") { if (adminTest && adminStats) { save.stats = JSON.parse(adminStats); writeSave(); } adminTest = false; dailyMode = false; } for (const s of document.querySelectorAll(".screen")) s.classList.remove("on"); $(id).classList.add("on"); $("mailBtn").style.display = (id === "sTitle" || id === "sLevels") ? "block" : "none"; if (id === "sTitle") setBg("bg-menu"); if (id !== "sGame") hammerOn = false; else updateBoosterUi(); }
+function show(id) { if (id !== "sGame") { if (adminTest && adminStats) { save.stats = JSON.parse(adminStats); writeSave(); } adminTest = false; dailyMode = false; } for (const s of document.querySelectorAll(".screen")) s.classList.remove("on"); $(id).classList.add("on"); $("mailBtn").style.display = (id === "sTitle" || id === "sLevels") ? "block" : "none"; $("giftBtn").style.display = id === "sTitle" ? "block" : "none"; if (id === "sTitle") setBg("bg-menu"); if (id !== "sGame") hammerOn = false; else updateBoosterUi(); }
 function modal(id, on) { $(id).classList.toggle("on", on); }
 
 function startLevel(i, test, isDaily) {
@@ -2019,6 +2099,9 @@ $("bCred").onclick = () => { sfx("click"); modal("mCred", true); };
 $("cClose").onclick = () => modal("mCred", false);
 $("bRank").onclick = openRank;
 $("bDaily").onclick = openDaily;
+$("giftBtn").onclick = openGift;
+$("gfClose").onclick = () => modal("mGift", false);
+$("gfClaim").onclick = claimGift;
 $("dyClose").onclick = () => modal("mDaily", false);
 $("dyPlay").onclick = () => { if (!daily) return; modal("mDaily", false); startLevel(daily.level - 1, false, true); };
 $("rkClose").onclick = () => modal("mRank", false);
@@ -2098,7 +2181,7 @@ if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
   navigator.serviceWorker.addEventListener("controllerchange", () => { if (!busy && !$("sGame").classList.contains("on")) location.reload(); });
 }
 
-updateBoosterUi(); updateMailBadge(); $("mailBtn").style.display = "block";
+updateBoosterUi(); updateMailBadge(); $("mailBtn").style.display = "block"; $("giftBtn").style.display = "block";
 cloudInit();
 { const nv = IS_LOCAL ? +new URLSearchParams(location.search).get("niveau") : 0; if (nv >= 1 && nv <= LEVELS.length) setTimeout(() => { modal("mLogin", false); startLevel(nv - 1); }, 600); }   /* test : ?niveau=200 ouvre directement ce niveau */
 
