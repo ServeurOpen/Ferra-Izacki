@@ -792,7 +792,7 @@ async function useBooster(kind) {
 async function useSwap(a, b) {
   busy = true; clearHint(); selected = null; hammerOn = false; swapFrom = null; say(""); updateBoosterUi();
   spendInv("hammer"); moveStats = { combo:0 }; sfx("swap");
-  swapCells(a, b); await settle(); await resolveBoard(null); await afterMove();
+  const tk = gameTok; swapCells(a, b); await settle(); await resolveBoard(null); if (tk !== gameTok) return; await afterMove(true);
 }
 /* Boule à facette : transforme le bonbon touché en boule à facette (à utiliser ensuite comme d'habitude) */
 async function useDisco(cell) {
@@ -846,9 +846,10 @@ function zoneMech(L, i) {                         /* zone 11 poissons, 12 bulles
   const SPOTS = [[2,2],[5,5],[2,5],[5,2],[3,3],[4,4],[1,6],[6,1],[3,4],[4,3],[1,1],[6,6],[0,3],[7,4],[3,0],[4,7]];
   const spots = n => SPOTS.map((_, k) => SPOTS[(k + j) % SPOTS.length]).filter(([r, c]) => !used.has(r * 8 + c)).slice(0, n);
   if (z !== 2 && L.kind === "drop") { L.goals = []; delete L.dropMax; L.kind = "mech"; }   /* un bloc arrêterait les cerises : l'objectif devient celui de la carte */
-  if (z === 0) { L.blocks = spots(2 + Math.floor(j / 5)).map(([r, c]) => [r, c, -6, 1]); if (!soft) L.goals.push({ k:"fish" }); }
-  if (z === 1) { L.blocks = spots(2 + Math.floor(j / 4)).map(([r, c]) => [r, c, -7, 3]); if (!soft) L.goals.push({ k:"bubble" }); }
-  if (z === 2) { L.starN = 2; L.starMax = 5 + Math.floor(j / 4); if (!soft && L.kind !== "drop") L.goals.push({ k:"star", count:3 + Math.floor(j / 5) }); }
+  const more = L.kind === "mech" ? 4 : 0;
+  if (z === 0) { L.blocks = spots(2 + more + Math.floor(j / 5)).map(([r, c]) => [r, c, -6, 1]); L.goals.push({ k:"fish" }); if (more) L.goals.push({ k:"collect", t:(i*2) % 5, count:22 + j }); }
+  if (z === 1) { L.blocks = spots(2 + (more ? 3 : 0) + Math.floor(j / 4)).map(([r, c]) => [r, c, -7, 3]); L.goals.push({ k:"bubble" }); }
+  if (z === 2) { L.starN = 2; L.starMax = 5 + Math.floor(j / 4); L.goals.push({ k:"star", count:(soft || L.kind === "drop" ? 2 : 3) + Math.floor(j / 5) }); }
   if (z === 3) { L.blocks = spots(soft ? 1 + Math.floor(j / 10) : 1 + Math.floor(j / 5)).map(([r, c]) => [r, c, -8, 1]); L.goals.push({ k:"chest" }); }
   if (T[0]) { L.moves = T[0]; L.stars = [T[1], T[2]]; }
 }
@@ -908,21 +909,21 @@ function makeLevelsExt() {
   const jellyPat = [(r,c) => r>=3 && r<=6 && c>=3 && c<=6, (r,c) => r===1||r===8||c===1||c===8, (r,c) => (r+c)%3===0 && r>0 && r<9 && c>0 && c<9];
   for (let i = 0; i < 60; i++) {
     const z = Math.floor(i / 20), j = i % 20, p = j / 19, n = 181 + i, T = TUNED_EXT[n] || [];
-    const L = { n, size:M, types:5, goals:[], blocks:[], kind:["ice","gift","choco"][z] };
-    const frac = .45 + .55 * p, pat = PAT[j % 5];
+    const L = { n, size:M, types:6, goals:[], blocks:[], kind:["ice","gift","choco"][z] };
+    const frac = .6 + .4 * p, pat = PAT[j % 5];
     if (z === 0) {                                   /* zone 15 : glace, 1 puis 2 couches */
       L.blocks = cellsOf(pat, frac).map(([r,c], k) => [r, c, -3, j < 6 ? 1 : j < 13 ? 1 + (k % 2) : 2]);
       L.goals.push({ k:"ice" });
-      if (j % 4 === 1) L.goals.push({ k:"collect", t:(i*2) % 5, count:18 + j });
-      if (j % 4 === 2) { const jp = jellyPat[j % 3], used = new Set(L.blocks.map(([r,c]) => r*M+c)); L.jelly = []; for (let r = 0; r < M; r++) for (let c = 0; c < M; c++) if (jp(r,c) && !used.has(r*M+c)) L.jelly.push([r, c, 1]); L.goals.push({ k:"jelly" }); }
+      if (j % 4 === 1) L.goals.push({ k:"collect", t:(i*2) % 5, count:15 + j });
+      if (j % 4 === 2) { const jp = jellyPat[j % 3], used = new Set(L.blocks.map(([r,c]) => r*M+c)); L.jelly = []; for (let r = 0; r < M; r++) for (let c = 0; c < M; c++) if (jp(r,c) && !used.has(r*M+c)) L.jelly.push([r, c, 1]); if (L.jelly.length > 16) L.jelly = L.jelly.filter((_, k) => k % 2 === 0); L.goals.push({ k:"jelly" }); }
     } else if (z === 1) {                            /* zone 16 : boîtes cadeaux 1 à 3 couches */
       const maxHp = 1 + Math.min(2, Math.floor(p * 3));
-      L.blocks = cellsOf(pat, frac * .8).map(([r,c], k) => [r, c, -4, 1 + (k % maxHp)]);
+      L.blocks = cellsOf(pat, frac * .9).map(([r,c], k) => [r, c, -4, 1 + (k % maxHp)]);
       L.goals.push({ k:"gift" });
       if (j % 4 === 1) L.goals.push({ k:"special", count:4 + Math.floor(j / 4) });
-      if (j % 4 === 2) L.goals.push({ k:"collect", t:(i*3) % 5, count:20 + j });
+      if (j % 4 === 2) L.goals.push({ k:"collect", t:(i*3) % 5, count:16 + j });
     } else {                                         /* zone 17 : chocolat qui coule (+ glace / cadeaux en fin de zone) */
-      const nCh = 2 + Math.floor(p * 6), core = [[4,4],[5,5],[4,5],[5,4],[3,4],[6,5],[4,3],[5,6]];
+      const nCh = 4 + Math.floor(p * 4.5), core = [[4,4],[5,5],[4,5],[5,4],[3,4],[6,5],[4,3],[5,6]];
       L.blocks = core.slice(0, nCh).map(([r,c]) => [r, c, -5, 1]); L.choco = true;
       if (j >= 8) { const used = new Set(L.blocks.map(([r,c]) => r*M+c)); for (const [r,c] of cellsOf(PAT[(j+2) % 5], .3 + .3 * p)) if (!used.has(r*M+c)) L.blocks.push([r, c, j % 2 ? -3 : -4, 1 + (j >= 15 ? 1 : 0)]); }
       L.goals.push({ k:"choco" });
@@ -950,7 +951,7 @@ function makeLevelsExt2() {                       /* zones 18 confiture, 19 mèc
   const PORT = [[10,2,4,8],[10,6,5,0],[10,4,6,10]];
   for (let i = 0; i < 100; i++) {
     const z = Math.floor(i / 20), j = i % 20, p = j / 19, n = 241 + i, T = TUNED_EXT[n] || [];
-    const L = { n, size:M, types:5, goals:[], blocks:[], kind:["jam","fuse","belt","portal","mystery"][z] };
+    const L = { n, size:M, types:z >= 2 ? 6 : 5, goals:[], blocks:[], kind:["jam","fuse","belt","portal","mystery"][z] };
     const pat = PAT[j % 5];
     if (z === 0) {                                   /* zone 18 : confiture à étaler, de moins en moins de confiture au départ */
       const st = j < 5 ? (r,c) => r>=4 && r<=6 : j < 10 ? (r,c) => r===5 || c===5 : j < 15 ? (r,c) => r===5 : (r,c) => r>=4 && r<=6 && c>=4 && c<=6;
@@ -959,8 +960,8 @@ function makeLevelsExt2() {                       /* zones 18 confiture, 19 mèc
       if (j >= 8 && j % 2) { L.blocks = cellsOf(pat, .3).map(([r,c]) => [r, c, -3, 1 + (j >= 15 ? 1 : 0)]); L.goals.push({ k:"ice" }); }
       if (j % 4 === 2) L.goals.push({ k:"collect", t:(i*2) % 5, count:24 + j });
     } else if (z === 1) {                            /* zone 19 : bonbons à mèche, compte à rebours de plus en plus court */
-      L.fuse = { t:12 - Math.floor(p * 4), max:2 + Math.floor(p * 2.5), start:1 + Math.floor(p * 2), p:.06 };
-      L.goals.push({ k:"fuse", count:5 + Math.floor(j / 2) });
+      L.fuse = { t:12 - Math.floor(p * 3), max:2 + Math.floor(p * 2.5), start:1 + Math.floor(p * 2), p:.06 };
+      L.goals.push({ k:"fuse", count:5 + Math.floor(j / 3) });
       if (j >= 8 && j % 2 === 0) { L.blocks = cellsOf(pat, .25).map(([r,c], k) => [r, c, -4, 1 + (k % 2)]); L.goals.push({ k:"gift" }); }
       if (j % 4 === 3) L.goals.push({ k:"collect", t:(i*3) % 5, count:24 + j });
     } else if (z === 2) {                            /* zone 20 : tapis roulants (1 puis 2 puis 3 rangées), boîtes cadeaux qui voyagent dessus */
@@ -992,6 +993,9 @@ function makeLevelsExt2() {                       /* zones 18 confiture, 19 mèc
 const IS_LOCAL = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
 const LEVELS = makeLevels().concat(makeLevelsExt(), makeLevelsExt2());
 [42, 67, 78, 84, 84].forEach(n => { LEVELS[n - 1].moves += 3; });   /* 84 compté deux fois : +6 */
+/* Rééquilibrage du 16/11 (robot, _outils_calibrage/_tuner4.js) : n → [coups, seuil 2★, seuil 3★] ; passe après tous les autres réglages */
+const TUNED3 = {"4":[32,3500,4600],"9":[37,4950,6700],"10":[36,3150,5100],"12":[46,4950,6000],"15":[36,4000,4850],"16":[33,3400,4350],"18":[33,3750,5100],"28":[34,2850,3500],"30":[31,3400,4200],"31":[26,3550,4250],"33":[36,3900,5450],"35":[11,1700,2300],"36":[33,3500,4400],"37":[20,2650,3300],"39":[38,4150,5550],"42":[38,4400,5300],"43":[21,2900,3500],"51":[36,3550,4600],"54":[34,3500,4450],"63":[34,3250,4400],"64":[25,3000,3700],"66":[31,3300,4400],"68":[16,2350,3050],"70":[29,2900,4000],"71":[13,2050,2500],"72":[30,3100,4100],"78":[32,3600,4300],"81":[33,4000,5400],"85":[21,2850,3500],"89":[15,2950,3550],"92":[17,2900,3500],"93":[31,3850,5200],"96":[32,4250,5600],"101":[21,3850,4800],"102":[26,4750,5700],"103":[21,4200,5050],"104":[18,3450,4300],"105":[30,4950,6300],"106":[10,2450,3500],"107":[19,3800,4750],"108":[28,5150,6250],"109":[17,3500,4200],"110":[16,3300,4450],"111":[22,3700,5050],"112":[10,3000,3700],"113":[18,3800,4900],"114":[22,4400,5300],"115":[17,4000,4800],"116":[14,3500,4650],"117":[19,3450,4800],"118":[13,3500,4500],"119":[18,3950,4750],"120":[21,4200,5100],"121":[19,3550,4250],"122":[17,3500,4200],"123":[38,6200,7500],"124":[13,2450,3400],"125":[22,4150,5150],"126":[28,4700,6000],"127":[21,4400,5300],"128":[18,3500,4200],"129":[25,4050,5250],"130":[16,3250,4050],"131":[21,4200,5050],"132":[23,4200,5050],"133":[20,4150,5000],"134":[18,3850,5100],"135":[33,6000,7800],"136":[13,2850,3800],"137":[22,4500,5400],"138":[32,5900,7250],"139":[18,3850,4600],"140":[17,3650,4400],"141":[27,5550,7400],"142":[19,4050,5550],"143":[15,4050,5050],"144":[20,4950,5950],"146":[10,3550,5050],"147":[21,4900,6850],"148":[19,4200,5400],"149":[10,3850,5000],"150":[20,5500,7150],"152":[10,3700,4800],"153":[21,4850,6550],"154":[13,3800,5950],"155":[10,4000,5300],"156":[17,5050,6150],"157":[10,4600,5500],"158":[10,3950,5050],"159":[16,5050,6900],"160":[12,3850,5350],"161":[30,4750,6200],"162":[42,6650,8650],"163":[24,4550,5450],"164":[20,3800,4800],"165":[37,5850,8150],"166":[35,5200,6450],"167":[40,6550,8250],"168":[36,6200,8050],"169":[25,4450,5350],"170":[46,6500,8250],"171":[46,6800,9500],"172":[26,4800,6300],"173":[32,5750,6900],"174":[29,4850,6150],"175":[36,6200,7500],"177":[39,6600,8550],"181":[12,1450,2050],"182":[17,2250,2950],"183":[36,4550,6050],"184":[28,3600,5200],"185":[12,1550,2200],"186":[15,2250,2900],"187":[30,3800,5000],"188":[19,2500,3300],"189":[38,5450,7150],"190":[19,2900,3700],"191":[53,7100,8550],"192":[17,2450,3550],"193":[20,2850,3700],"194":[54,7900,9500],"195":[28,3600,4800],"196":[18,2450,3200],"197":[26,3400,4200],"198":[30,4000,4800],"199":[54,7600,9300],"200":[19,2750,3950],"201":[12,1400,1900],"202":[14,1850,2500],"203":[17,2150,3050],"204":[25,3150,4450],"205":[12,1450,2050],"206":[13,1650,2250],"207":[17,2550,3300],"208":[16,2400,2900],"209":[34,4900,6050],"210":[17,2300,3050],"211":[21,3000,3900],"212":[17,2400,3150],"213":[19,2550,3500],"214":[46,6800,8300],"215":[24,3500,4300],"216":[16,2150,2800],"217":[20,2900,3500],"218":[26,3750,4750],"219":[53,7750,9400],"220":[18,2750,3550],"221":[12,1400,1800],"222":[18,2350,2800],"223":[12,1350,2050],"224":[12,1450,2000],"225":[12,1450,2200],"226":[19,2900,3600],"227":[12,1500,2200],"228":[12,1400,1800],"229":[12,1650,2300],"230":[22,3150,3950],"231":[14,1850,2550],"232":[20,2750,3750],"233":[13,1850,2850],"234":[25,3650,4800],"235":[13,1800,2450],"236":[23,3050,4000],"237":[37,6050,7450],"238":[31,4800,5750],"239":[19,2500,3200],"240":[20,2750,3600],"242":[33,11850,14950],"243":[36,11450,16800],"246":[29,11100,14900],"248":[29,10700,13500],"249":[29,11350,15250],"251":[31,11100,15400],"257":[30,11100,14950],"258":[29,11500,15000],"259":[28,10200,14100],"261":[12,3150,6150],"262":[13,3900,5450],"263":[12,3700,6100],"264":[16,5000,7700],"265":[13,3950,6950],"266":[15,4200,6950],"267":[16,4700,7900],"268":[18,4600,7600],"269":[23,5850,8400],"270":[14,4450,6000],"271":[14,5100,7650],"272":[17,5200,6450],"273":[18,5500,7650],"274":[13,4400,7600],"275":[32,6650,9650],"276":[32,6500,9400],"277":[20,5500,7500],"278":[19,4750,6650],"279":[49,9500,11650],"280":[55,9100,11200],"281":[19,4350,5800],"282":[18,3550,5250],"283":[20,4500,5750],"284":[27,6150,7600],"285":[19,4500,5700],"286":[13,2950,4000],"287":[28,5700,7300],"288":[16,4450,5650],"289":[35,10150,12200],"290":[15,4300,5250],"291":[23,6500,7800],"292":[18,5050,6300],"293":[22,6800,8150],"294":[36,10750,13900],"295":[20,6700,8200],"296":[16,5050,6050],"297":[22,7600,9100],"298":[15,5250,6300],"299":[30,10750,13150],"300":[15,5400,6500],"301":[22,3650,5000],"302":[32,5900,7800],"303":[18,3200,4500],"304":[41,8200,10400],"305":[19,3200,4550],"306":[35,5600,7550],"307":[21,3600,5050],"308":[32,6200,7650],"309":[38,8700,10450],"310":[34,6050,7850],"311":[24,4600,5850],"312":[32,7000,8600],"313":[23,4000,6000],"314":[47,10250,12300],"315":[19,3650,4800],"316":[35,7600,9500],"317":[22,4150,5650],"318":[30,5850,7450],"319":[42,10050,12250],"320":[34,8200,9850],"321":[12,2600,3600],"322":[25,5900,7100],"323":[12,2950,4100],"324":[18,4500,5750],"325":[12,3100,4000],"326":[21,5100,6300],"327":[22,5550,7050],"328":[12,3550,4500],"329":[22,6100,7550],"330":[29,6350,7650],"331":[18,4450,5350],"332":[36,8500,10550],"333":[17,4400,5750],"334":[29,7400,8900],"335":[22,5500,6600],"336":[12,4000,5150],"337":[40,9400,11300],"338":[30,8150,9800],"339":[20,6350,7750],"340":[16,4400,6250]};
+for (const [n, t] of Object.entries(TUNED3)) { const L = LEVELS[n - 1]; L.moves = t[0]; L.stars = [t[1], t[2]]; }
 
 /* ---------- Utilitaires ---------- */
 const $ = id => document.getElementById(id);
@@ -1216,11 +1220,11 @@ function initBoard() {
   jam = []; for (let r = 0; r < N; r++) jam.push(new Array(N).fill(0));
   if (level.jam) for (const [r,c] of level.jam) jam[r][c] = 1;
   portOut = new Map(); if (level.portals) for (const [r1,c1,r2,c2] of level.portals) portOut.set(key(r2,c2), [r1,c1]);
+  if (level.dropMax) { const cols=Array.from({ length:N }, (_, k) => k).sort(()=>Math.random()-.5).slice(0, Math.min(3, level.dropMax)); for (const c of cols) { grid[3][c] = newCandy(3,c,-2); dropSpawned++; } }
   { const free = []; for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) if (grid[r][c] && grid[r][c].t >= 0 && !jelly[r][c]) free.push(grid[r][c]);
     const take = () => free.splice(rnd(free.length), 1)[0];
     for (let k = 0; k < (level.starN || 0) && free.length; k++) { take().star = true; starSpawned++; }
     if (level.fuse) for (let k = 0; k < level.fuse.start && free.length; k++) take().fuse = level.fuse.t + 2 * k; }
-  if (level.dropMax) { const cols=Array.from({ length:N }, (_, k) => k).sort(()=>Math.random()-.5).slice(0, Math.min(3, level.dropMax)); for (const c of cols) { grid[3][c] = newCandy(3,c,-2); dropSpawned++; } }
   if (!findMove()) shuffleBoard(true);
 }
 
@@ -1305,9 +1309,10 @@ function fishSwim(r, c) {                         /* le poisson nage vers une ca
 }
 function mysteryOpen(r, c) {                      /* bonbon mystère : bonne ou mauvaise surprise */
   const roll = Math.random(); let cd;
-  if (roll < .12) cd = newCandy(r, c, -1, S_BOMB);
-  else if (roll < .62) cd = newCandy(r, c, randType(), [S_ROW, S_COL, S_WRAP][rnd(3)]);
-  else if (roll < .8) { cd = newCandy(r, c, randType()); moves += 2; floats.push({ x:c, y:r - .4, txt:"+2 coups", life:1.3 }); }
+  if (roll < .05) cd = newCandy(r, c, -1, S_BOMB);
+  else if (roll < .33) cd = newCandy(r, c, randType(), [S_ROW, S_COL, S_WRAP][rnd(3)]);
+  else if (roll < .6) cd = newCandy(r, c, randType());   /* simple bonbon */
+  else if (roll < .72) { cd = newCandy(r, c, randType()); moves += 2; floats.push({ x:c, y:r - .4, txt:"+2 coups", life:1.3 }); }
   else cd = newBlock(r, c, BLK.ice, 2);
   cd.pop = 1; grid[r][c] = cd;
 }
@@ -1537,7 +1542,7 @@ async function resolveBoard(pref) {
 async function trySwap(a, b) {
   if (busy || paused || ended) return;
   if (isLocked(a) || isLocked(b)) { if (isFrozen(a) || isFrozen(b)) frozenTip(); else sfx("bad"); selected = null; return; }
-  hideTip(true); busy = true; clearHint(); selected = null;
+  hideTip(true); busy = true; clearHint(); selected = null; const tk = gameTok;
   const A = grid[a[0]][a[1]], B = grid[b[0]][b[1]];
   swapCells(a,b); sfx("swap");
   await settle();
@@ -1590,26 +1595,29 @@ async function trySwap(a, b) {
   } else {
     await resolveBoard([a,b]);
   }
+  if (tk !== gameTok) return;
   await afterMove();
 }
 
-async function afterMove() {
-  if (level.choco && !chocoHit && !ended) spreadChoco();
+let gameTok = 0;   /* change à chaque lancement de niveau : une cascade de l'ancien niveau ne doit pas agir sur le nouveau */
+async function afterMove(free) {   /* free = bonus Échange : pas un vrai coup (ni chocolat, ni tapis, ni mèche) */
+  const tk = gameTok;
+  if (level.choco && !chocoHit && !ended && !free) spreadChoco();
   chocoHit = false;
   save.stats.maxCombo = Math.max(save.stats.maxCombo, moveStats.combo);
   if (moveStats.combo >= 4) unlock("combo4");
   if (moveStats.combo >= 7) unlock("combo7");
   if (save.stats.cleared >= 500) unlock("clear500");
   if (save.stats.cleared >= 5000) unlock("clear5000");
-  if (moveStats.combo >= 4) { say(["","","","Délicieux !","Sucré !","Divin !","Incroyable !","Extraordinaire !"][Math.min(7,moveStats.combo)], Math.min(4, moveStats.combo - 3)); await sleep(700); say(""); }
+  if (moveStats.combo >= 4) { say(["","","","Délicieux !","Sucré !","Divin !","Incroyable !","Extraordinaire !"][Math.min(7,moveStats.combo)], Math.min(4, moveStats.combo - 3)); await sleep(700); say(""); if (tk !== gameTok) return; }
   writeSave();
-  if (level.belts && !ended && !allGoalsDone()) {     /* les tapis avancent d'une case, ce qui peut créer de nouveaux alignements */
+  if (level.belts && !ended && !free && !allGoalsDone()) {     /* les tapis avancent d'une case, ce qui peut créer de nouveaux alignements */
     for (const [r, dir] of level.belts) { const row = grid[r]; if (dir > 0) { const q = row.pop(); row.unshift(q); if (q) q.x = -1; } else { const q = row.shift(); row.push(q); if (q) q.x = N; } }
-    if (!SIM) sfx("swap"); await settle(); await resolveBoard(null);
+    if (!SIM) sfx("swap"); await settle(); await resolveBoard(null); if (tk !== gameTok) return;
   }
   const done = allGoalsDone();
   if (done) return endLevel(true);
-  if (level.fuse) { let boom = null; for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) { const q = grid[r][c]; if (q && q.fuse && --q.fuse <= 0) boom = [r, c]; }
+  if (level.fuse && !free) { let boom = null; for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) { const q = grid[r][c]; if (q && q.fuse && --q.fuse <= 0) boom = [r, c]; }
     if (boom) { loseWhy = "Un pétard a explosé !"; fx("fuse-explode", boom[0], boom[1], { max:.8 }); shake = 16; if (!SIM) { sfx("boom"); await sleep(700); } return endLevel(false); } } /* objectif atteint : fin immédiate, coups restants convertis en points (donc en étoiles) */
   if (moves <= 0) return endLevel(done);
   if (!findMove()) { await shuffleBoard(false); if (!findMove()) return endLevel(false); }   /* plus aucun coup possible même après mélange : on ne bloque pas le joueur */
@@ -1896,7 +1904,7 @@ function modal(id, on) { $(id).classList.toggle("on", on); }
 
 function startLevel(i, test) {
   if (test !== undefined) { adminTest = !!test && isAdmin(); adminStats = adminTest ? JSON.stringify(save.stats) : ""; }   /* « Rejouer » / « Niveau suivant » gardent le mode en cours */
-  levelIdx = i; level = LEVELS[i];
+  gameTok++; levelIdx = i; level = LEVELS[i];
   N = level.size || 8; BOARD = N * CELL; if (cv.width !== BOARD) { cv.width = cv.height = BOARD; }
   chocoHit = false; starsGot = 0; starSpawned = 0; fuseDone = 0; fishUsed = 0; loseWhy = "";
   score = 0; moves = level.moves; collected = 0; dropped = 0; dropSpawned = 0; specialsMade = 0; ended = false; busy = false; paused = false; selected = null;
