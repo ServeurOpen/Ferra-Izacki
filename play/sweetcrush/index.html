@@ -244,6 +244,7 @@
     <div id="titleBtns">
       <button class="btn green" id="bPlay">Jouer</button>
       <button class="btn alt" id="bLevels">Niveaux</button>
+      <button class="btn alt" id="bDaily">Défi du jour</button>
       <button class="btn alt" id="bAch">Succès</button>
       <button class="btn alt" id="bRank">Classement</button>
       <button class="btn" id="bOpt">Options</button>
@@ -292,6 +293,7 @@
     <div class="stars" id="eStars"></div>
     <div id="eStreak" style="display:none;position:relative;width:250px;height:94px;margin:0 auto"><img src="assets/badge-streak.png" alt="" style="width:100%;height:100%" onerror="this.style.display='none'"><span id="eStreakTxt" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:21px;color:#fff;text-shadow:0 0 4px #8a3a00,0 2px 3px #8a3a00"></span></div>
     <p id="eText"></p>
+    <p id="eFin" style="font-size:19px;font-weight:900;color:#ffe14d;text-shadow:0 2px 3px rgba(0,0,0,.45)"></p>
     <button class="btn green" id="eNext">Niveau suivant</button><br>
     <button class="btn" id="eRetry">Rejouer</button><br>
     <button class="btn alt small" id="eMenu">Niveaux</button></div></div>
@@ -328,6 +330,12 @@
     <div id="rkLvBox" style="display:none;margin:4px 0;font-size:20px"><button class="btn small" id="rkPrev">◀</button> Niveau <b id="rkLvNum">1</b> <button class="btn small" id="rkNext">▶</button></div>
     <div id="rankList"></div><p id="rankNote" style="font-size:14px;opacity:.85;margin:2px 0 8px"></p>
     <button class="btn green small" id="rkClose">Fermer</button></div></div>
+
+  <div id="mDaily" class="modal"><div class="card"><h3><img src="assets/trophy.png" alt="" style="width:56px;height:56px;vertical-align:middle;margin-right:6px" onerror="this.remove()">Défi du jour</h3>
+    <p id="dyInfo" style="font-size:19px"></p>
+    <div id="dyList" style="max-height:300px;overflow-y:auto;margin:6px 0 8px"></div>
+    <button class="btn green" id="dyPlay">Jouer le défi</button><br>
+    <button class="btn alt small" id="dyClose">Fermer</button></div></div>
 
   <div id="mAch" class="modal"><div class="card"><h3>Succès</h3>
     <div id="achList"></div>
@@ -488,7 +496,7 @@ async function cloudSync() {
   if (cloudSource === "web" && !cloudAchSent) { cloudAchSent = true; for (const id of Object.keys(save.ach)) { const a = ACHIEVEMENTS.find(x => x.id === id); if (a) cloudRpc("unlock_achievement", { p_game_id: GAME_ID, p_achievement_id: id, p_name: a.name, p_description: a.description, p_icon: a.icon, p_tier: a.tier }); } }
   if ($("sLevels").classList.contains("on")) buildLevelMap();
   updateBoosterUi();
-  await importProgress(); await checkMilestones(); await inboxRefresh(); maybeRewardPopup();
+  await importProgress(); await dailyLogin(); await checkMilestones(); await inboxRefresh(); maybeRewardPopup(); claimFinish();
 }
 /* Progression jouée avant d'avoir un compte : envoyée UNE fois au classement (le serveur plafonne chaque score, migration 71) */
 async function importProgress() {
@@ -676,6 +684,7 @@ async function lbFetch(metric) {
   const call = async tok => fetch(CLOUD_URL + "/rest/v1/rpc/get_leaderboard", { method:"POST", headers:{ apikey:CLOUD_KEY, Authorization:"Bearer " + tok, "Content-Type":"application/json" }, body:JSON.stringify({ p_game_id:GAME_ID, p_metric:metric, p_limit:20 }) });
   try { let r = await call(cloudSession ? cloudSession.access_token : CLOUD_KEY); if (r.status === 401) r = await call(CLOUD_KEY); return r.ok ? await r.json() : null; } catch (e) { return null; }
 }
+const rankRows = (rows, me, star) => rows.map(r => '<div class="rk' + (r.user_id === me ? " me" : "") + '"><span class="pos">' + (r.rank <= 3 ? '<img src="assets/rank-' + r.rank + '.png" alt="' + r.rank + '">' : r.rank) + '</span><span class="nm">' + esc(r.display_name || "Joueur") + '</span><b>' + (star ? "★ " : "") + r.best_value + '</b></div>').join("");
 async function renderRank() {
   $("rkStars").classList.toggle("alt", rankMode === "stars"); $("rkLevel").classList.toggle("alt", rankMode === "level");
   $("rkLvBox").style.display = rankMode === "level" ? "block" : "none"; $("rkLvNum").textContent = rankLevel;
@@ -683,7 +692,7 @@ async function renderRank() {
   const rows = await lbFetch(rankMode === "stars" ? "total_stars" : "lvl_" + rankLevel), me = myUserId();
   if (rows === null) el.innerHTML = "<p>Classement indisponible pour le moment.</p>";
   else if (!rows.length) el.innerHTML = "<p>Personne n'est encore classé : sois le premier !</p>";
-  else el.innerHTML = rows.map(r => '<div class="rk' + (r.user_id === me ? " me" : "") + '"><span class="pos">' + (r.rank <= 3 ? '<img src="assets/rank-' + r.rank + '.png" alt="' + r.rank + '">' : r.rank) + '</span><span class="nm">' + esc(r.display_name || "Joueur") + '</span><b>' + (rankMode === "stars" ? "★ " : "") + r.best_value + '</b></div>').join("");
+  else el.innerHTML = rankRows(rows, me, rankMode === "stars");
   $("rankNote").textContent = cloudSession ? "" : "Connecte-toi (Options) pour apparaître dans le classement.";
 }
 function openRank() { sfx("click"); rankLevel = Math.max(1, Math.min(LEVEL_COUNT, save.unlocked)); modal("mRank", true); renderRank(); }
@@ -695,13 +704,45 @@ const isAdmin = () => !!cloudSession && String(cloudSession.email || "").toLower
 async function startRun(n) {
   runId = null; runMoves = 0;
   if (!cloudSession || SIM || adminTest) return;   /* test admin : pas de partie déclarée au serveur, donc pas de classement */
+  if (dailyMode) { const d = await cloudRpc("start_daily_run", { p_game_id:GAME_ID }); if (d.ok && d.data && d.data.level === level.n && dailyMode) runId = d.data.run; return; }
   const r = await cloudRpc("start_game_run", { p_game_id:GAME_ID, p_level:n });
   if (r.ok && n === level.n) runId = r.data;
 }
 function submitRun() {
   if (!runId || !cloudSession) return;
   const id = runId; runId = null;
+  if (dailyMode) { cloudRpc("submit_daily_run", { p_run:id, p_score:score, p_moves_used:runMoves }).then(r => { if (r.ok && r.data && r.data.ok) { toastMsg("🏆 Score envoyé au classement du jour"); inboxRefresh().then(() => maybeRewardPopup()); } }); return; }
   cloudRpc("submit_game_run", { p_run:id, p_score:score, p_moves_used:runMoves });
+}
+
+/* ---------- Défi du jour (migration 75) : un niveau par jour choisi par le serveur, classement « daily_AAAAMMJJ », rien dans la progression ---------- */
+let dailyMode = false, daily = null;
+async function openDaily() {
+  sfx("click"); $("dyInfo").textContent = "Chargement…"; $("dyList").innerHTML = ""; $("dyPlay").style.display = "none"; modal("mDaily", true);
+  const r = await cloudRpc("get_daily_challenge", { p_game_id:GAME_ID });
+  if (!r.ok || !r.data || !LEVELS[r.data.level - 1]) { $("dyInfo").textContent = "Défi indisponible pour le moment. Vérifie ta connexion et réessaie."; return; }
+  daily = r.data; const L = LEVELS[daily.level - 1];
+  $("dyInfo").innerHTML = "Aujourd'hui : <b>niveau " + L.n + "</b>, le même pour tout le monde.<br>" + L.goals.map(goalSentence).join(" + ") + "<br>" + (daily.best ? "Ton meilleur score du jour : <b>" + (+daily.best) + "</b>" : "Réussis-le pour gagner un cadeau !");
+  $("dyPlay").style.display = "";
+  const rows = await lbFetch(String(daily.metric)), me = myUserId();
+  $("dyList").innerHTML = rows === null ? "" : !rows.length ? "<p>Personne n'est encore classé aujourd'hui : sois le premier !</p>" : rankRows(rows, me, false);
+}
+/* ---------- Cadeau de connexion : le serveur dépose un cadeau par jour dans la boîte de réception (plus gros le 7e jour d'affilée) ---------- */
+async function dailyLogin() {
+  if (!cloudSession) return; const tag = new Date().toDateString() + "|" + (myUserId() || "");
+  try { if (localStorage.getItem("sc_login_day") === tag) return; } catch (e) {}
+  const r = await cloudRpc("claim_daily_login", { p_game_id:GAME_ID });
+  if (r.ok && r.data && r.data.ok) { try { localStorage.setItem("sc_login_day", tag); } catch (e) {} }
+}
+/* ---------- Tous les niveaux terminés : le serveur donne le rang du joueur (pour le nombre de niveaux actuel) ---------- */
+const finText = () => save.fin && save.fin.lv === LEVEL_COUNT ? "Bravo ! Tu es le joueur n° " + save.fin.n + " à avoir terminé tous les niveaux avant la prochaine mise à jour." : "";
+async function claimFinish() {
+  if (!cloudSession || adminTest || levelsCleared() < LEVEL_COUNT || finText()) return;
+  const r = await cloudRpc("claim_game_finish", { p_game_id:GAME_ID });
+  if (!r.ok || !r.data || !r.data.ok || r.data.levels !== LEVEL_COUNT) return;
+  save.fin = { lv:LEVEL_COUNT, n:+r.data.rank }; writeSave(); toastMsg("🏆 Tous les niveaux terminés : joueur n° " + save.fin.n + " !");
+  if ($("mEnd").classList.contains("on") && !dailyMode && $("eTitle").textContent.indexOf("réussi") >= 0) $("eFin").textContent = finText();
+  if ($("sLevels").classList.contains("on")) buildLevelMap();
 }
 
 /* ---------- Boosters (obtenus dans la boîte de réception) ---------- */
@@ -1653,6 +1694,7 @@ async function endLevel(win) {
     while (moves > 0) { moves--; score += 100; bonus += 100; if (!SIM) sfx("pop", 3); updateHud(); await sleep(110); }
     const stars = score >= level.stars[1] ? 3 : score >= level.stars[0] ? 2 : 1;
     if (adminTest) { showEnd(true, stars, bonus); return; }
+    if (dailyMode) { submitRun(); showEnd(true, stars, bonus); return; }   /* défi du jour : classement du jour seulement, la progression ne bouge pas */
     const id = level.n;
     const prev = save.stars[id] || 0;
     if (stars > prev) save.stars[id] = stars;
@@ -1666,9 +1708,9 @@ async function endLevel(win) {
     if (cloudSession) checkMilestones().then(() => maybeRewardPopup());
     const done = Object.keys(save.stars).length;
     if (done>=10) unlock("lvl10"); if (done>=20) unlock("lvl20"); if (done>=40) unlock("lvl40"); if (done>=60) unlock("lvl60"); if (done>=100) unlock("lvl100"); if (done>=180) unlock("lvl180"); if (done>=240) unlock("lvl240"); if (done>=340) unlock("lvl340");
-    showEnd(true, stars, bonus);
+    showEnd(true, stars, bonus); claimFinish();
   } else {
-    sfx("lose"); if (!adminTest) { save.streak = 0; writeSave(); }
+    sfx("lose"); if (!adminTest && !dailyMode) { save.streak = 0; writeSave(); }
     showEnd(false, 0, 0);
   }
 }
@@ -1677,10 +1719,11 @@ function showEnd(win, stars, bonus) {
   $("eBadge").style.display = ""; $("eBadge").src = "assets/badge-" + (win ? "win" : "lose") + ".png";
   const st = (on) => '<img src="assets/star-big-' + (on ? "on" : "off") + '.png" onerror="this.replaceWith(document.createTextNode(\'★\'))">';
   $("eStars").innerHTML = (win ? st(1).repeat(stars) + st(0).repeat(3-stars) : st(0).repeat(3));
-  $("eText").innerHTML = (win ? "Score : <b>"+score+"</b>" + (bonus ? " (dont bonus coups : "+bonus+")" : "") + (adminTest ? "<br><i>Test admin : rien n'est enregistré</i>" : "<br>Meilleur : "+save.best[level.n])
+  $("eText").innerHTML = (win ? "Score : <b>"+score+"</b>" + (bonus ? " (dont bonus coups : "+bonus+")" : "") + (adminTest ? "<br><i>Test admin : rien n'est enregistré</i>" : dailyMode ? "<br><i>Défi du jour : ton score part au classement du jour</i>" : "<br>Meilleur : "+save.best[level.n])
     : (loseWhy ? loseWhy + " " : "Plus de coups ! ") + "Il te manquait : " + missingText());
-  const sk = adminTest ? 0 : save.streak || 0; $("eStreak").style.display = win && sk >= 2 ? "block" : "none"; $("eStreakTxt").textContent = sk % 5 === 0 ? "Série de 5 ! Cadeau !" : "Série : " + (sk % 5) + " / 5";
-  $("eNext").style.display = win && levelIdx < LEVEL_COUNT-1 ? "" : "none";
+  $("eFin").textContent = win && !adminTest && !dailyMode && levelsCleared() >= LEVEL_COUNT ? finText() : "";
+  const sk = adminTest || dailyMode ? 0 : save.streak || 0; $("eStreak").style.display = win && sk >= 2 ? "block" : "none"; $("eStreakTxt").textContent = sk % 5 === 0 ? "Série de 5 ! Cadeau !" : "Série : " + (sk % 5) + " / 5";
+  $("eNext").style.display = win && !dailyMode && levelIdx < LEVEL_COUNT-1 ? "" : "none";
   $("mEnd").classList.add("on");
 }
 function missingText() {
@@ -1814,7 +1857,7 @@ let lastGoalsHtml = "";
 const GOAL_IC = { ice:["icon-ice","🧊"], gift:["icon-gift-box","🎁"], choco:["icon-choco","🍫"], fish:["icon-fish","🐟"], bubble:["icon-bubble","🫧"], chest:["icon-chest","👑"], mystery:["icon-mystery","🎁"], star:["icon-star-candy","⭐"], fuse:["icon-fuse","🧨"], jam:["icon-jam","🍓"] };
 function updateHud() {
   if (SIM) return;
-  $("hLevel").textContent = level.n + (adminTest ? " 🔧" : "");
+  $("hLevel").textContent = level.n + (adminTest ? " 🔧" : dailyMode ? " 🏆" : "");
   $("hMoves").textContent = moves;
   $("hScore").textContent = score;
   const gh = level.goals.map(g => {
@@ -1899,11 +1942,11 @@ cv.addEventListener("pointercancel", () => { down = null; });
 /* ============================================================
    ÉCRANS & FLUX
    ============================================================ */
-function show(id) { if (id !== "sGame") { if (adminTest && adminStats) { save.stats = JSON.parse(adminStats); writeSave(); } adminTest = false; } for (const s of document.querySelectorAll(".screen")) s.classList.remove("on"); $(id).classList.add("on"); $("mailBtn").style.display = (id === "sTitle" || id === "sLevels") ? "block" : "none"; if (id === "sTitle") setBg("bg-menu"); if (id !== "sGame") hammerOn = false; else updateBoosterUi(); }
+function show(id) { if (id !== "sGame") { if (adminTest && adminStats) { save.stats = JSON.parse(adminStats); writeSave(); } adminTest = false; dailyMode = false; } for (const s of document.querySelectorAll(".screen")) s.classList.remove("on"); $(id).classList.add("on"); $("mailBtn").style.display = (id === "sTitle" || id === "sLevels") ? "block" : "none"; if (id === "sTitle") setBg("bg-menu"); if (id !== "sGame") hammerOn = false; else updateBoosterUi(); }
 function modal(id, on) { $(id).classList.toggle("on", on); }
 
-function startLevel(i, test) {
-  if (test !== undefined) { adminTest = !!test && isAdmin(); adminStats = adminTest ? JSON.stringify(save.stats) : ""; }   /* « Rejouer » / « Niveau suivant » gardent le mode en cours */
+function startLevel(i, test, isDaily) {
+  if (test !== undefined) { adminTest = !!test && isAdmin(); adminStats = adminTest ? JSON.stringify(save.stats) : ""; dailyMode = !!isDaily; }   /* « Rejouer » / « Niveau suivant » gardent le mode en cours */
   gameTok++; levelIdx = i; level = LEVELS[i];
   N = level.size || 8; BOARD = N * CELL; if (cv.width !== BOARD) { cv.width = cv.height = BOARD; }
   chocoHit = false; starsGot = 0; starSpawned = 0; fuseDone = 0; fishUsed = 0; loseWhy = "";
@@ -1939,7 +1982,7 @@ function buildLevelMap() {
     html += '</div>';
   }
   $("mapInner").innerHTML = html;
-  $("totalStars").textContent = "★ " + total + " / " + (LEVEL_COUNT * 3);
+  $("totalStars").textContent = "★ " + total + " / " + (LEVEL_COUNT * 3) + (finText() ? " · 🏆 n° " + save.fin.n : "");
 }
 function scrollMapToCurrent() {
   const sc = $("mapScroll"), n = Math.min(save.unlocked, LEVEL_COUNT), node = $("mapInner").querySelector('[data-n="' + n + '"]');
@@ -1975,6 +2018,9 @@ $("lSignup").onclick = (e) => { const o = window.__TAURI__ && window.__TAURI__.o
 $("bCred").onclick = () => { sfx("click"); modal("mCred", true); };
 $("cClose").onclick = () => modal("mCred", false);
 $("bRank").onclick = openRank;
+$("bDaily").onclick = openDaily;
+$("dyClose").onclick = () => modal("mDaily", false);
+$("dyPlay").onclick = () => { if (!daily) return; modal("mDaily", false); startLevel(daily.level - 1, false, true); };
 $("rkClose").onclick = () => modal("mRank", false);
 $("rkStars").onclick = () => { rankMode = "stars"; renderRank(); };
 $("rkLevel").onclick = () => { rankMode = "level"; renderRank(); };
